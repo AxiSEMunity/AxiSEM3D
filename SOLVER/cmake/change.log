@@ -1,0 +1,14 @@
+* FindEigen3.cmake
+Kuangdai copied from eigen/cmake, Eigen 3.3.90
+
+* FindFFTW.cmake
+Kuangdai copied from eigen/cmake, Eigen 3.3.90
+Kuangdai removed FFTWL_LIB
+sKuangdai marked FFTW_LIB and FFTWF_LIB as necessary
+
+* FindMetis.cmake
+Kuangdai copied from eigen/cmake, Eigen 3.3.90
+
+* FindNetCDF.cmake
+Kuangdai copied from
+https://ftp.space.dtu.dk/pub/Ioana/pism0.6.1-10/CMake/FindNetCDF.cmake

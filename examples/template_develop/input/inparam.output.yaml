@@ -1,0 +1,23 @@
+#
+#  inparam.output.yaml
+#  AxiSEM3D
+#
+#  Created by Kuangdai Leng on 6/20/20.
+#  Copyright © 2020 Kuangdai Leng. All rights reserved.
+#
+
+#  This is an AxiSEM3D input parameter file for
+#  station-wise and element-wise output
+
+
+############################# station-wise #############################
+# what: list of station groups
+# type: array of objects
+# note: 1) different options such as channels and sampling rates can
+#          be used for different station groups; for example, one may
+#          have one group of real-world seismic stations to record the
+#          displacement vector at a high sampling rate and another group
+#          of animation stations to record only the vertical displacement
+#          at a low sampling rate
+#       2) use [] if no station group presents
+list_of_station_groups: []

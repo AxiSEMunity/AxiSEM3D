@@ -1,0 +1,139 @@
+    #==========================================================================#
+    # this key can be arbitrary
+    - VIRGINIA_201108231751A:
+        # source location
+        location:
+            # what: horizontal location
+            # type: string / array of double
+            # only: ON_AXIS / values
+            # note: 1) the key can be "latitude_longitude" or "distance_azimuth"
+            #       2) the unit for "latitude_longitude" is degree;
+            #          the unit for "distance" is either radian (for a
+            #          spherical mesh) or meter (for a Cartesian mesh);
+            #          the unit for "azimuth" is radian
+            #       3) use ON_AXIS to place the source on the mesh axis
+            #       4) if geodesy::lat_lon_north_pole_mesh = SOURCE in
+            #          inparam.model.yaml and this is the FIRST source in this
+            #          list, the key must be "latitude_longitude"
+            latitude_longitude: [37.91, -77.93]
+            # what: vertical location
+            # type: double
+            # note: the key can be "depth" or "radius" and the unit is meter
+            depth: 12e3
+            # what: correct for ellipticity when locating the source
+            # type: bool
+            # note: used only when the key for horizontal location is
+            #       "latitude_longitude"
+            ellipticity: true
+            # what: use solid surface as depth origin
+            # type: bool
+            # note: used only when the key for vertical location is "depth"
+            depth_below_solid_surface: true
+            # what: use undulated (otherwise reference) geometry to
+            #       determine the vertical location
+            # type: bool
+            # note: compatible with both "depth" and "radius"
+            undulated_geometry: true
+        # source mechanism
+        mechanism:
+            # what: type of source mechanism
+            # type: string
+            # only: MOMENT_TENSOR, FORCE_VECTOR, FLUID_PRESSURE
+            type: MOMENT_TENSOR
+            # what: data for the source mechanism
+            # type: array of double
+            # note: 1) use [M11, M22, M33, M12, M13, M23] for MOMENT_TENSOR;
+            #              [F1, F2, F3] for FORCE_VECTOR;
+            #              [P] for FLUID_PRESSURE,
+            #          where 123 stands for ZRT (vertical, radial, transpose)
+            #       2) if horizontal location is given by "latitude_longitude",
+            #          the RT-axes are determined w.r.t. the north pole;
+            #          the moment tensor of an earthquake then follows the same
+            #          order as in the CMTSOLUTION format (globalcmt.org)
+            #       3) if horizontal location is given by "distance_azimuth",
+            #          the RT-axes are determined w.r.t. the source (mesh axis)
+            data: [4.71e24, 3.81e22, -4.74e24, 3.99e23, -8.05e23, -1.23e24]
+            # what: unit of data
+            # type: double
+            # note: use 1e-7 to convert dyn*cm (in CMTSOLUTION) to N*m
+            unit: 1e-7
+        # source time function
+        source_time_function:
+            # what: class name
+            # type: string
+            # only: GaussianSTF / StreamSTF / NetCDF_STF
+            class_name: GaussianSTF
+            # -------------------------- #
+            # parameters for GaussianSTF #
+            # -------------------------- #
+            # what: half duraction
+            # type: double
+            # note: use 0 for a Dirac-δ to compute the Green's functions
+            half_duraction: 50.
+            # what: decay factor
+            # type: double
+            # note: 1) this factor further controls the shape of the bell
+            #       2) SPECFEM3D_GLOBE uses 1.628 and AxiSEM 3.5
+            decay_factor: 1.628
+            # what: time shift
+            # type: double
+            # note: 1) the axis of the bell will be aligned at the time
+            #          origin (t=0) if time_shift is given by zero
+            #       2) a positive time shift moves the bell to the right
+            time_shift: 0.
+            # what: use time derivative or integral of Gaussian
+            # type: string
+            # only: ERF / GAUSSIAN / FIRST_DERIVATIVE / RICKER
+            # note: 1) ERF: error function, integral of Gaussian
+            #       2) GAUSSIAN: Gaussian
+            #       3) FIRST_DERIVATIVE: first derivative of Gaussian
+            #       4) RICKER: second derivative of Gaussian
+            use_derivative_integral: ERF
+            # ------------------------ #
+            # parameters for StreamSTF #
+            # ------------------------ #
+            # what: ascii data file
+            # type: filename
+            # note: 1) this file must contain two columns, the first
+            #          for times and the second for values, and at least
+            #          two rows (two time-value points)
+            #       3) empty lines and comment lines (led by #) are allowed
+            ascii_data_file: stf.txt
+            # what: padding values when time is out of range
+            # type: string / array of double
+            # only: NONE / FIRST_LAST / [left, right]
+            # note: 1) NONE: throw an error when time is out of range
+            #       2) FIRST_LAST: use the first and the last values in file
+            #       3) [left, right]: specified padding values
+            padding: FIRST_LAST
+            # ------------------------- #
+            # parameters for NetCDF_STF #
+            # ------------------------- #
+            # what: netcdf data file
+            # type: filename
+            nc_data_file: stf_file.nc
+            # what: netcdf variable for times
+            # type: string
+            # note: must be double precision with shape (X,), X>=2
+            nc_var_times: stf_times
+            # what: netcdf variable for data
+            # type: string
+            # note: 1) must have the same shape as nc_var_times
+            #       2) datatype must match solver precision
+            #          (refer to USE_DOUBLE in CMakeLists.txt)
+            nc_var_data: stf_data
+            # what: padding values when time is out of range
+            # type: string / array of double
+            # only: NONE / FIRST_LAST / [left, right]
+            # note: 1) NONE: throw an error when time is out of range
+            #       2) FIRST_LAST: use the first and the last values in file
+            #       3) [left, right]: specified padding values
+            padding: FIRST_LAST
+            # what: chunk size (how many time steps per chunk)
+            # type: NONE / int
+            # note: 1) NetCDF_STF loads data by chunks during the time loop;
+            #          increase this chunk size to save reading time and
+            #          decrease it to save memroy (useful for a large number
+            #          of sources); must be greater than 2.
+            #       2) use NONE to disable buffer (chunk size = file size)
+            chunk_size: NONE
