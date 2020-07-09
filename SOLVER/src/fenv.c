@@ -8,12 +8,12 @@
 
 //  setup floating-point environment
 
-#include <fenv.h>
+#ifndef _SKIP_DISABLE_SSE_DENORMS
+#include <xmmintrin.h>
+#endif
 
 void fenv_setup() {
 #ifndef _SKIP_DISABLE_SSE_DENORMS
-    // To activate flush to zero for denormal float handling
-    // google: "Why does changing 0.1f to 0 slow down performance by 10x?"
-    fesetenv(FE_DFL_DISABLE_SSE_DENORMS_ENV);
+    _MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 #endif
 }
