@@ -29,31 +29,31 @@ namespace netcdf {
     ///////////////////////// datatype /////////////////////////
     // datatype covertion, e.g., int -> NC_INT
     template <typename T>
-    inline nc_type typeNC() = delete;
+    inline nc_type typeNC_T() = delete;
     
     // specializations
     template <>
-    inline nc_type typeNC<char>() {
+    inline nc_type typeNC_T<char>() {
         return NC_CHAR;
     }
     
     template <>
-    inline nc_type typeNC<int>() {
+    inline nc_type typeNC_T<int>() {
         return NC_INT;
     }
     
     template <>
-    inline nc_type typeNC<long>() {
+    inline nc_type typeNC_T<long>() {
         return NC_INT64;
     }
     
     template <>
-    inline nc_type typeNC<float>() {
+    inline nc_type typeNC_T<float>() {
         return NC_FLOAT;
     }
     
     template <>
-    inline nc_type typeNC<double>() {
+    inline nc_type typeNC_T<double>() {
         return NC_DOUBLE;
     }
     
@@ -61,35 +61,35 @@ namespace netcdf {
     ///////////////////////// allowed containers /////////////////////////
     // vector
     template <typename T>
-    inline nc_type typeNC(const std::vector<T> &val) {
-        return typeNC<T>();
+    inline nc_type typeNC_V(const std::vector<T> &val) {
+        return typeNC_T<T>();
     }
     
     // string
-    inline nc_type typeNC(const std::string &val) {
-        return typeNC<char>();
+    inline nc_type typeNC_V(const std::string &val) {
+        return typeNC_T<char>();
     }
     
     // Eigen::Matrix, RowMajor or column vector
     template <typename Derived>
     inline typename std::enable_if<Eigen::DenseBase<Derived>::IsRowMajor ||
     Eigen::DenseBase<Derived>::ColsAtCompileTime == 1, nc_type>::type
-    typeNC(const Eigen::DenseBase<Derived> &val) {
-        return typeNC<typename Eigen::DenseBase<Derived>::Scalar>();
+    typeNC_V(const Eigen::DenseBase<Derived> &val) {
+        return typeNC_T<typename Eigen::DenseBase<Derived>::Scalar>();
     }
     
     // Eigen::Tensor, RowMajor
     template <class Scalar, int R>
-    inline nc_type typeNC(const Eigen::Tensor<Scalar, R,
-                          Eigen::RowMajor> &val) {
-        return typeNC<Scalar>();
+    inline nc_type typeNC_V(const Eigen::Tensor<Scalar, R,
+                            Eigen::RowMajor> &val) {
+        return typeNC_T<Scalar>();
     }
     
     // Eigen::Tensor, ColMajor of rank one
     template <class Scalar>
-    inline nc_type typeNC(const Eigen::Tensor<Scalar, 1,
-                          Eigen::ColMajor> &val) {
-        return typeNC<Scalar>();
+    inline nc_type typeNC_V(const Eigen::Tensor<Scalar, 1,
+                            Eigen::ColMajor> &val) {
+        return typeNC_T<Scalar>();
     }
     
     

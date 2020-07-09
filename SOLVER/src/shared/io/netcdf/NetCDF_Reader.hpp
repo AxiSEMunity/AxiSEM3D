@@ -56,7 +56,7 @@ public:
                       bool checkDateType = true) const {
         if (checkDateType) {
             return netcdf::varID_CheckType(mFileID, vname, mFileName,
-                                           netcdf::typeNC(val));
+                                           netcdf::typeNC_V(val));
         } else {
             return netcdf::varID(mFileID, vname, mFileName);
         }

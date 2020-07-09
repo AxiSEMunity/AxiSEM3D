@@ -82,7 +82,7 @@ public:
         // define the variable
         int varid = -1;
         netcdf::error(nc_def_var(mPWD, vname.c_str(),
-                                 netcdf::typeNC<scalar>(),
+                                 netcdf::typeNC_T<scalar>(),
                                  (int)dims.size(), dimids.data(), &varid),
                       "nc_def_var", mFileName);
         
@@ -134,7 +134,7 @@ public:
                        const std::vector<numerical::Int> &starts,
                        const std::vector<numerical::Int> &counts) const {
         int varid = netcdf::varID_CheckType(mPWD, vname, mFileName,
-                                            netcdf::typeNC(val));
+                                            netcdf::typeNC_V(val));
         writeVariable(varid, vname, val, starts, counts);
     }
     
@@ -165,13 +165,13 @@ public:
         if (vname == "") {
             // file attribute
             netcdf::error(nc_put_att(mFileID, NC_GLOBAL, attname.c_str(),
-                                     netcdf::typeNC<scalar>(), 1, &attvalue),
+                                     netcdf::typeNC_T<scalar>(), 1, &attvalue),
                           "nc_put_att", mFileName);
         } else {
             // variable attribute
             int varid = netcdf::varID(mPWD, vname, mFileName);
             netcdf::error(nc_put_att(mPWD, varid, attname.c_str(),
-                                     netcdf::typeNC<scalar>(), 1, &attvalue),
+                                     netcdf::typeNC_T<scalar>(), 1, &attvalue),
                           "nc_put_att", mFileName);
         }
     }
