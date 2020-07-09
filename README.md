@@ -1,2 +1,4 @@
 # AxiSEM-3D
- New AxiSEM3D
+This version is not ready for use. 
+Stable version: 
+<https://github.com/kuangdai/AxiSEM3D>
