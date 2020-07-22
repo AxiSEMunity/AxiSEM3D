@@ -33,8 +33,8 @@ Name|Role|Minimum version|Note
 
 Before the installation, we can create a directory to store the dependencies:
 ```bash
-$ mkdir -p axisem3d_dependencies && cd $_
-$ export AXISEM3D_DEPENDS_DIR=$PWD
+mkdir -p axisem3d_dependencies && cd $_
+export AXISEM3D_DEPENDS_DIR=$PWD
 ```
 
 
@@ -43,9 +43,9 @@ $ export AXISEM3D_DEPENDS_DIR=$PWD
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 ```
-This will create `eigen3_develop` under the current directory. Next, to let `AxiSEM3D` use this version, do
+This will create `eigen3_develop` under the current directory. Next, to let `AxiSEM3D` find this version, do
 ```bash
-$ export EIGEN3_ROOT=$PWD/eigen3_develop
+$ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ``` 
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you have installed `Eigen` before. 
@@ -71,7 +71,7 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3NDY0Mjg5OSwtMjExNjY0Mzg0MiwxMj
+eyJoaXN0b3J5IjpbLTU5ODA3NzA1NiwtMjExNjY0Mzg0MiwxMj
 E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
 NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
 Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
