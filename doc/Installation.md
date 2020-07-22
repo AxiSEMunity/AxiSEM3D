@@ -60,7 +60,6 @@ $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 Alternatively, one can use `conda` to install `Boost`: 
 ```bash
 $ conda install -c conda-forge boost
-$ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 $ export BOOST_ROOT=$CONDA_PATH
 ```
 
@@ -79,7 +78,13 @@ $ conda install -c anaconda metis
 $ export METIS_ROOT=$CONDA_PATH
 ```
 
-
+### 5. NetCDF
+Using `conda`:
+```bash
+$ conda install -c anaconda netcdf4
+$ export NETCDF_ROOT=$CONDA_PATH
+$ export HDF5_ROOT=$CONDA_PATH
+```
 
 
 ## Tools for pre- and post-processing
@@ -89,11 +94,11 @@ $ export METIS_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNDQzOTIwODksNzkwNzQ2MzUxLDg2OD
-c5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5Nzkz
-MywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLT
-YzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3
-MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3OD
-kwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgs
-LTMzMjc5NDg2N119
+eyJoaXN0b3J5IjpbLTM1NzI3MzU3LDc5MDc0NjM1MSw4Njg3OT
+Y3NDcsNzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMs
+LTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02Mz
+M3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAy
+NjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MD
+ksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0z
+MzI3OTQ4NjddfQ==
 -->
