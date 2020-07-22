@@ -58,7 +58,7 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 ```
-Alternatively, we can do this using 
+Alternatively, one can use `conda`: 
 ```bash
 $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 ``` 
@@ -72,7 +72,7 @@ $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEzNTg0MzQxOCwtMjExNjY0Mzg0MiwxMj
+eyJoaXN0b3J5IjpbLTI5NDEzNTAzOSwtMjExNjY0Mzg0MiwxMj
 E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
 NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
 Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
