@@ -37,7 +37,7 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz -O - | tar -xz
 ``` 
 
-This will create `eigen-master` under the current directory. It can be placed anywhere. To compile `AxiSEM3D` with this `Eigen`, do
+This will create `eigen-master` under the current directory. It can be placed anywhere. To enable `AxiSEM3D` to find this `Eigen`, do
 
 ```bash
 $ export EIGEN3_ROOT=$PWD/eigen-master
@@ -58,7 +58,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MTY0MjU1MDEsNDY2ODcwNjgyLC0xNj
+eyJoaXN0b3J5IjpbLTE4MTU1MDM5MTksNDY2ODcwNjgyLC0xNj
 Q3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4
 ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5Nj
 EsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIy
