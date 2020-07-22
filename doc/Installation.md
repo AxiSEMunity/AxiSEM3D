@@ -40,12 +40,13 @@ Name|Role|Minimum version|Note
 ```bash
 # create a directory to store Eigen and Boost
 mkdir -p axisem3d_dependencies && cd $_
-# download Eigen3 de
+# download Eigen3
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
+# download Boost
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 ```
 
-The above scri 
+The above lines create a directory `axisem3d_dependencies`, which contains `eigen3_develop` and `boost_1_73_0` 
 
 
 
@@ -114,7 +115,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTUwODU5MSwxOTU0NDU3NTI4LDY1MT
+eyJoaXN0b3J5IjpbMTE5ODAxNzc5NSwxOTU0NDU3NTI4LDY1MT
 gzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3
 LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMT
 E2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2
