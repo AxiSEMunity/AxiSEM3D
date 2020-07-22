@@ -12,14 +12,18 @@
 ###################### Build Settings (EDIT BELOW) #####################
 ########################################################################
 
-# compiler suite
-# ** either hardcode here or pass by -Dcc, -Dcxx and -Dftn after cmake
+################## compiler suite ##################
+# either hardcode here or pass by -Dcc, -Dcxx and -Dftn after cmake
 set(CMAKE_C_COMPILER            ${cc})
 set(CMAKE_CXX_COMPILER          ${cxx})
 set(CMAKE_Fortran_COMPILER      ${ftn})
 
-# preferred installation prefix of external packages
-# ** the roots can also be set by environment variables, e.g.,
+
+################## dependencies ##################
+# preferred installation prefix of dependencies
+# ** the roots of the dependencies can be directly specified using the
+#    following CMake variables
+# ** alternatively, they can be specified by environment variables, e.g.,
 #    $ export EIGEN3_ROOT=$HOME/Developer/eigen3
 # ** by default, the following CMake variables are initialized by
 #    the environment variables; if specified otherwise, they will
@@ -29,32 +33,40 @@ set(BOOST_ROOT                  $ENV{BOOST_ROOT})
 set(FFTW_ROOT                   $ENV{FFTW_ROOT})
 set(METIS_ROOT                  $ENV{METIS_ROOT})
 set(NETCDF_ROOT                 $ENV{NETCDF_ROOT})
-# must use the same HDF5 used to build NetCDF
+
+# requiring linkage to HDF5
+# ** if linking fails with missing H5 symbols, set this to TRUE and
+#    specify HDF5_ROOT below or in the environment
+set(LINK_TO_HDF5                false)
+
+# root of the HDF5 library used to build NetCDF
 set(HDF5_ROOT                   $ENV{HDF5_ROOT})
 
 # additional libraries to link to
 # ** add libs if linking fails with missing symbols, e.g., "-lcurl"
-set(ADDITIONAL_LIBS "-lcurl")
+set(ADDITIONAL_LIBS             "")
 
+# use parallel NetCDF
+# ** parallel NetCDF can enhance I/O performance and simplify
+#    post-processing; it is supported by AxiSEM3D but not mandatory
+set(USE_PARALLEL_NETCDF         false)
+
+
+################## solver options ##################
 # polynomial order of spectral elements (from 1 to 8)
-set(NPOL 4)
+set(NPOL                        4)
 
 # solver precision
 # ** using double precision increases memory usage but barely
 #    affects solver performance
-set(USE_DOUBLE false)
+set(USE_DOUBLE                  false)
 
 # memory saving mode
 # ** minimize memory usage with some performance hit
-set(MEMORY_SAVING_MODE false)
+set(MEMORY_SAVING_MODE          false)
 
-# serial build
-# ** build AxiSEM3D without MPI
-set(SERIAL_BUILD false)
-
-# use parallel NetCDF for output
-# ** parallel NetCDF is supported but not mandatory
-set(USE_PARALLEL_NETCDF false)
+# serial build without MPI
+set(SERIAL_BUILD                false)
 
 ########################################################################
 ###################### Build Settings (EDIT ABOVE) #####################
@@ -94,23 +106,23 @@ add_definitions(-D_PROJ_DIR=\"${PROJECT_SOURCE_DIR}\")
 add_definitions(-D_NPOL=${NPOL})
 
 # double
-if(USE_DOUBLE)
+if(${USE_DOUBLE})
 add_definitions(-D_USE_DOUBLE)
 endif()
 
 # memory
-if(MEMORY_SAVING_MODE)
+if(${MEMORY_SAVING_MODE})
 add_definitions(-D_SAVE_MEMORY)
 endif()
 
 # serial build
-if(SERIAL_BUILD)
+if(${SERIAL_BUILD})
 add_definitions(-D_SERIAL_BUILD)
 set(USE_PARALLEL_NETCDF false)
 endif()
 
 # parallel NetCDF
-if(USE_PARALLEL_NETCDF)
+if(${USE_PARALLEL_NETCDF})
 add_definitions(-D_USE_PARALLEL_NETCDF)
 endif()
 
@@ -120,7 +132,7 @@ endif()
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 # mpi
-if(NOT SERIAL_BUILD)
+if(NOT ${SERIAL_BUILD})
 find_package(MPI COMPONENTS C REQUIRED)
 include_directories(${MPI_C_INCLUDE_DIRS})
 endif()
@@ -135,7 +147,7 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 # BOOST_ROOT can be case-sensitive depending on cmake version
 set(Boost_ROOT ${BOOST_ROOT})
 set(ENV{Boost_ROOT} $ENV{BOOST_ROOT})
-find_package(Boost 1.71.0 REQUIRED)
+find_package(Boost 1.73.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # fftw
@@ -159,8 +171,9 @@ message(FATAL_ERROR "Missing header netcdf_par.h under ${NETCDF_INCLUDES}/.\
 endif()
 
 # hdf5
+if(${LINK_TO_HDF5})
 find_package(HDF5 COMPONENTS C COMPONENTS HL REQUIRED)
-
+endif()
 
 ################# include paths #################
 # find all directories containing .hpp
@@ -240,16 +253,6 @@ message(STATUS "")
 message(STATUS "")
 message(STATUS "")
 message(STATUS "========================== Summary ===========================")
-message("   AxiSEM3D options______________________________________________")
-message("     SEM n-polynomial  =  ${NPOL}")
-if(${USE_DOUBLE})
-message("     Solver precision  =  double")
-else()
-message("     Solver precision  =  single")
-endif()
-message("     Memory-saving     =  ${MEMORY_SAVING_MODE}")
-message("     Serial build      =  ${SERIAL_BUILD}")
-message("     Parallel netcdf   =  ${USE_PARALLEL_NETCDF}")
 message("   Build settings________________________________________________")
 message("     Compilers")
 message("       C               =  ${CMAKE_C_COMPILER}")
@@ -262,6 +265,17 @@ message("       Fortran         =  ${CMAKE_Fortran_FLAGS_${BUILD_TYPE_U}}")
 message("     CMake build type  =  ${CMAKE_BUILD_TYPE}")
 message("     Source directory  =  ${PROJECT_SOURCE_DIR}")
 message("   Dependencies__________________________________________________")
+message("     * MPI")
+if(${SERIAL_BUILD})
+message("       This is a serial build without MPI.")
+else()
+if("${MPI_C_INCLUDE_DIRS}" STREQUAL "")
+message("       Using MPI wrapper compilers, no external link required.")
+else()
+msglist("       found include paths: " "${MPI_C_INCLUDE_DIRS}")
+msglist("       linked to libraries: " "${MPI_C_LIBRARIES}")
+endif()
+endif()
 message("     * Eigen3")
 msglist("       user-specified root: " "${EIGEN3_ROOT}")
 msglist("       found include paths: " "${EIGEN3_INCLUDE_DIR}")
@@ -281,22 +295,28 @@ msglist("       user-specified root: " "${NETCDF_ROOT}")
 msglist("       found include paths: " "${NETCDF_INCLUDES}")
 msglist("       linked to libraries: " "${NETCDF_LIBRARIES}")
 message("     * HDF5")
+if(${LINK_TO_HDF5})
 msglist("       user-specified root: " "${HDF5_ROOT}")
 msglist("       linked to libraries: " "${HDF5_LIBRARIES}")
 msglist("                            " "${HDF5_HL_LIBRARIES}")
-message("     * MPI")
-if (${SERIAL_BUILD})
-message("       This is a serial build without MPI.")
 else()
-if("${MPI_C_INCLUDE_DIRS}" STREQUAL "")
-message("       Using MPI wrapper compilers, no external link required.")
-else()
-msglist("       found include paths: " "${MPI_C_INCLUDE_DIRS}")
-msglist("       linked to libraries: " "${MPI_C_LIBRARIES}")
-endif()
+message("       Not linking to HDF5.")
 endif()
 message("     * Others")
+if("${ADDITIONAL_LIBS}" STREQUAL "")
+message("       No user-specified additional libraries.")
+else()
 message("       user-specified additional libraries: ${ADDITIONAL_LIBS}")
+endif()
+message("   AxiSEM3D options______________________________________________")
+message("     SEM n-polynomial  =  ${NPOL}")
+if(${USE_DOUBLE})
+message("     Solver precision  =  double")
+else()
+message("     Solver precision  =  single")
+endif()
+message("     Memory-saving     =  ${MEMORY_SAVING_MODE}")
+message("     Serial build      =  ${SERIAL_BUILD}")
 message(STATUS "==============================================================")
 message(STATUS "")
 message(STATUS "")
