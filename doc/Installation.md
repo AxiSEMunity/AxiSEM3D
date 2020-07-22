@@ -31,11 +31,11 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 
 Name|Role|Minimum version|Note
 --- | --- | ---|---
-`Eigen | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
-Boost | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
-FFTW | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
-Metis | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
-NetCDF | intensive structured IO | 4.7.1 | Parallel NetCDF is supported but not mandatory.
+`Eigen` | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
+`Boost` | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
+`FFTW` | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
+`Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
+`NetCDF` | intensive structured IO | 4.7.1 | Parallel NetCDF is supported but not mandatory.
 
 
 
@@ -74,7 +74,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyNzUzMTkwOCwtNjMzNzc2OTY0LC0xMj
+eyJoaXN0b3J5IjpbLTU1OTAwNzI2MCwtNjMzNzc2OTY0LC0xMj
 c5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5
 NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMj
 A2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwtMzMyNzk0ODY3LC0x
