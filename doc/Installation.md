@@ -111,7 +111,7 @@ export FFTW_ROOT=$HOME/anaconda3
 export METIS_ROOT=$HOME/anaconda3
 export NETCDF_ROOT=$HOME/anaconda3
 ```
-To avoid setting these environment variables every time for a new conversation, one 
+To avoid setting these environment variables every time for a new conversation, one has to copy them in `.bash_profile` or `.bashrc`
 
 
 
@@ -175,11 +175,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExODk4ODg5OTIsMTkzNzMyMDk1NywtND
-kzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAx
-MTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MT
-QsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0x
-MzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNT
-M1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05
-OTM5MDU2NzddfQ==
+eyJoaXN0b3J5IjpbNjYyNzgzNjQ3LDE5MzczMjA5NTcsLTQ5Mz
+Y0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4
+MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LD
+EyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5
+Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNT
+EwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkz
+OTA1Njc3XX0=
 -->
