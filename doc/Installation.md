@@ -37,7 +37,11 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz -O - | tar -xz
 ``` 
 
-This will create `eigen-master` under the current directory. It can be placed anywhere. To use this `Eigen`, 
+This will create `eigen-master` under the current directory. It can be placed anywhere. To compile `AxiSEM3D` with this `Eigen`, do
+
+```bash
+$ export EIGEN3_ROOT=$PWD/eigen-master
+``` 
 
 <strong>NOTE</strong>: AxiSEM3D requires Eigen 3.3.9 or above, but the current stable version is 3.3.7 (up to July 22, 2020). Therefore, the above step is essential even you have installed `Eigen` using a package manager such as `conda` or `pip`. 
 
@@ -54,9 +58,9 @@ This will create `eigen-master` under the current directory. It can be placed an
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUxMTM0OTA2NCw0NjY4NzA2ODIsLTE2ND
-cwNzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4
-ODU4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MS
-wxMTA3MDY4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIz
-MDAyNzg1XX0=
+eyJoaXN0b3J5IjpbLTE1MTY0MjU1MDEsNDY2ODcwNjgyLC0xNj
+Q3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4
+ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5Nj
+EsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIy
+MzAwMjc4NV19
 -->
