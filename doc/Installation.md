@@ -29,7 +29,7 @@ Name|Role|Minimum version|Note
 `Boost` | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 `FFTW` | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
 `Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
-`NetCDF` | intensive structured I/O | 4.7.1 | Parallel build is supported but not mandatory.
+`NetCDF` | efficient multi-dimensional I/O | 4.7.1 | Parallel build is supported but not mandatory.
 
 Before the installation, one can create a directory to store the dependencies:
 ```bash
@@ -98,11 +98,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY5NzM5NTYyMywtMTA4MzUzNTEwMiw3OT
-A3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3
-LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMT
-kzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYx
-OTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNj
-gyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1
-LDEzNzE4ODg1OF19
+eyJoaXN0b3J5IjpbNjUxODMzNjMzLC0xMDgzNTM1MTAyLDc5MD
+c0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05OTM5MDU2Nzcs
+LTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0xOT
+MyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5
+NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2OD
+IsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUs
+MTM3MTg4ODU4XX0=
 -->
