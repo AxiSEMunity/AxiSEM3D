@@ -30,7 +30,7 @@ which will display all the arguments you can pass to the mesher.
 The AxiSEM3D solver is developed on top of several modern numerical packages including `Eigen`, `Boost`,  `FFTW`, `Metis` and `NetCDF`. 
 
 ### Eigen
-Eigen is a C++ template library for linear algebra. Because 
+Eigen is a C++ template library for linear algebra. As a header-only library
 
 
 
@@ -41,7 +41,7 @@ Eigen is a C++ template library for linear algebra. Because
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODE5NTYxMDY3LC01Mjg5MzU5NjEsMTEwNz
-A2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4
-NV19
+eyJoaXN0b3J5IjpbLTE1NzgxNTQ0NSwtNTI4OTM1OTYxLDExMD
+cwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3
+ODVdfQ==
 -->
