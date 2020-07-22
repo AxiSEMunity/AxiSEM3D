@@ -31,7 +31,7 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 
 ### Eigen
 
-Eigen is a C++ template (header-only) library for linear algebra. We only need to download and decompress the source code:
+`Eigen` is a C++ template (header-only) library for linear algebra. We only need to download and decompress the source code:
 
 ```bash
 $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz -O - | tar -xz
@@ -51,8 +51,8 @@ This will create `eigen-master` under the current directory.
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc2Mjk3Njk5LC0xNzQ5MDU4NTA1LDEzNz
-E4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5
-NjEsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LD
-IyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbLTExMzY2NDQ5ODEsLTE3NDkwNTg1MDUsMT
+M3MTg4ODU4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkz
+NTk2MSwxMTA3MDY4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMz
+gsMjIzMDAyNzg1XX0=
 -->
