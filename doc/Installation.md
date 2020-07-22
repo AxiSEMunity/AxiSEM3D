@@ -47,7 +47,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 
 ### 2. Boost
-`Boost` provides free peer-reviewed portable C++ source libraries. `AxiSEM3D` uses 
+`Boost` provides free peer-reviewed portable C++ source libraries. `AxiSEM3D` uses header-only part of `Boost`, so we only need to download  
 
 
 
@@ -59,7 +59,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzU2Njc0NjQsNDY2ODcwNjgyLC0xNj
+eyJoaXN0b3J5IjpbLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNj
 Q3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4
 ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5Nj
 EsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIy
