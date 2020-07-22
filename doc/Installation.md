@@ -73,7 +73,7 @@ Next, load the required package:
 module load fftw/3.3.4
 ```
 
-If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
+If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html) --enable-float, [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
 
@@ -146,7 +146,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyMzgzMTEwNCwtNjIxNjU4ODE0LC0xNT
+eyJoaXN0b3J5IjpbMTMzMjU3MjA0MCwtNjIxNjU4ODE0LC0xNT
 Q5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMz
 NjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNz
 MzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2
