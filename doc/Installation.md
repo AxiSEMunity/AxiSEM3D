@@ -46,7 +46,7 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ```
 The first line creates `eigen3_develop` under the current directory. The second line enables `AxiSEM3D` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one already has `Eigen` installed.  
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one already has `Eigen` installed. 
 
 
 ### 2. Boost
@@ -76,11 +76,11 @@ $ export BOOST_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjI0NDU4ODMsNzMzMTcwODI5LC05OT
-M5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAy
-MTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MT
-QsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0
-NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYsLTE3ND
-kwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUx
-OTUsLTUyODkzNTk2MV19
+eyJoaXN0b3J5IjpbODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOT
+A1Njc3LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEy
+MiwtMTkzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LD
+EyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2
+ODcwNjgyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MD
+U4NTA1LDEzNzE4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1
+LC01Mjg5MzU5NjFdfQ==
 -->
