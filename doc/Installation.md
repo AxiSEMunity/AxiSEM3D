@@ -28,7 +28,7 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 Name|Role|Minimum version|Note
 --- | --- | ---|---
 [`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
-[`Boost`](https://www.boost.org/) | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
+[`Boost`](https://www.boost.org/) | C++ helpers | 1.73.0 | `AxiSEM3D` only uses some of its header-only modules.
 [`FFTW`](http://www.fftw.org/) | fast Fourier transform | 3.3.4 | Both single- and double-precision builds are required.
 [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
 [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
@@ -149,11 +149,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMT
-MxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1
-ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NT
-I4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4
-Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OT
-MzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3Niwt
-NjMzNzc2OTY0XX0=
+eyJoaXN0b3J5IjpbLTczMzk3NjQyNSwtNTQyMTAxMTgzLC0xNj
+ExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1NTQy
+Mjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNzcwMj
+E1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNTM1MTAyLDc5
+MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05OTM5MDU2Nz
+csLTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0x
+OTMyOTI0Mjc2XX0=
 -->
