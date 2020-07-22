@@ -38,7 +38,9 @@ $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz
 
 This will create `eigen-master` under the current directory. 
 
-Note: we r
+<strong>NOTE</strong>:
+
+AxiSEM3D requires Eigen 3.3.9 or above but 
 
 
 
@@ -50,7 +52,7 @@ Note: we r
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg0NzA3MzUxNiwtMzMyNzk0ODY3LC0xNz
+eyJoaXN0b3J5IjpbLTU3MTgyNTM0OSwtMzMyNzk0ODY3LC0xNz
 M3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNzA2ODY2MCwtMjEwMDQ3
 MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
 -->
