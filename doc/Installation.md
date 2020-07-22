@@ -39,9 +39,9 @@ Name|Role|Minimum version|Note
 ```bash
 # create a directory to store Eigen and Boost
 mkdir -p axisem3d_dependencies && cd $_
-# download Eigen3
+# download Eigen 3.3.9
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
-# download Boost
+# download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 ```
 The above lines create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`. 
@@ -75,7 +75,7 @@ module load fftw/3.3.4
 
 If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
-### 2. 
+### 2. Linking to dependencies
 
 
 
@@ -140,7 +140,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM1Mzk5NTk0OSwtNjIxNjU4ODE0LC0xNT
+eyJoaXN0b3J5IjpbMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNT
 Q5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMz
 NjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNz
 MzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2
