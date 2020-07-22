@@ -57,7 +57,7 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ```bash
 $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 ```
-This will create `eigen3_develop` under the current directory. Next, to let `AxiSEM3D` use this version, do
+This will create `boost_1_73_0` under the current directory. To let `AxiSEM3D` find this version, do
 ```bash
 $ export EIGEN3_ROOT=$PWD/eigen3_develop
 ``` 
@@ -71,11 +71,11 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1OTk0NDMyMCwtMjExNjY0Mzg0MiwxMj
-E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
-NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
-Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
-MTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2NywtMTczNz
-U4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2
-NDcsLTIxNjMyMTIzOF19
+eyJoaXN0b3J5IjpbLTExMjY4NjU4MTUsLTIxMTY2NDM4NDIsMT
+IxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkz
+NTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3ND
+M2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYs
+LTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4NjcsLTE3Mz
+c1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4NjYwLC0yMTAwNDcx
+NjQ3LC0yMTYzMjEyMzhdfQ==
 -->
