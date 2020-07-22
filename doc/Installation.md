@@ -16,7 +16,7 @@ $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMe
 
 The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate very large-scale meshes on a laptop.
 
-Verify the installation by
+* Verify the installation by
 
 ```bash
 $ python -m salvus_mesh_lite.interface AxiSEM -h
@@ -30,6 +30,6 @@ Installing the solver
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMj
-E2MzIxMjM4LDIyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbNDAxOTcyNzE0LDExMDcwNjg2NjAsLTIxMD
+A0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3ODVdfQ==
 -->
