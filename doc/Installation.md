@@ -2,7 +2,7 @@
 
 # Installation
 
-The installation of AxiSEM3D includes three parts: the mesher, the solver and a few tools (mostly python libraries) for pre- and post-processing. 
+The installation of AxiSEM3D includes three parts: the mesher, the solver and several tools (mostly python libraries) for pre- and post-processing. 
 
 Anaconda 
 
@@ -12,5 +12,5 @@ Anaconda
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjMzMTgzNzhdfQ==
+eyJoaXN0b3J5IjpbMjA4NjUxODM0OV19
 -->
