@@ -35,7 +35,7 @@ Name|Role|Minimum version|Note
 `Boost` | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 `FFTW` | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
 `Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
-`NetCDF` | intensive structured IO | 4.7.1 | Parallel NetCDF is supported but not mandatory.
+`NetCDF` | intensive structured IO | 4.7.1 | Parallel build is supported but not mandatory.
 
 
 
@@ -74,10 +74,10 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU1OTAwNzI2MCwtNjMzNzc2OTY0LC0xMj
-c5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5
-NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMj
-A2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwtMzMyNzk0ODY3LC0x
-NzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNzA2ODY2MCwtMjEwMD
-Q3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMT
+I3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgx
+OTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MD
+IwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Nywt
+MTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIxMD
+A0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3ODVdfQ==
 -->
