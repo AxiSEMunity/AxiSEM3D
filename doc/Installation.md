@@ -88,7 +88,7 @@ $ conda install -c anaconda netcdf4
 $ export NETCDF_ROOT=$CONDA_PATH
 $ export HDF5_ROOT=$CONDA_PATH
 ```
-Using a `NetCDF` build with parallel I/O support can enhance the performance of `AxiSEM3D` and simplify post-processing. However, a parallel building is MPI-dependent and sometimes difficult to make. 
+Using a `NetCDF` build with parallel I/O support can enhance the performance of `AxiSEM3D` and simplify post-processing. However, a parallel build is sometimes difficult to make. 
 
 
 ## Tools for pre- and post-processing
@@ -98,11 +98,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNzc1NzAwMTksNzkwNzQ2MzUxLDg2OD
-c5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5Nzkz
-MywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLT
-YzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3
-MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3OD
-kwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgs
-LTMzMjc5NDg2N119
+eyJoaXN0b3J5IjpbNTI3OTYyMDQyLDc5MDc0NjM1MSw4Njg3OT
+Y3NDcsNzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMs
+LTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02Mz
+M3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAy
+NjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MD
+ksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0z
+MzI3OTQ4NjddfQ==
 -->
