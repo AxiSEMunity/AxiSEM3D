@@ -89,7 +89,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 $ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
 ```
 #### 2.2.  cmake
-Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example:
+Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths depend on the users):
 
 ```python
 # Eigen and Boost installed by downloading the source code
@@ -101,7 +101,7 @@ set(METIS_ROOT  $ENV{HOME}/anaconda3)
 set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 ```
 
-Alternatively, one can set the corresponding environment variables, leaving `AxiSEM3D/SOLVER/CMakeLists.txt` unchanged:
+Alternatively, one can set them by environment variables, leaving `AxiSEM3D/SOLVER/CMakeLists.txt` unchanged:
 ```bash
 # Eigen and Boost installed by downloading the source code
 export EIGEN3_ROOT=$HOME/axisem3d_dependencies/eigen3_develop
@@ -111,8 +111,7 @@ export FFTW_ROOT=$HOME/anaconda3
 export METIS_ROOT=$HOME/anaconda3
 export NETCDF_ROOT=$HOME/anaconda3
 ```
-To avoid setting these environment variables every time for a new conversation, one has to copy them in `.bash_profile` or `.bashrc`
-
+To avoid setting these environment variables every time for a new conversation, one has to copy them to `.bash_profile` or `.bashrc`. 
 
 
 
@@ -175,11 +174,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjYyNzgzNjQ3LDE5MzczMjA5NTcsLTQ5Mz
-Y0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4
-MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LD
-EyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5
-Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNT
-EwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkz
-OTA1Njc3XX0=
+eyJoaXN0b3J5IjpbMjA2NDY1ODk1NCwxOTM3MzIwOTU3LC00OT
+M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
+ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
+wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
+OTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1Mz
+UxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5
+MzkwNTY3N119
 -->
