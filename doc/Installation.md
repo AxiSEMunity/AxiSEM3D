@@ -16,13 +16,13 @@ $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMe
 
 The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate very large-scale meshes on a laptop.
 
-Verify the installation by
+You can verify the installation by
 
 ```bash
 $ python -m salvus_mesh_lite.interface AxiSEM -h
 ```
 
-which will display all the arguments you can pass to the mesher. 
+This will display all the arguments you can pass to the mesher. 
 
 
 ## Solver
@@ -75,10 +75,10 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTY1Nzk0NzUsMTIxNjE5NzE0NSwtMT
-MyNzAyNjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcw
-Nzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4OD
-U4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwx
-MTA3MDY4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMD
-AyNzg1XX0=
+eyJoaXN0b3J5IjpbOTMzNTU1OTE5LDEyMTYxOTcxNDUsLTEzMj
+cwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4
+OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OC
+wtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEw
+NzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMj
+c4NV19
 -->
