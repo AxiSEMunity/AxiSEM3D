@@ -46,7 +46,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 ```
 The above lines will create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before, no matter one is working on a local workstation or an HPC cluster.
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before.
 
 
 #### 1.2. FFTW, Metis and NetCDF
@@ -61,7 +61,7 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed and optimized due to their popularity. On a cluster, the software packages are usually managed by `module`.  To check available packages and versions:
+On an HPC cluster, it is most likely that these packages have been installed and optimized owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To check available packages and versions:
 ```bash
 # check available packages
 module avail
@@ -80,8 +80,7 @@ module load metis/5.1.0_build2
 module load cray-netcdf/4.6.1.3
 ```
 
-
-If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
+If one o package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 ### 2. Linking to dependencies
 
@@ -148,7 +147,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjkxNDg2MiwtMTYxMTgzOTAwMiwtMT
+eyJoaXN0b3J5IjpbMjA0MTQ5MzkyNCwtMTYxMTgzOTAwMiwtMT
 MxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1
 ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NT
 I4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4
