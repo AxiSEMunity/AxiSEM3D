@@ -27,7 +27,7 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 
 Name|Role|Minimum version|Note
 --- | --- | ---|---
-`Eigen` | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
+[`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
 `Boost` | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 `FFTW` | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
 `Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
@@ -35,15 +35,16 @@ Name|Role|Minimum version|Note
 
 #### 1.1 Eigen and Boost
 
-Eigen and Boost are header-only libraries, so we only need to download the source code. One can first create a directory to store them:
+Eigen and Boost are header-only libraries, so we only need to download the source code. One can first create a directory to store :
+
+```bash
+$ mkdir -p axisem3d_dependencies && cd $_
+```
 
  
 
 Before the installation, one can create a directory to store the dependencies:
-```bash
-$ mkdir -p axisem3d_dependencies && cd $_
-$ export AXISEM3D_DEPENDS_PATH=$PWD
-```
+
 Also, if one uses `conda` (either `miniconda` or `anaconda`), its root path can be identified by
 ```bash
 $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
@@ -106,7 +107,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MjU3Mzg2LDE5NTQ0NTc1MjgsNjUxOD
+eyJoaXN0b3J5IjpbNjIyMjM4ODU2LDE5NTQ0NTc1MjgsNjUxOD
 MzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcs
 NzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMT
 Y2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5
