@@ -85,12 +85,11 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 
 ### 2. Building AxiSEM3D
 #### 1. Download the code
-
-
-
 ```bash
-$ export CONDA_PATH=$(dirname $(dirname $(which conda)))
+$ git clone https://github.com/kuangdai/AxiSEM-3D.git
 ```
+#### 2.  cmake
+Before doing `cmake`, one must edi
 
 ### 1. Eigen
 `Eigen` is a header-only library, so one just needs to download the source code:
@@ -149,11 +148,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01ND
-IxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5
-NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyOD
-IsLTEzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEw
-ODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4Mj
-ksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0Miwx
-MjE0MDIxMjJdfQ==
+eyJoaXN0b3J5IjpbNjA0MjYzNzY1LDEzODgxODY0MDIsLTUyMj
+kxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAx
+NDM5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC
+0xNTQ5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUx
+ODMzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3ND
+csNzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIx
+MTY2NDM4NDJdfQ==
 -->
