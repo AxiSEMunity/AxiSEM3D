@@ -127,7 +127,8 @@ module show metis/5.1.0_build2
 # show NetCDF
 module show cray-netcdf/4.6.1.3
 ```
-Note that the `_ROOT` variables sent to cmake is neither the library path ended with `/lib` or the include path ended with `/include`, but the one containing both `lib` and `include`.
+
+<strong>Note</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`.
 
 
 
@@ -144,7 +145,7 @@ Note that the `_ROOT` variables sent to cmake is neither the library path ended 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY3MTYzMzQ1NiwtMTkxMTQ0MzczMSwtMj
+eyJoaXN0b3J5IjpbLTc0ODk1NTk2MSwtMTkxMTQ0MzczMSwtMj
 A0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0
 NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4My
 wtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEy
