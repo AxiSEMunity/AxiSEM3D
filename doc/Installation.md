@@ -13,6 +13,8 @@ The installation of AxiSEM3D includes three parts: the mesher, the solver and se
 $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
 
+
+
 Verify the installation by
 
 ```bash
@@ -26,6 +28,6 @@ which will display all the arguments you can pass to the mesher.
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1ODA5NzIxNCwtMjEwMDQ3MTY0NywtMj
+eyJoaXN0b3J5IjpbLTczNTkzNTY0MiwtMjEwMDQ3MTY0NywtMj
 E2MzIxMjM4LDIyMzAwMjc4NV19
 -->
