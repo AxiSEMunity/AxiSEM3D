@@ -92,7 +92,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
-#### 2.2.  cmake
+#### 2.2.  CMake
 Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
 
 ```python
@@ -117,11 +117,11 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-To find the path of a package on an HPC cluster, one can use `module display`, for example:
+To find the `_ROOT` of a package on an HPC cluster, one can use `module display`, for example:
 ```bash
 module display fftw/3.3.4.11
 ```
-Note that the `_ROOT` variables sent to cmake is neither the library path ended with `/lib` or the include path ended with `/include`, but the o
+Note that the `_ROOT` variables sent to cmake is neither the library path ended with `/lib` or the include path ended with `/include`, but the one containing both `lib` and `include`.
 
 
 
@@ -138,7 +138,7 @@ Note that the `_ROOT` variables sent to cmake is neither the library path ended 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjY0ODc0NjAsLTE5MTE0NDM3MzEsLT
+eyJoaXN0b3J5IjpbLTE2NDk2Mjg3MjIsLTE5MTE0NDM3MzEsLT
 IwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2
 NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExOD
 MsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwx
