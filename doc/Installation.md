@@ -31,7 +31,7 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 
 Name|Role|Minimum version|Note
 --- | --- | ---|---
-Eigen | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
+`Eigen | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
 Boost | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 FFTW | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
 Metis | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
@@ -74,10 +74,10 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMj
-E2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3
-MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1OD
-UwNSwxMzcxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwt
-NTI4OTM1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNj
-MyMTIzOCwyMjMwMDI3ODVdfQ==
+eyJoaXN0b3J5IjpbMTkyNzUzMTkwOCwtNjMzNzc2OTY0LC0xMj
+c5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5
+NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMj
+A2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwtMzMyNzk0ODY3LC0x
+NzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNzA2ODY2MCwtMjEwMD
+Q3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
 -->
