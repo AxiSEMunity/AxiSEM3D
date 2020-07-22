@@ -38,15 +38,9 @@ Name|Role|Minimum version|Note
 `NetCDF` | intensive structured IO | 4.7.1 | Parallel build is supported but not mandatory.
 
 
+### 1. Eigen
 
-
-
-### 1. Installing dependencies locally
-#### 1.1. Dependency
-
-#### 1.1. Eigen
-
-`Eigen` is header-only. Just download and extract the source code:
+`Eigen` is header-only, so we just need to download the source code:
 
 ```bash
 $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz -O - | tar -xz
@@ -74,10 +68,11 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMT
-I3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgx
-OTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MD
-IwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Nywt
-MTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIxMD
-A0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3ODVdfQ==
+eyJoaXN0b3J5IjpbLTEwMTU2NDA1ODYsLTE5MzI5MjQyNzYsLT
+YzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3
+MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3OD
+kwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgs
+LTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMD
+cwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3
+ODVdfQ==
 -->
