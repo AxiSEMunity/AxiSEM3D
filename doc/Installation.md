@@ -36,7 +36,6 @@ Name|Role|Minimum version|Note
 #### 1.1. Eigen and Boost
 
 `Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
-
 ```bash
 # create a directory to store Eigen and Boost
 mkdir -p axisem3d_dependencies && cd $_
@@ -45,7 +44,6 @@ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 # download Boost
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 ```
-
 The above lines create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`. 
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one has `Eigen` installed before.
@@ -75,7 +73,7 @@ Next, load the required package:
 module load fftw/3.3.4
 ```
 
-If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download), [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
+If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
 
@@ -148,11 +146,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMzA1MTExNjcsLTE1NDkyMjUyODIsLT
-EzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1
-MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLT
-k5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0
-MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1ND
-kxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4
-LDQ2Njg3MDY4Ml19
+eyJoaXN0b3J5IjpbLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMT
+M5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUz
+NTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOT
+kzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQw
+MjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OT
+E0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgs
+NDY2ODcwNjgyXX0=
 -->
