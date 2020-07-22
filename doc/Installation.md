@@ -72,7 +72,7 @@ module avail fftw
 
 To load the required packages (note that the following lines are machine-dependent):
 ```bash
-# these lines are valid for the supercomputer Archer ([https://www.archer.ac.uk/](https://www.archer.ac.uk/))
+# valid for Archer (archer.ac.uk)
 # load FFTW
 module load fftw
 # load Metis
@@ -149,11 +149,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMDQ1MjI3MjIsLTQ4NDM5NjcxNCwxMj
-U1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOTI3
-NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMD
-IsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5Mzkw
-NTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIxMj
-IsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwx
-MjE2MTk3MTQ1XX0=
+eyJoaXN0b3J5IjpbMzY4NDgwNzkzLC00ODQzOTY3MTQsMTI1NT
+QyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNzcw
+MjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNTM1MTAyLD
+c5MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05OTM5MDU2
+NzcsLTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAyMTIyLC
+0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MTQsMTIx
+NjE5NzE0NV19
 -->
