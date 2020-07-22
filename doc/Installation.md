@@ -58,11 +58,12 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 ```
+
 Alternatively, we can use `conda`: 
 ```bash
 $ conda install -c conda-forge boost
-$ export CONDA_LIB_PATH=
-$ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
+$ export CONDA_LIB_PATH=$(dirname $(dirname $(which conda)))/lib
+$ export BOOST_ROOT=$CONDA_LIB_PATH
 ``` 
 
 
@@ -74,11 +75,11 @@ $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMj
-ExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3
-Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2Mj
-UwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwt
-MTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMj
-c5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2
-NjAsLTIxMDA0NzE2NDddfQ==
+eyJoaXN0b3J5IjpbMTMwMDAzMjIyOSwtOTkzOTA1Njc3LC0xMz
+YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
+NDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxND
+UsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0x
+NjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNz
+E4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5
+NjEsMTEwNzA2ODY2MF19
 -->
