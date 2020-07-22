@@ -80,7 +80,7 @@ module load metis/5.1.0_build2
 module load cray-netcdf/4.6.1.3
 ```
 
-If a package is missing, one may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
+If a package is missing, one may turn to the admin or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
 ### 2. Building AxiSEM3D
@@ -149,7 +149,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1NTg1NzUyNiwtNTIyOTE4ODYwLC01ND
+eyJoaXN0b3J5IjpbMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01ND
 IxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5
 NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyOD
 IsLTEzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEw
