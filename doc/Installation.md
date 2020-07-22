@@ -69,10 +69,13 @@ module avail
 # check available versions of FFTW
 module avail fftw
 ```
-To load packages ():
+To load the required packages (these lines are machine-dependent):
 ```bash
-# load FFTW 3.3.4
-module load fftw/3.3.4
+# load FFTW
+module load fftw
+# load Metis
+module load metis
+# load 
 ```
 
 
@@ -143,7 +146,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDEzNTA5MzM5LDEyNTU0MjI5NjQsLTYyMT
+eyJoaXN0b3J5IjpbODc0Nzg1ODIxLDEyNTU0MjI5NjQsLTYyMT
 Y1ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3
 NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsOD
 Y4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3
