@@ -39,10 +39,12 @@ $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz
 
 This will create `eigen-master` under the current directory. It can be placed anywhere.
 
+
+
 <strong>NOTE</strong>: AxiSEM3D requires Eigen 3.3.9 or above, but the current stable version is 3.3.7 (up to July 22, 2020). Therefore, the above step is essential even you have installed `Eigen` using a package manager such as `conda` or `pip`. 
 
 ### 2. Boost
-`Boost` provides free peer-reviewed portable C++ source libraries. 
+`Boost` provides free peer-reviewed portable C++ source libraries. `AxiSEM3D` uses 
 
 
 
@@ -54,8 +56,9 @@ This will create `eigen-master` under the current directory. It can be placed an
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0xMz
-gzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwtMzMyNzk0
-ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNzA2ODY2MC
-wtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbMTY5NzAzOTczNiw0NjY4NzA2ODIsLTE2ND
+cwNzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4
+ODU4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MS
+wxMTA3MDY4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIz
+MDAyNzg1XX0=
 -->
