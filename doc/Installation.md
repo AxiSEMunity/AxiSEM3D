@@ -101,15 +101,15 @@ set(METIS_ROOT  $ENV{HOME}/anaconda3)
 set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 ```
 
-Alternatively, one can set the corresponding environment variables:
+Alternatively, one can set the corresponding environment variables, leaving :
 ```bash
 # Eigen and Boost installed by downloading the source code
-set(EIGEN3_ROOT $ENV{HOME}/axisem3d_dependencies/eigen3_develop)
-set(BOOST_ROOT  $ENV{HOME}/axisem3d_dependencies/boost_1_73_0)
+export EIGEN3_ROOT=$HOME/axisem3d_dependencies/eigen3_develop
+export BOOST_ROOT=$HOME/axisem3d_dependencies/boost_1_73_0
 # FFTW, Metis and NetCDF installed by conda
-set(FFTW_ROOT   $ENV{HOME}/anaconda3)
-set(METIS_ROOT  $ENV{HOME}/anaconda3)
-set(NETCDF_ROOT $ENV{HOME}/anaconda3)
+export FFTW_ROOT=$HOME/anaconda3
+export METIS_ROOT=$HOME/anaconda3
+export NETCDF_ROOT=$HOME/anaconda3
 ```
 
 
@@ -173,7 +173,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1OTEyNDg3MywxOTM3MzIwOTU3LC00OT
+eyJoaXN0b3J5IjpbMTE5MzU5MjU4OCwxOTM3MzIwOTU3LC00OT
 M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
 ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
 wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
