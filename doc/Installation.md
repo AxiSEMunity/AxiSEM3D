@@ -61,11 +61,11 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed and optimized owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To check available packages and versions:
+On an HPC cluster, it is most likely that these packages have been installed and optimized owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
 ```bash
-# check available packages
+# all available packages
 module avail
-# check available versions of FFTW
+# all available versions of FFTW
 module avail fftw
 ```
 
@@ -149,7 +149,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUyMjkxODg2MCwtNTIyOTE4ODYwLC01ND
+eyJoaXN0b3J5IjpbLTQ1NTg1NzUyNiwtNTIyOTE4ODYwLC01ND
 IxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5
 NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyOD
 IsLTEzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEw
