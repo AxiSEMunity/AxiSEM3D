@@ -59,10 +59,12 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed and optimized because of their popularity. Usually the packages are managed by `module`. To use a package such as `FFTW`, first do
+On an HPC cluster, it is most likely that these packages have been installed and optimized due to their popularity. Software packages are usually managed by `module`.
+
+To use a package such as `FFTW`, first do
 
 ```bash
-module avial fftw
+module avial
 ```
 
 
@@ -137,11 +139,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMT
-k1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2
-MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMT
-M2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5
-MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MT
-Q1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4Miwt
-MTY0NzA3ODkwOV19
+eyJoaXN0b3J5IjpbMTk2NTIyMzI5MywtMTU0OTIyNTI4MiwtMT
+M5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUz
+NTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOT
+kzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQw
+MjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OT
+E0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgs
+NDY2ODcwNjgyXX0=
 -->
