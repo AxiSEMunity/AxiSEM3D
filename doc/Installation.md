@@ -46,7 +46,7 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 
 ### 2. Boost
-`AxiSEM3D` only uses some of the header-only modules of `Boost`, so we just download the source code:
+`AxiSEM3D` only uses some of the header-only modules of `Boost`, so we just need to download the source code:
 
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
@@ -62,11 +62,11 @@ $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUwMDA2NDY4MSwxMjE0MDIxMjIsLTE5Mz
-I5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3
-MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4Mi
-wtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwx
-MzcxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OT
-M1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIz
-OCwyMjMwMDI3ODVdfQ==
+eyJoaXN0b3J5IjpbNjAzMDQ5Njc4LDEyMTQwMjEyMiwtMTkzMj
+kyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcx
+NDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC
+0xNjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEz
+NzE4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5Mz
+U5NjEsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4
+LDIyMzAwMjc4NV19
 -->
