@@ -76,7 +76,7 @@ module load fftw
 # load Metis
 module load metis
 # load NetCDF
-
+module load cray
 ```
 
 
@@ -147,7 +147,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzNTc5Mjc5NywxMjU1NDIyOTY0LC02Mj
+eyJoaXN0b3J5IjpbLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02Mj
 E2NTg4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1
 NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLD
 g2ODc5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5
