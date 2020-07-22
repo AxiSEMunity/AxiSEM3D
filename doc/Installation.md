@@ -10,7 +10,6 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 ```bash
 $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
-
 The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate very large-scale meshes on a laptop.
 
 Verify the installation by
@@ -34,14 +33,11 @@ Name|Role|Minimum version|Note
 
 
 ### 1. Eigen
-
-`Eigen` is header-only, so we just need to download the source code:
-
+`Eigen` is a header-only library, so we just need to download the source code:
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 ```
-This will create `eigen3_develop` under the current directory. To let AxiSEM3D find it, do
-
+This will create `eigen3_develop` under the current directory. Next, to let `AxiSEM3D` use this version, do
 ```bash
 $ export EIGEN3_ROOT=$PWD/eigen3_develop
 ``` 
@@ -66,7 +62,7 @@ $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM4NjA4Mjg1NywxMjE0MDIxMjIsLTE5Mz
+eyJoaXN0b3J5IjpbMTUwMDA2NDY4MSwxMjE0MDIxMjIsLTE5Mz
 I5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3
 MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4Mi
 wtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwx
