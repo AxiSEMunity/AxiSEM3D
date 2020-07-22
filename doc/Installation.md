@@ -47,7 +47,7 @@ $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ```
-The first line creates `eigen3_develop` under the current directory. The second line enables `AxiSEM3D` to find this version by setting the environment variable `EIGEN3_ROOT`.
+The first line creates `eigen3_develop` under the current directory. The second line enables `cmake` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one already has `Eigen` installed before.
 
@@ -98,7 +98,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY1OTEwODg1NCw2NTE4MzM2MzMsLTEwOD
+eyJoaXN0b3J5IjpbLTYyMzM2NDc4Myw2NTE4MzM2MzMsLTEwOD
 M1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4Mjks
 LTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMj
 E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
