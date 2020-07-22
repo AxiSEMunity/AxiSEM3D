@@ -16,7 +16,7 @@ Verify the installation by
 ```bash
 $ python -m salvus_mesh_lite.interface AxiSEM -h
 ```
-This will display all the arguments you can pass to the mesher. 
+This will display all the arguments one can pass to the mesher. 
 
 
 ## Solver
@@ -46,7 +46,7 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ```
 The first line creates `eigen3_develop` under the current directory. The second line enables `AxiSEM3D` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you already have `Eigen` installed, no matter 
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one already has `Eigen` installed.  
 
 
 ### 2. Boost
@@ -76,11 +76,11 @@ $ export BOOST_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwMzIwNzYyOSw3MzMxNzA4MjksLTk5Mz
-kwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIx
-MjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNC
-wxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2
-Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OT
-A1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5
-NSwtNTI4OTM1OTYxXX0=
+eyJoaXN0b3J5IjpbLTEwMjI0NDU4ODMsNzMzMTcwODI5LC05OT
+M5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAy
+MTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MT
+QsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0
+NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYsLTE3ND
+kwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUx
+OTUsLTUyODkzNTk2MV19
 -->
