@@ -117,7 +117,7 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-Now we can do cmake:
+To find the root of a package on a cluster, 
 
 
 
@@ -134,11 +134,11 @@ Now we can do cmake:
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMT
-g5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4
-NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMD
-IsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02
-MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1ND
-Q1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUx
-LDg2ODc5Njc0N119
+eyJoaXN0b3J5IjpbNTY0NTM3MDM0LC0xOTExNDQzNzMxLC0yMD
+QyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1
+NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC
+0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1
+NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNz
+cwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNTM1MTAy
+LDc5MDc0NjM1MV19
 -->
