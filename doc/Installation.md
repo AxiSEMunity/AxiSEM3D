@@ -45,7 +45,7 @@ $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 `Eigen` is a header-only library, so one just needs to download the source code:
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
-$ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
+$ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_PATH/eigen3_develop
 ```
 The first line creates `eigen3_develop` under the current directory. The second line enables `cmake` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
@@ -98,7 +98,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0NTk2MjQwMyw2NTE4MzM2MzMsLTEwOD
+eyJoaXN0b3J5IjpbMTg2OTY0MzU2Nyw2NTE4MzM2MzMsLTEwOD
 M1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4Mjks
 LTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMj
 E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
