@@ -40,7 +40,7 @@ Name|Role|Minimum version|Note
 # create a top working directory
 mkdir -p AxiSEM3D_2020
 # create dependency directory
-dependencies && cd $_
+mkdir -p AxiSEM3D_2020/dependencies && cd $_
 # download Eigen 3.3.9
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 # download Boost 1.73
@@ -134,11 +134,11 @@ Now we can do cmake:
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDk3ODIxOTAsMTg5NTYxMDczOSwxOT
-M3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4
-ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0Mz
-ksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1
-NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4Mz
-M2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3
-MzMxNzA4MjldfQ==
+eyJoaXN0b3J5IjpbMTY3NTY4MDQ4MCwxODk1NjEwNzM5LDE5Mz
+czMjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4
+NjAsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOS
+wtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0
+OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMz
+YzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDcz
+MzE3MDgyOV19
 -->
