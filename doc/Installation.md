@@ -36,7 +36,7 @@ Eigen is a C++ template (header-only) library for linear algebra. We only need t
 $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz -O - | tar -xz
 ``` 
 
-This will create a directory `eigen-master` under the current 
+This will create `eigen-master` under the current directory. In 
 
 
 
@@ -47,7 +47,7 @@ This will create a directory `eigen-master` under the current
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE3MjE5ODYyMywtMTczNzU4NTE5NSwtNT
+eyJoaXN0b3J5IjpbLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNT
 I4OTM1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMy
 MTIzOCwyMjMwMDI3ODVdfQ==
 -->
