@@ -95,7 +95,7 @@ First, edit the root variables pointing to the dependencies:
 ```cmake
 set(EIGEN3_ROOT $ENV{HOME}/axisem3d_dependencies/eigen3_develop)
 set(BOOST_ROOT  $ENV{HOME}/axisem3d_dependencies/boost_1_73_0)
-set(FFTW_ROOT $ENV{HOME}/anaconda3)
+set(FFTW_ROOT   $ENV{HOME}/anaconda3)
 set(METIS_ROOT  $ENV{HOME}/anaconda3)
 set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 ```
@@ -161,7 +161,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY0MDU2NDY2NywxOTM3MzIwOTU3LC00OT
+eyJoaXN0b3J5IjpbMTU1MjMxMDIwMywxOTM3MzIwOTU3LC00OT
 M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
 ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
 wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
