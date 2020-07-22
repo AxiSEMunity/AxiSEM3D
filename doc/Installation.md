@@ -89,7 +89,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 $ git clone https://github.com/kuangdai/AxiSEM-3D.git
 ```
 #### 2.  cmake
-Before doing `cmake`, one must edit `AxiSEM3D/SOLVER/CMakeLists.txt`.
+Before doing `cmake`, one must edit `AxiSEM3D/SOLVER/CMakeLists.txt`. 
 
 ### 1. Eigen
 `Eigen` is a header-only library, so one just needs to download the source code:
@@ -148,11 +148,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjM1MzI2MTMyLDEzODgxODY0MDIsLTUyMj
-kxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAx
-NDM5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC
-0xNTQ5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUx
-ODMzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3ND
-csNzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIx
-MTY2NDM4NDJdfQ==
+eyJoaXN0b3J5IjpbLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01Mj
+I5MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIw
+MTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1ODgxNC
+wtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1
+MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2Nz
+Q3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMzLC0y
+MTE2NjQzODQyXX0=
 -->
