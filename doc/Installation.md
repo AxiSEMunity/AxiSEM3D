@@ -83,7 +83,8 @@ module load cray-netcdf/4.6.1.3
 If one of them is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
-### 2. Build AxiSEM3D
+### 2. Building AxiSEM3D
+#### 1. Download the code
 
 
 
@@ -148,7 +149,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMTQ0MTYyMCwtMTYxMTgzOTAwMiwtMT
+eyJoaXN0b3J5IjpbLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMT
 MxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1
 ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NT
 I4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4
