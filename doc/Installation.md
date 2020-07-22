@@ -28,7 +28,7 @@ Name|Role|Minimum version|Note
 `Eigen` | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
 `Boost` | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 `FFTW` | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
-`Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
+`Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
 `NetCDF` | intensive structured I/O | 4.7.1 | Parallel build is supported but not mandatory.
 
 Before the installation, one can create a directory to store the dependencies:
@@ -98,11 +98,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2OD
-c5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5Nzkz
-MywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLT
-YzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3
-MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3OD
-kwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgs
-LTMzMjc5NDg2N119
+eyJoaXN0b3J5IjpbMTY5NzM5NTYyMywtMTA4MzUzNTEwMiw3OT
+A3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3
+LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMT
+kzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYx
+OTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNj
+gyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1
+LDEzNzE4ODg1OF19
 -->
