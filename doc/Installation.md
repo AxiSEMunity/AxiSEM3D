@@ -27,7 +27,7 @@ which will display all the arguments you can pass to the mesher.
 
 ## Solver
 
-The AxiSEM3D solver is developed on top of several modern numerical packages including `Eigen`, `Boost`,  `FFTW`, `Metis` and `NetCDF`. 
+The `AxiSEM3D` solver is developed on top of several modern numerical packages including `Eigen`, `Boost`,  `FFTW`, `Metis` and `NetCDF`. 
 
 ### Eigen
 
@@ -51,8 +51,8 @@ This will create `eigen-master` under the current directory.
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4MzExNzQ4MSwtMTc0OTA1ODUwNSwxMz
-cxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1
-OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOC
-wyMjMwMDI3ODVdfQ==
+eyJoaXN0b3J5IjpbNzc2Mjk3Njk5LC0xNzQ5MDU4NTA1LDEzNz
+E4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5
+NjEsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LD
+IyMzAwMjc4NV19
 -->
