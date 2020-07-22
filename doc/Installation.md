@@ -27,10 +27,10 @@ which will display all the arguments you can pass to the mesher.
 
 ## Solver
 
-Installing the solver 
+AxiSEM3D 
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTc1MTc4MTgsMTEwNzA2ODY2MCwtMj
-EwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbLTUyODkzNTk2MSwxMTA3MDY4NjYwLC0yMT
+AwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1XX0=
 -->
