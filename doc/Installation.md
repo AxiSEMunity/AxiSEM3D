@@ -51,7 +51,7 @@ This will create `eigen3_develop` under the current directory. To let AxiSEM3D f
 $ export EIGEN3_ROOT=$PWD/eigen3_develop
 ``` 
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable version is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you have installed `Eigen` using a package manager such as `conda` or `pip`. 
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you have installed `Eigen` before. 
 
 
 ### 2. Boost
@@ -67,11 +67,11 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1MzMxNzM5MiwtMTkzMjkyNDI3NiwtNj
-MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
-MjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OT
-A5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwt
-MzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNz
-A2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4
-NV19
+eyJoaXN0b3J5IjpbMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02Mz
+M3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAy
+NjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MD
+ksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0z
+MzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MD
+Y4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1
+XX0=
 -->
