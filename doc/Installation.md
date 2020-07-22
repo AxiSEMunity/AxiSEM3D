@@ -60,7 +60,7 @@ $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar
 $ export BOOST_ROOT=$AXISEM3D_DEPENDS_PATH/boost_1_73_0
 ```
 
-Alternatively, one can use `conda` to install `Boost`: 
+Alternatively, one can use `conda`: 
 ```bash
 $ conda install -c conda-forge boost
 $ export BOOST_ROOT=$CONDA_PATH
@@ -98,11 +98,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTE4MDY0ODMsNjUxODMzNjMzLC0xMD
-gzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5
-LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMT
-IxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkz
-NTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3ND
-M2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYs
-LTE3NDkwNTg1MDVdfQ==
+eyJoaXN0b3J5IjpbMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwOD
+M1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4Mjks
+LTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMj
+E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
+NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
+Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
+MTc0OTA1ODUwNV19
 -->
