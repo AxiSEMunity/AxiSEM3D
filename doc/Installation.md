@@ -108,8 +108,8 @@ set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 Alternatively, one can set the corresponding environment variables, leaving `AxiSEM3D/SOLVER/CMakeLists.txt` unchanged:
 ```bash
 # Eigen and Boost installed by downloading the source code
-export EIGEN3_ROOT=$HOME/axisem3d_dependencies/eigen3_develop
-export BOOST_ROOT=$HOME/axisem3d_dependencies/boost_1_73_0
+export EIGEN3_ROOT=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop
+export BOOST_ROOT=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0
 # FFTW, Metis and NetCDF installed by conda
 export FFTW_ROOT=$HOME/anaconda3
 export METIS_ROOT=$HOME/anaconda3
@@ -134,11 +134,11 @@ Now we can do cmake:
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNDIyNzUzNjUsMTg5NTYxMDczOSwxOT
-M3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4
-ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0Mz
-ksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1
-NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4Mz
-M2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3
-MzMxNzA4MjldfQ==
+eyJoaXN0b3J5IjpbLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMT
+g5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4
+NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMD
+IsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02
+MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1ND
+Q1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUx
+LDg2ODc5Njc0N119
 -->
