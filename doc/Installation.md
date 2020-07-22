@@ -29,7 +29,7 @@ Name|Role|Minimum version|Note
 `Boost` | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 `FFTW` | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
 `Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
-`NetCDF` | intensive structured IO | 4.7.1 | Parallel build is supported but not mandatory.
+`NetCDF` | intensive structured I/O | 4.7.1 | Parallel build is supported but not mandatory.
 
 Before the installation, one can create a directory to store the dependencies:
 ```bash
@@ -88,7 +88,7 @@ $ conda install -c anaconda netcdf4
 $ export NETCDF_ROOT=$CONDA_PATH
 $ export HDF5_ROOT=$CONDA_PATH
 ```
-Using  NetCDF
+Using a `NetCDF` build with parallel I/O support can enhance the performance of `AxiSEM3D` and simplify post-processing. However, 
 
 
 ## Tools for pre- and post-processing
@@ -98,7 +98,7 @@ Using  NetCDF
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQxMzc1MDA1Niw3OTA3NDYzNTEsODY4Nz
+eyJoaXN0b3J5IjpbMTYxNTA5NzQzNyw3OTA3NDYzNTEsODY4Nz
 k2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMz
 LC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNj
 MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
