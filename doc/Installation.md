@@ -50,6 +50,10 @@ The above lines create a directory `axisem3d_dependencies` that contains `eigen3
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one has `Eigen` installed before.
 
+#### 1.2. FFTW, Metis and NetCDF by conda
+FFTW, Metis and NetCDF can be easily installed using `conda` (either `miniconda` or `anaconda`):
+
+
 
 
 
@@ -117,11 +121,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzMTE4Njk1MzIsMTk1NDQ1NzUyOCw2NT
-E4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0
-Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMj
-ExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3
-Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2Mj
-UwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwt
-MTM4Mzc3MDIwNl19
+eyJoaXN0b3J5IjpbNzU5NzEzMjA0LDE5NTQ0NTc1MjgsNjUxOD
+MzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcs
+NzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMT
+Y2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5
+NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MC
+wtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEz
+ODM3NzAyMDZdfQ==
 -->
