@@ -3,7 +3,7 @@
 
 # Installation
 
-The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly python libraries) for pre- and post-processing. 
+The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing. 
 
 
 ## Mesher
@@ -51,8 +51,8 @@ This will create `eigen-master` under the current directory.
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMz
-I3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4
-NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1XX
-0=
+eyJoaXN0b3J5IjpbLTI4MzExNzQ4MSwtMTc0OTA1ODUwNSwxMz
+cxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1
+OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOC
+wyMjMwMDI3ODVdfQ==
 -->
