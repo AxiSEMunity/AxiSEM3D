@@ -3,7 +3,7 @@
 
 # Installation
 
-The installation of AxiSEM3D includes three parts: the mesher, the solver and several tools (mostly python libraries) for pre- and post-processing. 
+The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly python libraries) for pre- and post-processing. 
 
 
 ## Mesher
@@ -39,7 +39,7 @@ $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz
 
 This will create `eigen-master` under the current directory. 
 
-<strong>NOTE</strong>: AxiSEM3D requires Eigen 3.3.9 or above, but the current stable version is 3.3.7 (up to July 22, 2020). Therefore, the above step is essential even you have installed Eigen using package managers such anaconda 
+<strong>NOTE</strong>: AxiSEM3D requires Eigen 3.3.9 or above, but the current stable version is 3.3.7 (up to July 22, 2020). Therefore, the above step is essential even you have installed Eigen using a package manager such as anaconda or pip. 
 
 
 
@@ -51,8 +51,7 @@ This will create `eigen-master` under the current directory.
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMzQ2MDMxNzEsMTM3MTg4ODU4LC0zMz
-I3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4
-NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1XX
-0=
+eyJoaXN0b3J5IjpbNzU3MTUxNzI1LDEzNzE4ODg1OCwtMzMyNz
+k0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNzA2ODY2
+MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
 -->
