@@ -93,7 +93,7 @@ cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  cmake
-Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
+Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
 
 ```python
 # Eigen and Boost installed by downloading the source code
@@ -117,11 +117,11 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-To find the root of a package on an HPC cluster, one can use `module display`, for example:
+To find the path of a package on an HPC cluster, one can use `module display`, for example:
 ```bash
-module display fftw
+module display fftw/3.3.4.11
 ```
-
+Note that the `_ROOT` sent to cmake
 
 
 
@@ -138,11 +138,11 @@ module display fftw
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzgwODA2MDY4LC0xOTExNDQzNzMxLC0yMD
-QyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1
-NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC
-0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1
-NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNz
-cwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNTM1MTAy
-LDc5MDc0NjM1MV19
+eyJoaXN0b3J5IjpbLTIwMTcyOTIyNTIsLTE5MTE0NDM3MzEsLT
+IwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2
+NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExOD
+MsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwx
+MjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOT
+I3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUx
+MDIsNzkwNzQ2MzUxXX0=
 -->
