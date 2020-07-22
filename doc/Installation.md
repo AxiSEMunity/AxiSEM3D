@@ -2,7 +2,7 @@
 
 
 # Installation
-The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing. 
+The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing.
 
 
 ## Mesher
@@ -20,6 +20,8 @@ This will display all the arguments one can pass to the mesher.
 
 
 ## Solver
+
+### 1. Dependencies
 
 The `AxiSEM3D` solver is developed on top of several modern numerical packages including:
 
@@ -98,11 +100,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwOD
-M1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4Mjks
-LTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMj
-E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
-NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
-Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
-MTc0OTA1ODUwNV19
+eyJoaXN0b3J5IjpbODU0MDc3NDYzLDE5NTQ0NTc1MjgsNjUxOD
+MzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcs
+NzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMT
+Y2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5
+NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MC
+wtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEz
+ODM3NzAyMDZdfQ==
 -->
