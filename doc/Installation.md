@@ -117,7 +117,11 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-To find the root of a package on a cluster, 
+To find the root of a package on an HPC cluster, one can use `module display`, for example:
+```bash
+module display fftw
+```
+
 
 
 
@@ -134,7 +138,7 @@ To find the root of a package on a cluster,
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTY0NTM3MDM0LC0xOTExNDQzNzMxLC0yMD
+eyJoaXN0b3J5IjpbMzgwODA2MDY4LC0xOTExNDQzNzMxLC0yMD
 QyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1
 NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC
 0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1
