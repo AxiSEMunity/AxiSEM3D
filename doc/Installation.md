@@ -36,7 +36,7 @@ Before the installation, one can create a directory to store the dependencies:
 $ mkdir -p axisem3d_dependencies && cd $_
 $ export AXISEM3D_DEPENDS_PATH=$PWD
 ```
-Also, find the root path of Anaconda: 
+Also, if one uses `conda`, the root path can be identified by
 ```bash
 $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 ```
@@ -88,6 +88,7 @@ $ conda install -c anaconda netcdf4
 $ export NETCDF_ROOT=$CONDA_PATH
 $ export HDF5_ROOT=$CONDA_PATH
 ```
+Using
 
 
 ## Tools for pre- and post-processing
@@ -97,7 +98,7 @@ $ export HDF5_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5NjIyNTExMiw3OTA3NDYzNTEsODY4Nz
+eyJoaXN0b3J5IjpbLTU5NTk1NDI0MCw3OTA3NDYzNTEsODY4Nz
 k2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMz
 LC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNj
 MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
