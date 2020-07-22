@@ -33,7 +33,7 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 Name|Introduction|Minimum version
 --- | --- | ---
 Eigen | C++ library for linear algebra | 3.3.9
-Boost | portable C++ source libraries | 1.7.1
+Boost | C++ libraries across a broad spectrum of applications | 1.7.1
 FFTW | C library for fast Fourier transform | 3.3.8
 Metis | mesh partitioning | 5.1.0
 NetCDF | IO | 5.1.0
@@ -76,7 +76,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2NjY2MzMxNywtMTMyNzAyNjI1MCwtMT
+eyJoaXN0b3J5IjpbMTQwMzM1NDQyMiwtMTMyNzAyNjI1MCwtMT
 M4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3
 NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4Nj
 csLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4NjYwLC0y
