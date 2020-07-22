@@ -38,7 +38,7 @@ Name|Role|Minimum version|Note
 `Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
 ```bash
 # create a directory to store Eigen and Boost
-mkdir -p axisem3d_dependencies && cd $_
+mkdir -p AxiSEM3D_2020/dependencies && cd $_
 # download Eigen 3.3.9
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 # download Boost 1.73
@@ -131,11 +131,11 @@ Now we can do cmake:
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzY2ODM1NzUzLDE5MzczMjA5NTcsLTQ5Mz
-Y0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4
-MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LD
-EyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5
-Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNT
-EwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkz
-OTA1Njc3XX0=
+eyJoaXN0b3J5IjpbLTE5ODY3OTc2NzIsMTkzNzMyMDk1NywtND
+kzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAx
+MTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MT
+QsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0x
+MzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNT
+M1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05
+OTM5MDU2NzddfQ==
 -->
