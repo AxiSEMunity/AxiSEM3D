@@ -86,8 +86,9 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
-mkdir -p AxiSEM3D_2020
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
+# this was created
+cd AxiSEM3D_2020
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_SOURCE
 ```
 #### 2.2.  cmake
 Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
@@ -131,7 +132,7 @@ Now we can do cmake:
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxOTU0MTgwNywxOTM3MzIwOTU3LC00OT
+eyJoaXN0b3J5IjpbMjA3MjY0MzcxOSwxOTM3MzIwOTU3LC00OT
 M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
 ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
 wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
