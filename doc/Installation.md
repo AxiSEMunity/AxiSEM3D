@@ -49,7 +49,7 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 `AxiSEM3D` only uses some of the header-only modules of `Boost`, so we just need to download the source code:
 
 ```bash
-$ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
+$ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -xf
 ```
 
 
@@ -62,7 +62,7 @@ $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzY4MDI4MDQsMTIxNDAyMTIyLC0xOT
+eyJoaXN0b3J5IjpbLTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0xOT
 MyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5
 NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2OD
 IsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUs
