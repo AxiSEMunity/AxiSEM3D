@@ -42,9 +42,9 @@ NetCDF | intensive structured IO | 4.7.1 | Parallel NetCDF is supported but not 
 
 
 ### 1. Installing dependencies locally
-#### 1.1 Eigen
+#### 1.1. Eigen
 
-`Eigen` is a C++ template (header-only) library for linear algebra. No installation is needed. Just download and decompress the source code:
+`Eigen` is header-only. Just download and extract the source code:
 
 ```bash
 $ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.gz -O - | tar -xz
@@ -72,10 +72,10 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjc5OTg5MDIzLC0xMjc5MzU0OTE0LDEyMT
-YxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcw
-NjgyLC0xNjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NT
-A1LDEzNzE4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01
-Mjg5MzU5NjEsMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2Mz
-IxMjM4LDIyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbMTM2NDQwODE3NywtMTI3OTM1NDkxNCwxMj
+E2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3
+MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1OD
+UwNSwxMzcxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwt
+NTI4OTM1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNj
+MyMTIzOCwyMjMwMDI3ODVdfQ==
 -->
