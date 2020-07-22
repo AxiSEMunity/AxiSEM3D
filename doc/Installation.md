@@ -91,6 +91,18 @@ $ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
 #### 2.2.  cmake
 Before doing `cmake`, one must edit `AxiSEM3D/SOLVER/CMakeLists.txt`. First, edit 
 
+```c
+set(EIGEN3_ROOT $ENV{EIGEN3_ROOT})
+
+set(BOOST_ROOT  $ENV{BOOST_ROOT})
+
+set(FFTW_ROOT $ENV{FFTW_ROOT})
+
+set(METIS_ROOT  $ENV{METIS_ROOT})
+
+set(NETCDF_ROOT $ENV{NETCDF_ROOT})
+```
+
 
 
 
@@ -152,11 +164,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc1NTU4NzM3LC00OTM2NDU1MzAsMTM4OD
-E4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2MTE4Mzkw
-MDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC
-02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1
-NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2Mz
-UxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2
-MTM5NzkzM119
+eyJoaXN0b3J5IjpbLTE0ODE4NzExMjAsLTQ5MzY0NTUzMCwxMz
+g4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgz
+OTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5Nj
+QsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwx
+OTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3ND
+YzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0x
+MzYxMzk3OTMzXX0=
 -->
