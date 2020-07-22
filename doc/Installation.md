@@ -35,9 +35,10 @@ Name|Role|Minimum version|Note
 
 #### 1.1. Eigen and Boost
 
-Eigen and Boost are header-only libraries, so we only need to download the source code. 
+`Eigen` and `Boost` are header-only libraries.  we only need to download the source code. 
 
 ```bash
+# create a folder to store Eigen and Boost
 mkdir -p axisem3d_dependencies && cd $_
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
@@ -109,11 +110,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkwOTA3ODI4NCwxOTU0NDU3NTI4LDY1MT
-gzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3
-LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMT
-E2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2
-OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNT
-AsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0x
-MzgzNzcwMjA2XX0=
+eyJoaXN0b3J5IjpbLTE5MDY1NzgwMzIsMTk1NDQ1NzUyOCw2NT
+E4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0
+Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMj
+ExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3
+Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2Mj
+UwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwt
+MTM4Mzc3MDIwNl19
 -->
