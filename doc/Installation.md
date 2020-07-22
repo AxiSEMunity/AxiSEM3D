@@ -29,8 +29,9 @@ which will display all the arguments you can pass to the mesher.
 
 The `AxiSEM3D` solver is developed on top of several modern numerical packages including `Eigen`, `Boost`,  `FFTW`, `Metis` and `NetCDF`:
 
+
 | Name        | Usage           | Cool  |
-| ------------- |-------------| -----:|
+| ------------- |-------------| -----|
 | col 3 is      | right-aligned | $1600 |
 | col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |
@@ -69,9 +70,9 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTE4OTI2MDYsLTEzMjcwMjYyNTAsLT
-EzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0xMzgz
-NzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwtMzMyNzk0OD
-Y3LC0xNzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEwNzA2ODY2MCwt
-MjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMjc4NV19
+eyJoaXN0b3J5IjpbOTE0MzExOTYwLC0xMzI3MDI2MjUwLC0xMz
+gxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3
+MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Ny
+wtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIx
+MDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3ODVdfQ==
 -->
