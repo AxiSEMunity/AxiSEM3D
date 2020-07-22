@@ -42,6 +42,8 @@ NetCDF | intensive structured IO | 4.7.1 | Parallel NetCDF is supported but not 
 
 
 ### 1. Installing dependencies locally
+#### 1.1. Dependency
+
 #### 1.1. Eigen
 
 `Eigen` is header-only. Just download and extract the source code:
@@ -72,7 +74,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2NDQwODE3NywtMTI3OTM1NDkxNCwxMj
+eyJoaXN0b3J5IjpbLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMj
 E2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3
 MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1OD
 UwNSwxMzcxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwt
