@@ -59,7 +59,7 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed because of their popularity. 
+On an HPC cluster, it is most likely that these packages have been installed and tuned to the architecture because of their popularity. 
 
 
 
@@ -131,7 +131,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDY3NzI5OSwtMTM5Mjc3MDIxNSwxOT
+eyJoaXN0b3J5IjpbLTUwNDE5NzA5NywtMTM5Mjc3MDIxNSwxOT
 U0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYz
 NTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMz
 YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
