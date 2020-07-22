@@ -34,7 +34,9 @@ Name|Introduction|Minimum version
 --- | --- | ---
 Eigen | C++ library for linear algebra | 3.3.9
 Boost | portable C++ source libraries | 1.7.1
-FFTW | Fast f | 1.7.1
+FFTW | fast Fourier transform | 3.3.8
+Metis | mesh partitioning | 3.3.8
+
 
 
 
@@ -72,9 +74,9 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4MjI4NjQyLC0xMzI3MDI2MjUwLC0xMz
-gxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3
-MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Ny
-wtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIx
-MDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3ODVdfQ==
+eyJoaXN0b3J5IjpbLTI5MzU1MDg5OCwtMTMyNzAyNjI1MCwtMT
+M4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3
+NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4Nj
+csLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4NjYwLC0y
+MTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1XX0=
 -->
