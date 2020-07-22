@@ -66,7 +66,12 @@ $ export BOOST_ROOT=$CONDA_PATH
 
 
 ### 3. FFTW
-
+With `conda`:
+```bash
+$ conda install -c conda-forge fftw
+$ export CONDA_PATH=$(dirname $(dirname $(which conda)))
+$ export BOOST_ROOT=$CONDA_PATH
+```
 
 
 ## Tools for pre- and post-processing
@@ -76,11 +81,11 @@ $ export BOOST_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNz
-A4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0
-MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMT
-I3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgx
-OTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MD
-IwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Nywt
-MTczNzU4NTE5NV19
+eyJoaXN0b3J5IjpbLTQxMjQ4MDg0MSw3OTA3NDYzNTEsODY4Nz
+k2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMz
+LC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNj
+MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
+MjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OT
+A5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwt
+MzMyNzk0ODY3XX0=
 -->
