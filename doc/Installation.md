@@ -34,7 +34,7 @@ Name|Role|Minimum version|Note
 Before the installation, we can create a directory to store the dependencies:
 ```bash
 $ mkdir -p axisem3d_dependencies && cd $_
-$ export $AXI3D_DEP_ROOT=$PWD
+$ export AXISEM3D_DEPENDS_DIR=$PWD
 ```
 
 
@@ -71,11 +71,11 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4ODM4MjM3NTEsLTIxMTY2NDM4NDIsMT
-IxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkz
-NTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3ND
-M2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYs
-LTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4NjcsLTE3Mz
-c1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4NjYwLC0yMTAwNDcx
-NjQ3LC0yMTYzMjEyMzhdfQ==
+eyJoaXN0b3J5IjpbMTM3NDY0Mjg5OSwtMjExNjY0Mzg0MiwxMj
+E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
+NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
+Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
+MTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2NywtMTczNz
+U4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2
+NDcsLTIxNjMyMTIzOF19
 -->
