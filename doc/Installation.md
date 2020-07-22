@@ -86,8 +86,8 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
-$
-$ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
+
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
 ```
 #### 2.2.  cmake
 Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
@@ -121,54 +121,7 @@ Now we can do cmake:
 
 
 
-### 1. Eigen
-`Eigen` is a header-only library, so one just needs to download the source code:
-```bash
-$ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
-$ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_PATH/eigen3_develop
-```
-The first line creates `eigen3_develop` under the current directory. The second line enables `cmake` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one already has `Eigen` installed before.
-
-
-### 2. Boost
-`AxiSEM3D` only uses some of the header-only modules of `Boost`. Similar to `Eigen`, one only needs to download the source code and set the root variable:
-
-```bash
-$ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
-$ export BOOST_ROOT=$AXISEM3D_DEPENDS_PATH/boost_1_73_0
-```
-
-Alternatively, one can use `conda`: 
-```bash
-$ conda install -c conda-forge boost
-$ export BOOST_ROOT=$CONDA_PATH
-```
-
-
-### 3. FFTW
-Using `conda`:
-```bash
-$ conda install -c conda-forge fftw
-$ export FFTW_ROOT=$CONDA_PATH
-```
-
-### 4. Metis
-Using `conda`:
-```bash
-$ conda install -c anaconda metis
-$ export METIS_ROOT=$CONDA_PATH
-```
-
-### 5. NetCDF
-Using `conda`:
-```bash
-$ conda install -c anaconda netcdf4
-$ export NETCDF_ROOT=$CONDA_PATH
-$ export HDF5_ROOT=$CONDA_PATH
-```
-Using a `NetCDF` build with parallel I/O support can enhance the performance of `AxiSEM3D` and simplify post-processing. However, a parallel build is sometimes difficult to make. Instructions are provided [here](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html#build_parallel). 
 
 
 ## Tools for pre- and post-processing
@@ -178,11 +131,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcwMjI5NTUwMSwxOTM3MzIwOTU3LC00OT
-M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
-ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
-wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
-OTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1Mz
-UxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5
-MzkwNTY3N119
+eyJoaXN0b3J5IjpbOTA0NzA5MTcyLDE5MzczMjA5NTcsLTQ5Mz
+Y0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4
+MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LD
+EyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5
+Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNT
+EwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkz
+OTA1Njc3XX0=
 -->
