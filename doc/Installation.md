@@ -92,9 +92,10 @@ $ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
 Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example:
 
 ```cmake
-# Eigen and Boost installed by
+# Eigen and Boost installed by downloading the source code
 set(EIGEN3_ROOT $ENV{HOME}/axisem3d_dependencies/eigen3_develop)
 set(BOOST_ROOT  $ENV{HOME}/axisem3d_dependencies/boost_1_73_0)
+# FFTW, Metis and NetCDF installed by conda
 set(FFTW_ROOT   $ENV{HOME}/anaconda3)
 set(METIS_ROOT  $ENV{HOME}/anaconda3)
 set(NETCDF_ROOT $ENV{HOME}/anaconda3)
@@ -162,11 +163,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzU4NDkzMDc2LDE5MzczMjA5NTcsLTQ5Mz
-Y0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4
-MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LD
-EyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5
-Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNT
-EwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkz
-OTA1Njc3XX0=
+eyJoaXN0b3J5IjpbMjA2NDAxMDI0OCwxOTM3MzIwOTU3LC00OT
+M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
+ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
+wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
+OTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1Mz
+UxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5
+MzkwNTY3N119
 -->
