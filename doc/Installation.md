@@ -34,7 +34,8 @@ Name|Role|Minimum version|Note
 Before the installation, one can create a directory to store the dependencies:
 ```bash
 $ mkdir -p axisem3d_dependencies && cd $_
-$ export AXISEM3D_DEPENDS_DIR=$PWD
+$ export AXISEM3D_DEPENDS_PATH=$PWD
+$ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 ```
 
 
@@ -69,8 +70,8 @@ $ export BOOST_ROOT=$CONDA_PATH
 With `conda`:
 ```bash
 $ conda install -c conda-forge fftw
-$ export CONDA_PATH=$(dirname $(dirname $(which conda)))
-$ export BOOST_ROOT=$CONDA_PATH
+$ 
+$ export FFTW_ROOT=$CONDA_PATH
 ```
 
 
@@ -81,7 +82,7 @@ $ export BOOST_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQxMjQ4MDg0MSw3OTA3NDYzNTEsODY4Nz
+eyJoaXN0b3J5IjpbLTU5MDkyODc1Nyw3OTA3NDYzNTEsODY4Nz
 k2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMz
 LC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNj
 MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
