@@ -31,7 +31,7 @@ Name|Role|Minimum version|Note
 [`Boost`](https://www.boost.org/) | C++ helpers | 1.7.1 | `AxiSEM3D` only uses some of its header-only modules.
 [`FFTW`](http://www.fftw.org/) | fast Fourier transform | 3.3.4 | Both single- and double-precision builds are required.
 [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
-[`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.7.1 | Parallel build is supported but not mandatory.
+[`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
 
 #### 1.1. Eigen and Boost
 
@@ -51,9 +51,7 @@ The above lines create a directory `axisem3d_dependencies` that contains `eigen3
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one has `Eigen` installed before.
 
 #### 1.2. FFTW, Metis and NetCDF
-On a lo
-
-FFTW, Metis and NetCDF can be easily installed using `conda` (either `miniconda` or `anaconda`):
+On a local laptop or workstation, FFTW, Metis and NetCDF can be easily installed using `conda` (either `miniconda` or `anaconda`):
 
 ```bash
 $ conda install -c conda-forge fftw
@@ -61,7 +59,7 @@ $ conda install -c anaconda metis
 $ conda install -c anaconda netcdf4
 ```
 
-
+On a HPC
 
 
 
@@ -133,11 +131,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzNjIzMTY0NSwtMTM5Mjc3MDIxNSwxOT
-U0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYz
-NTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMz
-YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
-NDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxND
-UsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0x
-NjQ3MDc4OTA5XX0=
+eyJoaXN0b3J5IjpbLTE2MzIyMzY1NTEsLTEzOTI3NzAyMTUsMT
+k1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2
+MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMT
+M2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5
+MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MT
+Q1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4Miwt
+MTY0NzA3ODkwOV19
 -->
