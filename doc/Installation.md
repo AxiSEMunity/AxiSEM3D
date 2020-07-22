@@ -86,7 +86,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 ### 2. Building AxiSEM3D
 #### 1. Download the code
 ```bash
-$ git clone https://github.com/kuangdai/AxiSEM-3D.git
+$ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
 ```
 #### 2.  cmake
 Before doing `cmake`, one must edit `AxiSEM3D/SOLVER/CMakeLists.txt`. 
@@ -148,11 +148,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01Mj
-I5MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIw
-MTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1ODgxNC
-wtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1
-MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2Nz
-Q3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMzLC0y
-MTE2NjQzODQyXX0=
+eyJoaXN0b3J5IjpbMjEwOTIyMDY5MywtNDkzNjQ1NTMwLDEzOD
+gxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5
+MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1NTQyMjk2NC
+wtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNzcwMjE1LDE5
+NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNTM1MTAyLDc5MDc0Nj
+M1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05OTM5MDU2NzcsLTEz
+NjEzOTc5MzNdfQ==
 -->
