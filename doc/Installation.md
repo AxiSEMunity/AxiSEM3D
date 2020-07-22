@@ -49,7 +49,7 @@ The above lines create a directory `axisem3d_dependencies` that contains `eigen3
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one has `Eigen` installed before.
 
 #### 1.2. FFTW, Metis and NetCDF
-On a laptop or workstation, they can be easily installed using `conda` (either `miniconda` or `anaconda`):
+On a laptop or workstation, these packages can be easily installed using `conda` (either `miniconda` or `anaconda`):
 
 ```bash
 conda install -c conda-forge fftw
@@ -146,7 +146,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5NDE3NzIzNCwtNjIxNjU4ODE0LC0xNT
+eyJoaXN0b3J5IjpbMTE3NzgyODA3NiwtNjIxNjU4ODE0LC0xNT
 Q5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMz
 NjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNz
 MzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2
