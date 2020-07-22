@@ -117,9 +117,15 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-To find the `_ROOT` of a package on an HPC cluster, one can use `module display`, for example:
+To find the `_ROOT` of a package on an HPC cluster, one can use `module show`, for example:
 ```bash
-module display fftw/3.3.4.11
+# examples for Archer (archer.ac.uk)
+# show FFTW
+module show fftw/3.3.4.11
+# show Metis
+module show metis/5.1.0_build2
+# show NetCDF
+module show cray-netcdf/4.6.1.3
 ```
 Note that the `_ROOT` variables sent to cmake is neither the library path ended with `/lib` or the include path ended with `/include`, but the one containing both `lib` and `include`.
 
@@ -138,11 +144,11 @@ Note that the `_ROOT` variables sent to cmake is neither the library path ended 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NDk2Mjg3MjIsLTE5MTE0NDM3MzEsLT
-IwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2
-NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExOD
-MsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwx
-MjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOT
-I3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUx
-MDIsNzkwNzQ2MzUxXX0=
+eyJoaXN0b3J5IjpbMTY3MTYzMzQ1NiwtMTkxMTQ0MzczMSwtMj
+A0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0
+NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4My
+wtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEy
+NTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mj
+c3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEw
+Miw3OTA3NDYzNTFdfQ==
 -->
