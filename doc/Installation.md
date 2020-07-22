@@ -45,10 +45,10 @@ Name|Role|Minimum version|Note
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 ```
-This will create `eigen3_develop` under the current directory. It can be placed anywhere. To enable `AxiSEM3D` to find this `Eigen`, do
+This will create `eigen3_develop` under the current directory. To let AxiSEM3D find it, do
 
 ```bash
-$ export EIGEN3_ROOT=$PWD/eigen-master
+$ export EIGEN3_ROOT=$PWD/eigen3_develop
 ``` 
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable version is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you have installed `Eigen` using a package manager such as `conda` or `pip`. 
@@ -67,7 +67,7 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0MzgxNjcyMiwtMTkzMjkyNDI3NiwtNj
+eyJoaXN0b3J5IjpbMTA1MzMxNzM5MiwtMTkzMjkyNDI3NiwtNj
 MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
 MjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OT
 A5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwt
