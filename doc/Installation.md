@@ -64,11 +64,9 @@ $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 $ export BOOST_ROOT=$CONDA_PATH
 ```
 
-If one is working on a cluster, 
-
-
 
 ### 3. FFTW
+
 
 
 ## Tools for pre- and post-processing
@@ -78,11 +76,11 @@ If one is working on a cluster,
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMTgyODMzNSw4Njg3OTY3NDcsNzMzMT
-cwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2NDM4
-NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLT
-EyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4
-MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3Nz
-AyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4Njcs
-LTE3Mzc1ODUxOTVdfQ==
+eyJoaXN0b3J5IjpbNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNz
+A4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0
+MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMT
+I3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgx
+OTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MD
+IwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Nywt
+MTczNzU4NTE5NV19
 -->
