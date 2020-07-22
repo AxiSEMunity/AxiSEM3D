@@ -130,7 +130,10 @@ module show cray-netcdf/4.6.1.3
 
 <strong>Note</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`.
 
-
+After setting the `_ROOT` variables, we can do `cmake`:
+```bash
+mkdir -p buil
+```
 
 
 
@@ -145,7 +148,7 @@ module show cray-netcdf/4.6.1.3
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc0ODk1NTk2MSwtMTkxMTQ0MzczMSwtMj
+eyJoaXN0b3J5IjpbLTE5NjY4MTk1MCwtMTkxMTQ0MzczMSwtMj
 A0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0
 NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4My
 wtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEy
