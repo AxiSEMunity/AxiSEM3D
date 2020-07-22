@@ -65,11 +65,16 @@ First, check available packages and versions:
 ```bash
 # check all available packages
 module avail
+# check all available fftw versions
 module avail fftw
 ```
-To load a package such as FFTW:
+
+Next, load a package:
 ```bash
+# load fftw (default version)
 module load fftw
+# load fftw (specific version)
+module load fftw/3.3.8
 ```
 
 
@@ -143,7 +148,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU4NTc1NDM0NiwtMTU0OTIyNTI4MiwtMT
+eyJoaXN0b3J5IjpbMTE4NTA2MTE0NCwtMTU0OTIyNTI4MiwtMT
 M5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUz
 NTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOT
 kzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQw
