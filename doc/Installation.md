@@ -1,8 +1,5 @@
 [<< Repo](https://github.com/kuangdai/AxiSEM-3D)
 # Installation
-
-  
-
 AxiSEM3D
 
   
@@ -13,5 +10,5 @@ AxiSEM3D
 
 ## Python for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxOTc5NjM4OV19
+eyJoaXN0b3J5IjpbLTEwNzQ5MDgzODldfQ==
 -->
