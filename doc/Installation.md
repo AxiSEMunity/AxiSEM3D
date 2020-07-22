@@ -19,7 +19,7 @@ Verify the installation by
 $ python -m salvus_mesh_lite.interface AxiSEM -h
 ```
 
-This will display 
+This will display all the arguments you can pass to the mesher. 
 
 
 
@@ -27,6 +27,6 @@ This will display
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzQwNzczNjU5LC0yMTYzMjEyMzgsMjIzMD
-AyNzg1XX0=
+eyJoaXN0b3J5IjpbLTIxMDA0NzE2NDcsLTIxNjMyMTIzOCwyMj
+MwMDI3ODVdfQ==
 -->
