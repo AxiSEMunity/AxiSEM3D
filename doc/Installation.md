@@ -90,15 +90,15 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 ```bash
 # go to the top working directory
 cd $HOME/AxiSEM3D_2020
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_SOURCE
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  cmake
 Before doing `cmake`, one must edit the root variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
 
 ```python
 # Eigen and Boost installed by downloading the source code
-set(EIGEN3_ROOT $ENV{HOME}/axisem3d_dependencies/eigen3_develop)
-set(BOOST_ROOT  $ENV{HOME}/axisem3d_dependencies/boost_1_73_0)
+set(EIGEN3_ROOT $ENV{HOME}/AxiSEM3D_2020/dependencies/eigen3_develop)
+set(BOOST_ROOT  $ENV{HOME}/AxiSEM3D_2020/dependencies/boost_1_73_0)
 # FFTW, Metis and NetCDF installed by conda
 set(FFTW_ROOT   $ENV{HOME}/anaconda3)
 set(METIS_ROOT  $ENV{HOME}/anaconda3)
@@ -134,7 +134,7 @@ Now we can do cmake:
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjM2NzE1NTcsMTg5NTYxMDczOSwxOT
+eyJoaXN0b3J5IjpbLTIwNDIyNzUzNjUsMTg5NTYxMDczOSwxOT
 M3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4
 ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0Mz
 ksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1
