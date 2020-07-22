@@ -46,7 +46,7 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ```
 The first line creates `eigen3_develop` under the current directory. The second line enables `AxiSEM3D` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you have installed `Eigen` before. 
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you already have `Eigen` installed, no matter 
 
 
 ### 2. Boost
@@ -57,13 +57,16 @@ $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar
 $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 ```
 
-Alternatively, one can use `conda`: 
+Alternatively, one can use `conda` to install `Boost`: 
 ```bash
 $ conda install -c conda-forge boost
 $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 $ export BOOST_ROOT=$CONDA_PATH
-``` 
+```
 
+
+
+### 3. FFTW
 
 
 ## Tools for pre- and post-processing
@@ -73,7 +76,7 @@ $ export BOOST_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3MzUyODE0Niw3MzMxNzA4MjksLTk5Mz
+eyJoaXN0b3J5IjpbLTcwMzIwNzYyOSw3MzMxNzA4MjksLTk5Mz
 kwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIx
 MjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNC
 wxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2
