@@ -86,6 +86,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
+$
 $ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D_NEW
 ```
 #### 2.2.  cmake
@@ -112,6 +113,9 @@ export METIS_ROOT=$HOME/anaconda3
 export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
+
+Now we can do cmake:
+
 
 
 
@@ -174,11 +178,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDQ3NTE2MTEsMTkzNzMyMDk1NywtND
-kzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAx
-MTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MT
-QsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0x
-MzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNT
-M1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05
-OTM5MDU2NzddfQ==
+eyJoaXN0b3J5IjpbLTcwMjI5NTUwMSwxOTM3MzIwOTU3LC00OT
+M2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDEx
+ODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNC
+wxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEz
+OTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1Mz
+UxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLTk5
+MzkwNTY3N119
 -->
