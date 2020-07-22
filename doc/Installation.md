@@ -27,7 +27,8 @@ which will display all the arguments you can pass to the mesher.
 
 ## Solver
 
-AxiSEM3D 
+The solver is developed on top of several modern numerical packages including `fftw`
+
 
 ## Tools for pre- and post-processing
 
@@ -36,7 +37,7 @@ AxiSEM3D
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk5ODY1NjI2NiwtNTI4OTM1OTYxLDExMD
+eyJoaXN0b3J5IjpbLTY4Mjk1ODQ3NSwtNTI4OTM1OTYxLDExMD
 cwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3
 ODVdfQ==
 -->
