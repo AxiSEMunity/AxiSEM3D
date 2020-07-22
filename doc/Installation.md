@@ -62,7 +62,7 @@ $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 Alternatively, one can use `conda`: 
 ```bash
 $ conda install -c conda-forge boost
-$ export CONDA_LIB_PATH=$(dirname $(dirname $(which conda)))/lib
+$ export CONDA_LIB_PATH=${VAR%/*}/../lib
 $ export BOOST_ROOT=$CONDA_LIB_PATH
 ``` 
 
@@ -75,7 +75,7 @@ $ export BOOST_ROOT=$CONDA_LIB_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwNzkyODAzNSwtOTkzOTA1Njc3LC0xMz
+eyJoaXN0b3J5IjpbMTc5NDcxMDc2MiwtOTkzOTA1Njc3LC0xMz
 YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
 NDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxND
 UsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0x
