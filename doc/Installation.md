@@ -36,7 +36,7 @@ Before the installation, one can create a directory to store the dependencies:
 $ mkdir -p axisem3d_dependencies && cd $_
 $ export AXISEM3D_DEPENDS_PATH=$PWD
 ```
-Also, if one uses `conda`, the root path can be identified by
+Also, if one uses `conda` (either `miniconda` or `anaconda`), the root path of `conda` can be identified by
 ```bash
 $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 ```
@@ -98,11 +98,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjUxODMzNjMzLC0xMDgzNTM1MTAyLDc5MD
-c0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05OTM5MDU2Nzcs
-LTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0xOT
-MyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5
-NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2OD
-IsLTE2NDcwNzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUs
-MTM3MTg4ODU4XX0=
+eyJoaXN0b3J5IjpbLTk4MDcxOTYwNSw2NTE4MzM2MzMsLTEwOD
+M1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4Mjks
+LTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMj
+E0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1
+NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0Mz
+Y4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwt
+MTc0OTA1ODUwNV19
 -->
