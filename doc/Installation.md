@@ -61,11 +61,11 @@ conda install -c anaconda netcdf4
 
 On an HPC cluster, it is most likely that these packages have been installed and optimized due to their popularity. The software packages are usually managed by `module`.
 
-First, check tavailable packages and versions:
+First, check the available packages and versions:
 ```bash
 # check all available packages
 module avail
-# check all available fftw versions
+# check available fftw versions
 module avail fftw
 ```
 
@@ -75,7 +75,7 @@ Next, load the required package:
 module load fftw/3.3.4
 ```
 
-
+If a p
 
 
 
@@ -146,11 +146,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc5NTM4NjM3NCwtMTU0OTIyNTI4MiwtMT
-M5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUz
-NTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOT
-kzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQw
-MjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OT
-E0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgs
-NDY2ODcwNjgyXX0=
+eyJoaXN0b3J5IjpbNTI4Nzg1NjU0LC0xNTQ5MjI1MjgyLC0xMz
+kyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMzLC0xMDgzNTM1
+MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNzMzMTcwODI5LC05OT
+M5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAy
+MTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MT
+QsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0
+NjY4NzA2ODJdfQ==
 -->
