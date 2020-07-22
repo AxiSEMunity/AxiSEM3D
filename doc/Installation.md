@@ -7,6 +7,7 @@ The installation of AxiSEM3D includes three parts: the mesher, the solver and se
 
 
 ## Mesher
+
 [SalvusMeshLite](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for AxiSEM3D. Its installation is trivial with `pip`: 
 
 ```bash
@@ -25,9 +26,10 @@ which will display all the arguments you can pass to the mesher.
 
 
 ## Solver
+Installing the solver 
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM3NjM3NDk5MSwtMjEwMDQ3MTY0NywtMj
+eyJoaXN0b3J5IjpbMTEwNzA2ODY2MCwtMjEwMDQ3MTY0NywtMj
 E2MzIxMjM4LDIyMzAwMjc4NV19
 -->
