@@ -33,6 +33,12 @@ Name|Role|Minimum version|Note
 `Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
 `NetCDF` | efficient multi-dimensional I/O | 4.7.1 | Parallel build is supported but not mandatory.
 
+#### 1.1 Eigen and Boost
+
+Eigen and Boost are header-only libraries, so we only need to download the source code. One can first create a directory to store them:
+
+ 
+
 Before the installation, one can create a directory to store the dependencies:
 ```bash
 $ mkdir -p axisem3d_dependencies && cd $_
@@ -100,7 +106,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODU0MDc3NDYzLDE5NTQ0NTc1MjgsNjUxOD
+eyJoaXN0b3J5IjpbMTA3MjU3Mzg2LDE5NTQ0NTc1MjgsNjUxOD
 MzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcs
 NzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMT
 Y2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5
