@@ -75,8 +75,8 @@ $ export FFTW_ROOT=$CONDA_PATH
 ### 4. Metis
 Using `conda`:
 ```bash
-$ conda install -c conda-forge fftw
-$ export FFTW_ROOT=$CONDA_PATH
+$ conda install -c anaconda metis
+$ export METIS_ROOT=$CONDA_PATH
 ```
 
 
@@ -89,11 +89,11 @@ $ export FFTW_ROOT=$CONDA_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5MTExODQzMSw3OTA3NDYzNTEsODY4Nz
-k2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMz
-LC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNj
-MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
-MjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OT
-A5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OCwt
-MzMyNzk0ODY3XX0=
+eyJoaXN0b3J5IjpbLTEzNDQzOTIwODksNzkwNzQ2MzUxLDg2OD
+c5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5Nzkz
+MywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLT
+YzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3
+MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3OD
+kwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgs
+LTMzMjc5NDg2N119
 -->
