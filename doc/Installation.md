@@ -88,7 +88,7 @@ $ conda install -c anaconda netcdf4
 $ export NETCDF_ROOT=$CONDA_PATH
 $ export HDF5_ROOT=$CONDA_PATH
 ```
-Using
+Using  NetCDF
 
 
 ## Tools for pre- and post-processing
@@ -98,7 +98,7 @@ Using
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU5NTk1NDI0MCw3OTA3NDYzNTEsODY4Nz
+eyJoaXN0b3J5IjpbMTQxMzc1MDA1Niw3OTA3NDYzNTEsODY4Nz
 k2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMz
 LC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNj
 MzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcw
