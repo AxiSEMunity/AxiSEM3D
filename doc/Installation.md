@@ -46,7 +46,9 @@ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 ```
 
-The above lines create a directory `axisem3d_dependencies`, which contains `eigen3_develop` and `boost_1_73_0` 
+The above lines create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`. 
+
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one has `Eigen` installed before.
 
 
 
@@ -115,11 +117,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE5ODAxNzc5NSwxOTU0NDU3NTI4LDY1MT
-gzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3
-LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMT
-E2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2
-OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNT
-AsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4OTA5LC0x
-MzgzNzcwMjA2XX0=
+eyJoaXN0b3J5IjpbLTEzMTE4Njk1MzIsMTk1NDQ1NzUyOCw2NT
+E4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0
+Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMj
+ExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3
+Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2Mj
+UwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwt
+MTM4Mzc3MDIwNl19
 -->
