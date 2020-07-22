@@ -31,7 +31,7 @@ Name|Role|Minimum version|Note
 `Metis` | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
 `NetCDF` | intensive structured IO | 4.7.1 | Parallel build is supported but not mandatory.
 
-Before the installation, we can create a directory to store the dependencies:
+Before the installation, one can create a directory to store the dependencies:
 ```bash
 $ mkdir -p axisem3d_dependencies && cd $_
 $ export AXISEM3D_DEPENDS_DIR=$PWD
@@ -39,11 +39,11 @@ $ export AXISEM3D_DEPENDS_DIR=$PWD
 
 
 ### 1. Eigen
-`Eigen` is a header-only library, so we just need to download the source code:
+`Eigen` is a header-only library, so one just needs to download the source code:
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 ```
-This will create `eigen3_develop` under the current directory. Next, to let `AxiSEM3D` find this version, do
+This will create `eigen3_develop` under the current directory. To let `AxiSEM3D` find this version, one can set the root variable
 ```bash
 $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 ``` 
@@ -75,7 +75,7 @@ $ export BOOST_ROOT=$CONDA_LIB_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMwMDAzMjIyOSwtOTkzOTA1Njc3LC0xMz
+eyJoaXN0b3J5IjpbLTc5NzgyNTcxMSwtOTkzOTA1Njc3LC0xMz
 YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
 NDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxND
 UsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0x
