@@ -73,18 +73,12 @@ Next, load the required package:
 module load fftw/3.3.4
 ```
 
-If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html) --enable-float, [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
+If a package is missing, you may turn to the admin for help or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
 
 
 
-
-
-
-Before the installation, one can create a directory to store the dependencies:
-
-Also, if one uses `conda` (either `miniconda` or `anaconda`), its root path can be identified by
 ```bash
 $ export CONDA_PATH=$(dirname $(dirname $(which conda)))
 ```
@@ -146,11 +140,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMjU3MjA0MCwtNjIxNjU4ODE0LC0xNT
-Q5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMz
-NjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3NDcsNz
-MzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIxMTY2
-NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02MzM3NzY5Nj
-QsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAyNjI1MCwt
-MTM4MTk3NDM2OF19
+eyJoaXN0b3J5IjpbLTE5NDIxNDg1NjMsLTYyMTY1ODgxNCwtMT
+U0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgz
+MzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LD
+czMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMTE2
+NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2OT
+Y0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAs
+LTEzODE5NzQzNjhdfQ==
 -->
