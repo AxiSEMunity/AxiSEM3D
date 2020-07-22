@@ -8,13 +8,13 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 ## Mesher
 [`SalvusMeshLite`](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for `AxiSEM3D`. Its installation is trivial with `pip`: 
 ```bash
-$ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
+pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
 The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate very large-scale meshes on a laptop.
 
 Verify the installation by
 ```bash
-$ python -m salvus_mesh_lite.interface AxiSEM -h
+python -m salvus_mesh_lite.interface AxiSEM -h
 ```
 This will display all the arguments one can pass to the mesher. 
 
@@ -35,7 +35,7 @@ Name|Role|Minimum version|Note
 
 #### 1.1. Eigen and Boost
 
-`Eigen` and `Boost` are header-only libraries.  we only need to download the source code. 
+`Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code. 
 
 ```bash
 # create a folder to store Eigen and Boost
@@ -110,7 +110,7 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDY1NzgwMzIsMTk1NDQ1NzUyOCw2NT
+eyJoaXN0b3J5IjpbLTE4OTIwMTc2NDAsMTk1NDQ1NzUyOCw2NT
 E4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0
 Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMj
 ExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3
