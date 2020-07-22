@@ -44,9 +44,10 @@ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 ```
-The above lines create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`. 
+The above lines will create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before.
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before, no matter one is working on a local workstation or an HPC cluster.
+
 
 #### 1.2. FFTW, Metis and NetCDF
 On a laptop or workstation, these packages can be easily installed using `conda` (either [`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)):
@@ -147,11 +148,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLT
-Q4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDky
-MjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2Mz
-MsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMx
-NzA4MjksLTk5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mz
-g0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwt
-MTI3OTM1NDkxNF19
+eyJoaXN0b3J5IjpbLTEzNjkxNDg2MiwtMTYxMTgzOTAwMiwtMT
+MxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1
+ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3NT
+I4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsODY4
+Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3OT
+MzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3Niwt
+NjMzNzc2OTY0XX0=
 -->
