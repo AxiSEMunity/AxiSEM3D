@@ -36,7 +36,7 @@ Eigen | linear algebra of matrices and tensors | 3.3.9
 Boost | facilitating C++ in every respect | 1.7.1
 FFTW | Fast Fourier Transform | 3.3.8
 Metis | mesh partitioning | 5.1.0
-NetCDF | efficient structured IO | 5.1.0
+NetCDF | efficient structured IO | 4.7.1
 
 
 
@@ -76,10 +76,10 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDE0OTAzODcsMTIxNjE5NzE0NSwtMT
-MyNzAyNjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcw
-Nzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4OD
-U4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwx
-MTA3MDY4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMD
-AyNzg1XX0=
+eyJoaXN0b3J5IjpbMTg4NTA3NDE1MSwxMjE2MTk3MTQ1LC0xMz
+I3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3
+ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NT
+gsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDEx
+MDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMD
+I3ODVdfQ==
 -->
