@@ -52,22 +52,25 @@ The above lines create a directory `axisem3d_dependencies` that contains `eigen3
 On a laptop or workstation, these packages can be easily installed using `conda` (either [`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)):
 
 ```bash
-# install FFTW 3.3.8
+# install FFTW
 conda install -c conda-forge fftw
-# install Metis 5.1.0
+# install Metis
 conda install -c anaconda metis
-# install Ne
+# install NetCDF
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed and optimized due to their popularity. The software packages are usually managed by `module`:
+On an HPC cluster, it is most likely that these packages have been installed and optimized due to their popularity. The software packages are usually managed by `module`. 
+
+To check available packages and versions:
 ```bash
 # check available packages
 module avail
-
 # check available versions of FFTW
 module avail fftw
-
+```
+To load packages ():
+```bash
 # load FFTW 3.3.4
 module load fftw/3.3.4
 ```
@@ -140,11 +143,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3MjYyMTE1MiwxMjU1NDIyOTY0LC02Mj
-E2NTg4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1
-NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUxMDIsNzkwNzQ2MzUxLD
-g2ODc5Njc0Nyw3MzMxNzA4MjksLTk5MzkwNTY3NywtMTM2MTM5
-NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5MjQyNz
-YsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MTQ1LC0x
-MzI3MDI2MjUwXX0=
+eyJoaXN0b3J5IjpbNDEzNTA5MzM5LDEyNTU0MjI5NjQsLTYyMT
+Y1ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIxNSwxOTU0NDU3
+NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEwMiw3OTA3NDYzNTEsOD
+Y4Nzk2NzQ3LDczMzE3MDgyOSwtOTkzOTA1Njc3LC0xMzYxMzk3
+OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjkyNDI3Ni
+wtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxNDUsLTEz
+MjcwMjYyNTBdfQ==
 -->
