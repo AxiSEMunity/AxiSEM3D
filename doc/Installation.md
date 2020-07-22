@@ -75,7 +75,7 @@ Next, load the required package:
 module load fftw/3.3.4
 ```
 
-If a package is missing, you may turn to the admin for help or install it from scratch. See instructions for [`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), 
+If a package is missing, you may turn to the admin for help or install it from scratch following the instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), 
 
 
 
@@ -148,11 +148,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNzY0NDcyNzMsLTE1NDkyMjUyODIsLT
-EzOTI3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1
-MzUxMDIsNzkwNzQ2MzUxLDg2ODc5Njc0Nyw3MzMxNzA4MjksLT
-k5MzkwNTY3NywtMTM2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0
-MDIxMjIsLTE5MzI5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1ND
-kxNCwxMjE2MTk3MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4
-LDQ2Njg3MDY4Ml19
+eyJoaXN0b3J5IjpbMTMxMzc4MTMxMSwtMTU0OTIyNTI4MiwtMT
+M5Mjc3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUz
+NTEwMiw3OTA3NDYzNTEsODY4Nzk2NzQ3LDczMzE3MDgyOSwtOT
+kzOTA1Njc3LC0xMzYxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQw
+MjEyMiwtMTkzMjkyNDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OT
+E0LDEyMTYxOTcxNDUsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgs
+NDY2ODcwNjgyXX0=
 -->
