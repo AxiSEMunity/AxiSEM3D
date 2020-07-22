@@ -34,7 +34,7 @@ Name|Role|Minimum version|Note
 Eigen | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
 Boost | C++ helpers | 1.7.1 | `AxiSEM3D` only uses the header-only modules.
 FFTW | fast Fourier transform | 3.3.8 | Both single- and double-precision builds are required.
-Metis | mesh partitioning | 5.1.0 | Either 32- or 64-bit build  
+Metis | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are accepted.
 NetCDF | intensive structured IO | 4.7.1
 
 
@@ -75,10 +75,10 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA1MTE1NzAxLDEyMTYxOTcxNDUsLTEzMj
-cwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0xNjQ3MDc4
-OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNzE4ODg1OC
-wtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5NjEsMTEw
-NzA2ODY2MCwtMjEwMDQ3MTY0NywtMjE2MzIxMjM4LDIyMzAwMj
-c4NV19
+eyJoaXN0b3J5IjpbLTkxNzc1MDA3MSwxMjE2MTk3MTQ1LC0xMz
+I3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3
+ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NT
+gsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDEx
+MDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMD
+I3ODVdfQ==
 -->
