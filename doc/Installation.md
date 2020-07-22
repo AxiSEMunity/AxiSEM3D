@@ -2,14 +2,11 @@
 
 
 # Installation
-
 The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing. 
 
 
 ## Mesher
-
 [`SalvusMeshLite`](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for `AxiSEM3D`. Its installation is trivial with `pip`: 
-
 ```bash
 $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
@@ -17,11 +14,9 @@ $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMe
 The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate very large-scale meshes on a laptop.
 
 Verify the installation by
-
 ```bash
 $ python -m salvus_mesh_lite.interface AxiSEM -h
 ```
-
 This will display all the arguments you can pass to the mesher. 
 
 
@@ -55,7 +50,11 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 
 ### 2. Boost
-`Boost` provides free peer-reviewed portable C++ source libraries. `AxiSEM3D` uses header-only part of `Boost`, so we only need to download  
+`AxiSEM3D` only uses some of the header-only modules of `Boost`, so we just download the source code:
+
+```bash
+$ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
+```
 
 
 
@@ -67,11 +66,11 @@ $ export EIGEN3_ROOT=$PWD/eigen3_develop
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIxNDAyMTIyLC0xOTMyOTI0Mjc2LC02Mz
-M3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NSwtMTMyNzAy
-NjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MD
-ksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0z
-MzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MD
-Y4NjYwLC0yMTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1
-XX0=
+eyJoaXN0b3J5IjpbMTM4NjA4Mjg1NywxMjE0MDIxMjIsLTE5Mz
+I5MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3
+MTQ1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4Mi
+wtMTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwx
+MzcxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OT
+M1OTYxLDExMDcwNjg2NjAsLTIxMDA0NzE2NDcsLTIxNjMyMTIz
+OCwyMjMwMDI3ODVdfQ==
 -->
