@@ -2,7 +2,7 @@
 
 # Installation
 
-The installation of AxiSEM3D includes three parts: the mesher, the solver and some python libraries for pre- and post-processing. The python libraries are optional but the most efficient way
+The installation of AxiSEM3D includes three parts: the mesher, the solver and a few libraries for pre- and post-processing.  
 
   
 
@@ -10,7 +10,7 @@ The installation of AxiSEM3D includes three parts: the mesher, the solver and so
 
 ## Solver
 
-## Python for pre- and post-processing
+## Libs for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzgwMTM0ODUyXX0=
+eyJoaXN0b3J5IjpbMTMzOTc3ODY1NF19
 -->
