@@ -42,11 +42,9 @@ $ export AXISEM3D_DEPENDS_DIR=$PWD
 `Eigen` is a header-only library, so one just needs to download the source code:
 ```bash
 $ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
-```
-This will create `eigen3_develop` under the current directory. To let `AxiSEM3D` find this version, set the environment variable `EIGEN3_ROOT`:
-```bash
 $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
-``` 
+```
+The first line creates `eigen3_develop` under the current directory. The second line enables `AxiSEM3D` to find this version by setting the environment variable `EIGEN3_ROOT`.
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the current stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even you have installed `Eigen` before. 
 
@@ -75,11 +73,11 @@ $ export BOOST_ROOT=$CONDA_LIB_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5NDcxMDc2MiwtOTkzOTA1Njc3LC0xMz
-YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
-NDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxND
-UsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0x
-NjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNz
-E4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5
-NjEsMTEwNzA2ODY2MF19
+eyJoaXN0b3J5IjpbODI1NzEzNDU5LC05OTM5MDU2NzcsLTEzNj
+EzOTc5MzMsLTIxMTY2NDM4NDIsMTIxNDAyMTIyLC0xOTMyOTI0
+Mjc2LC02MzM3NzY5NjQsLTEyNzkzNTQ5MTQsMTIxNjE5NzE0NS
+wtMTMyNzAyNjI1MCwtMTM4MTk3NDM2OCw0NjY4NzA2ODIsLTE2
+NDcwNzg5MDksLTEzODM3NzAyMDYsLTE3NDkwNTg1MDUsMTM3MT
+g4ODU4LC0zMzI3OTQ4NjcsLTE3Mzc1ODUxOTUsLTUyODkzNTk2
+MSwxMTA3MDY4NjYwXX0=
 -->
