@@ -13,7 +13,7 @@ The installation of AxiSEM3D includes three parts: the mesher, the solver and se
 $ pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
 
- The mesher runs on a single processor, there is no need to install the mesher on an HPC cluster. but is efficient enough to generate large-scale meshes in a flash.
+The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate large-scale meshes in a flash.
 
 Verify the installation by
 
@@ -28,6 +28,6 @@ which will display all the arguments you can pass to the mesher.
 
 ## Tools for pre- and post-processing
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI2MzYzMzU4NSwtMjEwMDQ3MTY0NywtMj
+eyJoaXN0b3J5IjpbMTMyODY2MTQ0MywtMjEwMDQ3MTY0NywtMj
 E2MzIxMjM4LDIyMzAwMjc4NV19
 -->
