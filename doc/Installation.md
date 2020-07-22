@@ -121,7 +121,7 @@ To find the path of a package on an HPC cluster, one can use `module display`, f
 ```bash
 module display fftw/3.3.4.11
 ```
-Note that the `_ROOT` sent to cmake
+Note that the `_ROOT` variables sent to cmake is neither the library path ended with `/lib` or the include path ended with `/include`, but the o
 
 
 
@@ -138,7 +138,7 @@ Note that the `_ROOT` sent to cmake
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTcyOTIyNTIsLTE5MTE0NDM3MzEsLT
+eyJoaXN0b3J5IjpbLTE3MjY0ODc0NjAsLTE5MTE0NDM3MzEsLT
 IwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2
 NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExOD
 MsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwx
