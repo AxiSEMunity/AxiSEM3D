@@ -52,14 +52,14 @@ $ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_DIR/eigen3_develop
 
 
 ### 2. Boost
-`AxiSEM3D` only uses some of the header-only modules of `Boost`. Similar to `Eigen`, we only need to download the source code and set the root variable:
+`AxiSEM3D` only uses some of the header-only modules of `Boost`. Similar to `Eigen`, one only needs to download the source code and set the root variable:
 
 ```bash
 $ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
 $ export BOOST_ROOT=$AXISEM3D_DEPENDS_DIR/boost_1_73_0
 ```
 
-Alternatively, we can use `conda`: 
+Alternatively, one can use `conda`: 
 ```bash
 $ conda install -c conda-forge boost
 $ export CONDA_LIB_PATH=$(dirname $(dirname $(which conda)))/lib
@@ -75,11 +75,11 @@ $ export BOOST_ROOT=$CONDA_LIB_PATH
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTk3ODI4MDQsLTk5MzkwNTY3NywtMT
-M2MTM5NzkzMywtMjExNjY0Mzg0MiwxMjE0MDIxMjIsLTE5MzI5
-MjQyNzYsLTYzMzc3Njk2NCwtMTI3OTM1NDkxNCwxMjE2MTk3MT
-Q1LC0xMzI3MDI2MjUwLC0xMzgxOTc0MzY4LDQ2Njg3MDY4Miwt
-MTY0NzA3ODkwOSwtMTM4Mzc3MDIwNiwtMTc0OTA1ODUwNSwxMz
-cxODg4NTgsLTMzMjc5NDg2NywtMTczNzU4NTE5NSwtNTI4OTM1
-OTYxLDExMDcwNjg2NjBdfQ==
+eyJoaXN0b3J5IjpbMTIwNzkyODAzNSwtOTkzOTA1Njc3LC0xMz
+YxMzk3OTMzLC0yMTE2NjQzODQyLDEyMTQwMjEyMiwtMTkzMjky
+NDI3NiwtNjMzNzc2OTY0LC0xMjc5MzU0OTE0LDEyMTYxOTcxND
+UsLTEzMjcwMjYyNTAsLTEzODE5NzQzNjgsNDY2ODcwNjgyLC0x
+NjQ3MDc4OTA5LC0xMzgzNzcwMjA2LC0xNzQ5MDU4NTA1LDEzNz
+E4ODg1OCwtMzMyNzk0ODY3LC0xNzM3NTg1MTk1LC01Mjg5MzU5
+NjEsMTEwNzA2ODY2MF19
 -->
