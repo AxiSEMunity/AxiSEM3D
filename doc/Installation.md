@@ -32,8 +32,10 @@ The `AxiSEM3D` solver is developed on top of several modern numerical packages i
 
 Name|Introduction|Minimum version
 --- | --- | ---
-Eigen | C++ template library for linear algebra | 3.3.9
-1 | 2 | 3
+Eigen | C++ library for linear algebra | 3.3.9
+Boost | portable C++ source libraries | 1.7.1
+FFTW | Fast f | 1.7.1
+
 
 
 ### Installing dependencies locally
@@ -70,9 +72,9 @@ $ export EIGEN3_ROOT=$PWD/eigen-master
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIyNDg1MTk2NCwtMTMyNzAyNjI1MCwtMT
-M4MTk3NDM2OCw0NjY4NzA2ODIsLTE2NDcwNzg5MDksLTEzODM3
-NzAyMDYsLTE3NDkwNTg1MDUsMTM3MTg4ODU4LC0zMzI3OTQ4Nj
-csLTE3Mzc1ODUxOTUsLTUyODkzNTk2MSwxMTA3MDY4NjYwLC0y
-MTAwNDcxNjQ3LC0yMTYzMjEyMzgsMjIzMDAyNzg1XX0=
+eyJoaXN0b3J5IjpbMTA4MjI4NjQyLC0xMzI3MDI2MjUwLC0xMz
+gxOTc0MzY4LDQ2Njg3MDY4MiwtMTY0NzA3ODkwOSwtMTM4Mzc3
+MDIwNiwtMTc0OTA1ODUwNSwxMzcxODg4NTgsLTMzMjc5NDg2Ny
+wtMTczNzU4NTE5NSwtNTI4OTM1OTYxLDExMDcwNjg2NjAsLTIx
+MDA0NzE2NDcsLTIxNjMyMTIzOCwyMjMwMDI3ODVdfQ==
 -->
