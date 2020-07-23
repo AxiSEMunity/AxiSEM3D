@@ -154,7 +154,7 @@ Upon a successful `cmake`, a summary will be displayed at the end. Check this su
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
 ```bash
-# j8 means using 8 threads to accelerate compilation
+# -j8 means using 8 threads to accelerate compilation
 make -j8
 ```
 
@@ -176,11 +176,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOT
-M4MjgxNywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIy
-OCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMT
-kxMTQ0MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5Mzcz
-MjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4Nj
-AsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwt
-NDg0Mzk2NzE0XX0=
+eyJoaXN0b3J5IjpbMjA0MTQxODk5MiwxMDgwODY2NzksLTExOT
+E3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMDYyNDI1
+MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOT
+c0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2
+MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MD
+IsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0x
+MzE0MjAxNDM5XX0=
 -->
