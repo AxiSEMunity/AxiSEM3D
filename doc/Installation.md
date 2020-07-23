@@ -122,16 +122,15 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 It can take the following parameters:
 Parameter|Role|Default|Note
 --- | --- | ---|---
-`-Dcc` | C compiler | gcc | 
-`-Dcxx` | C++ compiler | g++ | must support C++17
-`-Dftn` | Fortran compiler | gfortran | 
+`-Dcc`, `-Dcxx`, `-Dftn`| C, C++, Fortran compilers | gcc | 
+ | C++ compiler | g++ | must support C++17
+ | Fortran compiler | gfortran | 
 `-Deigen` | root of `Eigne` | empty
 `-Dboost` | root of `Boost` | empty
 `-Dfftw` | root of `FFTW` | empty
 `-Dmetis` | root of `Metis` | empty
 `-Dnetcdf` | root of `NetCDF` | empty
-`-Dhdf5` | root of `HDF5` | empty | If
-
+`-Dhdf5` | root of `HDF5` | empty | If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT`
 
 
 
@@ -209,7 +208,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MDU3ODk4MjQsMzkzMTQ2ODI2LDExNT
+eyJoaXN0b3J5IjpbLTE2ODQ1ODc0MzYsMzkzMTQ2ODI2LDExNT
 c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
 MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
 g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
