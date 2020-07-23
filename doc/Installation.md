@@ -6,7 +6,7 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
-* C++ compiler supporting C++17 (`GCC` ≥ 7, `ICC` ≥ 19, check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
+* C++ compiler supporting C++17 (`GCC` ≥ 7, `ICC` ≥ 19; check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
 * Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (≥ 3.15.3), `wget`
 * MPI (a serial build can be made but is not very useful) 
 
@@ -207,7 +207,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDQ0NjI1ODYsLTE4ODg0ODM3NTcsMT
+eyJoaXN0b3J5IjpbLTEwMjkwNjg1ODUsLTE4ODg0ODM3NTcsMT
 AwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUsMTI4ODE4
 NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLTU5NTkyNzg3NS
 wtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0NjEwODQsLTE4
