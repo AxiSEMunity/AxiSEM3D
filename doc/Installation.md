@@ -72,9 +72,9 @@ conda install -c anaconda netcdf4
 
 On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
 ```bash
-# all available packages
+# show all available packages
 module avail
-# all available versions of FFTW
+# show all available versions of FFTW
 module avail fftw
 ```
 
@@ -197,7 +197,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzkxNTI3MjkxLDE3NDc5MzQyNzgsLTIxNz
+eyJoaXN0b3J5IjpbMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNz
 U0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTcz
 LC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MD
 czMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYw
