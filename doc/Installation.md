@@ -157,11 +157,13 @@ To compile and link AxiSEM3D:
 # j8 means using 8 threads to accelerate compilation
 make -j8
 ```
-Next, one can verify the executable:
+
+Finally, one can verify the executable:
 ```bash
+# the number of processors can be arbitrary
 mpirun -np 4 ./axisem3d
 ```
-
+If an error message will appear saying that "Missing input directory"
 
 If linking fails with missing `H5_`
 
@@ -174,11 +176,11 @@ If linking fails with missing `H5_`
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDkxMjk2NjY2LC0xMTkxNzA5NzcyLC0yOT
-M4MjgxNywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIy
-OCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMT
-kxMTQ0MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5Mzcz
-MjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4Nj
-AsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwt
-NDg0Mzk2NzE0XX0=
+eyJoaXN0b3J5IjpbLTE5Mjk0NjQzODEsLTExOTE3MDk3NzIsLT
+I5MzgyODE3LC0xNDE4MjAyNzI0LDYwMDYyNDI1MCwxNjE3ODY4
+MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC
+0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkz
+NzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxOD
+g2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5
+LC00ODQzOTY3MTRdfQ==
 -->
