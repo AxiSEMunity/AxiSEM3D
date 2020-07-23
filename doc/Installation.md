@@ -159,11 +159,11 @@ mpirun -np 4 ./axisem3d
 # create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd $_
 
-# download eigen and boost (no)
+# download eigen and boost (check existence before download)
 mkdir -p dependencies
-[ -d ./dependencies/eigen-master ] && \
+[ ! -d ./dependencies/eigen-master ] && \
 wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
-
+[ ! -d ./dependencies/boost_1_73_0 ] && \
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx ./dependencies
 
 
@@ -203,11 +203,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4MjEyODE0NSwtMTI0OTc5OTI5OSwtMT
-U0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwxMzEwMjUwODUsMTc0Nzkz
-NDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0NiwtMTcwNjM3MjgyNC
-w0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2NDAy
-NjUxNywzNTUwNzMxNTQsLTY3ODAyMTUwMCwtMjA2OTg0NzYzNy
-wtMTQzNTIwNjAzMSwtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMDYy
-OTI0MjQ5XX0=
+eyJoaXN0b3J5IjpbMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNT
+Q0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0
+Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0LD
+QwNDc5NzE3MywtMTk1MTU1MTI0MSwtNjk1NDY4MzgsNzY0MDI2
+NTE3LDM1NTA3MzE1NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC
+0xNDM1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5
+MjQyNDldfQ==
 -->
