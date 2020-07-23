@@ -260,6 +260,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # environment modules and variables
 module switch intel/compilers intel/compilers/2019.3
+module load cmake/3.16.0
 export CRAYPE_LINK_TYPE=dynamic
 
 # modules required by AxiSEM3D
@@ -294,11 +295,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM4NjkwMDQ4NCwtMTU3OTU1ODkyLDE2ND
-IwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAw
-NiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMT
-AwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUsMTI4ODE4
-NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLTU5NTkyNzg3NS
-wtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0NjEwODQsLTE4
-OTE3NDg2NTddfQ==
+eyJoaXN0b3J5IjpbLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNj
+QyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgw
+MDYsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LD
+EwMDU1NDYxMDMsLTE3Mzk4NTUxNzUsOTM3NDAyOTM1LDEyODgx
+ODQyMTMsLTgwMTQzNzEzNywxOTgwODEwMDc5LC01OTU5Mjc4Nz
+UsLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNTEwNDYxMDg0LC0x
+ODkxNzQ4NjU3XX0=
 -->
