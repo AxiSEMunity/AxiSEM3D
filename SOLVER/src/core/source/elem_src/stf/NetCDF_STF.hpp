@@ -64,7 +64,7 @@ private:
     
     ////////////////// static //////////////////
     // store readers in a static map to avoid opening duplicated files
-    std::map<std::string, std::unique_ptr<NetCDF_Reader>> sReaders;
+    std::map<std::string, NetCDF_Reader> sReaders;
 };
 
 #endif /* NetCDF_STF_hpp */

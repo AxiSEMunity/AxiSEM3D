@@ -24,19 +24,19 @@ mPadding(padding != PaddingMode::None),
 mLeftPadding(left), mRightPadding(right) {
     // file
     if (sReaders.find(mFileName) == sReaders.end()) {
-        sReaders.insert({mFileName, std::make_unique<NetCDF_Reader>()});
-        sReaders.at(mFileName)->open(io::popInputDir(mFileName));
+        sReaders.insert({mFileName, NetCDF_Reader()});
+        sReaders.at(mFileName).open(io::popInputDir(mFileName));
     }
     
     // variable id
-    mVarID_Time = sReaders.at(mFileName)->getVariableID(mVarTime, mTimes);
-    mVarID_Data = sReaders.at(mFileName)->getVariableID(mVarData, mData);
+    mVarID_Time = sReaders.at(mFileName).getVariableID(mVarTime, mTimes);
+    mVarID_Data = sReaders.at(mFileName).getVariableID(mVarData, mData);
     
     // read all data for verification
     std::vector<double> timesAll;
     std::vector<numerical::Real> dataAll;
-    sReaders.at(mFileName)->readVector(mVarTime, timesAll);
-    sReaders.at(mFileName)->readVector(mVarData, dataAll);
+    sReaders.at(mFileName).readVector(mVarTime, timesAll);
+    sReaders.at(mFileName).readVector(mVarData, dataAll);
     mTotalTimeStepsInFile = (int)timesAll.size();
     chunkSize = std::min(chunkSize, mTotalTimeStepsInFile);
     
@@ -185,9 +185,9 @@ bool NetCDF_STF::loadNextBufferChunk() {
     mTimeStepOfTimesLast = mTimeStepOfTimes0 + readCount - 1;
     
     // read time
-    sReaders.at(mFileName)->readVariable(mVarID_Time, mVarTime, mTimes,
-                                         {mTimeStepOfTimes0}, {readCount});
-    sReaders.at(mFileName)->readVariable(mVarID_Data, mVarData, mData,
-                                         {mTimeStepOfTimes0}, {readCount});
+    sReaders.at(mFileName).readVariable(mVarID_Time, mVarTime, mTimes,
+                                        {mTimeStepOfTimes0}, {readCount});
+    sReaders.at(mFileName).readVariable(mVarID_Data, mVarData, mData,
+                                        {mTimeStepOfTimes0}, {readCount});
     return true;
 }
