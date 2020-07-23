@@ -158,7 +158,7 @@ To compile and link AxiSEM3D:
 make -j8
 ```
 
-<strong>Note</strong>: If the used `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt or via the environment variable.
+<strong>Note</strong>: If the used `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` to `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, additional libraries such as `-lcurl` m be `ADDITIONAL_LIBS` 
  
 
 Finally, one can verify the executable:
@@ -178,11 +178,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTA3MTY0NzAsMjA0MTQxODk5MiwxMD
-gwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAy
-NzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNj
-EzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQy
-Mjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NT
-MwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0x
-NjExODM5MDAyXX0=
+eyJoaXN0b3J5IjpbMTEyMTE1MzU5NSwyMDQxNDE4OTkyLDEwOD
+A4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3
+MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MT
+MzNzg4MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIy
+NzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1Mz
+AsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2
+MTE4MzkwMDJdfQ==
 -->
