@@ -141,14 +141,15 @@ module show cray-netcdf/4.6.1.3
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
 # create a build directory
-# it is good practice to put nothing under this build
+# It is good practice to put nothing under this 'build'
 # directory becuase it must be emptied before redoing 
 # cmake when CMakeLists.txt is changed
 mkdir -p build && cd $_
 # cmake (the build type is Release by default)
+# Make sure that the C++ compiler supports C++17.
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
-Make sure that the C++ compiler supports C++17.
+
 
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of dependencies. 
 
@@ -168,7 +169,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzOTI0MDI3NiwtMTQxODIwMjcyNCw2MD
+eyJoaXN0b3J5IjpbMTkyNDUwMDE2NywtMTQxODIwMjcyNCw2MD
 A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
 NSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NS
 wxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4
