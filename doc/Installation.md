@@ -6,7 +6,7 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
-* C++ compiler supporting C++17 (`gcc` ≥ 7, `icc` ≥ 19; check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
+* C++ compiler supporting C++17 (`GCC` ≥ 7, `Intel C++` ≥ 19; check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
 * Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (≥ 3.10.0), `wget`
 * MPI (a serial build can be made but is not very useful) 
 
@@ -150,7 +150,7 @@ mpirun -np 4 ./axisem3d
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 #### 2.4. Complete examples
-* A laptop or workstation with `conda` (`GNU`):
+* A laptop or workstation with `conda` (`GCC`):
 
 ```bash
 #!/bin/bash
@@ -189,7 +189,7 @@ rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 make -j8
 ```
 
-* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/):
+* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (`GCC`):
 
 ```bash
 #!/bin/bash
@@ -238,7 +238,7 @@ rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 make -j8
 ```
 
-* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge:
+* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (`Intel C++`):
 
 ```bash
 #!/bin/bash
@@ -291,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY4NTAxMzQ0NSwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
-NjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0Ny
-wtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4
-MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MT
-AzLC0xNzM5ODU1MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04
-MDE0MzcxMzddfQ==
+eyJoaXN0b3J5IjpbLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxND
+I5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcx
+MTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3ND
+csLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgz
+ODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMTAwNTU0Nj
+EwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUsMTI4ODE4NDIxMywt
+ODAxNDM3MTM3XX0=
 -->
