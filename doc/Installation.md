@@ -131,10 +131,7 @@ Parameter|Role|Default|Note
 `Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
-Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure that
-* the compliers and 
-
-and make sure that `cmake` has found the correct version of the dependencies.
+Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure the 
 
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
@@ -159,7 +156,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTEwNDI4ODQwLC0yMDY5ODQ3NjM3LC0xND
+eyJoaXN0b3J5IjpbMTUxNzUwMjYwLC0yMDY5ODQ3NjM3LC0xND
 M1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQy
 NDksNjkxMDg2MjcsMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNj
 QzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQs
