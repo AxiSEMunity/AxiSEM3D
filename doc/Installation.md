@@ -144,7 +144,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Make sure that the C++ compiler supports C++17.
 
-Upon a successful `cmake`, a summary will be displayed at the end. 
+Upon a successful `cmake`, a summary will be displayed at the end. Check this summary carefully and make sure that 
 
 
 
@@ -159,7 +159,7 @@ Upon a successful `cmake`, a summary will be displayed at the end.
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzMDA0MzQwNiwxNjE3ODY4MjI4LC03Nj
+eyJoaXN0b3J5IjpbMTA0NjI4OTgyMiwxNjE3ODY4MjI4LC03Nj
 I1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQz
 NzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1Ny
 wtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQy
