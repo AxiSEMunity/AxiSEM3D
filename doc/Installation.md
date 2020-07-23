@@ -113,7 +113,7 @@ set(METIS_ROOT  $ENV{HOME}/anaconda3)
 set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 ```
 
-Alternatively, one can set the corresponding environment variables, leaving `AxiSEM3D/SOLVER/CMakeLists.txt` unchanged:
+Alternatively, one can set the corresponding environment variables, leaving `CMakeLists.txt` unchanged:
 ```bash
 # Eigen and Boost installed by downloading the source code
 export EIGEN3_ROOT=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop
@@ -148,9 +148,9 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in `CMakeLists.txt`. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
  
-<strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
+<strong>NOTE</strong>: Whenever `CMakeLists.txt` has been changed, the build directory must be emptied before redoing `cmake`.
 
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTU0MTY0OTcsMTkxMjQ1NDk2LDIwND
-E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
-NywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNz
-YyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0
-MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NT
-csLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0
-MjEwMTE4M119
+eyJoaXN0b3J5IjpbMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MT
+QxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3
+LC0xNDE4MjAyNzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03Nj
+I1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQz
+NzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1Ny
+wtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQy
+MTAxMTgzXX0=
 -->
