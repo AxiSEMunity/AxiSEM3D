@@ -291,18 +291,19 @@ make -j8
 In the manual and the examples, we will mainly use python (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. Usually, one does not need to install them on an HPC cluster.
 
 
-Name|Usage|Installation
+Name|Role|Installation
 --- | --- | ---
+['pynetcdf'](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | draw maps with python | conda install -c anaconda basemap
 [`Obspy`](https://docs.obspy.org/) | waveform data processing | conda install -c conda-forge obspy
 [`Basemap`](https://matplotlib.org/basemap/) | draw maps with python | conda install -c anaconda basemap
-[`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | animation generation | 3.3.4 | Both single- and double-precision builds are required.
+[`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | animation generation | conda install -c conda-forge pyvtk
 [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
 [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzNTUzNjI5OSwtOTE5OTQ4Nzc2LDk1Nz
+eyJoaXN0b3J5IjpbLTQwMjQ4NTc5MCwtOTE5OTQ4Nzc2LDk1Nz
 g2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2
 MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC
 05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQy
