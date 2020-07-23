@@ -53,7 +53,7 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx ./dependencies
 ```
-The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen-master` and `boost_1_73_0`.
+The above lines will download `eigen-master`  and `boost_1_73_0` under `AxiSEM3D_2020/dependencies`.
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
 
@@ -197,11 +197,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MD
-YzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0Njgz
-OCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNj
-k4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMTY3NjA0
-MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1Nz
-kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
-XX0=
+eyJoaXN0b3J5IjpbMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nz
+c4OTg0NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEy
+NDEsLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3OD
+AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
+MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
+E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
+NF19
 -->
