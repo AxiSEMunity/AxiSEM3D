@@ -59,7 +59,7 @@ The above lines will create a directory `AxiSEM3D_2020/dependencies` that contai
 
 
 #### 1.2. FFTW, Metis and NetCDF
-On a laptop or workstation, these packages can be easily installed using `conda` (either [`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)):
+On a laptop or workstation, these packages can be easily installed using `conda`:
 
 ```bash
 # install FFTW
@@ -184,11 +184,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNz
-Y2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMTAzNzgz
-NjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5LC0xMT
-kxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcyNCw2MDA2MjQy
-NTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMT
-k3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NSwxODk1
-NjEwNzM5XX0=
+eyJoaXN0b3J5IjpbNDQyNzY2MzQzLC0xMjY4NjU0NTMsLTc0NT
+Q0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3ODk2Nzcw
+MywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwOD
+A4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3
+MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MT
+MzNzg4MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIy
+NzUzNjVdfQ==
 -->
