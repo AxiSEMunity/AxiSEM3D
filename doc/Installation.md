@@ -8,7 +8,7 @@ System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
 * C++ compiler supporting C++17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
 * Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (≥ 3.15.3), `wget`
-* MPI (a serial build can be made but is not useful) 
+* MPI (a serial build can be made but is not very useful) 
 
 
 
@@ -171,7 +171,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkzNjQ2ODczNiwtMTkyMzQ0OTY0LDEyMD
+eyJoaXN0b3J5IjpbLTgyNTY3ODA1MiwtMTkyMzQ0OTY0LDEyMD
 IwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgs
 LTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4OD
 UxNTI4LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2
