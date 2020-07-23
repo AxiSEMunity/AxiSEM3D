@@ -149,7 +149,56 @@ mpirun -np 4 ./axisem3d
 ```
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
-#### 2.4. Complete examples on HPC
+#### 2.4. Complete examples
+* A laptop or workstation with `conda`:
+
+```bash
+#!/bin/bash
+# install_AxiSEM3D.sh
+
+# create a top working directory and cd in
+mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
+
+# download eigen and boost (check existence before download)
+mkdir -p dependencies
+[ ! -d ./dependencies/eigen-master ] && \
+wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
+[ ! -d ./dependencies/boost_1_73_0 ] && \
+wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
+
+# download AxiSEM3D (check existence before download)
+[ ! -d ./AxiSEM3D ] && \
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+
+# environment modules and variables
+module switch PrgEnv-cray PrgEnv-gnu
+module switch gcc gcc/7.3.0
+module load cmake/3.16.0
+export CRAYPE_LINK_TYPE=dynamic
+
+# modules required by AxiSEM3D
+module load fftw
+module load metis
+module load cray-netcdf/4.6.1.3
+# On ARCHER, HDF5 is handled by compiler wrappers;
+# users only need to load the right version
+module load cray-hdf5/1.10.2.0
+
+# cmake
+# thep paths are found by "module show"
+rm -rf build && mkdir build && cd build
+cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
+-Deigen=$(dirname $PWD)/dependencies/eigen-master \
+-Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
+-Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
+-Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
+-Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
+-Dflags=-fPIC ../AxiSEM3D/SOLVER/
+
+# make
+make -j8
+```
+
 * The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/):
 
 ```bash
@@ -208,11 +257,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3OTI3MDQ5MjEsMTY2MzM1ODE2NywtMT
-g4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQw
-MjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMzcsMTk4MDgxMDA3OS
-wtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0xMzQ0Mjc5MDEsLTUx
-MDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMyMDk3NiwxODI3MD
-MyMDU0LDEyMzMxODUwNCwtMTI0OTc5OTI5OSwtMTU0NDc2Njkw
-NSwtMTQ1NzQ0NTc2OF19
+eyJoaXN0b3J5IjpbMzk1OTQ5NDgwLDE2NjMzNTgxNjcsLTE4OD
+g0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5
+MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLT
+U5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0
+NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMj
+A1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1NDQ3NjY5MDUs
+LTE0NTc0NDU3NjhdfQ==
 -->
