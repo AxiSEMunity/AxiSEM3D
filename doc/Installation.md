@@ -191,7 +191,7 @@ cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
 -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
--Dnetcdf=$ncdfpath \
+-Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
 -Dflags=-fPIC ../AxiSEM3D/SOLVER/
 
 # make
@@ -207,11 +207,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNzYyMDM4NTksLTE3Mzk4NTUxNzUsOT
-M3NDAyOTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNywxOTgwODEw
-MDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQyNzkwMS
-wtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4
-MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0Nz
-Y2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4
-LC0yMTc1NDI4MzRdfQ==
+eyJoaXN0b3J5IjpbMTE1NzE2OTA0NywtMTczOTg1NTE3NSw5Mz
+c0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAw
+NzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC
+01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgy
+NzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1NDQ3Nj
+Y5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5MzQyNzgs
+LTIxNzU0MjgzNF19
 -->
