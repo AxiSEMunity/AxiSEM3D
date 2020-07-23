@@ -8,7 +8,7 @@ System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
 * C++ compiler supporting C++17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
 * Basic development tools: `python`, `pip`, `conda`, `cmake`, `wget`
-* MPI (a serial build can be made but is mostly useless) 
+* MPI (a serial build can be made but is not useful) 
 
 
 
@@ -101,7 +101,7 @@ cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  Configure by `cmake`
-Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
+Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths are *user-dependent*):
 
 ```python
 # Eigen and Boost installed by downloading the source code
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOT
-EyNDU0OTYsMjA0MTQxODk5MiwxMDgwODY2NzksLTExOTE3MDk3
-NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMDYyNDI1MCwxNj
-E3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0
-NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3Mz
-ksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUy
-MjkxODg2MF19
+eyJoaXN0b3J5IjpbLTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMz
+EwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3
+OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNj
+AwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4
+MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNj
+UsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4
+ODE4NjQwMl19
 -->
