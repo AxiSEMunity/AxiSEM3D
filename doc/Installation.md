@@ -20,7 +20,7 @@ Installation:
 ```bash
 pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
-The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It can generate very large-scale meshes locally.
+The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It can efficiently generate large-scale meshes on a laptop.
 
 Verify the installation by
 ```bash
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODkwNzgzMjQyLDM1Nzk3Mzg0Myw2ODIwOD
-Q1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2Nywx
-MTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOT
-k3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2
-NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC
-05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4Mzgy
-NTEwNl19
+eyJoaXN0b3J5IjpbLTkzMzMwMDc1MCwzNTc5NzM4NDMsNjgyMD
+g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
+MTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mj
+k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
+NjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0Ny
+wtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4
+MjUxMDZdfQ==
 -->
