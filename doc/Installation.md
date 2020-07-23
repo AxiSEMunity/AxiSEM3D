@@ -78,9 +78,9 @@ module avail
 module avail fftw
 ```
 
-To load a required package, for example (machine-depen):
+To load a required package, for example, to load FFTW (*machine-dependent*):
 ```bash
-# load FFTW (machine-dependent!)
+# load FFTW
 module load fftw
 ```
 
@@ -173,7 +173,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTMyNjYzMzAsMzkzMTQ2ODI2LDExNT
+eyJoaXN0b3J5IjpbLTIwNTQxNDYyMzgsMzkzMTQ2ODI2LDExNT
 c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
 MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
 g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
