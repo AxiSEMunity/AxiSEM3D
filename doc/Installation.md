@@ -167,17 +167,17 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 
 # install FFTW, Metis and NetCDF
-conda install -c conda-forge fftw
-conda install -c anaconda metis
-conda install -c anaconda netcdf4
+conda install -c conda-forge -y fftw
+conda install -c anaconda -y metis
+conda install -c anaconda -y netcdf4
 
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
-# thep paths are found by "module show"
 rm -rf build && mkdir build && cd build
+export conda_path=$(dirname $(which conda))
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
@@ -225,7 +225,7 @@ module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
 
 # cmake
-# thep paths are found by "module show"
+# the paths are found by "module show"
 rm -rf build && mkdir build && cd build
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
@@ -248,11 +248,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNDIzNDM3NzcsMTY2MzM1ODE2NywtMT
-g4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQw
-MjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMzcsMTk4MDgxMDA3OS
-wtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0xMzQ0Mjc5MDEsLTUx
-MDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMyMDk3NiwxODI3MD
-MyMDU0LDEyMzMxODUwNCwtMTI0OTc5OTI5OSwtMTU0NDc2Njkw
-NSwtMTQ1NzQ0NTc2OF19
+eyJoaXN0b3J5IjpbLTk4MjAxMzM2MywxNjYzMzU4MTY3LC0xOD
+g4NDgzNzU3LDEwMDU1NDYxMDMsLTE3Mzk4NTUxNzUsOTM3NDAy
+OTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNywxOTgwODEwMDc5LC
+01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNTEw
+NDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMz
+IwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1
+LC0xNDU3NDQ1NzY4XX0=
 -->
