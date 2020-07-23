@@ -120,9 +120,11 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 ```
 
 It can take the following parameters:
-* -Dcc: C compiler, defau
-* -Dcxx: 
-
+Parameter|Role|Default|Note
+--- | --- | ---|---
+-Dcc | C compiler | gcc | 
+-Dcxx | C++ compiler | g++ | must support C++17
+-
 
 
 
@@ -200,11 +202,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzMjgzNjU2MCwzOTMxNDY4MjYsMTE1Nz
-kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
-LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
-Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjgs
-LTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MT
-QxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3
-XX0=
+eyJoaXN0b3J5IjpbLTY1MDc3NTksMzkzMTQ2ODI2LDExNTc5MD
+MzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2Miwz
+ODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NT
+Q1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0x
+ODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MT
+g5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxN119
+
 -->
