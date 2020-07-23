@@ -30,7 +30,7 @@ This will display all the arguments one can pass to the mesher.
 
 ### 1. Installing dependencies
 
-The `AxiSEM3D` solver is developed on top of several modern numerical packages including:
+The `AxiSEM3D` solver is developed on top of the following modern numerical libraries:
 
 Name|Role|Minimum version|Note
 --- | --- | ---|---
@@ -171,7 +171,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyNTY3ODA1MiwtMTkyMzQ0OTY0LDEyMD
+eyJoaXN0b3J5IjpbMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMD
 IwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgs
 LTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4OD
 UxNTI4LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2
