@@ -127,7 +127,7 @@ Parameter|Role|Default|Note
 `Dhdf5` | path of `HDF5` | empty | If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
 `Dpar_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
-`Dlibs`| additional libraries to link to | empty | For example, `-lcurl` is needed if `NetCDF` was built statically with remote client support.
+`Dlibs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` was built statically with remote client support.
 `Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
@@ -209,11 +209,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2Mj
-kyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4NSwx
-NTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYyLDM4OTQ1Nz
-E0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03
-NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Nj
-c3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5Ml19
+eyJoaXN0b3J5IjpbNjAzOTI5NDk3LC0xNDQ2NDIyNjIsLTE2Nz
+YwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMTQ2ODI2LDEx
+NTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNj
+g2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEy
+Njg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNT
+I4LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2XX0=
 
 -->
