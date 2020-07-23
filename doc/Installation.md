@@ -136,7 +136,7 @@ module show metis/5.1.0_build2
 module show cray-netcdf/4.6.1.3
 ```
 
-<strong>Note</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
+<strong>NOTE</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
 
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
@@ -158,7 +158,7 @@ To compile and link AxiSEM3D:
 make -j8
 ```
 
-<strong> Important Note</strong>: If the used `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` to `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, additional libraries such as `-lcurl` (needed if `NetCDF` was built with remote client support) may be required, which can be added through `ADDITIONAL_LIBS` in CMakeLists.txt.
+<strong> NOTE </strong>: If the used `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` to `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, additional libraries such as `-lcurl` (needed if `NetCDF` was built with remote client support) may be required, which can be added through `ADDITIONAL_LIBS` in CMakeLists.txt.
 
 
  
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzgxNzcwMDE3LDIwNDE0MTg5OTIsMTA4MD
-g2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcy
-NCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMz
-M3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3
-NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMC
-wxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYx
-MTgzOTAwMl19
+eyJoaXN0b3J5IjpbLTEyMDA2NzYxODcsMjA0MTQxODk5MiwxMD
+gwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAy
+NzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNj
+EzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQy
+Mjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NT
+MwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0x
+NjExODM5MDAyXX0=
 -->
