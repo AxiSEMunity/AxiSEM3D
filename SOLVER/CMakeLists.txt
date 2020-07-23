@@ -12,61 +12,48 @@
 ###################### Build Settings (EDIT BELOW) #####################
 ########################################################################
 
-################## compiler suite ##################
-# either hardcode here or pass by -Dcc, -Dcxx and -Dftn after cmake
+# NOTE: these parameters can be either hardcoded in this box or
+#       passed by -D (e.g., -Dcc=mpicc for CMAKE_C_COMPILER)
+
+
+################## compiler options ##################
+# compilers or compiler wrappers
 set(CMAKE_C_COMPILER            ${cc})
 set(CMAKE_CXX_COMPILER          ${cxx})
 set(CMAKE_Fortran_COMPILER      ${ftn})
 
+# compiler flags in addition to the stardard ones (such as -O3 -DNDEBUG)
+set(ADDITIONAL_COMPILER_FLAGS   ${flags})
+
+# additional libraries to link to if linking fails with missing symbols
+set(ADDITIONAL_LIBRARIES        ${libs})
+
 
 ################## dependencies ##################
 # preferred installation prefix of dependencies
-# ** the roots of the dependencies can be directly specified using the
-#    following CMake variables
-# ** alternatively, they can be specified by environment variables, e.g.,
-#    $ export EIGEN3_ROOT=$HOME/Developer/eigen3
-# ** by default, the following CMake variables are initialized by
-#    the environment variables; if specified otherwise, they will
-#    have priority over the environment variables
-set(EIGEN3_ROOT                 $ENV{EIGEN3_ROOT})
-set(BOOST_ROOT                  $ENV{BOOST_ROOT})
-set(FFTW_ROOT                   $ENV{FFTW_ROOT})
-set(METIS_ROOT                  $ENV{METIS_ROOT})
-set(NETCDF_ROOT                 $ENV{NETCDF_ROOT})
-
-# requiring linkage to HDF5
-# ** if linking fails with missing H5 symbols, set this to TRUE and
-#    specify HDF5_ROOT below or in the environment
-set(LINK_TO_HDF5                false)
-
-# root of the HDF5 library used to build NetCDF
-set(HDF5_ROOT                   $ENV{HDF5_ROOT})
-
-# additional libraries to link to
-# ** add libs if linking fails with missing symbols, e.g., "-lcurl"
-set(ADDITIONAL_LIBS             "")
+set(EIGEN3_ROOT                 ${eigen})
+set(BOOST_ROOT                  ${boost})
+set(FFTW_ROOT                   ${fftw})
+set(METIS_ROOT                  ${metis})
+set(NETCDF_ROOT                 ${netcdf})
+# omitting -Dhdf5 disables explicit linking to HDF5
+set(HDF5_ROOT                   ${hdf5})
 
 # use parallel NetCDF
-# ** parallel NetCDF can enhance I/O performance and simplify
-#    post-processing; it is supported by AxiSEM3D but not mandatory
-set(USE_PARALLEL_NETCDF         false)
+# parallel NetCDF can enhance I/O performance and simplify
+# post-processing, supported but not mandatory
+set(USE_PARALLEL_NETCDF         ${par_netcdf})
 
 
 ################## solver options ##################
 # polynomial order of spectral elements (from 1 to 8)
-set(NPOL                        4)
+set(NPOL_SEM                    ${npol})
 
 # solver precision
-# ** using double precision increases memory usage but barely
-#    affects solver performance
-set(USE_DOUBLE                  false)
+# using double precision increases memory usage but barely
+# affects solver performance
+set(USE_DOUBLE                  ${double})
 
-# memory saving mode
-# ** minimize memory usage with some performance hit
-set(MEMORY_SAVING_MODE          false)
-
-# serial build without MPI
-set(SERIAL_BUILD                false)
 
 ########################################################################
 ###################### Build Settings (EDIT ABOVE) #####################
@@ -76,6 +63,31 @@ set(SERIAL_BUILD                false)
 
 ########### NOTE: Users are less likely to edit lines below ############
 
+
+
+################# set default values #################
+# macro to set default
+macro(setDefault var val)
+if (NOT ${var})
+set (${var} ${val})
+endif()
+endmacro()
+
+# set default values
+setDefault(CMAKE_C_COMPILER            gcc)
+setDefault(CMAKE_CXX_COMPILER          g++)
+setDefault(CMAKE_Fortran_COMPILER      gfortran)
+setDefault(ADDITIONAL_COMPILER_FLAGS   "")
+setDefault(ADDITIONAL_LIBRARIES        "")
+setDefault(EIGEN3_ROOT                 "<empty>")
+setDefault(BOOST_ROOT                  "<empty>")
+setDefault(FFTW_ROOT                   "<empty>")
+setDefault(METIS_ROOT                  "<empty>")
+setDefault(NETCDF_ROOT                 "<empty>")
+setDefault(HDF5_ROOT                   "<empty>")
+setDefault(USE_PARALLEL_NETCDF         false)
+setDefault(NPOL_SEM                    4)
+setDefault(USE_DOUBLE                  false)
 
 
 ################# cmake setup #################
@@ -103,7 +115,7 @@ add_definitions(-D_VERSION="1.0")
 add_definitions(-D_PROJ_DIR=\"${PROJECT_SOURCE_DIR}\")
 
 # nPol
-add_definitions(-D_NPOL=${NPOL})
+add_definitions(-D_NPOL=${NPOL_SEM})
 
 # double
 if(${USE_DOUBLE})
@@ -111,11 +123,15 @@ add_definitions(-D_USE_DOUBLE)
 endif()
 
 # memory
+set(MEMORY_SAVING_MODE ${save_mem})
+setDefault(MEMORY_SAVING_MODE false)
 if(${MEMORY_SAVING_MODE})
 add_definitions(-D_SAVE_MEMORY)
 endif()
 
 # serial build
+set(SERIAL_BUILD ${serial})
+setDefault(SERIAL_BUILD false)
 if(${SERIAL_BUILD})
 add_definitions(-D_SERIAL_BUILD)
 set(USE_PARALLEL_NETCDF false)
@@ -146,34 +162,40 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 # boost
 # BOOST_ROOT can be case-sensitive depending on cmake version
 set(Boost_ROOT ${BOOST_ROOT})
-set(ENV{Boost_ROOT} $ENV{BOOST_ROOT})
+set(ENV{Boost_ROOT} ${BOOST_ROOT})
+set(ENV{BOOST_ROOT} ${BOOST_ROOT})
 find_package(Boost 1.73.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
 # fftw
+set(ENV{FFTW_ROOT} ${FFTW_ROOT})
 find_package(FFTW REQUIRED)
 include_directories(${FFTW_INCLUDES})
 
 # metis
 # FindMETIS.cmake uses METIS_DIR instead of METIS_ROOT in HINTS
 set(METIS_DIR ${METIS_ROOT})
-set(ENV{METIS_DIR} $ENV{METIS_ROOT})
-find_package(Metis REQUIRED QUIET)
+set(ENV{METIS_DIR} ${METIS_ROOT})
+find_package(METIS REQUIRED)
 include_directories(${METIS_INCLUDE_DIRS})
 
 # NetCDF
+set(ENV{NETCDF_ROOT} ${NETCDF_ROOT})
 find_package(NetCDF REQUIRED)
 include_directories(${NETCDF_INCLUDES})
 # check parallel
-if(${USE_PARALLEL_NETCDF} AND (NOT EXISTS "${NETCDF_INCLUDES}/netcdf_par.h"))
+if(${USE_PARALLEL_NETCDF})
+if(NOT EXISTS "${NETCDF_INCLUDES}/netcdf_par.h")
 message(FATAL_ERROR "Missing header netcdf_par.h under ${NETCDF_INCLUDES}/.\
 \nUse a NetCDF build with parallel support or disable USE_PARALLEL_NETCDF.")
 endif()
+endif()
 
 # hdf5
-if(${LINK_TO_HDF5})
+if(hdf5)
 find_package(HDF5 COMPONENTS C COMPONENTS HL REQUIRED)
 endif()
+
 
 ################# include paths #################
 # find all directories containing .hpp
@@ -198,6 +220,14 @@ external
 
 
 ################# source files #################
+# compiler flags
+# upper case of CMAKE_BUILD_TYPE for compiler flags
+string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD)
+set(ADD_FLAGS ${ADDITIONAL_COMPILER_FLAGS})
+set(CMAKE_C_FLAGS_${BUILD} "${CMAKE_C_FLAGS_${BUILD}} ${ADD_FLAGS}")
+set(CMAKE_CXX_FLAGS_${BUILD} "${CMAKE_CXX_FLAGS_${BUILD}} ${ADD_FLAGS}")
+set(CMAKE_Fortran_FLAGS_${BUILD} "${CMAKE_Fortran_FLAGS_${BUILD}} ${ADD_FLAGS}")
+
 # find *.cpp
 file(GLOB_RECURSE CPP_FILES src/*.cpp)
 # find *.c
@@ -226,7 +256,7 @@ ${METIS_LIBRARIES}
 ${NETCDF_LIBRARIES}
 ${HDF5_HL_LIBRARIES}
 ${HDF5_LIBRARIES}
-${ADDITIONAL_LIBS}
+${ADDITIONAL_LIBRARIES}
 )
 
 # standard C++17
@@ -234,9 +264,6 @@ set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
 
 
 ################# summary #################
-# upper case of CMAKE_BUILD_TYPE for compiler flags
-string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD_TYPE_U)
-
 # macro to message dependencies nicely
 macro(msglist myhead mylist)
 # length of myhead
@@ -259,10 +286,10 @@ message("       C               =  ${CMAKE_C_COMPILER}")
 message("       C++             =  ${CMAKE_CXX_COMPILER}")
 message("       Fortran         =  ${CMAKE_Fortran_COMPILER}")
 message("     Compiler flags")
-message("       C               =  ${CMAKE_C_FLAGS_${BUILD_TYPE_U}}")
-message("       C++             =  ${CMAKE_CXX_FLAGS_${BUILD_TYPE_U}}")
-message("       Fortran         =  ${CMAKE_Fortran_FLAGS_${BUILD_TYPE_U}}")
-message("     CMake build type  =  ${CMAKE_BUILD_TYPE}")
+message("       C               =  ${CMAKE_C_FLAGS_${BUILD}}")
+message("       C++             =  ${CMAKE_CXX_FLAGS_${BUILD}}")
+message("       Fortran         =  ${CMAKE_Fortran_FLAGS_${BUILD}}")
+message("     CMake build type  =  ${BUILD}")
 message("     Source directory  =  ${PROJECT_SOURCE_DIR}")
 message("   Dependencies__________________________________________________")
 message("     * MPI")
@@ -270,7 +297,7 @@ if(${SERIAL_BUILD})
 message("       This is a serial build without MPI.")
 else()
 if("${MPI_C_INCLUDE_DIRS}" STREQUAL "")
-message("       Using MPI wrapper compilers, no external link required.")
+message("       Using MPI wrapper compilers, no explicit link required.")
 else()
 msglist("       found include paths: " "${MPI_C_INCLUDE_DIRS}")
 msglist("       linked to libraries: " "${MPI_C_LIBRARIES}")
@@ -296,28 +323,30 @@ msglist("       found include paths: " "${NETCDF_INCLUDES}")
 msglist("       linked to libraries: " "${NETCDF_LIBRARIES}")
 message("       use parallel NetCDF: " "${USE_PARALLEL_NETCDF}")
 message("     * HDF5")
-if(${LINK_TO_HDF5})
+if(NOT hdf5)
+message("       Linking to HDF5 is disabled by omitting -Dhdf5.")
+else()
+if("${HDF5_LIBRARIES}" STREQUAL "")
+message("       Using HDF5 wrapper compilers, no explicit link required.")
+else()
 msglist("       user-specified root: " "${HDF5_ROOT}")
 msglist("       linked to libraries: " "${HDF5_LIBRARIES}")
 msglist("                            " "${HDF5_HL_LIBRARIES}")
-else()
-message("       Not linking to HDF5.")
+endif()
 endif()
 message("     * Others")
-if("${ADDITIONAL_LIBS}" STREQUAL "")
+if("${ADDITIONAL_LIBRARIES}" STREQUAL "")
 message("       No user-specified additional libraries.")
 else()
-message("       user-specified additional libraries: ${ADDITIONAL_LIBS}")
+message("       user-specified additional libraries: ${ADDITIONAL_LIBRARIES}")
 endif()
 message("   AxiSEM3D options______________________________________________")
-message("     SEM n-polynomial  =  ${NPOL}")
+message("     SEM n-polynomial  =  ${NPOL_SEM}")
 if(${USE_DOUBLE})
 message("     Solver precision  =  double")
 else()
 message("     Solver precision  =  single")
 endif()
-message("     Memory-saving     =  ${MEMORY_SAVING_MODE}")
-message("     Serial build      =  ${SERIAL_BUILD}")
 message(STATUS "==============================================================")
 message(STATUS "")
 message(STATUS "")
