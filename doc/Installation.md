@@ -78,12 +78,11 @@ module avail
 module avail fftw
 ```
 
-To load a required package, for example, FFTW (*machine-dependent*):
+To load a required package, for example, FFTW:
 ```bash
+# load FFTW (this is machine-dependent!)
 module load fftw
 ```
-Whether one needs to load `HDF5` depends on how `NetCDF` was compiled. 
-
 
 If a package is missing, one may turn to the admin or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
@@ -176,11 +175,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4MjMzMzk3NjcsMzg5NDU3MTQ0LDE5Nj
-YwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUy
-MiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMz
-EwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3
-OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNj
-AwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4
-MDVdfQ==
+eyJoaXN0b3J5IjpbLTc0ODQ0OTM5MiwzODk0NTcxNDQsMTk2Nj
+AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
+LDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMT
+AzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5
+LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcyNCw2MD
+A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
+NV19
 -->
