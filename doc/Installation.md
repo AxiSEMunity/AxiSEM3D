@@ -156,14 +156,15 @@ mpirun -np 4 ./axisem3d
 #!/bin/bash
 # install_AxiSEM3D.sh
 
-# top working directory
+# create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd $_
 
 # download eigen and boost
-mkdir -p AxiSEM3D_2020/dependencies && cd $_
-wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx
-wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
-cd ..
+if 
+mkdir -p dependencies
+wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
+wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx ./dependencies
+
 
 # download AxiSEM3D
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
@@ -201,7 +202,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk3MzA5MTAxNywtMTI0OTc5OTI5OSwtMT
+eyJoaXN0b3J5IjpbMjA1NTYwMjE3MSwtMTI0OTc5OTI5OSwtMT
 U0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwxMzEwMjUwODUsMTc0Nzkz
 NDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0NiwtMTcwNjM3MjgyNC
 w0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2NDAy
