@@ -84,9 +84,8 @@ To load a required package, for example, to load `FFTW` (this is *machine-depend
 ```bash
 # load default fftw
 module load fftw
-# load a specific fftw
-module load fftw
-
+# load a specific version of fftw
+module load fftw/3.3.8.0
 ```
 
 If a package is missing, one may 
@@ -198,7 +197,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5OTYxMzc0Myw0MDQ3OTcxNzMsLTE5NT
+eyJoaXN0b3J5IjpbLTYxNjc4NDAxNyw0MDQ3OTcxNzMsLTE5NT
 E1NTEyNDEsLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQs
 LTY3ODAyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMT
 Q0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3
