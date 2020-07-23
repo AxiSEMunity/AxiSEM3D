@@ -193,7 +193,7 @@ make -j8
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_archer.sh
+# install_AxiSEM3D_ARCHER.sh
 
 # create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -247,7 +247,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1ODg0NTQyNSwxMDIxMTcyMTYxLDYyOT
+eyJoaXN0b3J5IjpbLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOT
 cxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3
 NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUsMT
 I4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLTU5NTky
