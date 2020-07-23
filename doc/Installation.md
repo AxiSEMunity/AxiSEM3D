@@ -57,9 +57,9 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 ```
-The above lines will download *eigen-master* and *boost_1_73_0** under **AxiSEM3D_2020/dependencies**.
+The above lines will download *eigen-master/* and *boost_1_73_0/* under *AxiSEM3D_2020/dependencies/*.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
+**NOTE**: AxiSEM3D requires Eigen 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
 
 
 #### 1.2. FFTW, Metis and NetCDF
@@ -307,7 +307,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1NzA4NjM4MywyOTAxNzg0NzksMTk0Nz
+eyJoaXN0b3J5IjpbMTM0NzkxNjQ0NywyOTAxNzg0NzksMTk0Nz
 A2MzIyOCwzNTc5NzM4NDMsNjgyMDg0NTAxLC0zMTgzMzUwMjAs
 LTkxOTk0ODc3Niw5NTc4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwOD
 IxNjkwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYw
