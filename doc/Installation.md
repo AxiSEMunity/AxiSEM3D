@@ -100,7 +100,7 @@ cd $HOME/AxiSEM3D_2020
 # download the code
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
-#### 2.2.  Configure by cmake
+#### 2.2.  Configure by `cmake`
 Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
 
 ```python
@@ -149,11 +149,9 @@ mkdir -p build && cd $_
 # Make sure that the C++ compiler supports C++17.
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
+Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
-
-Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of dependencies. 
-
-#### 2.3.  make
+#### 2.3.  Compile and line by `make`
 Compile and link AxiSEM3D with `make`:
 ```bash
 make -j8
@@ -169,7 +167,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkyNDUwMDE2NywtMTQxODIwMjcyNCw2MD
+eyJoaXN0b3J5IjpbMjAxOTY0MTk3MywtMTQxODIwMjcyNCw2MD
 A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
 NSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NS
 wxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4
