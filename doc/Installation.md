@@ -288,19 +288,25 @@ make -j8
 
 ## Tools for pre- and post-processing
 
-In the manual and the examples, we will mainly use python (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. Usually, you do not need to install them on 
+In the manual and the examples, we will mainly use python (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. Usually, one does not need to install them on an HPC cluster.
 
 
-
+Name|Role|Note
+--- | --- | ---|---
+[`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
+[`Boost`](https://www.boost.org/) | C++ helpers | 1.73.0 | `AxiSEM3D` only uses some of its header-only modules.
+[`FFTW`](http://www.fftw.org/) | fast Fourier transform | 3.3.4 | Both single- and double-precision builds are required.
+[`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
+[`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxNzQ2MTQ5NCwtOTE5OTQ4Nzc2LDk1Nz
-g2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2
-MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC
-05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQy
-MDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMD
-YsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEw
-MDU1NDYxMDNdfQ==
+eyJoaXN0b3J5IjpbMTgwODc1NjUsLTkxOTk0ODc3Niw5NTc4Nj
+A4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAw
+LDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOT
+g1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1
+Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC
+0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1
+NTQ2MTAzXX0=
 -->
