@@ -78,7 +78,7 @@ module avail
 module avail fftw
 ```
 
-To load a required package, for example, to load `FFTW` (this is *machine-dependent*):
+To load a required package, for example, `FFTW` (this is *machine-dependent*):
 ```bash
 # load default FFTW
 module load fftw
@@ -197,11 +197,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nz
-c4OTg0NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEy
-NDEsLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3OD
-AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
-MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
-E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
-NF19
+eyJoaXN0b3J5IjpbNzkxNTI3MjkxLDE3NDc5MzQyNzgsLTIxNz
+U0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTcz
+LC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MD
+czMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYw
+MzEsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OT
+EwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3
+XX0=
 -->
