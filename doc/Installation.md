@@ -260,6 +260,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # environment modules
 module load intel/bundles/complib/2019.3
+module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 
 # modules required by AxiSEM3D
 module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
@@ -290,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
-NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNS
-wxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMz
-NTgxNjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NT
-E3NSw5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5
-ODA4MTAwNzldfQ==
+eyJoaXN0b3J5IjpbODQ1NjQxNTQyLDE0Mjk5Nzc2MDAsMTQyOT
+k3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2
+NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC
+05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4Mzgy
+NTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYxMD
+MsLTE3Mzk4NTUxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLTgw
+MTQzNzEzN119
 -->
