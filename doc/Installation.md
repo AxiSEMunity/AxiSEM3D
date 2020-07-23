@@ -91,7 +91,6 @@ If a package is missing, one may
 
 
 
-
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
@@ -180,7 +179,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMzE4ODI0MSwzODk0NTcxNDQsMTk2Nj
+eyJoaXN0b3J5IjpbMTUyNjEwNTA4OSwzODk0NTcxNDQsMTk2Nj
 AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
 LDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMT
 AzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5
