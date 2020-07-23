@@ -82,7 +82,7 @@ module avail
 module avail fftw
 ```
 
-To load a required package, for example, `FFTW` (this is *machine-dependent*):
+To load a required package, for example, FFTW:
 ```bash
 # load default FFTW
 module load fftw
@@ -307,11 +307,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjQzMTQwMDQyLDI5MDE3ODQ3OSwxOTQ3MD
-YzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwt
-OTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4Mj
-E2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAw
-LC0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLT
-E1Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3
-MjE2MV19
+eyJoaXN0b3J5IjpbMTA3OTAyMDM5MCwyOTAxNzg0NzksMTk0Nz
+A2MzIyOCwzNTc5NzM4NDMsNjgyMDg0NTAxLC0zMTgzMzUwMjAs
+LTkxOTk0ODc3Niw5NTc4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwOD
+IxNjkwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYw
+MCwtMTEwMjM0MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC
+0xNTc5NTU4OTIsMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjEx
+NzIxNjFdfQ==
 -->
