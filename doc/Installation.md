@@ -4,6 +4,13 @@
 # Installation
 The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing.
 
+System requirements:
+* Unix-like system (`AxiSEM3D` is untested on Windows)
+* C++ compiler supporting C++17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
+* Basic development tools: `python`, `pip`, `conda`, `cmake`, `wget`
+* MPI (a serial build can be made but is mostly useless) 
+
+
 
 ## Mesher
 [`SalvusMeshLite`](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for `AxiSEM3D`. Its installation is trivial with `pip`: 
@@ -37,14 +44,16 @@ Name|Role|Minimum version|Note
 
 `Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
 ```bash
-# create a directory to store Eigen and Boost
-mkdir -p axisem3d_dependencies && cd $_
+# create a top working directory
+mkdir -p AxiSEM3D_2020
+# create dependency directory
+mkdir -p AxiSEM3D_2020/dependencies && cd $_
 # download Eigen 3.3.9
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 ```
-The above lines will create a directory `axisem3d_dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
+The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before.
 
@@ -84,61 +93,84 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 
 
 ### 2. Building AxiSEM3D
-#### 1. Download the code
+#### 2.1. Download the code
 ```bash
-$ git clone https://github.com/kuangdai/AxiSEM-3D.git
+# go to the top working directory
+cd $HOME/AxiSEM3D_2020
+# download the code
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
-#### 2.  cmake
-Before doing `cmake`, one must edi
+#### 2.2.  Configure by `cmake`
+Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
 
-### 1. Eigen
-`Eigen` is a header-only library, so one just needs to download the source code:
-```bash
-$ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
-$ export EIGEN3_ROOT=$AXISEM3D_DEPENDS_PATH/eigen3_develop
-```
-The first line creates `eigen3_develop` under the current directory. The second line enables `cmake` to find this version by setting the environment variable `EIGEN3_ROOT`.
-
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are essential even one already has `Eigen` installed before.
-
-
-### 2. Boost
-`AxiSEM3D` only uses some of the header-only modules of `Boost`. Similar to `Eigen`, one only needs to download the source code and set the root variable:
-
-```bash
-$ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -x
-$ export BOOST_ROOT=$AXISEM3D_DEPENDS_PATH/boost_1_73_0
+```python
+# Eigen and Boost installed by downloading the source code
+set(EIGEN3_ROOT $ENV{HOME}/AxiSEM3D_2020/dependencies/eigen3_develop)
+set(BOOST_ROOT  $ENV{HOME}/AxiSEM3D_2020/dependencies/boost_1_73_0)
+# FFTW, Metis and NetCDF installed by conda
+set(FFTW_ROOT   $ENV{HOME}/anaconda3)
+set(METIS_ROOT  $ENV{HOME}/anaconda3)
+set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 ```
 
-Alternatively, one can use `conda`: 
+Alternatively, one can set the corresponding environment variables, leaving `AxiSEM3D/SOLVER/CMakeLists.txt` unchanged:
 ```bash
-$ conda install -c conda-forge boost
-$ export BOOST_ROOT=$CONDA_PATH
+# Eigen and Boost installed by downloading the source code
+export EIGEN3_ROOT=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop
+export BOOST_ROOT=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0
+# FFTW, Metis and NetCDF installed by conda
+export FFTW_ROOT=$HOME/anaconda3
+export METIS_ROOT=$HOME/anaconda3
+export NETCDF_ROOT=$HOME/anaconda3
+```
+To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
+
+To find the `_ROOT` of a package on a cluster, one can use `module show`, for example:
+```bash
+# examples for Archer (archer.ac.uk)
+# show FFTW
+module show fftw/3.3.4.11
+# show Metis
+module show metis/5.1.0_build2
+# show NetCDF
+module show cray-netcdf/4.6.1.3
+```
+
+<strong>NOTE</strong>: The `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
+
+After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
+```bash
+# create a build directory
+mkdir -p build && cd $_
+# cmake (the build type is Release by default)
+# make sure that the C++ compiler supports C++17
+cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
+```
+Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
+
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
+ 
+<strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
+
+#### 2.3.  Compile and link by `make`
+To compile and link AxiSEM3D:
+```bash
+# -j8 means using 8 threads to accelerate compilation
+make -j8
 ```
 
 
-### 3. FFTW
-Using `conda`:
-```bash
-$ conda install -c conda-forge fftw
-$ export FFTW_ROOT=$CONDA_PATH
-```
 
-### 4. Metis
-Using `conda`:
-```bash
-$ conda install -c anaconda metis
-$ export METIS_ROOT=$CONDA_PATH
-```
 
-### 5. NetCDF
-Using `conda`:
+
+Finally, one can verify the executable:
 ```bash
-$ conda install -c anaconda netcdf4
-$ export NETCDF_ROOT=$CONDA_PATH
-$ export HDF5_ROOT=$CONDA_PATH
+# the number of processors can be arbitrary
+mpirun -np 4 ./axisem3d
 ```
-Using a `NetCDF` build with parallel I/O support can enhance the performance of `AxiSEM3D` and simplify post-processing. However, a parallel build is sometimes difficult to make. Instructions are provided [here](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html#build_parallel). 
+`AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory: ./input".
+
+
 
 
 ## Tools for pre- and post-processing
@@ -148,11 +180,11 @@ Using a `NetCDF` build with parallel I/O support can enhance the performance of 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjA0MjYzNzY1LDEzODgxODY0MDIsLTUyMj
-kxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAx
-NDM5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC
-0xNTQ5MjI1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUx
-ODMzNjMzLC0xMDgzNTM1MTAyLDc5MDc0NjM1MSw4Njg3OTY3ND
-csNzMzMTcwODI5LC05OTM5MDU2NzcsLTEzNjEzOTc5MzMsLTIx
-MTY2NDM4NDJdfQ==
+eyJoaXN0b3J5IjpbLTEyMTU0MTY0OTcsMTkxMjQ1NDk2LDIwND
+E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
+NywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNz
+YyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0
+MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NT
+csLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0
+MjEwMTE4M119
 -->
