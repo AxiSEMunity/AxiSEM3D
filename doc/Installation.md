@@ -180,7 +180,7 @@ export CRAYPE_LINK_TYPE=dynamic
 module load fftw
 module load metis
 module load cray-netcdf/4.6.1.3
-# On ARCHER, hdf5 is handled by the compiler wrapper;
+# On ARCHER, HDF5 is handled by the compiler wrapper;
 # users only need to load the right version
 module load cray-hdf5/1.10.2.0
 
@@ -207,7 +207,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NDk4NjM2ODgsMTIzMzE4NTA0LC0xMj
+eyJoaXN0b3J5IjpbLTE2MjMyNTg2NjQsMTIzMzE4NTA0LC0xMj
 Q5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAy
 NTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC
 0xNzA2MzcyODI0LDQwNDc5NzE3MywtMTk1MTU1MTI0MSwtNjk1
