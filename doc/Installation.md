@@ -262,12 +262,9 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 module switch intel/compilers intel/compilers/2019.3
 
 # modules required by AxiSEM3D
-module load fftw
-module load metis
-module load cray-netcdf/4.6.1.3
-# On ARCHER, HDF5 is handled by compiler wrappers;
-# users only need to load the right version
-module load cray-hdf5/1.10.2.0
+module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
+module load metis-5.1.0-intel-17.0.4-r6z4bz6
+module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 
 # cmake
 # the paths of FFTW, Metis and NetCDF are found by "module show"
@@ -293,11 +290,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE2MzEzMzg4MCwtOTg1NzExNjQ0LC0xOD
-Y5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0NywtOTQxNDcy
-MDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4MjUxMDYsMT
-Y2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5
-ODU1MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMz
-csMTk4MDgxMDA3OSwtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0x
-MzQ0Mjc5MDFdfQ==
+eyJoaXN0b3J5IjpbLTYwNTQ5MTA4LC05ODU3MTE2NDQsLTE4Nj
+kwNDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0NzIw
+MTUsMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4MzgyNTEwNiwxNj
+YzMzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYxMDMsLTE3Mzk4
+NTUxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNy
+wxOTgwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEz
+NDQyNzkwMV19
 -->
