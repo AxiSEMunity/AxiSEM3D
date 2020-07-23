@@ -141,12 +141,9 @@ module show cray-netcdf/4.6.1.3
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
 # create a build directory
-# It is good practice to put nothing under this 'build'
-# directory becuase it must be emptied before redoing 
-# cmake when CMakeLists.txt is changed
 mkdir -p build && cd $_
 # cmake (the build type is Release by default)
-# Make sure that the C++ compiler supports C++17.
+# make sure that the C++ compiler supports C++17
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
@@ -158,7 +155,7 @@ To compile and link AxiSEM3D:
 make -j8
 ```
 
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS` in CMakeLists.txt.
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS` in CMakeLists.txt. After changing CMakeLists.txt, the build 
  
 
 Finally, one can verify the executable:
@@ -178,11 +175,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4NTA2NTc2NiwyMDQxNDE4OTkyLDEwOD
-A4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3
-MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MT
-MzNzg4MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIy
-NzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1Mz
-AsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2
-MTE4MzkwMDJdfQ==
+eyJoaXN0b3J5IjpbMTMwMjg2MzUsMjA0MTQxODk5MiwxMDgwOD
+Y2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0
+LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMz
+c4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1
+MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLD
+EzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjEx
+ODM5MDAyXX0=
 -->
