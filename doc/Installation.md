@@ -286,7 +286,6 @@ make -j8
 ```
 
 
-
 ## Tools for pre- and post-processing
 
 
@@ -294,7 +293,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc4MDgxMDQ1NCw5NTc4NjA4NjcsMTE0OD
+eyJoaXN0b3J5IjpbLTkxOTk0ODc3Niw5NTc4NjA4NjcsMTE0OD
 Q4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2
 MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzExNjQ0LC
 0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0NywtOTQx
