@@ -163,6 +163,9 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 cd ..
 
+# download AxiSEM3D
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+
 # load modules
 module switch PrgEnv-cray PrgEnv-gnu
 module switch gcc/7.3.0
@@ -173,8 +176,6 @@ module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
 export CRAYPE_LINK_TYPE=dynamic
 
-# download AxiSEM3D
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
 mkdir -p build &&  cd  $_
@@ -199,11 +200,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOT
-UxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0
-LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLT
-E0NDY0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYy
-NywzOTMxNDY4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOT
-IzNDQ5NjQsMTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkw
-XX0=
+eyJoaXN0b3J5IjpbOTU5OTczODI4LC0xNzA2MzcyODI0LDQwND
+c5NzE3MywtMTk1MTU1MTI0MSwtNjk1NDY4MzgsNzY0MDI2NTE3
+LDM1NTA3MzE1NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC0xND
+M1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQy
+NDksNjkxMDg2MjcsMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNj
+QzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDRd
+fQ==
 -->
