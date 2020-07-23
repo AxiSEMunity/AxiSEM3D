@@ -80,7 +80,7 @@ module avail fftw
 
 To load a required package, for example, to load `FFTW` (this is *machine-dependent*):
 ```bash
-module load fftw/3.3.4.11
+module load fftw
 ```
 
 If a package is missing, one may 
@@ -202,7 +202,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxOTQxOTc0NSwzOTMxNDY4MjYsMTE1Nz
+eyJoaXN0b3J5IjpbMTc5ODExMTE4MCwzOTMxNDY4MjYsMTE1Nz
 kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
 LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
 Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjgs
