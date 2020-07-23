@@ -2,7 +2,7 @@
 
 
 # Installation
-The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly python libraries) for pre- and post-processing.
+The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly `python` libraries) for pre- and post-processing.
 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
@@ -288,12 +288,12 @@ make -j8
 
 ## Tools for pre- and post-processing
 
-In the manual and the examples, we will mainly use python (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. Usually, one does not need to install them on an HPC cluster.
+In the manual and the examples, we will mainly use `python` (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. Usually, one does not need to install them on an HPC cluster.
 
 
 Name|Role|Installation
 --- | --- | ---
-[`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | NetCDF for python | conda install -c anaconda netcdf4
+[`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | `NetCDF` for `python` | conda install -c anaconda netcdf4
 [`Obspy`](https://docs.obspy.org/) | waveform data processing | conda install -c conda-forge obspy
 [`Basemap`](https://matplotlib.org/basemap/) | draw maps with python | conda install -c anaconda basemap
 [`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | animation generation | conda install -c conda-forge pyvtk
@@ -303,11 +303,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3Mjc3MjA4MDcsLTkxOTk0ODc3Niw5NT
-c4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3
-NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMS
-wtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0
-MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MD
-A2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1Nywx
-MDA1NTQ2MTAzXX0=
+eyJoaXN0b3J5IjpbMTA0NDExNzI5NywtOTE5OTQ4Nzc2LDk1Nz
+g2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2
+MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC
+05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQy
+MDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMD
+YsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEw
+MDU1NDYxMDNdfQ==
 -->
