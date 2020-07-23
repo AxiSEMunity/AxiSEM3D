@@ -97,7 +97,7 @@ set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
 endif()
 
 # project
-cmake_minimum_required(VERSION 3.10.0)
+cmake_minimum_required(VERSION 3.12.0)
 project(AxiSEM3D)
 enable_language(Fortran)
 
@@ -266,10 +266,14 @@ set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
 ################# summary #################
 # macro to message dependencies nicely
 macro(msglist myhead mylist)
-# length of myhead
+# form indent string
 string(LENGTH ${myhead} lenhead)
-# indent
-string(REPEAT " " ${lenhead} indent)
+# this neat solution requires 3.15
+# string(REPEAT " " ${lenhead} indent)
+set(indent "")
+foreach(idx RANGE 1 ${lenhead})
+set(indent "${indent} ")
+endforeach()
 # replace ; with \n + indent
 string(REPLACE ";" "\n${indent}" newlist "${mylist}")
 message("${myhead}${newlist}")
