@@ -128,9 +128,9 @@ Parameter|Role|Default|Note
 `cc`, `cxx`, `ftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
 `eigen`, `boost`, `fftw`, `metis`, `netcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
 `hdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build `NetCDF`.
-`Dpar_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
-`Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
-`Dlibs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
+`par_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
+`flags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
+`libs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
 `Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
@@ -198,11 +198,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MDg3OTMwMDEsLTE0NTc0NDU3NjgsMT
-MxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4
-NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC
-02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1
-MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2Mi
-wtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4
-MjZdfQ==
+eyJoaXN0b3J5IjpbMTU2OTE1ODAyMywtMTQ1NzQ0NTc2OCwxMz
+EwMjUwODUsMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0
+NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLT
+Y5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUw
+MCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQyMjYyLC
+0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5MzE0Njgy
+Nl19
 -->
