@@ -176,7 +176,6 @@ module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
 export CRAYPE_LINK_TYPE=dynamic
 
-
 # cmake
 mkdir -p build &&  cd  $_
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
@@ -200,7 +199,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU5OTczODI4LC0xNzA2MzcyODI0LDQwND
+eyJoaXN0b3J5IjpbNjg3Nzg5ODQ2LC0xNzA2MzcyODI0LDQwND
 c5NzE3MywtMTk1MTU1MTI0MSwtNjk1NDY4MzgsNzY0MDI2NTE3
 LDM1NTA3MzE1NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC0xND
 M1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQy
