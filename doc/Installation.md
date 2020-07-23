@@ -224,7 +224,7 @@ module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
 
 # cmake
-# the paths are found by "module show"
+# the paths of FFTW, Metis andd are found by "module show"
 mkdir -p build && cd build
 rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
@@ -247,11 +247,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjI5NzE4MDA2LC0yODM4MjUxMDYsMTY2Mz
-M1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5ODU1
-MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMzcsMT
-k4MDgxMDA3OSwtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0xMzQ0
-Mjc5MDEsLTUxMDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMyMD
-k3NiwxODI3MDMyMDU0LDEyMzMxODUwNCwtMTI0OTc5OTI5OSwt
-MTU0NDc2NjkwNV19
+eyJoaXN0b3J5IjpbLTYxNTQyMDcwNyw2Mjk3MTgwMDYsLTI4Mz
+gyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYx
+MDMsLTE3Mzk4NTUxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLT
+gwMTQzNzEzNywxOTgwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2
+MDk4MjksLTEzNDQyNzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4Nj
+U3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0x
+MjQ5Nzk5Mjk5XX0=
 -->
