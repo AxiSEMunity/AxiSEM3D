@@ -41,7 +41,7 @@ Name|Role|Minimum version|Note
 [Boost](https://www.boost.org/) | C++ helpers | 1.73.0 | We only use some of its header-only modules.
 [FFTW](http://www.fftw.org/) | fast Fourier transform | 3.3.4 | Both single- and double-precision builds are required.
 [Metis](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
-[NetCDF](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
+[NetCDF](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | A parallel build is supported but not mandatory.
 
 #### 1.1. Eigen and Boost
 
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQwNDU5NTY3LDE5NDcwNjMyMjgsMzU3OT
-czODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYs
-OTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOT
-k3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAx
-MTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLD
-E2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcx
-ODAwNl19
+eyJoaXN0b3J5IjpbMTA1NjkxMjc1MiwxOTQ3MDYzMjI4LDM1Nz
+k3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2
+LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mj
+k5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQw
+MTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5Mi
+wxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3
+MTgwMDZdfQ==
 -->
