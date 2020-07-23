@@ -126,7 +126,7 @@ Parameter|Role|Default|Note
 `Deigen`, `Dboost`, `Dfftw`, `Dmetis`, `Dnetcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`). 
 `Dhdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
 `Dpar_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
-`Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems may require different additional flags.
+`Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
 `Dlibs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
 `Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
@@ -156,7 +156,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4Nzg0MTIyNywtMjA2OTg0NzYzNywtMT
+eyJoaXN0b3J5IjpbLTcxNzA2MTE2MiwtMjA2OTg0NzYzNywtMT
 QzNTIwNjAzMSwtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0
 MjQ5LDY5MTA4NjI3LDM5MzE0NjgyNiwxMTU3OTAzMzg1LDE1Mz
 Y0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5NDU3MTQ0
