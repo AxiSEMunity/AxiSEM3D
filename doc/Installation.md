@@ -154,6 +154,7 @@ mpirun -np 4 ./axisem3d
 
 ```bash
 #!/bin/bash
+# install_AxiSEM3D.sh
 
 # download eigen and boost
 mkdir -p AxiSEM3D_2020
@@ -198,7 +199,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMTAyNzM4NTEsLTEyNDk3OTkyOTksLT
+eyJoaXN0b3J5IjpbLTEyODE5MTAzNzEsLTEyNDk3OTkyOTksLT
 E1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5
 MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4Mj
 QsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQw
