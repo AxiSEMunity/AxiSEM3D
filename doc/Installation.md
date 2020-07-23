@@ -119,7 +119,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 ../AxiSEM3D/SOLVER/
 ```
 
-It can take the following parameters:
+It takes the following arguments:
 Parameter|Role|Default|Note
 --- | --- | ---|---
 `Dcc`, `Dcxx`, `Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
@@ -209,7 +209,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM2NjExOTU0MywtMTY3NjA0MTgsMTA2Mj
+eyJoaXN0b3J5IjpbLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2Mj
 kyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4NSwx
 NTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYyLDM4OTQ1Nz
 E0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03
