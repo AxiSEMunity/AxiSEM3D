@@ -131,55 +131,7 @@ Parameter|Role|Default|Note
 `Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
-
-
-
-
-
-
-Before running `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths are *user-dependent*):
-
-```python
-# Eigen and Boost installed by downloading the source code
-set(EIGEN3_ROOT $ENV{HOME}/AxiSEM3D_2020/dependencies/eigen3_develop)
-set(BOOST_ROOT  $ENV{HOME}/AxiSEM3D_2020/dependencies/boost_1_73_0)
-# FFTW, Metis and NetCDF installed by conda
-set(FFTW_ROOT   $ENV{HOME}/anaconda3)
-set(METIS_ROOT  $ENV{HOME}/anaconda3)
-set(NETCDF_ROOT $ENV{HOME}/anaconda3)
-```
-
-Alternatively, one can set the corresponding environment variables, leaving `CMakeLists.txt` unchanged:
-```bash
-# Eigen and Boost installed by downloading the source code
-export EIGEN3_ROOT=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop
-export BOOST_ROOT=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0
-# FFTW, Metis and NetCDF installed by conda
-export FFTW_ROOT=$HOME/anaconda3
-export METIS_ROOT=$HOME/anaconda3
-export NETCDF_ROOT=$HOME/anaconda3
-```
-To avoid setting these environment variables every time in a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
-
-Use `module show` to find the `_ROOT` of a package (the one containing both `/lib` and `/include`) on a cluster, for example:
-```bash
-# show FFTW (this is machine-dependent!)
-module show fftw
-```
-
-After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
-```bash
-# create a build directory
-mkdir -p build && cd $_
-# cmake (the build type is Release by default)
-# make sure that the C++ compiler supports C++17
-cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
-```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
-
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT`. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
- 
-<strong>NOTE</strong>: Whenever `CMakeLists.txt` has been changed, the build directory must be emptied before redoing `cmake`.
 
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
@@ -187,11 +139,6 @@ To compile and link AxiSEM3D:
 # -j8 means using 8 threads to accelerate compilation
 make -j8
 ```
-
-
-
-
-
 Finally, one can verify the executable:
 ```bash
 # the number of processors can be arbitrary
@@ -209,11 +156,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMT
-Y3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYs
-MTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMj
-A2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwt
-MTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NT
-E1MjgsLTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTZd
-fQ==
+eyJoaXN0b3J5IjpbNzE5Mzc3NzMsLTE0MzUyMDYwMzEsLTE0ND
+Y0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywz
+OTMxNDY4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzND
+Q5NjQsMTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQz
+Mjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMT
+g1LC0yMTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMDM3ODM2OF19
+
 -->
