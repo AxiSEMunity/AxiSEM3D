@@ -55,7 +55,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 # go back to the top working directory
 cd ..
 ```
-The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
+The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen-master` and `boost_1_73_0`.
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
 
@@ -194,11 +194,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2ND
-AyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUwMCwtMjA2OTg0NzYz
-NywtMTQzNTIwNjAzMSwtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMD
-YyOTI0MjQ5LDY5MTA4NjI3LDM5MzE0NjgyNiwxMTU3OTAzMzg1
-LDE1MzY0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5ND
-U3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTNd
-fQ==
+eyJoaXN0b3J5IjpbNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OT
+U0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAs
+LTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMT
+Y3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYs
+MTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMj
+A2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOF19
+
 -->
