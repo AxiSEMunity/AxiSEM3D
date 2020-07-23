@@ -176,7 +176,7 @@ USE_INTEL=false
 # environment modules and variables
 if USE_INTEL; then
    module switch PrgEnv-cray PrgEnv-intel
-   module swithc intel intel/
+   module swithc intel intel/17.0.3.191
 else
    module switch PrgEnv-cray PrgEnv-gnu
 fi
@@ -217,7 +217,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ2NzkxNzE5MCwtNTEwNDYxMDg0LC0xOD
+eyJoaXN0b3J5IjpbLTIxNDM2MjQzMCwtNTEwNDYxMDg0LC0xOD
 kxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4
 NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1Nz
 Y4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3
