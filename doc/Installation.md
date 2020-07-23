@@ -52,6 +52,8 @@ mkdir -p AxiSEM3D_2020/dependencies && cd $_
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
+# go back to top working directory
+cd ..
 ```
 The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
 
@@ -157,6 +159,7 @@ mkdir -p AxiSEM3D_2020
 mkdir -p AxiSEM3D_2020/dependencies && cd $_
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
+cd ..
 
 # load modules
 module switch PrgEnv-cray PrgEnv-gnu
@@ -169,7 +172,6 @@ module load cray-hdf5/1.10.2.0
 export CRAYPE_LINK_TYPE=dynamic
 
 # download AxiSEM3D
-cd  .. 
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
@@ -195,11 +197,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzY0MDI2NTE3LDM1NTA3MzE1NCwtNjc4MD
-IxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIy
-NjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMT
-Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
-LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3Nz
-IyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NV19
-
+eyJoaXN0b3J5IjpbLTE2NDA4MDM4OTAsNzY0MDI2NTE3LDM1NT
+A3MzE1NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2
+MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNj
+kxMDg2MjcsMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1
+NywtMTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2Nj
+AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
+XX0=
 -->
