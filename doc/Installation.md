@@ -147,7 +147,11 @@ mpirun -np 4 ./axisem3d
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 #### 2.4.  Complete examples
-On the latest UK National Supercomputing Service  [ARCHER](https://www.archer.ac.uk/) 
+On the latest UK National Supercomputing Service  [ARCHER](https://www.archer.ac.uk/):
+
+```bash
+module load cmake
+```
 
 
 
@@ -158,7 +162,7 @@ On the latest UK National Supercomputing Service  [ARCHER](https://www.archer.ac
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUyMDA2MTE0OSwzNTUwNzMxNTQsLTY3OD
+eyJoaXN0b3J5IjpbLTg2OTMxMTQ1OCwzNTUwNzMxNTQsLTY3OD
 AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
 MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
 E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
