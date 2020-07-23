@@ -88,7 +88,7 @@ module load fftw/3.3.8.0
 
 If a package is missing, one may 
 1. turn to admin for help;
-2. install it by `conda` (many clusters allow users to install their own `Miniconda` or `Anaconda`);
+2. install it by `conda` (many clusters allow users to install their own [`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html));
 3. install it from scratch (see instructions for [`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
 
 
@@ -197,11 +197,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNz
-U0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTcz
-LC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MD
-czMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYw
-MzEsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OT
-EwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3
-XX0=
+eyJoaXN0b3J5IjpbLTE3MzA2NDMzNDMsMTMxMDI1MDg1LDE3ND
+c5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4
+MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3Nj
+QwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2
+MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMT
+A2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4
+NV19
 -->
