@@ -123,7 +123,7 @@ export FFTW_ROOT=$HOME/anaconda3
 export METIS_ROOT=$HOME/anaconda3
 export NETCDF_ROOT=$HOME/anaconda3
 ```
-To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
+To avoid setting these environment variables every time in a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
 To find the `_ROOT` of a package on a cluster, one can use `module show`, for example:
 ```bash
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MT
-QxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3
-LC0xNDE4MjAyNzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03Nj
-I1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQz
-NzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1Ny
-wtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQy
-MTAxMTgzXX0=
+eyJoaXN0b3J5IjpbMTY0MjAzNDAwNCwxMzEwMzc4MzY4LDE5MT
+I0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3OSwtMTE5MTcwOTc3
+MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNjAwNjI0MjUwLDE2MT
+c4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5NzQxMTQ1
+NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYxMDczOS
+wxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMiwtNTIy
+OTE4ODYwXX0=
 -->
