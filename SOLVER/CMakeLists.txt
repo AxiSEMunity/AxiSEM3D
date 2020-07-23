@@ -187,8 +187,9 @@ include_directories(${NETCDF_INCLUDES})
 # check parallel
 if(${USE_PARALLEL_NETCDF})
 if(NOT EXISTS "${NETCDF_INCLUDES}/netcdf_par.h")
-message(FATAL_ERROR "Missing header netcdf_par.h under ${NETCDF_INCLUDES}/.\
-\nUse a NetCDF build with parallel support or disable USE_PARALLEL_NETCDF.")
+message(FATAL_ERROR "\nMissing header netcdf_par.h under ${NETCDF_INCLUDES}/.\
+\nUse a NetCDF build with parallel support or disable parallel NetCDF by \
+-Dpar_netcdf=false.")
 endif()
 endif()
 
