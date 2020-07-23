@@ -124,12 +124,11 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time in a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-Use `module show` to find the `_ROOT` of a package on a cluster, for example:
+Use `module show` to find the `_ROOT` of a package (the one containing both `/lib` and `/include`) on a cluster, for example:
 ```bash
 # show FFTW (this is machine-dependent!)
 module show fftw
 ```
-The `_ROOT` is the one containing both `/lib` and `/include`. 
 
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
@@ -173,7 +172,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTc4MTg1OTE5LDM4OTQ1NzE0NCwxOTY2MD
+eyJoaXN0b3J5IjpbMTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MD
 E0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIs
 MzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMD
 M3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5MiwxMDgwODY2Nzks
