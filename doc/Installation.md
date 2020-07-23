@@ -87,7 +87,11 @@ module load fftw/3.3.4.11
 module load metis/5.1.0_build2
 # load NetCDF
 module load cray-netcdf/4.6.1.3
+# load HDF5
+module load cray-hdf5/1.10.2.0
 ```
+
+
 
 If a package is missing, one may turn to the admin or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
@@ -180,11 +184,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nz
-g5Njc3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5
-MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xND
-E4MjAyNzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2
-MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC
-0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkz
-NjQ1NTMwXX0=
+eyJoaXN0b3J5IjpbLTE4MTI2NzkwNjEsMzM3NjYyMTg1LC0yMT
+g4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOTEyNDU0
+OTYsMjA0MTQxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLT
+I5MzgyODE3LC0xNDE4MjAyNzI0LDYwMDYyNDI1MCwxNjE3ODY4
+MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC
+0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkz
+NzMyMDk1N119
 -->
