@@ -21,6 +21,10 @@
 #else
 #define MPI_Request int
 #define MPI_REQUEST_NULL 0
+#define MPI_Op int
+#define MPI_MIN 0
+#define MPI_MAX 1
+#define MPI_SUM 2
 #endif
 
 // flag for gathering operations
