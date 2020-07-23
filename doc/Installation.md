@@ -70,7 +70,7 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed and optimized owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
+On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
 ```bash
 # all available packages
 module avail
@@ -184,7 +184,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTcyMDI3OTczNiw0MzI3NzIyMzgsLTEyNj
+eyJoaXN0b3J5IjpbMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
 g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
 LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
 E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
