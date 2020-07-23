@@ -177,7 +177,7 @@ export USE_INTEL=false
 if $USE_INTEL; then
   module switch PrgEnv-cray PrgEnv-intel
   module swithc intel intel/17.0.3.191
-  export ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
+  export ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16.0
 else
   module switch PrgEnv-cray PrgEnv-gnu
   export ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTM3NDAyOTM1LDEyODgxODQyMTMsLTgwMT
-QzNzEzNywxOTgwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4
-MjksLTEzNDQyNzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC
-0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5
-Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNT
-A4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0x
-NzA2MzcyODI0XX0=
+eyJoaXN0b3J5IjpbLTE3Mzk4NTUxNzUsOTM3NDAyOTM1LDEyOD
+gxODQyMTMsLTgwMTQzNzEzNywxOTgwODEwMDc5LC01OTU5Mjc4
+NzUsLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNTEwNDYxMDg0LC
+0xODkxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIz
+MzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3ND
+Q1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQs
+Njg3Nzg5ODQ2XX0=
 -->
