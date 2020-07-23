@@ -238,7 +238,7 @@ rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 make -j8
 ```
 
-* RCS Cambridge [ARCHER](https://www.archer.ac.uk/):
+* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge:
 
 ```bash
 #!/bin/bash
@@ -296,11 +296,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MzM2MDcxMDEsLTk0MTQ3MjAxNSwxMD
-IxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgx
-NjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NS
-w5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4
-MTAwNzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OT
-AxLC01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYs
-MTgyNzAzMjA1NF19
+eyJoaXN0b3J5IjpbMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMj
+ExNzIxNjEsNjI5NzE4MDA2LC0yODM4MjUxMDYsMTY2MzM1ODE2
+NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LD
+kzNzQwMjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMzcsMTk4MDgx
+MDA3OSwtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0xMzQ0Mjc5MD
+EsLTUxMDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMyMDk3Niwx
+ODI3MDMyMDU0XX0=
 -->
