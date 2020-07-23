@@ -297,17 +297,17 @@ Name|Role|Installation
 [`Obspy`](https://docs.obspy.org/) | waveform data processing | conda install -c conda-forge obspy
 [`Basemap`](https://matplotlib.org/basemap/) | draw maps with `python` | conda install -c anaconda basemap
 [`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | animation generation | conda install -c conda-forge pyvtk
-[`ffmpeg`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | conda install -c conda-forge ffmpeg
-[`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
+[`ffmpeg`](https://ffmpeg.org/) | animation generation | conda install -c conda-forge ffmpeg
+[`Paraview`](https://www.paraview.org/) | animation generation 
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDgwNzc4ODUsLTkxOTk0ODc3Niw5NT
-c4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3
-NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMS
-wtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0
-MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MD
-A2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1Nywx
-MDA1NTQ2MTAzXX0=
+eyJoaXN0b3J5IjpbNzk0NTYwMjMzLC05MTk5NDg3NzYsOTU3OD
+YwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYw
+MCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLT
+k4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIw
+NTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNi
+wtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMTAw
+NTU0NjEwM119
 -->
