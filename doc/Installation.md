@@ -135,9 +135,7 @@ module show metis/5.1.0_build2
 module show cray-netcdf/4.6.1.3
 ```
 
-<strong>Note</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`.
-
-<strong>Note</strong>: if the used NetCDF was compiled as 
+<strong>Note</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
 
 After setting the `_ROOT` variables, we can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
@@ -161,11 +159,11 @@ Upon a successful `cmake`, a summary will be displayed at the end. Check this su
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3MjcwNDQ4MSw2MDA2MjQyNTAsMTYxNz
-g2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3
-MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LD
-E5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5
-MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMT
-QzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1ODgxNCwt
-MTU0OTIyNTI4Ml19
+eyJoaXN0b3J5IjpbNTczNDEwOTM3LDYwMDYyNDI1MCwxNjE3OD
+Y4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcx
+LC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMT
+kzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkx
+ODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAxND
+M5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0x
+NTQ5MjI1MjgyXX0=
 -->
