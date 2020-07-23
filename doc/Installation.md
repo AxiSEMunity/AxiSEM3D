@@ -172,6 +172,8 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # load modules
 module switch PrgEnv-cray PrgEnv-gnu
+# to use intel
+
 module switch gcc/7.3.0
 module load cmake/3.16.0
 module load fftw
@@ -203,11 +205,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU2MzAzMzM3LDEyMzMxODUwNCwtMTI0OT
-c5OTI5OSwtMTU0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwxMzEwMjUw
-ODUsMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0NiwtMT
-cwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLTY5NTQ2
-ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUwMCwtMj
-A2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQyMjYyLC0xNjc2
-MDQxOF19
+eyJoaXN0b3J5IjpbMTU5NjM4NzA1NiwxMjMzMTg1MDQsLTEyND
+k3OTkyOTksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1
+MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLT
+E3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0
+NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLT
+IwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMTY3
+NjA0MThdfQ==
 -->
