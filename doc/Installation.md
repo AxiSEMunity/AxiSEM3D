@@ -158,6 +158,8 @@ To compile and link AxiSEM3D:
 make -j8
 ```
 
+Depnding on how NetCDF was built, the linking may fail with missing `_H5` symbols.
+ 
 
 Finally, one can verify the executable:
 ```bash
@@ -176,11 +178,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA0MTQxODk5MiwxMDgwODY2NzksLTExOT
-E3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMDYyNDI1
-MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOT
-c0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2
-MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MD
-IsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0x
-MzE0MjAxNDM5XX0=
+eyJoaXN0b3J5IjpbMTYxNDE3NjkyNiwyMDQxNDE4OTkyLDEwOD
+A4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3
+MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MT
+MzNzg4MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIy
+NzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1Mz
+AsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2
+MTE4MzkwMDJdfQ==
 -->
