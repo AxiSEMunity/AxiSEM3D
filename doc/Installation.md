@@ -146,6 +146,8 @@ mpirun -np 4 ./axisem3d
 ```
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
+#### 2.4.  Complete examples
+
 
 
 
@@ -156,11 +158,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY3ODAyMTUwMCwtMjA2OTg0NzYzNywtMT
-QzNTIwNjAzMSwtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0
-MjQ5LDY5MTA4NjI3LDM5MzE0NjgyNiwxMTU3OTAzMzg1LDE1Mz
-Y0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5NDU3MTQ0
-LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMsLTc0NT
-Q0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3ODk2Nzcw
-M119
+eyJoaXN0b3J5IjpbMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNj
+k4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMTY3NjA0
+MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1Nz
+kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
+LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
+Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjhd
+fQ==
 -->
