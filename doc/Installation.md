@@ -96,9 +96,7 @@ If a package is missing, one may
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
-# go to the top working directory
-cd $HOME/AxiSEM3D_2020
-# download the code
+# download the code under the top working directory
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 
@@ -197,11 +195,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NDA4MDM4OTAsNzY0MDI2NTE3LDM1NT
-A3MzE1NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2
-MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNj
-kxMDg2MjcsMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1
-NywtMTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2Nj
-AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
-XX0=
+eyJoaXN0b3J5IjpbMTY1MjU3MTYxMiw3NjQwMjY1MTcsMzU1MD
+czMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYw
+MzEsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OT
+EwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3
+LC0xOTIzNDQ5NjQsMTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MD
+E0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjJd
+fQ==
 -->
