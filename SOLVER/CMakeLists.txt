@@ -97,7 +97,7 @@ set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
 endif()
 
 # project
-cmake_minimum_required(VERSION 3.15.3)
+cmake_minimum_required(VERSION 3.10.0)
 project(AxiSEM3D)
 enable_language(Fortran)
 
@@ -160,9 +160,6 @@ find_package(Eigen3 3.3.90 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # boost
-# BOOST_ROOT can be case-sensitive depending on cmake version
-set(Boost_ROOT ${BOOST_ROOT})
-set(ENV{Boost_ROOT} ${BOOST_ROOT})
 set(ENV{BOOST_ROOT} ${BOOST_ROOT})
 find_package(Boost 1.73.0 REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
