@@ -97,7 +97,7 @@ private:
 public:
     //////////////////////// get ////////////////////////
     // get global tag
-    inline const int getGlobalTag() const {
+    inline int getGlobalTag() const {
         return mGlobalTag;
     }
     

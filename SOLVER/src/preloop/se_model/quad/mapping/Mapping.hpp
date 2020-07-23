@@ -95,7 +95,7 @@ public:
     }
     
     // get minimum edge length
-    const double getMinEdgeLength() const {
+    double getMinEdgeLength() const {
         return mMinEdgeLength;
     }
     

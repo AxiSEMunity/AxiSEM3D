@@ -294,12 +294,12 @@ public:
     }
     
     // get number of data
-    inline const int numData() const {
+    inline int numData() const {
         return (int)mDataRankFactor.size();
     }
     
     // get number of unique data
-    inline const int numUniqueData() const {
+    inline int numUniqueData() const {
         return (int)mGridData.dimension(0);
     }
     
