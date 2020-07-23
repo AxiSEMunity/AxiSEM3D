@@ -100,7 +100,7 @@ cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  Configure by `cmake`
-Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths are *user-dependent*):
+Before running `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths are *user-dependent*):
 
 ```python
 # Eigen and Boost installed by downloading the source code
@@ -179,11 +179,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDc1NDY1NDYsMzg5NDU3MTQ0LDE5NjYwMT
-Q5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwz
-Mzc2NjIxODUsLTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMzEwMz
-c4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3OSwt
-MTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNjAwNj
-I0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4MDVd
-fQ==
+eyJoaXN0b3J5IjpbMTczMTA0Mjk4LDM4OTQ1NzE0NCwxOTY2MD
+E0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIs
+MzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMD
+M3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5MiwxMDgwODY2Nzks
+LTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMD
+YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
+XX0=
 -->
