@@ -37,7 +37,7 @@ The AxiSEM3D solver is developed on top of the following modern numerical librar
 
 Name|Role|Minimum version|Note
 --- | --- | ---|---
-[`Eigen`](http://eigen.tuxfamily.org/index.php?title=Main_Page) | linear algebra | 3.3.9 | The current stable release 3.3.7 (up to July 2020) is insufficient.
+[Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page) | linear algebra | 3.3.9 | The latest stable release 3.3.7 (up to July 2020) is insufficient.
 [`Boost`](https://www.boost.org/) | C++ helpers | 1.73.0 | `AxiSEM3D` only uses some of its header-only modules.
 [`FFTW`](http://www.fftw.org/) | fast Fourier transform | 3.3.4 | Both single- and double-precision builds are required.
 [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
-g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
-MTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
-NjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0Ny
-wtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4
-MjUxMDZdfQ==
+eyJoaXN0b3J5IjpbLTM2MDgyMTk5OCwxOTQ3MDYzMjI4LDM1Nz
+k3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2
+LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mj
+k5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQw
+MTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5Mi
+wxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3
+MTgwMDZdfQ==
 -->
