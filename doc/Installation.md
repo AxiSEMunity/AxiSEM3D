@@ -159,7 +159,7 @@ make -j8
 ```
 Next, one can verify the executable:
 ```bash
-./axisem3d
+mpirun -np 4 ./axisem3d
 ```
 
 
@@ -174,11 +174,11 @@ If linking fails with missing `H5_`
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI4NzYzMzkxNiwtMTE5MTcwOTc3MiwtMj
-kzODI4MTcsLTE0MTgyMDI3MjQsNjAwNjI0MjUwLDE2MTc4Njgy
-MjgsLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5NzQxMTQ1NzEsLT
-E5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3
-MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4OD
-YwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMDE0Mzks
-LTQ4NDM5NjcxNF19
+eyJoaXN0b3J5IjpbNDkxMjk2NjY2LC0xMTkxNzA5NzcyLC0yOT
+M4MjgxNywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIy
+OCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMT
+kxMTQ0MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5Mzcz
+MjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4Nj
+AsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwt
+NDg0Mzk2NzE0XX0=
 -->
