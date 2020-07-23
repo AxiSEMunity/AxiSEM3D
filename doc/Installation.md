@@ -100,6 +100,11 @@ cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  Configure by `cmake`
+We first create a `build` directory: 
+```bash
+# create a build directory
+mkdir -p build && cd $_
+```
 
 
 
@@ -175,7 +180,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzNjkwMDA2MywzOTMxNDY4MjYsMTE1Nz
+eyJoaXN0b3J5IjpbLTQxNTg2NzI5NiwzOTMxNDY4MjYsMTE1Nz
 kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
 LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
 Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjgs
