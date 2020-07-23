@@ -105,8 +105,8 @@ If a package is missing, one may
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 
-#### 2.2. Configure by `cmake`
-First, create a `build` directory: 
+#### 2.2. Configure by cmake
+First, create a *build/* directory: 
 ```bash
 # create and cd into build
 mkdir -p build && cd build
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MD
-E3ODQ3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEs
-LTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4ND
-g4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYw
-MCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2NDQsLT
-E4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0
-NzIwMTVdfQ==
+eyJoaXN0b3J5IjpbMTc2OTc1Mzk5OSwtNDUxOTcyOTk4LDE0ND
+U4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OTczODQz
+LDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3OD
+YwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYw
+MCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLT
+k4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIw
+NTc3NDddfQ==
 -->
