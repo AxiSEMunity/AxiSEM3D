@@ -150,7 +150,7 @@ mpirun -np 4 ./axisem3d
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 #### 2.4. Complete examples
-A few complete examples are provided below. On an HPC cluster, the major variability comes from the environment, such as loading a proper compiler suite
+A few complete examples are provided below. On an HPC cluster, the major variability comes from the environment setup, such as loading and using a proper compiler suite, which should  
  
 
 * A laptop or workstation with `conda` (GNU compilers):
@@ -294,7 +294,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNTI4MzI2OTMsOTU3ODYwODY3LDExND
+eyJoaXN0b3J5IjpbLTExNTY2MjA1NTcsOTU3ODYwODY3LDExND
 g0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3
 NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NC
 wtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0
