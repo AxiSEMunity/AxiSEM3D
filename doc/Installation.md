@@ -49,7 +49,7 @@ mkdir -p AxiSEM3D_2020
 # create dependency directory
 mkdir -p AxiSEM3D_2020/dependencies && cd $_
 # download Eigen 3.3.9
-git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
+wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 # go back to the top working directory
@@ -194,11 +194,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNz
-MxNTQsLTY3ODAyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAz
-MSwtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MT
-A4NjI3LDM5MzE0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcs
-LTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMT
-Q5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMl19
-
+eyJoaXN0b3J5IjpbLTE5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2ND
+AyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUwMCwtMjA2OTg0NzYz
+NywtMTQzNTIwNjAzMSwtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMD
+YyOTI0MjQ5LDY5MTA4NjI3LDM5MzE0NjgyNiwxMTU3OTAzMzg1
+LDE1MzY0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5ND
+U3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTNd
+fQ==
 -->
