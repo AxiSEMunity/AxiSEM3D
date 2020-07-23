@@ -173,6 +173,7 @@ cd  ..
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
+mkdir -p build &&  cd  $_
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Deigen=$PWD/../dependencies/eigen3_develop \
 -Dboost=$PWD/../dependencies/boost_1_73_0 \
@@ -194,11 +195,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEzOTI0NzExMSwzNTUwNzMxNTQsLTY3OD
-AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
-MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
-E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
-NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNz
-cyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODVd
-fQ==
+eyJoaXN0b3J5IjpbNzY0MDI2NTE3LDM1NTA3MzE1NCwtNjc4MD
+IxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIy
+NjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMT
+Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
+LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3Nz
+IyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NV19
+
 -->
