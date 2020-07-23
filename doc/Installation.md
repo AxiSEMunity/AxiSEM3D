@@ -148,7 +148,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
  
 <strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
 
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MD
-g2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcy
-NCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMz
-M3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3
-NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMC
-wxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYx
-MTgzOTAwMl19
+eyJoaXN0b3J5IjpbLTEyMTU0MTY0OTcsMTkxMjQ1NDk2LDIwND
+E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
+NywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNz
+YyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0
+MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NT
+csLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0
+MjEwMTE4M119
 -->
