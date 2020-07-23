@@ -128,7 +128,8 @@ Parameter|Role|Default|Note
 `Dpar_netcdf` | whether to use parallel `NetCDF` | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
 `Dlibs`| additional libraries to link to | empty | For example, `-lcurl` is needed if `NetCDF` was built statically with remote client support.
-`Dnpol`|polynomial order of spectral elements |4| 1~
+`Dnpol`|polynomial order of spectral elements |4| Must be an integer from 1 to 8
+`Ddouble` | whether to com solver in double-precision
 
 
 
@@ -208,7 +209,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUzMDMyMzk4NSw2OTEwODYyNywzOTMxND
+eyJoaXN0b3J5IjpbLTc1OTgyNDU0Myw2OTEwODYyNywzOTMxND
 Y4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQs
 MTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3Mj
 IzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0y
