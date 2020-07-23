@@ -152,7 +152,7 @@ On the latest UK National Supercomputing Service  [ARCHER](https://www.archer.ac
 ```bash
 #!/bin/bash
 
-# dependencies
+# download eigen and boost
 mkdir -p AxiSEM3D_2020
 mkdir -p AxiSEM3D_2020/dependencies && cd $_
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
@@ -166,10 +166,9 @@ module load fftw
 module load metis
 module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
-export 
+export CRAYPE_LINK_TYPE=dynamic
 
-
-# download code  
+# download AxiSEM3D
 cd  .. 
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
@@ -186,11 +185,11 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk2NzE1NDYsMzU1MDczMTU0LC02NzgwMj
-E1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2
-MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxND
-Y4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQs
-MTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3Mj
-IzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1XX0=
+eyJoaXN0b3J5IjpbNTc3NzUxNzY0LDM1NTA3MzE1NCwtNjc4MD
+IxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIy
+NjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMT
+Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
+LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3Nz
+IyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NV19
 
 -->
