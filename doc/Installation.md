@@ -90,6 +90,8 @@ If a package is missing, one may
 3. install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
+
+
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
@@ -178,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI1MTc4NTE1LDM4OTQ1NzE0NCwxOTY2MD
-E0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIs
-MzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMD
-M3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5MiwxMDgwODY2Nzks
-LTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMD
-YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
-XX0=
+eyJoaXN0b3J5IjpbLTgwMzE4ODI0MSwzODk0NTcxNDQsMTk2Nj
+AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
+LDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMT
+AzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5
+LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcyNCw2MD
+A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
+NV19
 -->
