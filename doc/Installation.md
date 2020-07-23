@@ -43,9 +43,10 @@ Name|Role|Minimum version|Note
 [Metis](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
 [NetCDF](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | A parallel build is supported but not mandatory.
 
+
 #### 1.1. Eigen and Boost
 
-`Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
+Eigen and Boost are header-only libraries. All we need to do is to download the source code:
 ```bash
 # create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -306,11 +307,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA1NjkxMjc1MiwxOTQ3MDYzMjI4LDM1Nz
-k3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2
-LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mj
-k5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQw
-MTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5Mi
-wxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3
-MTgwMDZdfQ==
+eyJoaXN0b3J5IjpbLTE5MTQzOTA0MjcsMTk0NzA2MzIyOCwzNT
+c5NzM4NDMsNjgyMDg0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3
+Niw5NTc4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxND
+I5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0
+MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OT
+IsMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5
+NzE4MDA2XX0=
 -->
