@@ -275,7 +275,7 @@ rm -rf ./* && cmake -Dcc=icc -Dcxx=icpc -Dftn=ifort \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
 -Dmetis=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/metis-5.1.0-r6z4bz6frgdd7flrrmoyxccliij5fwm7 \
 -Dnetcdf=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/netcdf-4.4.1.1-zysrbqwgar43zq7pisurzuhnk6iix3bf \
--Dflags=-Wno-unknown-pragmas ../AxiSEM3D/SOLVER/
+../AxiSEM3D/SOLVER/
 
 # make
 make -j8
@@ -290,11 +290,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MTAyMTIyNzUsMTQyOTk3NzYwMCwxND
-I5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4Njkw
-NDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0NzIwMT
-UsMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4MzgyNTEwNiwxNjYz
-MzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYxMDMsLTE3Mzk4NT
-UxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNywx
-OTgwODEwMDc5XX0=
+eyJoaXN0b3J5IjpbMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
+k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
+NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNS
+wxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMz
+NTgxNjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NT
+E3NSw5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5
+ODA4MTAwNzldfQ==
 -->
