@@ -126,8 +126,7 @@ Parameter|Role|Default|Note
 `Deigen`, `Dboost`, `Dfftw`, `Dmetis`, `Dnetcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`). 
 `Dhdf5` | path of `HDF5` | empty | If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
-`Dlibs`|additional libraries | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
-
+`Dlibs`| additional libraries | empty | For example, `-lcurl` is needed when `NetCDF` was built
 
 
 
@@ -205,7 +204,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1ODgxNDAxOCwzOTMxNDY4MjYsMTE1Nz
+eyJoaXN0b3J5IjpbMTg4NTEyMzQxNiwzOTMxNDY4MjYsMTE1Nz
 kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
 LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
 Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjgs
