@@ -177,10 +177,10 @@ set USE_INTEL=false
 if USE_INTEL; then
    module switch PrgEnv-cray PrgEnv-intel
    module swithc intel intel/17.0.3.191
-   ncdfpath = /opt/cray/netcdf/4.6.1.3/intel/16
+   set ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
 else
    module switch PrgEnv-cray PrgEnv-gnu
-   ncdfpath = /opt/cray/netcdf/4.6.1.3/GNU/7.1
+   set ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
 fi
 module switch gcc gcc/7.3.0
 module load cmake/3.16.0
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjg1MDE4OTk3LC0xMDYyNjA5ODI5LC0xMz
-Q0Mjc5MDEsLTUxMDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMy
-MDk3NiwxODI3MDMyMDU0LDEyMzMxODUwNCwtMTI0OTc5OTI5OS
-wtMTU0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwxMzEwMjUwODUsMTc0
-NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0NiwtMTcwNjM3Mj
-gyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2
-NDAyNjUxN119
+eyJoaXN0b3J5IjpbLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMT
+M0NDI3OTAxLC01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUz
+MjA5NzYsMTgyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOT
+ksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3
+NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNz
+I4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3
+NjQwMjY1MTddfQ==
 -->
