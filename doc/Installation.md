@@ -137,14 +137,13 @@ module show cray-netcdf/4.6.1.3
 
 <strong>Note</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`.
 
-After setting the `_ROOT` variables, we can do `cmake`:
+After setting the `_ROOT` variables, we can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively. Make sure that the C++ compiler supports C++17. 
+
 ```bash
 mkdir -p build && cd $_
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
-Make sure that the C++ compiler supports C++17. 
 
-If ``
 
 
 
@@ -159,11 +158,11 @@ If ``
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMDI5MTk0NywxNjE3ODY4MjI4LC03Nj
-I1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQz
-NzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1Ny
-wtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQy
-MTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOT
-Y3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1Mjgy
-LC0xMzkyNzcwMjE1XX0=
+eyJoaXN0b3J5IjpbLTE2MTQwNzM2MzgsMTYxNzg2ODIyOCwtNz
+YyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0
+MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NT
+csLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0
+MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mz
+k2NzE0LDEyNTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4
+MiwtMTM5Mjc3MDIxNV19
 -->
