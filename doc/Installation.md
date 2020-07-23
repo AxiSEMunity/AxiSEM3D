@@ -7,8 +7,8 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
 * C++ compiler supporting C++17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
-* Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (> 3.15.0), `wget`
-* MPI (a serial build can be made but is not useful) 
+* Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (≥ 3.15.3), `wget`
+* MPI (a serial build can be made but is not very useful) 
 
 
 
@@ -30,7 +30,7 @@ This will display all the arguments one can pass to the mesher.
 
 ### 1. Installing dependencies
 
-The `AxiSEM3D` solver is developed on top of several modern numerical packages including:
+The `AxiSEM3D` solver is developed on top of the following modern numerical libraries:
 
 Name|Role|Minimum version|Note
 --- | --- | ---|---
@@ -78,16 +78,17 @@ module avail
 module avail fftw
 ```
 
-To load a required package, for example, FFTW:
+To load a required package, for example, to load `FFTW` (this is *machine-dependent*):
 ```bash
-# load FFTW (this is machine-dependent!)
 module load fftw
 ```
 
 If a package is missing, one may 
 1. turn to admin for help;
 2. install it by `conda` (many clusters allow users to install their own `Miniconda` or `Anaconda`);
-3. install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
+3. install it from scratch (see instructions for [`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
+
+
 
 
 ### 2. Building AxiSEM3D
@@ -98,7 +99,38 @@ cd $HOME/AxiSEM3D_2020
 # download the code
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
+
 #### 2.2.  Configure by `cmake`
+First, create a `build` directory: 
+```bash
+# under the top working directory
+mkdir -p build && cd $_
+```
+Because `build` must be emptied before redoing `cmake`, it is good practice to put nothing under `build` except those automatically created by `cmake` and `make`. 
+
+Next, do `cmake` like this:
+```bash
+cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
+-Deigen=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop \
+-Dboost=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0 \
+-Dfftw=$HOME/anaconda3 \
+-Dmetis=$HOME/anaconda3 \
+-Dnetcdf=$HOME/anaconda3 \
+../AxiSEM3D/SOLVER/
+```
+
+It can take the following parameters:
+Parameter|Role|Default|Note
+--- | --- | ---|---
+`Dcc`, `Dcxx`, `Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17
+`Deigen`, `Dboost`, `Dfftw`, `Dmetis`, `Dnetcdf`| paths of the dependencies | empty string | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`). 
+`Dhdf5` | path of `HDF5` | empty | If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
+`Dflags`|
+
+
+
+
+
 Before running `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths are *user-dependent*):
 
 ```python
@@ -171,11 +203,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5ND
-U3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMs
-LTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3OD
-k2NzcwMywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTky
-LDEwODA4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MT
-gyMDI3MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYz
-OV19
+eyJoaXN0b3J5IjpbLTExMTY5NjQ3NiwzOTMxNDY4MjYsMTE1Nz
+kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
+LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
+Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjgs
+LTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MT
+QxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3
+XX0=
 -->
