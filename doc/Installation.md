@@ -178,8 +178,8 @@ export conda_path=$(dirname $(dirname $(which conda)))
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
-rm -rf build && mkdir build && cd build
-cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
+mkdir -p build && cd build
+rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=$conda_path -Dmetis=$conda_path -Dnetcdf=$conda_path \
@@ -247,7 +247,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODkyNzM1MjQ4LC0yODM4MjUxMDYsMTY2Mz
+eyJoaXN0b3J5IjpbNjI5NzE4MDA2LC0yODM4MjUxMDYsMTY2Mz
 M1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5ODU1
 MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMzcsMT
 k4MDgxMDA3OSwtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0xMzQ0
