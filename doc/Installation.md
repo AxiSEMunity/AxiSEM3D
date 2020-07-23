@@ -293,7 +293,7 @@ In the manual and the examples, we will mainly use python (Jupyter Notebook) to 
 
 Name|Role|Installation
 --- | --- | ---
-[`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | NetCDF for python | conda install -c anaconda basemap
+[`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | NetCDF for python | conda install -c anaconda netcdf4
 [`Obspy`](https://docs.obspy.org/) | waveform data processing | conda install -c conda-forge obspy
 [`Basemap`](https://matplotlib.org/basemap/) | draw maps with python | conda install -c anaconda basemap
 [`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | animation generation | conda install -c conda-forge pyvtk
@@ -303,11 +303,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU3MDc3ODQsLTkxOTk0ODc3Niw5NTc4Nj
-A4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAw
-LDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOT
-g1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1
-Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC
-0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1
-NTQ2MTAzXX0=
+eyJoaXN0b3J5IjpbLTE3Mjc3MjA4MDcsLTkxOTk0ODc3Niw5NT
+c4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3
+NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMS
+wtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0
+MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MD
+A2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1Nywx
+MDA1NTQ2MTAzXX0=
 -->
