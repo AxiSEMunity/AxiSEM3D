@@ -124,12 +124,13 @@ Parameter|Role|Default|Note
 --- | --- | ---|---
 `-Dcc` | C compiler | gcc | 
 `-Dcxx` | C++ compiler | g++ | must support C++17
-`-Deigen` | Path of `Eigne` | empty
-`-Dboost` | Path of `Boost` | empty
-`-Dfftw` | Path of `FFTW` | empty
-`-Dmetis` | Path of `Metis` | empty
--Dnetcdf | Path of `NetCDF` | empty
--Dhdf5 | Path of `HDF5` | empty
+`-Dftn` | Fortran compiler | gfortran | 
+`-Deigen` | root of `Eigne` | empty
+`-Dboost` | root of `Boost` | empty
+`-Dfftw` | root of `FFTW` | empty
+`-Dmetis` | root of `Metis` | empty
+`-Dnetcdf` | root of `NetCDF` | empty
+`-Dhdf5` | root of `HDF5` | empty | If
 
 
 
@@ -208,11 +209,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzY3MTU2NDg0LDM5MzE0NjgyNiwxMTU3OT
-AzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIs
-Mzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4Nj
-U0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwt
-MTg3ODk2NzcwMywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxND
-E4OTkyLDEwODA4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTdd
-fQ==
+eyJoaXN0b3J5IjpbLTE4MDU3ODk4MjQsMzkzMTQ2ODI2LDExNT
+c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
+MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
+g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
+LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
+E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
+N119
 -->
