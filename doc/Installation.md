@@ -134,9 +134,7 @@ Parameter|Role|Default|Note
 `npol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `double` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
-These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt`, however unrecommended. 
-
-Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure the compilers, the flags and the dependencies are correctly set.
+These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt`, however unrecommended. Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure the compilers, the flags and the dependencies are correctly set.
 
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
@@ -200,11 +198,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIzNzA3ODY5OSwtMTU0NDc2NjkwNSwtMT
-Q1NzQ0NTc2OCwxMzEwMjUwODUsMTc0NzkzNDI3OCwtMjE3NTQy
-ODM0LDY4Nzc4OTg0NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLT
-E5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMx
-NTQsLTY3ODAyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMS
-wtMTQ0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4
-NjI3XX0=
+eyJoaXN0b3J5IjpbNjA1NjI4NDY1LC0xNTQ0NzY2OTA1LC0xND
+U3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4
+MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0LDQwNDc5NzE3MywtMT
+k1MTU1MTI0MSwtNjk1NDY4MzgsNzY0MDI2NTE3LDM1NTA3MzE1
+NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC
+0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2
+MjddfQ==
 -->
