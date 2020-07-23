@@ -138,6 +138,7 @@ After setting the `_ROOT` variables, we can do `cmake`:
 mkdir -p build && cd $_
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
+Make sure that the C++ compiler supports C++ 17.
 
 
 
@@ -152,11 +153,11 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5Nz
-QxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYx
-MDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMi
-wtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEz
-MTQyMDE0MzksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NT
-g4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1NzUy
-OCw2NTE4MzM2MzNdfQ==
+eyJoaXN0b3J5IjpbOTAzNTM4MjMxLC03NjI1MDA2MzksNjEzMz
+c4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1
+MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLD
+EzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjEx
+ODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1NTQyMj
+k2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNzcwMjE1
+LDE5NTQ0NTc1MjhdfQ==
 -->
