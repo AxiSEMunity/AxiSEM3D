@@ -171,7 +171,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # use intel; otherwise use gnu
-set USE_INTEL = false
+set USE_INTEL=false
 
 # environment modules and variables
 if USE_INTEL; then
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MTM1NjIzNTMsLTEwNjI2MDk4MjksLT
-EzNDQyNzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1
-MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mj
-k5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwx
-NzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0xNzA2Mz
-cyODI0LDQwNDc5NzE3MywtMTk1MTU1MTI0MSwtNjk1NDY4Mzgs
-NzY0MDI2NTE3XX0=
+eyJoaXN0b3J5IjpbNjg1MDE4OTk3LC0xMDYyNjA5ODI5LC0xMz
+Q0Mjc5MDEsLTUxMDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMy
+MDk3NiwxODI3MDMyMDU0LDEyMzMxODUwNCwtMTI0OTc5OTI5OS
+wtMTU0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwxMzEwMjUwODUsMTc0
+NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0NiwtMTcwNjM3Mj
+gyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLTY5NTQ2ODM4LDc2
+NDAyNjUxN119
 -->
