@@ -87,8 +87,7 @@ module load fftw
 If a package is missing, one may 
 1. turn to admin for help;
 2. install it by `conda` (many clusters allow users to install their own `Miniconda` or `Anaconda`);
-3. install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
-
+3. install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
 
 
 ### 2. Building AxiSEM3D
@@ -172,11 +171,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MD
-E0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIs
-MzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMD
-M3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5MiwxMDgwODY2Nzks
-LTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMD
-YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
-XX0=
+eyJoaXN0b3J5IjpbLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5ND
+U3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMs
+LTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3OD
+k2NzcwMywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTky
+LDEwODA4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MT
+gyMDI3MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYz
+OV19
 -->
