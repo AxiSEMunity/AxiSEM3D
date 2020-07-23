@@ -68,8 +68,8 @@ set(USE_DOUBLE                  ${double})
 ################# set default values #################
 # macro to set default
 macro(setDefault var val)
-if (NOT ${var})
-set (${var} ${val})
+if(NOT ${var})
+set(${var} ${val})
 endif()
 endmacro()
 
