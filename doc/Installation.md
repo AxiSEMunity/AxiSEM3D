@@ -99,13 +99,15 @@ cd $HOME/AxiSEM3D_2020
 # download the code
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
+
 #### 2.2.  Configure by `cmake`
-We first create a `build` directory under the top working directory: 
+First, create a `build` directory under the top working directory: 
 ```bash
-# create a build directory
 mkdir -p build && cd $_
 ```
-It is good practice to put nothing under this directory except those created by `cmake` and `make`, because it must be emptied before redoing `cma`
+It is good practice to put nothing under this directory except those created by `cmake` and `make`, because it must be emptied before redoing `cmake`.
+
+
 
 
 
@@ -182,11 +184,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODAwMjM0NzMsMzkzMTQ2ODI2LDExNT
-c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
-MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
-g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
-LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
-E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
-N119
+eyJoaXN0b3J5IjpbNDE4OTc2MTk4LDM5MzE0NjgyNiwxMTU3OT
+AzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIs
+Mzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4Nj
+U0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwt
+MTg3ODk2NzcwMywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxND
+E4OTkyLDEwODA4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTdd
+fQ==
 -->
