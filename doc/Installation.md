@@ -128,7 +128,7 @@ Parameter|Role|Default|Note
 `Dpar_netcdf` | whether to use parallel `NetCDF` | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
 `Dlibs`| additional libraries to link to | empty | For example, `-lcurl` is needed if `NetCDF` was built statically with remote client support.
-
+`Dnpol`|polynomial order of spectral elements |4| 1~
 
 
 
@@ -208,11 +208,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NjYwOTk2MzEsNjkxMDg2MjcsMzkzMT
-Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
-LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3Nz
-IyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwt
-MjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMj
-Q1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5Nzcy
-XX0=
+eyJoaXN0b3J5IjpbMTUzMDMyMzk4NSw2OTEwODYyNywzOTMxND
+Y4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQs
+MTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3Mj
+IzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0y
+MTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOTEyND
+U0OTYsMjA0MTQxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzJd
+fQ==
 -->
