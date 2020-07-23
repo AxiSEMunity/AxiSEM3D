@@ -21,6 +21,8 @@ This will display all the arguments one can pass to the mesher.
 
 ## Solver
 
+Be
+
 ### 1. Installing dependencies
 
 The `AxiSEM3D` solver is developed on top of several modern numerical packages including:
@@ -149,11 +151,11 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOT
-ExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMy
-MDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MC
-wtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00
-ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5Mj
-I1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMz
-LC0xMDgzNTM1MTAyXX0=
+eyJoaXN0b3J5IjpbMjE0MDUxMDg2Miw2MTMzNzg4MDUsLTE5Nz
+QxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYx
+MDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMi
+wtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEz
+MTQyMDE0MzksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NT
+g4MTQsLTE1NDkyMjUyODIsLTEzOTI3NzAyMTUsMTk1NDQ1NzUy
+OCw2NTE4MzM2MzNdfQ==
 -->
