@@ -7,8 +7,8 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
 * C++ compiler supporting C++17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
-* Basic development tools: `python`, `pip`, `conda`, `cmake`, `wget`
-* MPI (a serial build can be made but is mostly useless) 
+* Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (> 3.15.0), `wget`
+* MPI (a serial build can be made but is not useful) 
 
 
 
@@ -55,11 +55,11 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 ```
 The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before.
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
 
 
 #### 1.2. FFTW, Metis and NetCDF
-On a laptop or workstation, these packages can be easily installed using `conda` (either [`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)):
+On a laptop or workstation, these packages can be easily installed using `conda`:
 
 ```bash
 # install FFTW
@@ -70,7 +70,7 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed and optimized owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
+On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
 ```bash
 # all available packages
 module avail
@@ -78,18 +78,16 @@ module avail
 module avail fftw
 ```
 
-To load the required packages (note that the following lines are *machine-dependent*):
+To load a required package, for example, FFTW:
 ```bash
-# examples for Archer (archer.ac.uk)
-# load FFTW
-module load fftw/3.3.4.11
-# load Metis
-module load metis/5.1.0_build2
-# load NetCDF
-module load cray-netcdf/4.6.1.3
+# load FFTW (this is machine-dependent!)
+module load fftw
 ```
 
-If a package is missing, one may turn to the admin or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
+If a package is missing, one may 
+1. turn to admin for help;
+2. install it by `conda` (many clusters allow users to install their own `Miniconda` or `Anaconda`);
+3. install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
 
 
 ### 2. Building AxiSEM3D
@@ -101,7 +99,7 @@ cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  Configure by `cmake`
-Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
+Before running `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example (the actual paths are *user-dependent*):
 
 ```python
 # Eigen and Boost installed by downloading the source code
@@ -113,7 +111,7 @@ set(METIS_ROOT  $ENV{HOME}/anaconda3)
 set(NETCDF_ROOT $ENV{HOME}/anaconda3)
 ```
 
-Alternatively, one can set the corresponding environment variables, leaving `AxiSEM3D/SOLVER/CMakeLists.txt` unchanged:
+Alternatively, one can set the corresponding environment variables, leaving `CMakeLists.txt` unchanged:
 ```bash
 # Eigen and Boost installed by downloading the source code
 export EIGEN3_ROOT=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop
@@ -123,20 +121,13 @@ export FFTW_ROOT=$HOME/anaconda3
 export METIS_ROOT=$HOME/anaconda3
 export NETCDF_ROOT=$HOME/anaconda3
 ```
-To avoid setting these environment variables every time for a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
+To avoid setting these environment variables every time in a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-To find the `_ROOT` of a package on a cluster, one can use `module show`, for example:
+Use `module show` to find the `_ROOT` of a package (the one containing both `/lib` and `/include`) on a cluster, for example:
 ```bash
-# examples for Archer (archer.ac.uk)
-# show FFTW
-module show fftw/3.3.4.11
-# show Metis
-module show metis/5.1.0_build2
-# show NetCDF
-module show cray-netcdf/4.6.1.3
+# show FFTW (this is machine-dependent!)
+module show fftw
 ```
-
-<strong>NOTE</strong>: The `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
 
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
@@ -148,9 +139,9 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In that case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT`. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
  
-<strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
+<strong>NOTE</strong>: Whenever `CMakeLists.txt` has been changed, the build directory must be emptied before redoing `cmake`.
 
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
@@ -168,7 +159,7 @@ Finally, one can verify the executable:
 # the number of processors can be arbitrary
 mpirun -np 4 ./axisem3d
 ```
-`AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory: ./input".
+`AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 
 
@@ -180,11 +171,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyMTU0MTY0OTcsMTkxMjQ1NDk2LDIwND
-E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
-NywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNz
-YyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0
-MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NT
-csLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0
-MjEwMTE4M119
+eyJoaXN0b3J5IjpbLTE5MjM0NDk2NCwxMjAyMDY4NjIsMzg5ND
+U3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMs
+LTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3OD
+k2NzcwMywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTky
+LDEwODA4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MT
+gyMDI3MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYz
+OV19
 -->
