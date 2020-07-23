@@ -53,7 +53,7 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 # download Boost 1.73
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 ```
-The above lines will download `eigen-master`  and `boost_1_73_0` under `AxiSEM3D_2020/dependencies`.
+The above lines will download `eigen-master` and `boost_1_73_0` under `AxiSEM3D_2020/dependencies`.
 
 <strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
 
@@ -70,7 +70,7 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. On a cluster, the software packages are usually managed by `module`.  To browse available packages and versions:
+On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. On a cluster, the software packages are usually managed by `module`. To browse available packages and versions:
 ```bash
 # show all available packages
 module avail
@@ -89,7 +89,7 @@ module load fftw/3.3.8.0
 If a package is missing, one may 
 1. turn to admin for help;
 2. install it by `conda` (many clusters allow users to install their own [`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html));
-3. install it from scratch (see instructions for [`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
+3. install it from scratch (see instructions for [`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
 
 
@@ -102,7 +102,7 @@ rm -rf AxiSEM3D
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 
-#### 2.2.  Configure by `cmake`
+#### 2.2. Configure by `cmake`
 First, create a `build` directory: 
 ```bash
 # create and cd into build
@@ -136,7 +136,7 @@ Parameter|Role|Default|Note
 
 These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt` (unrecommended). Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure that the compilers, the flags and the dependencies have been correctly set.
 
-#### 2.3.  Compile and link by `make`
+#### 2.3. Compile and link by `make`
 To compile and link AxiSEM3D:
 ```bash
 # -j8 means using 8 threads to accelerate compilation
@@ -149,8 +149,8 @@ mpirun -np 4 ./axisem3d
 ```
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
-#### 2.4.  Complete examples on HPC
-* The UK National Supercomputing Service  [ARCHER](https://www.archer.ac.uk/):
+#### 2.4. Complete examples on HPC
+* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/):
 
 ```bash
 #!/bin/bash
@@ -175,12 +175,12 @@ export USE_INTEL=false
 
 # environment modules and variables
 if $USE_INTEL; then
-   module switch PrgEnv-cray PrgEnv-intel
-   module swithc intel intel/17.0.3.191
-   export ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
+  module switch PrgEnv-cray PrgEnv-intel
+  module swithc intel intel/17.0.3.191
+  export ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
 else
-   module switch PrgEnv-cray PrgEnv-gnu
-   export ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
+  module switch PrgEnv-cray PrgEnv-gnu
+  export ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
 fi
 module switch gcc gcc/7.3.0
 module load cmake/3.16.0
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5OD
-A4MTAwNzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3
-OTAxLC01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5Nz
-YsMTgyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1
-NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5Mz
-QyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQs
-NDA0Nzk3MTczXX0=
+eyJoaXN0b3J5IjpbOTM3NDAyOTM1LDEyODgxODQyMTMsLTgwMT
+QzNzEzNywxOTgwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4
+MjksLTEzNDQyNzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC
+0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5
+Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNT
+A4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0x
+NzA2MzcyODI0XX0=
 -->
