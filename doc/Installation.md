@@ -288,7 +288,9 @@ make -j8
 
 ## Tools for pre- and post-processing
 
-In the manual and the examples, we will mainly use `python` (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. Usually, one does not need to install them on an HPC cluster. 
+In the manual and the examples, we will mainly use `python` (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) and post-processing (e.g., processing and plotting waveforms and animating wavefields). Most of the tools listed here can be easily installed with `conda`. One can install them later when need.
+
+Usually, one does not need to install them on a cluster. 
 
 
 Name|Role|Installation
@@ -303,11 +305,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk0OTgyMDU5NCwtMzE4MzM1MDIwLC05MT
-k5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5
-MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLT
-ExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3
-OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMT
-YxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4
-ODg0ODM3NTddfQ==
+eyJoaXN0b3J5IjpbLTEwOTcyMDk2MzIsLTMxODMzNTAyMCwtOT
+E5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2
+OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC
+0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1
+Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3Mj
+E2MSw2Mjk3MTgwMDYsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0x
+ODg4NDgzNzU3XX0=
 -->
