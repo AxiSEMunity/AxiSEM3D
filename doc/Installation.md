@@ -150,7 +150,7 @@ mpirun -np 4 ./axisem3d
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 #### 2.4. Complete examples
-* A laptop or workstation with `conda`:
+* A laptop or workstation with `conda` (`GNU`):
 
 ```bash
 #!/bin/bash
@@ -291,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODQ1NjQxNTQyLDE0Mjk5Nzc2MDAsMTQyOT
-k3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2
-NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC
-05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4Mzgy
-NTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYxMD
-MsLTE3Mzk4NTUxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLTgw
-MTQzNzEzN119
+eyJoaXN0b3J5IjpbMTY4NTAxMzQ0NSwxNDI5OTc3NjAwLDE0Mj
+k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
+NjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0Ny
+wtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4
+MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MT
+AzLC0xNzM5ODU1MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04
+MDE0MzcxMzddfQ==
 -->
