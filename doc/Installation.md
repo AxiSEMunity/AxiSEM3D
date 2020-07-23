@@ -92,7 +92,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 cd $HOME/AxiSEM3D_2020
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
-#### 2.2.  CMake
+#### 2.2.  cmake
 Before doing `cmake`, one must edit the `_ROOT` variables in `AxiSEM3D/SOLVER/CMakeLists.txt` to point to the correct dependencies, for example, on my own machine (the actual paths are *user-dependent*):
 
 ```python
@@ -149,11 +149,11 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLT
-IwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2
-NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExOD
-MsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwx
-MjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOT
-I3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUx
-MDIsNzkwNzQ2MzUxXX0=
+eyJoaXN0b3J5IjpbNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOT
+ExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMy
+MDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkxODg2MC
+wtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAxNDM5LC00
+ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0xNTQ5Mj
+I1MjgyLC0xMzkyNzcwMjE1LDE5NTQ0NTc1MjgsNjUxODMzNjMz
+LC0xMDgzNTM1MTAyXX0=
 -->
