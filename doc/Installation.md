@@ -14,11 +14,13 @@ System requirements:
 
 
 ## Mesher
-[SalvusMeshLite](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for AxiSEM3D. Its installation is trivial with `pip`: 
+[SalvusMeshLite](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for AxiSEM3D. 
+
+Installation: 
 ```bash
 pip install https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip
 ```
-The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It is efficient enough to generate very large-scale meshes on a laptop.
+The mesher runs on a single processor, so there is no need to install it on an HPC cluster. It can generate very large-scale meshes locally.
 
 Verify the installation by
 ```bash
@@ -304,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTAwMjAwMzAsMzU3OTczODQzLDY4Mj
-A4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3
-LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxND
-I5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcx
-MTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3ND
-csLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgz
-ODI1MTA2XX0=
+eyJoaXN0b3J5IjpbODkwNzgzMjQyLDM1Nzk3Mzg0Myw2ODIwOD
+Q1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2Nywx
+MTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOT
+k3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2
+NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQyMDU3NzQ3LC
+05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4Mzgy
+NTEwNl19
 -->
