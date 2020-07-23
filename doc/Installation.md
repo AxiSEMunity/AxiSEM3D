@@ -97,7 +97,7 @@ If a package is missing, one may
 ### 2. Building AxiSEM3D
 #### 2.1. Download the code
 ```bash
-# download the code
+# download the code (under the top working directory)
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 
@@ -197,7 +197,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxNDUyOTUyODMsMTMxMDI1MDg1LDE3ND
+eyJoaXN0b3J5IjpbLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3ND
 c5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4
 MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3Nj
 QwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2
