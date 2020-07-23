@@ -157,7 +157,7 @@ mpirun -np 4 ./axisem3d
 # install_AxiSEM3D.sh
 
 # create a top working directory and cd in
-mkdir -p AxiSEM3D_2020 && cd $_
+mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download eigen and boost (check existence before download)
 mkdir -p dependencies
@@ -207,7 +207,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTM5NDM1NjQ4NCwtMTczOTg1NTE3NSw5Mz
+eyJoaXN0b3J5IjpbMTEwODM5OTA0OCwtMTczOTg1NTE3NSw5Mz
 c0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAw
 NzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC
 01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgy
