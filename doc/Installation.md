@@ -107,6 +107,11 @@ mkdir -p build && cd $_
 ```
 Because `build` must be emptied before redoing `cmake`, it is good practice to put nothing under `build` except those created by `cmake` and `make`. 
 
+Next, do `cmake`:
+```bash
+cmake -Dcc=cc -Dcxx=CC -Dftn=ftn -Deigen=/home/n03/n03/ox2/AxiSEM3D_2020/dependencies/eigen3_develop -Dboost=/home/n03/n03/ox2/AxiSEM3D_2020/dependencies/boost_1_73_0 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 -Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1  -Dflags=-fPIC  -Dserial=true ../AxiSEM3D/SOLVER/
+```
+
 
 
 
@@ -184,7 +189,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzc4OTE1OTU2LDM5MzE0NjgyNiwxMTU3OT
+eyJoaXN0b3J5IjpbMTk2OTAxNDAzLDM5MzE0NjgyNiwxMTU3OT
 AzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIs
 Mzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4Nj
 U0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwt
