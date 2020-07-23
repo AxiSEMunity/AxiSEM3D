@@ -78,17 +78,9 @@ module avail
 module avail fftw
 ```
 
-To load the required packages (note that the following lines are *machine-dependent*):
+To load a required package, for example, FFTW (*machine-dependent*):
 ```bash
-# examples for Archer (archer.ac.uk)
-# load FFTW
-module load fftw/3.3.4.11
-# load Metis
-module load metis/5.1.0_build2
-# load NetCDF
-module load cray-netcdf/4.6.1.3
-# load HDF5
-module load cray-hdf5/1.10.2.0
+module load fftw
 ```
 Whether one needs to load `HDF5` depends on how `NetCDF` was compiled. 
 
@@ -184,11 +176,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNz
-cyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODUs
-LTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMzEwMzc4MzY4LDE5MT
-I0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3OSwtMTE5MTcwOTc3
-MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNjAwNjI0MjUwLDE2MT
-c4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5NzQxMTQ1
-NzFdfQ==
+eyJoaXN0b3J5IjpbLTE4MjMzMzk3NjcsMzg5NDU3MTQ0LDE5Nj
+YwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUy
+MiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMz
+EwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3
+OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNj
+AwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4
+MDVdfQ==
 -->
