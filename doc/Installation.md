@@ -146,8 +146,11 @@ Make sure that the C++ compiler supports C++17.
 
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of dependencies. 
 
-
-
+#### 2.3.  make
+Compile the code:
+```bash
+make -j8
+```
 
 
 
@@ -159,11 +162,11 @@ Upon a successful `cmake`, a summary will be displayed at the end. Check this su
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTI1ODIxODg2Myw2MDA2MjQyNTAsMTYxNz
-g2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3
-MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NSwxODk1NjEwNzM5LD
-E5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2NDAyLC01MjI5
-MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOTAwMiwtMTMxNDIwMT
-QzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYyMTY1ODgxNCwt
-MTU0OTIyNTI4Ml19
+eyJoaXN0b3J5IjpbMTk4NzM4NTM2LDYwMDYyNDI1MCwxNjE3OD
+Y4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcx
+LC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMT
+kzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MDIsLTUyMjkx
+ODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0xMzE0MjAxND
+M5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwtNjIxNjU4ODE0LC0x
+NTQ5MjI1MjgyXX0=
 -->
