@@ -166,8 +166,8 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 [ ! -d ./dependencies/boost_1_73_0 ] && \
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx ./dependencies
 
-
 # download AxiSEM3D
+rm -rf AxiSEM3D
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # load modules
@@ -203,11 +203,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNT
-Q0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0
-Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0LD
-QwNDc5NzE3MywtMTk1MTU1MTI0MSwtNjk1NDY4MzgsNzY0MDI2
-NTE3LDM1NTA3MzE1NCwtNjc4MDIxNTAwLC0yMDY5ODQ3NjM3LC
-0xNDM1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2NzYwNDE4LDEwNjI5
-MjQyNDldfQ==
+eyJoaXN0b3J5IjpbLTExNDY1MzQ1ODIsMTIzMzE4NTA0LC0xMj
+Q5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAy
+NTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC
+0xNzA2MzcyODI0LDQwNDc5NzE3MywtMTk1MTU1MTI0MSwtNjk1
+NDY4MzgsNzY0MDI2NTE3LDM1NTA3MzE1NCwtNjc4MDIxNTAwLC
+0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2
+NzYwNDE4XX0=
 -->
