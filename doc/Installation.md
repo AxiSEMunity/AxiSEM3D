@@ -140,8 +140,9 @@ module show cray-netcdf/4.6.1.3
 
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
-# create a build directoray
-# it is good practice to put nothing under a build directoray
+# create a build directory
+# it is good practice to put nothing under a build directory
+# becuase it must be emptied when redoing cmake
 mkdir -p build && cd $_
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
@@ -165,11 +166,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzMyNTYwMjgxLC0xNDE4MjAyNzI0LDYwMD
-YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
-LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LD
-E4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgx
-ODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MD
-AyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwt
-NjIxNjU4ODE0XX0=
+eyJoaXN0b3J5IjpbODY5Mzg3NiwtMTQxODIwMjcyNCw2MDA2Mj
+QyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwt
+MTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NSwxOD
+k1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4MTg2
+NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOTAwMi
+wtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQsLTYy
+MTY1ODgxNF19
 -->
