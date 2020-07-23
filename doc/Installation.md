@@ -151,12 +151,21 @@ On the latest UK National Supercomputing Service  [ARCHER](https://www.archer.ac
 
 ```bash
 #!/bin/bash
+
 # dependencies
 mkdir -p AxiSEM3D_2020
 mkdir -p AxiSEM3D_2020/dependencies && cd $_
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 
+# load modules
+
+
+# download code  
+cd  .. 
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+
+#
 
 ```
 
@@ -169,11 +178,11 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk0NTU2NDUwMCwzNTUwNzMxNTQsLTY3OD
-AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
-MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
-E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
-NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNz
-cyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODVd
-fQ==
+eyJoaXN0b3J5IjpbMTg3ODQwMTc1LDM1NTA3MzE1NCwtNjc4MD
+IxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIy
+NjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMT
+Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
+LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3Nz
+IyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NV19
+
 -->
