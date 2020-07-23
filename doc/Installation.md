@@ -164,7 +164,7 @@ mkdir -p dependencies
 [ ! -d ./dependencies/eigen-master ] && \
 wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
 [ ! -d ./dependencies/boost_1_73_0 ] && \
-wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx ./dependencies
+wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk4MDgxMDA3OSwtNTk1OTI3ODc1LC0xMD
-YyNjA5ODI5LC0xMzQ0Mjc5MDEsLTUxMDQ2MTA4NCwtMTg5MTc0
-ODY1NywtMTA2NTMyMDk3NiwxODI3MDMyMDU0LDEyMzMxODUwNC
-wtMTI0OTc5OTI5OSwtMTU0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwx
-MzEwMjUwODUsMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OT
-g0NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEs
-LTY5NTQ2ODM4XX0=
+eyJoaXN0b3J5IjpbNTE5NTQxNzMzLDE5ODA4MTAwNzksLTU5NT
+kyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0NjEw
+ODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMjA1NC
+wxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1NDQ3NjY5MDUsLTE0
+NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0Mj
+gzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0x
+OTUxNTUxMjQxXX0=
 -->
