@@ -55,7 +55,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 ```
 The above lines will create a directory `AxiSEM3D_2020/dependencies` that contains `eigen3_develop` and `boost_1_73_0`.
 
-<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one has had `Eigen` installed before.
+<strong>NOTE</strong>: `AxiSEM3D` requires `Eigen` 3.3.9 or above, but the latest stable release is 3.3.7 (up to July 22, 2020). Therefore, the above steps are *essential* even one had `Eigen` installed before.
 
 
 #### 1.2. FFTW, Metis and NetCDF
@@ -184,11 +184,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDMyNzcyMjM4LC0xMjY4NjU0NTMsLTc0NT
-Q0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwtMTg3ODk2Nzcw
-MywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwOD
-A4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3
-MjQsNjAwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MT
-MzNzg4MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIy
-NzUzNjVdfQ==
+eyJoaXN0b3J5IjpbLTcyMDI3OTczNiw0MzI3NzIyMzgsLTEyNj
+g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
+LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
+E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
+NywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNz
+YyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0
+MzczMV19
 -->
