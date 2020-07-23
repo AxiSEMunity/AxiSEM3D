@@ -44,7 +44,7 @@ Name|Role|Minimum version|Note
 
 `Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
 ```bash
-# create a top working directory
+# create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd $_
 # create a dependency directory
 mkdir -p dependencies
@@ -197,11 +197,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTYyNzk5NDksNjg3Nzg5ODQ2LC0xNz
-A2MzcyODI0LDQwNDc5NzE3MywtMTk1MTU1MTI0MSwtNjk1NDY4
-MzgsNzY0MDI2NTE3LDM1NTA3MzE1NCwtNjc4MDIxNTAwLC0yMD
-Y5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIyNjIsLTE2NzYw
-NDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMTQ2ODI2LDExNT
-c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
-Ml19
+eyJoaXN0b3J5IjpbLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MD
+YzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0Njgz
+OCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNj
+k4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMTY3NjA0
+MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1Nz
+kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
+XX0=
 -->
