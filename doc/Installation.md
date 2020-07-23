@@ -170,12 +170,12 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
-# load modules
+# load environment modules
 module switch PrgEnv-cray PrgEnv-gnu
-# to use intel
-
 module switch gcc/7.3.0
 module load cmake/3.16.0
+
+# load modules required
 module load fftw
 module load metis
 module load cray-netcdf/4.6.1.3
@@ -205,7 +205,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU5NjM4NzA1NiwxMjMzMTg1MDQsLTEyND
+eyJoaXN0b3J5IjpbLTI4MzczODU1NywxMjMzMTg1MDQsLTEyND
 k3OTkyOTksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1
 MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLT
 E3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0
