@@ -136,7 +136,7 @@ module show metis/5.1.0_build2
 module show cray-netcdf/4.6.1.3
 ```
 
-<strong>NOTE</strong>: the `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
+<strong>NOTE</strong>: The `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
 
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
@@ -148,7 +148,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS` in CMakeLists.txt.
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS`.
  
 <strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
 
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNTc2MzYyMTUsMjA0MTQxODk5MiwxMDgwOD
-Y2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0
-LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMz
-c4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1
-MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLD
-EzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjEx
-ODM5MDAyXX0=
+eyJoaXN0b3J5IjpbMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MD
+g2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcy
+NCw2MDA2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMz
+M3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3
+NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMC
+wxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYx
+MTgzOTAwMl19
 -->
