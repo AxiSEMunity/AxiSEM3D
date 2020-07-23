@@ -7,6 +7,7 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
 * C++ 17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
+* Basic tools: python, pip, conda, cmake, 
 
 ## Mesher
 [`SalvusMeshLite`](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for `AxiSEM3D`. Its installation is trivial with `pip`: 
@@ -153,11 +154,11 @@ Make sure that the C++ compiler supports C++ 17.
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTAzNTM4MjMxLC03NjI1MDA2MzksNjEzMz
-c4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1
-MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLD
-EzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjEx
-ODM5MDAyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1NTQyMj
-k2NCwtNjIxNjU4ODE0LC0xNTQ5MjI1MjgyLC0xMzkyNzcwMjE1
-LDE5NTQ0NTc1MjhdfQ==
+eyJoaXN0b3J5IjpbLTgwOTQyOTIxOSwtNzYyNTAwNjM5LDYxMz
+M3ODgwNSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3
+NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMC
+wxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYx
+MTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0Mj
+I5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mjc3MDIx
+NSwxOTU0NDU3NTI4XX0=
 -->
