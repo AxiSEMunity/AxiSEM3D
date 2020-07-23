@@ -238,7 +238,7 @@ rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 make -j8
 ```
 
-* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (`Intel C++`):
+* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (`Intel`):
 
 ```bash
 #!/bin/bash
@@ -291,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAyMTI1NTY5MCwtMTEwODIxNjkwMCwxND
-I5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0
-MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OT
-IsMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5
-NzE4MDA2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mz
-c1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQwMjkzNSwx
-Mjg4MTg0MjEzXX0=
+eyJoaXN0b3J5IjpbLTE5ODgyOTEyMTksLTExMDgyMTY5MDAsMT
+QyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIz
+NDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1OD
+kyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYy
+OTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0OD
+M3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUs
+MTI4ODE4NDIxM119
 -->
