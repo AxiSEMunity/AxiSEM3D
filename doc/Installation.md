@@ -162,7 +162,7 @@ A few complete examples are provided below. On an HPC cluster, the major variabi
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
-# create a top working directory and cd into it
+# create a top-level working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -201,7 +201,7 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_ARCHER.sh
 
-# create a top working directory and cd into it
+# create a top-level working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -250,7 +250,7 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_RCS_Cam.sh
 
-# create a top working directory and cd into it
+# create a top-level working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -306,7 +306,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1ODg3MzI5NSwxNDQ1ODYxMjQxLDI5MD
+eyJoaXN0b3J5IjpbLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MD
 E3ODQ3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEs
 LTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4ND
 g4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYw
