@@ -7,8 +7,8 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 System requirements:
 * Unix-like system (untested on Windows)
 * C++ 17 (check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
-* MPI
-* 
+* MPI 
+* CMake (>15)
 
 
 ## Mesher
@@ -155,7 +155,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1MzA5MjQ0NTksNjEzMzc4ODA1LC0xOT
+eyJoaXN0b3J5IjpbLTIwNTM0OTAzNjMsNjEzMzc4ODA1LC0xOT
 c0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LDE4OTU2
 MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgxODY0MD
 IsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MDAyLC0x
