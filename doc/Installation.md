@@ -150,7 +150,8 @@ mpirun -np 4 ./axisem3d
 On the latest UK National Supercomputing Service  [ARCHER](https://www.archer.ac.uk/):
 
 ```bash
-
+#!/bin/bash
+# dependencies
 mkdir -p AxiSEM3D_2020
 mkdir -p AxiSEM3D_2020/dependencies && cd $_
 git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
@@ -168,7 +169,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU3ODM1OTU2NSwzNTUwNzMxNTQsLTY3OD
+eyJoaXN0b3J5IjpbLTk0NTU2NDUwMCwzNTUwNzMxNTQsLTY3OD
 AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
 MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
 E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
