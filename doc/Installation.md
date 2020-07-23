@@ -294,7 +294,7 @@ In the manual and the examples, we will mainly use python (Jupyter Notebook) to 
 Name|Role|Installation
 --- | --- | ---
 [`Obspy`](https://docs.obspy.org/) | waveform data processing | conda install -c conda-forge obspy
-[`Basemap`](https://www.boost.org/) | C++ helpers | 1.73.0 | `AxiSEM3D` only uses some of its header-only modules.
+[`Basemap`](https://matplotlib.org/basemap/) | draw maps with python | plotting 2D data on maps
 [`FFTW`](http://www.fftw.org/) | fast Fourier transform | 3.3.4 | Both single- and double-precision builds are required.
 [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
 [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
@@ -302,11 +302,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODExMjE3ODk5LC05MTk5NDg3NzYsOTU3OD
-YwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYw
-MCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLT
-k4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIw
-NTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNi
-wtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMTAw
-NTU0NjEwM119
+eyJoaXN0b3J5IjpbLTE2NTY4MDQwMTgsLTkxOTk0ODc3Niw5NT
+c4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3
+NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMS
+wtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0
+MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MD
+A2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1Nywx
+MDA1NTQ2MTAzXX0=
 -->
