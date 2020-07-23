@@ -122,9 +122,8 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 It can take the following parameters:
 Parameter|Role|Default|Note
 --- | --- | ---|---
-`-Dcc`, `-Dcxx` and `-Dftn`| C, C++ and Fortran compilers | gcc, g++, gfortran | the C++ compiler must support C++17
- | Fortran compiler | gfortran | 
-`-Deigen` | root of `Eigne` | empty
+`-Dcc`, `-Dcxx`, `-Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | the C++ compiler must support C++17
+`-Deigen`, `-Dboost`, `-Dfftw`, `-Dmetis`, `-Dnetcdf`| root of the dependencies | empty
 `-Dboost` | root of `Boost` | empty
 `-Dfftw` | root of `FFTW` | empty
 `-Dmetis` | root of `Metis` | empty
@@ -207,7 +206,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTkwODYzNzM3NCwzOTMxNDY4MjYsMTE1Nz
+eyJoaXN0b3J5IjpbLTg4OTU1NjY4OCwzOTMxNDY4MjYsMTE1Nz
 kwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYy
 LDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2OD
 Y1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1Mjgs
