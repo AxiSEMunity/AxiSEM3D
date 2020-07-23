@@ -158,14 +158,15 @@ To compile and link AxiSEM3D:
 make -j8
 ```
 
+
+
 Finally, one can verify the executable:
 ```bash
 # the number of processors can be arbitrary
 mpirun -np 4 ./axisem3d
 ```
-`AxiSEM3D` has been built successfully if an error message appears saying that "missing input directory".
+`AxiSEM3D` has been built successfully if an error message appears saying "missing input directory".
 
-If linking fails with missing `H5_`
 
 
 
@@ -176,7 +177,7 @@ If linking fails with missing `H5_`
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU0MjYyNzExNSwtMTE5MTcwOTc3MiwtMj
+eyJoaXN0b3J5IjpbLTc2MDYyMzY4OCwtMTE5MTcwOTc3MiwtMj
 kzODI4MTcsLTE0MTgyMDI3MjQsNjAwNjI0MjUwLDE2MTc4Njgy
 MjgsLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5NzQxMTQ1NzEsLT
 E5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3
