@@ -122,7 +122,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 ../AxiSEM3D/SOLVER/
 ```
 
-It takes the following arguments, passed to `cmake` by `-D` directives:
+It takes the following arguments, passed to `cmake` by `-D` definitions:
 Parameter|Role|Default|Note
 --- | --- | ---|---
 `cc`, `cxx`, `ftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
@@ -198,11 +198,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMT
-MxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4
-NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC
-02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1
-MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2Mi
-wtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4
-MjZdfQ==
+eyJoaXN0b3J5IjpbLTE1MzcyOTMwMjcsLTE1NDQ3NjY5MDUsLT
+E0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0
+MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC
+0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDcz
+MTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMz
+EsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEw
+ODYyN119
 -->
