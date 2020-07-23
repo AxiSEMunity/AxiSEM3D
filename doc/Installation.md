@@ -171,16 +171,16 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # use intel; otherwise use gnu
-set USE_INTEL=false
+export USE_INTEL=false
 
 # environment modules and variables
 if $USE_INTEL; then
    module switch PrgEnv-cray PrgEnv-intel
    module swithc intel intel/17.0.3.191
-   set ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
+   export ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
 else
    module switch PrgEnv-cray PrgEnv-gnu
-   set ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
+   export ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
 fi
 module switch gcc gcc/7.3.0
 module load cmake/3.16.0
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgwMTQzNzEzNywxOTgwODEwMDc5LC01OT
-U5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNTEwNDYx
-MDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNT
-QsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0x
-NDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0yMTc1ND
-I4MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0LDQwNDc5NzE3Mywt
-MTk1MTU1MTI0MV19
+eyJoaXN0b3J5IjpbLTEwOTExNjg4MTMsLTgwMTQzNzEzNywxOT
+gwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQy
+NzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOT
+c2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0x
+NTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OT
+M0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0
+LDQwNDc5NzE3M119
 -->
