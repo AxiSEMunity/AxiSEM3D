@@ -189,6 +189,7 @@ ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
 module switch PrgEnv-gnu PrgEnv-intel
 module switch intel intel/17.0.3.191
 module switch gcc gcc/7.3.0
+ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
 
 # cmake
 mkdir -p build && cd $_
@@ -213,7 +214,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY4NzA0MjEwLC01MTA0NjEwODQsLTE4OT
+eyJoaXN0b3J5IjpbNDg1NTU2MTc4LC01MTA0NjEwODQsLTE4OT
 E3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMjA1NCwxMjMzMTg1
 MDQsLTEyNDk3OTkyOTksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3Nj
 gsMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3
