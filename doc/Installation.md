@@ -148,6 +148,10 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
+<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking (in 2.3) will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS` in CMakeLists.txt.
+ 
+<strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
+
 #### 2.3.  Compile and link by `make`
 To compile and link AxiSEM3D:
 ```bash
@@ -155,9 +159,8 @@ To compile and link AxiSEM3D:
 make -j8
 ```
 
-<strong>NOTE</strong>: If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In this case, one has to set `LINK_TO_HDF5` as `true` and provide `HDF5_ROOT` in CMakeLists.txt. Also, if `NetCDF` was built statically with remote client support, `-lcurl` must be added to `ADDITIONAL_LIBS` in CMakeLists.txt.
- 
-<strong>NOTE</strong>: Whenever CMakeLists.txt has been changed, the build directory must be emptied before redoing `cmake`.
+
+
 
 
 Finally, one can verify the executable:
@@ -177,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTQ4MDA5NjIsMjA0MTQxODk5MiwxMD
-gwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAy
-NzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNj
-EzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQy
-Mjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NT
-MwLDEzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0x
-NjExODM5MDAyXX0=
+eyJoaXN0b3J5IjpbNTc2MzYyMTUsMjA0MTQxODk5MiwxMDgwOD
+Y2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0
+LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMz
+c4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1
+MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLD
+EzODgxODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjEx
+ODM5MDAyXX0=
 -->
