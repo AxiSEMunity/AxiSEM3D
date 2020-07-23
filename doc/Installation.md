@@ -113,6 +113,7 @@ Because `build` must be emptied every time before redoing `cmake`, it is good pr
 
 Next, do `cmake` like this:
 ```bash
+# cmake command
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$HOME/AxiSEM3D_2020/dependencies/eigen-master \
 -Dboost=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0 \
@@ -198,11 +199,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc4NzEwMTA3MCw0MDQ3OTcxNzMsLTE5NT
-E1NTEyNDEsLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQs
-LTY3ODAyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMT
-Q0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3
-LDM5MzE0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5Mj
-M0NDk2NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMTQ5OTBd
-fQ==
+eyJoaXN0b3J5IjpbNDcyNTUzMDQzLDQwNDc5NzE3MywtMTk1MT
+U1MTI0MSwtNjk1NDY4MzgsNzY0MDI2NTE3LDM1NTA3MzE1NCwt
+Njc4MDIxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xND
+Q2NDIyNjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2Mjcs
+MzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMz
+Q0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MF19
+
 -->
