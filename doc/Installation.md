@@ -151,9 +151,10 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary and make sure that `cmake` has found the correct version of the dependencies. 
 
-#### 2.3.  Compile and line by `make`
-Compile and link AxiSEM3D with `make`:
+#### 2.3.  Compile and link by `make`
+To compile and link AxiSEM3D:
 ```bash
+# j8 means using 8 threads to accelerate compilation
 make -j8
 ```
 
@@ -167,11 +168,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAxOTY0MTk3MywtMTQxODIwMjcyNCw2MD
-A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
-NSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NS
-wxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4
-MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOT
-AwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQs
-LTYyMTY1ODgxNF19
+eyJoaXN0b3J5IjpbLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMD
+YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
+LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LD
+E4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgx
+ODY0MDIsLTUyMjkxODg2MCwtNTQyMTAxMTgzLC0xNjExODM5MD
+AyLC0xMzE0MjAxNDM5LC00ODQzOTY3MTQsMTI1NTQyMjk2NCwt
+NjIxNjU4ODE0XX0=
 -->
