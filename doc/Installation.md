@@ -84,10 +84,10 @@ module avail fftw
 
 To load a required package, for example, FFTW:
 ```bash
-# load default FFTW
+# load the default FFTW
 module load fftw
 # load a specific version of FFTW
-module load fftw/3.3.8.0
+module load fftw/3.3.8
 ```
 
 If a package is missing, one may 
@@ -307,11 +307,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA3OTAyMDM5MCwyOTAxNzg0NzksMTk0Nz
-A2MzIyOCwzNTc5NzM4NDMsNjgyMDg0NTAxLC0zMTgzMzUwMjAs
-LTkxOTk0ODc3Niw5NTc4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwOD
-IxNjkwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYw
-MCwtMTEwMjM0MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC
-0xNTc5NTU4OTIsMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjEx
-NzIxNjFdfQ==
+eyJoaXN0b3J5IjpbLTE1NjEzMzEwODMsMjkwMTc4NDc5LDE5ND
+cwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIw
+LC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMD
+gyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2
+MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5Ni
+wtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIx
+MTcyMTYxXX0=
 -->
