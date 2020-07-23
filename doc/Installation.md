@@ -124,7 +124,7 @@ export NETCDF_ROOT=$HOME/anaconda3
 ```
 To avoid setting these environment variables every time in a new conversation, one can copy them to `.bash_profile` or `.bashrc`. 
 
-To find the `_ROOT` of a package on a cluster, one can use `module show`, for example:
+Use `module show` to find the `_ROOT` of a package on a cluster, for example:
 ```bash
 # examples for Archer (archer.ac.uk)
 # show FFTW
@@ -179,11 +179,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTczMTA0Mjk4LDM4OTQ1NzE0NCwxOTY2MD
-E0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIs
-MzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMD
-M3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5MiwxMDgwODY2Nzks
-LTExOTE3MDk3NzIsLTI5MzgyODE3LC0xNDE4MjAyNzI0LDYwMD
-YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
-XX0=
+eyJoaXN0b3J5IjpbMjExNTgxNzc3OCwzODk0NTcxNDQsMTk2Nj
+AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
+LDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMT
+AzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5
+LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcyNCw2MD
+A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
+NV19
 -->
