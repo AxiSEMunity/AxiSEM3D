@@ -201,7 +201,7 @@ cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
 -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
--Dnetcdf=$ncdfpath  \
+-Dnetcdf=$ncdfpath \
 -Dflags=-fPIC ../AxiSEM3D/SOLVER/
 
 # make
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwOTExNjg4MTMsLTgwMTQzNzEzNywxOT
-gwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQy
-NzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOT
-c2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0x
-NTQ0NzY2OTA1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OT
-M0Mjc4LC0yMTc1NDI4MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0
-LDQwNDc5NzE3M119
+eyJoaXN0b3J5IjpbMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5OD
+A4MTAwNzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3
+OTAxLC01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5Nz
+YsMTgyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1
+NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5Mz
+QyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQs
+NDA0Nzk3MTczXX0=
 -->
