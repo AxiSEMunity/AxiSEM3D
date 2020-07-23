@@ -78,7 +78,7 @@ module avail
 module avail fftw
 ```
 
-To load a required package, for example, FFTW:
+To load a required package, for example (machine-depen):
 ```bash
 # load FFTW (machine-dependent!)
 module load fftw
@@ -88,6 +88,8 @@ If a package is missing, one may
 1. turn to admin for help;
 2. install it by `conda` (many clusters allow users to install their own `Miniconda` or `Anaconda`);
 3. install it from scratch (see instructions for [`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).  
+
+
 
 
 ### 2. Building AxiSEM3D
@@ -171,11 +173,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNj
-QzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQs
-MTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1ND
-QyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAz
-LDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MD
-g2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxNywtMTQxODIwMjcy
-NF19
+eyJoaXN0b3J5IjpbLTE5NTMyNjYzMzAsMzkzMTQ2ODI2LDExNT
+c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
+MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
+g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
+LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
+E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
+N119
 -->
