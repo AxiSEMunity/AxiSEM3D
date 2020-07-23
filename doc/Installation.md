@@ -174,6 +174,12 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 USE_INTEL=false
 
 # environment modules and variables
+if USE_INTEL; then
+   module switch PrgEnv-cray PrgEnv-intel
+   module swithc intel intel/
+else
+   module switch PrgEnv-cray PrgEnv-gnu
+fi
 module switch PrgEnv-cray PrgEnv-gnu
 module switch gcc gcc/7.3.0
 module load cmake/3.16.0
@@ -211,7 +217,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzMzEwMDk2MiwtNTEwNDYxMDg0LC0xOD
+eyJoaXN0b3J5IjpbLTQ2NzkxNzE5MCwtNTEwNDYxMDg0LC0xOD
 kxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4
 NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1Nz
 Y4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3
