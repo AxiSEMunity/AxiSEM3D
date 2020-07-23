@@ -172,7 +172,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # environment modules and variables
 module switch PrgEnv-cray PrgEnv-gnu
-module switch gcc gcc/7.3.0
+module switch gcc/7.3.0
 module load cmake/3.16.0
 export CRAYPE_LINK_TYPE=dynamic
 
@@ -207,11 +207,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMT
-gyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1NDQ3
-NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5MzQyNz
-gsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0
-Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MT
-csMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0
-MzUyMDYwMzFdfQ==
+eyJoaXN0b3J5IjpbLTE1Mjk5MTMzMDQsLTE4OTE3NDg2NTcsLT
+EwNjUzMjA5NzYsMTgyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3
+OTkyOTksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MD
+g1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3
+MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0Nj
+gzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIw
+Njk4NDc2MzddfQ==
 -->
