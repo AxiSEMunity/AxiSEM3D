@@ -170,6 +170,8 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
 conda install -c anaconda -y netcdf4
+# conda path
+export conda_path=$(dirname $(dirname $(which conda)))
 
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
@@ -177,14 +179,11 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
 rm -rf build && mkdir build && cd build
-export conda_path=$(dirname $(which conda))
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
--Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
--Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
--Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
--Dflags=-fPIC ../AxiSEM3D/SOLVER/
+-Dfftw=conda_path -Dmetis=conda_path -Dnetcdf=conda_path \
+../AxiSEM3D/SOLVER/
 
 # make
 make -j8
@@ -248,7 +247,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4MjAxMzM2MywxNjYzMzU4MTY3LC0xOD
+eyJoaXN0b3J5IjpbLTI5MTQzNjYyMCwxNjYzMzU4MTY3LC0xOD
 g4NDgzNzU3LDEwMDU1NDYxMDMsLTE3Mzk4NTUxNzUsOTM3NDAy
 OTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNywxOTgwODEwMDc5LC
 01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNTEw
