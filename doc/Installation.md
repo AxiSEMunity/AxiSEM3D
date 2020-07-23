@@ -2,7 +2,7 @@
 
 
 # Installation
-The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing.
+The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly python libraries) for pre- and post-processing.
 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
@@ -288,17 +288,17 @@ make -j8
 
 ## Tools for pre- and post-processing
 
-In the manual examples, we will mainly use 
+In the manual examples, we will mainly use python 
 
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA5ODQ0MTgzOCwtOTE5OTQ4Nzc2LDk1Nz
-g2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2
-MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC
-05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQy
-MDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMD
-YsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEw
-MDU1NDYxMDNdfQ==
+eyJoaXN0b3J5IjpbNjQxOTM1NjI4LC05MTk5NDg3NzYsOTU3OD
+YwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYw
+MCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLT
+k4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIw
+NTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNi
+wtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMTAw
+NTU0NjEwM119
 -->
