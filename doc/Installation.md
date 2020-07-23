@@ -185,12 +185,6 @@ module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
 ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
 
-# uncomment the follow lines to use intel compilers
-module switch PrgEnv-gnu PrgEnv-intel
-module switch intel intel/17.0.3.191
-module switch gcc gcc/7.3.0
-ncdfpath=/opt/cray/netcdf/4.6.1.3/intel/16
-
 # cmake
 mkdir -p build && cd $_
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
@@ -214,11 +208,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2NDk4MTI3NCwtNTEwNDYxMDg0LC0xOD
-kxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4
-NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1LC0xNDU3NDQ1Nz
-Y4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0yMTc1NDI4MzQsNjg3
-Nzg5ODQ2LC0xNzA2MzcyODI0LDQwNDc5NzE3MywtMTk1MTU1MT
-I0MSwtNjk1NDY4MzgsNzY0MDI2NTE3LDM1NTA3MzE1NCwtNjc4
-MDIxNTAwXX0=
+eyJoaXN0b3J5IjpbNDU4MjM4MDYwLC01MTA0NjEwODQsLTE4OT
+E3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMjA1NCwxMjMzMTg1
+MDQsLTEyNDk3OTkyOTksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3Nj
+gsMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3
+ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMj
+QxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02Nzgw
+MjE1MDBdfQ==
 -->
