@@ -295,19 +295,19 @@ Name|Role|Installation
 --- | --- | ---
 [`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | `NetCDF` for `python` | conda install -c anaconda netcdf4
 [`Obspy`](https://docs.obspy.org/) | waveform data processing | conda install -c conda-forge obspy
-[`Basemap`](https://matplotlib.org/basemap/) | draw maps with python | conda install -c anaconda basemap
+[`Basemap`](https://matplotlib.org/basemap/) | draw maps with `python` | conda install -c anaconda basemap
 [`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | animation generation | conda install -c conda-forge pyvtk
-[`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | 5.1.0 | Both 32- and 64-bit builds are acceptable.
+[`ffmpeg`](http://glaros.dtc.umn.edu/gkhome/metis/metis/overview) | mesh partitioning | conda install -c conda-forge ffmpeg
 [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/index.html) | efficient multi-dimensional I/O | 4.4.1 | Parallel build is supported but not mandatory.
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA0NDExNzI5NywtOTE5OTQ4Nzc2LDk1Nz
-g2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2
-MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC
-05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQy
-MDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMD
-YsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEw
-MDU1NDYxMDNdfQ==
+eyJoaXN0b3J5IjpbLTE3NDgwNzc4ODUsLTkxOTk0ODc3Niw5NT
+c4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3
+NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMS
+wtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0
+MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MD
+A2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1Nywx
+MDA1NTQ2MTAzXX0=
 -->
