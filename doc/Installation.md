@@ -159,7 +159,11 @@ git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 
 # load modules
-
+module switch PrgEnv-cray PrgEnv-gnu
+module load cmake/3.16.0
+module load gcc/7.3.0
+module load fftw
+module load 
 
 # download code  
 cd  .. 
@@ -178,7 +182,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg3ODQwMTc1LDM1NTA3MzE1NCwtNjc4MD
+eyJoaXN0b3J5IjpbMjUxMzE4MDI3LDM1NTA3MzE1NCwtNjc4MD
 IxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIy
 NjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMT
 Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
