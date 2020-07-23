@@ -124,7 +124,7 @@ Parameter|Role|Default|Note
 --- | --- | ---|---
 `Dcc`, `Dcxx`, `Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
-`Dlibs`| additional libraries to link to | empty | For example, `-lcurl` is needed when `NetCDF` was built statically with remote client support.
+`Dlibs`| additional libraries to link to | empty | For example, `-lcurl` is needed if `NetCDF` was built statically with remote client support.
 `Deigen`, `Dboost`, `Dfftw`, `Dmetis`, `Dnetcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`). 
 `Dhdf5` | path of `HDF5` | empty | If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
 
@@ -207,11 +207,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NzM1NDM3NjAsMzkzMTQ2ODI2LDExNT
-c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
-MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
-g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
-LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
-E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
-N119
+eyJoaXN0b3J5IjpbNjkxMDg2MjcsMzkzMTQ2ODI2LDExNTc5MD
+MzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2Miwz
+ODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NT
+Q1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0x
+ODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MT
+g5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxN119
+
 -->
