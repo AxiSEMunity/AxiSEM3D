@@ -223,7 +223,10 @@ external
 # compiler flags
 # upper case of CMAKE_BUILD_TYPE for compiler flags
 string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD)
-set(ADD_FLAGS "${ADDITIONAL_COMPILER_FLAGS} -Wno-unknown-pragmas")
+# supress #pragma warnings
+set(CMAKE_CXX_FLAGS_${BUILD} "${CMAKE_CXX_FLAGS_${BUILD}} -Wno-unknown-pragmas")
+# addtional flags from user
+set(ADD_FLAGS "${ADDITIONAL_COMPILER_FLAGS}")
 set(CMAKE_C_FLAGS_${BUILD} "${CMAKE_C_FLAGS_${BUILD}} ${ADD_FLAGS}")
 set(CMAKE_CXX_FLAGS_${BUILD} "${CMAKE_CXX_FLAGS_${BUILD}} ${ADD_FLAGS}")
 set(CMAKE_Fortran_FLAGS_${BUILD} "${CMAKE_Fortran_FLAGS_${BUILD}} ${ADD_FLAGS}")
