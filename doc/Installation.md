@@ -97,6 +97,7 @@ If a package is missing, one may turn to the admin or install it from scratch fo
 ```bash
 # go to the top working directory
 cd $HOME/AxiSEM3D_2020
+# download the code
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 #### 2.2.  Configure by cmake
@@ -139,6 +140,8 @@ module show cray-netcdf/4.6.1.3
 
 After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and Fortran compilers via -Dcc, -Dcxx and -Dftn, respectively: 
 ```bash
+# create a build directoray
+# the build 
 mkdir -p build && cd $_
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
@@ -162,11 +165,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTgyMDI3MjQsNjAwNjI0MjUwLDE2MT
-c4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5NzQxMTQ1
-NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYxMDczOS
-wxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMiwtNTIy
-OTE4ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEzMTQyMD
-E0MzksLTQ4NDM5NjcxNCwxMjU1NDIyOTY0LC02MjE2NTg4MTQs
-LTE1NDkyMjUyODJdfQ==
+eyJoaXN0b3J5IjpbMTIzOTYyNDc4NywtMTQxODIwMjcyNCw2MD
+A2MjQyNTAsMTYxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgw
+NSwtMTk3NDExNDU3MSwtMTkxMTQ0MzczMSwtMjA0MjI3NTM2NS
+wxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0NTUzMCwxMzg4
+MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4MywtMTYxMTgzOT
+AwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEyNTU0MjI5NjQs
+LTYyMTY1ODgxNF19
 -->
