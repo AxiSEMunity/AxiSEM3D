@@ -154,7 +154,7 @@ mpirun -np 4 ./axisem3d
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D.sh
+# install_AxiSEM3D_conda.sh
 
 # create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -193,7 +193,7 @@ make -j8
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D.sh
+# install_AxiSEM3D_archer.sh
 
 # create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -247,11 +247,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAyMTE3MjE2MSw2Mjk3MTgwMDYsLTI4Mz
-gyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYx
-MDMsLTE3Mzk4NTUxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLT
-gwMTQzNzEzNywxOTgwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2
-MDk4MjksLTEzNDQyNzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4Nj
-U3LC0xMDY1MzIwOTc2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0x
-MjQ5Nzk5Mjk5XX0=
+eyJoaXN0b3J5IjpbMTg1ODg0NTQyNSwxMDIxMTcyMTYxLDYyOT
+cxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3
+NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUsMT
+I4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLTU5NTky
+Nzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0NjEwOD
+QsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMjA1NCwx
+MjMzMTg1MDRdfQ==
 -->
