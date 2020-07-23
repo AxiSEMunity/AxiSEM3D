@@ -173,8 +173,19 @@ cd  ..
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
-cmake -Dcc=cc -Dcxx=CC -Dftn=ftn -Deigen=/home/n03/n03/ox2/AxiSEM3D_2020/dependencies/eigen3_develop -Dboost=/home/n03/n03/ox2/AxiSEM3D_2020/dependencies/boost_1_73_0 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 -Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1  -Dflags=-fPIC  -Dserial=true ../AxiSEM3D/SOLVER/
+cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
+-Deigen=$PWD/../dependencies/eigen3_develop \
+-Dboost=$PWD/../dependencies/boost_1_73_0 \
+-Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
+-Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
+-Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1  \
+-Dflags=-fPIC  ../AxiSEM3D/SOLVER/
 
+# make
+make -j8
+
+# test
+./axisem3d
 ```
 
 
@@ -186,11 +197,11 @@ cmake -Dcc=cc -Dcxx=CC -Dftn=ftn -Deigen=/home/n03/n03/ox2/AxiSEM3D_2020/depende
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExNzYyMjksMzU1MDczMTU0LC02NzgwMj
-E1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2
-MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxND
-Y4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQs
-MTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3Mj
-IzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1XX0=
-
+eyJoaXN0b3J5IjpbLTEwNzE5ODkxMSwzNTUwNzMxNTQsLTY3OD
+AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
+MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
+E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
+NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNz
+cyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODVd
+fQ==
 -->
