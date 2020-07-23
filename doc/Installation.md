@@ -295,7 +295,7 @@ Name|Role|Installation
 --- | --- | ---
 [`Obspy`](https://docs.obspy.org/) | data processing | conda install -c conda-forge obspy
 [`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | `NetCDF` for `python` | conda install -c anaconda netcdf4
-[`Basemap`](https://matplotlib.org/basemap/) | draw maps | conda install -c anaconda basemap
+[`Basemap`](https://matplotlib.org/basemap/) | drawing maps | conda install -c anaconda basemap
 [`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | wavefield animation | conda install -c conda-forge pyvtk
 [`ffmpeg`](https://ffmpeg.org/) | wavefield animation | conda install -c conda-forge ffmpeg
 [`Paraview`](https://www.paraview.org/) | model visualization and wavefield animation | [https://www.paraview.org/download/](https://www.paraview.org/download/)
@@ -303,11 +303,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nz
-g2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2
-MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC
-05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1NTg5MiwxNjQy
-MDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3MjE2MSw2Mjk3MTgwMD
-YsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xODg4NDgzNzU3LDEw
-MDU1NDYxMDNdfQ==
+eyJoaXN0b3J5IjpbLTEzNzE0MTU0NzgsLTMxODMzNTAyMCwtOT
+E5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2
+OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC
+0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1
+Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3Mj
+E2MSw2Mjk3MTgwMDYsLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0x
+ODg4NDgzNzU3XX0=
 -->
