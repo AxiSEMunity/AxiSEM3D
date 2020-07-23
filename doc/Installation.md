@@ -142,7 +142,8 @@ After setting the `_ROOT` variables, one can do `cmake`, sending the C, C++ and 
 ```bash
 # create a build directory
 # it is good practice to put nothing under this build directory
-# becuase it must be emptied before redoing cmake upon parameter change
+# becuase it must be emptied before redoing cmake once any 
+# parameter in CMakeLists.txt is changed
 mkdir -p build && cd $_
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
@@ -166,7 +167,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjY1NzY2MjEzLC0xNDE4MjAyNzI0LDYwMD
+eyJoaXN0b3J5IjpbNDc5NjQ1OTQ4LC0xNDE4MjAyNzI0LDYwMD
 YyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2MzksNjEzMzc4ODA1
 LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC0yMDQyMjc1MzY1LD
 E4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkzNjQ1NTMwLDEzODgx
