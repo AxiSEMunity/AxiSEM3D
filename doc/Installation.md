@@ -163,7 +163,11 @@ module switch PrgEnv-cray PrgEnv-gnu
 module load cmake/3.16.0
 module load gcc/7.3.0
 module load fftw
-module load 
+module load metis
+module load cray-netcdf/4.6.1.3
+module load cray-hdf5/1.10.2.0
+export 
+
 
 # download code  
 cd  .. 
@@ -182,11 +186,11 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjUxMzE4MDI3LDM1NTA3MzE1NCwtNjc4MD
-IxNTAwLC0yMDY5ODQ3NjM3LC0xNDM1MjA2MDMxLC0xNDQ2NDIy
-NjIsLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMDg2MjcsMzkzMT
-Q2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0
-LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3Nz
-IyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NV19
+eyJoaXN0b3J5IjpbMTk2NzE1NDYsMzU1MDczMTU0LC02NzgwMj
+E1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2
+MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxND
+Y4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQs
+MTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3Mj
+IzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1XX0=
 
 -->
