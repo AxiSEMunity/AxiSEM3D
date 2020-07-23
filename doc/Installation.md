@@ -182,7 +182,7 @@ rm -rf build && mkdir build && cd build
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
--Dfftw=conda_path -Dmetis=conda_path -Dnetcdf=conda_path \
+-Dfftw=$conda_path -Dmetis=$conda_path -Dnetcdf=$conda_path \
 ../AxiSEM3D/SOLVER/
 
 # make
@@ -247,11 +247,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI4MzgyNTEwNiwxNjYzMzU4MTY3LC0xOD
-g4NDgzNzU3LDEwMDU1NDYxMDMsLTE3Mzk4NTUxNzUsOTM3NDAy
-OTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNywxOTgwODEwMDc5LC
-01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNTEw
-NDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4MjcwMz
-IwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OTA1
-LC0xNDU3NDQ1NzY4XX0=
+eyJoaXN0b3J5IjpbLTE5OTAzMDc2NTQsLTI4MzgyNTEwNiwxNj
+YzMzU4MTY3LC0xODg4NDgzNzU3LDEwMDU1NDYxMDMsLTE3Mzk4
+NTUxNzUsOTM3NDAyOTM1LDEyODgxODQyMTMsLTgwMTQzNzEzNy
+wxOTgwODEwMDc5LC01OTU5Mjc4NzUsLTEwNjI2MDk4MjksLTEz
+NDQyNzkwMSwtNTEwNDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1Mz
+IwOTc2LDE4MjcwMzIwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5
+LC0xNTQ0NzY2OTA1XX0=
 -->
