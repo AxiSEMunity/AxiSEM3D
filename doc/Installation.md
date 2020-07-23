@@ -119,7 +119,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Dfftw=$HOME/anaconda3 \
 -Dmetis=$HOME/anaconda3 \
 -Dnetcdf=$HOME/anaconda3 \
-../AxiSEM3D/SOLVER
+../AxiSEM3D/SOLVER/
 ```
 
 It takes the following arguments:
@@ -198,11 +198,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNDY3MjY5OTEsLTE0NTc0NDU3NjgsMT
-MxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4
-NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC
-02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1
-MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2Mi
-wtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4
-MjZdfQ==
+eyJoaXN0b3J5IjpbLTI2Nzk2ODU5NCwtMTQ1NzQ0NTc2OCwxMz
+EwMjUwODUsMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0
+NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLT
+Y5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUw
+MCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQyMjYyLC
+0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5MzE0Njgy
+Nl19
 -->
