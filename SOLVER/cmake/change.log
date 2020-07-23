@@ -6,7 +6,7 @@ Kuangdai copied from eigen/cmake, Eigen 3.3.90
 Kuangdai removed FFTWL_LIB
 sKuangdai marked FFTW_LIB and FFTWF_LIB as necessary
 
-* FindMetis.cmake
+* FindMETIS.cmake
 Kuangdai copied from eigen/cmake, Eigen 3.3.90
 
 * FindNetCDF.cmake
