@@ -90,7 +90,7 @@ module load cray-netcdf/4.6.1.3
 # load HDF5
 module load cray-hdf5/1.10.2.0
 ```
-Whether one needs to load `HDF5` depends on how `NetCDF` was compiled and  
+Whether one needs to load `HDF5` depends on how `NetCDF` was compiled. 
 
 
 If a package is missing, one may turn to the admin or install it from scratch following the official instructions ([`FFTW`](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [`Metis`](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [`NetCDF`](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
@@ -184,11 +184,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NjcxNjE5MjMsMTk2NjAxNDk5MCw0Mz
-I3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4
-NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMT
-kxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5
-NzcyLC0yOTM4MjgxNywtMTQxODIwMjcyNCw2MDA2MjQyNTAsMT
-YxNzg2ODIyOCwtNzYyNTAwNjM5LDYxMzM3ODgwNSwtMTk3NDEx
-NDU3MV19
+eyJoaXN0b3J5IjpbMzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNz
+cyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODUs
+LTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMzEwMzc4MzY4LDE5MT
+I0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3OSwtMTE5MTcwOTc3
+MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNjAwNjI0MjUwLDE2MT
+c4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4MDUsLTE5NzQxMTQ1
+NzFdfQ==
 -->
