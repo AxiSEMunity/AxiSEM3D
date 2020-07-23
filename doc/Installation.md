@@ -122,14 +122,14 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 It can take the following parameters:
 Parameter|Role|Default|Note
 --- | --- | ---|---
-`Dcc`, `Dcxx`, `Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17
+`Dcc`, `Dcxx`, `Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
 `Deigen`, `Dboost`, `Dfftw`, `Dmetis`, `Dnetcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`). 
 `Dhdf5` | path of `HDF5` | empty | If `NetCDF` was built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
 `Dpar_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`.
 `Dlibs`| additional libraries to link to | empty | For example, `-lcurl` is needed if `NetCDF` was built statically with remote client support.
-`Dnpol`|polynomial order of spectral elements |4| Must be an integer from 1 to 8
-`Ddouble` | to compile solver in double precision or not |false|
+`Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
+`Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
 
 
@@ -209,11 +209,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxND
-Y4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQs
-MTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3Mj
-IzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1LC0y
-MTg4NTE1MjgsLTE4Nzg5Njc3MDMsMTMxMDM3ODM2OCwxOTEyND
-U0OTYsMjA0MTQxODk5MiwxMDgwODY2NzksLTExOTE3MDk3NzJd
-fQ==
+eyJoaXN0b3J5IjpbLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMD
+g2MjcsMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1Nywt
+MTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxND
+k5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMz
+NzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMTAzNz
+gzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5XX0=
+
 -->
