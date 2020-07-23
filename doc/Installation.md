@@ -160,6 +160,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 
 # load modules
 module switch PrgEnv-cray PrgEnv-gnu
+module switch gcc/7.3.0
 module load cmake/3.16.0
 module load fftw
 module load metis
@@ -193,11 +194,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwOTUwNzE5OTcsMzU1MDczMTU0LC02Nz
-gwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0
-MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOT
-MxNDY4MjYsMTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5
-NjQsMTIwMjA2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMj
-c3MjIzOCwtMTI2ODY1NDUzLC03NDU0NDI1MjIsMzM3NjYyMTg1
-XX0=
+eyJoaXN0b3J5IjpbMjEzOTI0NzExMSwzNTUwNzMxNTQsLTY3OD
+AyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMTQ0NjQy
+MjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3LDM5Mz
+E0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2
+NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNz
+cyMjM4LC0xMjY4NjU0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODVd
+fQ==
 -->
