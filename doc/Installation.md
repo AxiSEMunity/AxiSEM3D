@@ -131,8 +131,8 @@ Parameter|Role|Default|Note
 `par_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `flags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
 `libs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
-`Dnpol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
-`Ddouble` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
+`npol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
+`double` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
 
 Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure the compilers, the flags and the dependencies are correctly set.
 
@@ -198,7 +198,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2OTE1ODAyMywtMTQ1NzQ0NTc2OCwxMz
+eyJoaXN0b3J5IjpbMjA3ODg2NTIxMywtMTQ1NzQ0NTc2OCwxMz
 EwMjUwODUsMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0
 NiwtMTcwNjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLT
 Y5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUw
