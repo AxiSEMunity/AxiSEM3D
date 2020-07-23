@@ -74,7 +74,7 @@ conda install -c anaconda metis
 conda install -c anaconda netcdf4
 ```
 
-On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. On a cluster, the software packages are usually managed by `module`. To browse available packages and versions:
+On an HPC cluster, it is most likely that these packages have been installed with an optimized configuration owing to their popularity. The software packages are usually managed by `module`. To browse available packages and versions:
 ```bash
 # show all available packages
 module avail
@@ -307,11 +307,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTAxNjUyNzYsMjkwMTc4NDc5LDE5NDcwNj
-MyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05
-MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMT
-Y5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAs
-LTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMT
-U3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcy
-MTYxXX0=
+eyJoaXN0b3J5IjpbMjQzMTQwMDQyLDI5MDE3ODQ3OSwxOTQ3MD
+YzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwt
+OTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4Mj
+E2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAw
+LC0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLT
+E1Nzk1NTg5MiwxNjQyMDU3NzQ3LC05NDE0NzIwMTUsMTAyMTE3
+MjE2MV19
 -->
