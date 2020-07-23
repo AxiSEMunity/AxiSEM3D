@@ -168,7 +168,7 @@ Finally, one can verify the executable:
 # the number of processors can be arbitrary
 mpirun -np 4 ./axisem3d
 ```
-`AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory: ./input".
+`AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 
 
@@ -180,11 +180,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxODg1MTUyOCwtMTg3ODk2NzcwMywxMz
-EwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxNDE4OTkyLDEwODA4NjY3
-OSwtMTE5MTcwOTc3MiwtMjkzODI4MTcsLTE0MTgyMDI3MjQsNj
-AwNjI0MjUwLDE2MTc4NjgyMjgsLTc2MjUwMDYzOSw2MTMzNzg4
-MDUsLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNj
-UsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4
-ODE4NjQwMl19
+eyJoaXN0b3J5IjpbMzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nz
+g5Njc3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5
+MiwxMDgwODY2NzksLTExOTE3MDk3NzIsLTI5MzgyODE3LC0xND
+E4MjAyNzI0LDYwMDYyNDI1MCwxNjE3ODY4MjI4LC03NjI1MDA2
+MzksNjEzMzc4ODA1LC0xOTc0MTE0NTcxLC0xOTExNDQzNzMxLC
+0yMDQyMjc1MzY1LDE4OTU2MTA3MzksMTkzNzMyMDk1NywtNDkz
+NjQ1NTMwXX0=
 -->
