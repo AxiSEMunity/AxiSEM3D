@@ -273,9 +273,9 @@ rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
--Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
--Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
--Dflags=-fPIC ../AxiSEM3D/SOLVER/
+-Dmetis=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/metis-5.1.0-r6z4bz6frgdd7flrrmoyxccliij5fwm7 \
+-Dnetcdf=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/netcdf-4.4.1.1-zysrbqwgar43zq7pisurzuhnk6iix3bf \
+../AxiSEM3D/SOLVER/
 
 # make
 make -j8
@@ -290,11 +290,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ4NjI5MzA1MiwtOTg1NzExNjQ0LC0xOD
-Y5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0NywtOTQxNDcy
-MDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4MjUxMDYsMT
-Y2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5
-ODU1MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMz
-csMTk4MDgxMDA3OSwtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0x
-MzQ0Mjc5MDFdfQ==
+eyJoaXN0b3J5IjpbLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMT
+g2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3
+MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LD
+E2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTcz
+OTg1NTE3NSw5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MT
+M3LDE5ODA4MTAwNzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwt
+MTM0NDI3OTAxXX0=
 -->
