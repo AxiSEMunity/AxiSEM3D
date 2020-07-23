@@ -259,7 +259,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # environment modules
-module switch intel/compilers intel/compilers/2019.3
+module load intel/bundles/complib/2019.3
 
 # modules required by AxiSEM3D
 module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
@@ -269,7 +269,7 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 # cmake
 # the paths of FFTW, Metis and NetCDF are found by "module show"
 mkdir -p build && cd build
-rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
+rm -rf ./* && cmake -Dcc=icc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
@@ -290,11 +290,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMT
-g2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3
-MjAxNSwxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LD
-E2NjMzNTgxNjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTcz
-OTg1NTE3NSw5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MT
-M3LDE5ODA4MTAwNzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwt
-MTM0NDI3OTAxXX0=
+eyJoaXN0b3J5IjpbMTkyMTkyNTMzMSwtMTEwMjM0MDExMSwtOT
+g1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1
+Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC
+0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1
+NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQwMjkzNSwxMjg4MTg0Mj
+EzLC04MDE0MzcxMzcsMTk4MDgxMDA3OSwtNTk1OTI3ODc1LC0x
+MDYyNjA5ODI5XX0=
 -->
