@@ -63,7 +63,7 @@ The above lines will download *eigen-master/* and *boost_1_73_0/* under *AxiSEM3
 
 
 #### 1.2. FFTW, Metis and NetCDF
-On a laptop or workstation, these packages can be easily installed using `conda`:
+On a local laptop or workstation, these packages can be easily installed using `conda`:
 
 ```bash
 # install FFTW
@@ -307,11 +307,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNzIzNDE1NTEsMjkwMTc4NDc5LDE5ND
-cwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIw
-LC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMD
-gyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2
-MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5Ni
-wtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIx
-MTcyMTYxXX0=
+eyJoaXN0b3J5IjpbMTAxNjUyNzYsMjkwMTc4NDc5LDE5NDcwNj
+MyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05
+MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMT
+Y5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAs
+LTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMT
+U3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcy
+MTYxXX0=
 -->
