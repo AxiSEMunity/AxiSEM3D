@@ -159,30 +159,21 @@ mpirun -np 4 ./axisem3d
 # create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
-# download eigen and boost (check existence before download)
+# download Eigen and Boost (check existence before download)
 mkdir -p dependencies
 [ ! -d ./dependencies/eigen-master ] && \
 wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
 [ ! -d ./dependencies/boost_1_73_0 ] && \
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 
+# install FFTW, Metis and NetCDF
+conda install -c conda-forge fftw
+conda install -c anaconda metis
+conda install -c anaconda netcdf4
+
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
-
-# environment modules and variables
-module switch PrgEnv-cray PrgEnv-gnu
-module switch gcc gcc/7.3.0
-module load cmake/3.16.0
-export CRAYPE_LINK_TYPE=dynamic
-
-# modules required by AxiSEM3D
-module load fftw
-module load metis
-module load cray-netcdf/4.6.1.3
-# On ARCHER, HDF5 is handled by compiler wrappers;
-# users only need to load the right version
-module load cray-hdf5/1.10.2.0
 
 # cmake
 # thep paths are found by "module show"
@@ -208,7 +199,7 @@ make -j8
 # create a top working directory and cd in
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
-# download eigen and boost (check existence before download)
+# download Eigen and Boost (check existence before download)
 mkdir -p dependencies
 [ ! -d ./dependencies/eigen-master ] && \
 wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
@@ -257,11 +248,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzk1OTQ5NDgwLDE2NjMzNTgxNjcsLTE4OD
-g0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5
-MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLT
-U5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0
-NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMj
-A1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOTksLTE1NDQ3NjY5MDUs
-LTE0NTc0NDU3NjhdfQ==
+eyJoaXN0b3J5IjpbLTIxNDIzNDM3NzcsMTY2MzM1ODE2NywtMT
+g4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQw
+MjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMzcsMTk4MDgxMDA3OS
+wtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0xMzQ0Mjc5MDEsLTUx
+MDQ2MTA4NCwtMTg5MTc0ODY1NywtMTA2NTMyMDk3NiwxODI3MD
+MyMDU0LDEyMzMxODUwNCwtMTI0OTc5OTI5OSwtMTU0NDc2Njkw
+NSwtMTQ1NzQ0NTc2OF19
 -->
