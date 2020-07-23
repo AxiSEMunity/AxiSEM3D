@@ -108,7 +108,7 @@ mkdir -p build && cd $_
 ```
 Because `build` must be emptied before redoing `cmake`, it is good practice to put nothing under `build` except those automatically created by `cmake` and `make`. 
 
-Next, do `cmake`:
+Next, do `cmake` like this:
 ```bash
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop \
@@ -118,6 +118,8 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Dnetcdf=$HOME/anaconda3 \
 ../AxiSEM3D/SOLVER/
 ```
+
+
 
 
 
@@ -196,7 +198,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzOTU5MTg5MDksMzkzMTQ2ODI2LDExNT
+eyJoaXN0b3J5IjpbLTExODMwMTE2ODAsMzkzMTQ2ODI2LDExNT
 c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
 MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
 g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
