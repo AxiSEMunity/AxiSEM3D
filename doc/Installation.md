@@ -6,7 +6,7 @@ The installation of `AxiSEM3D` includes three parts: the mesher, the solver and 
 
 System requirements:
 * Unix-like system (`AxiSEM3D` is untested on Windows)
-* C++ compiler supporting C++17 (`gcc` ≥ 7, `icc` ≥ 19; check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
+* C++ compiler supporting C++17 (`GCC` ≥ 7, `Intel C++` ≥ 19; check [C++ compiler support](https://en.cppreference.com/w/cpp/compiler_support))
 * Basic development tools: `python`, `pip`, `conda` ([`Anaconda`](https://docs.anaconda.com/anaconda/install/) or [`Miniconda`](https://docs.conda.io/en/latest/miniconda.html)), `cmake` (≥ 3.10.0), `wget`
 * MPI (a serial build can be made but is not very useful) 
 
@@ -44,7 +44,7 @@ Name|Role|Minimum version|Note
 
 `Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
 ```bash
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 # create a dependency directory
 mkdir -p dependencies
@@ -150,13 +150,13 @@ mpirun -np 4 ./axisem3d
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 #### 2.4. Complete examples
-* A laptop or workstation with `conda`:
+* A laptop or workstation with `conda` (GNU compilers):
 
 ```bash
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -189,13 +189,13 @@ rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 make -j8
 ```
 
-* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/):
+* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GNU compilers):
 
 ```bash
 #!/bin/bash
 # install_AxiSEM3D_ARCHER.sh
 
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -238,13 +238,13 @@ rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 make -j8
 ```
 
-* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge:
+* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (Intel compilers):
 
 ```bash
 #!/bin/bash
 # install_AxiSEM3D_RCS_Cam.sh
 
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -260,6 +260,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # environment modules
 module load intel/bundles/complib/2019.3
+module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 
 # modules required by AxiSEM3D
 module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
@@ -290,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
-NDE5NiwtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNS
-wxMDIxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMz
-NTgxNjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NT
-E3NSw5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5
-ODA4MTAwNzldfQ==
+eyJoaXN0b3J5IjpbOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMD
+gyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2
+MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5Ni
+wtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIx
+MTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNj
+csLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5
+Mzc0MDI5MzVdfQ==
 -->
