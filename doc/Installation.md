@@ -149,7 +149,7 @@ mpirun -np 4 ./axisem3d
 ```
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
-#### 2.4.  Complete examples
+#### 2.4.  Complete examples on HPC
 * The UK National Supercomputing Service  [ARCHER](https://www.archer.ac.uk/):
 
 ```bash
@@ -198,11 +198,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNDk3OTkyOTksLTE1NDQ3NjY5MDUsLT
-E0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0
-MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC
-0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDcz
-MTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMz
-EsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEw
-ODYyN119
+eyJoaXN0b3J5IjpbLTEwMTAyNzM4NTEsLTEyNDk3OTkyOTksLT
+E1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3NDc5
+MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNzI4Mj
+QsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3NjQw
+MjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIwNjk4NDc2Mz
+csLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMTY3NjA0MTgsMTA2
+MjkyNDI0OV19
 -->
