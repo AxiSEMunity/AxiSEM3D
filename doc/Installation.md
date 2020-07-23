@@ -124,7 +124,12 @@ Parameter|Role|Default|Note
 --- | --- | ---|---
 -Dcc | C compiler | gcc | 
 -Dcxx | C++ compiler | g++ | must support C++17
--
+-Deigen | Path of `Eigne` | empty
+-Deigen | Path of `Eigne` | empty
+-Deigen | Path of `Eigne` | empty
+-Deigen | Path of `Eigne` | empty
+-Deigen | Path of `Eigne` | empty
+
 
 
 
@@ -202,11 +207,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY1MDc3NTksMzkzMTQ2ODI2LDExNTc5MD
-MzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2Miwz
-ODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NT
-Q1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0x
-ODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MT
-g5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4MjgxN119
-
+eyJoaXN0b3J5IjpbLTEyNjQ5Mjc3NjgsMzkzMTQ2ODI2LDExNT
+c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
+MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
+g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
+LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
+E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
+N119
 -->
