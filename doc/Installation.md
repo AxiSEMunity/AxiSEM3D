@@ -258,10 +258,8 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
-# environment modules and variables
+# environment modules
 module switch intel/compilers intel/compilers/2019.3
-module load cmake/3.16.0
-export CRAYPE_LINK_TYPE=dynamic
 
 # modules required by AxiSEM3D
 module load fftw
@@ -295,11 +293,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMT
-U3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcy
-MTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLT
-E4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0
-MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNz
-ksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01
-MTA0NjEwODRdfQ==
+eyJoaXN0b3J5IjpbMTE2MzEzMzg4MCwtOTg1NzExNjQ0LC0xOD
+Y5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1Nzc0NywtOTQxNDcy
+MDE1LDEwMjExNzIxNjEsNjI5NzE4MDA2LC0yODM4MjUxMDYsMT
+Y2MzM1ODE2NywtMTg4ODQ4Mzc1NywxMDA1NTQ2MTAzLC0xNzM5
+ODU1MTc1LDkzNzQwMjkzNSwxMjg4MTg0MjEzLC04MDE0MzcxMz
+csMTk4MDgxMDA3OSwtNTk1OTI3ODc1LC0xMDYyNjA5ODI5LC0x
+MzQ0Mjc5MDFdfQ==
 -->
