@@ -122,11 +122,11 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 ../AxiSEM3D/SOLVER/
 ```
 
-It takes the following arguments ():
+It takes the following arguments, passed to `cmake` by `-D`:
 Parameter|Role|Default|Note
 --- | --- | ---|---
-`Dcc`, `Dcxx`, `Dftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
-`Deigen`, `Dboost`, `Dfftw`, `Dmetis`, `Dnetcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`). 
+`cc`, `cxx`, `ftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
+`eigen`, `boost`, `fftw`, `metis`, `netcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
 `Dhdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
 `Dpar_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
@@ -198,11 +198,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgxOTE3NDcsLTE0NTc0NDU3NjgsMTMxMD
-I1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYs
-LTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OT
-U0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAs
-LTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMT
-Y3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjZd
-fQ==
+eyJoaXN0b3J5IjpbLTE4NDE0MDY3MzQsLTE0NTc0NDU3NjgsMT
+MxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4
+NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC
+02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1
+MDAsLTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2Mi
+wtMTY3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4
+MjZdfQ==
 -->
