@@ -132,7 +132,7 @@ module show cray-netcdf/4.6.1.3
 
 After setting the `_ROOT` variables, we can do `cmake`:
 ```bash
-mkdir -p build |
+mkdir -p build && cd $_
 cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 ```
 
@@ -149,11 +149,11 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQzNjQyMzU5MSwtMTkxMTQ0MzczMSwtMj
-A0MjI3NTM2NSwxODk1NjEwNzM5LDE5MzczMjA5NTcsLTQ5MzY0
-NTUzMCwxMzg4MTg2NDAyLC01MjI5MTg4NjAsLTU0MjEwMTE4My
-wtMTYxMTgzOTAwMiwtMTMxNDIwMTQzOSwtNDg0Mzk2NzE0LDEy
-NTU0MjI5NjQsLTYyMTY1ODgxNCwtMTU0OTIyNTI4MiwtMTM5Mj
-c3MDIxNSwxOTU0NDU3NTI4LDY1MTgzMzYzMywtMTA4MzUzNTEw
-Miw3OTA3NDYzNTFdfQ==
+eyJoaXN0b3J5IjpbLTE5NzQxMTQ1NzEsLTE5MTE0NDM3MzEsLT
+IwNDIyNzUzNjUsMTg5NTYxMDczOSwxOTM3MzIwOTU3LC00OTM2
+NDU1MzAsMTM4ODE4NjQwMiwtNTIyOTE4ODYwLC01NDIxMDExOD
+MsLTE2MTE4MzkwMDIsLTEzMTQyMDE0MzksLTQ4NDM5NjcxNCwx
+MjU1NDIyOTY0LC02MjE2NTg4MTQsLTE1NDkyMjUyODIsLTEzOT
+I3NzAyMTUsMTk1NDQ1NzUyOCw2NTE4MzM2MzMsLTEwODM1MzUx
+MDIsNzkwNzQ2MzUxXX0=
 -->
