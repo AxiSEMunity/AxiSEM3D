@@ -288,13 +288,13 @@ make -j8
 
 ## Tools for pre- and post-processing
 
-In the manual and the examples, python (Jupyter Notebook) will be used as the 
+In the manual and the examples, we will mainly use python (Jupyter Notebook) to demonstrate pre-processing (e.g., preparing 3D models) 
 
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAwNTQ5MjMxLC05MTk5NDg3NzYsOTU3OD
+eyJoaXN0b3J5IjpbMjU4MzY1OTk1LC05MTk5NDg3NzYsOTU3OD
 YwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYw
 MCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLT
 k4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1ODkyLDE2NDIw
