@@ -4,6 +4,10 @@
 # Installation
 The installation of `AxiSEM3D` includes three parts: the mesher, the solver and several tools (mostly Python libraries) for pre- and post-processing.
 
+System requirements:
+* Unix-like system (untested on Windows)
+* 
+
 
 ## Mesher
 [`SalvusMeshLite`](https://gitlab.com/Salvus/SalvusMeshLite) is the mesher for `AxiSEM3D`. Its installation is trivial with `pip`: 
@@ -20,8 +24,6 @@ This will display all the arguments one can pass to the mesher.
 
 
 ## Solver
-
-Be
 
 ### 1. Installing dependencies
 
@@ -151,7 +153,7 @@ cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 ../AxiSEM3D/SOLVER
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjE0MDUxMDg2Miw2MTMzNzg4MDUsLTE5Nz
+eyJoaXN0b3J5IjpbMTQwNDI3OTU5OCw2MTMzNzg4MDUsLTE5Nz
 QxMTQ1NzEsLTE5MTE0NDM3MzEsLTIwNDIyNzUzNjUsMTg5NTYx
 MDczOSwxOTM3MzIwOTU3LC00OTM2NDU1MzAsMTM4ODE4NjQwMi
 wtNTIyOTE4ODYwLC01NDIxMDExODMsLTE2MTE4MzkwMDIsLTEz
