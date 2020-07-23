@@ -150,7 +150,7 @@ mpirun -np 4 ./axisem3d
 `AxiSEM3D` has been built successfully if an error message appears saying "Missing input directory".
 
 #### 2.4. Complete examples
-* A laptop or workstation with `conda` (`GNU`):
+* A laptop or workstation with `conda` (GNU compilers):
 
 ```bash
 #!/bin/bash
@@ -189,7 +189,7 @@ rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 make -j8
 ```
 
-* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (`GNU`):
+* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GNU compilers):
 
 ```bash
 #!/bin/bash
@@ -238,7 +238,7 @@ rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 make -j8
 ```
 
-* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (`Intel`):
+* [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (Intel compilers):
 
 ```bash
 #!/bin/bash
@@ -291,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5ODgyOTEyMTksLTExMDgyMTY5MDAsMT
-QyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIz
-NDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5NiwtMTU3OTU1OD
-kyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYy
-OTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0OD
-M3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUs
-MTI4ODE4NDIxM119
+eyJoaXN0b3J5IjpbMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxND
+I5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0
+MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OT
+IsMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5
+NzE4MDA2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mz
+c1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQwMjkzNSwx
+Mjg4MTg0MjEzXX0=
 -->
