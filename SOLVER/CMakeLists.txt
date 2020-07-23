@@ -22,7 +22,7 @@ set(CMAKE_C_COMPILER            ${cc})
 set(CMAKE_CXX_COMPILER          ${cxx})
 set(CMAKE_Fortran_COMPILER      ${ftn})
 
-# compiler flags in addition to the stardard ones (such as -O3 -DNDEBUG)
+# compiler flags in addition to the standard ones (such as -O3 -DNDEBUG)
 set(ADDITIONAL_COMPILER_FLAGS   ${flags})
 
 # additional libraries to link to if linking fails with missing symbols
