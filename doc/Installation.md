@@ -106,7 +106,7 @@ First, create a `build` directory:
 # under the top working directory
 mkdir -p build && cd $_
 ```
-Because `build` must be emptied before redoing `cmake`, it is good practice to put nothing under `build` except those automatically created by `cmake` and `make`. 
+Because `build` must be emptied every time before redoing `cmake`, it is good practice to put nothing under `build` except those automatically created by `cmake` and `make`. 
 
 Next, do `cmake` like this:
 ```bash
@@ -209,11 +209,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzYwNDE4LDEwNjI5MjQyNDksNjkxMD
-g2MjcsMzkzMTQ2ODI2LDExNTc5MDMzODUsMTUzNjQzMjM1Nywt
-MTkyMzQ0OTY0LDEyMDIwNjg2MiwzODk0NTcxNDQsMTk2NjAxND
-k5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIyLDMz
-NzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMTAzNz
-gzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5XX0=
+eyJoaXN0b3J5IjpbLTU1OTE5Mzg1OCwtMTY3NjA0MTgsMTA2Mj
+kyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYsMTE1NzkwMzM4NSwx
+NTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMjA2ODYyLDM4OTQ1Nz
+E0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOCwtMTI2ODY1NDUzLC03
+NDU0NDI1MjIsMzM3NjYyMTg1LC0yMTg4NTE1MjgsLTE4Nzg5Nj
+c3MDMsMTMxMDM3ODM2OCwxOTEyNDU0OTYsMjA0MTQxODk5Ml19
 
 -->
