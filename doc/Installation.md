@@ -197,8 +197,8 @@ module load cray-hdf5/1.10.2.0
 # cmake
 rm -rf build && mkdir build && cd $_
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
--Deigen=$PWD/../dependencies/eigen-master \
--Dboost=$PWD/../dependencies/boost_1_73_0 \
+-Deigen=$(dirname $PWD)/dependencies/eigen-master \
+-Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
 -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
 -Dnetcdf=$ncdfpath  \
@@ -217,11 +217,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNjI2MDk4MjksLTEzNDQyNzkwMSwtNT
-EwNDYxMDg0LC0xODkxNzQ4NjU3LC0xMDY1MzIwOTc2LDE4Mjcw
-MzIwNTQsMTIzMzE4NTA0LC0xMjQ5Nzk5Mjk5LC0xNTQ0NzY2OT
-A1LC0xNDU3NDQ1NzY4LDEzMTAyNTA4NSwxNzQ3OTM0Mjc4LC0y
-MTc1NDI4MzQsNjg3Nzg5ODQ2LC0xNzA2MzcyODI0LDQwNDc5Nz
-E3MywtMTk1MTU1MTI0MSwtNjk1NDY4MzgsNzY0MDI2NTE3LDM1
-NTA3MzE1NF19
+eyJoaXN0b3J5IjpbMTA5NTI5MDExMSwtMTA2MjYwOTgyOSwtMT
+M0NDI3OTAxLC01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUz
+MjA5NzYsMTgyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3OTkyOT
+ksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MDg1LDE3
+NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3MDYzNz
+I4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0NjgzOCw3
+NjQwMjY1MTddfQ==
 -->
