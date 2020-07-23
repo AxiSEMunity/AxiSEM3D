@@ -238,6 +238,55 @@ rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 make -j8
 ```
 
+* RCS Cambridge [ARCHER](https://www.archer.ac.uk/):
+
+```bash
+#!/bin/bash
+# install_AxiSEM3D_ARCHER.sh
+
+# create a top working directory and cd in
+mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
+
+# download Eigen and Boost (check existence before download)
+mkdir -p dependencies
+[ ! -d ./dependencies/eigen-master ] && \
+wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
+[ ! -d ./dependencies/boost_1_73_0 ] && \
+wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
+
+# download AxiSEM3D (check existence before download)
+[ ! -d ./AxiSEM3D ] && \
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+
+# environment modules and variables
+module switch PrgEnv-cray PrgEnv-gnu
+module switch gcc gcc/7.3.0
+module load cmake/3.16.0
+export CRAYPE_LINK_TYPE=dynamic
+
+# modules required by AxiSEM3D
+module load fftw
+module load metis
+module load cray-netcdf/4.6.1.3
+# On ARCHER, HDF5 is handled by compiler wrappers;
+# users only need to load the right version
+module load cray-hdf5/1.10.2.0
+
+# cmake
+# the paths of FFTW, Metis and NetCDF are found by "module show"
+mkdir -p build && cd build
+rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
+-Deigen=$(dirname $PWD)/dependencies/eigen-master \
+-Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
+-Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
+-Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
+-Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
+-Dflags=-fPIC ../AxiSEM3D/SOLVER/
+
+# make
+make -j8
+```
+
 
 
 ## Tools for pre- and post-processing
@@ -247,11 +296,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk0MTQ3MjAxNSwxMDIxMTcyMTYxLDYyOT
-cxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNjcsLTE4ODg0ODM3
-NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mzc0MDI5MzUsMT
-I4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAwNzksLTU5NTky
-Nzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC01MTA0NjEwOD
-QsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgyNzAzMjA1NCwx
-MjMzMTg1MDRdfQ==
+eyJoaXN0b3J5IjpbLTE3MzM2MDcxMDEsLTk0MTQ3MjAxNSwxMD
+IxMTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgx
+NjcsLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NS
+w5Mzc0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4
+MTAwNzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OT
+AxLC01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYs
+MTgyNzAzMjA1NF19
 -->
