@@ -109,12 +109,13 @@ Because `build` must be emptied before redoing `cmake`, it is good practice to p
 
 Next, do `cmake`:
 ```bash
-cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
+cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
 -Deigen=$HOME/AxiSEM3D_2020/dependencies/eigen3_develop \
 -Dboost=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0 \
--Dfftw=$HOME/anaconda3 
--Dmetis=$HOME/anaconda3 
--Dnetcdf=$HOME/anaconda3  -Dflags=-fPIC  -Dserial=true ../AxiSEM3D/SOLVER/
+-Dfftw=$HOME/anaconda3 \
+-Dmetis=$HOME/anaconda3 \
+-Dnetcdf=$HOME/anaconda3 \
+../AxiSEM3D/SOLVER/
 ```
 
 
@@ -194,11 +195,11 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwNDAxMDY2NzMsMzkzMTQ2ODI2LDExNT
-c5MDMzODUsMTUzNjQzMjM1NywtMTkyMzQ0OTY0LDEyMDIwNjg2
-MiwzODk0NTcxNDQsMTk2NjAxNDk5MCw0MzI3NzIyMzgsLTEyNj
-g2NTQ1MywtNzQ1NDQyNTIyLDMzNzY2MjE4NSwtMjE4ODUxNTI4
-LC0xODc4OTY3NzAzLDEzMTAzNzgzNjgsMTkxMjQ1NDk2LDIwND
-E0MTg5OTIsMTA4MDg2Njc5LC0xMTkxNzA5NzcyLC0yOTM4Mjgx
-N119
+eyJoaXN0b3J5IjpbNzQ3MDkyNDM5LDM5MzE0NjgyNiwxMTU3OT
+AzMzg1LDE1MzY0MzIzNTcsLTE5MjM0NDk2NCwxMjAyMDY4NjIs
+Mzg5NDU3MTQ0LDE5NjYwMTQ5OTAsNDMyNzcyMjM4LC0xMjY4Nj
+U0NTMsLTc0NTQ0MjUyMiwzMzc2NjIxODUsLTIxODg1MTUyOCwt
+MTg3ODk2NzcwMywxMzEwMzc4MzY4LDE5MTI0NTQ5NiwyMDQxND
+E4OTkyLDEwODA4NjY3OSwtMTE5MTcwOTc3MiwtMjkzODI4MTdd
+fQ==
 -->
