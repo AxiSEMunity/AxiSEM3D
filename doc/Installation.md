@@ -185,7 +185,7 @@ module load cray-netcdf/4.6.1.3
 module load cray-hdf5/1.10.2.0
 
 # cmake
-rm -rf build && mkdir build && cd $_
+rm -rf build && mkdir build && cd build
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
@@ -207,7 +207,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTEwODM5OTA0OCwtMTczOTg1NTE3NSw5Mz
+eyJoaXN0b3J5IjpbMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5Mz
 c0MDI5MzUsMTI4ODE4NDIxMywtODAxNDM3MTM3LDE5ODA4MTAw
 NzksLTU5NTkyNzg3NSwtMTA2MjYwOTgyOSwtMTM0NDI3OTAxLC
 01MTA0NjEwODQsLTE4OTE3NDg2NTcsLTEwNjUzMjA5NzYsMTgy
