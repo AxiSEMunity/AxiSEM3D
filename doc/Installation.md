@@ -184,6 +184,10 @@ module load cray-netcdf/4.6.1.3
 # users only need to load the right version
 module load cray-hdf5/1.10.2.0
 
+# uncomment the follow lines to use intel
+
+ncdfpath=/opt/cray/netcdf/4.6.1.3/GNU/7.1
+
 # cmake
 mkdir -p build && cd $_
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
@@ -207,11 +211,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Mjk5MTMzMDQsLTE4OTE3NDg2NTcsLT
-EwNjUzMjA5NzYsMTgyNzAzMjA1NCwxMjMzMTg1MDQsLTEyNDk3
-OTkyOTksLTE1NDQ3NjY5MDUsLTE0NTc0NDU3NjgsMTMxMDI1MD
-g1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4NDYsLTE3
-MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OTU0Nj
-gzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAsLTIw
-Njk4NDc2MzddfQ==
+eyJoaXN0b3J5IjpbLTIwODU5Mzg0NSwtMTg5MTc0ODY1NywtMT
+A2NTMyMDk3NiwxODI3MDMyMDU0LDEyMzMxODUwNCwtMTI0OTc5
+OTI5OSwtMTU0NDc2NjkwNSwtMTQ1NzQ0NTc2OCwxMzEwMjUwOD
+UsMTc0NzkzNDI3OCwtMjE3NTQyODM0LDY4Nzc4OTg0NiwtMTcw
+NjM3MjgyNCw0MDQ3OTcxNzMsLTE5NTE1NTEyNDEsLTY5NTQ2OD
+M4LDc2NDAyNjUxNywzNTUwNzMxNTQsLTY3ODAyMTUwMCwtMjA2
+OTg0NzYzN119
 -->
