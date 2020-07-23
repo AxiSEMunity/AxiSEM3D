@@ -126,13 +126,8 @@ To avoid setting these environment variables every time in a new conversation, o
 
 Use `module show` to find the `_ROOT` of a package on a cluster, for example:
 ```bash
-# examples for Archer (archer.ac.uk)
-# show FFTW
-module show fftw/3.3.4.11
-# show Metis
-module show metis/5.1.0_build2
-# show NetCDF
-module show cray-netcdf/4.6.1.3
+# show FFTW (this is machine-dependent!)
+module show fftw
 ```
 
 <strong>NOTE</strong>: The `_ROOT` variables sent to `cmake` is neither the library path ended with `/lib` nor the include path ended with `/include`; it is the one containing both `/lib` and `/include`. 
@@ -179,7 +174,7 @@ mpirun -np 4 ./axisem3d
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExNTgxNzc3OCwzODk0NTcxNDQsMTk2Nj
+eyJoaXN0b3J5IjpbMTk1ODA0NTY0NSwzODk0NTcxNDQsMTk2Nj
 AxNDk5MCw0MzI3NzIyMzgsLTEyNjg2NTQ1MywtNzQ1NDQyNTIy
 LDMzNzY2MjE4NSwtMjE4ODUxNTI4LC0xODc4OTY3NzAzLDEzMT
 AzNzgzNjgsMTkxMjQ1NDk2LDIwNDE0MTg5OTIsMTA4MDg2Njc5
