@@ -44,7 +44,7 @@ Name|Role|Minimum version|Note
 
 `Eigen` and `Boost` are header-only libraries. All one needs to do is to download the source code:
 ```bash
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 # create a dependency directory
 mkdir -p dependencies
@@ -156,7 +156,7 @@ mpirun -np 4 ./axisem3d
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -195,7 +195,7 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_ARCHER.sh
 
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -244,7 +244,7 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_RCS_Cam.sh
 
-# create a top working directory and cd in
+# create a top working directory and cd into it
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -291,11 +291,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxND
-I5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0
-MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OT
-IsMTY0MjA1Nzc0NywtOTQxNDcyMDE1LDEwMjExNzIxNjEsNjI5
-NzE4MDA2LC0yODM4MjUxMDYsMTY2MzM1ODE2NywtMTg4ODQ4Mz
-c1NywxMDA1NTQ2MTAzLC0xNzM5ODU1MTc1LDkzNzQwMjkzNSwx
-Mjg4MTg0MjEzXX0=
+eyJoaXN0b3J5IjpbOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMD
+gyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2
+MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0NDE5Ni
+wtMTU3OTU1ODkyLDE2NDIwNTc3NDcsLTk0MTQ3MjAxNSwxMDIx
+MTcyMTYxLDYyOTcxODAwNiwtMjgzODI1MTA2LDE2NjMzNTgxNj
+csLTE4ODg0ODM3NTcsMTAwNTU0NjEwMywtMTczOTg1NTE3NSw5
+Mzc0MDI5MzVdfQ==
 -->
