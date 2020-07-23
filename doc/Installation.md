@@ -127,7 +127,7 @@ Parameter|Role|Default|Note
 --- | --- | ---|---
 `cc`, `cxx`, `ftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
 `eigen`, `boost`, `fftw`, `metis`, `netcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
-`Dhdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, one has to pass `Dhdf5` pointing to the HDF5 library used to build `NetCDF`.
+`hdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build `NetCDF`.
 `Dpar_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `Dflags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
 `Dlibs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
@@ -198,7 +198,7 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE4NDE0MDY3MzQsLTE0NTc0NDU3NjgsMT
+eyJoaXN0b3J5IjpbLTE5MDg3OTMwMDEsLTE0NTc0NDU3NjgsMT
 MxMDI1MDg1LDE3NDc5MzQyNzgsLTIxNzU0MjgzNCw2ODc3ODk4
 NDYsLTE3MDYzNzI4MjQsNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC
 02OTU0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1
