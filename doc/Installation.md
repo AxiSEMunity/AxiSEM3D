@@ -154,7 +154,7 @@ mpirun -np 4 ./axisem3d
 # download eigen and boost
 mkdir -p AxiSEM3D_2020
 mkdir -p AxiSEM3D_2020/dependencies && cd $_
-git clone https://gitlab.com/libeigen/eigen.git eigen3_develop
+wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx
 cd ..
 
@@ -174,7 +174,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 # cmake
 mkdir -p build &&  cd  $_
 cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
--Deigen=$PWD/../dependencies/eigen3_develop \
+-Deigen=$PWD/../dependencies/eigen-master \
 -Dboost=$PWD/../dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
 -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
@@ -194,11 +194,11 @@ make -j8
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDA0Nzk3MTczLC0xOTUxNTUxMjQxLC02OT
-U0NjgzOCw3NjQwMjY1MTcsMzU1MDczMTU0LC02NzgwMjE1MDAs
-LTIwNjk4NDc2MzcsLTE0MzUyMDYwMzEsLTE0NDY0MjI2MiwtMT
-Y3NjA0MTgsMTA2MjkyNDI0OSw2OTEwODYyNywzOTMxNDY4MjYs
-MTE1NzkwMzM4NSwxNTM2NDMyMzU3LC0xOTIzNDQ5NjQsMTIwMj
-A2ODYyLDM4OTQ1NzE0NCwxOTY2MDE0OTkwLDQzMjc3MjIzOF19
-
+eyJoaXN0b3J5IjpbLTYwMzczNzUzMiw0MDQ3OTcxNzMsLTE5NT
+E1NTEyNDEsLTY5NTQ2ODM4LDc2NDAyNjUxNywzNTUwNzMxNTQs
+LTY3ODAyMTUwMCwtMjA2OTg0NzYzNywtMTQzNTIwNjAzMSwtMT
+Q0NjQyMjYyLC0xNjc2MDQxOCwxMDYyOTI0MjQ5LDY5MTA4NjI3
+LDM5MzE0NjgyNiwxMTU3OTAzMzg1LDE1MzY0MzIzNTcsLTE5Mj
+M0NDk2NCwxMjAyMDY4NjIsMzg5NDU3MTQ0LDE5NjYwMTQ5OTBd
+fQ==
 -->
