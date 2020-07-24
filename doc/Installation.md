@@ -251,7 +251,7 @@ The above script must also be called by the job-submission script (submitted by 
 * Build AxiSEM3D
 
 ```bash
-# create and cd into build
+# create build under the top-level 
 mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 
 # cmake
@@ -330,11 +330,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMj
-cwNzAwNDQsLTExMjQ0MDM5OTQsODUxMjE0NDcxLC0xODI2NDIx
-ODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMT
-g4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAw
-MzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwxODk5NzAyNj
-Q3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0MDAyLC02
-MzA1MjA2OTBdfQ==
+eyJoaXN0b3J5IjpbLTE5NDA3MjM0NDMsLTQ0NTA3MDIxNCwtMT
+EwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0MDM5OTQsODUxMjE0
+NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Ni
+w4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIy
+Nzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2Nz
+kyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwx
+NTA3MzM0MDAyXX0=
 -->
