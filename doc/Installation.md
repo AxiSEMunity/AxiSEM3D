@@ -131,7 +131,7 @@ Argument|Role|Default|Note
 --- | --- | ---|---
 cxx| C++ compiler | g++ | Must support C++17.
 flags|compiler flags | empty | If presented, they will overwrite the flags automatically determined by `cmake`. Different systems and compilers may require different flags.
-link| additional link options | empty | For example, `-lcurl` will be required if NetCDF has been built statically with remote client support.
+links | additional link options | empty | For example, `-lcurl` will be required if NetCDF has been built statically with remote client support.
 eigen, boost, fftw, metis, netcdf| paths of the dependencies | empty | Such a path should contain both *lib/* and *include/*. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
 hdf5 | path of HDF5 | empty | If NetCDF has been built as a static library, linking will fail with missing `_H5_` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build NetCDF.
 par_netcdf | invoke parallel NetCDF | false | Parallel NetCDF is supported but not mandatory because of its tricky installation.
@@ -315,11 +315,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc1NTE2ODUyMSwzOTQ5MjY2MDEsODkzOD
-AzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMsMTMzNTQzNTM3MSwx
-MjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOTcyOTk4LDE0NDU4Nj
-EyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4
-MjA4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3ODYwOD
-Y3LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMF19
-
+eyJoaXN0b3J5IjpbLTE3NzQ1ODU5NzQsMzk0OTI2NjAxLDg5Mz
+gwMzA4NSwtOTg5NzEyODM4LDk1NjY5OTYzLDEzMzU0MzUzNzEs
+MTIwNDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1OD
+YxMjQxLDI5MDE3ODQ3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2
+ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MD
+g2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDBd
+fQ==
 -->
