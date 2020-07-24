@@ -90,7 +90,7 @@ module load fftw
 module load fftw/3.3.8
 ```
 
-If a package is missing, one may 
+If a package is missing, you may 
 1. turn to admin for help;
 2. install it by `conda` (many clusters allow users to install their own [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html));
 3. install it from scratch (see instructions for [FFTW](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [Metis](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [NetCDF](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
@@ -146,12 +146,12 @@ To compile and link AxiSEM3D:
 # -j8 means using 8 threads to accelerate compilation
 make -j8
 ```
-Finally, one can verify the executable:
+Finally, you can verify the executable:
 ```bash
 # the number of processors can be arbitrary
 mpirun -np 4 ./axisem3d
 ```
-If you see an error message saying *missing input directory*, it means that AxiSEM3D has been built successfully.
+If you see an error message saying *missing input directory*, it means that AxiSEM3D has been built successfully. On a cluster, you may ha
 
 
 ### 3. Complete examples
@@ -330,11 +330,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY0NDQ3MTY0NSw4MDAzNzg5OTMsMTg4ND
-YxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAwMzQ2
-ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwxODk5NzAyNjQ3LC
-04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0MDAyLC02MzA1
-MjA2OTAsLTY4MzkyMDI0NywxODAyMDYxOTQ4LC0yMDQ3MTQ5Nz
-IzLC0yMDQ3MTQ5NzIzLDI5Nzk3OTI4OSwtMjYyODk3ODU2LC0x
-NzIwMzk3NDU3XX0=
+eyJoaXN0b3J5IjpbMzk4NDc5NDg4LDgwMDM3ODk5MywxODg0Nj
+EzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMyMDAzNDY4
+OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3MDI2NDcsLT
+g3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQwMDIsLTYzMDUy
+MDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLTIwNDcxNDk3Mj
+MsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC0yNjI4OTc4NTYsLTE3
+MjAzOTc0NTddfQ==
 -->
