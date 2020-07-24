@@ -190,7 +190,7 @@ conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
 conda install -c anaconda -y netcdf4
 
-# create build
+# create build directory
 mkdir -p build && cd build
 # find conda path via executable
 export conda_path=$(dirname $(dirname $(which conda)))
@@ -287,9 +287,10 @@ module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
 module load metis-5.1.0-intel-17.0.4-r6z4bz6
 module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 
+# create build directory
+mkdir -p build && cd build
 # cmake
 # the paths of FFTW, Metis and NetCDF are found by "module show"
-mkdir -p build && cd build
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
@@ -321,11 +322,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0NjM4OTQ0NjUsMTU0MDU2NzkyOCwxOD
-k5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0
-MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0NywxODAyMDYxOTQ4LC
-0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLDI5Nzk3OTI4OSwtMjYy
-ODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYxNjc5MjEsLTI5MDYyNT
-E5MSwtMTc3NDU4NTk3NCwzOTQ5MjY2MDEsODkzODAzMDg1LC05
-ODk3MTI4MzhdfQ==
+eyJoaXN0b3J5IjpbLTg1ODIwNDU1MiwxNTQwNTY3OTI4LDE4OT
+k3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQw
+MDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLT
+IwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC0yNjI4
+OTc4NTYsLTE3MjAzOTc0NTcsMTI1NjE2NzkyMSwtMjkwNjI1MT
+kxLC0xNzc0NTg1OTc0LDM5NDkyNjYwMSw4OTM4MDMwODUsLTk4
+OTcxMjgzOF19
 -->
