@@ -277,7 +277,7 @@ module load metis-5.1.0-intel-17.0.4-r6z4bz6
 module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 
 # create and cd into build
-mkdir -p build && cd $_
+mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 
 # cmake
 # 1) FFTW, Metis and NetCDF paths are found by 'module show'
@@ -317,7 +317,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODY1MjA5NzE5LC0xMTI0NDAzOTk0LDg1MT
+eyJoaXN0b3J5IjpbLTY4MTIwMzU4LC0xMTI0NDAzOTk0LDg1MT
 IxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3
 ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMT
 QyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3MTUyNDM1LDE1NDA1
