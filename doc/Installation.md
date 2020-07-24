@@ -128,7 +128,7 @@ rm -rf ./* && cmake -Dcxx=mpicxx \
 It takes the following arguments, passed to `cmake` by `-D` definitions:
 Parameter|Role|Default|Note
 --- | --- | ---|---
-`cc`, `cxx`, `ftn`| C, C++, Fortran compilers | gcc, g++, gfortran | The C++ compiler must support C++17.
+`cxx`| C++ compiler | g++ | Must support C++17.
 `eigen`, `boost`, `fftw`, `metis`, `netcdf`| paths of the dependencies | empty | Such a path should contain both `\lib` and `\include`. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
 `hdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build `NetCDF`.
 `par_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIwNDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MT
-k3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3ODQ3OSwxOTQ3MDYzMjI4
-LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OT
-Q4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAw
-LDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMT
-AyMzQwMTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1
-NTg5Ml19
+eyJoaXN0b3J5IjpbMTc4MzI4NjI0MywxMjA0MjY0MDMyLC00ND
+M2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5
+LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4Mz
+M1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEs
+LTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
+k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
+NDE5Nl19
 -->
