@@ -272,14 +272,12 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 
 # download AxiSEM3D (check existence before download)
-module load git
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 git -C AxiSEM3D pull
 
 # environment modules
 # purge intel-17 components
-module purge
 module load intel/bundles/complib/2019.3
 module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 module load cmake-3.12.0-intel-17.0.4-donirfx
@@ -323,11 +321,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MD
-IwNjE5NDgsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5
-Mjg5LC0yNjI4OTc4NTYsLTE3MjAzOTc0NTcsMTI1NjE2NzkyMS
-wtMjkwNjI1MTkxLC0xNzc0NTg1OTc0LDM5NDkyNjYwMSw4OTM4
-MDMwODUsLTk4OTcxMjgzOCw5NTY2OTk2MywxMzM1NDM1MzcxLD
-EyMDQyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2
-MTI0MV19
+eyJoaXN0b3J5IjpbNjU5ODk2NzUzLC02MzA1MjA2OTAsLTY4Mz
+kyMDI0NywxODAyMDYxOTQ4LC0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5
+NzIzLDI5Nzk3OTI4OSwtMjYyODk3ODU2LC0xNzIwMzk3NDU3LD
+EyNTYxNjc5MjEsLTI5MDYyNTE5MSwtMTc3NDU4NTk3NCwzOTQ5
+MjY2MDEsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMsMT
+MzNTQzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOTcy
+OTk4XX0=
 -->
