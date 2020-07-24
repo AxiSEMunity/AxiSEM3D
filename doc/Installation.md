@@ -255,7 +255,7 @@ rm -rf ./* && cmake -Dcxx=CC \
 make -j8
 ```
 
-#### 3.3. [Research Computing Services](https://www.hpc.cam.ac.uk/) of the University of Cambridge (Intel C++):
+#### 3.3. Cambridge Service for Data Driven Discovery[ (CSD3)](https://www.csd3.cam.ac.uk/) (Intel C++):
 
 ```bash
 #!/bin/bash
@@ -318,11 +318,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3MjAzOTc0NTcsMTI1NjE2NzkyMSwtMj
-kwNjI1MTkxLC0xNzc0NTg1OTc0LDM5NDkyNjYwMSw4OTM4MDMw
-ODUsLTk4OTcxMjgzOCw5NTY2OTk2MywxMzM1NDM1MzcxLDEyMD
-QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
-MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
-g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njdd
+eyJoaXN0b3J5IjpbMTQ2NjkzMTQ3LC0xNzIwMzk3NDU3LDEyNT
+YxNjc5MjEsLTI5MDYyNTE5MSwtMTc3NDU4NTk3NCwzOTQ5MjY2
+MDEsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMsMTMzNT
+QzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOTcyOTk4
+LDE0NDU4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OT
+czODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzZd
 fQ==
 -->
