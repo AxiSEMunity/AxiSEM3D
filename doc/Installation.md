@@ -277,7 +277,6 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 git -C AxiSEM3D pull
 
 # environment modules
-# purge intel-17 components
 module load intel/bundles/complib/2019.3
 module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 module load cmake-3.12.0-intel-17.0.4-donirfx
@@ -321,11 +320,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEyNTIxNTY4MzYsMTg5OTcwMjY0NywtOD
-c5NjU3NDA1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIw
-NjkwLC02ODM5MjAyNDcsMTgwMjA2MTk0OCwtMjA0NzE0OTcyMy
-wtMjA0NzE0OTcyMywyOTc5NzkyODksLTI2Mjg5Nzg1NiwtMTcy
-MDM5NzQ1NywxMjU2MTY3OTIxLC0yOTA2MjUxOTEsLTE3NzQ1OD
-U5NzQsMzk0OTI2NjAxLDg5MzgwMzA4NSwtOTg5NzEyODM4LDk1
-NjY5OTYzXX0=
+eyJoaXN0b3J5IjpbLTU2MzI2NDI1LDE4OTk3MDI2NDcsLTg3OT
+Y1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5
+MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLTIwNDcxNDk3MjMsLT
+IwNDcxNDk3MjMsMjk3OTc5Mjg5LC0yNjI4OTc4NTYsLTE3MjAz
+OTc0NTcsMTI1NjE2NzkyMSwtMjkwNjI1MTkxLC0xNzc0NTg1OT
+c0LDM5NDkyNjYwMSw4OTM4MDMwODUsLTk4OTcxMjgzOCw5NTY2
+OTk2M119
 -->
