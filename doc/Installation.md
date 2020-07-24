@@ -240,9 +240,11 @@ module load cray-netcdf/4.6.1.3
 # users only need to load the right version
 module load cray-hdf5/1.10.2.0
 
+# create build directory
+mkdir -p build && cd build
 # cmake
 # the paths of FFTW, Metis and NetCDF are found by 'module show'
-mkdir -p build && cd build
+# -fPIC is required by the system
 rm -rf ./* && cmake -Dcxx=CC \
 -Dflags="-O3 -DNDEBUG -fPIC" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
@@ -322,7 +324,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg1ODIwNDU1MiwxNTQwNTY3OTI4LDE4OT
+eyJoaXN0b3J5IjpbLTk4NzIwODQ5OCwxNTQwNTY3OTI4LDE4OT
 k3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQw
 MDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLT
 IwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC0yNjI4
