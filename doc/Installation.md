@@ -289,7 +289,7 @@ make -j8
 
 ```bash
 #!/bin/bash
-# setenv_AxiSEM3D_ARCHER.sh
+# setenv_AxiSEM3D_CSD3.sh
 
 # environment modules
 module load intel/bundles/complib/2019.3
@@ -360,11 +360,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTExNjAzMTkwNSwyMDMxMjY2Mjc1LDQ4Nj
-AwMTA5MywxOTkyNTE1NDU3LDEyNzk3OTYyNywxOTMzNjkyNjg1
-LC0xOTM5OTkyMjgxLC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLT
-ExMDcyOTk4NywxMzI3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIx
-NDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3OD
-YsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMTQy
-Mjc3ODA0MF19
+eyJoaXN0b3J5IjpbLTE0ODEwOTY5NTUsMjAzMTI2NjI3NSw0OD
+YwMDEwOTMsMTk5MjUxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4
+NSwtMTkzOTk5MjI4MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC
+0xMTA3Mjk5ODcsMTMyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEy
+MTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNz
+g2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0
+MjI3NzgwNDBdfQ==
 -->
