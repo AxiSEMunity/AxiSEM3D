@@ -207,7 +207,7 @@ conda install -c anaconda -y netcdf4
 # find conda path via executable
 export conda_path=$(dirname $(dirname $(which conda)))
 
-# create and cd into build/
+# create and cd into build
 mkdir -p build && cd build
 
 # cmake
@@ -345,7 +345,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTYzNzYzMTc4MywtMTEyNDQwMzk5NCw4NT
+eyJoaXN0b3J5IjpbLTc3NTA5NjUwMCwtMTEyNDQwMzk5NCw4NT
 EyMTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIx
 Nzg2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLD
 E0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQw
