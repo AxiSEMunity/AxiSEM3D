@@ -294,7 +294,7 @@ rm -rf ./* && cmake -Dcxx=mpicxx \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
--Dmetis=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/metis-5.1.0-fgrknihgrkbvrewdqgr5x6dq4a6pfek3 \
+-Dmetis=/home/zl382/rds/hpc-work/Libs/anaconda3 \
 -Dnetcdf=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/netcdf-4.4.1.1-zysrbqwgar43zq7pisurzuhnk6iix3bf \
 ../AxiSEM3D/SOLVER/
 
@@ -320,11 +320,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjcyNTYxMDI4LC04Nzk2NTc0MDUsMTQ2MT
-A4MjQ0NSwxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0
-NywxODAyMDYxOTQ4LC0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLD
-I5Nzk3OTI4OSwtMjYyODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYx
-Njc5MjEsLTI5MDYyNTE5MSwtMTc3NDU4NTk3NCwzOTQ5MjY2MD
-EsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMsMTMzNTQz
-NTM3MV19
+eyJoaXN0b3J5IjpbMTg5OTcwMjY0NywtODc5NjU3NDA1LDE0Nj
+EwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02ODM5MjAy
+NDcsMTgwMjA2MTk0OCwtMjA0NzE0OTcyMywtMjA0NzE0OTcyMy
+wyOTc5NzkyODksLTI2Mjg5Nzg1NiwtMTcyMDM5NzQ1NywxMjU2
+MTY3OTIxLC0yOTA2MjUxOTEsLTE3NzQ1ODU5NzQsMzk0OTI2Nj
+AxLDg5MzgwMzA4NSwtOTg5NzEyODM4LDk1NjY5OTYzLDEzMzU0
+MzUzNzFdfQ==
 -->
