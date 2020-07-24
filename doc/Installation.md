@@ -206,11 +206,11 @@ conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
 conda install -c anaconda -y netcdf4
 
-# find conda path via executable
-export conda_path=$(dirname $(dirname $(which conda)))
-
 # create and cd into build
 mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
+
+# find conda path via executable
+export conda_path=$(dirname $(dirname $(which conda)))
 
 # cmake
 rm -rf ./* && cmake -Dcxx=mpicxx \
@@ -225,9 +225,11 @@ make -j8
 
 #### 3.2. The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GCC):
 
+Environment setup:
+
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_ARCHER.sh
+# install_AxiSEM3D_ARCHER_ENV.sh
 
 # environment modules and variables
 module switch PrgEnv-cray PrgEnv-gnu
@@ -321,11 +323,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NT
-EyMTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIx
-Nzg2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLD
-E0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQw
-NTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyND
-Q1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4
-MDIwNjE5NDhdfQ==
+eyJoaXN0b3J5IjpbMTQwMTgxMDY1MiwxMzI3MDcwMDQ0LC0xMT
+I0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5
+NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLT
+E3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3
+MTUyNDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3ND
+A1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02
+ODM5MjAyNDddfQ==
 -->
