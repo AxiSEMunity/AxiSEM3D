@@ -116,7 +116,7 @@ Because *build/* must be emptied every time before redoing `cmake`, it is good p
 Next, run `cmake`, for example:
 ```bash
 # cmake
-rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
+rm -rf ./* && cmake -Dcxx=mpicxx \
 -Deigen=$HOME/AxiSEM3D_2020/dependencies/eigen-master \
 -Dboost=$HOME/AxiSEM3D_2020/dependencies/boost_1_73_0 \
 -Dfftw=$HOME/anaconda3 \
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NT
-g2MTI0MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMs
-NjgyMDg0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4Nj
-A4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAw
-LDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOT
-g1NzExNjQ0LC0xODY5MDQ0MTk2LC0xNTc5NTU4OTIsMTY0MjA1
-Nzc0N119
+eyJoaXN0b3J5IjpbMTIwNDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MT
+k3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3ODQ3OSwxOTQ3MDYzMjI4
+LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OT
+Q4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAw
+LDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLC0xMT
+AyMzQwMTExLC05ODU3MTE2NDQsLTE4NjkwNDQxOTYsLTE1Nzk1
+NTg5Ml19
 -->
