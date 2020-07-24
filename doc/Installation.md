@@ -290,7 +290,7 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 # the paths of FFTW, Metis and NetCDF are found by "module show"
 mkdir -p build && cd build
 rm -rf ./* && cmake -Dcxx=mpicxx \
--Dflags="-O2 -DNDEBUG" \
+-Dflags="-O3 -DNDEBUG" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
@@ -320,11 +320,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MD
-czMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5
-NDgsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC
-0yNjI4OTc4NTYsLTE3MjAzOTc0NTcsMTI1NjE2NzkyMSwtMjkw
-NjI1MTkxLC0xNzc0NTg1OTc0LDM5NDkyNjYwMSw4OTM4MDMwOD
-UsLTk4OTcxMjgzOCw5NTY2OTk2MywxMzM1NDM1MzcxLDEyMDQy
-NjQwMzJdfQ==
+eyJoaXN0b3J5IjpbMjcyNTYxMDI4LC04Nzk2NTc0MDUsMTQ2MT
+A4MjQ0NSwxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0
+NywxODAyMDYxOTQ4LC0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLD
+I5Nzk3OTI4OSwtMjYyODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYx
+Njc5MjEsLTI5MDYyNTE5MSwtMTc3NDU4NTk3NCwzOTQ5MjY2MD
+EsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMsMTMzNTQz
+NTM3MV19
 -->
