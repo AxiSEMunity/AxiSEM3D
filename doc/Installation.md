@@ -159,7 +159,7 @@ A few complete examples are provided below. On an HPC cluster, the major variabi
 * loading a proper compiler and its compatible software bundles;
 * sending the correct compiler flags and link options.
 
-Instructions should be elaborated in the user manual of the machine.
+Detailed instructions can usually be found in the user manual of the cluster.
 
  
 
@@ -313,7 +313,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTU2NjY0ODQwNSwxMzM1NDM1MzcxLDEyMD
+eyJoaXN0b3J5IjpbMTQyMTc3MDg2OSwxMzM1NDM1MzcxLDEyMD
 QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
 MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
 g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
