@@ -155,7 +155,7 @@ If you see an error message saying *missing input directory*, it means that AxiS
 
 
 ### 3. Complete examples
-A few examples are provided below, the first for a laptop or local workstation. 
+A few examples are provided below, the first for a laptop or a local workstation with `conda` and the others for some HPC clusters. These scripts encompass 
 
 On an HPC cluster, the major variability comes from environment setup, such as 
 * defining essential environment variables;
@@ -331,7 +331,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA5NjI2MzUyOCwtMTgyNjQyMTgxNCwxNT
+eyJoaXN0b3J5IjpbLTk4OTI4NDU4OCwtMTgyNjQyMTgxNCwxNT
 A4MDI5NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLDE4ODQ2MTMz
 MDksLTE3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC
 0xNjg3MTUyNDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5
