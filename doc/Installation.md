@@ -180,17 +180,17 @@ wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 
 [ ! -d ./dependencies/boost_1_73_0 ] && \
 wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
 
+# download AxiSEM3D (check existence before download)
+[ ! -d ./AxiSEM3D ] && \
+git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+git -C AxiSEM3D pull
+
 # install FFTW, Metis and NetCDF
 conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
 conda install -c anaconda -y netcdf4
 # conda path
 export conda_path=$(dirname $(dirname $(which conda)))
-
-# download AxiSEM3D (check existence before download)
-[ ! -d ./AxiSEM3D ] && \
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
-git -C AxiSEM3D pull
 
 # cmake
 mkdir -p build && cd build
@@ -315,11 +315,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NzQ1ODU5NzQsMzk0OTI2NjAxLDg5Mz
-gwMzA4NSwtOTg5NzEyODM4LDk1NjY5OTYzLDEzMzU0MzUzNzEs
-MTIwNDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1OD
-YxMjQxLDI5MDE3ODQ3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2
-ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MD
-g2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDBd
+eyJoaXN0b3J5IjpbMTg4MTkyOTk5NCwtMTc3NDU4NTk3NCwzOT
+Q5MjY2MDEsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMs
+MTMzNTQzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOT
+cyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgs
+MzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05MTk5ND
+g3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDBd
 fQ==
 -->
