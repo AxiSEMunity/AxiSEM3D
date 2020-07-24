@@ -232,13 +232,13 @@ rm -rf ./* && cmake -Dcxx=mpicxx \
 make -j8
 ```
 
-#### 3.2. The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GCC):
+#### 3.3. The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GCC):
 
 * Environment setup
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_ARCHER_ENV.sh
+# setenv_ARCHER.sh
 
 # environment modules and variables
 module switch PrgEnv-cray PrgEnv-gnu
@@ -254,7 +254,7 @@ module load cray-netcdf/4.6.1.3
 # users only need to load the right version
 module load cray-hdf5/1.10.2.0
 ```
-The above script must also be called by the job-submission script (submitted by `qsub`).
+**NOTE**: The above script must also be called by the job-submission script (submitted by `qsub`).
 
 
 * Build AxiSEM3D
@@ -339,11 +339,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDg2MDAxMDkzLDE5OTI1MTU0NTcsMTI3OT
-c5NjI3LDE5MzM2OTI2ODUsLTE5Mzk5OTIyODEsLTE5NDA3MjM0
-NDMsLTQ0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLT
-ExMjQ0MDM5OTQsODUxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgw
-Mjk1MzAsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOS
-wtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2
-ODcxNTI0MzVdfQ==
+eyJoaXN0b3J5IjpbMTc5OTI2NDEwNSw0ODYwMDEwOTMsMTk5Mj
+UxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4NSwtMTkzOTk5MjI4
+MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC0xMTA3Mjk5ODcsMT
+MyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEyMTQ0NzEsLTE4MjY0
+MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5My
+wxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMy
+MDAzNDY4OF19
 -->
