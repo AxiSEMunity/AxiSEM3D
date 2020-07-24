@@ -132,7 +132,7 @@ cxx| C++ compiler | g++ | Must support C++17.
 eigen, boost, fftw, metis, netcdf| paths of the dependencies | empty | Such a path should contain both *lib/* and *include/*. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
 hdf5 | path of HDF5 | empty | If NetCDF has been built as a static library, linking will fail with missing `_H5_` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build NetCDF.
 par_netcdf | invoke parallel NetCDF | false | Parallel NetCDF is supported but not mandatory because of its tricky installation.
-`flags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
+flags|compiler flags | empty | If presented, they will overwrite the flags automatically determ`cmake`. Different systems and compilers may require different additional flags.
 `libs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
 `npol`|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 `double` | to compile the solver in double precision or not |false|Using double precision increases memory usage but barely affects solver performance.
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ4NzAzNzI0MiwxMjA0MjY0MDMyLC00ND
-M2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5
-LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4Mz
-M1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEs
-LTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
-NDE5Nl19
+eyJoaXN0b3J5IjpbLTE3MTU0MzQ5NzAsMTIwNDI2NDAzMiwtND
+QzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3ODQ3
+OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxOD
+MzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYx
+LC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxND
+I5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4Njkw
+NDQxOTZdfQ==
 -->
