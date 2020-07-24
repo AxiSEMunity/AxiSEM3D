@@ -164,6 +164,8 @@ On a cluster, the major variability comes from environment setup, such as
 
 Detailed instructions can usually be found in the user manual of the cluster.
 
+#### 3.1. Download 
+
  
 
 #### 3.1. A laptop or workstation with `conda` (GCC):
@@ -331,7 +333,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyNzI1ODU0MSw4NTEyMTQ0NzEsLTE4Mj
+eyJoaXN0b3J5IjpbMTY0ODY2OTkwOSw4NTEyMTQ0NzEsLTE4Mj
 Y0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5
 MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMT
 MyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3
