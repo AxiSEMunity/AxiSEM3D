@@ -260,7 +260,11 @@ module load cray-hdf5/1.10.2.0
 * Build AxiSEM3D
 
 ```bash
-# create build under the top-level 
+#!/bin/bash
+# build_AxiSEM3D_ARCHER.sh
+
+# create build under the top working directory
+export AxiSEM3D_WORK_DIR=$HOME/AxiSEM3D_2020
 mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 
 # cmake
@@ -339,7 +343,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDY5MDMxNzM4LDQ4NjAwMTA5MywxOTkyNT
+eyJoaXN0b3J5IjpbOTc4MTc1OTQ5LDQ4NjAwMTA5MywxOTkyNT
 E1NDU3LDEyNzk3OTYyNywxOTMzNjkyNjg1LC0xOTM5OTkyMjgx
 LC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLTExMDcyOTk4NywxMz
 I3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQy
