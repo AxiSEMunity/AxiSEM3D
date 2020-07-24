@@ -105,7 +105,7 @@ If a package is missing, one may
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 ```
 
-#### 2.2. Configure by cmake
+#### 2.2. Configure by `cmake`
 First, create a *build/* directory:
 ```bash
 # create and cd into build
@@ -139,7 +139,7 @@ double | to compile the solver in double precision |false|Using double precision
 
 These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt` (unrecommended). Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure that the compiler, the flags and the dependencies have been correctly set.
 
-#### 2.3. Compile and link by make
+#### 2.3. Compile and link by `make`
 To compile and link AxiSEM3D:
 ```bash
 # -j8 means using 8 threads to accelerate compilation
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg1NDczODUxMSwxMzM1NDM1MzcxLDEyMD
-QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
-MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
-g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
-MTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
-NjQ0XX0=
+eyJoaXN0b3J5IjpbLTE3NDQ2NTk2NTksMTMzNTQzNTM3MSwxMj
+A0MjY0MDMyLC00NDM2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEy
+NDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4Mj
+A4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3
+LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxND
+I5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcx
+MTY0NF19
 -->
