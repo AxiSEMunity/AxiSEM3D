@@ -201,6 +201,9 @@ git -C AxiSEM3D pull
 #### 3.2. A laptop or workstation with `conda` (GCC):
 * Install FFTW, Metis and NetCDF:
 ```bash
+#!/bin/bash
+# install_FFTW_Metis_NetCDF_conda.sh
+
 conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
 conda install -c anaconda -y netcdf4
@@ -336,11 +339,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTg3OTAxMDU5NCwxOTkyNTE1NDU3LDEyNz
-k3OTYyNywxOTMzNjkyNjg1LC0xOTM5OTkyMjgxLC0xOTQwNzIz
-NDQzLC00NDUwNzAyMTQsLTExMDcyOTk4NywxMzI3MDcwMDQ0LC
-0xMTI0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4
-MDI5NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLDE4ODQ2MTMzMD
-ksLTE3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC0x
-Njg3MTUyNDM1XX0=
+eyJoaXN0b3J5IjpbLTY1MzEzNjE0LDE5OTI1MTU0NTcsMTI3OT
+c5NjI3LDE5MzM2OTI2ODUsLTE5Mzk5OTIyODEsLTE5NDA3MjM0
+NDMsLTQ0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLT
+ExMjQ0MDM5OTQsODUxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgw
+Mjk1MzAsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOS
+wtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2
+ODcxNTI0MzVdfQ==
 -->
