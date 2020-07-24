@@ -137,7 +137,7 @@ par_netcdf | invoke parallel NetCDF | false | Parallel NetCDF is supported but n
 npol|polynomial order of spectral elements |4| It must be an integer from 1 to 8.
 double | to compile the solver in double precision |false|Using double precision increases memory usage but barely affects solver performance.
 
-These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt` (unrecommended). Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure that the compilers, the flags and the dependencies have been correctly set.
+These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt` (unrecommended). Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure that the compiler, the flags and the dependencies have been correctly set.
 
 #### 2.3. Compile and link by `make`
 To compile and link AxiSEM3D:
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMzNTQzNTM3MSwxMjA0MjY0MDMyLC00ND
-M2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5
-LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4Mz
-M1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEs
-LTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
-NDE5Nl19
+eyJoaXN0b3J5IjpbLTEyNjA4MzgyMjQsMTMzNTQzNTM3MSwxMj
+A0MjY0MDMyLC00NDM2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEy
+NDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4Mj
+A4NDUwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3
+LDExNDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxND
+I5OTc3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcx
+MTY0NF19
 -->
