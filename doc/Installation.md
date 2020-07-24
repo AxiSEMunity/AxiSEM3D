@@ -206,17 +206,13 @@ conda install -c anaconda -y metis
 conda install -c anaconda -y netcdf4
 ```
 
-* Bui
+* Build AxiSEM3D:
 ```bash
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
-# install FFTW, Metis and NetCDF by conda
-conda install -c conda-forge -y fftw
-conda install -c anaconda -y metis
-conda install -c anaconda -y netcdf4
-
-# create and cd into build
+# create build under the top working directory
+export AxiSEM3D_WORK_DIR=$HOME/AxiSEM3D_2020
 mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 
 # find conda path via executable
@@ -340,7 +336,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2MTUwNzI5NCwxOTkyNTE1NDU3LDEyNz
+eyJoaXN0b3J5IjpbLTg3OTAxMDU5NCwxOTkyNTE1NDU3LDEyNz
 k3OTYyNywxOTMzNjkyNjg1LC0xOTM5OTkyMjgxLC0xOTQwNzIz
 NDQzLC00NDUwNzAyMTQsLTExMDcyOTk4NywxMzI3MDcwMDQ0LC
 0xMTI0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4
