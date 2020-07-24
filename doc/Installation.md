@@ -255,11 +255,11 @@ rm -rf ./* && cmake -Dcxx=CC \
 make -j8
 ```
 
-#### 3.3. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/) (Intel C++):
+#### 3.3. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/), knl partition (Intel C++):
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_CSD3.sh
+# install_AxiSEM3D_CSD3_knl.sh
 
 # create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -277,6 +277,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 git -C AxiSEM3D pull
 
 # environment modules
+# purge intel-17 components
 module load intel/bundles/complib/2019.3
 module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 module load cmake-3.12.0-intel-17.0.4-donirfx
@@ -290,11 +291,11 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 # the paths of FFTW, Metis and NetCDF are found by "module show"
 mkdir -p build && cd build
 rm -rf ./* && cmake -Dcxx=mpicxx \
--Dflags="-O3 -DNDEBUG" \
+-Dflags="-O2 -DNDEBUG -xHost" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
--Dmetis=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/gcc-4.8.5/metis-5.1.0-fgrknihgrkbvrewdqgr5x6dq4a6pfek3 \
+-Dmetis=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/metis-5.1.0-r6z4bz6frgdd7flrrmoyxccliij5fwm7 \
 -Dnetcdf=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/netcdf-4.4.1.1-zysrbqwgar43zq7pisurzuhnk6iix3bf \
 ../AxiSEM3D/SOLVER/
 
@@ -320,11 +321,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjcyNTYxMDI4LDE4OTk3MDI2NDcsLTg3OT
-Y1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5
-MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLTIwNDcxNDk3MjMsLT
-IwNDcxNDk3MjMsMjk3OTc5Mjg5LC0yNjI4OTc4NTYsLTE3MjAz
-OTc0NTcsMTI1NjE2NzkyMSwtMjkwNjI1MTkxLC0xNzc0NTg1OT
-c0LDM5NDkyNjYwMSw4OTM4MDMwODUsLTk4OTcxMjgzOCw5NTY2
-OTk2M119
+eyJoaXN0b3J5IjpbLTEzODkzMDU2OTgsMTg5OTcwMjY0NywtOD
+c5NjU3NDA1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIw
+NjkwLC02ODM5MjAyNDcsMTgwMjA2MTk0OCwtMjA0NzE0OTcyMy
+wtMjA0NzE0OTcyMywyOTc5NzkyODksLTI2Mjg5Nzg1NiwtMTcy
+MDM5NzQ1NywxMjU2MTY3OTIxLC0yOTA2MjUxOTEsLTE3NzQ1OD
+U5NzQsMzk0OTI2NjAxLDg5MzgwMzA4NSwtOTg5NzEyODM4LDk1
+NjY5OTYzXX0=
 -->
