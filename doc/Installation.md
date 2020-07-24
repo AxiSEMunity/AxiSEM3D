@@ -99,6 +99,7 @@ If a package is missing, one may
 
 
 ### 2. Building AxiSEM3D
+
 #### 2.1. Download the code
 ```bash
 # download under the top-level working directory
@@ -314,11 +315,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMzk0OTI2NjAxLDg5MzgwMzA4NSwtOTg5Nz
-EyODM4LDk1NjY5OTYzLDEzMzU0MzUzNzEsMTIwNDI2NDAzMiwt
-NDQzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3OD
-Q3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMx
-ODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4ND
-YxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMF19
+eyJoaXN0b3J5IjpbMTI3NDUxNDMsMzk0OTI2NjAxLDg5MzgwMz
+A4NSwtOTg5NzEyODM4LDk1NjY5OTYzLDEzMzU0MzUzNzEsMTIw
+NDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1ODYxMj
+QxLDI5MDE3ODQ3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIw
+ODQ1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2Ny
+wxMTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDBdfQ==
 
 -->
