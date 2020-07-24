@@ -169,7 +169,7 @@ Detailed instructions can usually be found in the user manual of the cluster.
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
-# create a top-level working directory and cd into it
+# create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -313,11 +313,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ5ODY2ODc5NCwxMzM1NDM1MzcxLDEyMD
-QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
-MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
-g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
-MTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
-NjQ0XX0=
+eyJoaXN0b3J5IjpbOTU2Njk5NjMsMTMzNTQzNTM3MSwxMjA0Mj
+Y0MDMyLC00NDM2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEs
+MjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4ND
+UwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDEx
+NDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OT
+c3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0
+NF19
 -->
