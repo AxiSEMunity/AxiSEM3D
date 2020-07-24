@@ -230,20 +230,8 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_ARCHER.sh
 
-# create and cd into a top-level working directory
-mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
-
-# download Eigen and Boost (check existence before download)
-mkdir -p dependencies
-[ ! -d ./dependencies/eigen-master ] && \
-wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
-[ ! -d ./dependencies/boost_1_73_0 ] && \
-wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
-
-# download AxiSEM3D (check existence before download)
-[ ! -d ./AxiSEM3D ] && \
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
-git -C AxiSEM3D pull
+# cd into the top-level working directory
+cd $AxiSEM3D_WORK_DIR
 
 # environment modules and variables
 module switch PrgEnv-cray PrgEnv-gnu
@@ -348,7 +336,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwMDkyOTAwNSwtMTEyNDQwMzk5NCw4NT
+eyJoaXN0b3J5IjpbMjA2NjYxMTgzMSwtMTEyNDQwMzk5NCw4NT
 EyMTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIx
 Nzg2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLD
 E0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQw
