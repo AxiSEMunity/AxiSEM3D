@@ -126,10 +126,10 @@ rm -rf ./* && cmake -Dcxx=mpicxx \
 ```
 
 It takes the following arguments, passed to `cmake` by `-D` definitions:
-Parameter|Role|Default|Note
+Argument|Role|Default|Note
 --- | --- | ---|---
-`cxx`| C++ compiler | g++ | Must support C++17.
-`eigen`, `boost`, `fftw`, `metis`, `netcdf`| paths of the dependencies | empty | Such a path should contain both *lib/* and *include/*. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
+cxx| C++ compiler | g++ | Must support C++17.
+eigen, boost, fftw, metis, netcdf| paths of the dependencies | empty | Such a path should contain both *lib/* and *include/*. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
 `hdf5` | path of `HDF5` | empty | If `NetCDF` has been built as a static library, linking will fail with missing `_H5` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build `NetCDF`.
 `par_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `flags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQwODk2NDE2MSwxMjA0MjY0MDMyLC00ND
-M2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5
-LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4Mz
-M1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEs
-LTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
-k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
-NDE5Nl19
+eyJoaXN0b3J5IjpbLTEzMjI5MDI3NzUsMTIwNDI2NDAzMiwtND
+QzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3ODQ3
+OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxOD
+MzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYx
+LC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxND
+I5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2NDQsLTE4Njkw
+NDQxOTZdfQ==
 -->
