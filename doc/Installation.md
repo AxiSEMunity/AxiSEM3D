@@ -212,7 +212,7 @@ conda install -c anaconda -y netcdf4
 * Build AxiSEM3D:
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_conda.sh
+# build_AxiSEM3D_conda.sh
 
 # create build under the top working directory
 export AxiSEM3D_WORK_DIR=$HOME/AxiSEM3D_2020
@@ -339,7 +339,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY1MzEzNjE0LDE5OTI1MTU0NTcsMTI3OT
+eyJoaXN0b3J5IjpbNDg2MDAxMDkzLDE5OTI1MTU0NTcsMTI3OT
 c5NjI3LDE5MzM2OTI2ODUsLTE5Mzk5OTIyODEsLTE5NDA3MjM0
 NDMsLTQ0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLT
 ExMjQ0MDM5OTQsODUxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgw
