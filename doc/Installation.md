@@ -154,14 +154,14 @@ If you see an error message saying *missing input directory*, it means that AxiS
 
 #### 2.4. Complete examples
 A few complete examples are provided below. On an HPC cluster, the major variability comes from environment setup, such as 
-* defining essential environment variables 
-* loading a proper compiler and its compatible software bundles
-* sending the correct compiler flags and link options. 
+* defining essential environment variables;
+* loading a proper compiler and its compatible software bundles;
+* sending the correct compiler flags and link options.
 
 Such steps should be elaborated in the user manual of the machine.
  
 
-* A laptop or workstation with `conda` (GNU compilers):
+2.4.1 A laptop or workstation with `conda` (GNU compilers):
 
 ```bash
 #!/bin/bash
@@ -311,11 +311,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjUzNDQ3MzIzLDEzMzU0MzUzNzEsMTIwND
-I2NDAzMiwtNDQzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQx
-LDI5MDE3ODQ3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwOD
-Q1MDEsLTMxODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2Nywx
-MTQ4NDg4NDYxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOT
-k3NzYwMCwxNDI5OTc3NjAwLC0xMTAyMzQwMTExLC05ODU3MTE2
-NDRdfQ==
+eyJoaXN0b3J5IjpbLTU3OTYwODQ2NiwxMzM1NDM1MzcxLDEyMD
+QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
+MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
+g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
+MTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mj
+k5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzEx
+NjQ0XX0=
 -->
