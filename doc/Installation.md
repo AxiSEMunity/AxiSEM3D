@@ -323,8 +323,8 @@ mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
 -Dlinks="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl" \
--Deigen=$(dirname $PWD)/dependencies/eigen-master \
--Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
+-Deigen=$AxiSEM3D_WORK_DIR/dependencies/eigen-master \
+-Dboost=$AxiSEM3D_WORK_DIR/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
 -Dmetis=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/metis-5.1.0-r6z4bz6frgdd7flrrmoyxccliij5fwm7 \
 -Dnetcdf=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/netcdf-4.4.1.1-zysrbqwgar43zq7pisurzuhnk6iix3bf \
@@ -353,11 +353,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODI0MjkxNjQsMjAzMTI2NjI3NSw0OD
-YwMDEwOTMsMTk5MjUxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4
-NSwtMTkzOTk5MjI4MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC
-0xMTA3Mjk5ODcsMTMyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEy
-MTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNz
-g2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0
-MjI3NzgwNDBdfQ==
+eyJoaXN0b3J5IjpbNjM2ODA3MTAyLC0xNDgyNDI5MTY0LDIwMz
+EyNjYyNzUsNDg2MDAxMDkzLDE5OTI1MTU0NTcsMTI3OTc5NjI3
+LDE5MzM2OTI2ODUsLTE5Mzk5OTIyODEsLTE5NDA3MjM0NDMsLT
+Q0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0
+MDM5OTQsODUxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1Mz
+AsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcx
+ODc2OTI1M119
 -->
