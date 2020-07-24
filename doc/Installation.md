@@ -189,7 +189,7 @@ export conda_path=$(dirname $(dirname $(which conda)))
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
-git pull
+git -C AxiSEM3D pull
 
 # cmake
 mkdir -p build && cd build
@@ -314,11 +314,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Nj
-k5NjMsMTMzNTQzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0Mywt
-NDUxOTcyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNj
-MyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05
-MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMT
-Y5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDBd
-fQ==
+eyJoaXN0b3J5IjpbMzk0OTI2NjAxLDg5MzgwMzA4NSwtOTg5Nz
+EyODM4LDk1NjY5OTYzLDEzMzU0MzUzNzEsMTIwNDI2NDAzMiwt
+NDQzNjQ5NDMsLTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3OD
+Q3OSwxOTQ3MDYzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMx
+ODMzNTAyMCwtOTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4ND
+YxLC0xMTA4MjE2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMF19
+
 -->
