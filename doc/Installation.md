@@ -165,8 +165,8 @@ A few examples are provided, one for a laptop or workstation with `conda` and th
 3. build AxiSEM3D
 
 On a cluster, the major complexity comes from environment setup, such as 
-* defining essential environment variables;
-* loading a compiler and its compatible software bundles;
+* defining environment variables;
+* loading a compiler suite and its compatible modules;
 * using the correct compiler flags and link options.
 
 Detailed instructions can usually be found in the user manual of the cluster.
@@ -333,11 +333,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg5MTU1ODQ0MiwxOTMzNjkyNjg1LC0xOT
-M5OTkyMjgxLC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLTExMDcy
-OTk4NywxMzI3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIxNDQ3MS
-wtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3ODYsODAw
-Mzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMTQyMjc3OD
-A0MCwxMzIwMDM0Njg4LC0xNjg3MTUyNDM1LDE1NDA1Njc5Mjgs
-MTg5OTcwMjY0N119
+eyJoaXN0b3J5IjpbMTI3OTc5NjI3LDE5MzM2OTI2ODUsLTE5Mz
+k5OTIyODEsLTE5NDA3MjM0NDMsLTQ0NTA3MDIxNCwtMTEwNzI5
+OTg3LDEzMjcwNzAwNDQsLTExMjQ0MDM5OTQsODUxMjE0NDcxLC
+0xODI2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Niw4MDAz
+Nzg5OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MD
+QwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwx
+ODk5NzAyNjQ3XX0=
 -->
