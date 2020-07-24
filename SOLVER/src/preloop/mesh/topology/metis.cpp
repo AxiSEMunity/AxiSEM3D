@@ -114,11 +114,12 @@ namespace metis {
         
         // weights
         idx_t *vwgt = NULL;
+        eigen::IIColX iweights; // must be defined outside if
         if (weights.rows() == nelem) {
             // first normalize then magnify to avoid over/underflow
             double imax = std::numeric_limits<idx_t>::max() * .9;
-            eigen::IIColX iweights = (weights / weights.sum() *
-                                      imax).array().round().cast<idx_t>();
+            iweights = (weights / weights.sum() *
+                        imax).array().round().cast<idx_t>();
             vwgt = iweights.data();
         }
         
