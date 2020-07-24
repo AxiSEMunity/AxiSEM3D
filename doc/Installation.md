@@ -284,7 +284,7 @@ make -j8
 ```
 
 
-#### 3.3. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/) (Intel C++):
+#### 3.4. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/) (Intel C++):
 
 ```bash
 #!/bin/bash
@@ -343,11 +343,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjAzMTI2NjI3NSw0ODYwMDEwOTMsMTk5Mj
-UxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4NSwtMTkzOTk5MjI4
-MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC0xMTA3Mjk5ODcsMT
-MyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEyMTQ0NzEsLTE4MjY0
-MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5My
-wxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMy
-MDAzNDY4OF19
+eyJoaXN0b3J5IjpbMTYyMDQ1ODkxNiwyMDMxMjY2Mjc1LDQ4Nj
+AwMTA5MywxOTkyNTE1NDU3LDEyNzk3OTYyNywxOTMzNjkyNjg1
+LC0xOTM5OTkyMjgxLC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLT
+ExMDcyOTk4NywxMzI3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIx
+NDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3OD
+YsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMTQy
+Mjc3ODA0MF19
 -->
