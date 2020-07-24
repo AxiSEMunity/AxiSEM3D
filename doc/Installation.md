@@ -163,7 +163,7 @@ Detailed instructions can usually be found in the user manual of the cluster.
 
  
 
-#### 3.1 A laptop or workstation with `conda` (GNU compilers):
+#### 3.1. A local laptop or workstation with `conda` (GCC):
 
 ```bash
 #!/bin/bash
@@ -313,7 +313,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM0MTEwMzgzNiwxMzM1NDM1MzcxLDEyMD
+eyJoaXN0b3J5IjpbMTQ5ODY2ODc5NCwxMzM1NDM1MzcxLDEyMD
 QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
 MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
 g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
