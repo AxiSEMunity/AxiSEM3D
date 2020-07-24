@@ -318,8 +318,8 @@ mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 # 2) -xMIC-AVX512 is required on KNL partition; 
 #    use -xCORE-AVX512 for skylake and -xCORE-AVX2 for pascal
 # 3) -DEIGEN_USE_MKL_ALL asks Eigen to use Intel MKL, and the
-#    link options required by MKL are sent by -Dlinks; remove
-#    -DEIGEN_USE_MKL_ALL and -Dlinks to disable MKL
+#    link options required by MKL are sent by -Dlinks;
+#    remove -DEIGEN_USE_MKL_ALL and -Dlinks to disable MKL
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
 -Dlinks="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl" \
@@ -353,11 +353,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyMzUyMTA0LC0xNDgyNDI5MTY0LDIwMz
-EyNjYyNzUsNDg2MDAxMDkzLDE5OTI1MTU0NTcsMTI3OTc5NjI3
-LDE5MzM2OTI2ODUsLTE5Mzk5OTIyODEsLTE5NDA3MjM0NDMsLT
-Q0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0
-MDM5OTQsODUxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1Mz
-AsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcx
-ODc2OTI1M119
+eyJoaXN0b3J5IjpbMTQ5NjQ3ODEyMiwxMzIzNTIxMDQsLTE0OD
+I0MjkxNjQsMjAzMTI2NjI3NSw0ODYwMDEwOTMsMTk5MjUxNTQ1
+NywxMjc5Nzk2MjcsMTkzMzY5MjY4NSwtMTkzOTk5MjI4MSwtMT
+k0MDcyMzQ0MywtNDQ1MDcwMjE0LC0xMTA3Mjk5ODcsMTMyNzA3
+MDA0NCwtMTEyNDQwMzk5NCw4NTEyMTQ0NzEsLTE4MjY0MjE4MT
+QsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5MywxODg0
+NjEzMzA5XX0=
 -->
