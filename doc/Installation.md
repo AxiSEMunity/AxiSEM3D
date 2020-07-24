@@ -245,7 +245,7 @@ module load cray-netcdf/4.6.1.3
 # users only need to load the right version
 module load cray-hdf5/1.10.2.0
 ```
-The above script must also be called by the job submission script (`qsub`).
+The above script must also be called by the job-submission script (submitted by `qsub`).
 
 
 * Build AxiSEM3D
@@ -330,11 +330,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExMDcyOTk4NywxMzI3MDcwMDQ0LC0xMT
-I0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5
-NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLT
-E3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3
-MTUyNDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3ND
-A1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02
-ODM5MjAyNDddfQ==
+eyJoaXN0b3J5IjpbLTQ0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMj
+cwNzAwNDQsLTExMjQ0MDM5OTQsODUxMjE0NDcxLC0xODI2NDIx
+ODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMT
+g4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAw
+MzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwxODk5NzAyNj
+Q3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0MDAyLC02
+MzA1MjA2OTBdfQ==
 -->
