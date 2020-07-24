@@ -273,12 +273,13 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
-module purge
-module load git
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 git -C AxiSEM3D pull
 
 # environment modules
+# purge intel-17 components
+module purge
+module load git
 module load intel/bundles/complib/2019.3
 module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
 module load cmake-3.12.0-intel-17.0.4-donirfx
@@ -322,7 +323,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTc2NDAxNjc4NiwxODAyMDYxOTQ4LC0yMD
+eyJoaXN0b3J5IjpbLTY4MzkyMDI0NywxODAyMDYxOTQ4LC0yMD
 Q3MTQ5NzIzLC0yMDQ3MTQ5NzIzLDI5Nzk3OTI4OSwtMjYyODk3
 ODU2LC0xNzIwMzk3NDU3LDEyNTYxNjc5MjEsLTI5MDYyNTE5MS
 wtMTc3NDU4NTk3NCwzOTQ5MjY2MDEsODkzODAzMDg1LC05ODk3
