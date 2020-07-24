@@ -272,8 +272,8 @@ mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 # 2) -fPIC is required by the system
 rm -rf ./* && cmake -Dcxx=CC \
 -Dflags="-O3 -DNDEBUG -fPIC" \
--Deigen=$(dirname $PWD)/dependencies/eigen-master \
--Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
+-Deigen=$AxiSEM3D_WORK_DIR/dependencies/eigen-master \
+-Dboost=$AxiSEM3D_WORK_DIR/dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
 -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
 -Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
@@ -343,11 +343,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTc4MTc1OTQ5LDQ4NjAwMTA5MywxOTkyNT
-E1NDU3LDEyNzk3OTYyNywxOTMzNjkyNjg1LC0xOTM5OTkyMjgx
-LC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLTExMDcyOTk4NywxMz
-I3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQy
-MTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLD
-E4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIw
-MDM0Njg4XX0=
+eyJoaXN0b3J5IjpbMjAzMTI2NjI3NSw0ODYwMDEwOTMsMTk5Mj
+UxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4NSwtMTkzOTk5MjI4
+MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC0xMTA3Mjk5ODcsMT
+MyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEyMTQ0NzEsLTE4MjY0
+MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5My
+wxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMy
+MDAzNDY4OF19
 -->
