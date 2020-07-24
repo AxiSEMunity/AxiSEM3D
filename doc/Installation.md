@@ -151,7 +151,7 @@ Finally, you can verify the executable:
 # the number of processors can be arbitrary
 mpirun -np 4 ./axisem3d
 ```
-If you see an error message saying *missing input directory*, it means that AxiSEM3D has been built successfully. On a cluster, you may need to acquire resource before `mpirun`.
+If you see an error message saying *missing input directory*, it means that AxiSEM3D has been built successfully. On a cluster, you may have to first acquire resource before executing `mpirun`.
 
 
 ### 3. Complete examples
@@ -329,11 +329,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMD
-M3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3Nzgw
-NDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LD
-E4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDcz
-MzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5ND
-gsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC0y
-NjI4OTc4NTZdfQ==
+eyJoaXN0b3J5IjpbLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtND
+c3MjIxNzg2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5
+MjUzLDE0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNS
+wxNTQwNTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYx
+MDgyNDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMj
+Q3LDE4MDIwNjE5NDgsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMs
+Mjk3OTc5Mjg5XX0=
 -->
