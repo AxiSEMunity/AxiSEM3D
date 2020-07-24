@@ -293,7 +293,9 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 mkdir -p build && cd build
 # cmake
 # 1) FFTW, Metis and NetCDF paths are found by 'module show'
-# 2) -xMIC-AVX512 is required on KNL partition
+# 2) -xMIC-AVX512 is required on KNL partition; use 
+#    -xCORE-AVX512 for skylake
+#    
 # 3) -DEIGEN_USE_MKL_ALL asks Eigen to use Intel MKL, and the
 #    link options required by MKL are sent by -Dlinks; remove
 #    -DEIGEN_USE_MKL_ALL and -Dlinks to disable MKL
@@ -329,11 +331,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4NDYxMzMwOSwtMTcxODc2OTI1MywxND
-IyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2
-NzkyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NS
-wxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0NywxODAy
-MDYxOTQ4LC0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLDI5Nzk3OT
-I4OSwtMjYyODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYxNjc5MjEs
-LTI5MDYyNTE5MV19
+eyJoaXN0b3J5IjpbLTI5MjE0NDg3NCwxODg0NjEzMzA5LC0xNz
+E4NzY5MjUzLDE0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1
+MjQzNSwxNTQwNTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNS
+wxNDYxMDgyNDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgz
+OTIwMjQ3LDE4MDIwNjE5NDgsLTIwNDcxNDk3MjMsLTIwNDcxND
+k3MjMsMjk3OTc5Mjg5LC0yNjI4OTc4NTYsLTE3MjAzOTc0NTcs
+MTI1NjE2NzkyMV19
 -->
