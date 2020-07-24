@@ -266,9 +266,6 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_CSD3Cam.sh
 
-# cd into the top-level working directory
-cd $AxiSEM3D_WORK_DIR
-
 # environment modules
 module load intel/bundles/complib/2019.3
 module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
@@ -320,7 +317,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTM4NTc4MDkxLC0xMTI0NDAzOTk0LDg1MT
+eyJoaXN0b3J5IjpbODY1MjA5NzE5LC0xMTI0NDAzOTk0LDg1MT
 IxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3
 ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMT
 QyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3MTUyNDM1LDE1NDA1
