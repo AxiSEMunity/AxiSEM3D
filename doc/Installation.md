@@ -259,7 +259,7 @@ make -j8
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_RCSCam.sh
+# install_AxiSEM3D_CSD3.sh
 
 # create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -318,7 +318,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ1MDIxMzA3MCwtMTcyMDM5NzQ1NywxMj
+eyJoaXN0b3J5IjpbLTI2Mjg5Nzg1NiwtMTcyMDM5NzQ1NywxMj
 U2MTY3OTIxLC0yOTA2MjUxOTEsLTE3NzQ1ODU5NzQsMzk0OTI2
 NjAxLDg5MzgwMzA4NSwtOTg5NzEyODM4LDk1NjY5OTYzLDEzMz
 U0MzUzNzEsMTIwNDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MTk3Mjk5
