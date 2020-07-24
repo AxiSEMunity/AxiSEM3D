@@ -48,8 +48,8 @@ Name|Role|Minimum version|Note
 
 Eigen and Boost are header-only libraries. All we need to do is to download the source code:
 ```bash
-# create and cd into a top-level working directory
-export AxiSEM3D_WORK_DIR=$PWD/AxiSEM3D_2020
+# create a top-level working directory
+export AxiSEM3D_WORK_DIR=$HOME/AxiSEM3D_2020
 mkdir -p $AxiSEM3D_WORK_DIR && cd $_
 
 # create a dependency directory
@@ -330,11 +330,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDA3MjM0NDMsLTQ0NTA3MDIxNCwtMT
-EwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0MDM5OTQsODUxMjE0
-NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Ni
-w4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIy
-Nzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2Nz
-kyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwx
-NTA3MzM0MDAyXX0=
+eyJoaXN0b3J5IjpbLTE5Mzk5OTIyODEsLTE5NDA3MjM0NDMsLT
+Q0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0
+MDM5OTQsODUxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1Mz
+AsLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcx
+ODc2OTI1MywxNDIyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNT
+I0MzUsMTU0MDU2NzkyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUs
+MTQ2MTA4MjQ0NV19
 -->
