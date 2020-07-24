@@ -184,6 +184,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+# synchronize to master
 git -C AxiSEM3D pull
 ``` 
 
@@ -354,7 +355,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTUzNzA5MjA2MCw4NTEyMTQ0NzEsLTE4Mj
+eyJoaXN0b3J5IjpbLTgyMjg2MTk1Niw4NTEyMTQ0NzEsLTE4Mj
 Y0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5
 MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMT
 MyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3
