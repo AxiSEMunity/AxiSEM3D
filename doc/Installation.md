@@ -223,8 +223,8 @@ export conda_path=$(dirname $(dirname $(which conda)))
 
 # cmake
 rm -rf ./* && cmake -Dcxx=mpicxx \
--Deigen=$(dirname $PWD)/dependencies/eigen-master \
--Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
+-Deigen=$AxiSEM3D_WORK_DIR/dependencies/eigen-master \
+-Dboost=$AxiSEM3D_WORK_DIR/dependencies/boost_1_73_0 \
 -Dfftw=$conda_path -Dmetis=$conda_path -Dnetcdf=$conda_path \
 ../AxiSEM3D/SOLVER/
 
@@ -353,7 +353,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNjM2ODA3MTAyLC0xNDgyNDI5MTY0LDIwMz
+eyJoaXN0b3J5IjpbMTMyMzUyMTA0LC0xNDgyNDI5MTY0LDIwMz
 EyNjYyNzUsNDg2MDAxMDkzLDE5OTI1MTU0NTcsMTI3OTc5NjI3
 LDE5MzM2OTI2ODUsLTE5Mzk5OTIyODEsLTE5NDA3MjM0NDMsLT
 Q0NTA3MDIxNCwtMTEwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0
