@@ -293,8 +293,8 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 mkdir -p build && cd build
 # cmake
 # 1) FFTW, Metis and NetCDF paths are found by 'module show'
-# 2) -xMIC-AVX512 is required on KNL partition; use 
-#    -xCORE-AVX512 for skylake and -xCORE-AVX2 for pascal
+# 2) -xMIC-AVX512 is required on KNL partition; 
+#    use -xCORE-AVX512 for skylake and -xCORE-AVX2 for pascal
 # 3) -DEIGEN_USE_MKL_ALL asks Eigen to use Intel MKL, and the
 #    link options required by MKL are sent by -Dlinks; remove
 #    -DEIGEN_USE_MKL_ALL and -Dlinks to disable MKL
@@ -330,7 +330,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjcwMDY0NDc5LDE4ODQ2MTMzMDksLTE3MT
+eyJoaXN0b3J5IjpbODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MT
 g3NjkyNTMsMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3MTUy
 NDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3NDA1LD
 E0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02ODM5
