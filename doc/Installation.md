@@ -292,7 +292,7 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 # create build directory
 mkdir -p build && cd build
 # cmake
-# the paths of FFTW, Metis and NetCDF are found by "module show"
+# 1) FFTW, Metis and NetCDF paths are found by 'module show'
 # -xMIC-AVX512 is required on KNL partition
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
@@ -326,7 +326,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEwMjUxMDQ2MiwtMTY4NzE1MjQzNSwxNT
+eyJoaXN0b3J5IjpbMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNT
 QwNTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgy
 NDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LD
 E4MDIwNjE5NDgsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3
