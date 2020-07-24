@@ -202,7 +202,7 @@ rm -rf ./* && cmake -Dcxx=mpicxx \
 make -j8
 ```
 
-* The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GNU compilers):
+#### 3.2. The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GCC):
 
 ```bash
 #!/bin/bash
@@ -313,11 +313,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTk4OTcxMjgzOCw5NTY2OTk2MywxMzM1ND
-M1MzcxLDEyMDQyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgs
-MTQ0NTg2MTI0MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5Nz
-M4NDMsNjgyMDg0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5
-NTc4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OT
-c3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDEx
-MV19
+eyJoaXN0b3J5IjpbLTE2OTQ3ODU1MiwtOTg5NzEyODM4LDk1Nj
+Y5OTYzLDEzMzU0MzUzNzEsMTIwNDI2NDAzMiwtNDQzNjQ5NDMs
+LTQ1MTk3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3ODQ3OSwxOTQ3MD
+YzMjI4LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwt
+OTE5OTQ4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4Mj
+E2OTAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAw
+XX0=
 -->
