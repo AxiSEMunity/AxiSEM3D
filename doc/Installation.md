@@ -155,7 +155,9 @@ If you see an error message saying *missing input directory*, it means that AxiS
 
 
 ### 3. Complete examples
-A few complete examples are provided below. On an HPC cluster, the major variability comes from environment setup, such as 
+A few examples are provided below. These scripts 
+
+On an HPC cluster, the major variability comes from environment setup, such as 
 * defining essential environment variables;
 * loading a compiler and its compatible software bundles;
 * using the correct compiler flags and link options.
@@ -329,7 +331,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NjAyMjIwMDgsLTE4MjY0MjE4MTQsMT
+eyJoaXN0b3J5IjpbLTE4ODYzMzE4MTIsLTE4MjY0MjE4MTQsMT
 UwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5MywxODg0NjEz
 MzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMyMDAzNDY4OC
 wtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3MDI2NDcsLTg3
