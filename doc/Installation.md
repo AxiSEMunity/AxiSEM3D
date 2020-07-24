@@ -192,7 +192,7 @@ git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
 
 # cmake
 mkdir -p build && cd build
-rm -rf ./* && cmake -Dcc=mpicc -Dcxx=mpicxx -Dftn=mpif90 \
+rm -rf ./* && cmake -Dcxx=mpicxx \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=$conda_path -Dmetis=$conda_path -Dnetcdf=$conda_path \
@@ -313,11 +313,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTU2Njk5NjMsMTMzNTQzNTM3MSwxMjA0Mj
-Y0MDMyLC00NDM2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEs
-MjkwMTc4NDc5LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4ND
-UwMSwtMzE4MzM1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDEx
-NDg0ODg0NjEsLTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OT
-c3NjAwLDE0Mjk5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0
-NF19
+eyJoaXN0b3J5IjpbLTk4OTcxMjgzOCw5NTY2OTk2MywxMzM1ND
+M1MzcxLDEyMDQyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgs
+MTQ0NTg2MTI0MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5Nz
+M4NDMsNjgyMDg0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5
+NTc4NjA4NjcsMTE0ODQ4ODQ2MSwtMTEwODIxNjkwMCwxNDI5OT
+c3NjAwLDE0Mjk5Nzc2MDAsMTQyOTk3NzYwMCwtMTEwMjM0MDEx
+MV19
 -->
