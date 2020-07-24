@@ -174,8 +174,8 @@ This is the first step shared by all the examples:
 # download_Eigen_Boost_AxiSEM3D.sh
 
 # create and cd into a top-level working directory
-export AxiSEM3D_TOP_DIR=$PWD/AxiSEM3D_2020
-mkdir -p $AxiSEM3D_TOP_DIR && cd $_
+export AxiSEM3D_WORK_DIR=$PWD/AxiSEM3D_2020
+mkdir -p $AxiSEM3D_WORK_DIR && cd $_
 
 # download Eigen and Boost (check existence before download)
 mkdir -p dependencies
@@ -348,7 +348,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDUxOTgzODYxLC0xMTI0NDAzOTk0LDg1MT
+eyJoaXN0b3J5IjpbOTYxODY1NzQ1LC0xMTI0NDAzOTk0LDg1MT
 IxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3
 ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMT
 QyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3MTUyNDM1LDE1NDA1
