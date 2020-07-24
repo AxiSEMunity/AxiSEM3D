@@ -24,7 +24,7 @@ set(CMAKE_CXX_COMPILER          ${cxx})
 set(CMAKE_CXX_FLAGS             ${flags})
 
 # additional link options
-set(LINK_OPTIONS                ${link})
+set(LINK_OPTIONS                ${links})
 
 
 ################## dependencies ##################
