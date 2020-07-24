@@ -130,7 +130,7 @@ Argument|Role|Default|Note
 --- | --- | ---|---
 cxx| C++ compiler | g++ | Must support C++17.
 eigen, boost, fftw, metis, netcdf| paths of the dependencies | empty | Such a path should contain both *lib/* and *include/*. To find the path of a package managed by `module`, use `module show` (e.g., `module show fftw`).
-hdf5 | path of HDF5 | empty | If NetCDF has been built as a static library, linking will fail with missing `_H5_` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build `NetCDF`.
+hdf5 | path of HDF5 | empty | If NetCDF has been built as a static library, linking will fail with missing `_H5_` symbols. In that case, `-Dhdf5` must be presented, pointing to the HDF5 library used to build NetCDF.
 `par_netcdf` | to use parallel `NetCDF` or not | false | Parallel `NetCDF` is supported but not mandatory because of its tricky installation.
 `flags`|additional compiler flags | empty | Standard flags such as `-O3`, `-DNDEBUG` and `-std=C++1z` will be automatically handled by `cmake`. Different systems and compilers may require different additional flags.
 `libs`| additional libraries to link to | empty | For example, `-lcurl` will be required if `NetCDF` has been built statically with remote client support.
@@ -306,11 +306,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDAwNTI4ODQ4LDEyMDQyNjQwMzIsLTQ0Mz
-Y0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0MSwyOTAxNzg0Nzks
-MTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMDg0NTAxLC0zMTgzMz
-UwMjAsLTkxOTk0ODc3Niw5NTc4NjA4NjcsMTE0ODQ4ODQ2MSwt
-MTEwODIxNjkwMCwxNDI5OTc3NjAwLDE0Mjk5Nzc2MDAsMTQyOT
-k3NzYwMCwtMTEwMjM0MDExMSwtOTg1NzExNjQ0LC0xODY5MDQ0
-MTk2XX0=
+eyJoaXN0b3J5IjpbLTM4NDk2MTc2MCwxMjA0MjY0MDMyLC00ND
+M2NDk0MywtNDUxOTcyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5
+LDE5NDcwNjMyMjgsMzU3OTczODQzLDY4MjA4NDUwMSwtMzE4Mz
+M1MDIwLC05MTk5NDg3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEs
+LTExMDgyMTY5MDAsMTQyOTk3NzYwMCwxNDI5OTc3NjAwLDE0Mj
+k5Nzc2MDAsLTExMDIzNDAxMTEsLTk4NTcxMTY0NCwtMTg2OTA0
+NDE5Nl19
 -->
