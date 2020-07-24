@@ -1,5 +1,5 @@
 //
-//  fenv.c
+//  fenv.cpp
 //  AxiSEM3D
 //
 //  Created by Kuangdai Leng on 6/7/20.

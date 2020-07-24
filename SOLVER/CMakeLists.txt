@@ -17,16 +17,14 @@
 
 
 ################## compiler options ##################
-# compilers or compiler wrappers
-set(CMAKE_C_COMPILER            ${cc})
+# compiler
 set(CMAKE_CXX_COMPILER          ${cxx})
-set(CMAKE_Fortran_COMPILER      ${ftn})
 
-# compiler flags in addition to the standard ones (such as -O3 -DNDEBUG)
-set(ADDITIONAL_COMPILER_FLAGS   ${flags})
+# compiler flags
+set(CMAKE_CXX_FLAGS             ${flags})
 
-# additional libraries to link to if linking fails with missing symbols
-set(ADDITIONAL_LIBRARIES        ${libs})
+# additional link options
+set(LINK_OPTIONS                ${link})
 
 
 ################## dependencies ##################
@@ -36,7 +34,7 @@ set(BOOST_ROOT                  ${boost})
 set(FFTW_ROOT                   ${fftw})
 set(METIS_ROOT                  ${metis})
 set(NETCDF_ROOT                 ${netcdf})
-# omitting -Dhdf5 disables explicit linking to HDF5
+# omitting -Dhdf5 disables linking to HDF5
 set(HDF5_ROOT                   ${hdf5})
 
 # use parallel NetCDF
@@ -74,11 +72,9 @@ endif()
 endmacro()
 
 # set default values
-setDefault(CMAKE_C_COMPILER            gcc)
 setDefault(CMAKE_CXX_COMPILER          g++)
-setDefault(CMAKE_Fortran_COMPILER      gfortran)
-setDefault(ADDITIONAL_COMPILER_FLAGS   "")
-setDefault(ADDITIONAL_LIBRARIES        "")
+setDefault(CMAKE_CXX_FLAGS             "")
+setDefault(LINK_OPTIONS                "")
 setDefault(EIGEN3_ROOT                 "<empty>")
 setDefault(BOOST_ROOT                  "<empty>")
 setDefault(FFTW_ROOT                   "<empty>")
@@ -99,7 +95,6 @@ endif()
 # project
 cmake_minimum_required(VERSION 3.12.0)
 project(AxiSEM3D)
-enable_language(Fortran)
 
 # CMP0074 issue since CMake 3.12
 if(POLICY CMP0074)
@@ -223,28 +218,21 @@ external
 # compiler flags
 # upper case of CMAKE_BUILD_TYPE for compiler flags
 string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD)
+# overwrite CMAKE_CXX_FLAGS_${BUILD}
+if(NOT "${CMAKE_CXX_FLAGS}" STREQUAL "")
+set(CMAKE_CXX_FLAGS_${BUILD} ${CMAKE_CXX_FLAGS})
+endif()
 # supress #pragma warnings
 set(CMAKE_CXX_FLAGS_${BUILD} "${CMAKE_CXX_FLAGS_${BUILD}} -Wno-unknown-pragmas")
-# addtional flags from user
-set(ADD_FLAGS "${ADDITIONAL_COMPILER_FLAGS}")
-set(CMAKE_C_FLAGS_${BUILD} "${CMAKE_C_FLAGS_${BUILD}} ${ADD_FLAGS}")
-set(CMAKE_CXX_FLAGS_${BUILD} "${CMAKE_CXX_FLAGS_${BUILD}} ${ADD_FLAGS}")
-set(CMAKE_Fortran_FLAGS_${BUILD} "${CMAKE_Fortran_FLAGS_${BUILD}} ${ADD_FLAGS}")
 
 # find *.cpp
 file(GLOB_RECURSE CPP_FILES src/*.cpp)
-# find *.c
-file(GLOB_RECURSE C_FILES src/*.c)
-# find *.f90
-file(GLOB_RECURSE F90_FILES src/*.f90)
 
 # add all source files
 add_executable(
 axisem3d
 # src
 ${CPP_FILES}
-${C_FILES}
-${F90_FILES}
 # non-header-only local externals
 external/yaml/Yaml.cpp
 )
@@ -259,7 +247,7 @@ ${METIS_LIBRARIES}
 ${NETCDF_LIBRARIES}
 ${HDF5_HL_LIBRARIES}
 ${HDF5_LIBRARIES}
-${ADDITIONAL_LIBRARIES}
+${LINK_OPTIONS}
 )
 
 # standard C++17
@@ -288,15 +276,9 @@ message(STATUS "")
 message(STATUS "")
 message(STATUS "========================== Summary ===========================")
 message("   Build settings________________________________________________")
-message("     Compilers")
-message("       C               =  ${CMAKE_C_COMPILER}")
-message("       C++             =  ${CMAKE_CXX_COMPILER}")
-message("       Fortran         =  ${CMAKE_Fortran_COMPILER}")
-message("     Compiler flags")
-message("       C               =  ${CMAKE_C_FLAGS_${BUILD}}")
-message("       C++             =  ${CMAKE_CXX_FLAGS_${BUILD}}")
-message("       Fortran         =  ${CMAKE_Fortran_FLAGS_${BUILD}}")
-message("     CMake build type  =  ${CMAKE_BUILD_TYPE}")
+message("     C++ compiler      =  ${CMAKE_CXX_COMPILER}")
+message("     Compiler flags    =  ${CMAKE_CXX_FLAGS_${BUILD}}")
+message("     Product type      =  ${CMAKE_BUILD_TYPE}")
 message("     Source directory  =  ${PROJECT_SOURCE_DIR}")
 message("   Dependencies__________________________________________________")
 message("     * MPI")
@@ -341,11 +323,11 @@ msglist("       linked to libraries: " "${HDF5_LIBRARIES}")
 msglist("                            " "${HDF5_HL_LIBRARIES}")
 endif()
 endif()
-message("     * Others")
-if("${ADDITIONAL_LIBRARIES}" STREQUAL "")
-message("       No user-specified additional libraries.")
+message("     * Link options")
+if("${LINK_OPTIONS}" STREQUAL "")
+message("       No user-specified link options.")
 else()
-message("       user-specified additional libraries: ${ADDITIONAL_LIBRARIES}")
+message("       user-specified link options: ${LINK_OPTIONS}")
 endif()
 message("   AxiSEM3D options______________________________________________")
 message("     SEM n-polynomial  =  ${NPOL_SEM}")

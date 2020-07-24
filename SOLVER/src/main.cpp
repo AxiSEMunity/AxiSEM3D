@@ -10,7 +10,7 @@
 
 #include "main.hpp"
 
-extern "C" void fenv_setup();
+extern void fenv_setup();
 
 int main(int argc, char *argv[]) {
     // setup floating-point environment
