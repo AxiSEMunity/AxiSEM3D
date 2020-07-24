@@ -242,7 +242,8 @@ module load cray-hdf5/1.10.2.0
 # cmake
 # the paths of FFTW, Metis and NetCDF are found by "module show"
 mkdir -p build && cd build
-rm -rf ./* && cmake -Dcc=cc -Dcxx=CC -Dftn=ftn \
+rm -rf ./* && cmake -Dcxx=CC \
+-Dflags="-Ofast -funroll-loops -DNDEBUG" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
@@ -316,7 +317,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcwMDU5NDI3MiwtMTc3NDU4NTk3NCwzOT
+eyJoaXN0b3J5IjpbMTgzODk3NzM3MCwtMTc3NDU4NTk3NCwzOT
 Q5MjY2MDEsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMs
 MTMzNTQzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOT
 cyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgs
