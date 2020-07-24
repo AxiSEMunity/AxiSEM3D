@@ -285,6 +285,23 @@ make -j8
 
 
 #### 3.4. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/) (Intel C++):
+* Environment setup
+
+```bash
+#!/bin/bash
+# setenv_AxiSEM3D_ARCHER.sh
+
+# environment modules
+module load intel/bundles/complib/2019.3
+module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
+module load cmake-3.12.0-intel-17.0.4-donirfx
+
+# modules required by AxiSEM3D
+module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
+module load metis-5.1.0-intel-17.0.4-r6z4bz6
+module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
+```
+**NOTE**: This script must also be called by the job-submission script (the one sent by `squeue`).
 
 ```bash
 #!/bin/bash
@@ -343,7 +360,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTYyMDQ1ODkxNiwyMDMxMjY2Mjc1LDQ4Nj
+eyJoaXN0b3J5IjpbMTExNjAzMTkwNSwyMDMxMjY2Mjc1LDQ4Nj
 AwMTA5MywxOTkyNTE1NDU3LDEyNzk3OTYyNywxOTMzNjkyNjg1
 LC0xOTM5OTkyMjgxLC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLT
 ExMDcyOTk4NywxMzI3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIx
