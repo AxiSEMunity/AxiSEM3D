@@ -225,7 +225,7 @@ make -j8
 
 #### 3.2. The UK National Supercomputing Service [ARCHER](https://www.archer.ac.uk/) (GCC):
 
-* Environment setup:
+* Environment setup
 
 ```bash
 #!/bin/bash
@@ -245,10 +245,30 @@ module load cray-netcdf/4.6.1.3
 # users only need to load the right version
 module load cray-hdf5/1.10.2.0
 ```
+The above script must also be called by the job submission script (`qsub`).
+
 
 * Build AxiSEM3D
 
+```bash
+# create and cd into build
+mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 
+# cmake
+# 1) FFTW, Metis and NetCDF paths are found by 'module show'
+# 2) -fPIC is required by the system
+rm -rf ./* && cmake -Dcxx=CC \
+-Dflags="-O3 -DNDEBUG -fPIC" \
+-Deigen=$(dirname $PWD)/dependencies/eigen-master \
+-Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
+-Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
+-Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
+-Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
+../AxiSEM3D/SOLVER/
+
+# make
+make -j8
+```
 
 
 #### 3.3. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/) (Intel C++):
@@ -310,11 +330,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5NDk5Mjc5MTgsMTMyNzA3MDA0NCwtMT
-EyNDQwMzk5NCw4NTEyMTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAy
-OTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5MywxODg0NjEzMzA5LC
-0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4
-NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1Nz
-QwNSwxNDYxMDgyNDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwt
-NjgzOTIwMjQ3XX0=
+eyJoaXN0b3J5IjpbLTExMDcyOTk4NywxMzI3MDcwMDQ0LC0xMT
+I0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5
+NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLT
+E3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3
+MTUyNDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3ND
+A1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02
+ODM5MjAyNDddfQ==
 -->
