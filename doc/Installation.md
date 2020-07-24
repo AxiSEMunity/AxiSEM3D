@@ -238,7 +238,7 @@ make -j8
 
 ```bash
 #!/bin/bash
-# setenv_ARCHER.sh
+# setenv_AxiSEM3D_ARCHER.sh
 
 # environment modules and variables
 module switch PrgEnv-cray PrgEnv-gnu
@@ -339,11 +339,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5OTI2NDEwNSw0ODYwMDEwOTMsMTk5Mj
-UxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4NSwtMTkzOTk5MjI4
-MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC0xMTA3Mjk5ODcsMT
-MyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEyMTQ0NzEsLTE4MjY0
-MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5My
-wxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMTMy
-MDAzNDY4OF19
+eyJoaXN0b3J5IjpbNzc4MDMyOTk2LDQ4NjAwMTA5MywxOTkyNT
+E1NDU3LDEyNzk3OTYyNywxOTMzNjkyNjg1LC0xOTM5OTkyMjgx
+LC0xOTQwNzIzNDQzLC00NDUwNzAyMTQsLTExMDcyOTk4NywxMz
+I3MDcwMDQ0LC0xMTI0NDAzOTk0LDg1MTIxNDQ3MSwtMTgyNjQy
+MTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3ODYsODAwMzc4OTkzLD
+E4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMTQyMjc3ODA0MCwxMzIw
+MDM0Njg4XX0=
 -->
