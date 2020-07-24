@@ -298,7 +298,7 @@ mkdir -p build && cd build
 # 4) -lpthread -lm -ldl is required by Intel MKL
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
--Dlinks="-lpthread -lm -ldl" \
+-Dlinks="-lmkl_blacs_intelmpi_lp64 -lpthread -lm -ldl" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
@@ -328,11 +328,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNj
-g3MTUyNDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3
-NDA1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC
-02ODM5MjAyNDcsMTgwMjA2MTk0OCwtMjA0NzE0OTcyMywtMjA0
-NzE0OTcyMywyOTc5NzkyODksLTI2Mjg5Nzg1NiwtMTcyMDM5Nz
-Q1NywxMjU2MTY3OTIxLC0yOTA2MjUxOTEsLTE3NzQ1ODU5NzQs
-Mzk0OTI2NjAxXX0=
+eyJoaXN0b3J5IjpbODk0MTgwMzAzLDE0MjI3NzgwNDAsMTMyMD
+AzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3MDI2
+NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQwMDIsLT
+YzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLTIwNDcx
+NDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC0yNjI4OTc4NT
+YsLTE3MjAzOTc0NTcsMTI1NjE2NzkyMSwtMjkwNjI1MTkxLC0x
+Nzc0NTg1OTc0XX0=
 -->
