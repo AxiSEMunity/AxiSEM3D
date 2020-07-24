@@ -255,11 +255,11 @@ rm -rf ./* && cmake -Dcxx=CC \
 make -j8
 ```
 
-#### 3.3. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/), knl partition (Intel C++):
+#### 3.3. Cambridge Service for Data Driven Discovery [CSD3](https://www.csd3.cam.ac.uk/) (Intel C++):
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_CSD3_knl.sh
+# install_AxiSEM3D_CSD3Cam.sh
 
 # create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -321,7 +321,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTEzODkzMDU2OTgsMTg5OTcwMjY0NywtOD
+eyJoaXN0b3J5IjpbLTEyNTIxNTY4MzYsMTg5OTcwMjY0NywtOD
 c5NjU3NDA1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIw
 NjkwLC02ODM5MjAyNDcsMTgwMjA2MTk0OCwtMjA0NzE0OTcyMy
 wtMjA0NzE0OTcyMywyOTc5NzkyODksLTI2Mjg5Nzg1NiwtMTcy
