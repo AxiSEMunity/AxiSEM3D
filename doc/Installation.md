@@ -190,26 +190,11 @@ git -C AxiSEM3D pull
 
  
 
-#### 3.1. A laptop or workstation with `conda` (GCC):
+#### 3.2. A laptop or workstation with `conda` (GCC):
 
 ```bash
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
-
-# create and cd into a top-level working directory
-mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
-
-# download Eigen and Boost (check existence before download)
-mkdir -p dependencies
-[ ! -d ./dependencies/eigen-master ] && \
-wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
-[ ! -d ./dependencies/boost_1_73_0 ] && \
-wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
-
-# download AxiSEM3D (check existence before download)
-[ ! -d ./AxiSEM3D ] && \
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
-git -C AxiSEM3D pull
 
 # install FFTW, Metis and NetCDF
 conda install -c conda-forge -y fftw
@@ -355,11 +340,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTczNTc4NDYwNSw4NTEyMTQ0NzEsLTE4Mj
-Y0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMDM3ODk5
-MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3NzgwNDAsMT
-MyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LDE4OTk3
-MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDczMzQwMD
-IsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5NDgsLTIw
-NDcxNDk3MjNdfQ==
+eyJoaXN0b3J5IjpbLTExMjQ0MDM5OTQsODUxMjE0NDcxLC0xOD
+I2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Niw4MDAzNzg5
+OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MDQwLD
+EzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwxODk5
+NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0MD
+AyLC02MzA1MjA2OTAsLTY4MzkyMDI0NywxODAyMDYxOTQ4LC0y
+MDQ3MTQ5NzIzXX0=
 -->
