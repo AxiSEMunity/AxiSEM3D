@@ -126,7 +126,7 @@ rm -rf ./* && cmake -Dcxx=mpicxx \
 ../AxiSEM3D/SOLVER/
 ```
 
-It takes the following arguments, passed to `cmake` by `-D` definitions:
+The following arguments can be passed to `cmake` by `-D` definitions:
 Argument|Role|Default|Note
 --- | --- | ---|---
 cxx| C++ compiler | g++ | Must support C++17.
@@ -329,11 +329,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4ND
-YxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAwMzQ2
-ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwxODk5NzAyNjQ3LC
-04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0MDAyLC02MzA1
-MjA2OTAsLTY4MzkyMDI0NywxODAyMDYxOTQ4LC0yMDQ3MTQ5Nz
-IzLC0yMDQ3MTQ5NzIzLDI5Nzk3OTI4OSwtMjYyODk3ODU2LC0x
-NzIwMzk3NDU3XX0=
+eyJoaXN0b3J5IjpbMTUwODAyOTUzMCwtNDc3MjIxNzg2LDgwMD
+M3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0MjI3Nzgw
+NDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3OTI4LD
+E4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LDE1MDcz
+MzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIwNjE5ND
+gsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mjg5LC0y
+NjI4OTc4NTZdfQ==
 -->
