@@ -199,9 +199,6 @@ git -C AxiSEM3D pull
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
-# cd into the top-level working directory
-cd $AxiSEM3D_WORK_DIR
-
 # install FFTW, Metis and NetCDF by conda
 conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
@@ -272,20 +269,8 @@ make -j8
 #!/bin/bash
 # install_AxiSEM3D_CSD3Cam.sh
 
-# create and cd into a top-level working directory
-mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
-
-# download Eigen and Boost (check existence before download)
-mkdir -p dependencies
-[ ! -d ./dependencies/eigen-master ] && \
-wget -c https://gitlab.com/libeigen/eigen/-/archive/master/eigen-master.tar.bz2 -O - | tar -jx -C ./dependencies
-[ ! -d ./dependencies/boost_1_73_0 ] && \
-wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.bz2 -O - | tar -jx -C ./dependencies
-
-# download AxiSEM3D (check existence before download)
-[ ! -d ./AxiSEM3D ] && \
-git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
-git -C AxiSEM3D pull
+# cd into the top-level working directory
+cd $AxiSEM3D_WORK_DIR
 
 # environment modules
 module load intel/bundles/complib/2019.3
@@ -297,8 +282,9 @@ module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
 module load metis-5.1.0-intel-17.0.4-r6z4bz6
 module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 
-# create build directory
-mkdir -p build && cd build
+# create and cd into build
+mkdir -p build && cd $_
+
 # cmake
 # 1) FFTW, Metis and NetCDF paths are found by 'module show'
 # 2) -xMIC-AVX512 is required on KNL partition; 
@@ -337,11 +323,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0MTA0MTgzMDksLTExMjQ0MDM5OTQsOD
-UxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIy
-MTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1My
-wxNDIyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0
-MDU2NzkyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4Mj
-Q0NSwxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0Nywx
-ODAyMDYxOTQ4XX0=
+eyJoaXN0b3J5IjpbMjAxODA5NTg3MSwtMTEyNDQwMzk5NCw4NT
+EyMTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIx
+Nzg2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLD
+E0MjI3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQw
+NTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyND
+Q1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4
+MDIwNjE5NDhdfQ==
 -->
