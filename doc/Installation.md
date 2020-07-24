@@ -208,9 +208,9 @@ make -j8
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_ARCHER.sh
+# install_AxiSEM3D_conda.sh
 
-# create a top-level working directory and cd into it
+# create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -223,6 +223,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+git -C AxiSEM3D pull
 
 # environment modules and variables
 module switch PrgEnv-cray PrgEnv-gnu
@@ -315,7 +316,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTg4MTkyOTk5NCwtMTc3NDU4NTk3NCwzOT
+eyJoaXN0b3J5IjpbMTcwMDU5NDI3MiwtMTc3NDU4NTk3NCwzOT
 Q5MjY2MDEsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMs
 MTMzNTQzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOT
 cyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgs
