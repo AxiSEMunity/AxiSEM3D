@@ -208,7 +208,7 @@ make -j8
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_conda.sh
+# install_AxiSEM3D_ARCHER.sh
 
 # create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
@@ -259,9 +259,9 @@ make -j8
 
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_RCS_Cam.sh
+# install_AxiSEM3D_RCSCam.sh
 
-# create a top-level working directory and cd into it
+# create and cd into a top-level working directory
 mkdir -p AxiSEM3D_2020 && cd AxiSEM3D_2020
 
 # download Eigen and Boost (check existence before download)
@@ -274,6 +274,7 @@ wget -c https://dl.bintray.com/boostorg/release/1.73.0/source/boost_1_73_0.tar.b
 # download AxiSEM3D (check existence before download)
 [ ! -d ./AxiSEM3D ] && \
 git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D
+git -C AxiSEM3D pull
 
 # environment modules
 module load intel/bundles/complib/2019.3
@@ -317,7 +318,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIyMzg2NzQyNiwtMjkwNjI1MTkxLC0xNz
+eyJoaXN0b3J5IjpbMTI1NjE2NzkyMSwtMjkwNjI1MTkxLC0xNz
 c0NTg1OTc0LDM5NDkyNjYwMSw4OTM4MDMwODUsLTk4OTcxMjgz
 OCw5NTY2OTk2MywxMzM1NDM1MzcxLDEyMDQyNjQwMzIsLTQ0Mz
 Y0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0MSwyOTAxNzg0Nzks
