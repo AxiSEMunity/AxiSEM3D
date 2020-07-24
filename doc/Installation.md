@@ -196,6 +196,9 @@ git -C AxiSEM3D pull
 #!/bin/bash
 # install_AxiSEM3D_conda.sh
 
+# cd into the top-level working directory
+cd AxiSEM3D_2020
+
 # install FFTW, Metis and NetCDF by conda
 conda install -c conda-forge -y fftw
 conda install -c anaconda -y metis
@@ -342,11 +345,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzMzNjgxMzksLTExMjQ0MDM5OTQsOD
-UxMjE0NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIy
-MTc4Niw4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1My
-wxNDIyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0
-MDU2NzkyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4Mj
-Q0NSwxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0Nywx
-ODAyMDYxOTQ4XX0=
+eyJoaXN0b3J5IjpbNTI5MTM4NDY4LC0xMTI0NDAzOTk0LDg1MT
+IxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3
+ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMT
+QyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3MTUyNDM1LDE1NDA1
+Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3NDA1LDE0NjEwODI0ND
+UsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02ODM5MjAyNDcsMTgw
+MjA2MTk0OF19
 -->
