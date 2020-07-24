@@ -294,8 +294,8 @@ mkdir -p build && cd build
 # cmake
 # 1) FFTW, Metis and NetCDF paths are found by 'module show'
 # 2) -xMIC-AVX512 is required on KNL partition
-# 3) -DEIGEN_USE_MKL_ALL asks Eigen to use Intel MKL
-# 4) -Dlinks is required by Intel MKL
+# 3) -DEIGEN_USE_MKL_ALL asks Eigen to use Intel MKL, and the
+#    link options required by MKL are sent by -Dlinks
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
 -Dlinks="-L${MKLROOT}/lib/intel64 -lmkl_intel_lp64 -lmkl_sequential -lmkl_core -lpthread -lm -ldl" \
@@ -328,11 +328,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc2MDk4MDYzOSwtMTcxODc2OTI1MywxND
-IyNzc4MDQwLDEzMjAwMzQ2ODgsLTE2ODcxNTI0MzUsMTU0MDU2
-NzkyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NS
-wxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0NywxODAy
-MDYxOTQ4LC0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLDI5Nzk3OT
-I4OSwtMjYyODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYxNjc5MjEs
-LTI5MDYyNTE5MV19
+eyJoaXN0b3J5IjpbNDQ4MDg4MzY1LC0xNzE4NzY5MjUzLDE0Mj
+I3NzgwNDAsMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNTQwNTY3
+OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgyNDQ1LD
+E1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LDE4MDIw
+NjE5NDgsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3OTc5Mj
+g5LC0yNjI4OTc4NTYsLTE3MjAzOTc0NTcsMTI1NjE2NzkyMSwt
+MjkwNjI1MTkxXX0=
 -->
