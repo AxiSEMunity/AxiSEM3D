@@ -319,17 +319,17 @@ In this manual and the provided examples, we will mainly use python (Jupyter Not
 
 Name|Role|Installation
 --- | --- | ---
-[`Obspy`](https://docs.obspy.org/) | data processing | conda install -c conda-forge obspy
-[`netcdf4-python`](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | `NetCDF` for `python` | conda install -c anaconda netcdf4
-[`Basemap`](https://matplotlib.org/basemap/) | drawing maps | conda install -c anaconda basemap
-[`pyvtk`](http://cens.ioc.ee/projects/pyvtk/) | wavefield animation | conda install -c conda-forge pyvtk
-[`ffmpeg`](https://ffmpeg.org/) | wavefield animation | conda install -c conda-forge ffmpeg
-[`Paraview`](https://www.paraview.org/) | model visualization and wavefield animation | [https://www.paraview.org/download/](https://www.paraview.org/download/)
+[Obspy](https://docs.obspy.org/) | data processing | conda install -c conda-forge obspy
+[netcdf4-python](https://unidata.github.io/netcdf4-python/netCDF4/index.html) | NetCDF for python | conda install -c anaconda netcdf4
+[Basemap](https://matplotlib.org/basemap/) | drawing maps | conda install -c anaconda basemap
+[pyvtk](http://cens.ioc.ee/projects/pyvtk/) | wavefield animation | conda install -c conda-forge pyvtk
+[ffmpeg](https://ffmpeg.org/) | wavefield animation | conda install -c conda-forge ffmpeg
+[Paraview](https://www.paraview.org/) | model visualization and wavefield animation | [https://www.paraview.org/download/](https://www.paraview.org/download/)
 
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTgyOTMxNzk0NCw4MDAzNzg5OTMsMTg4ND
+eyJoaXN0b3J5IjpbLTQ3NzIyMTc4Niw4MDAzNzg5OTMsMTg4ND
 YxMzMwOSwtMTcxODc2OTI1MywxNDIyNzc4MDQwLDEzMjAwMzQ2
 ODgsLTE2ODcxNTI0MzUsMTU0MDU2NzkyOCwxODk5NzAyNjQ3LC
 04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0MDAyLC02MzA1
