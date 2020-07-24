@@ -192,7 +192,7 @@ conda install -c anaconda -y netcdf4
 
 # create build
 mkdir -p build && cd build
-# find conda path by exce
+# find conda path via executable
 export conda_path=$(dirname $(dirname $(which conda)))
 # cmake
 rm -rf ./* && cmake -Dcxx=mpicxx \
@@ -321,11 +321,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjUyMjAwMDIzLDE1NDA1Njc5MjgsMTg5OT
-cwMjY0NywtODc5NjU3NDA1LDE0NjEwODI0NDUsMTUwNzMzNDAw
-MiwtNjMwNTIwNjkwLC02ODM5MjAyNDcsMTgwMjA2MTk0OCwtMj
-A0NzE0OTcyMywtMjA0NzE0OTcyMywyOTc5NzkyODksLTI2Mjg5
-Nzg1NiwtMTcyMDM5NzQ1NywxMjU2MTY3OTIxLC0yOTA2MjUxOT
-EsLTE3NzQ1ODU5NzQsMzk0OTI2NjAxLDg5MzgwMzA4NSwtOTg5
-NzEyODM4XX0=
+eyJoaXN0b3J5IjpbLTE0NjM4OTQ0NjUsMTU0MDU2NzkyOCwxOD
+k5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4MjQ0NSwxNTA3MzM0
+MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0NywxODAyMDYxOTQ4LC
+0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLDI5Nzk3OTI4OSwtMjYy
+ODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYxNjc5MjEsLTI5MDYyNT
+E5MSwtMTc3NDU4NTk3NCwzOTQ5MjY2MDEsODkzODAzMDg1LC05
+ODk3MTI4MzhdfQ==
 -->
