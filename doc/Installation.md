@@ -293,7 +293,9 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 mkdir -p build && cd build
 # cmake
 # 1) FFTW, Metis and NetCDF paths are found by 'module show'
-# -xMIC-AVX512 is required on KNL partition
+# 2) -xMIC-AVX512 is required on KNL partition
+# 3) -DEIGEN_USE_MKL_ALL tells Eigen to use Intel MKL
+# 4) -lpthread -lm -ldl is required by
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
 -Dlinks="-lpthread -lm -ldl" \
@@ -326,11 +328,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMyMDAzNDY4OCwtMTY4NzE1MjQzNSwxNT
-QwNTY3OTI4LDE4OTk3MDI2NDcsLTg3OTY1NzQwNSwxNDYxMDgy
-NDQ1LDE1MDczMzQwMDIsLTYzMDUyMDY5MCwtNjgzOTIwMjQ3LD
-E4MDIwNjE5NDgsLTIwNDcxNDk3MjMsLTIwNDcxNDk3MjMsMjk3
-OTc5Mjg5LC0yNjI4OTc4NTYsLTE3MjAzOTc0NTcsMTI1NjE2Nz
-kyMSwtMjkwNjI1MTkxLC0xNzc0NTg1OTc0LDM5NDkyNjYwMSw4
-OTM4MDMwODVdfQ==
+eyJoaXN0b3J5IjpbMTIxMjY3Mjg2MCwxMzIwMDM0Njg4LC0xNj
+g3MTUyNDM1LDE1NDA1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3
+NDA1LDE0NjEwODI0NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC
+02ODM5MjAyNDcsMTgwMjA2MTk0OCwtMjA0NzE0OTcyMywtMjA0
+NzE0OTcyMywyOTc5NzkyODksLTI2Mjg5Nzg1NiwtMTcyMDM5Nz
+Q1NywxMjU2MTY3OTIxLC0yOTA2MjUxOTEsLTE3NzQ1ODU5NzQs
+Mzk0OTI2NjAxXX0=
 -->
