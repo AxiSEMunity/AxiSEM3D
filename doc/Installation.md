@@ -139,7 +139,7 @@ double | to compile the solver in double precision |false|Using double precision
 
 These arguments can be hardcoded in `AxiSEM3D/SOLVER/CMakeLists.txt` (unrecommended). Upon a successful `cmake`, a summary will be displayed at the end. Check this summary closely and make sure that the compiler, the flags and the dependencies have been correctly set.
 
-#### 2.3. Compile and link by `make`
+#### 2.3. Compile and link by make
 To compile and link AxiSEM3D:
 ```bash
 # -j8 means using 8 threads to accelerate compilation
@@ -306,7 +306,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTMzMjMxOTExNywxMzM1NDM1MzcxLDEyMD
+eyJoaXN0b3J5IjpbMTg1NDczODUxMSwxMzM1NDM1MzcxLDEyMD
 QyNjQwMzIsLTQ0MzY0OTQzLC00NTE5NzI5OTgsMTQ0NTg2MTI0
 MSwyOTAxNzg0NzksMTk0NzA2MzIyOCwzNTc5NzM4NDMsNjgyMD
 g0NTAxLC0zMTgzMzUwMjAsLTkxOTk0ODc3Niw5NTc4NjA4Njcs
