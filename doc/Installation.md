@@ -97,6 +97,8 @@ If a package is missing, you may
 2. install it by `conda` (many clusters allow users to install their own [Anaconda](https://docs.anaconda.com/anaconda/install/) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html));
 3. install it from scratch (see instructions for [FFTW](http://www.fftw.org/fftw3_doc/Installation-on-Unix.html), [Metis](http://glaros.dtc.umn.edu/gkhome/metis/metis/download) and [NetCDF](https://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html)).
 
+**NOTE**: If you use `module load` in the build stage, you may also need it in the running sta
+
 
 
 
@@ -319,7 +321,7 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNDg4NzAwNDcwLC0xMTI0NDAzOTk0LDg1MT
+eyJoaXN0b3J5IjpbMjA2NDA4MTMwLC0xMTI0NDAzOTk0LDg1MT
 IxNDQ3MSwtMTgyNjQyMTgxNCwxNTA4MDI5NTMwLC00NzcyMjE3
 ODYsODAwMzc4OTkzLDE4ODQ2MTMzMDksLTE3MTg3NjkyNTMsMT
 QyMjc3ODA0MCwxMzIwMDM0Njg4LC0xNjg3MTUyNDM1LDE1NDA1
