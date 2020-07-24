@@ -243,13 +243,13 @@ module load cray-hdf5/1.10.2.0
 # the paths of FFTW, Metis and NetCDF are found by "module show"
 mkdir -p build && cd build
 rm -rf ./* && cmake -Dcxx=CC \
--Dflags="-Ofast -funroll-loops -DNDEBUG" \
+-Dflags="-Ofast -funroll-loops -DNDEBUG -fPIC" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/opt/cray/fftw/3.3.4.11/ivybridge \
 -Dmetis=/work/y07/y07/cse/metis/5.1.0_build2 \
 -Dnetcdf=/opt/cray/netcdf/4.6.1.3/GNU/7.1 \
--Dflags=-fPIC ../AxiSEM3D/SOLVER/
+../AxiSEM3D/SOLVER/
 
 # make
 make -j8
@@ -317,11 +317,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTgzODk3NzM3MCwtMTc3NDU4NTk3NCwzOT
-Q5MjY2MDEsODkzODAzMDg1LC05ODk3MTI4MzgsOTU2Njk5NjMs
-MTMzNTQzNTM3MSwxMjA0MjY0MDMyLC00NDM2NDk0MywtNDUxOT
-cyOTk4LDE0NDU4NjEyNDEsMjkwMTc4NDc5LDE5NDcwNjMyMjgs
-MzU3OTczODQzLDY4MjA4NDUwMSwtMzE4MzM1MDIwLC05MTk5ND
-g3NzYsOTU3ODYwODY3LDExNDg0ODg0NjEsLTExMDgyMTY5MDBd
-fQ==
+eyJoaXN0b3J5IjpbLTE5NzQyNjMyODMsLTE3NzQ1ODU5NzQsMz
+k0OTI2NjAxLDg5MzgwMzA4NSwtOTg5NzEyODM4LDk1NjY5OTYz
+LDEzMzU0MzUzNzEsMTIwNDI2NDAzMiwtNDQzNjQ5NDMsLTQ1MT
+k3Mjk5OCwxNDQ1ODYxMjQxLDI5MDE3ODQ3OSwxOTQ3MDYzMjI4
+LDM1Nzk3Mzg0Myw2ODIwODQ1MDEsLTMxODMzNTAyMCwtOTE5OT
+Q4Nzc2LDk1Nzg2MDg2NywxMTQ4NDg4NDYxLC0xMTA4MjE2OTAw
+XX0=
 -->
