@@ -303,21 +303,14 @@ module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
 ```
 **NOTE**: This script must also be called by the job-submission script (the one sent by `squeue`).
 
+* Build AxiSEM3D
+
 ```bash
 #!/bin/bash
-# install_AxiSEM3D_CSD3Cam.sh
+# build_AxiSEM3D_CSD3.sh
 
-# environment modules
-module load intel/bundles/complib/2019.3
-module load gcc-7.2.0-gcc-4.8.5-pqn7o2k
-module load cmake-3.12.0-intel-17.0.4-donirfx
-
-# modules required by AxiSEM3D
-module load fftw-3.3.6-pl2-intel-17.0.4-qssvkuw
-module load metis-5.1.0-intel-17.0.4-r6z4bz6
-module load netcdf-4.4.1.1-intel-17.0.4-zysrbqw
-
-# create and cd into build
+# create build under the top working directory
+export AxiSEM3D_WORK_DIR=$HOME/AxiSEM3D_2020
 mkdir -p $AxiSEM3D_WORK_DIR/build && cd $_
 
 # cmake
@@ -360,11 +353,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0ODEwOTY5NTUsMjAzMTI2NjI3NSw0OD
-YwMDEwOTMsMTk5MjUxNTQ1NywxMjc5Nzk2MjcsMTkzMzY5MjY4
-NSwtMTkzOTk5MjI4MSwtMTk0MDcyMzQ0MywtNDQ1MDcwMjE0LC
-0xMTA3Mjk5ODcsMTMyNzA3MDA0NCwtMTEyNDQwMzk5NCw4NTEy
-MTQ0NzEsLTE4MjY0MjE4MTQsMTUwODAyOTUzMCwtNDc3MjIxNz
-g2LDgwMDM3ODk5MywxODg0NjEzMzA5LC0xNzE4NzY5MjUzLDE0
-MjI3NzgwNDBdfQ==
+eyJoaXN0b3J5IjpbLTk2MTMwMDQ0LDIwMzEyNjYyNzUsNDg2MD
+AxMDkzLDE5OTI1MTU0NTcsMTI3OTc5NjI3LDE5MzM2OTI2ODUs
+LTE5Mzk5OTIyODEsLTE5NDA3MjM0NDMsLTQ0NTA3MDIxNCwtMT
+EwNzI5OTg3LDEzMjcwNzAwNDQsLTExMjQ0MDM5OTQsODUxMjE0
+NDcxLC0xODI2NDIxODE0LDE1MDgwMjk1MzAsLTQ3NzIyMTc4Ni
+w4MDAzNzg5OTMsMTg4NDYxMzMwOSwtMTcxODc2OTI1MywxNDIy
+Nzc4MDQwXX0=
 -->
