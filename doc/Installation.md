@@ -296,7 +296,7 @@ mkdir -p build && cd build
 # -xMIC-AVX512 is required on KNL partition
 rm -rf ./* && cmake -Dcxx=mpicxx \
 -Dflags="-O3 -DNDEBUG -xMIC-AVX512 -DEIGEN_USE_MKL_ALL" \
--Dlinks="" \
+-Dlinks=" -lpthread -lm -ldl" \
 -Deigen=$(dirname $PWD)/dependencies/eigen-master \
 -Dboost=$(dirname $PWD)/dependencies/boost_1_73_0 \
 -Dfftw=/usr/local/software/spack/spack-0.11.2/opt/spack/linux-rhel7-x86_64/intel-17.0.4/fftw-3.3.6-pl2-qssvkuwklbyukyc5bx33wjosyzxreqwc \
@@ -326,11 +326,11 @@ Name|Role|Installation
 
 [<< Back to repository](https://github.com/kuangdai/AxiSEM-3D)
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE3NDcyMTYwMjUsLTE2ODcxNTI0MzUsMT
-U0MDU2NzkyOCwxODk5NzAyNjQ3LC04Nzk2NTc0MDUsMTQ2MTA4
-MjQ0NSwxNTA3MzM0MDAyLC02MzA1MjA2OTAsLTY4MzkyMDI0Ny
-wxODAyMDYxOTQ4LC0yMDQ3MTQ5NzIzLC0yMDQ3MTQ5NzIzLDI5
-Nzk3OTI4OSwtMjYyODk3ODU2LC0xNzIwMzk3NDU3LDEyNTYxNj
-c5MjEsLTI5MDYyNTE5MSwtMTc3NDU4NTk3NCwzOTQ5MjY2MDEs
-ODkzODAzMDg1XX0=
+eyJoaXN0b3J5IjpbMTk4OTQwNDgzLC0xNjg3MTUyNDM1LDE1ND
+A1Njc5MjgsMTg5OTcwMjY0NywtODc5NjU3NDA1LDE0NjEwODI0
+NDUsMTUwNzMzNDAwMiwtNjMwNTIwNjkwLC02ODM5MjAyNDcsMT
+gwMjA2MTk0OCwtMjA0NzE0OTcyMywtMjA0NzE0OTcyMywyOTc5
+NzkyODksLTI2Mjg5Nzg1NiwtMTcyMDM5NzQ1NywxMjU2MTY3OT
+IxLC0yOTA2MjUxOTEsLTE3NzQ1ODU5NzQsMzk0OTI2NjAxLDg5
+MzgwMzA4NV19
 -->
