@@ -40,7 +40,7 @@ item_stations_GSN = read('input/item_stations.yaml')[:-1]
 
 ################ 01_spherical_Earth_PREM_100s ################
 # copy
-ex_name = '01_spherical_Earth_PREM_100s'
+ex_name = '01_spherical_Earth_PREM_50s'
 input_dir = '../%s/input' % ex_name
 os.system('cp input/inparam.*.yaml %s' % input_dir)
 

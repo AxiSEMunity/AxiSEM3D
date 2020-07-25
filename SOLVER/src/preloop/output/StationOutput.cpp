@@ -80,13 +80,13 @@ StationOutput::buildInparam(int gindex, double dt) {
         samplingPeriod = cast<double>(strSP, "StationOutput::buildInparam");
     }
     // buffer size
-    int bufferTimeSteps = gm.getWithBounds(rooto + ":buffer_time_steps", 1);
+    int bufferSize = gm.getWithBounds(rooto + ":buffer_size", 1);
     // construct and return
     return std::make_shared
     <const StationOutput>(groupName, fileName, sourceCentered, ellipticity,
                           useDepth, depthSolid, undulated,
                           wcs, fluid, userChannels,
-                          format, samplingPeriod, bufferTimeSteps);
+                          format, samplingPeriod, bufferSize);
 }
 
 // verbose
@@ -149,13 +149,23 @@ verbose(double dt, int numRecordSteps, int numStations) const {
         ss << boxEquals(4, width, "output file format", "NetCDF (serial)");
 #endif
     }
-    // sampling
-    int sampleIntv = std::max((int)round(mSamplingPeriod / dt), 1);
+    // smapling interval
+    int sampleIntv = (int)(mSamplingPeriod / dt);
+    // mSamplingPeriod < dt
+    if (sampleIntv == 0) {
+        sampleIntv = 1;
+    }
     ss << "    sampling period\n";
     ss << boxEquals(6, width - 2, "user-specified", mSamplingPeriod);
-    ss << boxEquals(6, width - 1, "rounded to Δt", sampleIntv * dt);
-    ss << boxEquals(4, width, "# time steps per sample", sampleIntv);
-    ss << boxEquals(4, width, "# buffered time steps", mBufferTimeSteps);
+    // check overflow with very large mSamplingPeriod
+    if (sampleIntv < 0) {
+        ss << boxEquals(6, width - 1, "rounded to Δt", "Inf (1 sample)");
+        ss << boxEquals(4, width, "# time steps per sample", "Inf (1 sample)");
+    } else {
+        ss << boxEquals(6, width - 1, "rounded to Δt", sampleIntv * dt);
+        ss << boxEquals(4, width, "# time steps per sample", sampleIntv);
+    }
+    ss << boxEquals(4, width, "# buffer size", mBufferSize);
     
     //////// dimensions ////////
     ss << boxSubTitle(2, "Dimensions");
@@ -299,8 +309,18 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
         
         //////////// release ////////////
         timer::gPreloopTimer.begin("Releasing station group");
-        // intervals
-        int sampleIntv = std::max((int)round(stgrp->mSamplingPeriod / dt), 1);
+        // smapling interval
+        int sampleIntv = (int)(stgrp->mSamplingPeriod / dt);
+        // mSamplingPeriod < dt
+        if (sampleIntv == 0) {
+            sampleIntv = 1;
+        }
+        // check overflow with very large mSamplingPeriod
+        if (sampleIntv < 0) {
+            sampleIntv = std::numeric_limits<int>::max();
+        }
+        
+        // total number of steps recorded
         int nRecSteps = nTotalSteps / sampleIntv;
         if (nTotalSteps % sampleIntv > 0) {
             nRecSteps++;
@@ -326,11 +346,11 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
         // but only initialize one (stationIO can be used only once)
         if (stgrp->mFluid) {
             SGF = std::make_unique<StationGroup<StationFluid>>
-            (stgrp->mGroupName, nRecSteps, sampleIntv, stgrp->mBufferTimeSteps,
+            (stgrp->mGroupName, nRecSteps, sampleIntv, stgrp->mBufferSize,
              stgrp->mWCS, stgrp->mUserChannels, stationIO);
         } else {
             SGS = std::make_unique<StationGroup<StationSolid>>
-            (stgrp->mGroupName, nRecSteps, sampleIntv, stgrp->mBufferTimeSteps,
+            (stgrp->mGroupName, nRecSteps, sampleIntv, stgrp->mBufferSize,
              stgrp->mWCS, stgrp->mUserChannels, stationIO);
         }
         

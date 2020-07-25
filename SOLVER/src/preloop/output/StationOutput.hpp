@@ -27,14 +27,14 @@ public:
                   bool useDepth, bool depthSolid, bool undulatedGeometry,
                   channel::WavefieldCS wcs, bool fluid,
                   const std::vector<std::string> &userChannels,
-                  Format format, double samplingPeriod, int bufferTimeSteps):
+                  Format format, double samplingPeriod, int bufferSize):
     mGroupName(groupName), mFileName(fileName),
     mSourceCentered(sourceCentered), mEllipticity(ellipticity),
     mUseDepth(useDepth), mDepthSolid(depthSolid),
     mUndulatedGeometry(undulatedGeometry),
     mWCS(wcs), mFluid(fluid), mUserChannels(userChannels),
     mFormat(format), mSamplingPeriod(samplingPeriod),
-    mBufferTimeSteps(bufferTimeSteps) {
+    mBufferSize(bufferSize) {
         // nothing
     }
     
@@ -72,7 +72,7 @@ private:
     // format
     const Format mFormat;
     const double mSamplingPeriod;
-    const int mBufferTimeSteps;
+    const int mBufferSize;
 };
 
 #endif /* StationOutput_hpp */

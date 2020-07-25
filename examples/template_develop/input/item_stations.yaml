@@ -99,8 +99,11 @@
             # note: DT stands for Δt of the simulation; DTx3 means
             #       sampling period = Δt * 3
             sampling_period: DT
-            # what: buffer time steps for efficient file writing
+            # what: number of sampled time steps to be buffered
             # type: int
-            # note: 1) this parameter does not affect the final results
-            #       2) use 1 to write at each sampled time step (slow);
-            buffer_time_steps: 1000
+            # note: 1) the solver buffers wave data during the time loop for
+            #          efficient writing; increase this buffer size to save
+            #          writing time and decrease it to save memroy (useful for
+            #          a large number of stations)
+            #       2) this parameter does not affect the final results
+            buffer_size: 1000
