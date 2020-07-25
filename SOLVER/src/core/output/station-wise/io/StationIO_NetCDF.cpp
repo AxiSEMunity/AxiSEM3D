@@ -102,7 +102,7 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
                                   const eigen::RTensor3 &bufferFields,
                                   int bufferLine) {
     // no station
-    int nst = (int)bufferFields.dimensions()[2];
+    int nst = (int)bufferFields.dimensions()[0];
     if (nst == 0) {
         return;
     }
