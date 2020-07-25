@@ -81,7 +81,7 @@ public:
         // buffer
         if (nst > 0) {
             mBufferTime.resize(mDumpIntv);
-            mBufferFields.resize(mDumpIntv, nch, nst);
+            mBufferFields.resize(nst, nch, mDumpIntv);
             mBufferLine = 0;
             
             // stations
@@ -124,7 +124,7 @@ public:
     
     // dump to file
     void dumpToFile() {
-        if (mStations.size() > 0) {
+        if (mStations.size() > 0 && mBufferLine > 0) {
             // stations
             for (int ist = 0; ist < mStations.size(); ist++) {
                 mStations[ist]->processReport(mBufferLine, mChannelOptions,

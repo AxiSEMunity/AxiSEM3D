@@ -58,9 +58,9 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
         
         // data
         mVarID_Data = mNcFile->defineVariable("data_wave", {
-            {"dim_time", numRecordSteps},
+            {"dim_station", stKeysAll.size()},
             {"dim_channel", channels.size()},
-            {"dim_station", stKeysAll.size()}
+            {"dim_time", numRecordSteps}
         }, (numerical::Real)numerical::dErr);
         
         // channels
@@ -139,9 +139,9 @@ void StationIO_ParNetCDF::dumpToFile(const eigen::DColX &bufferTime,
     
     // write data
     int nch = (int)bufferFields.dimensions()[1];
-    mNcFile->writeVariable(mVarID_Data, "data", bufferFields,
-                           {mFileLineTime, 0, mGlobalIndexFirstStation},
-                           {bufferLine, nch, nst});
+    mNcFile->writeVariable(mVarID_Data, "data_wave", bufferFields,
+                           {mGlobalIndexFirstStation, 0, mFileLineTime},
+                           {nst, nch, bufferLine});
     
     // flush?
     // mNcFile->flush();

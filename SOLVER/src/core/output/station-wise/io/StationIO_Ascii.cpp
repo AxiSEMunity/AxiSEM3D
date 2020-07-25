@@ -103,7 +103,7 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
                                  const eigen::RTensor3 &bufferFields,
                                  int bufferLine) {
     // no station
-    int nst = (int)bufferFields.dimensions()[2];
+    int nst = (int)bufferFields.dimensions()[0];
     if (nst == 0) {
         return;
     }
@@ -126,20 +126,22 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
     int nch = (int)bufferFields.dimensions()[1];
     if (mStationCentric) {
         for (int ist = 0; ist < nst; ist++) {
-            eigen::IArray3 loc = {0, 0, ist};
-            eigen::IArray3 len = {bufferLine, nch, 1};
+            eigen::IArray3 loc = {ist, 0, 0};
+            eigen::IArray3 len = {1, nch, bufferLine};
             Eigen::internal::set_is_malloc_allowed(true);
             (*mFileStreams[ist + tfile]) << bufferFields.slice(loc, len).
-            reshape(eigen::IArray2{bufferLine, nch}) << "\n";
+            reshape(eigen::IArray2{nch, bufferLine}).
+            shuffle(eigen::IArray2{1, 0}) << "\n";
             Eigen::internal::set_is_malloc_allowed(false);
         }
     } else {
         for (int ich = 0; ich < nch; ich++) {
             eigen::IArray3 loc = {0, ich, 0};
-            eigen::IArray3 len = {bufferLine, 1, nst};
+            eigen::IArray3 len = {nst, 1, bufferLine};
             Eigen::internal::set_is_malloc_allowed(true);
             (*mFileStreams[ich + tfile]) << bufferFields.slice(loc, len).
-            reshape(eigen::IArray2{bufferLine, nst}) << "\n";
+            reshape(eigen::IArray2{nst, bufferLine}).
+            shuffle(eigen::IArray2{1, 0}) << "\n";
             Eigen::internal::set_is_malloc_allowed(false);
         }
     }

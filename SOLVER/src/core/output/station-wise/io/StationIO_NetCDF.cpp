@@ -53,9 +53,9 @@ void StationIO_NetCDF::initialize(const std::string &groupName,
     
     // data
     mVarID_Data = mNcFile->defineVariable("data_wave", {
-        {"dim_time", numRecordSteps},
+        {"dim_station", stKeys.size()},
         {"dim_channel", channels.size()},
-        {"dim_station", stKeys.size()}
+        {"dim_time", numRecordSteps}
     }, (numerical::Real)numerical::dErr);
     
     // channels
@@ -118,9 +118,9 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
     
     // write data
     int nch = (int)bufferFields.dimensions()[1];
-    mNcFile->writeVariable(mVarID_Data, "data", bufferFields,
-                           {mFileLineTime, 0, 0},
-                           {bufferLine, nch, nst});
+    mNcFile->writeVariable(mVarID_Data, "data_wave", bufferFields,
+                           {0, 0, mFileLineTime},
+                           {nst, nch, bufferLine});
     
     // flush?
     // mNcFile->flush();

@@ -161,8 +161,8 @@ protected:
         }
         
         // feed to tensor
-        eigen::IArray3 loc = {0, channelIndex, stationIndex};
-        eigen::IArray3 len = {bufferLine, 1, 1};
+        eigen::IArray3 loc = {stationIndex, channelIndex, 0};
+        eigen::IArray3 len = {1, 1, bufferLine};
         bufferFields.slice(loc, len).reshape(eigen::IArray1{bufferLine}) =
         Eigen::TensorMap<eigen::RTensor1>(sColBuffer.data(), bufferLine);
     }
