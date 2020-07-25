@@ -492,9 +492,12 @@ void Domain::reportScanning() const {
         writer.open(io::gOutputDirectory + "/" +
                     mWavefieldScanning->mFileName, true);
         writer.defModeOn();
-        writer.defineVariable("pointwise_sz", {nPoints, 2}, 0.);
-        writer.defineVariable("pointwise_Nr", {nPoints}, 0);
-        writer.defineVariable("starting_Nr_for_scanning", {nPoints}, 0);
+        writer.defineVariable("pointwise_sz", {
+            {"dim_point", nPoints}, {"dim_sz", 2}}, 0.);
+        writer.defineVariable("pointwise_Nr", {
+            {"dim_point", nPoints}}, 0);
+        writer.defineVariable("starting_Nr_for_scanning", {
+            {"dim_point", nPoints}}, 0);
         writer.defModeOff();
         writer.writeVariable("pointwise_sz", sz, {0, 0}, {nPoints, 2});
         writer.writeVariable("pointwise_Nr", nrScan, {0}, {nPoints});

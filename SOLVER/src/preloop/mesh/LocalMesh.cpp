@@ -360,13 +360,16 @@ void LocalMesh::plotDD(const std::string &fname,
         // open
         NetCDF_Writer nw(io::gOutputDirectory + "/plots/" + fname, true);
         // coords
-        nw.defineVariable("coords", {nelem, 2}, numerical::dErr);
+        nw.defineVariable("coords", {
+            {"dim_elem", nelem}, {"dim_sz", 2}}, numerical::dErr);
         nw.writeVariable("coords", center, {0, 0}, {nelem, 2});
         // weights
-        nw.defineVariable("weights", {nelem}, numerical::dErr);
+        nw.defineVariable("weights", {
+            {"dim_elem", nelem}}, numerical::dErr);
         nw.writeVariable("weights", weights, {0}, {nelem});
         // rank
-        nw.defineVariable("mpi_rank", {nelem}, -1);
+        nw.defineVariable("mpi_rank", {
+            {"dim_elem", nelem}}, -1);
         nw.writeVariable("mpi_rank", elemRank, {0}, {nelem});
     }
 }

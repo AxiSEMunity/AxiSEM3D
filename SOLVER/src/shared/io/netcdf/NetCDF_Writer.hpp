@@ -62,19 +62,19 @@ public:
     // define variable
     template <class scalar>
     int defineVariable(const std::string &vname,
-                       const std::vector<numerical::Int> &dims,
+                       const std::vector<
+                       std::pair<std::string, numerical::Int>> &dims,
                        const scalar &fill, bool collective = true) const {
         // define dimensions
         std::vector<int> dimids(dims.size(), -1);
         for (int idim = 0; idim < dims.size(); idim++) {
-            std::stringstream dimName;
-            dimName << "ncdim_" << dims[idim];
             // find dimension ID
-            if (nc_inq_dimid(mFileID, dimName.str().c_str(),
+            if (nc_inq_dimid(mFileID, dims[idim].first.c_str(),
                              &(dimids[idim])) != NC_NOERR) {
                 // if not found, create it
-                netcdf::error(nc_def_dim(mFileID, dimName.str().c_str(),
-                                         (size_t)dims[idim], &dimids[idim]),
+                netcdf::error(nc_def_dim(mFileID, dims[idim].first.c_str(),
+                                         (size_t)dims[idim].second,
+                                         &dimids[idim]),
                               "nc_def_dim", mFileName);
             }
         }

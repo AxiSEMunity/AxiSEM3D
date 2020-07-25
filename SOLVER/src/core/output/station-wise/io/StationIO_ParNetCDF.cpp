@@ -54,22 +54,26 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
         
         // time
         mVarID_Time = mNcFile->defineVariable("time_points", {
-            numRecordSteps}, numerical::dErr);
+            {"dim_time", numRecordSteps}}, numerical::dErr);
         
         // data
-        mVarID_Data = mNcFile->defineVariable("data", {
-            numRecordSteps, (int)channels.size(), (int)stKeysAll.size()
+        mVarID_Data = mNcFile->defineVariable("data_wave", {
+            {"dim_time", numRecordSteps},
+            {"dim_channel", channels.size()},
+            {"dim_station", stKeysAll.size()}
         }, (numerical::Real)numerical::dErr);
         
         // channels
-        int maxChLength = vector_tools::maxLength(channels);
         mNcFile->defineVariable("channel_order", {
-            (int)channels.size(), maxChLength}, (char)0);
+            {"dim_channel", channels.size()},
+            {"dim_channel_str_length", vector_tools::maxLength(channels)}
+        }, (char)0);
         
         // stations
-        int maxStLength = vector_tools::maxLength(stKeysAll);
         mNcFile->defineVariable("station_order", {
-            (int)stKeysAll.size(), maxStLength}, (char)0);
+            {"dim_station", stKeysAll.size()},
+            {"dim_station_str_length", vector_tools::maxLength(stKeysAll)}
+        }, (char)0);
         
         // end defining variables
         mNcFile->defModeOff();
