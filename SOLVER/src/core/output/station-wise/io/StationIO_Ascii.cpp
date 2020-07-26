@@ -108,11 +108,6 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
         return;
     }
     
-    // no line, avoid redundant "\n"
-    if (bufferLine == 0) {
-        return;
-    }
-    
     // time on max rank
     int tfile = 0;
     if (mpi::rank() == mRankWithMaxNumStations) {

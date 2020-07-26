@@ -78,16 +78,17 @@ public:
         // IO
         mIO->initialize(mGroupName, mNumRecordSteps, channels, stKeys);
         
-        // buffer
+        // buffers
         if (nst > 0) {
+            // time buffer is not needed without stations
             mBufferTime.resize(mDumpIntv);
-            mBufferFields.resize(nst, nch, mDumpIntv);
-            mBufferLine = 0;
-            
-            // stations
-            for (const std::unique_ptr<StationT> &st: mStations) {
-                st->setInGroup(mDumpIntv, mChannelOptions);
-            }
+        }
+        mBufferFields.resize(nst, nch, mDumpIntv);
+        mBufferLine = 0;
+        
+        // stations
+        for (const std::unique_ptr<StationT> &st: mStations) {
+            st->setInGroup(mDumpIntv, mChannelOptions);
         }
     }
     
@@ -98,45 +99,49 @@ public:
     
     // record at a time step
     void record(int timeStep, double time) {
+        // interval
+        if (timeStep % mSampleIntv != 0) {
+            return;
+        }
+        
+        // time
         if (mStations.size() > 0) {
-            // interval
-            if (timeStep % mSampleIntv != 0) {
-                return;
-            }
-            
-            // time
             mBufferTime(mBufferLine) = time;
-            
-            // stations
-            for (const std::unique_ptr<StationT> &st: mStations) {
-                st->record(mBufferLine, mChannelOptions);
-            }
-            
-            // increment buffer line
-            mBufferLine++;
-            
-            // dump to file
-            if (mBufferLine == mDumpIntv) {
-                dumpToFile();
-            }
+        }
+        
+        // stations
+        for (const std::unique_ptr<StationT> &st: mStations) {
+            st->record(mBufferLine, mChannelOptions);
+        }
+        
+        // increment buffer line
+        mBufferLine++;
+        
+        // dump to file
+        if (mBufferLine == mDumpIntv) {
+            dumpToFile();
         }
     }
     
     // dump to file
     void dumpToFile() {
-        if (mStations.size() > 0 && mBufferLine > 0) {
-            // stations
-            for (int ist = 0; ist < mStations.size(); ist++) {
-                mStations[ist]->processReport(mBufferLine, mChannelOptions,
-                                              ist, mBufferFields);
-            }
-            
-            // IO
-            mIO->dumpToFile(mBufferTime, mBufferFields, mBufferLine);
-            
-            // rewind buffer line
-            mBufferLine = 0;
+        // redundant call at the end of the time loop
+        if (mBufferLine == 0) {
+            return;
         }
+        
+        // stations
+        for (int ist = 0; ist < mStations.size(); ist++) {
+            mStations[ist]->processReport(mBufferLine, mChannelOptions,
+                                          ist, mBufferFields);
+        }
+        
+        // IO
+        // check zero station inside
+        mIO->dumpToFile(mBufferTime, mBufferFields, mBufferLine);
+        
+        // rewind buffer line
+        mBufferLine = 0;
     }
     
 private:

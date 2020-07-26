@@ -58,32 +58,32 @@ void StationIO_NetCDF::initialize(const std::string &groupName,
         {"dim_time", numRecordSteps}
     }, (numerical::Real)numerical::dErr);
     
-    // channels
-    mNcFile->defineVariable("channel_order", {
-        {"dim_channel", channels.size()},
-        {"dim_channel_str_length", vector_tools::maxLength(channels)}
-    }, (char)0);
-    
-    // stations
+    // station order
     mNcFile->defineVariable("station_order", {
         {"dim_station", stKeys.size()},
         {"dim_station_str_length", vector_tools::maxLength(stKeys)}
+    }, (char)0);
+    
+    // channel order
+    mNcFile->defineVariable("channel_order", {
+        {"dim_channel", channels.size()},
+        {"dim_channel_str_length", vector_tools::maxLength(channels)}
     }, (char)0);
     
     // end defining variables
     mNcFile->defModeOff();
     
     ///////////////////// write info /////////////////////
-    // write channels
-    for (int ich = 0; ich < channels.size(); ich++) {
-        mNcFile->writeVariable("channel_order", channels[ich],
-                               {ich, 0}, {1, (int)channels[ich].size()});
-    }
-    
-    // write station keys
+    // station order
     for (int ist = 0; ist < stKeys.size(); ist++) {
         mNcFile->writeVariable("station_order", stKeys[ist],
                                {ist, 0}, {1, (int)stKeys[ist].size()});
+    }
+    
+    // channel order
+    for (int ich = 0; ich < channels.size(); ich++) {
+        mNcFile->writeVariable("channel_order", channels[ich],
+                               {ich, 0}, {1, (int)channels[ich].size()});
     }
 }
 
@@ -104,11 +104,6 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
     // no station
     int nst = (int)bufferFields.dimensions()[0];
     if (nst == 0) {
-        return;
-    }
-    
-    // no line
-    if (bufferLine == 0) {
         return;
     }
     

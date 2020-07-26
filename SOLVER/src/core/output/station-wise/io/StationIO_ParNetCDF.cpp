@@ -23,6 +23,8 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
     
     // base
     StationIO::initialize(groupName, numRecordSteps, channels, stKeys);
+    
+    // return only if no station in group
     if (mNumStationsGlobal == 0) {
         return;
     }
@@ -63,32 +65,32 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
             {"dim_time", numRecordSteps}
         }, (numerical::Real)numerical::dErr);
         
-        // channels
-        mNcFile->defineVariable("channel_order", {
-            {"dim_channel", channels.size()},
-            {"dim_channel_str_length", vector_tools::maxLength(channels)}
-        }, (char)0);
-        
-        // stations
+        // station order
         mNcFile->defineVariable("station_order", {
             {"dim_station", stKeysAll.size()},
             {"dim_station_str_length", vector_tools::maxLength(stKeysAll)}
+        }, (char)0);
+        
+        // channel order
+        mNcFile->defineVariable("channel_order", {
+            {"dim_channel", channels.size()},
+            {"dim_channel_str_length", vector_tools::maxLength(channels)}
         }, (char)0);
         
         // end defining variables
         mNcFile->defModeOff();
         
         ///////////////////// write info /////////////////////
-        // write channels
-        for (int ich = 0; ich < channels.size(); ich++) {
-            mNcFile->writeVariable("channel_order", channels[ich],
-                                   {ich, 0}, {1, (int)channels[ich].size()});
-        }
-        
-        // write station keys
+        // station order
         for (int ist = 0; ist < stKeysAll.size(); ist++) {
             mNcFile->writeVariable("station_order", stKeysAll[ist],
                                    {ist, 0}, {1, (int)stKeysAll[ist].size()});
+        }
+        
+        // channel order
+        for (int ich = 0; ich < channels.size(); ich++) {
+            mNcFile->writeVariable("channel_order", channels[ich],
+                                   {ich, 0}, {1, (int)channels[ich].size()});
         }
         
         // close serial
@@ -97,8 +99,8 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
     
     // bcast variable IDs
     // variable ID should not change upon re-opening
-    mpi::bcast(mVarID_Time);
-    mpi::bcast(mVarID_Data);
+    mpi::bcast(mVarID_Time, mRankWithMaxNumStations);
+    mpi::bcast(mVarID_Data, mRankWithMaxNumStations);
     
     // open parallel
     mpi::barrier();
@@ -125,11 +127,9 @@ void StationIO_ParNetCDF::dumpToFile(const eigen::DColX &bufferTime,
     // no station
     int nst = (int)bufferFields.dimensions()[0];
     if (nst == 0) {
-        return;
-    }
-    
-    // no line
-    if (bufferLine == 0) {
+        // because file is opened globally, better to have
+        // mFileLineTime keep pace with the other ranks
+        mFileLineTime += bufferLine;
         return;
     }
     
