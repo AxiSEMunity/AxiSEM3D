@@ -75,8 +75,7 @@ namespace eigen_tools {
     
     /////////////////////////////// Fourier ///////////////////////////////
     // compute 2 * exp(I * alpha * phi)
-    template <typename T,
-    typename CColX = Eigen::Matrix<std::complex<T>, Eigen::Dynamic, 1>>
+    template <typename CColX, typename T = typename CColX::Scalar::value_type>
     void computeTwoExpIAlphaPhi(int nu_1, double phi, CColX &twoExpIAlphaPhi) {
         // no factor two on order zero
         twoExpIAlphaPhi(0) = 1.;
@@ -89,10 +88,7 @@ namespace eigen_tools {
     }
     
     // compute real value of a Fourier series at phi with precomputed exp
-    template <typename T, int M,
-    typename RRowM = Eigen::Matrix<T, 1, M>,
-    typename CColX = Eigen::Matrix<std::complex<T>, Eigen::Dynamic, 1>,
-    typename CMatXM = Eigen::Matrix<std::complex<T>, Eigen::Dynamic, M>>
+    template <typename RRowM, typename CColX, typename CMatXM>
     void computeFourierAtPhiExp(const CMatXM &coeffs, int nu_1,
                                 const CColX &twoExpIAlphaPhi, RRowM &reals) {
         // sum over Fourier orders
@@ -101,17 +97,14 @@ namespace eigen_tools {
     }
     
     // compute real value of a Fourier series at phi
-    template <typename T, int M,
-    typename RRowM = Eigen::Matrix<T, 1, M>,
-    typename CColX = Eigen::Matrix<std::complex<T>, Eigen::Dynamic, 1>,
-    typename CMatXM = Eigen::Matrix<std::complex<T>, Eigen::Dynamic, M>>
+    template <typename RRowM, typename CColX, typename CMatXM>
     void computeFourierAtPhi(const CMatXM &coeffs, int nu_1, double phi,
                              RRowM &reals) {
         // 2 * exp(I * alpha * phi)
         CColX twoExpIAlphaPhi(nu_1);
-        computeTwoExpIAlphaPhi<T>(nu_1, phi, twoExpIAlphaPhi);
+        computeTwoExpIAlphaPhi(nu_1, phi, twoExpIAlphaPhi);
         // sum over Fourier orders
-        computeFourierAtPhiExp<T, M>(coeffs, nu_1, twoExpIAlphaPhi, reals);
+        computeFourierAtPhiExp(coeffs, nu_1, twoExpIAlphaPhi, reals);
     }
 }
 

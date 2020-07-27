@@ -63,15 +63,12 @@ protected:
         // azimuthal interpolation
 #ifndef _SAVE_MEMORY
         // sum exp
-        eigen_tools::computeFourierAtPhiExp
-        <numerical::Real, D>(xd, nu_1, m2ExpIAlphaPhi, d);
+        eigen_tools::computeFourierAtPhiExp(xd, nu_1, m2ExpIAlphaPhi, d);
 #else
         // compute exp on-the-fly
-        eigen_tools::computeTwoExpIAlphaPhi
-        <numerical::Real>(nu_1, mPhi, s2ExpIAlphaPhi);
+        eigen_tools::computeTwoExpIAlphaPhi(nu_1, mPhi, s2ExpIAlphaPhi);
         // sum exp
-        eigen_tools::computeFourierAtPhiExp
-        <numerical::Real, D>(xd, nu_1, s2ExpIAlphaPhi, d);
+        eigen_tools::computeFourierAtPhiExp(xd, nu_1, s2ExpIAlphaPhi, d);
 #endif
     }
     

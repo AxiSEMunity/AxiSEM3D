@@ -29,8 +29,7 @@ void Station::setElement(const eigen::DRowN &weights, int nu_1) {
 #ifndef _SAVE_MEMORY
     // precompute
     m2ExpIAlphaPhi.resize(nu_1);
-    eigen_tools::computeTwoExpIAlphaPhi
-    <numerical::Real>(nu_1, mPhi, m2ExpIAlphaPhi);
+    eigen_tools::computeTwoExpIAlphaPhi(nu_1, mPhi, m2ExpIAlphaPhi);
 #else
     // on-the-fly
     if (s2ExpIAlphaPhi.rows() < nu_1) {
