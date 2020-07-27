@@ -73,7 +73,7 @@ protected:
     }
     
     // process: rotate field
-    template<int D,
+    template <int D,
     typename RMatXD_RM =
     Eigen::Matrix<numerical::Real, Eigen::Dynamic, D, Eigen::RowMajor>>
     void rotateField(RMatXD_RM &field, int bufferLine, bool fieldInRTZ,
@@ -106,7 +106,7 @@ protected:
     }
     
     // process: compute channel and feed buffer
-    template<int D,
+    template <int D,
     typename RMatXD_RM =
     Eigen::Matrix<numerical::Real, Eigen::Dynamic, D, Eigen::RowMajor>>
     void computeFeedChannel(const RMatXD_RM &field, int fieldIndex,

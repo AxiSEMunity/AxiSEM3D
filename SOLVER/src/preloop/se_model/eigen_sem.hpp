@@ -78,7 +78,7 @@ namespace op1D_3D {
     }
     
     // addTo
-    template<class MatIn, class MatMe>
+    template <class MatIn, class MatMe>
     void addTo(const MatIn &in, MatMe &me) {
         // input can be zero-sized with mpi
         if (in.rows() == 0) {
@@ -108,7 +108,7 @@ namespace op1D_3D {
     }
     
     // regularize 1D or 3D
-    template<class Mat>
+    template <class Mat>
     bool regularize1D(const std::vector<std::reference_wrapper<Mat>> &mats) {
         // find max nr
         int nrMax = -1;
@@ -143,7 +143,7 @@ namespace op1D_3D {
     }
     
     // extend 1D to 3D
-    template<class Mat>
+    template <class Mat>
     Mat to3D(const Mat &m, int nr) {
         if (m.rows() == nr) {
             // already 3D, do nothing
@@ -159,7 +159,7 @@ namespace op1D_3D {
     }
     
     // reduce 3D to 1D if possible
-    template<class Mat, typename T = typename Mat::Scalar>
+    template <class Mat, typename T = typename Mat::Scalar>
     void tryReduceTo1D(Mat &m) {
         // null or 1D
         if (m.rows() == 0 || m.rows() == 1) {

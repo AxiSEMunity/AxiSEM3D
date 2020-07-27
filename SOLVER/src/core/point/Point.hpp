@@ -116,7 +116,7 @@ class Scanning1D {
     
 public:
     // do scanning
-    template<class CColX>
+    template <class CColX>
     void doScanning(Real relTolFourierH2, Real relTolH2,
                     Real absTolH2, const CColX &fseries) {
         // l2 and h2 norm

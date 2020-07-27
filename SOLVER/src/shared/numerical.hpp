@@ -29,7 +29,7 @@ namespace numerical {
     const double dEpsilon = 1e-12;
     
     // get epsilon
-    template<typename T>
+    template <typename T>
     inline T epsilon() = delete;
     
     // float specialization

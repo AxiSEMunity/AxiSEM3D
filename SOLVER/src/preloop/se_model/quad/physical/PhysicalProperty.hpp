@@ -97,7 +97,7 @@ public:
     }
     
     // linear interpolation over phi
-    template<class MatIn, class MatOut>
+    template <class MatIn, class MatOut>
     static void linInterpPhi(const MatIn &dataIn, MatOut &dataOut,
                              int colIn, int colOut, int nrIn, int nrOut) {
         if (nrIn == nrOut) {
