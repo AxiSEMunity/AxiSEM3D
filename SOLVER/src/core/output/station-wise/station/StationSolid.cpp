@@ -74,10 +74,6 @@ record(int bufferLine, const channel::solid::ChannelOptions &chops) {
     if (chops.mNeedBufferE) {
         mElement->getStrainField(sEXN6);
         interpolate<6>(sEXN6, sEX6, sE6, nu_1);
-        // halve off-diagonal components of strain for unified
-        // tensorial operations for strain and stress
-        static const numerical::Real half = .5;
-        sE6.rightCols(3) *= half;
         mBufferE.row(bufferLine) = sE6;
     }
     // curl
@@ -152,8 +148,11 @@ rotate(int bufferLine, const channel::solid::ChannelOptions &chops) {
                        chops.mWCS, cartesian);
     }
     if (chops.mNeedBufferE) {
+        // halve off-diagonal components before rotation
+        mBufferE.rightCols(3) *= (numerical::Real).5;
         rotateField<6>(mBufferE, bufferLine, mElement->strainInRTZ(),
                        chops.mWCS, cartesian);
+        mBufferE.rightCols(3) *= (numerical::Real)2.;
     }
     if (chops.mNeedBufferR) {
         rotateField<3>(mBufferR, bufferLine, mElement->curlInRTZ(),
