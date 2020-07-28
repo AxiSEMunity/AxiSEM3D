@@ -120,7 +120,7 @@ protected:
                     sColBuffer.topRows(bufferLine) =
                     field.topRows(bufferLine).rowwise().norm();
                 } else {
-                    throw std::runtime_error("Station::computeChannel || "
+                    throw std::runtime_error("Station::computeFeedChannel || "
                                              "Invalid channel setting.");
                 }
             } else if (D == 6) {
@@ -140,7 +140,7 @@ protected:
                      field.bblk(4).cwiseProduct(field.bblk(4)) -
                      field.bblk(5).cwiseProduct(field.bblk(5)));
                 } else {
-                    throw std::runtime_error("Station::computeChannel || "
+                    throw std::runtime_error("Station::computeFeedChannel || "
                                              "Invalid channel setting.");
                 }
             } else if (D == 9) {
@@ -148,11 +148,11 @@ protected:
                     sColBuffer.topRows(bufferLine) =
                     field.bblk(0) + field.bblk(4) + field.bblk(8);
                 } else {
-                    throw std::runtime_error("Station::computeChannel || "
+                    throw std::runtime_error("Station::computeFeedChannel || "
                                              "Invalid channel setting.");
                 }
             } else {
-                throw std::runtime_error("Station::computeChannel || "
+                throw std::runtime_error("Station::computeFeedChannel || "
                                          "Invalid channel setting.");
             }
         }

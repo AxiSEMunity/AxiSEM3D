@@ -50,7 +50,7 @@ createRankStation(const std::string &groupName,
         const auto &gdir = io::gOutputDirectory + "/stations/" + groupName;
         std::ofstream fout(gdir + "/rank_station.info");
         if (!fout) {
-            throw std::runtime_error("StationIO::initialize || "
+            throw std::runtime_error("StationIO::createRankStation || "
                                      "Error creating rank-station index file:"
                                      " || " + gdir + "/rank_station.info");
         }

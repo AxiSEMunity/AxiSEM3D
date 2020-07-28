@@ -129,7 +129,7 @@ processReport(int bufferLine,
                                   bufferLine, ich, stationIndex,
                                   bufferFields);
         } else {
-            throw std::runtime_error("StationSolid::process || "
+            throw std::runtime_error("StationSolid::processReport || "
                                      "Unknown field type.");
         }
     }
