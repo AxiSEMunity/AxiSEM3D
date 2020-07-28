@@ -15,7 +15,7 @@
 /////////////////////////// setup ///////////////////////////
 // set element
 void StationSolid::
-setElement(const std::shared_ptr<const SolidElement> &element,
+setElement(const std::shared_ptr<SolidElement> &element,
            const eigen::DRowN &weights) {
     // element
     mElement = element;
@@ -45,7 +45,7 @@ setInGroup(int dumpIntv, const channel::solid::ChannelOptions &chops) {
     }
     
     // element
-    mElement->prepareWavefieldOutput(chops);
+    mElement->prepareWavefieldOutput(chops, false);
     
     // workspace
     expandWorkspaceRecord(mElement->getNu_1(), chops);

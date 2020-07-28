@@ -86,14 +86,19 @@ public:
     
     /////////////////////////// wavefield output ///////////////////////////
     // prepare wavefield output
-    void
-    prepareWavefieldOutput(const channel::fluid::ChannelOptions &chops) const;
+    void prepareWavefieldOutput(const channel::fluid::ChannelOptions &chops,
+                                bool enforceCoordTransform);
     
     // chi field
     void getChiField(eigen::CMatXN &chi) const;
     
     // displ field
-    void getDisplField(eigen::CMatXN3 &displ) const;
+    void getDisplField(eigen::CMatXN3 &displ) const {
+        getDisplField(displ, displInRTZ());
+    }
+    
+    // displ field
+    void getDisplField(eigen::CMatXN3 &displ, bool needRTZ) const;
     
     // pressure field
     void getPressureField(eigen::CMatXN &pressure) const;

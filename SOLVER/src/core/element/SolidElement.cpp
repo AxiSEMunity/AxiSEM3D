@@ -125,8 +125,13 @@ displToStiff(const eigen::vec_ar3_CMatPP_RM &displElem,
             mElastic->strainToStress_FR(sStrainUndulated_FR,
                                         sStressUndulated_FR, mNu_1);
             // record stress if needed for output
-            if (mStressBuffer->rows() > 0) {
-                mapPPvsN::PP2N(sStressUndulated_FR, *mStressBuffer, mNu_1);
+            if (mStressBuffer->size() > 0) {
+                for (int alpha = 0; alpha < mNu_1; alpha++) {
+                    for (int idim = 0; idim < 6; idim++) {
+                        (*mStressBuffer)[alpha][idim] =
+                        sStressUndulated_FR[alpha][idim];
+                    }
+                }
             }
             mPRT->undulatedToSpherical6_FR(sStressUndulated_FR,
                                            sStressSpherical_FR, mNu_1);
@@ -138,7 +143,7 @@ displToStiff(const eigen::vec_ar3_CMatPP_RM &displElem,
             mElastic->strainToStress_CD(sStrainUndulated_CD,
                                         sStressUndulated_CD, mNr);
             // record stress if needed for output
-            if (mStressBuffer->rows() > 0) {
+            if (mStressBuffer->size() > 0) {
                 //*** additional support required from gFFT_N6 ***//
                 fft::gFFT_N6.computeR2C(sStressUndulated_CD,
                                         *mStressBuffer, mNr);
@@ -175,8 +180,13 @@ displToStiff(const eigen::vec_ar3_CMatPP_RM &displElem,
         
         // record stress if needed for output
         // record before rotation to keep RTZ consistent with strain
-        if (mStressBuffer->rows() > 0) {
-            mapPPvsN::PP2N(sStressUndulated_FR, *mStressBuffer, mNu_1);
+        if (mStressBuffer->size() > 0) {
+            for (int alpha = 0; alpha < mNu_1; alpha++) {
+                for (int idim = 0; idim < 6; idim++) {
+                    (*mStressBuffer)[alpha][idim] =
+                    sStressUndulated_FR[alpha][idim];
+                }
+            }
         }
         
         // stress to stiffness
@@ -349,29 +359,55 @@ void SolidElement::addMomentSource(const eigen::CMatXN6 &moment,
 /////////////////////////// wavefield output ///////////////////////////
 // prepare wavefield output
 void SolidElement::
-prepareWavefieldOutput(const channel::solid::ChannelOptions &chops) const {
+prepareWavefieldOutput(const channel::solid::ChannelOptions &chops,
+                       bool enforceCoordTransform) {
     // buffer
     if (chops.mNeedBufferS) {
-        mStressBuffer->resize(mNu_1, spectral::nPEM * 6);
+        mStressBuffer->resize(mNu_1);
     }
     
     // fft
     if (mPRT && !mInFourier && (chops.mNeedBufferE || chops.mNeedBufferS)) {
         fft::gFFT_N6.addNR(mNr);
     }
+    
+    // coord
+    if (enforceCoordTransform) {
+        bool needRTZ = (chops.mWCS == channel::WavefieldCS::RTZ);
+        if (chops.mNeedBufferU && displInRTZ() != needRTZ) {
+            createCoordTransform();
+        }
+        if (chops.mNeedBufferG && nablaInRTZ() != needRTZ) {
+            createCoordTransform();
+        }
+        if (chops.mNeedBufferE && strainInRTZ() != needRTZ) {
+            createCoordTransform();
+        }
+        if (chops.mNeedBufferR && curlInRTZ() != needRTZ) {
+            createCoordTransform();
+        }
+        if (chops.mNeedBufferS && stressInRTZ() != needRTZ) {
+            createCoordTransform();
+        }
+    }
 }
 
 // displ field
-void SolidElement::getDisplField(eigen::CMatXN3 &displ) const {
+void SolidElement::getDisplField(eigen::CMatXN3 &displ, bool needRTZ) const {
     // collect displacement from points
     collectDisplFromPoints(sDisplSpherical_FR);
+    
+    // coord
+    if (needRTZ) {
+        mTransform->transformSPZ_RTZ3(sDisplSpherical_FR, mNu_1);
+    }
     
     // copy
     mapPPvsN::PP2N(sDisplSpherical_FR, displ, mNu_1);
 }
 
 // nabla field
-void SolidElement::getNablaField(eigen::CMatXN9 &nabla) const {
+void SolidElement::getNablaField(eigen::CMatXN9 &nabla, bool needRTZ) const {
     // collect displacement from points
     collectDisplFromPoints(sDisplSpherical_FR);
     
@@ -393,9 +429,15 @@ void SolidElement::getNablaField(eigen::CMatXN9 &nabla) const {
             fft::gFFT_N9.computeR2C(sStrainUndulated9_CD,
                                     sStrainUndulated9_FR, mNr);
         }
+        if (!needRTZ) {
+            mTransform->transformRTZ_SPZ9(sStrainUndulated9_FR, mNu_1);
+        }
     } else {
         mGradQuad->computeGrad9(sDisplSpherical_FR,
                                 sStrainUndulated9_FR, mNu_1);
+        if (needRTZ) {
+            mTransform->transformSPZ_RTZ9(sStrainUndulated9_FR, mNu_1);
+        }
     }
     
     // copy
@@ -403,7 +445,7 @@ void SolidElement::getNablaField(eigen::CMatXN9 &nabla) const {
 }
 
 // strain field
-void SolidElement::getStrainField(eigen::CMatXN6 &strain) const {
+void SolidElement::getStrainField(eigen::CMatXN6 &strain, bool needRTZ) const {
     // collect displacement from points
     collectDisplFromPoints(sDisplSpherical_FR);
     
@@ -424,9 +466,28 @@ void SolidElement::getStrainField(eigen::CMatXN6 &strain) const {
             fft::gFFT_N6.computeR2C(sStrainUndulated_CD,
                                     sStrainUndulated_FR, mNr);
         }
+        if (!needRTZ) {
+            // change to Voigt convention for strain before rotation
+            for (int alpha = 0; alpha < mNu_1; alpha++) {
+                // dims 3, 4, 5 are shear components
+                for (int idim = 3; idim < 6; idim++) {
+                    sStrainUndulated_FR[alpha][idim] *= (numerical::Real).5;
+                }
+            }
+            mTransform->transformRTZ_SPZ6(sStrainUndulated_FR, mNu_1);
+            for (int alpha = 0; alpha < mNu_1; alpha++) {
+                // dims 3, 4, 5 are shear components
+                for (int idim = 3; idim < 6; idim++) {
+                    sStrainUndulated_FR[alpha][idim] *= (numerical::Real)2.;
+                }
+            }
+        }
     } else {
         mGradQuad->computeGrad6(sDisplSpherical_FR,
                                 sStrainUndulated_FR, mNu_1);
+        if (needRTZ) {
+            mTransform->transformSPZ_RTZ6(sStrainUndulated_FR, mNu_1);
+        }
     }
     
     // copy
@@ -434,7 +495,7 @@ void SolidElement::getStrainField(eigen::CMatXN6 &strain) const {
 }
 
 // curl field
-void SolidElement::getCurlField(eigen::CMatXN3 &curl) const {
+void SolidElement::getCurlField(eigen::CMatXN3 &curl, bool needRTZ) const {
     // collect displacement from points
     collectDisplFromPoints(sDisplSpherical_FR);
     
@@ -472,6 +533,39 @@ void SolidElement::getCurlField(eigen::CMatXN3 &curl) const {
                                        sStrainUndulated9_FR[alpha][1]);
     }
     
+    // coord
+    if (needRTZ && !curlInRTZ()) {
+        mTransform->transformSPZ_RTZ3(sCurlUndulated_FR, mNu_1);
+    } else if (!needRTZ && curlInRTZ()) {
+        mTransform->transformRTZ_SPZ3(sCurlUndulated_FR, mNu_1);
+    }
+    
     // copy
     mapPPvsN::PP2N(sCurlUndulated_FR, curl, mNu_1);
+}
+
+// stress field
+void SolidElement::getStressField(eigen::CMatXN6 &stress, bool needRTZ) const {
+    // coord
+    if (needRTZ && !stressInRTZ()) {
+        // change to Voigt convention for strain before rotation
+        for (int alpha = 0; alpha < mNu_1; alpha++) {
+            // dims 3, 4, 5 are shear components
+            for (int idim = 3; idim < 6; idim++) {
+                (*mStressBuffer)[alpha][idim] *= (numerical::Real)2.;
+            }
+        }
+        mTransform->transformSPZ_RTZ6(*mStressBuffer, mNu_1);
+        for (int alpha = 0; alpha < mNu_1; alpha++) {
+            // dims 3, 4, 5 are shear components
+            for (int idim = 3; idim < 6; idim++) {
+                (*mStressBuffer)[alpha][idim] *= (numerical::Real).5;
+            }
+        }
+    } else if (!needRTZ && stressInRTZ()) {
+        mTransform->transformRTZ_SPZ6(*mStressBuffer, mNu_1);
+    }
+    
+    // copy
+    mapPPvsN::PP2N(*mStressBuffer, stress, mNu_1);
 }

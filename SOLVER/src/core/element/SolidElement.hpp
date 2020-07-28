@@ -93,25 +93,48 @@ public:
     
     /////////////////////////// wavefield output ///////////////////////////
     // prepare wavefield output
-    void
-    prepareWavefieldOutput(const channel::solid::ChannelOptions &chops) const;
+    void prepareWavefieldOutput(const channel::solid::ChannelOptions &chops,
+                                bool enforceCoordTransform);
     
     // displ field
-    void getDisplField(eigen::CMatXN3 &displ) const;
+    void getDisplField(eigen::CMatXN3 &displ) const {
+        getDisplField(displ, displInRTZ());
+    }
+    
+    // displ field
+    void getDisplField(eigen::CMatXN3 &displ, bool needRTZ) const;
     
     // nabla field
-    void getNablaField(eigen::CMatXN9 &nabla) const;
+    void getNablaField(eigen::CMatXN9 &nabla) const {
+        getNablaField(nabla, nablaInRTZ());
+    }
+    
+    // nabla field
+    void getNablaField(eigen::CMatXN9 &nabla, bool needRTZ) const;
     
     // strain field
-    void getStrainField(eigen::CMatXN6 &strain) const;
+    void getStrainField(eigen::CMatXN6 &strain) const {
+        getStrainField(strain, strainInRTZ());
+    }
+    
+    // strain field
+    void getStrainField(eigen::CMatXN6 &strain, bool needRTZ) const;
     
     // curl field
-    void getCurlField(eigen::CMatXN3 &curl) const;
+    void getCurlField(eigen::CMatXN3 &curl) const {
+        getCurlField(curl, curlInRTZ());
+    }
+    
+    // curl field
+    void getCurlField(eigen::CMatXN3 &curl, bool needRTZ) const;
     
     // stress field
     void getStressField(eigen::CMatXN6 &stress) const {
-        stress.topRows(mNu_1) = *mStressBuffer;
+        getStressField(stress, stressInRTZ());
     }
+    
+    // stress field
+    void getStressField(eigen::CMatXN6 &stress, bool needRTZ) const;
     
     // displ crd
     inline bool displInRTZ() const {
@@ -151,9 +174,8 @@ private:
     
     // stress buffer
     // stress cannot be recomputed with attenuation
-    // using a pointer because it will be written during a const method
-    const std::unique_ptr<eigen::CMatXN6> mStressBuffer =
-    std::make_unique<eigen::CMatXN6>(0, spectral::nPEM * 6);
+    const std::unique_ptr<eigen::vec_ar6_CMatPP_RM> mStressBuffer =
+    std::make_unique<eigen::vec_ar6_CMatPP_RM>();
     
     
     ////////////////////////////////////////

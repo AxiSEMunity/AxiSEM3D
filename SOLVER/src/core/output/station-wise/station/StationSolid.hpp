@@ -26,7 +26,7 @@ public:
     
     /////////////////////////// setup ///////////////////////////
     // set element
-    void setElement(const std::shared_ptr<const SolidElement> &element,
+    void setElement(const std::shared_ptr<SolidElement> &element,
                     const eigen::DRowN &weights);
     
     // set in group
@@ -40,7 +40,7 @@ public:
     
 private:
     // element
-    std::shared_ptr<const SolidElement> mElement = nullptr;
+    std::shared_ptr<SolidElement> mElement = nullptr;
     
     // buffer
     eigen::RMatX3_RM mBufferU = eigen::RMatX3_RM(0, 3);

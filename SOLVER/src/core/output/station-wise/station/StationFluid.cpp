@@ -15,7 +15,7 @@
 /////////////////////////// setup ///////////////////////////
 // set element
 void StationFluid::
-setElement(const std::shared_ptr<const FluidElement> &element,
+setElement(const std::shared_ptr<FluidElement> &element,
            const eigen::DRowN &weights) {
     // element
     mElement = element;
@@ -42,7 +42,7 @@ setInGroup(int dumpIntv, const channel::fluid::ChannelOptions &chops) {
     }
     
     // element
-    mElement->prepareWavefieldOutput(chops);
+    mElement->prepareWavefieldOutput(chops, false);
     
     // workspace
     expandWorkspaceRecord(mElement->getNu_1(), chops);

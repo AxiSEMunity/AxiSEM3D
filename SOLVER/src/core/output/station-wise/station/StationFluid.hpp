@@ -26,7 +26,7 @@ public:
     
     /////////////////////////// setup ///////////////////////////
     // set element
-    void setElement(const std::shared_ptr<const FluidElement> &element,
+    void setElement(const std::shared_ptr<FluidElement> &element,
                     const eigen::DRowN &weights);
     
     // set in group
@@ -40,7 +40,7 @@ public:
     
 private:
     // element
-    std::shared_ptr<const FluidElement> mElement = nullptr;
+    std::shared_ptr<FluidElement> mElement = nullptr;
     
     // buffer
     eigen::RMatX1_RM mBufferX = eigen::RMatX1_RM(0, 1);

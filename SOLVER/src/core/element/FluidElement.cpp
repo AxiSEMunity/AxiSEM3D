@@ -213,16 +213,27 @@ void FluidElement::addPressureSource(const eigen::CMatXN &pressure,
 /////////////////////////// wavefield output ///////////////////////////
 // prepare wavefield output
 void FluidElement::
-prepareWavefieldOutput(const channel::fluid::ChannelOptions &chops) const {
+prepareWavefieldOutput(const channel::fluid::ChannelOptions &chops,
+                       bool enforceCoordTransform) {
+    // pressure
     if (chops.mNeedBufferP) {
         for (int ipnt = 0; ipnt < nPEM; ipnt++) {
             mPoints[ipnt]->preparePressureOutput();
         }
     }
     
+    // delta
     if (chops.mNeedBufferD) {
         for (int ipnt = 0; ipnt < nPEM; ipnt++) {
             mPoints[ipnt]->prepareDeltaOutput();
+        }
+    }
+    
+    // coord
+    if (enforceCoordTransform) {
+        bool needRTZ = (chops.mWCS == channel::WavefieldCS::RTZ);
+        if (chops.mNeedBufferU && displInRTZ() != needRTZ) {
+            createCoordTransform();
         }
     }
 }
@@ -237,7 +248,7 @@ void FluidElement::getChiField(eigen::CMatXN &chi) const {
 }
 
 // displ field
-void FluidElement::getDisplField(eigen::CMatXN3 &displ) const {
+void FluidElement::getDisplField(eigen::CMatXN3 &displ, bool needRTZ) const {
     // collect displacement from points
     collectDisplFromPoints(sDisplSpherical_FR);
     
@@ -264,8 +275,9 @@ void FluidElement::getDisplField(eigen::CMatXN3 &displ) const {
             fft::gFFT_N3.computeR2C(sStressUndulated_CD,
                                     sStressUndulated_FR, mNr);
         }
-        // convert to flattened
-        mapPPvsN::PP2N(sStressUndulated_FR, displ, mNu_1);
+        if (!needRTZ) {
+            mTransform->transformRTZ_SPZ3(sStressSpherical_FR, mNu_1);
+        }
     } else {
         if (mInFourier) {
             mAcoustic->strainToStress_FR(sStrainSpherical_FR,
@@ -278,9 +290,13 @@ void FluidElement::getDisplField(eigen::CMatXN3 &displ) const {
             fft::gFFT_N3.computeR2C(sStressSpherical_CD,
                                     sStressSpherical_FR, mNr);
         }
-        // convert to flattened
-        mapPPvsN::PP2N(sStressSpherical_FR, displ, mNu_1);
+        if (needRTZ) {
+            mTransform->transformSPZ_RTZ3(sStressSpherical_FR, mNu_1);
+        }
     }
+    
+    // convert to flattened
+    mapPPvsN::PP2N(sStressUndulated_FR, displ, mNu_1);
 }
 
 // pressure field

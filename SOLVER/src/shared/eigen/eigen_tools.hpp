@@ -91,21 +91,26 @@ namespace eigen_tools {
     template <typename RRowM, typename CColX, typename CMatXM>
     void computeFourierAtPhiExp(const CMatXM &coeffs, int nu_1,
                                 const CColX &twoExpIAlphaPhi, RRowM &reals,
-                                int realRow = 0) {
+                                int realRow = 0, int ncol = -1) {
+        if (ncol < 0) {
+            ncol = (int)coeffs.cols();
+        }
         // sum over Fourier orders
-        reals.row(realRow) = (twoExpIAlphaPhi.topRows(nu_1).asDiagonal() *
-                              coeffs.topRows(nu_1)).real().colwise().sum();
+        reals.block(realRow, 0, 1, ncol) =
+        (twoExpIAlphaPhi.topRows(nu_1).asDiagonal() *
+         coeffs.block(0, 0, nu_1, ncol)).real().colwise().sum();
     }
     
     // compute real value of a Fourier series at phi
     template <typename RRowM, typename CColX, typename CMatXM>
     void computeFourierAtPhi(const CMatXM &coeffs, int nu_1, double phi,
-                             RRowM &reals, int realRow = 0) {
+                             RRowM &reals, int realRow = 0, int ncol = -1) {
         // 2 * exp(I * alpha * phi)
         CColX twoExpIAlphaPhi(nu_1);
         computeTwoExpIAlphaPhi(nu_1, phi, twoExpIAlphaPhi);
         // sum over Fourier orders
-        computeFourierAtPhiExp(coeffs, nu_1, twoExpIAlphaPhi, reals, realRow);
+        computeFourierAtPhiExp(coeffs, nu_1, twoExpIAlphaPhi, reals,
+                               realRow, ncol);
     }
 }
 
