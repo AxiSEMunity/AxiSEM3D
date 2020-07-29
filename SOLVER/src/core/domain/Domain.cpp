@@ -499,9 +499,9 @@ void Domain::reportScanning() const {
         writer.defineVariable("starting_Nr_for_scanning", {
             {"dim_point", nPoints}}, 0);
         writer.defModeOff();
-        writer.writeVariable("pointwise_sz", sz, {0, 0}, {nPoints, 2});
-        writer.writeVariable("pointwise_Nr", nrScan, {0}, {nPoints});
-        writer.writeVariable("starting_Nr_for_scanning", nrOrig, {0}, {nPoints});
+        writer.writeWholeVariable("pointwise_sz", sz);
+        writer.writeWholeVariable("pointwise_Nr", nrScan);
+        writer.writeWholeVariable("starting_Nr_for_scanning", nrOrig);
         writer.close();
     }
 }

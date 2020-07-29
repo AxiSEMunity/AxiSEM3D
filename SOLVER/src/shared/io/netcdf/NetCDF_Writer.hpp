@@ -109,7 +109,7 @@ public:
     
     ////////////////// write variable //////////////////
     // write data to variable chunk
-    // this is the UNSAFE one without checking
+    // this is UNSAFE without checking
     // * ID existence
     // * datatype consistency
     // * container structure (e.g., row/col-major)
@@ -129,7 +129,7 @@ public:
     }
     
     // write data to variable chunk
-    // this is the SAFE one with everything checked
+    // this is SAFE with everything checked
     template <class Container>
     void writeVariable(const std::string &vname, const Container &val,
                        const std::vector<numerical::Int> &starts,
@@ -137,6 +137,21 @@ public:
         int varid = netcdf::varID_CheckType(mPWD, vname, mFileName,
                                             netcdf::typeNC_V(val));
         writeVariable(varid, vname, val, starts, counts);
+    }
+    
+    // write data to the whole variable
+    // this is SAFE with everything checked except size match
+    template <class Container>
+    void writeWholeVariable(const std::string &vname,
+                            const Container &val) const {
+        int varid = netcdf::varID_CheckType(mPWD, vname, mFileName,
+                                            netcdf::typeNC_V(val));
+        if (nc_put_var(mPWD, varid, val.data()) != NC_NOERR) {
+            throw std::runtime_error("NetCDF_Writer::writeWholeVariable || "
+                                     "Error writing variable to file. || "
+                                     "Variable name: " + vname + " || "
+                                     "NetCDF file: " + mFileName);
+        }
     }
     
     // flush
