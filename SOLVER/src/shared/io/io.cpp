@@ -64,20 +64,28 @@ namespace io {
         gOutputDirectory = execDirectory + "/output";
         warning = "";
         if (mpi::root()) {
+            // check input
             if (!dirExists(gInputDirectory)) {
                 throw std::runtime_error("io::verifyDirectories || "
                                          "Missing input directory: || "
                                          + gInputDirectory);
             }
+            // check output
             if (dirExists(gOutputDirectory)) {
-                // backup the old? maybe unnecessary, use C rename() if needed
+                // backup the old
+                const std::string &backup =
+                gOutputDirectory + "__backup@" + bstring::currentDateTime();
+                ::rename(gOutputDirectory.c_str(), backup.c_str());
+                // warning
                 warning = bstring::warning("io::verifyDirectories || "
-                                           "Output directory exists: || " +
-                                           gOutputDirectory + " || "
-                                           "Old results will be overwritten.");
+                                           "Output directory exists; "
+                                           "old output renamed to || " +
+                                           backup);
             }
+            // create output folders
             mkdir(gOutputDirectory);
             mkdir(gOutputDirectory + "/stations");
+            mkdir(gOutputDirectory + "/elements");
             mkdir(gOutputDirectory + "/develop");
             mkdir(gOutputDirectory + "/plots");
         }
@@ -138,7 +146,7 @@ namespace io {
         "[                                               /'     v x.y ]"
         "[                                                            ]"
         "[Copyright (c) 2019 Kuangdai Leng & friends, MIT License     ]"
-        "[News, suggestions and issues: www.axisem3d.ox.ac.uk         ]"
+        "[Source, docs and issues: github.com/kuangdai/AxiSEM-3D      ]"
         "{~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}\n\n";
         
         std::string space = filled((fmt::gBoxWidth - 60) / 2);
