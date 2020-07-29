@@ -45,9 +45,9 @@ void StationIO_Ascii::initialize(const std::string &groupName,
     int precisionWave = 8;
 #endif
     
-    // time_points (shared by ranks)
+    // data_time (shared by ranks)
     if (mpi::rank() == mRankWithMaxNumStations) {
-        createFileStream(gdir + "/time_points", precisionTime);
+        createFileStream(gdir + "/data_time", precisionTime);
     }
     
     // data
@@ -55,13 +55,13 @@ void StationIO_Ascii::initialize(const std::string &groupName,
         for (const std::string &stKey: stKeys) {
             createFileStream(gdir + "/" + stKey, precisionWave);
         }
-        // channel_order.info
+        // list_channel.info
         if (mpi::rank() == mRankWithMaxNumStations) {
-            std::ofstream fout(gdir + "/channel_order.info");
+            std::ofstream fout(gdir + "/list_channel.info");
             if (!fout) {
                 throw std::runtime_error("StationIO_Ascii::initialize || "
                                          "Error creating channel index file: ||"
-                                         + gdir + "/channel_order.info");
+                                         + gdir + "/list_channel.info");
             }
             for (const std::string &channel: channels) {
                 fout << channel << "\n";
@@ -75,12 +75,12 @@ void StationIO_Ascii::initialize(const std::string &groupName,
         for (const std::string &channel: channels) {
             createFileStream(rdir + "/" + channel, precisionWave);
         }
-        // station_order.info
-        std::ofstream fout(rdir + "/station_order.info");
+        // list_station.info
+        std::ofstream fout(rdir + "/list_station.info");
         if (!fout) {
             throw std::runtime_error("StationIO_Ascii::initialize || "
                                      "Error creating station index file: ||"
-                                     + rdir + "/station_order.info");
+                                     + rdir + "/list_station.info");
         }
         for (const std::string &stKey: stKeys) {
             fout << stKey << "\n";
@@ -119,27 +119,28 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
     
     // wavefields
     int nch = (int)bufferFields.dimensions()[1];
+    eigen::IArray2 shuffle = {1, 0};
+    Eigen::internal::set_is_malloc_allowed(true);
     if (mStationCentric) {
+        eigen::IArray3 loc = {0, 0, 0};
+        eigen::IArray3 len = {1, nch, bufferLine};
+        eigen::IArray2 shape = {nch, bufferLine};
         for (int ist = 0; ist < nst; ist++) {
-            eigen::IArray3 loc = {ist, 0, 0};
-            eigen::IArray3 len = {1, nch, bufferLine};
-            Eigen::internal::set_is_malloc_allowed(true);
+            loc[0] = ist;
             (*mFileStreams[ist + tfile]) << bufferFields.slice(loc, len).
-            reshape(eigen::IArray2{nch, bufferLine}).
-            shuffle(eigen::IArray2{1, 0}) << "\n";
-            Eigen::internal::set_is_malloc_allowed(false);
+            reshape(shape).shuffle(shuffle) << "\n";
         }
     } else {
+        eigen::IArray3 loc = {0, 0, 0};
+        eigen::IArray3 len = {nst, 1, bufferLine};
+        eigen::IArray2 shape = {nst, bufferLine};
         for (int ich = 0; ich < nch; ich++) {
-            eigen::IArray3 loc = {0, ich, 0};
-            eigen::IArray3 len = {nst, 1, bufferLine};
-            Eigen::internal::set_is_malloc_allowed(true);
+            loc[1] = ich;
             (*mFileStreams[ich + tfile]) << bufferFields.slice(loc, len).
-            reshape(eigen::IArray2{nst, bufferLine}).
-            shuffle(eigen::IArray2{1, 0}) << "\n";
-            Eigen::internal::set_is_malloc_allowed(false);
+            reshape(shape).shuffle(shuffle) << "\n";
         }
     }
+    Eigen::internal::set_is_malloc_allowed(false);
 }
 
 // create file

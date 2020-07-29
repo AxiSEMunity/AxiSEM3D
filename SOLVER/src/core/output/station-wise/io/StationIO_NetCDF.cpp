@@ -47,43 +47,43 @@ void StationIO_NetCDF::initialize(const std::string &groupName,
     ///////////////////// define variables /////////////////////
     mNcFile->defModeOn();
     
-    // time
-    mVarID_Time = mNcFile->defineVariable("time_points", {
+    // data time
+    mVarID_Time = mNcFile->defineVariable("data_time", {
         {"dim_time", numRecordSteps}}, numerical::dErr);
     
-    // data
+    // data wave
     mVarID_Data = mNcFile->defineVariable("data_wave", {
         {"dim_station", stKeys.size()},
         {"dim_channel", channels.size()},
         {"dim_time", numRecordSteps}
     }, (numerical::Real)numerical::dErr);
     
-    // station order
-    mNcFile->defineVariable("station_order", {
-        {"dim_station", stKeys.size()},
-        {"dim_station_str_length", vector_tools::maxLength(stKeys)}
-    }, (char)0);
-    
-    // channel order
-    mNcFile->defineVariable("channel_order", {
+    // list channel
+    mNcFile->defineVariable("list_channel", {
         {"dim_channel", channels.size()},
         {"dim_channel_str_length", vector_tools::maxLength(channels)}
+    }, (char)0);
+    
+    // list station
+    mNcFile->defineVariable("list_station", {
+        {"dim_station", stKeys.size()},
+        {"dim_station_str_length", vector_tools::maxLength(stKeys)}
     }, (char)0);
     
     // end defining variables
     mNcFile->defModeOff();
     
     ///////////////////// write info /////////////////////
-    // station order
-    for (int ist = 0; ist < stKeys.size(); ist++) {
-        mNcFile->writeVariable("station_order", stKeys[ist],
-                               {ist, 0}, {1, (int)stKeys[ist].size()});
+    // list channel
+    for (int ich = 0; ich < channels.size(); ich++) {
+        mNcFile->writeVariable("list_channel", channels[ich],
+                               {ich, 0}, {1, (int)channels[ich].size()});
     }
     
-    // channel order
-    for (int ich = 0; ich < channels.size(); ich++) {
-        mNcFile->writeVariable("channel_order", channels[ich],
-                               {ich, 0}, {1, (int)channels[ich].size()});
+    // list station
+    for (int ist = 0; ist < stKeys.size(); ist++) {
+        mNcFile->writeVariable("list_station", stKeys[ist],
+                               {ist, 0}, {1, (int)stKeys[ist].size()});
     }
 }
 
@@ -108,7 +108,7 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
     }
     
     // write time
-    mNcFile->writeVariable(mVarID_Time, "time_points", bufferTime,
+    mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
                            {mFileLineTime}, {bufferLine});
     
     // write data
