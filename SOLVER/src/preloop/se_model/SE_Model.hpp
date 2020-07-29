@@ -76,9 +76,9 @@ public:
     // compute inplane factor
     eigen::DRowN computeInplaneFactor(const eigen::DCol2 &sz, int iquad) const;
     
-    // get quad
-    const Quad &getQuad(int iquad) const {
-        return mQuads[iquad];
+    // get quads
+    const std::vector<Quad> &getQuads() const {
+        return mQuads;
     }
     
     

@@ -355,6 +355,9 @@ void Source::release(const SE_Model &sem, Domain &domain, double dt,
     minT0 = std::numeric_limits<double>::max();
     // verbose on rank
     std::map<int, std::string> verboseRank;
+    // get quads
+    const std::vector<Quad> &quads = sem.getQuads();
+    // release
     for (int sindex = 0; sindex < sourceCount; sindex++) {
         if (sourceIndexRank.at(sindex) != mpi::rank()) {
             // handled by another rank
@@ -393,7 +396,7 @@ void Source::release(const SE_Model &sem, Domain &domain, double dt,
         // release
         mechanism->release(source->computeQzsp(spz, source->mEllipticity),
                            source->mAxial, inplaneFactor, spz(1),
-                           sem.getQuad(quadTag), stf, domain);
+                           quads[quadTag], stf, domain);
     }
     // minimum t0 over ranks
     minT0 = mpi::min(minT0);

@@ -69,7 +69,7 @@ private:
     const bool mFluid;
     const std::vector<std::string> mUserChannels;
     
-    // format
+    // options
     const Format mFormat;
     const double mSamplingPeriod;
     const int mBufferSize;

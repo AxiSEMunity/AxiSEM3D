@@ -354,6 +354,8 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
              stgrp->mWCS, stgrp->mUserChannels, stationIO);
         }
         
+        // get quads
+        const std::vector<Quad> &quads = sem.getQuads();
         // add stations to group
         for (int ist = 0; ist < numStations; ist++) {
             if (stationRank.at(ist) != mpi::rank()) {
@@ -383,13 +385,13 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
             if (stgrp->mFluid) {
                 std::unique_ptr<StationFluid> st =
                 std::make_unique<StationFluid>(stKeys[ist], spz(1), theta, baz);
-                st->setElement(sem.getQuad(stationQuad[ist]).getFluidElement(),
+                st->setElement(quads[stationQuad[ist]].getFluidElement(),
                                inplaneFactor);
                 SGF->addStation(st);
             } else {
                 std::unique_ptr<StationSolid> st =
                 std::make_unique<StationSolid>(stKeys[ist], spz(1), theta, baz);
-                st->setElement(sem.getQuad(stationQuad[ist]).getSolidElement(),
+                st->setElement(quads[stationQuad[ist]].getSolidElement(),
                                inplaneFactor);
                 SGS->addStation(st);
             }
