@@ -37,6 +37,9 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
     std::vector<std::vector<std::string>> stKeysRanks;
     mpi::gather(stKeys, stKeysRanks, mRankWithMaxNumStations);
     
+    // file pointer
+    mNcFile = std::make_unique<NetCDF_Writer>();
+    
     /////////////////////// only on max rank ///////////////////////
     if (mpi::rank() == mRankWithMaxNumStations) {
         // flatten keys
@@ -48,7 +51,6 @@ void StationIO_ParNetCDF::initialize(const std::string &groupName,
         }
         
         // create and open
-        mNcFile = std::make_unique<NetCDF_Writer>();
         mNcFile->open(fname, true);
         
         ///////////////////// define variables /////////////////////
@@ -115,7 +117,7 @@ void StationIO_ParNetCDF::finalize() {
     // close files
     if (mNcFile) {
         mNcFile->close();
-        mNcFile = nullptr;
+        mNcFile.reset(nullptr);
     }
     mFileLineTime = 0;
 }

@@ -90,16 +90,17 @@ public:
         netcdf::error(nc_def_var_fill(mPWD, varid, NC_FILL, &fill),
                       "nc_def_var_fill", mFileName);
         
-        // collective
-#ifdef _USE_PARALLEL_NETCDF
-        if (collective) {
-            netcdf::error(nc_var_par_access(mPWD, varid, NC_COLLECTIVE),
-                          "nc_var_par_access", mFileName);
-        } else {
-            netcdf::error(nc_var_par_access(mPWD, varid, NC_INDEPENDENT),
-                          "nc_var_par_access", mFileName);
-        }
-#endif
+        // this call to nc_var_par_access is not valid
+        // // collective
+        // #ifdef _USE_PARALLEL_NETCDF
+        // if (collective) {
+        //     netcdf::error(nc_var_par_access(mPWD, varid, NC_COLLECTIVE),
+        //                   "nc_var_par_access", mFileName);
+        // } else {
+        //     netcdf::error(nc_var_par_access(mPWD, varid, NC_INDEPENDENT),
+        //                   "nc_var_par_access", mFileName);
+        // }
+        // #endif
         
         // return id
         return varid;
