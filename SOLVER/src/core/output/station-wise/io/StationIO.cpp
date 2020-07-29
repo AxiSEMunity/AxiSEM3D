@@ -12,6 +12,7 @@
 #include "io.hpp"
 #include "mpi.hpp"
 
+// initialize
 void StationIO::initialize(const std::string &groupName,
                            int numRecordSteps,
                            const std::vector<std::string> &channels,
