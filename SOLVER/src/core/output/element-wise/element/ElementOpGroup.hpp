@@ -1,0 +1,261 @@
+//
+//  ElementOpGroup.hpp
+//  AxiSEM3D
+//
+//  Created by Kuangdai Leng on 7/26/20.
+//  Copyright © 2020 Kuangdai Leng. All rights reserved.
+//
+
+//  element output group
+
+#ifndef ElementOpGroup_hpp
+#define ElementOpGroup_hpp
+
+#include "ElementIO.hpp"
+#include "ElementOpSolid.hpp"
+#include "ElementOpFluid.hpp"
+#include "vector_tools.hpp"
+
+///////////////////// type inference /////////////////////
+template <class ElementOpT>
+struct ElementOpInference {
+};
+
+template <>
+struct ElementOpInference<ElementOpSolid> {
+    typedef channel::solid::ChannelOptions ChannelOptions;
+    inline static const auto &gChannelMap = channel::solid::gChannelMap;
+};
+
+template <>
+struct ElementOpInference<ElementOpFluid> {
+    typedef channel::fluid::ChannelOptions ChannelOptions;
+    inline static const auto &gChannelMap = channel::fluid::gChannelMap;
+};
+
+
+///////////////////// element group /////////////////////
+template <class ElementOpT>
+class ElementOpGroup {
+public:
+    // constructor
+    ElementOpGroup(const std::string &groupName,
+                   int numRecordSteps, int sampleIntv, int dumpIntv,
+                   channel::WavefieldCS wcs,
+                   const std::vector<std::string> &userChannels,
+                   const std::vector<int> ipnts,
+                   const std::vector<double> phis, int naSpace,
+                   std::unique_ptr<ElementIO> &io):
+    mGroupName(groupName), mNumRecordSteps(numRecordSteps),
+    mSampleIntv(sampleIntv), mDumpIntv(std::min(dumpIntv, numRecordSteps)),
+    mChannelOptions(wcs, userChannels), mIPnts(ipnts), mPhis(phis),
+    mNaSpace(naSpace), mIO(io.release()) {
+        // nothing
+    }
+    
+    // add an element
+    void addElementOp(std::unique_ptr<ElementOpT> &elementOp) {
+        mElementOps.push_back(std::move(elementOp));
+    }
+    
+    // initialize after adding all elements
+    void initialize() {
+        // channels
+        int nch = (int)mChannelOptions.mStdChannels.size();
+        std::vector<std::string> channels;
+        channels.reserve(nch);
+        for (int ich = 0; ich < nch; ich++) {
+            const std::string &chstr =
+            std::get<0>(ElementOpInference<ElementOpT>::gChannelMap.
+                        at(mChannelOptions.mStdChannels[ich]));
+            channels.push_back(chstr);
+        }
+        
+        // Fourier
+        int nphis = (int)mPhis.size();
+        if (nphis > 0) {
+            // find max nu_1
+            int maxNu_1 = -1;
+            for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
+                maxNu_1 = std::max(maxNu_1, eop->getNu_1());
+            }
+            // allocate
+            mExpIAlphaPhi = eigen::CMatXX::Zero(maxNu_1, nphis);
+            for (int iphi = 0; iphi < nphis; iphi++) {
+                eigen_tools::computeTwoExpIAlphaPhi(maxNu_1, mPhis[iphi],
+                                                    mExpIAlphaPhi.col(iphi));
+            }
+        }
+        
+        //////////// na grid ////////////
+        // all na on elements
+        std::vector<int> allNa, sortedNa, allTag;
+        int nelem = (int)mElementOps.size();
+        allNa.reserve(nelem);
+        allTag.reserve(nelem);
+        for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
+            allNa.push_back(eop->getNa(nphis));
+            allTag.push_back(eop->getElementTag());
+        }
+        sortedNa = allNa;
+        vector_tools::sortUnique(sortedNa);
+        
+        // merge the sorted na
+        mNaGrid.clear();
+        mNaGrid.push_back(sortedNa.back());
+        for (int isort = (int)sortedNa.size() - 2; isort >=0; isort--) {
+            if (sortedNa[isort] < mNaGrid.back() - mNaSpace) {
+                mNaGrid.push_back(sortedNa[isort]);
+            }
+        }
+        // reverse order (descending to ascending)
+        vector_tools::sortUnique(mNaGrid);
+        
+        // form dict of naGrid for fast search
+        for (int inag = 0; inag < mNaGrid.size(); inag++) {
+            mNaGridIndexDict[mNaGrid[inag]] = inag;
+        }
+        
+        //////////// element-na info and coords ////////////
+        std::vector<int> numElemNaGrid = std::vector<int>(mNaGrid.size(), 0);
+        mElemNaInfo = eigen::IMatX4_RM(nelem, 4);
+        eigen::DMatXX_RM elemCoords(nelem, mIPnts.size() * 2);
+        for (int ielem = 0; ielem < nelem; ielem++) {
+            mElemNaInfo(ielem, 0) = allTag[ielem];
+            mElemNaInfo(ielem, 1) = allNa[ielem];
+            // find na gird for this na
+            auto it = std::lower_bound(mNaGrid.begin(), mNaGrid.end(),
+                                       allNa[ielem]);
+            mElemNaInfo(ielem, 2) = *it;
+            int naGridIndex = (int)(it - mNaGrid.begin());
+            mElemNaInfo(ielem, 3) = numElemNaGrid[naGridIndex];
+            // increment element number of this grid-na
+            numElemNaGrid[naGridIndex]++;
+            // coords
+            elemCoords.row(ielem) = mElementOps[ielem]->getCoords(mIPnts);
+        }
+        
+        // buffers
+        if (nelem > 0) {
+            // time buffer is not needed without stations
+            mBufferTime.resize(mDumpIntv);
+        }
+        for (int inag = 0; inag < mNaGrid.size(); inag++) {
+            eigen::RTensor5 bufferField(numElemNaGrid[inag],
+                                        mNaGrid[inag], mIPnts.size(),
+                                        channels.size(), mDumpIntv);
+            mBufferFields.push_back(bufferField);
+        }
+        mBufferLine = 0;
+        
+        // IO
+        mIO->initialize(mGroupName, mNumRecordSteps, channels,
+                        mIPnts, mNaGrid, mElemNaInfo, elemCoords);
+        
+        // elementOps
+        for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
+            eop->setInGroup(mDumpIntv, mChannelOptions,
+                            (int)mIPnts.size(), (int)mPhis.size());
+        }
+    }
+    
+    // finalize after time loop
+    void finalize() const {
+        mIO->finalize();
+    }
+    
+    // record at a time step
+    void record(int timeStep, double time) {
+        // interval
+        if (timeStep % mSampleIntv != 0) {
+            return;
+        }
+        
+        // time
+        if (mElementOps.size() > 0) {
+            mBufferTime(mBufferLine) = time;
+        }
+        
+        // stations
+        for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
+            eop->record(mBufferLine, mChannelOptions, mIPnts, mExpIAlphaPhi);
+        }
+        
+        // increment buffer line
+        mBufferLine++;
+        
+        // dump to file
+        if (mBufferLine == mDumpIntv) {
+            dumpToFile();
+        }
+    }
+    
+    // dump to file
+    void dumpToFile() {
+        // redundant call at the end of the time loop
+        if (mBufferLine == 0) {
+            return;
+        }
+        
+        // stations
+        for (int ie = 0; ie < mElementOps.size(); ie++) {
+            int naGridIndex = mNaGridIndexDict.at(mElemNaInfo(ie, 2));
+            int elemIndexNaGrid = mElemNaInfo(ie, 3);
+            mElementOps[ie]->processReport(mBufferLine, mChannelOptions,
+                                           elemIndexNaGrid, naGridIndex,
+                                           mBufferFields);
+        }
+        
+        // IO
+        // check zero station inside
+        mIO->dumpToFile(mBufferTime, mBufferFields, mBufferLine);
+        
+        // rewind buffer line
+        mBufferLine = 0;
+    }
+    
+private:
+    //////////////// const ////////////////
+    // name
+    const std::string mGroupName;
+    
+    // steps
+    const int mNumRecordSteps;
+    const int mSampleIntv;
+    const int mDumpIntv;
+    
+    // channels
+    const typename
+    ElementOpInference<ElementOpT>::ChannelOptions mChannelOptions;
+    
+    // in-plane
+    const std::vector<int> mIPnts;
+    
+    // azimuth
+    const std::vector<double> mPhis;
+    
+    // na space
+    const int mNaSpace;
+    
+    // IO
+    const std::unique_ptr<ElementIO> mIO;
+    
+    //////////////// non-const ////////////////
+    // elements
+    std::vector<std::unique_ptr<ElementOpT>> mElementOps;
+    
+    // Fourier
+    eigen::CMatXX mExpIAlphaPhi = eigen::CMatXX(0, 0);
+    
+    // na
+    std::vector<int> mNaGrid;
+    std::map<int, int> mNaGridIndexDict;
+    eigen::IMatX4_RM mElemNaInfo;
+    
+    // buffer
+    eigen::DColX mBufferTime = eigen::DColX(0);
+    std::vector<eigen::RTensor5> mBufferFields;
+    int mBufferLine = 0;
+};
+
+#endif /* ElementOpGroup_hpp */
