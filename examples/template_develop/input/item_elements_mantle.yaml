@@ -65,7 +65,7 @@
             #          dimensions are stored in the output NetCDF file(s);
             #          see the online manual for details
             #       2) must be greater than or equal to 1
-            #       3) recommended: maximum Nr in the target region / 100
+            #       3) recommended: maximum Nr in the target region / 200
             na_space: 1
         # wavefields to be recorded
         wavefields:
