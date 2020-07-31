@@ -38,8 +38,7 @@ set(NETCDF_ROOT                 ${netcdf})
 set(HDF5_ROOT                   ${hdf5})
 
 # use parallel NetCDF
-# parallel NetCDF can enhance I/O performance and simplify
-# post-processing, supported but not mandatory
+# parallel NetCDF is supported but not mandatory
 set(USE_PARALLEL_NETCDF         ${par_netcdf})
 
 
@@ -248,6 +247,8 @@ ${NETCDF_LIBRARIES}
 ${HDF5_HL_LIBRARIES}
 ${HDF5_LIBRARIES}
 ${LINK_OPTIONS}
+# cmake may not specify HDF5 lib path
+-L${HDF5_ROOT}/lib
 )
 
 # standard C++17
@@ -315,12 +316,12 @@ message("     * HDF5")
 if(NOT hdf5)
 message("       Linking to HDF5 is disabled by omitting -Dhdf5.")
 else()
+msglist("       user-specified root: " "${HDF5_ROOT}")
 if("${HDF5_LIBRARIES}" STREQUAL "")
 message("       Using HDF5 wrapper compilers, no explicit link required.")
 else()
-msglist("       user-specified root: " "${HDF5_ROOT}")
-msglist("       linked to libraries: " "${HDF5_LIBRARIES}")
-msglist("                            " "${HDF5_HL_LIBRARIES}")
+msglist("       linked to libraries: " "${HDF5_HL_LIBRARIES}")
+msglist("                            " "${HDF5_LIBRARIES}")
 endif()
 endif()
 message("     * Link options")
