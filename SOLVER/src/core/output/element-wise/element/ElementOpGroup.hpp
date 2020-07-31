@@ -157,7 +157,7 @@ public:
         for (int inag = 0; inag < mNaGrid.size(); inag++) {
             eigen::RTensor5 bufferField(numElemNaGrid[inag],
                                         mNaGrid[inag], mNPnts,
-                                        channels.size(), mDumpIntv);
+                                        nch, mDumpIntv);
             mBufferFields.push_back(bufferField);
         }
         mBufferLine = 0;
