@@ -103,10 +103,12 @@ public:
         
         // merge the sorted na
         mNaGrid.clear();
-        mNaGrid.push_back(sortedNa.back());
-        for (int isort = (int)sortedNa.size() - 2; isort >=0; isort--) {
-            if (sortedNa[isort] <= mNaGrid.back() - mNaSpace) {
-                mNaGrid.push_back(sortedNa[isort]);
+        if (sortedNa.size() > 0) {
+            mNaGrid.push_back(sortedNa.back());
+            for (int isort = (int)sortedNa.size() - 2; isort >= 0; isort--) {
+                if (sortedNa[isort] <= mNaGrid.back() - mNaSpace) {
+                    mNaGrid.push_back(sortedNa[isort]);
+                }
             }
         }
         // reverse order (descending to ascending)
@@ -122,7 +124,7 @@ public:
         }
         vector_tools::sortUnique(mNaGrid);
         mNaGrid.shrink_to_fit();
- 
+        
         // form dict of na-grid for fast search
         for (int inag = 0; inag < mNaGrid.size(); inag++) {
             mNaGridIndexDict[mNaGrid[inag]] = inag;
