@@ -17,8 +17,7 @@
 void ElementIO_NetCDF::initialize(const std::string &groupName,
                                   int numRecordSteps,
                                   const std::vector<std::string> &channels,
-                                  const std::vector<int> &ipnts,
-                                  const std::vector<int> &naGrid,
+                                  int npnts, const std::vector<int> &naGrid,
                                   const eigen::IMatX4_RM &elemNaInfo,
                                   const eigen::DMatXX_RM &elemCoords) {
     // finalize
@@ -26,7 +25,7 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
     
     // base
     ElementIO::initialize(groupName, numRecordSteps, channels,
-                          ipnts, naGrid, elemNaInfo, elemCoords);
+                          npnts, naGrid, elemNaInfo, elemCoords);
     
     // nothing locally without elements
     int nelem = (int)elemNaInfo.rows();
@@ -77,7 +76,7 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
         int varID = mNcFile->defineVariable("data_wave__NaG=" + strNag, {
             {"dim_element__NaG=" + strNag, elemsNaGrid[inag].size()},
             {"dim_na__NaG=" + strNag, naGrid[inag]},
-            {"dim_GLL", ipnts.size()},
+            {"dim_GLL", npnts},
             {"dim_channel", channels.size()},
             {"dim_time", numRecordSteps}
         }, (numerical::Real)0.); // must fill with zeros
@@ -90,11 +89,6 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
         {"dim_channel", channels.size()},
         {"dim_channel_str_length", vector_tools::maxLength(channels)}
     }, (char)0);
-    
-    // GLL
-    mNcFile->defineVariable("list_GLL", {
-        {"dim_GLL", ipnts.size()}
-    }, (int)-1);
     
     // element
     for (int inag = 0; inag < naGrid.size(); inag++) {
@@ -116,7 +110,7 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
     
     // element coords
     mNcFile->defineVariable("list_element_coords", {
-        {"dim_element", nelem}, {"dim_GLL", ipnts.size()}, {"dim_2", 2}
+        {"dim_element", nelem}, {"dim_GLL", npnts}, {"dim_2", 2}
     }, (double)0.);
     
     // end defining variables
@@ -128,9 +122,6 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
         mNcFile->writeVariable("list_channel", channels[ich],
                                {ich, 0}, {1, (int)channels[ich].size()});
     }
-    
-    // GLL
-    mNcFile->writeWholeVariable("list_GLL", ipnts);
     
     // element
     for (int inag = 0; inag < naGrid.size(); inag++) {
@@ -186,8 +177,10 @@ dumpToFile(const eigen::DColX &bufferTime,
                                {nelem, nag, npnts, nch, bufferLine});
     }
     
-    // flush?
-    // mNcFile->flush();
+    // flush
+    if (mFlush) {
+        mNcFile->flush();
+    }
     
     // update record postion in file
     mFileLineTime += bufferLine;

@@ -42,6 +42,7 @@
 // source-receiver stage
 #include "Source.hpp"
 #include "StationOutput.hpp"
+#include "ElementOutput.hpp"
 
 // wavefield scanning
 #include "WavefieldScanning.hpp"

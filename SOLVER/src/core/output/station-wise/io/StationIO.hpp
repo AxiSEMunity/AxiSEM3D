@@ -33,6 +33,11 @@ public:
                const eigen::RTensor3 &bufferFields,
                int bufferLine) = 0;
     
+    // set flush
+    void setFlush(bool flush) {
+        mFlush = flush;
+    }
+    
 protected:
     // create rank_station.info
     void createRankStation(const std::string &groupName,
@@ -48,6 +53,9 @@ protected:
     
     // global index of first station
     int mGlobalIndexFirstStation = 0;
+    
+    // flush
+    bool mFlush = false;
 };
 
 #endif /* StationIO_hpp */

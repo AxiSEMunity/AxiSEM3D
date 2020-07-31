@@ -14,9 +14,10 @@
 // set in group
 void ElementOpFluid::
 setInGroup(int dumpIntv, const channel::fluid::ChannelOptions &chops,
-           int npnts, int nphis) {
-    // NA
+           int nphis) {
+    // sizes
     int na = getNa(nphis);
+    int npnts = (int)mIPnts.size();
     
     // member buffers
     if (chops.mNeedBufferX) {
@@ -44,28 +45,28 @@ setInGroup(int dumpIntv, const channel::fluid::ChannelOptions &chops,
 // record
 void ElementOpFluid::
 record(int bufferLine, const channel::fluid::ChannelOptions &chops,
-       const std::vector<int> &ipnts, const eigen::CMatXX &expIAlphaPhi) {
+       const eigen::CMatXX &expIAlphaPhi) {
     int nu_1 = mElement->getNu_1();
     bool needRTZ = (chops.mWCS == channel::WavefieldCS::RTZ);
     
     if (chops.mNeedBufferX) {
         mElement->getChiField(sCXXN1);
-        recordToElem<1>(sCXXN1, nu_1, sCXXX, ipnts, sRXXX, expIAlphaPhi,
+        recordToElem<1>(sCXXN1, nu_1, sCXXX, sRXXX, expIAlphaPhi,
                         mBufferX, bufferLine);
     }
     if (chops.mNeedBufferU) {
         mElement->getDisplField(sCUXN3, needRTZ);
-        recordToElem<3>(sCUXN3, nu_1, sCUXX, ipnts, sRUXX, expIAlphaPhi,
+        recordToElem<3>(sCUXN3, nu_1, sCUXX, sRUXX, expIAlphaPhi,
                         mBufferU, bufferLine);
     }
     if (chops.mNeedBufferP) {
         mElement->getPressureField(sCPXN1);
-        recordToElem<1>(sCPXN1, nu_1, sCPXX, ipnts, sRPXX, expIAlphaPhi,
+        recordToElem<1>(sCPXN1, nu_1, sCPXX, sRPXX, expIAlphaPhi,
                         mBufferP, bufferLine);
     }
     if (chops.mNeedBufferD) {
         mElement->getDeltaField(sCDXN1);
-        recordToElem<1>(sCDXN1, nu_1, sCDXX, ipnts, sRDXX, expIAlphaPhi,
+        recordToElem<1>(sCDXN1, nu_1, sCDXX, sRDXX, expIAlphaPhi,
                         mBufferD, bufferLine);
     }
 }

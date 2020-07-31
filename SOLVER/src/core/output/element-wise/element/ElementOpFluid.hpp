@@ -17,6 +17,12 @@
 
 class ElementOpFluid: public ElementOp {
 public:
+    // constructor
+    ElementOpFluid(const std::vector<int> &ipnts): ElementOp(ipnts) {
+        // nothing
+    }
+    
+    
     /////////////////////////// setup ///////////////////////////
     // set element
     void setElement(const std::shared_ptr<FluidElement> &element) {
@@ -25,7 +31,7 @@ public:
     
     // set in group
     void setInGroup(int dumpIntv, const channel::fluid::ChannelOptions &chops,
-                    int npnts, int nphis);
+                    int nphis);
     
     
     /////////////////////////// get sizes ///////////////////////////
@@ -49,11 +55,11 @@ public:
     }
     
     // get coords
-    eigen::DRowX getCoords(const std::vector<int> &ipnts) const {
-        eigen::DRowX sz(ipnts.size() * 2);
-        for (int ip = 0; ip < ipnts.size(); ip++) {
+    eigen::DRowX getCoords() const {
+        eigen::DRowX sz(mIPnts.size() * 2);
+        for (int ip = 0; ip < mIPnts.size(); ip++) {
             sz.block(0, ip * 2, 1, 2) =
-            mElement->getPoint(ipnts[ip]).getCoords();
+            mElement->getPoint(mIPnts[ip]).getCoords();
         }
         return sz;
     }
@@ -64,7 +70,7 @@ public:
     // record
     void
     record(int bufferLine, const channel::fluid::ChannelOptions &chops,
-           const std::vector<int> &ipnts, const eigen::CMatXX &expIAlphaPhi);
+           const eigen::CMatXX &expIAlphaPhi);
     
 private:
     // element

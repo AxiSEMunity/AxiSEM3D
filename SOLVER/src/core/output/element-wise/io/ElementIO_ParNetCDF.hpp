@@ -20,8 +20,7 @@ public:
     void initialize(const std::string &groupName,
                     int numRecordSteps,
                     const std::vector<std::string> &channels,
-                    const std::vector<int> &ipnts,
-                    const std::vector<int> &naGrid,
+                    int npnts, const std::vector<int> &naGrid,
                     const eigen::IMatX4_RM &elemNaInfo,
                     const eigen::DMatXX_RM &elemCoords);
     

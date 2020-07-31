@@ -22,8 +22,7 @@ public:
     virtual void initialize(const std::string &groupName,
                             int numRecordSteps,
                             const std::vector<std::string> &channels,
-                            const std::vector<int> &ipnts,
-                            const std::vector<int> &naGrid,
+                            int npnts, const std::vector<int> &naGrid,
                             const eigen::IMatX4_RM &elemNaInfo,
                             const eigen::DMatXX_RM &elemCoords);
     
@@ -36,6 +35,11 @@ public:
                const std::vector<eigen::RTensor5> &bufferFields,
                int bufferLine) = 0;
     
+    // set flush
+    void setFlush(bool flush) {
+        mFlush = flush;
+    }
+    
     //////////////// mpi global properties ////////////////
 protected:
     // total number of elements
@@ -43,6 +47,9 @@ protected:
     
     // mpi rank with maximum number of elements
     int mRankWithMaxNumElements = -1;
+    
+    // flush
+    bool mFlush = false;
 };
 
 #endif /* ElementIO_hpp */

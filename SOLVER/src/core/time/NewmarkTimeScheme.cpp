@@ -33,7 +33,7 @@ void NewmarkTimeScheme::solve() const {
     
     // wavefield output: initialize
     timers.at("WAVE_OUTPUT").resume();
-    mDomain->initializeStations();
+    mDomain->initializeOutput();
     timers.at("WAVE_OUTPUT").pause();
     
     // disable eigen malloc from now on
@@ -66,7 +66,7 @@ void NewmarkTimeScheme::solve() const {
         
         // wavefield output: record and dump
         timers.at("WAVE_OUTPUT").resume();
-        mDomain->recordStations(tstep, t);
+        mDomain->recordOutput(tstep, t);
         timers.at("WAVE_OUTPUT").pause();
         
         // wavefield scanning
@@ -114,8 +114,8 @@ void NewmarkTimeScheme::solve() const {
     
     // wavefield output: dump remaining buffers and finalize
     timers.at("WAVE_OUTPUT").resume();
-    mDomain->dumpStations();
-    mDomain->finalizeStations();
+    mDomain->dumpOutput();
+    mDomain->finalizeOutput();
     timers.at("WAVE_OUTPUT").pause();
     
     // enable eigen malloc from now on

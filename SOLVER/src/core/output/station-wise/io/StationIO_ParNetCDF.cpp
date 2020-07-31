@@ -145,8 +145,10 @@ void StationIO_ParNetCDF::dumpToFile(const eigen::DColX &bufferTime,
                            {mGlobalIndexFirstStation, 0, mFileLineTime},
                            {nst, nch, bufferLine});
     
-    // flush?
-    // mNcFile->flush();
+    // flush
+    if (mFlush) {
+        mNcFile->flush();
+    }
     
     // update record postion in file
     mFileLineTime += bufferLine;

@@ -117,8 +117,10 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
                            {0, 0, mFileLineTime},
                            {nst, nch, bufferLine});
     
-    // flush?
-    // mNcFile->flush();
+    // flush
+    if (mFlush) {
+        mNcFile->flush();
+    }
     
     // update record postion in file
     mFileLineTime += bufferLine;

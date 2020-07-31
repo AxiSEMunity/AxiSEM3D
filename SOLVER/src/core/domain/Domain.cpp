@@ -26,6 +26,7 @@
 #include "ElementSource.hpp"
 // output
 #include "StationGroup.hpp"
+#include "ElementOpGroup.hpp"
 // wavefield scanning
 #include "WavefieldScanning.hpp"
 #include "NetCDF_Writer.hpp"
@@ -260,6 +261,18 @@ addStationGroupInFluid(std::unique_ptr<StationGroupInFluid> &stgrp) {
     mStationGroupInFluids.push_back(std::move(stgrp));
 }
 
+// add element group in solid
+void Domain::
+addElementOpGroupInSolid(std::unique_ptr<ElementOpGroupInSolid> &elgrp) {
+    mElementOpGroupInSolids.push_back(std::move(elgrp));
+}
+
+// add element group in fluid
+void Domain::
+addElementOpGroupInFluid(std::unique_ptr<ElementOpGroupInFluid> &elgrp) {
+    mElementOpGroupInFluids.push_back(std::move(elgrp));
+}
+
 // set wavefield scanning
 void Domain::
 setWavefieldScanning(std::unique_ptr<WavefieldScanning> &ws) {
@@ -340,63 +353,111 @@ void Domain::mpiWaitScatter() const {
     mMessaging->commWaitScatter();
 }
 
-// initialize stations
-void Domain::initializeStations() const {
-    // solid
+// initialize output
+void Domain::initializeOutput() const {
+    // solid stations
     for (const std::unique_ptr<StationGroupInSolid> &stgrp:
          mStationGroupInSolids) {
         stgrp->initialize();
     }
     
-    // fluid
+    // fluid stations
     for (const std::unique_ptr<StationGroupInFluid> &stgrp:
          mStationGroupInFluids) {
         stgrp->initialize();
     }
+    
+    // solid elements
+    for (const std::unique_ptr<ElementOpGroupInSolid> &elgrp:
+         mElementOpGroupInSolids) {
+        elgrp->initialize();
+    }
+    
+    // fluid elements
+    for (const std::unique_ptr<ElementOpGroupInFluid> &elgrp:
+         mElementOpGroupInFluids) {
+        elgrp->initialize();
+    }
 }
 
-// record stations
-void Domain::recordStations(int tstep, double time) const {
-    // solid
+// record output
+void Domain::recordOutput(int tstep, double time) const {
+    // solid stations
     for (const std::unique_ptr<StationGroupInSolid> &stgrp:
          mStationGroupInSolids) {
         stgrp->record(tstep, time);
     }
     
-    // fluid
+    // fluid stations
     for (const std::unique_ptr<StationGroupInFluid> &stgrp:
          mStationGroupInFluids) {
         stgrp->record(tstep, time);
     }
+    
+    // solid elements
+    for (const std::unique_ptr<ElementOpGroupInSolid> &elgrp:
+         mElementOpGroupInSolids) {
+        elgrp->record(tstep, time);
+    }
+    
+    // fluid elements
+    for (const std::unique_ptr<ElementOpGroupInFluid> &elgrp:
+         mElementOpGroupInFluids) {
+        elgrp->record(tstep, time);
+    }
 }
 
-// dump stations
-void Domain::dumpStations() const {
-    // solid
+// dump output
+void Domain::dumpOutput() const {
+    // solid stations
     for (const std::unique_ptr<StationGroupInSolid> &stgrp:
          mStationGroupInSolids) {
         stgrp->dumpToFile();
     }
     
-    // fluid
+    // fluid stations
     for (const std::unique_ptr<StationGroupInFluid> &stgrp:
          mStationGroupInFluids) {
         stgrp->dumpToFile();
     }
+    
+    // solid elements
+    for (const std::unique_ptr<ElementOpGroupInSolid> &elgrp:
+         mElementOpGroupInSolids) {
+        elgrp->dumpToFile();
+    }
+    
+    // fluid elements
+    for (const std::unique_ptr<ElementOpGroupInFluid> &elgrp:
+         mElementOpGroupInFluids) {
+        elgrp->dumpToFile();
+    }
 }
 
-// finalize stations
-void Domain::finalizeStations() const {
-    // solid
+// finalize output
+void Domain::finalizeOutput() const {
+    // solid stations
     for (const std::unique_ptr<StationGroupInSolid> &stgrp:
          mStationGroupInSolids) {
         stgrp->finalize();
     }
     
-    // fluid
+    // fluid stations
     for (const std::unique_ptr<StationGroupInFluid> &stgrp:
          mStationGroupInFluids) {
         stgrp->finalize();
+    }
+    
+    // solid elements
+    for (const std::unique_ptr<ElementOpGroupInSolid> &elgrp:
+         mElementOpGroupInSolids) {
+        elgrp->finalize();
+    }
+    
+    // fluid elements
+    for (const std::unique_ptr<ElementOpGroupInFluid> &elgrp:
+         mElementOpGroupInFluids) {
+        elgrp->finalize();
     }
 }
 

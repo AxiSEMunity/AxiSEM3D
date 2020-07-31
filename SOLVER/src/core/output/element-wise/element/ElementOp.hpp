@@ -17,6 +17,11 @@
 
 class ElementOp {
 public:
+    // constructor
+    ElementOp(const std::vector<int> &ipnts): mIPnts(ipnts) {
+        // nothing
+    }
+    
     // destructor
     virtual ~ElementOp() = default;
     
@@ -24,13 +29,11 @@ public:
     // record: in-plane downsampling and making real
     template <int D, typename CMatXND =
     Eigen::Matrix<numerical::ComplexR, Eigen::Dynamic, spectral::nPEM * D>>
-    static void
-    recordToElem(const CMatXND &cxnd, int nu_1,
-                 eigen::CMatXX &cxad, const std::vector<int> &ipnts,
-                 eigen::RMatXX_RM &rxad, const eigen::CMatXX &expIAlphaPhi,
-                 eigen::RTensor4 &field, int bufferLine) {
+    void recordToElem(const CMatXND &cxnd, int nu_1, eigen::CMatXX &cxad,
+                      eigen::RMatXX_RM &rxad, const eigen::CMatXX &expIAlphaPhi,
+                      eigen::RTensor4 &field, int bufferLine) const {
         // in-plane downsampling
-        int npnts = (int)ipnts.size();
+        int npnts = (int)mIPnts.size();
         if (npnts == spectral::nPEM) {
             // no downsampling
             cxad.topRows(nu_1) = cxnd.topRows(nu_1);
@@ -39,7 +42,7 @@ public:
             for (int dim = 0; dim < D; dim++) {
                 cxad.block(0, npnts * dim, nu_1, npnts) =
                 cxnd.block(0, spectral::nPEM * dim, nu_1, spectral::nPEM)
-                (Eigen::all, ipnts);
+                (Eigen::all, mIPnts);
             }
         }
         
@@ -162,6 +165,11 @@ public:
             }
         }
     }
+    
+    ////////// data //////////
+protected:
+    // ipnts are different for elements if edge is specified
+    const std::vector<int> mIPnts;
 };
 
 #endif /* ElementOp_hpp */

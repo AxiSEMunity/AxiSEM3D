@@ -113,6 +113,9 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
     if (mpi::rank() == mRankWithMaxNumStations) {
         Eigen::internal::set_is_malloc_allowed(true);
         (*mFileStreams[0]) << bufferTime.topRows(bufferLine) << "\n";
+        if (mFlush) {
+            mFileStreams[0]->flush();
+        }
         Eigen::internal::set_is_malloc_allowed(false);
         tfile = 1;
     }
@@ -129,6 +132,9 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
             loc[0] = ist;
             (*mFileStreams[ist + tfile]) << bufferFields.slice(loc, len).
             reshape(shape).shuffle(shuffle) << "\n";
+            if (mFlush) {
+                mFileStreams[ist + tfile]->flush();
+            }
         }
     } else {
         eigen::IArray3 loc = {0, 0, 0};
@@ -138,6 +144,9 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
             loc[1] = ich;
             (*mFileStreams[ich + tfile]) << bufferFields.slice(loc, len).
             reshape(shape).shuffle(shuffle) << "\n";
+            if (mFlush) {
+                mFileStreams[ich + tfile]->flush();
+            }
         }
     }
     Eigen::internal::set_is_malloc_allowed(false);

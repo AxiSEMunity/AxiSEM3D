@@ -15,6 +15,7 @@
 #include "ElementOpSolid.hpp"
 #include "ElementOpFluid.hpp"
 #include "vector_tools.hpp"
+#include "mpi.hpp"
 
 ///////////////////// type inference /////////////////////
 template <class ElementOpT>
@@ -43,12 +44,11 @@ public:
                    int numRecordSteps, int sampleIntv, int dumpIntv,
                    channel::WavefieldCS wcs,
                    const std::vector<std::string> &userChannels,
-                   const std::vector<int> ipnts,
-                   const std::vector<double> phis, int naSpace,
+                   int npnts, const std::vector<double> &phis, int naSpace,
                    std::unique_ptr<ElementIO> &io):
     mGroupName(groupName), mNumRecordSteps(numRecordSteps),
     mSampleIntv(sampleIntv), mDumpIntv(std::min(dumpIntv, numRecordSteps)),
-    mChannelOptions(wcs, userChannels), mIPnts(ipnts), mPhis(phis),
+    mChannelOptions(wcs, userChannels), mNPnts(npnts), mPhis(phis),
     mNaSpace(naSpace), mIO(io.release()) {
         // nothing
     }
@@ -82,8 +82,9 @@ public:
             // allocate
             mExpIAlphaPhi = eigen::CMatXX::Zero(maxNu_1, nphis);
             for (int iphi = 0; iphi < nphis; iphi++) {
-                eigen_tools::computeTwoExpIAlphaPhi(maxNu_1, mPhis[iphi],
-                                                    mExpIAlphaPhi.col(iphi));
+                eigen::CColX temp(maxNu_1);
+                eigen_tools::computeTwoExpIAlphaPhi(maxNu_1, mPhis[iphi], temp);
+                mExpIAlphaPhi.col(iphi) = temp;
             }
         }
         
@@ -104,14 +105,25 @@ public:
         mNaGrid.clear();
         mNaGrid.push_back(sortedNa.back());
         for (int isort = (int)sortedNa.size() - 2; isort >=0; isort--) {
-            if (sortedNa[isort] < mNaGrid.back() - mNaSpace) {
+            if (sortedNa[isort] <= mNaGrid.back() - mNaSpace) {
                 mNaGrid.push_back(sortedNa[isort]);
             }
         }
         // reverse order (descending to ascending)
         vector_tools::sortUnique(mNaGrid);
         
-        // form dict of naGrid for fast search
+        // na-grid must be the same on ranks
+        std::vector<std::vector<int>> naGridGlobal;
+        mpi::gather(mNaGrid, naGridGlobal, MPI_ALL);
+        mNaGrid.clear();
+        for (int irank = 0; irank < mpi::nproc(); irank++) {
+            mNaGrid.insert(mNaGrid.end(), naGridGlobal[irank].begin(),
+                           naGridGlobal[irank].end());
+        }
+        vector_tools::sortUnique(mNaGrid);
+        mNaGrid.shrink_to_fit();
+ 
+        // form dict of na-grid for fast search
         for (int inag = 0; inag < mNaGrid.size(); inag++) {
             mNaGridIndexDict[mNaGrid[inag]] = inag;
         }
@@ -119,7 +131,7 @@ public:
         //////////// element-na info and coords ////////////
         std::vector<int> numElemNaGrid = std::vector<int>(mNaGrid.size(), 0);
         mElemNaInfo = eigen::IMatX4_RM(nelem, 4);
-        eigen::DMatXX_RM elemCoords(nelem, mIPnts.size() * 2);
+        eigen::DMatXX_RM elemCoords(nelem, mNPnts * 2);
         for (int ielem = 0; ielem < nelem; ielem++) {
             mElemNaInfo(ielem, 0) = allTag[ielem];
             mElemNaInfo(ielem, 1) = allNa[ielem];
@@ -132,7 +144,7 @@ public:
             // increment element number of this grid-na
             numElemNaGrid[naGridIndex]++;
             // coords
-            elemCoords.row(ielem) = mElementOps[ielem]->getCoords(mIPnts);
+            elemCoords.row(ielem) = mElementOps[ielem]->getCoords();
         }
         
         // buffers
@@ -142,7 +154,7 @@ public:
         }
         for (int inag = 0; inag < mNaGrid.size(); inag++) {
             eigen::RTensor5 bufferField(numElemNaGrid[inag],
-                                        mNaGrid[inag], mIPnts.size(),
+                                        mNaGrid[inag], mNPnts,
                                         channels.size(), mDumpIntv);
             mBufferFields.push_back(bufferField);
         }
@@ -150,12 +162,11 @@ public:
         
         // IO
         mIO->initialize(mGroupName, mNumRecordSteps, channels,
-                        mIPnts, mNaGrid, mElemNaInfo, elemCoords);
+                        mNPnts, mNaGrid, mElemNaInfo, elemCoords);
         
         // elementOps
         for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
-            eop->setInGroup(mDumpIntv, mChannelOptions,
-                            (int)mIPnts.size(), (int)mPhis.size());
+            eop->setInGroup(mDumpIntv, mChannelOptions, (int)mPhis.size());
         }
     }
     
@@ -178,7 +189,7 @@ public:
         
         // stations
         for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
-            eop->record(mBufferLine, mChannelOptions, mIPnts, mExpIAlphaPhi);
+            eop->record(mBufferLine, mChannelOptions, mExpIAlphaPhi);
         }
         
         // increment buffer line
@@ -229,7 +240,7 @@ private:
     ElementOpInference<ElementOpT>::ChannelOptions mChannelOptions;
     
     // in-plane
-    const std::vector<int> mIPnts;
+    const int mNPnts;
     
     // azimuth
     const std::vector<double> mPhis;

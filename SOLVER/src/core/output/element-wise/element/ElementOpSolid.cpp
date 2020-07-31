@@ -14,9 +14,10 @@
 // set in group
 void ElementOpSolid::
 setInGroup(int dumpIntv, const channel::solid::ChannelOptions &chops,
-           int npnts, int nphis) {
-    // NA
+           int nphis) {
+    // sizes
     int na = getNa(nphis);
+    int npnts = (int)mIPnts.size();
     
     // member buffers
     if (chops.mNeedBufferU) {
@@ -47,34 +48,34 @@ setInGroup(int dumpIntv, const channel::solid::ChannelOptions &chops,
 // record
 void ElementOpSolid::
 record(int bufferLine, const channel::solid::ChannelOptions &chops,
-       const std::vector<int> &ipnts, const eigen::CMatXX &expIAlphaPhi) {
+       const eigen::CMatXX &expIAlphaPhi) {
     int nu_1 = mElement->getNu_1();
     bool needRTZ = (chops.mWCS == channel::WavefieldCS::RTZ);
     
     if (chops.mNeedBufferU) {
         mElement->getDisplField(sCUXN3, needRTZ);
-        recordToElem<3>(sCUXN3, nu_1, sCUXX, ipnts, sRUXX, expIAlphaPhi,
+        recordToElem<3>(sCUXN3, nu_1, sCUXX, sRUXX, expIAlphaPhi,
                         mBufferU, bufferLine);
     }
     if (chops.mNeedBufferG) {
         mElement->getNablaField(sCGXN9, needRTZ);
-        recordToElem<9>(sCGXN9, nu_1, sCGXX, ipnts, sRGXX, expIAlphaPhi,
+        recordToElem<9>(sCGXN9, nu_1, sCGXX, sRGXX, expIAlphaPhi,
                         mBufferG, bufferLine);
     }
     if (chops.mNeedBufferE) {
         mElement->getStrainField(sCEXN6, needRTZ);
-        recordToElem<6>(sCEXN6, nu_1, sCEXX, ipnts, sREXX, expIAlphaPhi,
+        recordToElem<6>(sCEXN6, nu_1, sCEXX, sREXX, expIAlphaPhi,
                         mBufferE, bufferLine);
         
     }
     if (chops.mNeedBufferR) {
         mElement->getCurlField(sCRXN3, needRTZ);
-        recordToElem<3>(sCRXN3, nu_1, sCRXX, ipnts, sRRXX, expIAlphaPhi,
+        recordToElem<3>(sCRXN3, nu_1, sCRXX, sRRXX, expIAlphaPhi,
                         mBufferR, bufferLine);
     }
     if (chops.mNeedBufferS) {
         mElement->getStressField(sCSXN6, needRTZ);
-        recordToElem<6>(sCSXN6, nu_1, sCSXX, ipnts, sRSXX, expIAlphaPhi,
+        recordToElem<6>(sCSXN6, nu_1, sCSXX, sRSXX, expIAlphaPhi,
                         mBufferS, bufferLine);
     }
 }

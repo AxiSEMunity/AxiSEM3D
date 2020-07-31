@@ -1,4 +1,3 @@
-
 //
 //  StationOutput.cpp
 //  AxiSEM3D
@@ -51,25 +50,21 @@ StationOutput::buildInparam(int gindex, double dt) {
     bool undulated = gm.getWithDefault(rootl + ":undulated_geometry", true);
     
     // fields
-    const std::string &rootf = root + ":wavefields";
+    const std::string &rootw = root + ":wavefields";
     channel::WavefieldCS wcs = gm.getWithLimits<channel::WavefieldCS>
-    (rootf + ":coordinate_frame", {
+    (rootw + ":coordinate_frame", {
         {"spz", channel::WavefieldCS::spz},
         {"RTZ", channel::WavefieldCS::RTZ},
         {"ENZ", channel::WavefieldCS::ENZ}});
-    bool fluid = gm.getWithLimits<bool>(rootf + ":medium", {
+    bool fluid = gm.getWithLimits<bool>(rootw + ":medium", {
         {"SOLID", false}, {"FLUID", true}});
     const std::vector<std::string> userChannels =
-    gm.getVector<std::string>(rootf + ":channels");
+    gm.getVector<std::string>(rootw + ":channels");
     
-    // options
-    const std::string &rooto = root + ":options";
-    Format format = gm.getWithLimits<Format>(rooto + ":format", {
-        {"ASCII_STATION", Format::AsciiStation},
-        {"ASCII_CHANNEL", Format::AsciiChannel},
-        {"NETCDF", Format::NetCDF}});
+    // temporal
+    const std::string &roott = root + ":temporal";
     // parse sampling period
-    const std::string &strSP = gm.get<std::string>(rooto + ":sampling_period");
+    const std::string &strSP = gm.get<std::string>(roott + ":sampling_period");
     double samplingPeriod = 0.;
     if (strSP == "DT") {
         samplingPeriod = dt;
@@ -79,14 +74,25 @@ StationOutput::buildInparam(int gindex, double dt) {
     } else {
         samplingPeriod = cast<double>(strSP, "StationOutput::buildInparam");
     }
+    
+    // file options
+    const std::string &rootf = root + ":file_options";
+    // format
+    Format format = gm.getWithLimits<Format>(rootf + ":format", {
+        {"ASCII_STATION", Format::AsciiStation},
+        {"ASCII_CHANNEL", Format::AsciiChannel},
+        {"NETCDF", Format::NetCDF}});
     // buffer size
-    int bufferSize = gm.getWithBounds(rooto + ":buffer_size", 1);
+    int bufferSize = gm.getWithBounds(rootf + ":buffer_size", 1);
+    // flush
+    bool flush = gm.get<bool>(rootf + ":flush");
+    
     // construct and return
     return std::make_shared
     <const StationOutput>(groupName, fileName, sourceCentered, ellipticity,
                           useDepth, depthSolid, undulated,
                           wcs, fluid, userChannels,
-                          format, samplingPeriod, bufferSize);
+                          samplingPeriod, format, bufferSize, flush);
 }
 
 // verbose
@@ -114,7 +120,7 @@ verbose(double dt, int numRecordSteps, int numStations) const {
                     "undulated" : "reference");
     
     //////// fields ////////
-    ss << boxSubTitle(2, "Fields");
+    ss << boxSubTitle(2, "Wavefields");
     ss << boxEquals(4, width, "output coordinate system",
                     channel::WavefieldCS_Str.at(mWCS));
     ss << boxEquals(4, width, "medium type", mFluid ? "fluid" : "solid");
@@ -135,20 +141,8 @@ verbose(double dt, int numRecordSteps, int numStations) const {
                     "=", true);
     ss << boxEquals(4, width, "standardized channels", stdChs, "=", true);
     
-    //////// options ////////
-    // format
-    ss << boxSubTitle(2, "Options");
-    if (mFormat == Format::AsciiStation) {
-        ss << boxEquals(4, width, "output file format", "ascii (per station)");
-    } else if (mFormat == Format::AsciiChannel) {
-        ss << boxEquals(4, width, "output file format", "ascii (per channel)");
-    } else {
-#ifdef _USE_PARALLEL_NETCDF
-        ss << boxEquals(4, width, "output file format", "NetCDF (parallel)");
-#else
-        ss << boxEquals(4, width, "output file format", "NetCDF (serial)");
-#endif
-    }
+    //////// temporal ////////
+    ss << boxSubTitle(2, "Temporal");
     // smapling interval
     int sampleIntv = (int)(mSamplingPeriod / dt);
     // mSamplingPeriod < dt
@@ -165,13 +159,28 @@ verbose(double dt, int numRecordSteps, int numStations) const {
         ss << boxEquals(6, width - 1, "rounded to Δt", sampleIntv * dt);
         ss << boxEquals(4, width, "# time steps per sample", sampleIntv);
     }
-    ss << boxEquals(4, width, "# buffer size", mBufferSize);
+    
+    //////// file options ////////
+    ss << boxSubTitle(2, "File otions");
+    if (mFormat == Format::AsciiStation) {
+        ss << boxEquals(4, width, "output file format", "ascii (per station)");
+    } else if (mFormat == Format::AsciiChannel) {
+        ss << boxEquals(4, width, "output file format", "ascii (per channel)");
+    } else {
+#ifdef _USE_PARALLEL_NETCDF
+        ss << boxEquals(4, width, "output file format", "NetCDF (parallel)");
+#else
+        ss << boxEquals(4, width, "output file format", "NetCDF (serial)");
+#endif
+    }
+    ss << boxEquals(4, width, "buffer size", mBufferSize);
+    ss << boxEquals(4, width, "flush file", mFlush);
     
     //////// dimensions ////////
     ss << boxSubTitle(2, "Dimensions");
-    ss << boxEquals(4, width, "# time steps", numRecordSteps);
-    ss << boxEquals(4, width, "# channels", stdChs.size());
     ss << boxEquals(4, width, "# stations", numStations);
+    ss << boxEquals(4, width, "# channels", stdChs.size());
+    ss << boxEquals(4, width, "# time steps", numRecordSteps);
     return ss.str();
 }
 
@@ -339,6 +348,8 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
             stationIO = std::make_unique<StationIO_NetCDF>();
 #endif
         }
+        // set flush
+        stationIO->setFlush(stgrp->mFlush);
         
         // create both solid and fluid groups
         std::unique_ptr<StationGroup<StationFluid>> SGF = nullptr;

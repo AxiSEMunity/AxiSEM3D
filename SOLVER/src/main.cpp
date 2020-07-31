@@ -135,6 +135,8 @@ int main(int argc, char *argv[]) {
         timer::gPreloopTimer.begin("Freeing memory Stage-II", '*');
         // needed for wavefield scanning
         double meshPeriod = exodusMesh->getGlobalVariable("minimum_period");
+        // needed for element output
+        double distTol = exodusMesh->getGlobalVariable("dist_tolerance");
         exodusMesh.reset();
         localMesh.reset();
         abc.reset();
@@ -155,6 +157,12 @@ int main(int argc, char *argv[]) {
         StationOutput::release(*sem, *domain, dt,
                                timeScheme->getNumTimeSteps());
         timer::gPreloopTimer.ended("Station groups", '*');
+        
+        // element output
+        timer::gPreloopTimer.begin("Element groups", '*');
+        ElementOutput::release(*sem, *domain, dt,
+                               timeScheme->getNumTimeSteps(), distTol);
+        timer::gPreloopTimer.ended("Element groups", '*');
         
         // wavefield scanning
         timer::gPreloopTimer.begin("Wavefield scanning", '*');

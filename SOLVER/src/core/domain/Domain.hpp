@@ -33,13 +33,21 @@ class Messaging;
 class WavefieldInjection;
 class ElementSource;
 
-// output
+// station output
 class StationSolid;
 class StationFluid;
 template <class StationT>
 class StationGroup;
 typedef StationGroup<StationSolid> StationGroupInSolid;
 typedef StationGroup<StationFluid> StationGroupInFluid;
+
+// element output
+class ElementOpSolid;
+class ElementOpFluid;
+template <class ElementT>
+class ElementOpGroup;
+typedef ElementOpGroup<ElementOpSolid> ElementOpGroupInSolid;
+typedef ElementOpGroup<ElementOpFluid> ElementOpGroupInFluid;
 
 // wavefield scanning
 class WavefieldScanning;
@@ -89,6 +97,14 @@ public:
     
     // add station group in fluid
     void addStationGroupInFluid(std::unique_ptr<StationGroupInFluid> &stgrp);
+    
+    // add element group in solid
+    void
+    addElementOpGroupInSolid(std::unique_ptr<ElementOpGroupInSolid> &elgrp);
+    
+    // add element group in fluid
+    void
+    addElementOpGroupInFluid(std::unique_ptr<ElementOpGroupInFluid> &elgrp);
     
     // set wavefield scanning
     void setWavefieldScanning(std::unique_ptr<WavefieldScanning> &ws);
@@ -169,17 +185,17 @@ public:
     // mpi phase 2: commWaitScatter
     void mpiWaitScatter() const;
     
-    // initialize stations
-    void initializeStations() const;
+    // initialize output
+    void initializeOutput() const;
     
-    // record stations
-    void recordStations(int tstep, double time) const;
+    // record output
+    void recordOutput(int tstep, double time) const;
     
-    // dump stations
-    void dumpStations() const;
+    // dump output
+    void dumpOutput() const;
     
-    // finalize stations
-    void finalizeStations() const;
+    // finalize output
+    void finalizeOutput() const;
     
     // do scanning
     void doScanning(int tstep) const;
@@ -237,6 +253,12 @@ private:
     
     // stations in fluid
     std::vector<std::unique_ptr<StationGroupInFluid>> mStationGroupInFluids;
+    
+    // elements in solid
+    std::vector<std::unique_ptr<ElementOpGroupInSolid>> mElementOpGroupInSolids;
+    
+    // elements in fluid
+    std::vector<std::unique_ptr<ElementOpGroupInFluid>> mElementOpGroupInFluids;
     
     
     ////////////////////// wavefield scanning //////////////////////
