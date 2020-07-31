@@ -171,21 +171,19 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
         firstElemNaGridRanks.assign
         (mpi::nproc(), std::vector<int>(naGrid.size(), 0));
         // loop over ranks
-        for (int irank = 0; irank < mpi::nproc(); irank++) {
-            int nelocal = (int)elemNaInfoRanks[irank].rows();
+        for (int irank = 1; irank < mpi::nproc(); irank++) {
+            int nelocal = (int)elemNaInfoRanks[irank - 1].rows();
             // count elements on this rank
             for (int ielem = 0; ielem < nelocal; ielem++) {
                 // four columns: tag, actual na, grid na, index
-                int nag = elemNaInfoAll(nelocal, 2);
+                int nag = elemNaInfoRanks[irank - 1](ielem, 2);
                 int nagIndex = naGridIndexDict[nag];
                 firstElemNaGridRanks[irank][nagIndex]++;
             }
             // add counts on previous ranks
-            if (irank > 0) {
-                for (int inag = 0; inag <naGrid.size(); inag++) {
-                    firstElemNaGridRanks[irank][inag] +=
-                    firstElemNaGridRanks[irank - 1][inag];
-                }
+            for (int inag = 0; inag <naGrid.size(); inag++) {
+                firstElemNaGridRanks[irank][inag] +=
+                firstElemNaGridRanks[irank - 1][inag];
             }
         }
     }
