@@ -55,8 +55,8 @@ eigen::DMatX3 Model3D::computeElemSPZ(const Quad &quad, bool undulated) {
             // add undulation to r in spherical
             double s = spz(row, 0);
             double z = spz(row, 2);
-            double theta = acos(z / std::max(sqrt(s * s + z * z),
-                                             numerical::dEpsilon));
+            double r = sqrt(s * s + z * z);
+            double theta = (r < numerical::dEpsilon) ? 0. : acos(z / r);
             spz.block(row, 0, nr, 1) += und[ipnt] * sin(theta);
             spz.block(row, 2, nr, 1) += und[ipnt] * cos(theta);
         }

@@ -556,12 +556,12 @@ void SE_Model::formInplaneRTree() {
 // locate inplane
 int SE_Model::locateInplane(const eigen::DCol2 &sz, bool inFluid) const {
     // mesh range
-    if ((sz(0) < mRangeS(0) || sz(0) > mRangeS(1)) &&
+    if ((sz(0) < mRangeS(0) || sz(0) > mRangeS(1)) ||
         (sz(1) < mRangeZ(0) || sz(1) > mRangeZ(1))) {
         return -1;
     }
     const eigen::DCol2 &rt = geodesy::sz2rtheta(sz, false);
-    if ((rt(0) < mRangeR(0) || rt(0) > mRangeR(1)) &&
+    if ((rt(0) < mRangeR(0) || rt(0) > mRangeR(1)) ||
         (rt(1) * rt(0) < mRangeT(0) * rt(0) - mDistToleranceMesh ||
          rt(1) * rt(0) > mRangeT(1) * rt(0) + mDistToleranceMesh)) {
         return -1;

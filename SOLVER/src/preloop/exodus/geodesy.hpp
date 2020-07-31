@@ -118,14 +118,16 @@ namespace geodesy {
             // s in the first column
             rt.col(idr) = (sz.col(ids).array().square() +
                            sz.col(idz).array().square()).sqrt();
-            rt.col(idt) = (sz.col(idz).cwiseQuotient
-                           (rt.col(idr).cwiseMax(epsilon)).array().acos());
+            rt.col(idt) = (rt.col(idr).array() < epsilon).select
+            ((T)0., (sz.col(idz).cwiseQuotient
+                     (rt.col(idr).cwiseMax(epsilon)).array().acos()));
         } else {
             // s in the first row
             rt.row(idr) = (sz.row(ids).array().square() +
                            sz.row(idz).array().square()).sqrt();
-            rt.row(idt) = (sz.row(idz).cwiseQuotient
-                           (rt.row(idr).cwiseMax(epsilon)).array().acos());
+            rt.row(idt) = (rt.row(idr).array() < epsilon).select
+            ((T)0., (sz.row(idz).cwiseQuotient
+                     (rt.row(idr).cwiseMax(epsilon)).array().acos()));
         }
         return rt;
     }

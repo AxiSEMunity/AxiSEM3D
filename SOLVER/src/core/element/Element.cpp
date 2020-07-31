@@ -83,8 +83,8 @@ findBoundaryPointsByCrds(const std::vector<double> &boundaryCrdsRorZ,
             crdTorS(ipnt) = sz(0);
         } else {
             crdRorZ(ipnt) = sz.norm();
-            crdTorS(ipnt) = acos(sz(1) / std::max(crdRorZ(ipnt),
-                                                  numerical::dEpsilon));
+            crdTorS(ipnt) = (crdRorZ(ipnt) < numerical::dEpsilon) ? 0. :
+            acos(sz(1) / crdRorZ(ipnt));
         }
     }
     
