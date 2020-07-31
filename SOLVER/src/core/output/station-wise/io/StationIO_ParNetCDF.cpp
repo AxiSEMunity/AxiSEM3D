@@ -129,6 +129,10 @@ void StationIO_ParNetCDF::dumpToFile(const eigen::DColX &bufferTime,
     // no station
     int nst = (int)bufferFields.dimensions()[0];
     if (nst == 0) {
+        // flush is a collective operation
+        if (mFlush) {
+            mNcFile->flush();
+        }
         // because file is opened globally, better to have
         // mFileLineTime keep pace with the other ranks
         mFileLineTime += bufferLine;
@@ -136,8 +140,10 @@ void StationIO_ParNetCDF::dumpToFile(const eigen::DColX &bufferTime,
     }
     
     // write time
-    mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
-                           {mFileLineTime}, {bufferLine});
+    if (mpi::rank() == mRankWithMaxNumStations) {
+        mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
+                               {mFileLineTime}, {bufferLine});
+    }
     
     // write data
     int nch = (int)bufferFields.dimensions()[1];

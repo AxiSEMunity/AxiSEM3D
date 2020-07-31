@@ -224,6 +224,10 @@ dumpToFile(const eigen::DColX &bufferTime,
            int bufferLine) {
     // no element
     if (mNumElementsLocal == 0) {
+        // flush is a collective operation
+        if (mFlush) {
+            mNcFile->flush();
+        }
         // because file is opened globally, better to have
         // mFileLineTime keep pace with the other ranks
         mFileLineTime += bufferLine;
@@ -231,8 +235,10 @@ dumpToFile(const eigen::DColX &bufferTime,
     }
     
     // write time
-    mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
-                           {mFileLineTime}, {bufferLine});
+    if (mpi::rank() == mRankWithMaxNumElements) {
+        mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
+                               {mFileLineTime}, {bufferLine});
+    }
     
     // write datas
     for (int inag = 0; inag < bufferFields.size(); inag++) {
