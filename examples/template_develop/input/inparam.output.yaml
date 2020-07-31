@@ -21,3 +21,12 @@
 #          at a low sampling rate
 #       2) use [] if no station group presents
 list_of_station_groups: []
+
+
+############################# element-wise #############################
+# what: list of element groups
+# type: array of objects
+# note: 1) different options such as channels and sampling rates can
+#          be used for different element groups
+#       2) use [] if no element group presents
+list_of_element_groups: []

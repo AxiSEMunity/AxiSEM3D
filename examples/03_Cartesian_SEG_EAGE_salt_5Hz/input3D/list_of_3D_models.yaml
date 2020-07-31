@@ -1,0 +1,155 @@
+    #==========================================================================#
+    # this key can be arbitrary
+    - SEG_C3_volumetric:
+        # what: activate this model
+        # type: bool
+        activated: true
+        # what: class name
+        # type: string
+        # note: current built-in classes include
+        #       - StructuredGridV3D: volumetric 3D model on a structured grid
+        #       - StructuredGridG3D: geometric 3D model on a structured grid
+        #       - StructuredGridO3D: ocean-load 3D model on a structured grid
+        #       - Ellipticity: deform the mesh with global ellipticity
+        class_name: StructuredGridV3D
+        # -------------------------------- #
+        # parameters for StructuredGridV3D #
+        # -------------------------------- #
+        # what: NetCDF data file
+        # type: filename
+        nc_data_file: SEG_C3_data/SEG_C3_SOLID.nc
+        # parameters for grid coordinates
+        coordinates:
+            # what: type of horizontal coordinates
+            # type: string
+            # only: DISTANCE_AZIMUTH / XY_CARTESIAN / LATITUDE_LONGITUDE
+            horizontal: XY_CARTESIAN
+            # what: type of vertical coordinate
+            # type: string
+            # only: RADIUS / DEPTH
+            vertical: DEPTH
+            # what: use solid surface as depth origin
+            # type: bool
+            # note: used only when vertical = DEPTH
+            depth_below_solid_surface: false
+            # what: NetCDF variables for the coordinates
+            # type: array of string
+            nc_variables: [x, y, depth]
+            # what: rank of the coordinates in data
+            # type: array of int
+            data_rank: [1, 2, 0]
+            # what: length unit of the coordinates
+            # type: string / value
+            # only: km / m / number
+            length_unit: m
+            # what: angle unit of the coordinates
+            # type: string
+            # only: degree / radian
+            angle_unit: degree
+            # what: use undulated (otherwise reference) geometry to
+            #       determine the vertical location
+            # type: bool
+            # note: compatible only with vertical = RADIUS
+            undulated_geometry: false
+            # what: use element center for model scope check
+            # type: bool
+            # note: this feature allows for in-plane discontinuities
+            element_center_in_scope: true
+        # parameters for properties
+        properties:
+            - VP:
+                # what: NetCDF variable
+                nc_var: VP
+                # what: factor or unit
+                factor: 1e3
+                # what: reference kind
+                # only: ABS / REF1D / REF3D / REF_PERTURB
+                reference_kind: ABS
+            - VS:
+                # what: NetCDF variable
+                nc_var: VS
+                # what: factor or unit
+                factor: 1e3
+                # what: reference kind
+                # only: ABS / REF1D / REF3D / REF_PERTURB
+                reference_kind: ABS
+            - RHO:
+                # what: NetCDF variable
+                nc_var: RHO
+                # what: factor or unit
+                factor: 1e3
+                # what: reference kind
+                # only: ABS / REF1D / REF3D / REF_PERTURB
+                reference_kind: ABS
+        # what: store grid data only on the leader processors
+        # type: bool
+        # note: turn this on if the model is large; set mpi:nproc_per_group
+        #       in inparam.advanced.yaml to the number of processors per
+        #       node to minimize memory usage
+        store_grid_only_on_leaders: true
+    #==========================================================================#
+    # this key can be arbitrary
+    - SEG_C3_geometric:
+        # what: activate this model
+        # type: bool
+        activated: true
+        # what: class name
+        # type: string
+        # note: current built-in classes include
+        #       - StructuredGridV3D: volumetric 3D model on a structured grid
+        #       - StructuredGridG3D: geometric 3D model on a structured grid
+        #       - StructuredGridO3D: ocean-load 3D model on a structured grid
+        #       - Ellipticity: deform the mesh with global ellipticity
+        class_name: StructuredGridG3D
+        # -------------------------------- #
+        # parameters for StructuredGridG3D #
+        # -------------------------------- #
+        # what: NetCDF data file
+        # type: filename
+        nc_data_file: SEG_C3_data/SEG_C3_UNDULATION.nc
+        # parameters for grid coordinates
+        coordinates:
+            # what: type of horizontal coordinates
+            # type: string
+            # only: DISTANCE_AZIMUTH / XY_CARTESIAN / LATITUDE_LONGITUDE
+            horizontal: XY_CARTESIAN
+            # what: type of vertical coordinate
+            # type: string
+            # only: RADIUS / DEPTH
+            vertical: DEPTH
+            # what: use solid surface as depth origin
+            # type: bool
+            # note: used only when vertical = DEPTH
+            depth_below_solid_surface: false
+            # what: NetCDF variables for the coordinates
+            # type: array of string
+            nc_variables: [x, y]
+            # what: rank of the coordinates in data
+            # type: array of int
+            data_rank: [0, 1]
+            # what: length unit of the coordinates
+            # type: string / value
+            # only: km / m / number
+            length_unit: m
+            # what: angle unit of the coordinates
+            # type: string
+            # only: degree / radian
+            angle_unit: degree
+        # parameters for undulation range
+        undulation_range:
+            # what: interface location
+            interface: 200.
+            # what: undulation range
+            min_max: [0., 1000.]
+        # parameters for undulation data
+        undulation_data:
+            # what: NetCDF variable
+            nc_var: depth
+            # what: factor or unit
+            factor: 1.
+        # what: store grid data only on the leader processors
+        # type: bool
+        # note: turn this on if the model is large; set mpi:nproc_per_group
+        #       in inparam.advanced.yaml to the number of processors per
+        #       node to minimize memory usage
+        store_grid_only_on_leaders: true

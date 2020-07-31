@@ -37,7 +37,7 @@
             # type: bool
             # note: compatible with vertical_x3 = both RADIUS and DEPTH
             undulated_geometry: true
-        # wavefields to be recorded at stations
+        # wavefields to be recorded
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -79,8 +79,16 @@
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # IO and sampling options
-        options:
+        # temporal sampling
+        temporal:
+            # what: sampling period
+            # type: string / double
+            # only: DT / DTx2 / DTx3 / ... / value
+            # note: DT stands for Δt of the simulation; DTx3 means
+            #       sampling period = Δt * 3
+            sampling_period: DT
+        # file options
+        file_options:
             # what: output file format
             # type: string
             # only: ASCII_STATION / ASCII_CHANNEL / NETCDF
@@ -93,12 +101,6 @@
             #                  many stations; parallel NetCDF can be activated
             #                  in CMakeLists.txt
             format: ASCII_STATION
-            # what: sampling period
-            # type: string / double
-            # only: DT / DTx2 / DTx3 / ... / value
-            # note: DT stands for Δt of the simulation; DTx3 means
-            #       sampling period = Δt * 3
-            sampling_period: DT
             # what: number of sampled time steps to be buffered
             # type: int
             # note: 1) the solver buffers wave data during the time loop for
@@ -107,3 +109,9 @@
             #          a large number of stations)
             #       2) this parameter does not affect the final results
             buffer_size: 1000
+            # what: flush file after writing a buffer to it
+            # type: bool
+            # note: 1) pro: minimizes data loss in case of abnormal termination
+            #          con: hits output performace if buffer_size is small
+            #       2) this parameter does not affect the final results
+            flush: true

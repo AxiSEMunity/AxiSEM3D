@@ -21,7 +21,7 @@ verbose:
     # what: verbosity level
     # type: string
     # only: NONE / ESSENTIAL / DETAILED
-    level: DETAILED
+    level: ESSENTIAL
 
     # what: show/hide runtime warnings
     # type: bool

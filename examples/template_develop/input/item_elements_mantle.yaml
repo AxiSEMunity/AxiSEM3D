@@ -1,38 +1,6 @@
-#
-#  inparam.output.yaml
-#  AxiSEM3D
-#
-#  Created by Kuangdai Leng on 6/20/20.
-#  Copyright © 2020 Kuangdai Leng. All rights reserved.
-#
-
-#  This is an AxiSEM3D input parameter file for
-#  station-wise and element-wise output
-
-
-############################# station-wise #############################
-# what: list of station groups
-# type: array of objects
-# note: 1) different options such as channels and sampling rates can
-#          be used for different station groups; for example, one may
-#          have one group of real-world seismic stations to record the
-#          displacement vector at a high sampling rate and another group
-#          of animation stations to record only the vertical displacement
-#          at a low sampling rate
-#       2) use [] if no station group presents
-list_of_station_groups: []
-
-
-############################# element-wise #############################
-# what: list of element groups
-# type: array of objects
-# note: 1) different options such as channels and sampling rates can
-#          be used for different element groups
-#       2) use [] if no element group presents
-list_of_element_groups:
     #==========================================================================#
     # this key can be arbitrary but must be unique in this list
-    - orthogonal_azimuthal_slices:
+    - Fourier_coefficients_spherical_Earth_whole_mantle:
         # elements to be recorded
         # note: an element will be included if its center falls within
         #       both horizontal_range and vertical_range
@@ -41,12 +9,12 @@ list_of_element_groups:
             # type: array of double
             # note: 1) θ-range for a spherical mesh
             #       2) s-range for a Cartesian mesh
-            horizontal_range: [0, 1e10]
+            horizontal_range: [0, 3.15]
             # what: vertical range
             # type: array of double
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
-            vertical_range: [0, 1e10]
+            vertical_range: [3480e3, 6371e3]
         # in-plane sampling on each element
         inplane:
             # what: edge dimension
@@ -75,7 +43,7 @@ list_of_element_groups:
             #       - [0, 4]:    only the 4 vertices
             #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
             #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
-            GLL_points_one_edge: [0, 2, 4]
+            GLL_points_one_edge: FULL
         # azimuthal sampling on each element
         # note: if both phi_list and lat_lon_list are empty, no azimuthal
         #       interpolation will be performed; instead, all the Fourier
@@ -84,7 +52,7 @@ list_of_element_groups:
             # what: azimuths (ɸ) of the recorded slices
             # type: array of double
             # note: the unit is radian
-            phi_list: [0, 1.57079632679, 3.14159265359, 4.71238898038]
+            phi_list: []
             # what: latitudes and longitudes of the recorded slices
             # type: array of array of double
             # note: ɸ computed from (lat, lon) will be append to phi_list
@@ -148,7 +116,7 @@ list_of_element_groups:
             # only: DT / DTx2 / DTx3 / ... / value
             # note: DT stands for Δt of the simulation; DTx3 means
             #       sampling period = Δt * 3
-            sampling_period: 0.05
+            sampling_period: DT
         # file options
         file_options:
             # what: number of sampled time steps to be buffered
