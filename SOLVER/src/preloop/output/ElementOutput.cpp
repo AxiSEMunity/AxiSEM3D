@@ -62,12 +62,17 @@ ElementOutput::buildInparam(int gindex, double dt) {
     } else {
         ipols = gm.getVector<int>(rooti + ":GLL_points_one_edge");
     }
-    // sort
+    // sort and check
     vector_tools::sortUnique(ipols);
     if (ipols.front() < 0 || ipols.back() > spectral::nPol) {
         throw std::runtime_error
-        ("ElementOutput::buildInparam || elements:GLL_points must be ranged "
-         "between 0 and " + bstring::toString(spectral::nPol) + ".");
+        ("ElementOutput::buildInparam || elements:GLL_points_one_edge must be "
+         "ranged between 0 and " + bstring::toString(spectral::nPol) + ".");
+    }
+    if (ipols.size() == 0) {
+        throw std::runtime_error
+        ("ElementOutput::buildInparam || elements:GLL_points_one_edge cannot "
+         "be empty.");
     }
     
     /////// azimuthal ///////
