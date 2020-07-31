@@ -41,7 +41,7 @@ public:
     bool inverseMapping(const eigen::DCol2 &sz, eigen::DCol2 &xieta,
                         double maxIter = 10, double tolerance = 1e-9) const {
         // Newton
-        xieta = eigen::DCol2::Zero();
+        xieta.setZero();
         double absSZ = tolerance * mMinEdgeLength;
         int iter = 0;
         for (; iter < maxIter; iter++) {

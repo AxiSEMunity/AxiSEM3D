@@ -204,7 +204,7 @@ namespace geodesy {
         if (ellipticity) {
             // ellipticity correction
             typedef Eigen::Matrix<T, Eigen::Dynamic, 1> TColX;
-            const TColX &f = computeFlattening(tpr.col(2).eval());
+            const TColX &f = computeFlattening(llr.col(2).eval());
             const TColX &f1sq = (f.array() - one).square();
             tpr.col(0) = (tpr.col(0).array().tan() * f1sq.array()).atan();
         }
