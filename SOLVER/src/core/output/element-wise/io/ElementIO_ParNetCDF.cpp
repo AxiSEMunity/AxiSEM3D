@@ -241,6 +241,10 @@ dumpToFile(const eigen::DColX &bufferTime,
     // write datas
     for (int inag = 0; inag < bufferFields.size(); inag++) {
         int nelem = (int)bufferFields[inag].dimensions()[0];
+        if (nelem == 0) {
+            // no element locally with this grid na
+            continue;
+        }
         int nag = (int)bufferFields[inag].dimensions()[1];
         int npnts = (int)bufferFields[inag].dimensions()[2];
         int nch = (int)bufferFields[inag].dimensions()[3];

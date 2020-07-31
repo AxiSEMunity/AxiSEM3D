@@ -29,7 +29,7 @@ verbose:
 
     # what: time step interval to display time loop info
     # type: int
-    loop_info_interval: 1000
+    loop_info_interval: 100
 
     # what: time step interval for stability check
     # type: int

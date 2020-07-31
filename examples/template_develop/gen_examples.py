@@ -148,3 +148,13 @@ replace_in_file(input3D_dir + '/inparam.model.yaml',
 replace_in_file(input3D_dir + '/inparam.nr.yaml',
                 ['constant: 1'],
                 ['constant: 50'])
+                
+# output
+replace_in_file(input3D_dir + '/inparam.output.yaml',
+                ['buffer_size: 1000'],
+                ['buffer_size: 100'])
+
+# advanced
+replace_in_file(input3D_dir + '/inparam.advanced.yaml',
+                ['loop_info_interval: 1000'],
+                ['loop_info_interval: 100'])
