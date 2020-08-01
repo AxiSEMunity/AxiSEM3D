@@ -70,14 +70,15 @@ public:
         }
         
         // write to buffer (Nyquist truncated here)
-        const static eigen::IArray3 shuffle = {0, 2, 1};
+        static const eigen::IArray3 shuffle = {0, 2, 1};
+        static const eigen::IArray3 zero = {0, 0, 0};
         int na = (int)field.dimension(0);
         eigen::IArray3 copy = {na, npnts, D};
         field.slice(eigen::IArray4({0, 0, 0, bufferLine}),
                     eigen::IArray4({na, npnts, D, 1})).reshape(copy) =
         Eigen::TensorMap<eigen::RTensor3>
         (rxad.data(), eigen::IArray3({rxad.rows(), D, rxad.cols() / D})).
-        shuffle(shuffle).slice(eigen::IArray3({0, 0, 0}), copy);
+        shuffle(shuffle).slice(zero, copy);
     };
     
     // dump: compute channel and feed IO buffer
@@ -97,8 +98,11 @@ public:
         eigen::IArray4 loc4 = {0, 0, 0, 0};
         eigen::IArray4 len4 = {na, npnts, 1, bufferLine};
         
+        // channel index
+        static const int chrank = 2;
+        static const eigen::IArray1 chDim = {2};
+        
         // channel
-        const int chrank = 2;
         if (fieldIndex >= 0) {
             loc4[chrank] = fieldIndex;
             len4[chrank] = 1;
@@ -122,13 +126,13 @@ public:
                     // trace
                     loc4[chrank] = 0;
                     len4[chrank] = 3;
-                    res = field.slice(loc4, len4).sum(eigen::IArray1({2}));
+                    res = field.slice(loc4, len4).sum(chDim);
                 } else if (fieldIndex == -2) {
                     // J2 = I1 ^ 2 / 3 - I2
                     // I1
                     loc4[chrank] = 0;
                     len4[chrank] = 3;
-                    res = (field.slice(loc4, len4).sum(eigen::IArray1({2})).
+                    res = (field.slice(loc4, len4).sum(chDim).
                            square() * numerical::Real(1./3));
                     // I2: permutation 0, 1, 2
                     len4[chrank] = 1;
@@ -155,7 +159,7 @@ public:
                     // trace
                     loc4[chrank] = 0;
                     len4[chrank] = 3;
-                    res = field.slice(loc4, len4).sum(eigen::IArray1({2}));
+                    res = field.slice(loc4, len4).sum(chDim);
                 } else {
                     throw std::runtime_error("ElementOp::dumpToIO || "
                                              "Invalid channel setting.");

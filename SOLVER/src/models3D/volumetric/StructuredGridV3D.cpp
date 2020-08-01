@@ -164,7 +164,7 @@ bool StructuredGridV3D::getProperties(const eigen::DMatX3 &spz,
     propValues = eigen::DMatXX::Zero(nCardinals, nProperties);
     
     // point loop
-    const static double err = std::numeric_limits<double>::lowest();
+    static const double err = std::numeric_limits<double>::lowest();
     const eigen::DRowX &valOut = eigen::DRowX::Constant(nProperties, err);
     for (int ipnt = 0; ipnt < nCardinals; ipnt++) {
         const eigen::DRowX &val = mGrid->compute(crdGrid.row(ipnt), valOut);

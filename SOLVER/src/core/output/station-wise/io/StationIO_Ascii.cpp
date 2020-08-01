@@ -122,7 +122,7 @@ void StationIO_Ascii::dumpToFile(const eigen::DColX &bufferTime,
     
     // wavefields
     int nch = (int)bufferFields.dimensions()[1];
-    eigen::IArray2 shuffle = {1, 0};
+    static const eigen::IArray2 shuffle = {1, 0};
     Eigen::internal::set_is_malloc_allowed(true);
     if (mStationCentric) {
         eigen::IArray3 loc = {0, 0, 0};

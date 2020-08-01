@@ -34,7 +34,7 @@ public:
         auto &stiff = mPoint->getFields().mStiff;
         const auto &veloc = mPoint->getFields().mVeloc;
         const auto &displ = mPoint->getFields().mDispl;
-        const static numerical::Real two = 2.;
+        static const numerical::Real two = 2.;
         // update acceleration
         stiff -= (two * mGamma) * veloc + (mGamma * mGamma) * displ;
     }
