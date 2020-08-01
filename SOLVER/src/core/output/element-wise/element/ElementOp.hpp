@@ -89,7 +89,7 @@ public:
         int npnts = (int)field.dimension(1);
         eigen::IArray5 loc5 = {elemIndexNaGrid, 0, 0, channelIndex, 0};
         eigen::IArray5 len5 = {1, na, npnts, 1, bufferLine};
-        eigen::IArray4 copy = {na, npnts, bufferLine};
+        eigen::IArray3 copy = {na, npnts, bufferLine};
         auto res = ioBuffers[naGridIndex].slice(loc5, len5).reshape(copy);
         
         // indexing of input elemBuffer

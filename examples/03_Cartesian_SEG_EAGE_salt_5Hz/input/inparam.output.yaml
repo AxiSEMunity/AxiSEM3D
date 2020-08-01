@@ -167,7 +167,7 @@ list_of_element_groups:
             flush: true
     #==========================================================================#
     # this key can be arbitrary but must be unique in this list
-    - Fourier_coefficients_surface:
+    - Fourier_coefficients_ocean_floor:
         # elements to be recorded
         # note: an element will be included if its center falls within
         #       both horizontal_range and vertical_range
@@ -198,7 +198,7 @@ list_of_element_groups:
             #          boundary (either internal or external), such as one
             #          of the vertical discontinuities
             #       2) not used if edge_dimension = BOTH
-            edge_position: 6370e3
+            edge_position: 6370.8e3
             # what: GLL points on one edge
             # type: string / array of int
             # only: FULL / a subset of [0, 1, 2, ..., npol], where npol is

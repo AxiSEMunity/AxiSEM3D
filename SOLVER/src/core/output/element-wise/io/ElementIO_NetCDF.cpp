@@ -164,9 +164,13 @@ dumpToFile(const eigen::DColX &bufferTime,
     mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
                            {mFileLineTime}, {bufferLine});
     
-    // write datas
+    // write data
     for (int inag = 0; inag < bufferFields.size(); inag++) {
         int nelem = (int)bufferFields[inag].dimensions()[0];
+        if (nelem == 0) {
+            // no element on this rank uses this grid na
+            continue;
+        }
         int nag = (int)bufferFields[inag].dimensions()[1];
         int npnts = (int)bufferFields[inag].dimensions()[2];
         int nch = (int)bufferFields[inag].dimensions()[3];

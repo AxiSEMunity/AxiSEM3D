@@ -46,9 +46,6 @@ private:
     
     // first element index on na-grid
     std::vector<int> mFirstElemNaGrid;
-    
-    // number of elements on this rank
-    int mNumElementsLocal;
 };
 
 #endif /* ElementIO_ParNetCDF_hpp */

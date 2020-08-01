@@ -114,20 +114,20 @@ item_elements_inplane = replace_in_string(item_elements_mantle,
  'phi_list: [0, 1.57079632679, 3.14159265359, 4.71238898038]',
  'sampling_period: 0.05'])
 
-item_elements_surface = replace_in_string(item_elements_mantle,
+item_elements_ocean_floor = replace_in_string(item_elements_mantle,
 ['- Fourier_coefficients_spherical_Earth_whole_mantle:',
  'horizontal_range: [0, 3.15]', 'vertical_range: [3480e3, 6371e3]',
  'edge_dimension: BOTH', 'edge_position: 6371e3',
  'sampling_period: DT'],
-['- Fourier_coefficients_surface:',
+['- Fourier_coefficients_ocean_floor:',
  'horizontal_range: [0, 1e10]', 'vertical_range: [0, 1e10]',
- 'edge_dimension: VERTICAL', 'edge_position: 6370e3',
+ 'edge_dimension: VERTICAL', 'edge_position: 6370.8e3',
  'sampling_period: 0.01'])
 
 replace_in_file(input_dir + '/inparam.output.yaml',
                 ['list_of_element_groups: []'],
                 ['list_of_element_groups:\n' +
-                 item_elements_inplane + '\n' + item_elements_surface])
+                 item_elements_inplane + '\n' + item_elements_ocean_floor])
 
 # advanced
 replace_in_file(input_dir + '/inparam.advanced.yaml',

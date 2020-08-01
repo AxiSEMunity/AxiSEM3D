@@ -27,9 +27,6 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
     ElementIO::initialize(groupName, numRecordSteps, channels,
                           npnts, naGrid, elemNaInfoL, elemCoordsL);
     
-    // local num
-    mNumElementsLocal = (int)elemNaInfoL.rows();
-    
     // return only if no element in group
     if (mNumElementsGlobal == 0) {
         return;
@@ -220,29 +217,17 @@ void ElementIO_ParNetCDF::
 dumpToFile(const eigen::DColX &bufferTime,
            const std::vector<eigen::RTensor5> &bufferFields,
            int bufferLine) {
-    // no element
-    if (mNumElementsLocal == 0) {
-        // flush is a collective operation
-        if (mFlush) {
-            mNcFile->flush();
-        }
-        // because file is opened globally, better to have
-        // mFileLineTime keep pace with the other ranks
-        mFileLineTime += bufferLine;
-        return;
-    }
-    
     // write time
     if (mpi::rank() == mRankWithMaxNumElements) {
         mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime,
                                {mFileLineTime}, {bufferLine});
     }
     
-    // write datas
+    // write data
     for (int inag = 0; inag < bufferFields.size(); inag++) {
         int nelem = (int)bufferFields[inag].dimensions()[0];
         if (nelem == 0) {
-            // no element locally with this grid na
+            // no element on this rank uses this grid na
             continue;
         }
         int nag = (int)bufferFields[inag].dimensions()[1];

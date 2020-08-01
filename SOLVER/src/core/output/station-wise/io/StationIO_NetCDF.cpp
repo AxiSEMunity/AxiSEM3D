@@ -102,8 +102,7 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
                                   const eigen::RTensor3 &bufferFields,
                                   int bufferLine) {
     // no station
-    int nst = (int)bufferFields.dimensions()[0];
-    if (nst == 0) {
+    if (!mNcFile) {
         return;
     }
     
@@ -112,6 +111,7 @@ void StationIO_NetCDF::dumpToFile(const eigen::DColX &bufferTime,
                            {mFileLineTime}, {bufferLine});
     
     // write data
+    int nst = (int)bufferFields.dimensions()[0];
     int nch = (int)bufferFields.dimensions()[1];
     mNcFile->writeVariable(mVarID_Data, "data_wave", bufferFields,
                            {0, 0, mFileLineTime},
