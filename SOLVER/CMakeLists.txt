@@ -236,8 +236,12 @@ ${CPP_FILES}
 external/yaml/Yaml.cpp
 )
 
+# standard C++17
+set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
+
 
 ################# linking #################
+if(hdf5)
 target_link_libraries(
 axisem3d
 ${MPI_C_LIBRARIES}
@@ -246,13 +250,20 @@ ${METIS_LIBRARIES}
 ${NETCDF_LIBRARIES}
 ${HDF5_HL_LIBRARIES}
 ${HDF5_LIBRARIES}
-${LINK_OPTIONS}
 # cmake may not specify HDF5 lib path
 -L${HDF5_ROOT}/lib
+${LINK_OPTIONS}
 )
-
-# standard C++17
-set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
+else()
+target_link_libraries(
+axisem3d
+${MPI_C_LIBRARIES}
+${FFTW_LIBRARIES}
+${METIS_LIBRARIES}
+${NETCDF_LIBRARIES}
+${LINK_OPTIONS}
+)
+endif()
 
 
 ################# summary #################
