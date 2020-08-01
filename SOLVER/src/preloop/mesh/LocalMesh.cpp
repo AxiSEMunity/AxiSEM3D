@@ -369,7 +369,7 @@ void LocalMesh::plotDD(const std::string &fname,
         nw.writeWholeVariable("weights", weights);
         // rank
         nw.defineVariable("mpi_rank", {
-            {"dim_elem", nelem}}, -1);
+            {"dim_elem", nelem}}, (int)-1);
         nw.writeWholeVariable("mpi_rank", elemRank);
     }
 }

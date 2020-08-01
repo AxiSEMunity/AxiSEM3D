@@ -554,11 +554,11 @@ void Domain::reportScanning() const {
                     mWavefieldScanning->mFileName, true);
         writer.defModeOn();
         writer.defineVariable("pointwise_sz", {
-            {"dim_point", nPoints}, {"dim_sz", 2}}, 0.);
+            {"dim_point", nPoints}, {"dim_sz", 2}}, numerical::dErr);
         writer.defineVariable("pointwise_Nr", {
-            {"dim_point", nPoints}}, 0);
+            {"dim_point", nPoints}}, (int)-1);
         writer.defineVariable("starting_Nr_for_scanning", {
-            {"dim_point", nPoints}}, 0);
+            {"dim_point", nPoints}}, (int)-1);
         writer.defModeOff();
         writer.writeWholeVariable("pointwise_sz", sz);
         writer.writeWholeVariable("pointwise_Nr", nrScan);

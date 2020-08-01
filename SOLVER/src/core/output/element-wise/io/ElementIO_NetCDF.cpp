@@ -79,7 +79,7 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
             {"dim_GLL", npnts},
             {"dim_channel", channels.size()},
             {"dim_time", numRecordSteps}
-        }, (numerical::Real)0.); // must fill with zeros
+        }, (numerical::Real)numerical::dErr);
         mVarID_Data.push_back(varID);
     }
     
@@ -101,17 +101,17 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
     // na-grid
     mNcFile->defineVariable("list_na_grid", {
         {"dim_na_grid", naGrid.size()}
-    }, (int)0);
+    }, (int)-1);
     
     // element-na info
     mNcFile->defineVariable("list_element_na", {
         {"dim_element", nelem}, {"dim_4", 4}
-    }, (int)0);
+    }, (int)-1);
     
     // element coords
     mNcFile->defineVariable("list_element_coords", {
         {"dim_element", nelem}, {"dim_GLL", npnts}, {"dim_2", 2}
-    }, (double)0.);
+    }, numerical::dErr);
     
     // end defining variables
     mNcFile->defModeOff();
