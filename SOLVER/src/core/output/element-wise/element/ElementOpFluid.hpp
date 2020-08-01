@@ -106,37 +106,33 @@ private:
         if (chops.mNeedBufferX) {
             if (sCXXN1.rows() < nu_1) {
                 sCXXN1.resize(nu_1, spectral::nPEM * 1);
-                sCXXX.resize(nu_1, spectral::nPEM * 1);
             }
-            if (sRXXX.rows() < na_1) {
-                sRXXX.resize(na_1, spectral::nPEM * 1);
+            if (sRXXN1.rows() < na_1) {
+                sRXXN1.resize(na_1, spectral::nPEM * 1);
             }
         }
         if (chops.mNeedBufferU) {
             if (sCUXN3.rows() < nu_1) {
                 sCUXN3.resize(nu_1, spectral::nPEM * 3);
-                sCUXX.resize(nu_1, spectral::nPEM * 3);
             }
-            if (sRUXX.rows() < na_1) {
-                sRUXX.resize(na_1, spectral::nPEM * 3);
+            if (sRUXN3.rows() < na_1) {
+                sRUXN3.resize(na_1, spectral::nPEM * 3);
             }
         }
         if (chops.mNeedBufferP) {
             if (sCPXN1.rows() < nu_1) {
                 sCPXN1.resize(nu_1, spectral::nPEM * 1);
-                sCPXX.resize(nu_1, spectral::nPEM * 1);
             }
-            if (sRPXX.rows() < na_1) {
-                sRPXX.resize(na_1, spectral::nPEM * 1);
+            if (sRPXN1.rows() < na_1) {
+                sRPXN1.resize(na_1, spectral::nPEM * 1);
             }
         }
         if (chops.mNeedBufferD) {
             if (sCDXN1.rows() < nu_1) {
                 sCDXN1.resize(nu_1, spectral::nPEM * 1);
-                sCDXX.resize(nu_1, spectral::nPEM * 1);
             }
-            if (sRDXX.rows() < na_1) {
-                sRDXX.resize(na_1, spectral::nPEM * 1);
+            if (sRDXN1.rows() < na_1) {
+                sRDXN1.resize(na_1, spectral::nPEM * 1);
             }
         }
     }
@@ -148,17 +144,15 @@ private:
     inline static eigen::CMatXN  sCPXN1 = eigen::CMatXN (0, spectral::nPEM * 1);
     inline static eigen::CMatXN  sCDXN1 = eigen::CMatXN (0, spectral::nPEM * 1);
     
-    // in-plane downsampling
-    inline static eigen::CMatXX sCXXX = eigen::CMatXX(0, spectral::nPEM * 1);
-    inline static eigen::CMatXX sCUXX = eigen::CMatXX(0, spectral::nPEM * 3);
-    inline static eigen::CMatXX sCPXX = eigen::CMatXX(0, spectral::nPEM * 1);
-    inline static eigen::CMatXX sCDXX = eigen::CMatXX(0, spectral::nPEM * 1);
-    
     // making real
-    inline static eigen::RMatXX_RM sRXXX = eigen::RMatXX(0, spectral::nPEM * 1);
-    inline static eigen::RMatXX_RM sRUXX = eigen::RMatXX(0, spectral::nPEM * 3);
-    inline static eigen::RMatXX_RM sRPXX = eigen::RMatXX(0, spectral::nPEM * 1);
-    inline static eigen::RMatXX_RM sRDXX = eigen::RMatXX(0, spectral::nPEM * 1);
+    inline static
+    eigen::RMatXN_RM  sRXXN1 = eigen::RMatXN_RM (0, spectral::nPEM * 1);
+    inline static
+    eigen::RMatXN3_RM sRUXN3 = eigen::RMatXN3_RM(0, spectral::nPEM * 3);
+    inline static
+    eigen::RMatXN_RM  sRPXN1 = eigen::RMatXN_RM (0, spectral::nPEM * 1);
+    inline static
+    eigen::RMatXN_RM  sRDXN1 = eigen::RMatXN_RM (0, spectral::nPEM * 1);
 };
 
 #endif /* ElementOpFluid_hpp */

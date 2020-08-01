@@ -51,22 +51,22 @@ record(int bufferLine, const channel::fluid::ChannelOptions &chops,
     
     if (chops.mNeedBufferX) {
         mElement->getChiField(sCXXN1);
-        recordToElem<1>(sCXXN1, nu_1, sCXXX, sRXXX, expIAlphaPhi,
+        recordToElem<1>(sCXXN1, nu_1, sRXXN1, expIAlphaPhi,
                         mBufferX, bufferLine);
     }
     if (chops.mNeedBufferU) {
         mElement->getDisplField(sCUXN3, needRTZ);
-        recordToElem<3>(sCUXN3, nu_1, sCUXX, sRUXX, expIAlphaPhi,
+        recordToElem<3>(sCUXN3, nu_1, sRUXN3, expIAlphaPhi,
                         mBufferU, bufferLine);
     }
     if (chops.mNeedBufferP) {
         mElement->getPressureField(sCPXN1);
-        recordToElem<1>(sCPXN1, nu_1, sCPXX, sRPXX, expIAlphaPhi,
+        recordToElem<1>(sCPXN1, nu_1, sRPXN1, expIAlphaPhi,
                         mBufferP, bufferLine);
     }
     if (chops.mNeedBufferD) {
         mElement->getDeltaField(sCDXN1);
-        recordToElem<1>(sCDXN1, nu_1, sCDXX, sRDXX, expIAlphaPhi,
+        recordToElem<1>(sCDXN1, nu_1, sRDXN1, expIAlphaPhi,
                         mBufferD, bufferLine);
     }
 }

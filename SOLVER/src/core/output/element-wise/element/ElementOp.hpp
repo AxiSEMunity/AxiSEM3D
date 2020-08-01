@@ -27,20 +27,20 @@ public:
     
     ///////////////////////// template functions /////////////////////////
     // record: in-plane downsampling and making real
-    template <int D, typename CMatXND =
-    Eigen::Matrix<numerical::ComplexR, Eigen::Dynamic, spectral::nPEM * D>>
-    void recordToElem(const CMatXND &cxnd, int nu_1, eigen::CMatXX &cxad,
-                      eigen::RMatXX_RM &rxad, const eigen::CMatXX &expIAlphaPhi,
+    template <int D,
+    typename CMatXND =
+    Eigen::Matrix<numerical::ComplexR, Eigen::Dynamic, spectral::nPEM * D>,
+    typename RMatXND_RM =
+    Eigen::Matrix<numerical::Real, Eigen::Dynamic, spectral::nPEM * D,
+    Eigen::RowMajor>>
+    void recordToElem(CMatXND &cxnd, int nu_1, RMatXND_RM &rxnd,
+                      const eigen::CMatXX &expIAlphaPhi,
                       eigen::RTensor4 &field, int bufferLine) const {
         // in-plane downsampling
         int npnts = (int)mIPnts.size();
-        if (npnts == spectral::nPEM) {
-            // no downsampling
-            cxad.topRows(nu_1) = cxnd.topRows(nu_1);
-        } else {
-            // downsampling for each dimension
+        if (npnts != spectral::nPEM) {
             for (int dim = 0; dim < D; dim++) {
-                cxad.block(0, npnts * dim, nu_1, npnts) =
+                cxnd.block(0, npnts * dim, nu_1, npnts) =
                 cxnd.block(0, spectral::nPEM * dim, nu_1, spectral::nPEM)
                 (Eigen::all, mIPnts);
             }
@@ -52,20 +52,20 @@ public:
         if (nphis == 0) {
             // no Fourier interpolation, just reform complex to real
             // zeroth
-            rxad.block(0, 0, 1, npntsD) = cxad.block(0, 0, 1, npntsD).real();
+            rxnd.block(0, 0, 1, npntsD) = cxnd.block(0, 0, 1, npntsD).real();
             // higher (Nyquist truncated later)
             for (int alpha = 1; alpha < nu_1; alpha++) {
-                rxad.block(alpha * 2 - 1, 0, 1, npntsD) =
-                cxad.block(alpha, 0, 1, npntsD).real();
-                rxad.block(alpha * 2 - 0, 0, 1, npntsD) =
-                cxad.block(alpha, 0, 1, npntsD).imag();
+                rxnd.block(alpha * 2 - 1, 0, 1, npntsD) =
+                cxnd.block(alpha, 0, 1, npntsD).real();
+                rxnd.block(alpha * 2 - 0, 0, 1, npntsD) =
+                cxnd.block(alpha, 0, 1, npntsD).imag();
             }
         } else {
             // Fourier interpolation
             for (int iphi = 0; iphi < nphis; iphi++) {
                 eigen_tools::
-                computeFourierAtPhiExp(cxad, nu_1, expIAlphaPhi.col(iphi),
-                                       rxad, iphi, npntsD);
+                computeFourierAtPhiExp(cxnd, nu_1, expIAlphaPhi.col(iphi),
+                                       rxnd, iphi, npntsD);
             }
         }
         
@@ -78,7 +78,7 @@ public:
         reshape(eigen::IArray3{na, npnts, D})
         = // the longest C++ statement I have written
         Eigen::TensorMap<eigen::RTensor3>
-        (rxad.data(), eigen::IArray3({rxad.rows(), rxad.cols(), 1})).
+        (rxnd.data(), eigen::IArray3({rxnd.rows(), rxnd.cols(), 1})).
         slice(zero, eigen::IArray3({na, npntsD, 1})).
         reshape(eigen::IArray3{na, D, npnts}).shuffle(shuffle);
     };

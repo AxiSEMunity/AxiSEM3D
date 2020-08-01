@@ -54,28 +54,28 @@ record(int bufferLine, const channel::solid::ChannelOptions &chops,
     
     if (chops.mNeedBufferU) {
         mElement->getDisplField(sCUXN3, needRTZ);
-        recordToElem<3>(sCUXN3, nu_1, sCUXX, sRUXX, expIAlphaPhi,
+        recordToElem<3>(sCUXN3, nu_1, sRUXN3, expIAlphaPhi,
                         mBufferU, bufferLine);
     }
     if (chops.mNeedBufferG) {
         mElement->getNablaField(sCGXN9, needRTZ);
-        recordToElem<9>(sCGXN9, nu_1, sCGXX, sRGXX, expIAlphaPhi,
+        recordToElem<9>(sCGXN9, nu_1, sRGXN9, expIAlphaPhi,
                         mBufferG, bufferLine);
     }
     if (chops.mNeedBufferE) {
         mElement->getStrainField(sCEXN6, needRTZ);
-        recordToElem<6>(sCEXN6, nu_1, sCEXX, sREXX, expIAlphaPhi,
+        recordToElem<6>(sCEXN6, nu_1, sREXN6, expIAlphaPhi,
                         mBufferE, bufferLine);
         
     }
     if (chops.mNeedBufferR) {
         mElement->getCurlField(sCRXN3, needRTZ);
-        recordToElem<3>(sCRXN3, nu_1, sCRXX, sRRXX, expIAlphaPhi,
+        recordToElem<3>(sCRXN3, nu_1, sRRXN3, expIAlphaPhi,
                         mBufferR, bufferLine);
     }
     if (chops.mNeedBufferS) {
         mElement->getStressField(sCSXN6, needRTZ);
-        recordToElem<6>(sCSXN6, nu_1, sCSXX, sRSXX, expIAlphaPhi,
+        recordToElem<6>(sCSXN6, nu_1, sRSXN6, expIAlphaPhi,
                         mBufferS, bufferLine);
     }
 }

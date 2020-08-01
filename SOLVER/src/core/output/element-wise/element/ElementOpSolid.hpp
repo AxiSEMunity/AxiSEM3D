@@ -107,46 +107,41 @@ private:
         if (chops.mNeedBufferU) {
             if (sCUXN3.rows() < nu_1) {
                 sCUXN3.resize(nu_1, spectral::nPEM * 3);
-                sCUXX.resize(nu_1, spectral::nPEM * 3);
             }
-            if (sRUXX.rows() < na_1) {
-                sRUXX.resize(na_1, spectral::nPEM * 3);
+            if (sRUXN3.rows() < na_1) {
+                sRUXN3.resize(na_1, spectral::nPEM * 3);
             }
         }
         if (chops.mNeedBufferG) {
             if (sCGXN9.rows() < nu_1) {
                 sCGXN9.resize(nu_1, spectral::nPEM * 9);
-                sCGXX.resize(nu_1, spectral::nPEM * 9);
             }
-            if (sRGXX.rows() < na_1) {
-                sRGXX.resize(na_1, spectral::nPEM * 9);
+            if (sRGXN9.rows() < na_1) {
+                sRGXN9.resize(na_1, spectral::nPEM * 9);
             }
         }
         if (chops.mNeedBufferE) {
             if (sCEXN6.rows() < nu_1) {
                 sCEXN6.resize(nu_1, spectral::nPEM * 6);
-                sCEXX.resize(nu_1, spectral::nPEM * 6);
             }
-            if (sREXX.rows() < na_1) {
-                sREXX.resize(na_1, spectral::nPEM * 6);
+            if (sREXN6.rows() < na_1) {
+                sREXN6.resize(na_1, spectral::nPEM * 6);
             }
         }
         if (chops.mNeedBufferR) {
             if (sCRXN3.rows() < nu_1) {
                 sCRXN3.resize(nu_1, spectral::nPEM * 3);
-                sCRXX.resize(nu_1, spectral::nPEM * 3);
             }
-            if (sRRXX.rows() < na_1) {
-                sRRXX.resize(na_1, spectral::nPEM * 3);
+            if (sRRXN3.rows() < na_1) {
+                sRRXN3.resize(na_1, spectral::nPEM * 3);
             }
         }
         if (chops.mNeedBufferS) {
             if (sCSXN6.rows() < nu_1) {
                 sCSXN6.resize(nu_1, spectral::nPEM * 6);
-                sCSXX.resize(nu_1, spectral::nPEM * 6);
             }
-            if (sRSXX.rows() < na_1) {
-                sRSXX.resize(na_1, spectral::nPEM * 6);
+            if (sRSXN6.rows() < na_1) {
+                sRSXN6.resize(na_1, spectral::nPEM * 6);
             }
         }
     }
@@ -159,19 +154,17 @@ private:
     inline static eigen::CMatXN3 sCRXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
     inline static eigen::CMatXN6 sCSXN6 = eigen::CMatXN6(0, spectral::nPEM * 6);
     
-    // in-plane downsampling
-    inline static eigen::CMatXX sCUXX = eigen::CMatXX(0, spectral::nPEM * 3);
-    inline static eigen::CMatXX sCGXX = eigen::CMatXX(0, spectral::nPEM * 9);
-    inline static eigen::CMatXX sCEXX = eigen::CMatXX(0, spectral::nPEM * 6);
-    inline static eigen::CMatXX sCRXX = eigen::CMatXX(0, spectral::nPEM * 3);
-    inline static eigen::CMatXX sCSXX = eigen::CMatXX(0, spectral::nPEM * 6);
-    
     // making real
-    inline static eigen::RMatXX_RM sRUXX = eigen::RMatXX(0, spectral::nPEM * 3);
-    inline static eigen::RMatXX_RM sRGXX = eigen::RMatXX(0, spectral::nPEM * 9);
-    inline static eigen::RMatXX_RM sREXX = eigen::RMatXX(0, spectral::nPEM * 6);
-    inline static eigen::RMatXX_RM sRRXX = eigen::RMatXX(0, spectral::nPEM * 3);
-    inline static eigen::RMatXX_RM sRSXX = eigen::RMatXX(0, spectral::nPEM * 6);
+    inline static
+    eigen::RMatXN3_RM sRUXN3 = eigen::RMatXN3_RM(0, spectral::nPEM * 3);
+    inline static
+    eigen::RMatXN9_RM sRGXN9 = eigen::RMatXN9_RM(0, spectral::nPEM * 9);
+    inline static
+    eigen::RMatXN6_RM sREXN6 = eigen::RMatXN6_RM(0, spectral::nPEM * 6);
+    inline static
+    eigen::RMatXN3_RM sRRXN3 = eigen::RMatXN3_RM(0, spectral::nPEM * 3);
+    inline static
+    eigen::RMatXN6_RM sRSXN6 = eigen::RMatXN6_RM(0, spectral::nPEM * 6);
 };
 
 #endif /* ElementOpSolid_hpp */
