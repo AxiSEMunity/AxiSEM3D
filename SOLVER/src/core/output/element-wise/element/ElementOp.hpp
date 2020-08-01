@@ -73,12 +73,14 @@ public:
         static const eigen::IArray3 shuffle = {0, 2, 1};
         static const eigen::IArray3 zero = {0, 0, 0};
         int na = (int)field.dimension(0);
-        eigen::IArray3 copy = {na, npnts, D};
         field.slice(eigen::IArray4({0, 0, 0, bufferLine}),
-                    eigen::IArray4({na, npnts, D, 1})).reshape(copy) =
+                    eigen::IArray4({na, npnts, D, 1})).
+        reshape(eigen::IArray3{na, npnts, D})
+        = // the longest C++ statement I have written
         Eigen::TensorMap<eigen::RTensor3>
-        (rxad.data(), eigen::IArray3({rxad.rows(), D, rxad.cols() / D})).
-        shuffle(shuffle).slice(zero, copy);
+        (rxad.data(), eigen::IArray3({rxad.rows(), rxad.cols(), 1})).
+        slice(zero, eigen::IArray3({na, npntsD, 1})).
+        reshape(eigen::IArray3{na, D, npnts}).shuffle(shuffle);
     };
     
     // dump: compute channel and feed IO buffer
