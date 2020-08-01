@@ -48,23 +48,24 @@ public:
         
         // making real
         int nphis = (int)expIAlphaPhi.cols();
+        int npntsD = npnts * D;
         if (nphis == 0) {
             // no Fourier interpolation, just reform complex to real
             // zeroth
-            rxad.block(0, 0, 1, npnts) = cxad.block(0, 0, 1, npnts).real();
+            rxad.block(0, 0, 1, npntsD) = cxad.block(0, 0, 1, npntsD).real();
             // higher (Nyquist truncated later)
             for (int alpha = 1; alpha < nu_1; alpha++) {
-                rxad.block(alpha * 2 - 1, 0, 1, npnts) =
-                cxad.block(alpha, 0, 1, npnts).real();
-                rxad.block(alpha * 2 - 0, 0, 1, npnts) =
-                cxad.block(alpha, 0, 1, npnts).imag();
+                rxad.block(alpha * 2 - 1, 0, 1, npntsD) =
+                cxad.block(alpha, 0, 1, npntsD).real();
+                rxad.block(alpha * 2 - 0, 0, 1, npntsD) =
+                cxad.block(alpha, 0, 1, npntsD).imag();
             }
         } else {
             // Fourier interpolation
             for (int iphi = 0; iphi < nphis; iphi++) {
                 eigen_tools::
                 computeFourierAtPhiExp(cxad, nu_1, expIAlphaPhi.col(iphi),
-                                       rxad, iphi, npnts);
+                                       rxad, iphi, npntsD);
             }
         }
         
