@@ -174,6 +174,7 @@ verbose(double dt, int numRecordSteps, int npnts,
     ss << boxSubTitle(2, "Azimuthal sampling");
     if (nphis == 0) {
         ss << "    * Recording all Fourier series coefficients.\n";
+        ss << boxEquals(6, width - 2, "grid space for Nr-storage", mNaSpace);
     } else {
         ss << "    * Recording on " << nphis << " azimuthal slices:\n";
         for (int iphi = 0; iphi < mPhis.size(); iphi++) {
