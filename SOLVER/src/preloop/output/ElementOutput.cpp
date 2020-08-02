@@ -152,18 +152,20 @@ verbose(double dt, int numRecordSteps, int npnts,
     ss << boxSubTitle(2, "Elements");
     ss << boxEquals(4, width, "horizontal range", range(mMinR, mMaxR));
     ss << boxEquals(4, width, "vertical range", range(mMinZ, mMaxZ));
-    ss << boxEquals(4, width, "# elements found", numElements);
     
     //////// inplane ////////
     ss << boxSubTitle(2, "In-plane sampling");
     if (mEdgeDim == 0) {
         ss << boxEquals(4, width, "edge dimension", "horizontal");
         ss << boxEquals(4, width, "edge position", mEdgeCoord);
+        ss << boxEquals(4, width, "# element edges found", numElements);
     } else if (mEdgeDim == 1) {
         ss << boxEquals(4, width, "edge dimension", "vertical");
         ss << boxEquals(4, width, "edge position", mEdgeCoord);
+        ss << boxEquals(4, width, "# element edges found", numElements);
     } else {
         ss << boxEquals(4, width, "edge dimension", "both");
+        ss << boxEquals(4, width, "# elements found", numElements);
     }
     ss << boxEquals(4, width, "GLL points on one edge", mIPols, "=", true);
     ss << boxEquals(4, width, "# GLL points per element", npnts);
@@ -235,7 +237,11 @@ verbose(double dt, int numRecordSteps, int npnts,
     
     //////// dimensions ////////
     ss << boxSubTitle(2, "Dimensions");
-    ss << boxEquals(4, width, "# elements", numElements);
+    if (mEdgeDim >= 0) {
+        ss << boxEquals(4, width, "# element edges", numElements);
+    } else {
+        ss << boxEquals(4, width, "# elements", numElements);
+    }
     if (nphis == 0) {
         ss << boxEquals(4, width, "# Fourier series", "variable");
     } else {
