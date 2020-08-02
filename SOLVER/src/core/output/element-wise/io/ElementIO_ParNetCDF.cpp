@@ -52,7 +52,7 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
     if (mpi::rank() == mRankWithMaxNumElements) {
         // flatten
         int ncrd = npnts * 2;
-        eigen::IMatX4_RM elemNaInfoAll(mNumElementsGlobal, 4);
+        eigen::IMatX5_RM elemNaInfoAll(mNumElementsGlobal, 5);
         eigen::DMatXX_RM elemCoordsAll(mNumElementsGlobal, ncrd);
         int row = 0;
         for (int irank = 0; irank < mpi::nproc(); irank++) {
@@ -61,6 +61,50 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
             elemCoordsAll.block(row, 0, nelocal, ncrd) = elemCoordsRanks[irank];
             row += nelocal;
         }
+        
+        // form dict of naGrid for fast search
+        std::map<int, int> naGridIndexDict;
+        for (int inag = 0; inag < naGrid.size(); inag++) {
+            naGridIndexDict[naGrid[inag]] = inag;
+        }
+        
+        // first element index on na-grid
+        firstElemNaGridRanks.assign
+        (mpi::nproc(), std::vector<int>(naGrid.size(), 0));
+        // loop over ranks
+        for (int irank = 1; irank < mpi::nproc(); irank++) {
+            int nelocal = (int)elemNaInfoRanks[irank - 1].rows();
+            // count elements on this rank
+            for (int ielem = 0; ielem < nelocal; ielem++) {
+                // four columns: tag, actual na, grid na, element index in data
+                int nag = elemNaInfoRanks[irank - 1](ielem, 2);
+                int nagIndex = naGridIndexDict[nag];
+                firstElemNaGridRanks[irank][nagIndex]++;
+            }
+            // add counts on previous ranks
+            for (int inag = 0; inag <naGrid.size(); inag++) {
+                firstElemNaGridRanks[irank][inag] +=
+                firstElemNaGridRanks[irank - 1][inag];
+            }
+        }
+        
+        // the fifth column: element index in data after concat
+        row = 0;
+        for (int irank = 0; irank < mpi::nproc(); irank++) {
+            int nelocal = (int)elemNaInfoRanks[irank].rows();
+            for (int ielem = 0; ielem < nelocal; ielem++) {
+                int nag = elemNaInfoRanks[irank](ielem, 2);
+                int nagIndex = naGridIndexDict[nag];
+                elemNaInfoAll(row, 4) = elemNaInfoAll(row, 3) +
+                firstElemNaGridRanks[irank][nagIndex];
+                row++;
+            }
+        }
+        
+        
+        //////////////////////////////////////////////////////////////
+        //////////////////////////// file ////////////////////////////
+        //////////////////////////////////////////////////////////////
         
         // to reuse code in ElementIO_NetCDF.cpp
         int nelem = mNumElementsGlobal;
@@ -76,12 +120,6 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
             {"dim_time", numRecordSteps}}, numerical::dErr);
         
         //////// wave ////////
-        // form dict of naGrid for fast search
-        std::map<int, int> naGridIndexDict;
-        for (int inag = 0; inag < naGrid.size(); inag++) {
-            naGridIndexDict[naGrid[inag]] = inag;
-        }
-        
         // classify elements on na-grid
         std::vector<std::vector<int>> elemsNaGrid;
         elemsNaGrid.assign(naGrid.size(), std::vector<int>());
@@ -128,7 +166,7 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
         
         // element-na info
         mNcFile->defineVariable("list_element_na", {
-            {"dim_element", nelem}, {"dim_4", 4}
+            {"dim_element", nelem}, {"dim_5", 5}
         }, (int)-1);
         
         // element coords
@@ -161,28 +199,6 @@ void ElementIO_ParNetCDF::initialize(const std::string &groupName,
         
         // element coords
         mNcFile->writeWholeVariable("list_element_coords", elemCoordsAll);
-        
-        
-        ////////// parallel //////////
-        // first element index on na-grid
-        firstElemNaGridRanks.assign
-        (mpi::nproc(), std::vector<int>(naGrid.size(), 0));
-        // loop over ranks
-        for (int irank = 1; irank < mpi::nproc(); irank++) {
-            int nelocal = (int)elemNaInfoRanks[irank - 1].rows();
-            // count elements on this rank
-            for (int ielem = 0; ielem < nelocal; ielem++) {
-                // four columns: tag, actual na, grid na, index
-                int nag = elemNaInfoRanks[irank - 1](ielem, 2);
-                int nagIndex = naGridIndexDict[nag];
-                firstElemNaGridRanks[irank][nagIndex]++;
-            }
-            // add counts on previous ranks
-            for (int inag = 0; inag <naGrid.size(); inag++) {
-                firstElemNaGridRanks[irank][inag] +=
-                firstElemNaGridRanks[irank - 1][inag];
-            }
-        }
     }
     
     // bcast variable IDs

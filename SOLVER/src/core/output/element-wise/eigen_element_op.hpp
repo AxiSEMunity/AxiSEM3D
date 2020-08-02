@@ -27,6 +27,7 @@ namespace eigen {
     
     // element-na info
     typedef Eigen::Matrix<int, Eigen::Dynamic, 4, Eigen::RowMajor> IMatX4_RM;
+    typedef Eigen::Matrix<int, Eigen::Dynamic, 5, Eigen::RowMajor> IMatX5_RM;
     
     // azimuthal making real
     typedef Eigen::Matrix<Real, Dynamic, nPEM, Eigen::RowMajor> RMatXN_RM;

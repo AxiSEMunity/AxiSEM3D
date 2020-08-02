@@ -27,8 +27,53 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
     ElementIO::initialize(groupName, numRecordSteps, channels,
                           npnts, naGrid, elemNaInfo, elemCoords);
     
-    // nothing locally without elements
+    
+    ///////////////////////////////////////////////////////////////////////
+    // the fifth column: element index in data after concat
+    // gather elements
+    std::vector<eigen::IMatX4_RM> elemNaInfoRanks;
+    mpi::gatherEigen(elemNaInfo, elemNaInfoRanks, MPI_ALL);
+    
+    // form dict of naGrid for fast search
+    std::map<int, int> naGridIndexDict;
+    for (int inag = 0; inag < naGrid.size(); inag++) {
+        naGridIndexDict[naGrid[inag]] = inag;
+    }
+    
+    // first element index on na-grid
+    std::vector<std::vector<int>> firstElemNaGridRanks;
+    firstElemNaGridRanks.assign
+    (mpi::nproc(), std::vector<int>(naGrid.size(), 0));
+    // loop over ranks
+    for (int irank = 1; irank < mpi::nproc(); irank++) {
+        int nelocal = (int)elemNaInfoRanks[irank - 1].rows();
+        // count elements on this rank
+        for (int ielem = 0; ielem < nelocal; ielem++) {
+            // four columns: tag, actual na, grid na, element index in data
+            int nag = elemNaInfoRanks[irank - 1](ielem, 2);
+            int nagIndex = naGridIndexDict[nag];
+            firstElemNaGridRanks[irank][nagIndex]++;
+        }
+        // add counts on previous ranks
+        for (int inag = 0; inag <naGrid.size(); inag++) {
+            firstElemNaGridRanks[irank][inag] +=
+            firstElemNaGridRanks[irank - 1][inag];
+        }
+    }
+    
+    // the fifth column
     int nelem = (int)elemNaInfo.rows();
+    eigen::IMatX5_RM elemNaInfo5(nelem, 5);
+    elemNaInfo5.leftCols(4) = elemNaInfo;
+    for (int ielem = 0; ielem < nelem; ielem++) {
+        int nag = elemNaInfo5(ielem, 2);
+        int nagIndex = naGridIndexDict[nag];
+        elemNaInfo5(ielem, 4) = elemNaInfo5(ielem, 3) +
+        firstElemNaGridRanks[mpi::rank()][nagIndex];
+    }
+    ///////////////////////////////////////////////////////////////////////
+    
+    // nothing locally without elements
     if (nelem == 0) {
         return;
     }
@@ -53,12 +98,6 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
         {"dim_time", numRecordSteps}}, numerical::dErr);
     
     //////// wave ////////
-    // form dict of naGrid for fast search
-    std::map<int, int> naGridIndexDict;
-    for (int inag = 0; inag < naGrid.size(); inag++) {
-        naGridIndexDict[naGrid[inag]] = inag;
-    }
-    
     // classify elements on na-grid
     std::vector<std::vector<int>> elemsNaGrid;
     elemsNaGrid.assign(naGrid.size(), std::vector<int>());
@@ -105,7 +144,7 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
     
     // element-na info
     mNcFile->defineVariable("list_element_na", {
-        {"dim_element", nelem}, {"dim_4", 4}
+        {"dim_element", nelem}, {"dim_5", 5}
     }, (int)-1);
     
     // element coords
@@ -134,7 +173,7 @@ void ElementIO_NetCDF::initialize(const std::string &groupName,
     mNcFile->writeWholeVariable("list_na_grid", naGrid);
     
     // element-na info
-    mNcFile->writeWholeVariable("list_element_na", elemNaInfo);
+    mNcFile->writeWholeVariable("list_element_na", elemNaInfo5);
     
     // element coords
     mNcFile->writeWholeVariable("list_element_coords", elemCoords);
