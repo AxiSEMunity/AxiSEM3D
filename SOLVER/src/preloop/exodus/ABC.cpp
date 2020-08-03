@@ -82,10 +82,9 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
                                      "Kosloff_Kosloff:relative_spans "
                                      "must range between 0.01 and 0.25.");
         }
-        if (*std::min_element(U0.begin(), U0.end()) < .01 ||
-            *std::max_element(U0.begin(), U0.end()) > .25) {
+        if (*std::min_element(U0.begin(), U0.end()) < numerical::dEpsilon) {
             throw std::runtime_error("ABC::buildInparam || Kosloff_Kosloff:U0 "
-                                     "must range between 0.01 and 0.25.");
+                                     "must be positive.");
         }
     }
     
