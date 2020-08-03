@@ -250,10 +250,27 @@ dumpToFile(const eigen::DColX &bufferTime,
         int npnts = (int)bufferFields[inag].dimensions()[2];
         int nch = (int)bufferFields[inag].dimensions()[3];
         const std::string &strNag = bstring::toString(nag);
-        mNcFile->writeVariable(mVarID_Data[inag], "data_wave__NaG=" + strNag,
-                               bufferFields[inag],
-                               {mFirstElemNaGrid[inag], 0, 0, 0, mFileLineTime},
-                               {nelem, nag, npnts, nch, bufferLine});
+        
+        // write to file
+        if (bufferLine == bufferFields[inag].dimension(4)) {
+            // full buffer
+            mNcFile->writeVariable
+            (mVarID_Data[inag], "data_wave__NaG=" + strNag, bufferFields[inag],
+             {mFirstElemNaGrid[inag], 0, 0, 0, mFileLineTime},
+             {nelem, nag, npnts, nch, bufferLine});
+        } else {
+            // must truncate by copy because time is the fastest varying
+            // dimension; occuring only at the end of the simulation
+            eigen::IArray5 loc = {0, 0, 0, 0, 0};
+            eigen::IArray5 len = {nelem, nag, npnts, nch, bufferLine};
+            Eigen::internal::set_is_malloc_allowed(true);
+            eigen::RTensor5 timeTruncated = bufferFields[inag].slice(loc, len);
+            Eigen::internal::set_is_malloc_allowed(false);
+            mNcFile->writeVariable
+            (mVarID_Data[inag], "data_wave__NaG=" + strNag, timeTruncated,
+             {mFirstElemNaGrid[inag], 0, 0, 0, mFileLineTime},
+             {nelem, nag, npnts, nch, bufferLine});
+        }
     }
     
     // flush

@@ -136,9 +136,25 @@ void StationIO_ParNetCDF::dumpToFile(const eigen::DColX &bufferTime,
     int nst = (int)bufferFields.dimensions()[0];
     if (nst > 0) {
         int nch = (int)bufferFields.dimensions()[1];
-        mNcFile->writeVariable(mVarID_Data, "data_wave", bufferFields,
-                               {mGlobalIndexFirstStation, 0, mFileLineTime},
-                               {nst, nch, bufferLine});
+        
+        // write to file
+        if (bufferLine == bufferFields.dimension(2)) {
+            // full buffer
+            mNcFile->writeVariable(mVarID_Data, "data_wave", bufferFields,
+                                   {mGlobalIndexFirstStation, 0, mFileLineTime},
+                                   {nst, nch, bufferLine});
+        } else {
+            // must truncate by copy because time is the fastest varying
+            // dimension; occuring only at the end of the simulation
+            eigen::IArray3 loc = {0, 0, 0};
+            eigen::IArray3 len = {nst, nch, bufferLine};
+            Eigen::internal::set_is_malloc_allowed(true);
+            eigen::RTensor3 timeTruncated = bufferFields.slice(loc, len);
+            Eigen::internal::set_is_malloc_allowed(false);
+            mNcFile->writeVariable(mVarID_Data, "data_wave", timeTruncated,
+                                   {mGlobalIndexFirstStation, 0, mFileLineTime},
+                                   {nst, nch, bufferLine});
+        }
     }
     
     // flush

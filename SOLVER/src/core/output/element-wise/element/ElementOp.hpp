@@ -81,7 +81,7 @@ public:
         (rxnd.data(), eigen::IArray3({rxnd.rows(), rxnd.cols(), 1})).
         slice(zero, eigen::IArray3({na, npntsD, 1})).
         reshape(eigen::IArray3{na, D, npnts}).shuffle(shuffle);
-    };
+    }
     
     // dump: compute channel and feed IO buffer
     template <int D> static
