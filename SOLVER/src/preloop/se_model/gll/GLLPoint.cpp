@@ -38,17 +38,11 @@
 void GLLPoint::
 release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
     //////////////////////////// reduce ////////////////////////////
+    // variables to be reduced after setting up all Quads
     op1D_3D::tryReduceTo1D(mMassFluid);
     op1D_3D::tryReduceTo1D(mMassSolid);
     op1D_3D::tryReduceTo1D(mNormalSFU);
     op1D_3D::tryReduceTo1D(mNormalSFA);
-    for (auto itm = mClaytonABC.begin(); itm != mClaytonABC.end(); itm++) {
-        for (auto itv = itm->second.begin(); itv != itm->second.end(); itv++) {
-            op1D_3D::tryReduceTo1D(std::get<1>(*itv));
-            op1D_3D::tryReduceTo1D(std::get<2>(*itv));
-            op1D_3D::tryReduceTo1D(std::get<3>(*itv));
-        }
-    }
     op1D_3D::tryReduceTo1D(mNormalTop);
     op1D_3D::tryReduceTo1D(mSumRhoDepth);
     

@@ -72,6 +72,10 @@ public:
         mClaytonABC.insert({key, std::vector<
             std::tuple<bool, eigen::DMatX3, eigen::DColX, eigen::DColX>>()});
         mClaytonABC.at(key).push_back({fluid, nABC, rhoVp, rhoVs});
+        // try reduce to 1D
+        op1D_3D::tryReduceTo1D(std::get<1>(mClaytonABC.at(key).back()));
+        op1D_3D::tryReduceTo1D(std::get<2>(mClaytonABC.at(key).back()));
+        op1D_3D::tryReduceTo1D(std::get<3>(mClaytonABC.at(key).back()));
     }
     
     // add ocean load
