@@ -236,12 +236,12 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
             }
         }
         // release
-        if (mSolidPoint && gammaMaxSolid > numerical::dEpsilon) {
+        if (gammaMaxSolid > numerical::dEpsilon) {
             std::unique_ptr<const SpongeSolid> sponge =
             std::make_unique<const SpongeSolid>(mSolidPoint, gammaMaxSolid);
             domain.getAbsorbingBoundary()->addSpongeSolid(sponge);
         }
-        if (mFluidPoint && gammaMaxFluid > numerical::dEpsilon) {
+        if (gammaMaxFluid > numerical::dEpsilon) {
             std::unique_ptr<const SpongeFluid> sponge =
             std::make_unique<const SpongeFluid>(mFluidPoint, gammaMaxFluid);
             domain.getAbsorbingBoundary()->addSpongeFluid(sponge);

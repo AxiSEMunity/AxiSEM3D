@@ -100,15 +100,10 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
         }
     }
     
-    // setup mesh
+    // setup mesh pointer
     abc->mExodusMesh = &exodusMesh;
     abc->mVpKey = exodusMesh.isIsotropic() ? "VP" : "VPV";
     abc->mVsKey = exodusMesh.isIsotropic() ? "VS" : "VSV";
-    // shift outer a little because we will search for vertex values
-    double distTol = exodusMesh.getGlobalVariable("dist_tolerance");
-    abc->mRadialCoords = exodusMesh.getRadialCoords();
-    abc->mRadialCoords.front() -= distTol * 2;
-    abc->mRadialCoords.back() += distTol * 2;
     
     // setup expressions
     // constant
@@ -177,8 +172,9 @@ std::string ABC::verbose() const {
             ss << boxEquals(4, 21, "range of sponge layer",
                             range(outer - span, outer));
         }
-        ss << boxEquals(4, 21, "Gamma expr in solid", mGammaExprSolidStr);
-        ss << boxEquals(4, 21, "Gamma expr in fluid", mGammaExprFluidStr);
+        ss << "  * Expression for γ-factor" << ":\n";
+        ss << "    in solid: " + mGammaExprSolidStr + "\n";
+        ss << "    in fluid: " + mGammaExprFluidStr + "\n";
     }
     ss << boxBaseline() << "\n\n";
     return ss.str();
@@ -187,17 +183,21 @@ std::string ABC::verbose() const {
 // get gamma solid
 double ABC::getGammaSolid(double r, double span) const {
     // get radial coords and variables from mesh
+    const auto &rcrd = mExodusMesh->getRadialCoords();
     const auto &rval = mExodusMesh->getRadialVariables();
     double distTol = mExodusMesh->getGlobalVariable("dist_tolerance");
     
     // locate r
+    // first bound r by mesh min/max because vertices are searched for
+    r = std::max(r, rcrd.front());
+    r = std::min(r, rcrd.back());
     int index0 = -1, index1 = -1;
     double factor0 = 0., factor1 = 0.;
-    vector_tools::linearInterpSorted(mRadialCoords, r, index0, index1,
+    vector_tools::linearInterpSorted(rcrd, r, index0, index1,
                                      factor0, factor1);
     
     // judge type of the gap
-    if (mRadialCoords[index1] - mRadialCoords[index0] > distTol * 4) {
+    if (rcrd[index1] - rcrd[index0] > distTol * 4) {
         // this gap spans an element
         // do interpolation
         sVP = (rval.at(mVpKey)(index0) * factor0 +
@@ -240,17 +240,21 @@ double ABC::getGammaSolid(double r, double span) const {
 // get gamma fluid
 double ABC::getGammaFluid(double r, double span) const {
     // get radial coords and variables from mesh
+    const auto &rcrd = mExodusMesh->getRadialCoords();
     const auto &rval = mExodusMesh->getRadialVariables();
     double distTol = mExodusMesh->getGlobalVariable("dist_tolerance");
     
     // locate r
+    // first bound r by mesh min/max because vertices are searched for
+    r = std::max(r, rcrd.front());
+    r = std::min(r, rcrd.back());
     int index0 = -1, index1 = -1;
     double factor0 = 0., factor1 = 0.;
-    vector_tools::linearInterpSorted(mRadialCoords, r, index0, index1,
+    vector_tools::linearInterpSorted(rcrd, r, index0, index1,
                                      factor0, factor1);
     
     // judge type of the gap
-    if (mRadialCoords[index1] - mRadialCoords[index0] > distTol * 4) {
+    if (rcrd[index1] - rcrd[index0] > distTol * 4) {
         // this gap spans an element
         // do interpolation
         sVP = (rval.at(mVpKey)(index0) * factor0 +

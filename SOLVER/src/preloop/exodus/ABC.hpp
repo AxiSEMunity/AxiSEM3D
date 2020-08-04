@@ -71,9 +71,10 @@ private:
     // data based on mesh
     std::vector<std::string> mBoundaryKeys;
     std::map<std::string, std::tuple<double, double>> mSpongeOuterSpan;
+    
+    // mesh pointer
     const ExodusMesh *mExodusMesh = nullptr;
     std::string mVpKey, mVsKey;
-    std::vector<double> mRadialCoords;
     
     // gamma expressions
     // using static for variables to keep const modifier
