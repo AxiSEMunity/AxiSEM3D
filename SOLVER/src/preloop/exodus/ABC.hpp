@@ -61,15 +61,14 @@ public:
     double getGammaFluid(double r, double span) const;
     
 private:
-    // data from inparam
+    /////// general data ///////
     std::vector<std::string> mUserKeys;
+    std::vector<std::string> mBoundaryKeys;
     bool mClayton = false;
     bool mSponge = false;
-    std::string mGammaExprSolidStr;
-    std::string mGammaExprFluidStr;
     
-    // data based on mesh
-    std::vector<std::string> mBoundaryKeys;
+    /////// data for sponge ///////
+    // geometry
     std::map<std::string, std::tuple<double, double>> mSpongeOuterSpan;
     
     // mesh pointer
@@ -83,6 +82,8 @@ private:
     inline static double sRHO = 0.;
     inline static double sSPAN = 0.;
     double mT0 = 0.;
+    std::string mGammaExprSolidStr;
+    std::string mGammaExprFluidStr;
     exprtk::expression<double> mGammaExprSolid;
     exprtk::expression<double> mGammaExprFluid;
 };

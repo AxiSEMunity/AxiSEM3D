@@ -100,6 +100,11 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
         }
     }
     
+    // mesh and expressions for sponge
+    if (!abc->sponge()) {
+        return abc;
+    }
+    
     // setup mesh pointer
     abc->mExodusMesh = &exodusMesh;
     abc->mVpKey = exodusMesh.isIsotropic() ? "VP" : "VPV";
