@@ -87,15 +87,28 @@ absorbing_boundary:
         #       3) allowed range: .01 ~ 0.25
         relative_spans: [.05, .05]
         
-        # what: U0's of the sponge layers
-        # type: array of double
-        # note: 1) must be presented in the same order as absorbing_boundaries
-        #       2) U0 represents the attenuation strength on the outermost edge
-        #          of a sponge layer (i.e., on the mesh boundary); moving away
-        #          from the outermost edge, such a strength gradually decreases
-        #          and finally vanishes on the the innermost edge
-        #       3) must be positive
-        U0: [1., 1.]
+        # what: expression of γ-factor in solid domain
+        # type: math expression
+        # note: 1) γ-factor represents the absorbing strength at a point
+        #       2) allowed arguments include (case sensitive):
+        #          - VP, VS: P- and S- wave velocities at the point
+        #          - RHO   : density at the point
+        #          - SPAN  : span of the sponge layer
+        #          - T0    : mesh period
+        #          * VP, VS and RHO are the 1D values in the Exodus mesh
+        #       3) this expression will be further multiplied by a pattern
+        #          function that equals to 1 on the outermost edge of the
+        #          sponge layer (i.e., on the mesh boundary) and gradually
+        #          decreases to 0 on the the innermost edge; such a decreasing
+        #          pattern is automatically handled by the solver
+        #       4) the default is an empirical expression from
+        #          Haindl et al., 2020
+        gamma_expr_solid: 2.2 / T0 * (VS / VP)^2 * exp(-0.08 * SPAN / (VP * T0))
+        
+        # what: expression of γ-factor in fluid domain
+        # type: math expression
+        # note: same as gamma_expr_solid but without VS dependency
+        gamma_expr_fluid: 1.76 / T0 * exp(-0.08 * SPAN / (VP * T0))
 
 
 ######################## attenuation ########################

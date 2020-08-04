@@ -15,7 +15,15 @@
 #include <vector>
 #include <map>
 #include <memory>
-class ExodusMesh;
+
+#include "ExodusMesh.hpp"
+#include "vector_tools.hpp"
+
+// exprtk
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Weverything"
+#include "exprtk/exprtk.hpp"
+#pragma clang diagnostic pop
 
 class ABC {
 public:
@@ -40,21 +48,42 @@ public:
         return mSponge;
     }
     
-    // get sponge data
-    std::tuple<double, double, double>
-    getSpongeData(const std::string &key) const {
-        return mSpongeData.at(key);
+    // get sponge outer and span
+    const std::tuple<double, double> &
+    getSpongeOuterSpan(const std::string &key) const {
+        return mSpongeOuterSpan.at(key);
     }
+    
+    // get gamma solid
+    double getGammaSolid(double r, double span) const;
+    
+    // get gamma fluid
+    double getGammaFluid(double r, double span) const;
     
 private:
     // data from inparam
     std::vector<std::string> mUserKeys;
     bool mClayton = false;
     bool mSponge = false;
+    std::string mGammaExprSolidStr;
+    std::string mGammaExprFluidStr;
     
     // data based on mesh
     std::vector<std::string> mBoundaryKeys;
-    std::map<std::string, std::tuple<double, double, double>> mSpongeData;
+    std::map<std::string, std::tuple<double, double>> mSpongeOuterSpan;
+    const ExodusMesh *mExodusMesh = nullptr;
+    std::string mVpKey, mVsKey;
+    std::vector<double> mRadialCoords;
+    
+    // gamma expressions
+    // using static for variables to keep const modifier
+    inline static double sVP = 0.;
+    inline static double sVS = 0.;
+    inline static double sRHO = 0.;
+    inline static double sSPAN = 0.;
+    double mT0 = 0.;
+    exprtk::expression<double> mGammaExprSolid;
+    exprtk::expression<double> mGammaExprFluid;
 };
 
 #endif /* ABC_hpp */

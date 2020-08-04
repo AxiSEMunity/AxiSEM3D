@@ -63,16 +63,13 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
     
     // get parameters for sponge
     std::vector<double> relSpan;
-    std::vector<double> U0;
     if (abc->mSponge) {
         relSpan = gm.getVector<double>(root + ":relative_spans");
-        U0 = gm.getVector<double>(root + ":U0");
         // check sizes
-        if (abc->mUserKeys.size() != relSpan.size() ||
-            abc->mUserKeys.size() != U0.size()) {
+        if (abc->mUserKeys.size() != relSpan.size()) {
             throw std::runtime_error
             ("ABC::buildInparam || "
-             "The number of parameters for Kosloff_Kosloff || "
+             "The number of Kosloff_Kosloff::relative_spans || "
              "does not match the number of boundaries.");
         }
         // check values
@@ -82,10 +79,11 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
                                      "Kosloff_Kosloff:relative_spans "
                                      "must range between 0.01 and 0.25.");
         }
-        if (*std::min_element(U0.begin(), U0.end()) < numerical::dEpsilon) {
-            throw std::runtime_error("ABC::buildInparam || Kosloff_Kosloff:U0 "
-                                     "must be positive.");
-        }
+        // read expr string
+        abc->mGammaExprSolidStr =
+        gm.get<std::string>(root + ":gamma_expr_solid");
+        abc->mGammaExprFluidStr =
+        gm.get<std::string>(root + ":gamma_expr_fluid");
     }
     
     // setup in mesh
@@ -97,9 +95,44 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
             abc->mBoundaryKeys.push_back(key);
             if (abc->mSponge) {
                 double span = relSpan[ikey] * meshSpan;
-                abc->mSpongeData.insert({key, {outer, span, U0[ikey]}});
+                abc->mSpongeOuterSpan.insert({key, {outer, span}});
             }
         }
+    }
+    
+    // setup mesh
+    abc->mExodusMesh = &exodusMesh;
+    abc->mVpKey = exodusMesh.isIsotropic() ? "VP" : "VPV";
+    abc->mVsKey = exodusMesh.isIsotropic() ? "VS" : "VSV";
+    // shift outer a little because we will search for vertex values
+    double distTol = exodusMesh.getGlobalVariable("dist_tolerance");
+    abc->mRadialCoords = exodusMesh.getRadialCoords();
+    abc->mRadialCoords.front() -= distTol * 2;
+    abc->mRadialCoords.back() += distTol * 2;
+    
+    // setup expressions
+    // constant
+    abc->mT0 = exodusMesh.getGlobalVariable("minimum_period");
+    // symbol table
+    exprtk::symbol_table<double> symbol_table;
+    symbol_table.add_variable("VP", sVP);
+    symbol_table.add_variable("RHO", sRHO);
+    symbol_table.add_variable("SPAN", sSPAN);
+    symbol_table.add_constant("T0", abc->mT0);
+    // fluid
+    abc->mGammaExprFluid.register_symbol_table(symbol_table);
+    // solid
+    symbol_table.add_variable("VS", sVS);
+    abc->mGammaExprSolid.register_symbol_table(symbol_table);
+    // parse
+    exprtk::parser<double> parser;
+    if (!parser.compile(abc->mGammaExprSolidStr, abc->mGammaExprSolid)) {
+        throw std::runtime_error("ABC::buildInparam || Error parsing "
+                                 "Kosloff_Kosloff::gamma_expr_solid.");
+    }
+    if (!parser.compile(abc->mGammaExprFluidStr, abc->mGammaExprFluid)) {
+        throw std::runtime_error("ABC::buildInparam || Error parsing "
+                                 "Kosloff_Kosloff::gamma_expr_fluid.");
     }
     return abc;
 }
@@ -135,18 +168,119 @@ std::string ABC::verbose() const {
         ss << boxSubTitle(0, "Parameters for Kosloff-Kosloff");
         for (const std::string &key: mBoundaryKeys) {
             // data
-            double outer = std::get<0>(mSpongeData.at(key));
-            double span = std::get<1>(mSpongeData.at(key));
-            double U0 = std::get<2>(mSpongeData.at(key));
+            double outer = std::get<0>(mSpongeOuterSpan.at(key));
+            double span = std::get<1>(mSpongeOuterSpan.at(key));
             // verbose
             ss << "  * " << key << ":\n";
             ss << boxEquals(4, 21, "boundary location", outer);
             ss << boxEquals(4, 21, "span of sponge layer", std::abs(span));
             ss << boxEquals(4, 21, "range of sponge layer",
                             range(outer - span, outer));
-            ss << boxEquals(4, 21, "U0 (@ outer boundary)", U0);
         }
+        ss << boxEquals(4, 21, "Gamma expr in solid", mGammaExprSolidStr);
+        ss << boxEquals(4, 21, "Gamma expr in fluid", mGammaExprFluidStr);
     }
     ss << boxBaseline() << "\n\n";
     return ss.str();
+}
+
+// get gamma solid
+double ABC::getGammaSolid(double r, double span) const {
+    // get radial coords and variables from mesh
+    const auto &rval = mExodusMesh->getRadialVariables();
+    double distTol = mExodusMesh->getGlobalVariable("dist_tolerance");
+    
+    // locate r
+    int index0 = -1, index1 = -1;
+    double factor0 = 0., factor1 = 0.;
+    vector_tools::linearInterpSorted(mRadialCoords, r, index0, index1,
+                                     factor0, factor1);
+    
+    // judge type of the gap
+    if (mRadialCoords[index1] - mRadialCoords[index0] > distTol * 4) {
+        // this gap spans an element
+        // do interpolation
+        sVP = (rval.at(mVpKey)(index0) * factor0 +
+               rval.at(mVpKey)(index1) * factor1);
+        sVS = (rval.at(mVsKey)(index0) * factor0 +
+               rval.at(mVsKey)(index1) * factor1);
+        sRHO = (rval.at("RHO")(index0) * factor0 +
+                rval.at("RHO")(index1) * factor1);
+    } else if (rval.at(mVsKey)(index0) > numerical::dEpsilon &&
+               rval.at(mVsKey)(index1) > numerical::dEpsilon) {
+        // this gap is either solid-solid or fake
+        // do average
+        sVP = (rval.at(mVpKey)(index0) + rval.at(mVpKey)(index1)) * 0.5;
+        sVS = (rval.at(mVsKey)(index0) + rval.at(mVsKey)(index1)) * 0.5;
+        sRHO = (rval.at("RHO")(index0) + rval.at("RHO")(index1)) * 0.5;
+    } else if (rval.at(mVsKey)(index0) > numerical::dEpsilon &&
+               rval.at(mVsKey)(index1) < numerical::dEpsilon) {
+        // this gap is solid-fluid
+        // use solid
+        sVP = rval.at(mVpKey)(index0);
+        sVS = rval.at(mVsKey)(index0);
+        sRHO = rval.at("RHO")(index0);
+    } else if (rval.at(mVsKey)(index0) < numerical::dEpsilon &&
+               rval.at(mVsKey)(index1) > numerical::dEpsilon) {
+        // this gap is solid-fluid
+        // use solid
+        sVP = rval.at(mVpKey)(index1);
+        sVS = rval.at(mVsKey)(index1);
+        sRHO = rval.at("RHO")(index1);
+    } else {
+        // this gap is fluid-fluid, impossible
+        throw std::runtime_error("ABC::getGammaSolid || Impossible.");
+    }
+    
+    // evaluate
+    sSPAN = span;
+    return mGammaExprSolid.value();
+}
+
+// get gamma fluid
+double ABC::getGammaFluid(double r, double span) const {
+    // get radial coords and variables from mesh
+    const auto &rval = mExodusMesh->getRadialVariables();
+    double distTol = mExodusMesh->getGlobalVariable("dist_tolerance");
+    
+    // locate r
+    int index0 = -1, index1 = -1;
+    double factor0 = 0., factor1 = 0.;
+    vector_tools::linearInterpSorted(mRadialCoords, r, index0, index1,
+                                     factor0, factor1);
+    
+    // judge type of the gap
+    if (mRadialCoords[index1] - mRadialCoords[index0] > distTol * 4) {
+        // this gap spans an element
+        // do interpolation
+        sVP = (rval.at(mVpKey)(index0) * factor0 +
+               rval.at(mVpKey)(index1) * factor1);
+        sRHO = (rval.at("RHO")(index0) * factor0 +
+                rval.at("RHO")(index1) * factor1);
+    } else if (rval.at(mVsKey)(index0) < numerical::dEpsilon &&
+               rval.at(mVsKey)(index1) < numerical::dEpsilon) {
+        // this gap is fake (fluid-fluid is non-physical)
+        // do average
+        sVP = (rval.at(mVpKey)(index0) + rval.at(mVpKey)(index1)) * 0.5;
+        sRHO = (rval.at("RHO")(index0) + rval.at("RHO")(index1)) * 0.5;
+    } else if (rval.at(mVsKey)(index0) > numerical::dEpsilon &&
+               rval.at(mVsKey)(index1) < numerical::dEpsilon) {
+        // this gap is solid-fluid
+        // use fluid
+        sVP = rval.at(mVpKey)(index1);
+        sRHO = rval.at("RHO")(index1);
+    } else if (rval.at(mVsKey)(index0) < numerical::dEpsilon &&
+               rval.at(mVsKey)(index1) > numerical::dEpsilon) {
+        // this gap is solid-fluid
+        // use fluid
+        sVP = rval.at(mVpKey)(index0);
+        sRHO = rval.at("RHO")(index0);
+    } else {
+        // this gap is solid-solid or fluid-fluid, impossible
+        throw std::runtime_error("ABC::getGammaFluid || Impossible.");
+    }
+    
+    // evaluate
+    sSPAN = span;
+    return mGammaExprFluid.value();
 }

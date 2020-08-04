@@ -191,46 +191,60 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
     
     // sponge ABC
     if (abc.sponge()) {
-        // compute gamma based on the closest absorbing boundary
-        double gammaMax = -1.;
+        // compute maximum gamma among all boundaries
+        double gammaMaxSolid = -1.;
+        double gammaMaxFluid = -1.;
         for (const std::string &key: abc.getBoundaryKeys()) {
-            // data
-            const auto &date = abc.getSpongeData(key);
-            double outer = std::get<0>(date);
-            double span = std::get<1>(date);
-            double U0 = std::get<2>(date);
+            /////////// pattern ///////////
+            // geometry
+            const auto &outerSpan = abc.getSpongeOuterSpan(key);
+            double outer = std::get<0>(outerSpan);
+            double span = std::get<1>(outerSpan);
             // coord of me
             double coord = 0.;
+            double r = 0.;
             if (geodesy::isCartesian()) {
                 coord = (key == "RIGHT" ? mCoords(0) : mCoords(1));
+                r = mCoords(1);
             } else {
                 const eigen::DCol2 &rt = geodesy::sz2rtheta(mCoords, false);
                 coord = (key == "RIGHT" ? rt(1) : rt(0));
+                r = rt(0);
             }
             // gamma
             double distToOuter = 1. / span * (outer - coord);
             if (distToOuter > 1.) {
-                // point is inside the inner boundary, skip
+                // point is inside the inner boundary, skip;
                 // there is no need to check distToOuter < 0.
                 continue;
             }
             static const double piHalf = numerical::dPi / 2.;
-            double gamma = U0 * pow(cos(piHalf * distToOuter), 2.);
-            // use the max (closest)
-            gammaMax = std::max(gamma, gammaMax);
-        }
-        // release
-        if (gammaMax > numerical::dEpsilon) {
+            double pattern = pow(cos(piHalf * distToOuter), 2.);
+            
+            /////////// gamma ///////////
+            // for theta, change span to arc-length
+            if (!geodesy::isCartesian() && key == "RIGHT") {
+                span *= r;
+            }
             if (mSolidPoint) {
-                std::unique_ptr<const SpongeSolid> sponge =
-                std::make_unique<const SpongeSolid>(mSolidPoint, gammaMax);
-                domain.getAbsorbingBoundary()->addSpongeSolid(sponge);
+                double gamma = pattern * abc.getGammaSolid(r, std::abs(span));
+                gammaMaxSolid = std::max(gamma, gammaMaxSolid);
             }
             if (mFluidPoint) {
-                std::unique_ptr<const SpongeFluid> sponge =
-                std::make_unique<const SpongeFluid>(mFluidPoint, gammaMax);
-                domain.getAbsorbingBoundary()->addSpongeFluid(sponge);
+                double gamma = pattern * abc.getGammaFluid(r, std::abs(span));
+                gammaMaxFluid = std::max(gamma, gammaMaxFluid);
             }
+        }
+        // release
+        if (mSolidPoint && gammaMaxSolid > numerical::dEpsilon) {
+            std::unique_ptr<const SpongeSolid> sponge =
+            std::make_unique<const SpongeSolid>(mSolidPoint, gammaMaxSolid);
+            domain.getAbsorbingBoundary()->addSpongeSolid(sponge);
+        }
+        if (mFluidPoint && gammaMaxFluid > numerical::dEpsilon) {
+            std::unique_ptr<const SpongeFluid> sponge =
+            std::make_unique<const SpongeFluid>(mFluidPoint, gammaMaxFluid);
+            domain.getAbsorbingBoundary()->addSpongeFluid(sponge);
         }
     }
     
@@ -246,7 +260,8 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
     
     // fluid surface without ABC
     if (mFluidPoint && mSurface &&
-        mClaytonABC.find("TOP") == mClaytonABC.end()) {
+        std::find(abc.getBoundaryKeys().begin(), abc.getBoundaryKeys().end(),
+                  "TOP") == abc.getBoundaryKeys().end()) {
         domain.getFluidSurfaceBoundary()->addPoint(mFluidPoint);
     }
     
