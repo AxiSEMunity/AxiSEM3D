@@ -239,7 +239,12 @@ double ABC::getGammaSolid(double r, double span) const {
     
     // evaluate
     sSPAN = span;
-    return mGammaExprSolid.value();
+    double gamma = mGammaExprSolid.value();
+    if (gamma < 0.) {
+        throw std::runtime_error("ABC::getGammaSolid || Nagative γ yeilded "
+                                 "from Kosloff_Kosloff:gamma_expr_solid.");
+    }
+    return gamma;
 }
 
 // get gamma fluid
@@ -291,5 +296,10 @@ double ABC::getGammaFluid(double r, double span) const {
     
     // evaluate
     sSPAN = span;
-    return mGammaExprFluid.value();
+    double gamma = mGammaExprFluid.value();
+    if (gamma < 0.) {
+        throw std::runtime_error("ABC::getGammaFluid || Nagative γ yeilded "
+                                 "from Kosloff_Kosloff:gamma_expr_fluid.");
+    }
+    return gamma;
 }
