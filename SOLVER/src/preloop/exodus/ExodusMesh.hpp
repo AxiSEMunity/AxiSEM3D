@@ -267,8 +267,8 @@ public:
                         getGlobalVariable("dist_tolerance"));
             }
         }
-        throw std::runtime_error("ExodusMesh::getSolidSurface || "
-                                 "The model constains pure fluid.");
+        // pure fluid, return a level below mesh bottom
+        return getMeshBottom() - getGlobalVariable("dist_tolerance") * 1000.;
     }
     
     // mesh bottom

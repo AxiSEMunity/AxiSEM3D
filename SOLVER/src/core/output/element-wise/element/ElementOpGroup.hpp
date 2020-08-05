@@ -79,7 +79,11 @@ public:
             for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
                 maxNu_1 = std::max(maxNu_1, eop->getNu_1());
             }
-            // allocate
+            // no elements
+            if (maxNu_1 < 0) {
+                return;
+            }
+            // allocate and compute
             mExpIAlphaPhi = eigen::CMatXX::Zero(maxNu_1, nphis);
             for (int iphi = 0; iphi < nphis; iphi++) {
                 eigen::CColX temp(maxNu_1);
