@@ -77,6 +77,10 @@ namespace eigen_tools {
     // compute 2 * exp(I * alpha * phi)
     template <typename CColX, typename T = typename CColX::Scalar::value_type>
     void computeTwoExpIAlphaPhi(int nu_1, double phi, CColX &twoExpIAlphaPhi) {
+        if (nu_1 <= 0) {
+            // nothing
+            return;
+        }
         // no factor two on order zero
         twoExpIAlphaPhi(0) = 1.;
         // non-zero orders

@@ -75,13 +75,9 @@ public:
         int nphis = (int)mPhis.size();
         if (nphis > 0) {
             // find max nu_1
-            int maxNu_1 = -1;
+            int maxNu_1 = 0;
             for (const std::unique_ptr<ElementOpT> &eop: mElementOps) {
                 maxNu_1 = std::max(maxNu_1, eop->getNu_1());
-            }
-            // no elements
-            if (maxNu_1 < 0) {
-                return;
             }
             // allocate and compute
             mExpIAlphaPhi = eigen::CMatXX::Zero(maxNu_1, nphis);
