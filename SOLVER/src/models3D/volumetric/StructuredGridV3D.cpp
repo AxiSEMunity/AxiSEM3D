@@ -195,16 +195,15 @@ bool StructuredGridV3D::getProperties(const eigen::DMatX3 &spz,
         
         // point loop
         for (int ipnt = 0; ipnt < nCardinals; ipnt++) {
+            static eigen::DMat66 inCijkl, outCijkl;
             // copy input
-            eigen::DMat66 inCijkl = eigen::DMat66::Zero();
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 6; j++) {
                     inCijkl(i, j) = propValues(ipnt, (*mIndexCIJ)(i, j));
                 }
             }
             // transform
-            const eigen::DMat66 &outCijkl =
-            bondTransformation(inCijkl, 0., 0., angle(ipnt));
+            bondTransformation(inCijkl, 0., 0., angle(ipnt), outCijkl);
             // copy output
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 6; j++) {

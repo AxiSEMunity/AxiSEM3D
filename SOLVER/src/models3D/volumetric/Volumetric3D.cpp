@@ -136,18 +136,18 @@ setPropertiesToQuad(const std::vector<std::string> &propKeys,
 }
 
 // Bond transformation for rotating Cijkl
-eigen::DMat66 Volumetric3D::bondTransformation(const eigen::DMat66 &inCijkl,
-                                               double alpha, double beta,
-                                               double gamma) {
+void Volumetric3D::bondTransformation(const eigen::DMat66 &inCijkl,
+                                      double alpha, double beta, double gamma,
+                                      eigen::DMat66 &outCijkl) {
     // R
-    eigen::DMat33 R1, R2, R3, R;
+    static eigen::DMat33 R1, R2, R3, R;
     R1 << 1., 0., 0., 0., cos(alpha), sin(alpha), 0., -sin(alpha), cos(alpha);
     R2 << cos(beta), 0., sin(beta), 0., 1., 0., -sin(beta), 0, cos(beta);
     R3 << cos(gamma), sin(gamma), 0., -sin(gamma), cos(gamma), 0., 0., 0., 1.;
     R = R1 * R2 * R3;
     
     // K
-    eigen::DMat33 K1, K2, K3, K4;
+    static eigen::DMat33 K1, K2, K3, K4;
     K1.array() = R.array().pow(2.);
     K2 <<
     R(0, 1) * R(0, 2), R(0, 2) * R(0, 0), R(0, 0) * R(0, 1),
@@ -167,14 +167,14 @@ eigen::DMat66 Volumetric3D::bondTransformation(const eigen::DMat66 &inCijkl,
     R(0, 1) * R(1, 2) + R(0, 2) * R(1, 1),
     R(0, 2) * R(1, 0) + R(0, 0) * R(1, 2),
     R(0, 0) * R(1, 1) + R(0, 1) * R(1, 0);
-    eigen::DMat66 K;
+    static eigen::DMat66 K;
     K.block(0, 0, 3, 3) = K1;
     K.block(0, 3, 3, 3) = 2. * K2;
     K.block(3, 0, 3, 3) = K3;
     K.block(3, 3, 3, 3) = K4;
     
     // rotation
-    return K * inCijkl * K.transpose();
+    outCijkl = K * inCijkl * K.transpose();
 }
 
 

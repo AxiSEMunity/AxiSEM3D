@@ -69,9 +69,9 @@ protected:
     
     ////////////////////////////// static //////////////////////////////
     // Bond transformation for rotating Cijkl
-    static eigen::DMat66 bondTransformation(const eigen::DMat66 &inCijkl,
-                                            double alpha, double beta,
-                                            double gamma);
+    static void bondTransformation(const eigen::DMat66 &inCijkl,
+                                   double alpha, double beta, double gamma,
+                                   eigen::DMat66 &outCijkl);
     
 public:
     // build from inparam
