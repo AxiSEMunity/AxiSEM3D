@@ -79,7 +79,7 @@ buildSE_Model(const ExodusMesh &exodusMesh,
               const std::string &stageKey);
 
 // compute dt
-double computeDt(const SE_Model &sem);
+double computeDt(const SE_Model &sem, const ABC &abc);
 
 // attenuation
 std::unique_ptr<const AttBuilder>

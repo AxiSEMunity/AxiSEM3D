@@ -59,7 +59,7 @@ public:
                   std::vector<GLLPoint> &GLLPoints) const;
     
     // compute dt
-    double computeDt(double courant) const;
+    double computeDt(double courant, const ABC &abc) const;
     
     // get nodal sz
     const eigen::DMat24 &getNodalSZ() const {

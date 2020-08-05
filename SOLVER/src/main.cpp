@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
         
         // dt
         timer::gPreloopTimer.begin("Time step", '*');
-        double dt = computeDt(*sem);
+        double dt = computeDt(*sem, *abc);
         timer::gPreloopTimer.ended("Time step", '*');
         
         // attenuation
@@ -418,13 +418,13 @@ buildSE_Model(const ExodusMesh &exodusMesh,
 }
 
 // compute dt
-double computeDt(const SE_Model &sem) {
+double computeDt(const SE_Model &sem, const ABC &abc) {
     // get courant
     double courant =
     inparam::gInparamSource.getWithBounds("time_axis:Courant_number", 0.0);
     // automatically determined by mesh
     eigen::DCol2 sz;
-    double dtMesh = sem.computeDt(courant, sz);
+    double dtMesh = sem.computeDt(courant, abc, sz);
     // enforced
     double dtEnforce = inparam::gInparamSource.
     getWithOptions<double>("time_axis:enforced_dt", {{"NONE", -1.}});

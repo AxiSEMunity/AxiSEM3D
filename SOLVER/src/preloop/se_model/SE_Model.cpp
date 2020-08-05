@@ -173,11 +173,12 @@ mDistToleranceMesh(exodusMesh.getGlobalVariable("dist_tolerance")) {
 }
 
 // step 2: get dt for attenuation
-double SE_Model::computeDt(double courant, eigen::DCol2 &sz) const {
+double SE_Model::
+computeDt(double courant, const ABC &abc, eigen::DCol2 &sz) const {
     // minimum dt over quads
     double dtMin = std::numeric_limits<double>::max();
     for (const Quad &quad: mQuads) {
-        double dt = quad.computeDt(courant);
+        double dt = quad.computeDt(courant, abc);
         if (dtMin > dt) {
             dtMin = dt;
             sz = quad.getNodalSZ().rowwise().mean();

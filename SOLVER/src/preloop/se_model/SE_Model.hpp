@@ -44,7 +44,7 @@ public:
              const std::vector<std::shared_ptr<const Model3D>> &models3D);
     
     // step 2: get dt for attenuation
-    double computeDt(double courant, eigen::DCol2 &sz) const;
+    double computeDt(double courant, const ABC &abc, eigen::DCol2 &sz) const;
     
     // step 3: release to domain
     void release(const ABC &abc, const LocalMesh &localMesh,

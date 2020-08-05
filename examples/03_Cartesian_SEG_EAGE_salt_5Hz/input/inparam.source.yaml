@@ -27,7 +27,7 @@ time_axis:
     # what: the Courant number for determining Δt by mesh
     # type: double
     # note: Δt increases with this number
-    Courant_number: 0.3
+    Courant_number: 0.6
 
     # what: time integrator
     # type: string

@@ -188,7 +188,7 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
 }
 
 // compute dt
-double Quad::computeDt(double courant) const {
+double Quad::computeDt(double courant, const ABC &abc) const {
     // get vp
     const eigen::DColX &vmaxNr =
     mMaterial->getMaxVelocity().rowwise().maxCoeff();
@@ -244,6 +244,27 @@ double Quad::computeDt(double courant) const {
         }
         // dt
         dt = std::min(dt, hmin / vmax);
+    }
+    
+    // solid-fluid and clayton BCs are numerically sensitive
+    bool decreaseDtForBC = false;
+    // solid-fluid
+    if (mEdgesOnBoundary.at("SOLID_FLUID") != -1) {
+        decreaseDtForBC = true;
+    }
+    // clayton ABC
+    if (abc.clayton()) {
+        for (const std::string &key: abc.getBoundaryKeys()) {
+            if (mEdgesOnBoundary.at(key) != -1) {
+                decreaseDtForBC = true;
+                break;
+            }
+        }
+    }
+    // decrease DT a little bit
+    if (decreaseDtForBC) {
+        // 0.915 is empirical
+        dt *= 0.915;
     }
     
     // courant
