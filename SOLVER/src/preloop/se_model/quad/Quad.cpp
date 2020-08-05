@@ -122,7 +122,8 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
         // add normals to points
         for (int ip = 0; ip < spectral::nPED; ip++) {
             int igll = localMesh.mElementGLL(mLocalTag, ipnts[ip]);
-            GLLPoints[igll].addNormalSF(nSF[ip]);
+            // normal must point from fluid to solid
+            GLLPoints[igll].addNormalSF(-nSF[ip]);
         }
     }
     
