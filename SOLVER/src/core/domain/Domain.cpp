@@ -308,18 +308,19 @@ void Domain::computeStiffness() const {
 }
 
 // boundary conditions before assembling stiffness
+// * Clayton ABC
 // * solid-fluild
 void Domain::applyBC_BeforeAssemblingStiff() const {
+    // the following order matters!
+    mAbsorbingBoundary->applyClayton();
     mSolidFluidBoundary->apply();
 }
 
 // boundary conditions after assembling stiffness
-// * Clayton ABC
 // * axial
 // * fluid surface
 void Domain::applyBC_AfterAssemblingStiff() const {
     // the following order matters!
-    mAbsorbingBoundary->applyClayton();
     mAxialBoundary->apply();
     mFluidSurfaceBoundary->apply();
 }
