@@ -209,6 +209,9 @@ private:
     
     /////////////////////////// data ///////////////////////////
 private:
+    // fluid
+    bool mFluid;
+    
     // properties
     std::map<std::string, NodalPhysicalProperty> mProperties;
 };

@@ -44,6 +44,7 @@ Material::Material(const ExodusMesh &exodusMesh, const eigen::DMat24 &nodalSZ,
     double r1 = radialCoords[index1] + distTol;
     
     // loop over all variables
+    mFluid = false;
     for (auto it = radialVariables.begin(); it != radialVariables.end(); ++it) {
         // end points
         const eigen::DColX &rvals = it->second;
@@ -54,6 +55,29 @@ Material::Material(const ExodusMesh &exodusMesh, const eigen::DMat24 &nodalSZ,
         (v1 - v0) / (r1 - r0) * (r.array() - r0) + v0;
         // add to map
         mProperties.insert({it->first, NodalPhysicalProperty(nvals, axial)});
+        // check fluid
+        if (it->first == "VS" || it->first == "VSV" || it->first == "VSH") {
+            if (nvals.maxCoeff() < numerical::dEpsilon) {
+                mFluid = true;
+            }
+        }
+    }
+    
+    // reduce to fluid
+    if (mFluid) {
+        // get vp and rho
+        const eigen::DRow4 &vp = (mProperties.find("VPV") != mProperties.end()
+                                  ? mProperties.at("VPV").getNodalData()
+                                  : mProperties.at("VP").getNodalData());
+        const eigen::DRow4 &rho = mProperties.at("RHO").getNodalData();
+        // clear all properties
+        mProperties.clear();
+        // save vp and rho
+        mProperties.insert({"VP", NodalPhysicalProperty(vp, axial)});
+        mProperties.insert({"RHO", NodalPhysicalProperty(rho, axial)});
+        // still keep vs for Clayton
+        mProperties.insert({"VS", NodalPhysicalProperty(eigen::DRow4::Zero(),
+                                                        axial)});
     }
     
     // reduce TISO to ISO if possible
@@ -85,6 +109,13 @@ void Material::addProperty3D(const std::string &propKey,
                              const Volumetric3D::ReferenceKind &refKind,
                              const eigen::arN_IColX &inScope,
                              const eigen::arN_DColX &propValue) {
+    // check fluid
+    if (mFluid && !(propKey == "VP" || propKey == "RHO")) {
+        throw std::runtime_error("Material::getProperty || "
+                                 "Setting " + propKey + " is prohibited "
+                                 "in fluid media.");
+    }
+    
     // evolve anisotropy
     // ISO -> TISO
     if (currentAnisotropy() == AnisotropyType::ISO &&
@@ -245,6 +276,7 @@ eigen::DMatXN Material::getMaxVelocity() const {
         op1D_3D::regularize1D<eigen::DMatXN>({std::ref(vpv), std::ref(vph)});
         return vpv.cwiseMax(vph);
     } else {
+        // include fluid case
         return getElemental("VP");
     }
 }
@@ -253,6 +285,12 @@ eigen::DMatXN Material::getMaxVelocity() const {
 eigen::arN_DColX Material::getMass(const eigen::DRowN &integralFactor,
                                    const eigen::arN_DColX &jacobianPRT,
                                    bool fluid) const {
+    // check fluid
+    if (fluid != mFluid) {
+        throw std::runtime_error("Material::getMass || "
+                                 "Incompatible solid/fluid flags.");
+    }
+    
     // form density
     eigen::arN_DColX mass;
     if (fluid) {
@@ -286,6 +324,11 @@ eigen::arN_DColX Material::getMass(const eigen::DRowN &integralFactor,
 
 // create Acoustic
 std::unique_ptr<Acoustic> Material::createAcoustic() const {
+    // check fluid
+    if (!mFluid) {
+        throw std::runtime_error("Material::createAcoustic || "
+                                 "Incompatible solid/fluid flags.");
+    }
     // K = 1 / rho
     const eigen::DMatXN &K = getElemental("RHO").cwiseInverse();
     // 1D or 3D
@@ -300,6 +343,11 @@ std::unique_ptr<Acoustic> Material::createAcoustic() const {
 std::unique_ptr<Elastic> Material::
 createElastic(const std::unique_ptr<const AttBuilder> &attBuilder,
               const eigen::DRow4 &weightsCG4) const {
+    // check fluid
+    if (mFluid) {
+        throw std::runtime_error("Material::createElastic || "
+                                 "Incompatible solid/fluid flags.");
+    }
     // three types of anisotropy
     if (currentAnisotropy() == AnisotropyType::ANISO) {
         return createAnisotropic(attBuilder, weightsCG4);
