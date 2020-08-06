@@ -47,8 +47,10 @@ os.system('cp input/inparam.*.yaml %s' % input_dir)
 
 # source
 replace_in_file(input_dir + '/inparam.source.yaml',
-                ['list_of_sources: []'],
-                ['list_of_sources:\n' + item_source_VIR])
+                ['list_of_sources: []',
+                 'Courant_number: 0.6'],
+                ['list_of_sources:\n' + item_source_VIR,
+                 'Courant_number: 1.0'])
 
 # output
 item_stations_US = replace_in_string(item_stations_GSN,
@@ -98,8 +100,8 @@ replace_in_file(input_dir + '/inparam.source.yaml',
                 ['list_of_sources: []'],
                 ['list_of_sources:\n' + item_source_mono])
 replace_in_file(input_dir + '/inparam.source.yaml',
-                ['record_length: 1800.'],
-                ['record_length: 10.'])
+                ['record_length: 1800.', 'Courant_number: 0.6'],
+                ['record_length: 10.', 'Courant_number: 0.6'])
                 
 # output
 item_elements_inplane = replace_in_string(item_elements_mantle,
@@ -139,7 +141,7 @@ input3D_dir = input_dir + '3D'
 os.system('cp %s/inparam.*.yaml %s' % (input_dir, input3D_dir))
 
 # model
-item_3D_model_list = read(input3D_dir + '/list_of_3D_models.yaml')[:-1]
+item_3D_model_list = read('input/ex03_list_of_3D_models.yaml')[:-1]
 replace_in_file(input3D_dir + '/inparam.model.yaml',
                 ['list_of_3D_models: []'],
                 ['list_of_3D_models:\n' + item_3D_model_list])
@@ -148,6 +150,11 @@ replace_in_file(input3D_dir + '/inparam.model.yaml',
 replace_in_file(input3D_dir + '/inparam.nr.yaml',
                 ['constant: 1'],
                 ['constant: 50'])
+                
+# source
+replace_in_file(input3D_dir + '/inparam.source.yaml',
+                ['Courant_number: 0.6'],
+                ['Courant_number: 0.5'])
                 
 # output
 replace_in_file(input3D_dir + '/inparam.output.yaml',

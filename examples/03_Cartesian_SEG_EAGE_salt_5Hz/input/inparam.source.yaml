@@ -26,7 +26,12 @@ time_axis:
 
     # what: the Courant number for determining Δt by mesh
     # type: double
-    # note: Δt increases with this number
+    # note: 1) Δt increases with the Courant number; decrease it when
+    #          numerical instability occurs
+    #       2) [safe] 0.5 <===> 1.0 [aggressive]; 0.6~0.7 normally works
+    #       3) if instability occurs with Courant_number < 0.3
+    #          (for a double-precision build), it is likely that one of
+    #          the input models has something wrong
     Courant_number: 0.6
 
     # what: time integrator
