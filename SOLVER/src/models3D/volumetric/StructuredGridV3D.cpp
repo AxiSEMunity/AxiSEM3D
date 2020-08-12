@@ -105,8 +105,8 @@ mElementCenter(center), mSuperOnly(superOnly) {
     // data
     if (mSuperOnly) {
         // constructor of StructuredGrid uses root + broadcast to read
-        // right: mpi::super() after enterSuper()
-        // wrong: mpi::root() after enterInfer()
+        // right: mpi::super() after mpi::enterSuper()
+        // wrong: mpi::root() after mpi::enterInfer()
         mpi::enterSuper();
         if (mpi::super()) {
             initGrid();
