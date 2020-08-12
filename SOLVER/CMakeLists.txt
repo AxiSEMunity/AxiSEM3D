@@ -47,11 +47,10 @@ set(USE_PARALLEL_NETCDF         ${par_netcdf})
 set(NPOL_SEM                    ${npol})
 
 # solver precision
-# using double precision doubles runtime memory and output size, but
+# using double precision doubles runtime memory and output size but
 # affects performance only slightly on a modern 64-bit architecture;
-# sometimes it can promote performance by enhancing numerical stability
-# (by increasing time step). Use -Ddouble=true if you are not concerned
-# by memory or storage.
+# sometimes it can promote performance by enhancing numerical stability;
+# use -Ddouble=true if you are not concerned by memory or storage.
 set(USE_DOUBLE                  ${double})
 
 
