@@ -214,7 +214,7 @@ void Material::finished3D() {
         const NodalPhysicalProperty &mu =
         (C11 + C22 + C33 - (C12 + C23 + C13) + (C44 + C55 + C66) * 3.) / 15.;
         // vp, vs
-        mProperties.insert({"VP", (kp / rho).pow(.5)});
+        mProperties.insert({"VP", ((kp + mu * (4. / 3.))/ rho).pow(.5)});
         mProperties.insert({"VS", (mu / rho).pow(.5)});
     }
     
@@ -254,22 +254,14 @@ eigen::DMatXN Material::getMaxVelocity() const {
         // get density and Cijkl
         eigen::DMatXN rho = getElemental("RHO");
         eigen::DMatXN C11 = getElemental("C11");
-        eigen::DMatXN C12 = getElemental("C12");
-        eigen::DMatXN C13 = getElemental("C13");
         eigen::DMatXN C22 = getElemental("C22");
-        eigen::DMatXN C23 = getElemental("C23");
         eigen::DMatXN C33 = getElemental("C33");
         op1D_3D::regularize1D<eigen::DMatXN>({std::ref(rho),
-            std::ref(C11), std::ref(C12), std::ref(C13),
-            std::ref(C22), std::ref(C23), std::ref(C33)});
+            std::ref(C11), std::ref(C22), std::ref(C33)});
         // max of C11, C22, C33
-        const eigen::DMatXN &major = C11.cwiseMax(C22).cwiseMax(C33);
-        // max of C12, C13, C23
-        const eigen::DMatXN &minor = C12.cwiseMax(C13).cwiseMax(C23);
-        // max kappa
-        const eigen::DMatXN &kappa = (major + 2. * minor) / 3.;
-        // vp = sqrt(kappa / rho)
-        return kappa.cwiseQuotient(rho).cwiseSqrt();
+        const eigen::DMatXN &Cmax = C11.cwiseMax(C22).cwiseMax(C33);
+        // vp = sqrt(Cmax / rho)
+        return Cmax.cwiseQuotient(rho).cwiseSqrt();
     } else if (currentAnisotropy() == AnisotropyType::TISO) {
         eigen::DMatXN vpv = getElemental("VPV");
         eigen::DMatXN vph = getElemental("VPH");
