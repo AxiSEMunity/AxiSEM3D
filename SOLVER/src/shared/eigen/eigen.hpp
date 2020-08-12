@@ -21,6 +21,9 @@
 // disable static alignment to enhance code portability
 #define EIGEN_MAX_STATIC_ALIGN_BYTES 0
 
+// initialize matrix with NAN
+#define EIGEN_INITIALIZE_MATRICES_BY_NAN
+
 ///////////////// include /////////////////
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Weverything"
