@@ -27,6 +27,12 @@ namespace mpi {
 #endif
         // # proc per group
         int iNumProcPerGroup = 1;
+        
+        // number of groups
+        int iNumGroups = -1;
+        
+        // am I a super proc in my group
+        bool iSuper = true;
     }
     
     
@@ -61,15 +67,64 @@ namespace mpi {
         nprocPerGroup = std::min(nprocPerGroup, nproc());
         nprocPerGroup = std::max(nprocPerGroup, 1);
         
-        // need to remember this number
-        internal::iNumProcPerGroup = nprocPerGroup;
+        // get node id
+        char charNID[MPI_MAX_PROCESSOR_NAME] = "Node";
+        int lenNID = 4;
+#ifndef _SERIAL_BUILD
+        MPI_Get_processor_name(charNID, &lenNID);
+#endif
+        std::string nodeID(charNID);
         
+        // assemble node id and count number of procs for each id
+        std::vector<std::string> nodeIDs;
+        gather(nodeID, nodeIDs, MPI_ALL);
+        std::map<std::string, int> nodeID_NP;
+        nodeID_NP.insert({nodeID, 1});
+        aggregate(nodeID_NP, MPI_ALL, MPI_SUM);
+        
+        // find starting group index for each id
+        int curGroupIndex = 0;
+        internal::iNumProcPerGroup = 0;
+        std::map<std::string, int> nodeID_StartG;
+        for (auto it = nodeID_NP.begin(); it != nodeID_NP.end(); ++it) {
+            nodeID_StartG.insert({it->first, curGroupIndex});
+            curGroupIndex += it->second / nprocPerGroup;
+            if (it->second % nprocPerGroup > 0) {
+                curGroupIndex += 1;
+            }
+            // find max number of procs on node
+            internal::iNumProcPerGroup =
+            std::max(internal::iNumProcPerGroup, it->second);
+        }
+        internal::iNumProcPerGroup = std::min(internal::iNumProcPerGroup,
+                                              nprocPerGroup);
+        
+        // total number of groups
+        internal::iNumGroups = curGroupIndex;
+        
+        // search my index in this id
+        int myIndexInID = 0;
+        for (int irank = 0; irank < rank(); irank++) {
+            if (nodeIDs[irank] == nodeID) {
+                myIndexInID += 1;
+            }
+        }
+        
+        // my group index
+        int myGroupIndex = (myIndexInID / internal::iNumProcPerGroup +
+                            nodeID_StartG.at(nodeID));
+        int myIndexInGroup = myIndexInID % internal::iNumProcPerGroup;
+        
+        // super
+        internal::iSuper = (myIndexInGroup == 0);
+        
+        // split MPI comm
 #ifndef _SERIAL_BUILD
         // super: discontinuous in rank
-        MPI_Comm_split(MPI_COMM_WORLD, rank() % nprocPerGroup, rank(),
+        MPI_Comm_split(MPI_COMM_WORLD, myIndexInGroup, rank(),
                        &internal::iCommSuper);
         // infer: continuous in rank
-        MPI_Comm_split(MPI_COMM_WORLD, rank() / nprocPerGroup, rank(),
+        MPI_Comm_split(MPI_COMM_WORLD, myGroupIndex, rank(),
                        &internal::iCommInfer);
 #endif
     }
@@ -223,7 +278,7 @@ namespace mpi {
         ss << bstring::boxTitle("MPI");
 #ifndef _SERIAL_BUILD
         ss << bstring::boxEquals(0, 22, "# processors", nproc());
-        ss << bstring::boxEquals(0, 22, "# MPI groups", ngroup());
+        ss << bstring::boxEquals(0, 22, "# MPI groups", internal::iNumGroups);
         ss << bstring::boxEquals(0, 22, "# processors per group",
                                  internal::iNumProcPerGroup);
 #else

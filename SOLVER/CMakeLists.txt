@@ -47,9 +47,11 @@ set(USE_PARALLEL_NETCDF         ${par_netcdf})
 set(NPOL_SEM                    ${npol})
 
 # solver precision
-# using double precision increases memory usage but barely affects
-# solver performance; rather, it can promote performance by enhancing
-# numerical stability (increasing time step) sometimes
+# using double precision doubles runtime memory and output size, but
+# affects performance only slightly on a modern 64-bit architecture;
+# sometimes it can promote performance by enhancing numerical stability
+# (by increasing time step). Use -Ddouble=true if you are not concerned
+# by memory or storage.
 set(USE_DOUBLE                  ${double})
 
 
@@ -83,7 +85,7 @@ setDefault(NETCDF_ROOT                 "<empty>")
 setDefault(HDF5_ROOT                   "<empty>")
 setDefault(USE_PARALLEL_NETCDF         false)
 setDefault(NPOL_SEM                    4)
-setDefault(USE_DOUBLE                  true)
+setDefault(USE_DOUBLE                  false)
 
 
 ################# cmake setup #################

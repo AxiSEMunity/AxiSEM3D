@@ -45,6 +45,11 @@ namespace mpi {
         // # proc per group
         extern int iNumProcPerGroup;
         
+        // number of groups
+        extern int iNumGroups;
+        
+        // am I a super proc in my group
+        extern bool iSuper;
         
         //////// data type ////////
 #ifndef _SERIAL_BUILD
@@ -180,14 +185,9 @@ namespace mpi {
         return rank() == 0;
     }
     
-    // Am I a super proc in my group?
+    // am I a super proc in my group
     inline bool super() {
-        return rankWorld() % internal::iNumProcPerGroup == 0;
-    }
-    
-    // number of groups
-    inline int ngroup() {
-        return (nprocWorld() - 1) / internal::iNumProcPerGroup + 1;
+        return internal::iSuper;
     }
     
     // barrier
