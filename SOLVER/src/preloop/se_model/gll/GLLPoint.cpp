@@ -152,39 +152,39 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
             const eigen::DColX &rhoVs = std::get<3>(*itv);
             // fluid
             if (fluid) {
-                std::unique_ptr<const ClaytonFluid> abc = nullptr;
+                std::unique_ptr<const ClaytonFluid> clayton = nullptr;
                 if (nABC.rows() == 1 && rhoVp.rows() == 1) {
                     // 1D fluid
-                    abc = std::make_unique<const ClaytonFluid1D>
+                    clayton = std::make_unique<const ClaytonFluid1D>
                     (mFluidPoint, rhoVp(0), nABC.row(0).norm());
                 } else {
                     // 3D fluid
-                    abc = std::make_unique<const ClaytonFluid3D>
+                    clayton = std::make_unique<const ClaytonFluid3D>
                     (mFluidPoint, op1D_3D::to3D(rhoVp, mNr),
                      op1D_3D::to3D(nABC, mNr).rowwise().norm());
                 }
-                domain.getAbsorbingBoundary()->addClaytonFluid(abc);
+                domain.getAbsorbingBoundary()->addClaytonFluid(clayton);
             } else {
-                std::unique_ptr<const ClaytonSolid> abc = nullptr;
+                std::unique_ptr<const ClaytonSolid> clayton = nullptr;
                 if (nABC.rows() == 1 && rhoVp.rows() == 1 &&
                     rhoVs.rows() == 1) {
                     // 1D solid
                     eigen::DCol2 nsz;
                     nsz << nABC(0, 0), nABC(0, 2);
                     const eigen::DCol2 &nrt = geodesy::sz2rtheta(nsz, false);
-                    abc = std::make_unique<const ClaytonSolid1D>
+                    clayton = std::make_unique<const ClaytonSolid1D>
                     (mSolidPoint, rhoVp(0), rhoVs(0), nrt(0), nrt(1));
                 } else {
                     // 3D solid
                     const eigen::DColX &area = nABC.rowwise().norm();
                     const eigen::DMatX3 &unitNormal =
                     nABC.array().colwise() / area.array();
-                    abc = std::make_unique<const ClaytonSolid3D>
+                    clayton = std::make_unique<const ClaytonSolid3D>
                     (mSolidPoint,
                      op1D_3D::to3D(rhoVp, mNr), op1D_3D::to3D(rhoVs, mNr),
                      op1D_3D::to3D(area, mNr), op1D_3D::to3D(unitNormal, mNr));
                 }
-                domain.getAbsorbingBoundary()->addClaytonSolid(abc);
+                domain.getAbsorbingBoundary()->addClaytonSolid(clayton);
             }
         }
     }
