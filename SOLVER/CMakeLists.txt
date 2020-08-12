@@ -66,7 +66,7 @@ set(USE_DOUBLE                  ${double})
 ################# set default values #################
 # macro to set default
 macro(setDefault var val)
-if(NOT ${var})
+if(NOT DEFINED ${var})
 set(${var} ${val})
 endif()
 endmacro()
@@ -88,7 +88,7 @@ setDefault(USE_DOUBLE                  true)
 
 ################# cmake setup #################
 # use "Release" as the default build type
-if(NOT CMAKE_BUILD_TYPE)
+if(NOT DEFINED CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
 endif()
 
@@ -186,7 +186,7 @@ endif()
 endif()
 
 # hdf5
-if(hdf5)
+if(DEFINED hdf5)
 set(ENV{HDF5_ROOT} ${HDF5_ROOT})
 find_package(HDF5 COMPONENTS C COMPONENTS HL REQUIRED)
 endif()
@@ -242,7 +242,7 @@ set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
 
 
 ################# linking #################
-if(hdf5)
+if(DEFINED hdf5)
 target_link_libraries(
 axisem3d
 ${MPI_C_LIBRARIES}
@@ -325,7 +325,7 @@ msglist("       found include paths: " "${NETCDF_INCLUDES}")
 msglist("       linked to libraries: " "${NETCDF_LIBRARIES}")
 msglist("       use parallel NetCDF: " "${USE_PARALLEL_NETCDF}")
 message("     * HDF5")
-if(NOT hdf5)
+if(NOT DEFINED hdf5)
 message("       Linking to HDF5 is disabled by omitting -Dhdf5.")
 else()
 msglist("       user-specified root: " "${HDF5_ROOT}")
