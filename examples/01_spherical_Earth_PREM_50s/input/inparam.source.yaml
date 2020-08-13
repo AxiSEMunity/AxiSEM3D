@@ -29,9 +29,9 @@ time_axis:
     # note: 1) Δt increases with the Courant number; decrease it when
     #          numerical instability occurs
     #       2) [safe] 0.5 <===> 1.0 [aggressive]; 0.6~0.7 normally works
-    #       3) if instability occurs with Courant_number < 0.3
-    #          (for a double-precision build), it is likely that one of
-    #          the input models has something wrong
+    #       3) if Courant_number < 0.3 but instability still occurs,
+    #          it is likely to be an issue caused by an input 3D model
+    #          (e.g., mislocation near a model boundary)
     Courant_number: 1.0
 
     # what: time integrator

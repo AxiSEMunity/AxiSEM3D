@@ -247,25 +247,22 @@ double Quad::computeDt(double courant, const ABC &abc) const {
     }
     
     // solid-fluid and clayton BCs are numerically sensitive
-    bool decreaseDtForBC = false;
+    double factorDtForBC = 1.;
     // solid-fluid
     if (mEdgesOnBoundary.at("SOLID_FLUID") != -1) {
-        decreaseDtForBC = true;
+        factorDtForBC = .9;
     }
     // clayton ABC
     if (abc.clayton()) {
         for (const std::string &key: abc.getBoundaryKeys()) {
             if (mEdgesOnBoundary.at(key) != -1) {
-                decreaseDtForBC = true;
+                factorDtForBC = .5;
                 break;
             }
         }
     }
-    // decrease DT a little bit
-    if (decreaseDtForBC) {
-        // 0.915 is empirical
-        dt *= 0.915;
-    }
+    // decrease DT
+    dt *= factorDtForBC;
     
     // courant
     return dt * courant;

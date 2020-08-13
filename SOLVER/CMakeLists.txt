@@ -48,9 +48,7 @@ set(NPOL_SEM                    ${npol})
 
 # solver precision
 # using double precision doubles runtime memory and output size but
-# affects performance only slightly on a modern 64-bit architecture;
-# sometimes it can promote performance by enhancing numerical stability;
-# use -Ddouble=true if you are not concerned by memory or storage.
+# affects performance only slightly on a modern 64-bit architecture
 set(USE_DOUBLE                  ${double})
 
 

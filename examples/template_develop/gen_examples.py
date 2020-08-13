@@ -67,18 +67,18 @@ replace_in_file(input_dir + '/inparam.output.yaml',
 ################ 03_Cartesian_SEG_EAGE_salt_5Hz ################
 # copy
 ex_name = '03_Cartesian_SEG_EAGE_salt_5Hz'
-input_dir = '../%s/input' % ex_name
-os.system('cp input/inparam.*.yaml %s' % input_dir)
+input1D_dir = '../%s/input1D' % ex_name
+os.system('cp input/inparam.*.yaml %s' % input1D_dir)
 
 # model
-replace_in_file(input_dir + '/inparam.model.yaml',
+replace_in_file(input1D_dir + '/inparam.model.yaml',
                 ['exodus_mesh: global_mesh__prem_ani__50s.e',
                  'attenuation: CG4'],
                 ['exodus_mesh: local_mesh__SEG_salt__5Hz.e',
                  'attenuation: NONE'])
                 
 # nr
-replace_in_file(input_dir + '/inparam.nr.yaml',
+replace_in_file(input1D_dir + '/inparam.nr.yaml',
                 ['constant: 5'],
                 ['constant: 1'])
                 
@@ -96,10 +96,10 @@ item_source_mono = replace_in_string(item_source_VIR,
  'undulated_geometry: false',
  'data: [1e20, 0., 0., 0., 0., 0.]',
  'half_duraction: 0.2', 'use_derivative_integral: GAUSSIAN'])
-replace_in_file(input_dir + '/inparam.source.yaml',
+replace_in_file(input1D_dir + '/inparam.source.yaml',
                 ['list_of_sources: []'],
                 ['list_of_sources:\n' + item_source_mono])
-replace_in_file(input_dir + '/inparam.source.yaml',
+replace_in_file(input1D_dir + '/inparam.source.yaml',
                 ['record_length: 1800.', 'Courant_number: 0.6'],
                 ['record_length: 10.', 'Courant_number: 0.6'])
                 
@@ -126,19 +126,19 @@ item_elements_ocean_floor = replace_in_string(item_elements_mantle,
  'edge_dimension: VERTICAL', 'edge_position: 6370.8e3',
  'sampling_period: 0.01'])
 
-replace_in_file(input_dir + '/inparam.output.yaml',
+replace_in_file(input1D_dir + '/inparam.output.yaml',
                 ['list_of_element_groups: []'],
                 ['list_of_element_groups:\n' +
                  item_elements_inplane + '\n' + item_elements_ocean_floor])
 
 # advanced
-replace_in_file(input_dir + '/inparam.advanced.yaml',
+replace_in_file(input1D_dir + '/inparam.advanced.yaml',
                 ['nproc_per_group: 1'],
                 ['nproc_per_group: 24'])
 
 # copy 3D
-input3D_dir = input_dir + '3D'
-os.system('cp %s/inparam.*.yaml %s' % (input_dir, input3D_dir))
+input3D_dir = input1D_dir.replace('1D', '3D')
+os.system('cp %s/inparam.*.yaml %s' % (input1D_dir, input3D_dir))
 
 # model
 item_3D_model_list = read('input/ex03_list_of_3D_models.yaml')[:-1]
@@ -150,11 +150,6 @@ replace_in_file(input3D_dir + '/inparam.model.yaml',
 replace_in_file(input3D_dir + '/inparam.nr.yaml',
                 ['constant: 1'],
                 ['constant: 50'])
-                
-# source
-replace_in_file(input3D_dir + '/inparam.source.yaml',
-                ['Courant_number: 0.6'],
-                ['Courant_number: 0.5'])
                 
 # output
 replace_in_file(input3D_dir + '/inparam.output.yaml',
