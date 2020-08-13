@@ -37,7 +37,7 @@ void SolverFFTW<floatT, HOWMANY>::createPlans(double timeLimitForPlanning) {
     double factor = 0.;
     for (const int &NR: mToBeNRs) {
         // use NR * log2(NR) for NR scaling
-        factor += NR * std::log2(NR * 1.);
+        factor += NR * std::log2(NR * 2.);
     }
     // factor * 2: R2C and C2R
     double timeUnit = timeLimitForPlanning / (factor * 2.);
@@ -45,7 +45,7 @@ void SolverFFTW<floatT, HOWMANY>::createPlans(double timeLimitForPlanning) {
     // create plans
     for (const int &NR: mToBeNRs) {
         // split time limit by NR
-        InterfaceFFTW<floatT>::timelimit(timeUnit * NR * std::log2(NR * 1.));
+        InterfaceFFTW<floatT>::timelimit(timeUnit * NR * std::log2(NR * 2.));
         // r2c plan
         mPlansR2C.insert({NR,
             InterfaceFFTW<floatT>::planR2C(1, &NR, HOWMANY,
@@ -99,7 +99,7 @@ double SolverFFTW<floatT, HOWMANY>::timeFactorForPlanning() const {
     double factor = 0.;
     for (const int &NR: mToBeNRs) {
         // use NR * log2(NR) for NR scaling
-        factor += NR * std::log2(NR * 1.);
+        factor += NR * std::log2(NR * 2.);
     }
     
     // use HOWMANY ^ 0.75 for HOWMANY scaling
