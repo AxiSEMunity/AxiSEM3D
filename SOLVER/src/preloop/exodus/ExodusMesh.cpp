@@ -718,7 +718,9 @@ void ExodusMesh::formNrAtNodes(const NrField &nrField,
     // lucky numbers
     if (useLuckyNumbers) {
         timer::gPreloopTimer.begin("Rounding Nr up to FFTW lucky numbers");
-        nrMe.unaryExpr([](int nr) {return NrField::nextLuckyNumber(nr);});
+        nrMe = nrMe.unaryExpr([](int nr) {
+            return NrField::nextLuckyNumber(nr);
+        });
         timer::gPreloopTimer.ended("Rounding Nr up to FFTW lucky numbers");
     }
     
