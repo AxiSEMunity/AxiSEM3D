@@ -13,6 +13,8 @@
 #include "bstring.hpp"
 // io::cout
 #include "io.hpp"
+// grouping
+#include "vector_tools.hpp"
 
 namespace mpi {
     ////////////////////////////// internal //////////////////////////////
@@ -75,12 +77,19 @@ namespace mpi {
 #endif
         std::string nodeID(charNID);
         
-        // assemble node id and count number of procs for each id
+        // assemble node id
         std::vector<std::string> nodeIDs;
         gather(nodeID, nodeIDs, MPI_ALL);
+        
+        // find nproc in each id and my index in my id
+        int myIndexInID = 0;
         std::map<std::string, int> nodeID_NP;
-        nodeID_NP.insert({nodeID, 1});
-        aggregate(nodeID_NP, MPI_ALL, MPI_SUM);
+        for (int irank = 0; irank < nproc(); irank++) {
+            vector_tools::aggregate(nodeID_NP, nodeIDs[irank], 1);
+            if (irank < rank() && nodeIDs[irank] == nodeID) {
+                myIndexInID += 1;
+            }
+        }
         
         // find starting group index for each id
         int curGroupIndex = 0;
@@ -101,14 +110,6 @@ namespace mpi {
         
         // total number of groups
         internal::iNumGroups = curGroupIndex;
-        
-        // search my index in this id
-        int myIndexInID = 0;
-        for (int irank = 0; irank < rank(); irank++) {
-            if (nodeIDs[irank] == nodeID) {
-                myIndexInID += 1;
-            }
-        }
         
         // my group index
         int myGroupIndex = (myIndexInID / internal::iNumProcPerGroup +
