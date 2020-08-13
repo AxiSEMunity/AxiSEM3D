@@ -29,9 +29,14 @@ void SolverFFTW<floatT, HOWMANY>::createPlans(double timeLimitForPlanning) {
     int maxNR = *std::max_element(mToBeNRs.begin(), mToBeNRs.end());
     int maxNC = maxNR / 2 + 1;
     
-    // data allocation
-    mRMatXM.resize(maxNR, HOWMANY);
-    mCMatXM.resize(maxNC, HOWMANY);
+    // data allocation by fftw
+    auto *rdata = InterfaceFFTW<floatT>::allocr(maxNR * HOWMANY);
+    auto *cdata = InterfaceFFTW<floatT>::allocc(maxNC * HOWMANY);
+    
+    // hand over memory to Eigen::Map
+    new (&mRMatXM) Eigen::Map<RMatXM>(rdata, maxNR, HOWMANY);
+    new (&mCMatXM) Eigen::Map<CMatXM>(reinterpret_cast<cmplxT *>(cdata),
+                                      maxNC, HOWMANY);
     
     // split time limit by NR
     double factor = 0.;
@@ -49,18 +54,14 @@ void SolverFFTW<floatT, HOWMANY>::createPlans(double timeLimitForPlanning) {
         // r2c plan
         mPlansR2C.insert({NR,
             InterfaceFFTW<floatT>::planR2C(1, &NR, HOWMANY,
-                                           (mRMatXM.data()), NULL, 1, maxNR,
-                                           reinterpret_cast<typename
-                                           InterfaceFFTW<floatT>::fftw_cmplx *>
-                                           (mCMatXM.data()), NULL, 1, maxNC,
+                                           rdata, NULL, 1, maxNR,
+                                           cdata, NULL, 1, maxNC,
                                            FFTW_PATIENT)});
         // c2r plan
         mPlansC2R.insert({NR,
             InterfaceFFTW<floatT>::planC2R(1, &NR, HOWMANY,
-                                           reinterpret_cast<typename
-                                           InterfaceFFTW<floatT>::fftw_cmplx *>
-                                           (mCMatXM.data()), NULL, 1, maxNC,
-                                           (mRMatXM.data()), NULL, 1, maxNR,
+                                           cdata, NULL, 1, maxNC,
+                                           rdata, NULL, 1, maxNR,
                                            FFTW_PATIENT)});
     }
 }
@@ -82,9 +83,13 @@ void SolverFFTW<floatT, HOWMANY>::clearPlans() {
     mPlansR2C.clear();
     mPlansC2R.clear();
     
-    // data
-    mRMatXM.resize(0, HOWMANY);
-    mCMatXM.resize(0, HOWMANY);
+    // free memory
+    InterfaceFFTW<floatT>::free(mRMatXM.data());
+    InterfaceFFTW<floatT>::free(mCMatXM.data());
+    
+    // reset Eigen::Map
+    new (&mRMatXM) Eigen::Map<RMatXM>(nullptr, 0, HOWMANY);
+    new (&mCMatXM) Eigen::Map<CMatXM>(nullptr, 0, HOWMANY);
 }
 
 // time factor for planning

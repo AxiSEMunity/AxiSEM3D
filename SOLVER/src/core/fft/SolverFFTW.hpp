@@ -31,23 +31,27 @@ struct InterfaceFFTW {
 template <>
 struct InterfaceFFTW<double> {
     typedef fftw_plan Plan;
-    typedef fftw_complex fftw_cmplx;
     static constexpr auto planR2C = fftw_plan_many_dft_r2c;
     static constexpr auto planC2R = fftw_plan_many_dft_c2r;
     static constexpr auto destroy = fftw_destroy_plan;
     static constexpr auto execute = fftw_execute;
     static constexpr auto timelimit = fftw_set_timelimit;
+    static constexpr auto allocr = fftw_alloc_real;
+    static constexpr auto allocc = fftw_alloc_complex;
+    static constexpr auto free = fftw_free;
 };
 
 template <>
 struct InterfaceFFTW<float> {
     typedef fftwf_plan Plan;
-    typedef fftwf_complex fftw_cmplx;
     static constexpr auto planR2C = fftwf_plan_many_dft_r2c;
     static constexpr auto planC2R = fftwf_plan_many_dft_c2r;
     static constexpr auto destroy = fftwf_destroy_plan;
     static constexpr auto execute = fftwf_execute;
     static constexpr auto timelimit = fftwf_set_timelimit;
+    static constexpr auto allocr = fftwf_alloc_real;
+    static constexpr auto allocc = fftwf_alloc_complex;
+    static constexpr auto free = fftwf_free;
 };
 
 
@@ -178,8 +182,8 @@ private:
     std::map<int, typename InterfaceFFTW<floatT>::Plan> mPlansC2R;
     
     // buffer data
-    RMatXM mRMatXM = RMatXM(0, HOWMANY);
-    CMatXM mCMatXM = CMatXM(0, HOWMANY);
+    Eigen::Map<RMatXM> mRMatXM = Eigen::Map<RMatXM>(nullptr, 0, HOWMANY);
+    Eigen::Map<CMatXM> mCMatXM = Eigen::Map<CMatXM>(nullptr, 0, HOWMANY);
 };
 
 #endif /* SolverFFTW_hpp */
