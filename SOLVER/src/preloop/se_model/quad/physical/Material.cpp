@@ -44,7 +44,7 @@ Material::Material(const ExodusMesh &exodusMesh, const eigen::DMat24 &nodalSZ,
     double r1 = radialCoords[index1] + distTol;
     
     // loop over all variables
-    mFluid = false;
+    bool fluid = false;
     for (auto it = radialVariables.begin(); it != radialVariables.end(); ++it) {
         // end points
         const eigen::DColX &rvals = it->second;
@@ -58,13 +58,13 @@ Material::Material(const ExodusMesh &exodusMesh, const eigen::DMat24 &nodalSZ,
         // check fluid
         if (it->first == "VS" || it->first == "VSV" || it->first == "VSH") {
             if (nvals.maxCoeff() < numerical::dEpsilon) {
-                mFluid = true;
+                fluid = true;
             }
         }
     }
     
     // reduce to fluid
-    if (mFluid) {
+    if (fluid) {
         // get vp and rho
         const eigen::DRow4 &vp = (mProperties.find("VPV") != mProperties.end()
                                   ? mProperties.at("VPV").getNodalData()
@@ -72,16 +72,13 @@ Material::Material(const ExodusMesh &exodusMesh, const eigen::DMat24 &nodalSZ,
         const eigen::DRow4 &rho = mProperties.at("RHO").getNodalData();
         // clear all properties
         mProperties.clear();
-        // save vp and rho
+        // only save vp and rho
         mProperties.insert({"VP", NodalPhysicalProperty(vp, axial)});
         mProperties.insert({"RHO", NodalPhysicalProperty(rho, axial)});
-        // still keep vs for Clayton
-        mProperties.insert({"VS", NodalPhysicalProperty(eigen::DRow4::Zero(),
-                                                        axial)});
     }
     
     // reduce TISO to ISO if possible
-    if (currentAnisotropy() == AnisotropyType::TISO) {
+    if (currentRheology() == RheologyType::TISO) {
         const eigen::DRow4 &vpv = mProperties.at("VPV").getNodalData();
         const eigen::DRow4 &vph = mProperties.at("VPH").getNodalData();
         const eigen::DRow4 &vsv = mProperties.at("VSV").getNodalData();
@@ -109,40 +106,33 @@ void Material::addProperty3D(const std::string &propKey,
                              const Volumetric3D::ReferenceKind &refKind,
                              const eigen::arN_IColX &inScope,
                              const eigen::arN_DColX &propValue) {
-    // check fluid
-    if (mFluid && !(propKey == "VP" || propKey == "RHO")) {
-        throw std::runtime_error("Material::getProperty || "
-                                 "Setting " + propKey + " is prohibited "
-                                 "in fluid media.");
-    }
-    
     // evolve anisotropy
     // ISO -> TISO
-    if (currentAnisotropy() == AnisotropyType::ISO &&
+    if (currentRheology() == RheologyType::ISO &&
         (propKey == "VPV" || propKey == "VPH" ||
          propKey == "VSV" || propKey == "VSH" || propKey == "ETA")) {
         evolveISO_TISO();
     }
     // ISO -> TISO -> ANISO
     if (propKey.front() == 'C') {
-        if (currentAnisotropy() == AnisotropyType::ISO) {
+        if (currentRheology() == RheologyType::ISO) {
             evolveISO_TISO();
         }
-        if (currentAnisotropy() == AnisotropyType::TISO) {
+        if (currentRheology() == RheologyType::TISO) {
             evolveTISO_ANISO();
         }
     }
     
     // backward compatibility
     // TISO
-    if (currentAnisotropy() == AnisotropyType::TISO &&
+    if (currentRheology() == RheologyType::TISO &&
         (propKey == "VP" || propKey == "VS")) {
         // recursive call
         addProperty3D(propKey + "V", refKind, inScope, propValue);
         addProperty3D(propKey + "H", refKind, inScope, propValue);
     }
     // ANISO
-    if (currentAnisotropy() == AnisotropyType::ANISO &&
+    if (currentRheology() == RheologyType::ANISO &&
         propKey.front() == 'V') {
         // give a clearer instruction
         throw std::runtime_error("Material::getProperty || "
@@ -195,31 +185,8 @@ void Material::addProperty3D(const std::string &propKey,
 
 // finished 3D properties
 void Material::finished3D() {
-    // create velocity for ANISO using Voigt average (required by ABC)
-    if (currentAnisotropy() == AnisotropyType::ANISO) {
-        // get density and Cijkl
-        const NodalPhysicalProperty &rho = mProperties.at("RHO");
-        const NodalPhysicalProperty &C11 = mProperties.at("C11");
-        const NodalPhysicalProperty &C12 = mProperties.at("C12");
-        const NodalPhysicalProperty &C13 = mProperties.at("C13");
-        const NodalPhysicalProperty &C22 = mProperties.at("C22");
-        const NodalPhysicalProperty &C23 = mProperties.at("C23");
-        const NodalPhysicalProperty &C33 = mProperties.at("C33");
-        const NodalPhysicalProperty &C44 = mProperties.at("C44");
-        const NodalPhysicalProperty &C55 = mProperties.at("C55");
-        const NodalPhysicalProperty &C66 = mProperties.at("C66");
-        // kappa, mu in Voigt average
-        const NodalPhysicalProperty &kp =
-        (C11 + C22 + C33 + (C12 + C23 + C13) * 2.) / 9.;
-        const NodalPhysicalProperty &mu =
-        (C11 + C22 + C33 - (C12 + C23 + C13) + (C44 + C55 + C66) * 3.) / 15.;
-        // vp, vs
-        mProperties.insert({"VP", ((kp + mu * (4. / 3.))/ rho).pow(.5)});
-        mProperties.insert({"VS", (mu / rho).pow(.5)});
-    }
-    
     // try to degenerate TISO to ISO
-    if (currentAnisotropy() == AnisotropyType::TISO) {
+    if (currentRheology() == RheologyType::TISO) {
         eigen::DMatXN vpv = getElemental("VPV");
         eigen::DMatXN vph = getElemental("VPH");
         eigen::DMatXN vsv = getElemental("VSV");
@@ -250,7 +217,7 @@ void Material::finished3D() {
 // get maximum velocity for dt
 eigen::DMatXN Material::getMaxVelocity() const {
     // three types of anisotropy
-    if (currentAnisotropy() == AnisotropyType::ANISO) {
+    if (currentRheology() == RheologyType::ANISO) {
         // get density and Cijkl
         eigen::DMatXN rho = getElemental("RHO");
         eigen::DMatXN C11 = getElemental("C11");
@@ -262,14 +229,72 @@ eigen::DMatXN Material::getMaxVelocity() const {
         const eigen::DMatXN &Cmax = C11.cwiseMax(C22).cwiseMax(C33);
         // vp = sqrt(Cmax / rho)
         return Cmax.cwiseQuotient(rho).cwiseSqrt();
-    } else if (currentAnisotropy() == AnisotropyType::TISO) {
+    } else if (currentRheology() == RheologyType::TISO) {
         eigen::DMatXN vpv = getElemental("VPV");
         eigen::DMatXN vph = getElemental("VPH");
         op1D_3D::regularize1D<eigen::DMatXN>({std::ref(vpv), std::ref(vph)});
         return vpv.cwiseMax(vph);
     } else {
-        // include fluid case
+        // ISO or fluid
         return getElemental("VP");
+    }
+}
+
+// get rho, vp, vs for Clayton
+void Material::getPointwiseRhoVpVs(eigen::arN_DColX &rho,
+                                   eigen::arN_DColX &vp,
+                                   eigen::arN_DColX &vs) const {
+    // density
+    rho = getProperty("RHO").getPointwise();
+    if (currentRheology() == RheologyType::FLUID) {
+        vp = getProperty("VP").getPointwise();
+        // vs = 0
+        vs = NodalPhysicalProperty(eigen::DRow4::Zero(),
+                                   getProperty("RHO").axial()).getPointwise();
+    } else if (currentRheology() == RheologyType::ANISO) {
+        // get density and Cijkl
+        const NodalPhysicalProperty &rh = mProperties.at("RHO");
+        const NodalPhysicalProperty &C11 = mProperties.at("C11");
+        const NodalPhysicalProperty &C12 = mProperties.at("C12");
+        const NodalPhysicalProperty &C13 = mProperties.at("C13");
+        const NodalPhysicalProperty &C22 = mProperties.at("C22");
+        const NodalPhysicalProperty &C23 = mProperties.at("C23");
+        const NodalPhysicalProperty &C33 = mProperties.at("C33");
+        const NodalPhysicalProperty &C44 = mProperties.at("C44");
+        const NodalPhysicalProperty &C55 = mProperties.at("C55");
+        const NodalPhysicalProperty &C66 = mProperties.at("C66");
+        // kappa, mu in Voigt average
+        const NodalPhysicalProperty &kp =
+        (C11 + C22 + C33 + (C12 + C23 + C13) * 2.) / 9.;
+        const NodalPhysicalProperty &mu =
+        (C11 + C22 + C33 - (C12 + C23 + C13) + (C44 + C55 + C66) * 3.) / 15.;
+        // vp, vs
+        vp = ((kp + mu * (4. / 3.)) / rh).pow(.5).getPointwise();
+        vs = (mu / rh).pow(.5).getPointwise();
+    } else if (currentRheology() == RheologyType::TISO) {
+        // get density and VH
+        const NodalPhysicalProperty &rh = mProperties.at("RHO");
+        const NodalPhysicalProperty &vpv = mProperties.at("VPV");
+        const NodalPhysicalProperty &vph = mProperties.at("VPH");
+        const NodalPhysicalProperty &vsv = mProperties.at("VSV");
+        const NodalPhysicalProperty &vsh = mProperties.at("VSH");
+        const NodalPhysicalProperty &eta = mProperties.at("ETA");
+        const NodalPhysicalProperty &A = rh * vph.pow(2.);
+        const NodalPhysicalProperty &C = rh * vpv.pow(2.);
+        const NodalPhysicalProperty &L = rh * vsv.pow(2.);
+        const NodalPhysicalProperty &N = rh * vsh.pow(2.);
+        const NodalPhysicalProperty &F = eta * (A - L * 2.);
+        // kappa, mu in Voigt average
+        const NodalPhysicalProperty &kp =
+        (A * 4. + C + F * 4. - N * 4.) / 9.;
+        const NodalPhysicalProperty &mu =
+        (A + C - F * 2. + L * 6. + N * 5.) / 15.;
+        // vp, vs
+        vp = ((kp + mu * (4. / 3.)) / rh).pow(.5).getPointwise();
+        vs = (mu / rh).pow(.5).getPointwise();
+    } else {
+        vp = getProperty("VP").getPointwise();
+        vs = getProperty("VS").getPointwise();
     }
 }
 
@@ -278,7 +303,7 @@ eigen::arN_DColX Material::getMass(const eigen::DRowN &integralFactor,
                                    const eigen::arN_DColX &jacobianPRT,
                                    bool fluid) const {
     // check fluid
-    if (fluid != mFluid) {
+    if (fluid != (currentRheology() == RheologyType::FLUID)) {
         throw std::runtime_error("Material::getMass || "
                                  "Incompatible solid/fluid flags.");
     }
@@ -317,7 +342,7 @@ eigen::arN_DColX Material::getMass(const eigen::DRowN &integralFactor,
 // create Acoustic
 std::unique_ptr<Acoustic> Material::createAcoustic() const {
     // check fluid
-    if (!mFluid) {
+    if (currentRheology() != RheologyType::FLUID) {
         throw std::runtime_error("Material::createAcoustic || "
                                  "Incompatible solid/fluid flags.");
     }
@@ -336,14 +361,14 @@ std::unique_ptr<Elastic> Material::
 createElastic(const std::unique_ptr<const AttBuilder> &attBuilder,
               const eigen::DRow4 &weightsCG4) const {
     // check fluid
-    if (mFluid) {
+    if (currentRheology() == RheologyType::FLUID) {
         throw std::runtime_error("Material::createElastic || "
                                  "Incompatible solid/fluid flags.");
     }
     // three types of anisotropy
-    if (currentAnisotropy() == AnisotropyType::ANISO) {
+    if (currentRheology() == RheologyType::ANISO) {
         return createAnisotropic(attBuilder, weightsCG4);
-    } else if (currentAnisotropy() == AnisotropyType::TISO) {
+    } else if (currentRheology() == RheologyType::TISO) {
         return createTISO(attBuilder, weightsCG4);
     } else {
         return createIsotropic(attBuilder, weightsCG4);
@@ -498,8 +523,8 @@ createTISO(const std::unique_ptr<const AttBuilder> &attBuilder,
         ({ref(A), ref(C), ref(F), ref(L), ref(N), ref(QKp), ref(QMu)});
         
         // build attenuation
-        eigen::DMatXN kp = (4. * A + C + 4. * F - 4. * N) / 9.;
-        eigen::DMatXN mu = (A + C - 2. * F + 6. * L + 5. * N) / 15.;
+        eigen::DMatXN kp = (A * 4. + C + F * 4. - N * 4.) / 9.;
+        eigen::DMatXN mu = (A + C - F * 2. + L * 6. + N * 5.) / 15.;
         A -= (kp + 4. / 3. * mu);
         C -= (kp + 4. / 3. * mu);
         F -= (kp - 2. / 3. * mu);

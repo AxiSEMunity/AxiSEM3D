@@ -47,6 +47,11 @@ public:
     // get maximum velocity for dt
     eigen::DMatXN getMaxVelocity() const;
     
+    // get rho, vp, vs for Clayton
+    void getPointwiseRhoVpVs(eigen::arN_DColX &rho,
+                             eigen::arN_DColX &vp,
+                             eigen::arN_DColX &vs) const;
+    
     // get mass for GLL-point setup
     eigen::arN_DColX getMass(const eigen::DRowN &integralFactor,
                              const eigen::arN_DColX &jacobianPRT,
@@ -77,8 +82,8 @@ private:
                     const eigen::DRow4 &weightsCG4) const;
     
     
-    ////////////////////// get property //////////////////////
-public:
+    ////////////////////// property //////////////////////
+private:
     // get property pointwise
     eigen::arN_DColX getPointwise(const std::string &key) const {
         return getProperty(key).getPointwise();
@@ -89,21 +94,15 @@ public:
         return getProperty(key).getElemental();
     }
     
-private:
-    // get property
+    // get property for get
     const NodalPhysicalProperty &getProperty(const std::string &key) const {
-        // verify anisotropy
-        if ((key == "VP" || key == "VS") &&
-            currentAnisotropy() == AnisotropyType::TISO) {
-            return mProperties.at(key + "V");
-        }
         try {
             return mProperties.at(key);
         } catch (...) {
             throw std::runtime_error("Material::getProperty || "
                                      "Unacceptable property key: " + key + "||"
-                                     "Anisotropy type: " +
-                                     AnisotropyTypeStr.at(currentAnisotropy()));
+                                     "Rheology type: " +
+                                     RheologyTypeStr.at(currentRheology()));
         }
     }
     
@@ -114,29 +113,32 @@ private:
         } catch (...) {
             throw std::runtime_error("Material::getProperty || "
                                      "Unacceptable property key: " + key + "||"
-                                     "Anisotropy type: " +
-                                     AnisotropyTypeStr.at(currentAnisotropy()));
+                                     "Rheology type: " +
+                                     RheologyTypeStr.at(currentRheology()));
         }
     }
     
     
-    ////////////////////// anisotropy //////////////////////
-    // anisotropy type
-    enum class AnisotropyType {ISO, TISO, ANISO};
+    ////////////////////// rheology //////////////////////
+    // rheology type
+    enum class RheologyType {FLUID, ISO, TISO, ANISO};
     inline static const
-    std::map<AnisotropyType, std::string> AnisotropyTypeStr = {
-        {AnisotropyType::ISO, "Isotropy"},
-        {AnisotropyType::TISO, "Transverse isotropy"},
-        {AnisotropyType::ANISO, "Full anisotropy"}};
+    std::map<RheologyType, std::string> RheologyTypeStr = {
+        {RheologyType::FLUID, "Fluid"},
+        {RheologyType::ISO, "Isotropic solid"},
+        {RheologyType::TISO, "Transversely isotropic solid"},
+        {RheologyType::ANISO, "Full anisotropic solid"}};
     
-    // current anisotropy
-    AnisotropyType currentAnisotropy() const {
+    // current rheology
+    RheologyType currentRheology() const {
         if (mProperties.find("C11") != mProperties.end()) {
-            return AnisotropyType::ANISO;
+            return RheologyType::ANISO;
         } else if (mProperties.find("VPV") != mProperties.end()) {
-            return AnisotropyType::TISO;
+            return RheologyType::TISO;
+        } else if (mProperties.find("VS") != mProperties.end()) {
+            return RheologyType::ISO;
         } else {
-            return AnisotropyType::ISO;
+            return RheologyType::FLUID;
         }
     }
     
@@ -159,7 +161,7 @@ private:
     // evolve from TISO to ANISO
     void evolveTISO_ANISO() {
         // density and velocity
-        const NodalPhysicalProperty &rho = mProperties.at("VPV");
+        const NodalPhysicalProperty &rho = mProperties.at("RHO");
         const NodalPhysicalProperty &vpv = mProperties.at("VPV");
         const NodalPhysicalProperty &vph = mProperties.at("VPH");
         const NodalPhysicalProperty &vsv = mProperties.at("VSV");
@@ -200,7 +202,7 @@ private:
         mProperties.insert({"C56", zero});
         // erase
         mProperties.erase("VPV");
-        mProperties.erase("VSH");
+        mProperties.erase("VPH");
         mProperties.erase("VSV");
         mProperties.erase("VSH");
         mProperties.erase("ETA");
@@ -209,9 +211,6 @@ private:
     
     /////////////////////////// data ///////////////////////////
 private:
-    // fluid
-    bool mFluid;
-    
     // properties
     std::map<std::string, NodalPhysicalProperty> mProperties;
 };

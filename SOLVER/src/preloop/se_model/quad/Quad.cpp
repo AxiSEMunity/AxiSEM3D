@@ -138,9 +138,8 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
             static eigen::arP_DMatX3 nABC;
             computeNormal(mEdgesOnBoundary.at(key), sz, J, ipnts, nABC);
             // get properties from material
-            const eigen::arN_DColX &rho = mMaterial->getPointwise("RHO");
-            const eigen::arN_DColX &vp = mMaterial->getPointwise("VP");
-            const eigen::arN_DColX &vs = mMaterial->getPointwise("VS");
+            eigen::arN_DColX rho, vp, vs;
+            mMaterial->getPointwiseRhoVpVs(rho, vp, vs);
             // add ABCs to points
             for (int ip = 0; ip < spectral::nPED; ip++) {
                 int ipnt = ipnts[ip];
