@@ -107,8 +107,6 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
     
     // setup mesh pointer
     abc->mExodusMesh = &exodusMesh;
-    abc->mVpKey = exodusMesh.isIsotropic() ? "VP" : "VPV";
-    abc->mVsKey = exodusMesh.isIsotropic() ? "VS" : "VSV";
     
     // setup expressions
     // constant
@@ -201,37 +199,53 @@ double ABC::getGammaSolid(double r, double span) const {
     vector_tools::linearInterpSorted(rcrd, r, index0, index1,
                                      factor0, factor1);
     
+    // get end values
+    double rho0 = rval.at("RHO")(index0);
+    double rho1 = rval.at("RHO")(index1);
+    bool tiso = (rval.find("VPV") != rval.end());
+    double vp0 = 0., vp1 = 0., vs0 = 0., vs1 = 0.;
+    if (tiso) {
+        // approximate Voigt average (assuming eta = 1)
+        vp0 = sqrt((pow(rval.at("VPV")(index0), 2.) +
+                    pow(rval.at("VPH")(index0), 2.) * 4.) / 5.);
+        vp1 = sqrt((pow(rval.at("VPV")(index1), 2.) +
+                    pow(rval.at("VPH")(index1), 2.) * 4.) / 5.);
+        vs0 = sqrt((pow(rval.at("VSV")(index0), 2.)  * 2. +
+                    pow(rval.at("VSH")(index0), 2.)) / 3.);
+        vs1 = sqrt((pow(rval.at("VSV")(index1), 2.)  * 2. +
+                    pow(rval.at("VSH")(index1), 2.)) / 3.);
+    } else {
+        vp0 = rval.at("VP")(index0);
+        vp1 = rval.at("VP")(index1);
+        vs0 = rval.at("VS")(index0);
+        vs1 = rval.at("VS")(index1);
+    }
+    
     // judge type of the gap
     if (rcrd[index1] - rcrd[index0] > distTol * 4) {
         // this gap spans an element
         // do interpolation
-        sVP = (rval.at(mVpKey)(index0) * factor0 +
-               rval.at(mVpKey)(index1) * factor1);
-        sVS = (rval.at(mVsKey)(index0) * factor0 +
-               rval.at(mVsKey)(index1) * factor1);
-        sRHO = (rval.at("RHO")(index0) * factor0 +
-                rval.at("RHO")(index1) * factor1);
-    } else if (rval.at(mVsKey)(index0) > numerical::dEpsilon &&
-               rval.at(mVsKey)(index1) > numerical::dEpsilon) {
+        sVP = vp0 * factor0 + vp1 * factor1;
+        sVS = vs0 * factor0 + vs1 * factor1;
+        sRHO = rho0 * factor0 + rho1 * factor1;
+    } else if (vs0 > numerical::dEpsilon && vs1 > numerical::dEpsilon) {
         // this gap is either solid-solid or fake
         // do average
-        sVP = (rval.at(mVpKey)(index0) + rval.at(mVpKey)(index1)) * 0.5;
-        sVS = (rval.at(mVsKey)(index0) + rval.at(mVsKey)(index1)) * 0.5;
-        sRHO = (rval.at("RHO")(index0) + rval.at("RHO")(index1)) * 0.5;
-    } else if (rval.at(mVsKey)(index0) > numerical::dEpsilon &&
-               rval.at(mVsKey)(index1) < numerical::dEpsilon) {
+        sVP = (vp0 + vp1) * 0.5;
+        sVS = (vs0 + vs1) * 0.5;
+        sRHO = (rho0 + rho1) * 0.5;
+    } else if (vs0 > numerical::dEpsilon && vs1 < numerical::dEpsilon) {
         // this gap is solid-fluid
         // use solid
-        sVP = rval.at(mVpKey)(index0);
-        sVS = rval.at(mVsKey)(index0);
-        sRHO = rval.at("RHO")(index0);
-    } else if (rval.at(mVsKey)(index0) < numerical::dEpsilon &&
-               rval.at(mVsKey)(index1) > numerical::dEpsilon) {
+        sVP = vp0;
+        sVS = vs0;
+        sRHO = rho0;
+    } else if (vs0 < numerical::dEpsilon && vs1 > numerical::dEpsilon) {
         // this gap is solid-fluid
         // use solid
-        sVP = rval.at(mVpKey)(index1);
-        sVS = rval.at(mVsKey)(index1);
-        sRHO = rval.at("RHO")(index1);
+        sVP = vp1;
+        sVS = vs1;
+        sRHO = rho1;
     } else {
         // this gap is fluid-fluid, impossible
         throw std::runtime_error("ABC::getGammaSolid || Impossible.");
@@ -263,32 +277,49 @@ double ABC::getGammaFluid(double r, double span) const {
     vector_tools::linearInterpSorted(rcrd, r, index0, index1,
                                      factor0, factor1);
     
+    // get end values
+    double rho0 = rval.at("RHO")(index0);
+    double rho1 = rval.at("RHO")(index1);
+    bool tiso = (rval.find("VPV") != rval.end());
+    double vp0 = 0., vp1 = 0., vs0 = 0., vs1 = 0.;
+    if (tiso) {
+        // approximate Voigt average (assuming eta = 1)
+        vp0 = sqrt((pow(rval.at("VPV")(index0), 2.) +
+                    pow(rval.at("VPH")(index0), 2.) * 4.) / 5.);
+        vp1 = sqrt((pow(rval.at("VPV")(index1), 2.) +
+                    pow(rval.at("VPH")(index1), 2.) * 4.) / 5.);
+        vs0 = sqrt((pow(rval.at("VSV")(index0), 2.)  * 2. +
+                    pow(rval.at("VSH")(index0), 2.)) / 3.);
+        vs1 = sqrt((pow(rval.at("VSV")(index1), 2.)  * 2. +
+                    pow(rval.at("VSH")(index1), 2.)) / 3.);
+    } else {
+        vp0 = rval.at("VP")(index0);
+        vp1 = rval.at("VP")(index1);
+        vs0 = rval.at("VS")(index0);
+        vs1 = rval.at("VS")(index1);
+    }
+    
     // judge type of the gap
     if (rcrd[index1] - rcrd[index0] > distTol * 4) {
         // this gap spans an element
         // do interpolation
-        sVP = (rval.at(mVpKey)(index0) * factor0 +
-               rval.at(mVpKey)(index1) * factor1);
-        sRHO = (rval.at("RHO")(index0) * factor0 +
-                rval.at("RHO")(index1) * factor1);
-    } else if (rval.at(mVsKey)(index0) < numerical::dEpsilon &&
-               rval.at(mVsKey)(index1) < numerical::dEpsilon) {
+        sVP = vp0 * factor0 + vp1 * factor1;
+        sRHO = rho0 * factor0 + rho1 * factor1;
+    } else if (vs0 < numerical::dEpsilon && vs1 < numerical::dEpsilon) {
         // this gap is fake (fluid-fluid is non-physical)
         // do average
-        sVP = (rval.at(mVpKey)(index0) + rval.at(mVpKey)(index1)) * 0.5;
-        sRHO = (rval.at("RHO")(index0) + rval.at("RHO")(index1)) * 0.5;
-    } else if (rval.at(mVsKey)(index0) > numerical::dEpsilon &&
-               rval.at(mVsKey)(index1) < numerical::dEpsilon) {
+        sVP = (vp0 + vp1) * 0.5;
+        sRHO = (rho0 + rho1) * 0.5;
+    } else if (vs0 > numerical::dEpsilon && vs1 < numerical::dEpsilon) {
         // this gap is solid-fluid
         // use fluid
-        sVP = rval.at(mVpKey)(index1);
-        sRHO = rval.at("RHO")(index1);
-    } else if (rval.at(mVsKey)(index0) < numerical::dEpsilon &&
-               rval.at(mVsKey)(index1) > numerical::dEpsilon) {
+        sVP = vp1;
+        sRHO = rho1;
+    } else if (vs0 < numerical::dEpsilon && vs1 > numerical::dEpsilon) {
         // this gap is solid-fluid
         // use fluid
-        sVP = rval.at(mVpKey)(index0);
-        sRHO = rval.at("RHO")(index0);
+        sVP = vp0;
+        sRHO = rho0;
     } else {
         // this gap is solid-solid or fluid-fluid, impossible
         throw std::runtime_error("ABC::getGammaFluid || Impossible.");

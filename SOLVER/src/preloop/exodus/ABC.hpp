@@ -73,7 +73,6 @@ private:
     
     // mesh pointer
     const ExodusMesh *mExodusMesh = nullptr;
-    std::string mVpKey, mVsKey;
     
     // gamma expressions
     // using static for variables to keep const modifier
