@@ -25,6 +25,7 @@
 #define MPI_MIN 0
 #define MPI_MAX 1
 #define MPI_SUM 2
+#define MPI_MAX_PROCESSOR_NAME 32
 #endif
 
 // flag for gathering operations
