@@ -162,7 +162,7 @@ namespace geodesy {
         ss << "a reference geographic location on the positive z-axis\n";
         ss << bstring::boxEquals(2, 19, "latitude",
                                  internal::iLatLonRadiusAxisZ[0]);
-        ss << bstring::boxEquals(2, 19, "longtiude",
+        ss << bstring::boxEquals(2, 19, "longitude",
                                  internal::iLatLonRadiusAxisZ[1]);
         ss << bstring::boxEquals(2, 19, "radius",
                                  internal::iLatLonRadiusAxisZ[2]);

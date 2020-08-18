@@ -594,7 +594,7 @@ void Domain::checkStability(int tstep, double t, double dt) const {
         using namespace bstring;
         std::stringstream ss;
         ss << "Simulation has blown up, with ΔT = " << dt << " s. || ";
-        ss << "Where the instability occured: || ";
+        ss << "Where the instability occurred: || ";
         const eigen::DRow2 &sz = unstablePoint->getCoords();
         if (geodesy::isCartesian()) {
             ss << "* (s, z)  =  " << range(sz(0), sz(1), '(', ')') << " || ";
@@ -602,7 +602,7 @@ void Domain::checkStability(int tstep, double t, double dt) const {
             const eigen::DRow2 &rt = geodesy::sz2rtheta(sz, true);
             ss << "* (r, θ)  =  " << range(rt(0), rt(1), '(', ')') << " || ";
         }
-        ss << "When the instability occured: || ";
+        ss << "When the instability occurred: || ";
         ss << "* current time  =  " << t << " || ";
         ss << "* current step  =  " << tstep;
         throw std::runtime_error("Domain::checkStability || " + ss.str());

@@ -232,7 +232,7 @@ verbose(double dt, int numRecordSteps, int npnts,
     }
     
     //////// file options ////////
-    ss << boxSubTitle(2, "File otions");
+    ss << boxSubTitle(2, "File options");
     ss << boxEquals(4, width, "buffer size", mBufferSize);
     ss << boxEquals(4, width, "flush file", mFlush);
     

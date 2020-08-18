@@ -161,7 +161,7 @@ verbose(double dt, int numRecordSteps, int numStations) const {
     }
     
     //////// file options ////////
-    ss << boxSubTitle(2, "File otions");
+    ss << boxSubTitle(2, "File options");
     if (mFormat == Format::AsciiStation) {
         ss << boxEquals(4, width, "output file format", "ascii (per station)");
     } else if (mFormat == Format::AsciiChannel) {
