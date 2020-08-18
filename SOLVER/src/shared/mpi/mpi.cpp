@@ -30,6 +30,10 @@ namespace mpi {
         // # proc per group
         int iNumProcPerGroup = 1;
         
+        // min/max # proc on node
+        int iMinNumProcOnNode = -1;
+        int iMaxNumProcOnNode = -1;
+        
         // number of groups
         int iNumGroups = -1;
         
@@ -93,7 +97,8 @@ namespace mpi {
         
         // find starting group index for each id
         int curGroupIndex = 0;
-        internal::iNumProcPerGroup = 0;
+        internal::iMinNumProcOnNode = nproc() + 1;
+        internal::iMaxNumProcOnNode = 0;
         std::map<std::string, int> nodeID_StartG;
         for (auto it = nodeID_NP.begin(); it != nodeID_NP.end(); ++it) {
             nodeID_StartG.insert({it->first, curGroupIndex});
@@ -101,11 +106,13 @@ namespace mpi {
             if (it->second % nprocPerGroup > 0) {
                 curGroupIndex += 1;
             }
-            // find max number of procs on node
-            internal::iNumProcPerGroup =
-            std::max(internal::iNumProcPerGroup, it->second);
+            // find min/max number of procs on node
+            internal::iMinNumProcOnNode =
+            std::min(internal::iMinNumProcOnNode, it->second);
+            internal::iMaxNumProcOnNode =
+            std::max(internal::iMaxNumProcOnNode, it->second);
         }
-        internal::iNumProcPerGroup = std::min(internal::iNumProcPerGroup,
+        internal::iNumProcPerGroup = std::min(internal::iMaxNumProcOnNode,
                                               nprocPerGroup);
         
         // total number of groups
@@ -278,10 +285,14 @@ namespace mpi {
         std::stringstream ss;
         ss << bstring::boxTitle("MPI");
 #ifndef _SERIAL_BUILD
-        ss << bstring::boxEquals(0, 22, "# processors", nproc());
-        ss << bstring::boxEquals(0, 22, "# MPI groups", internal::iNumGroups);
-        ss << bstring::boxEquals(0, 22, "# processors per group",
+        ss << bstring::boxEquals(0, 24, "# processors", nproc());
+        ss << bstring::boxEquals(0, 24, "# MPI groups", internal::iNumGroups);
+        ss << bstring::boxEquals(0, 24, "# processors per group",
                                  internal::iNumProcPerGroup);
+        ss << bstring::boxEquals(0, 24, "min # processors on node",
+                                 internal::iMinNumProcOnNode);
+        ss << bstring::boxEquals(0, 24, "max # processors on node",
+                                 internal::iMaxNumProcOnNode);
 #else
         ss << "  This is a serial build without MPI.\n";
 #endif
