@@ -67,10 +67,10 @@ namespace op1D_3D {
             R = A.cwiseProduct(B);
         } else if (A.rows() == 1) {
             // 1Dx3D
-            R = B * A.asDiagonal();
+            R = (B * A.asDiagonal()).eval();
         } else if (B.rows() == 1) {
             // 3Dx1D
-            R = A * B.asDiagonal();
+            R = (A * B.asDiagonal()).eval();
         } else {
             throw std::runtime_error("op1D_3D::times || "
                                      "Incompatible dimemsions.");
