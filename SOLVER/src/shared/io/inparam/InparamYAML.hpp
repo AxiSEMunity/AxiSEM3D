@@ -200,15 +200,16 @@ public:
         return get<T>(bstring::split(keyword, ":"));
     }
     
+    // this function is disabled for safety
     // get value with default
-    template <typename T>
-    T getWithDefault(const std::string &keyword, const T &defaultVal) const {
-        try {
-            return get<T>(keyword);
-        } catch (...) {
-            return defaultVal;
-        }
-    }
+    // template <typename T>
+    // T getWithDefault(const std::string &keyword, const T &defaultVal) const {
+    //     try {
+    //         return get<T>(keyword);
+    //     } catch (...) {
+    //         return defaultVal;
+    //     }
+    // }
     
     // get value with string-typed options
     template <typename T>

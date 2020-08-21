@@ -42,7 +42,7 @@ namespace sg_tools {
         } else if (type == "LATITUDE_LONGITUDE") {
             sourceCentered = false;
             xy = false;
-            ellipticity = gm.getWithDefault(rootc + ":ellipticity", false);
+            ellipticity = gm.get<bool>(rootc + ":ellipticity");
         } else {
             throw std::runtime_error
             ("sg_tools::inparamHorizontal || "
@@ -62,8 +62,7 @@ namespace sg_tools {
         const std::string &type = gm.get<std::string>(rootc + ":vertical");
         if (type == "DEPTH") {
             useDepth = true;
-            depthSolid =
-            gm.getWithDefault(rootc + ":depth_below_solid_surface", true);
+            depthSolid = gm.get<bool>(rootc + ":depth_below_solid_surface");
         } else if (gm.contains(rootc + ":radius")) {
             useDepth = false;
             depthSolid = false;

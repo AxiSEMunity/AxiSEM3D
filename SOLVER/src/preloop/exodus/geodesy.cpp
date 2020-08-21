@@ -103,8 +103,8 @@ namespace geodesy {
             if (inparam::gInparamSource.contains(rootl + ":depth")) {
                 double depth = inparam::gInparamSource.
                 getWithBounds(rootl + ":depth", 0., getOuterRadius());
-                if (inparam::gInparamSource.getWithDefault
-                    (rootl + ":depth_below_solid_surface", true)) {
+                if (inparam::gInparamSource.get<bool>
+                    (rootl + ":depth_below_solid_surface")) {
                     internal::iLatLonRadiusAxisZ(2) =
                     getOuterSolidRadius() - depth;
                 } else {

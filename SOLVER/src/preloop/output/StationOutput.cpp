@@ -44,10 +44,15 @@ StationOutput::buildInparam(int gindex, double dt) {
         {"LATITUDE_LONGITUDE", false}, {"DISTANCE_AZIMUTH", true}});
     bool useDepth = gm.getWithLimits<bool>(rootl + ":vertical_x3", {
         {"RADIUS", false}, {"DEPTH", true}});
-    bool ellipticity = gm.getWithDefault(rootl + ":ellipticity", true);
-    bool depthSolid =
-    gm.getWithDefault(rootl + ":depth_below_solid_surface", true);
-    bool undulated = gm.getWithDefault(rootl + ":undulated_geometry", true);
+    bool ellipticity = false;
+    if (!sourceCentered) {
+        ellipticity = gm.get<bool>(rootl + ":ellipticity");
+    }
+    bool depthSolid = false;
+    if (useDepth) {
+        depthSolid = gm.get<bool>(rootl + ":depth_below_solid_surface");
+    }
+    bool undulated = gm.get<bool>(rootl + ":undulated_geometry");
     
     // fields
     const std::string &rootw = root + ":wavefields";

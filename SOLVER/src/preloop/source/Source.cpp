@@ -41,7 +41,7 @@ std::shared_ptr<const Source> Source::buildInparam(int sindex) {
             sourceCentered = false;
             crd(0) = gm.getWithBounds(rooth + ":[0]", -90., 90.);
             crd(1) = gm.getWithBounds(rooth + ":[1]", -180., 180.);
-            ellipticity = gm.getWithDefault(root + ":ellipticity", true);
+            ellipticity = gm.get<bool>(root + ":ellipticity");
         }
     } else if (gm.contains(root + ":distance_azimuth")) {
         const std::string &rooth = root + ":distance_azimuth";
@@ -75,8 +75,7 @@ std::shared_ptr<const Source> Source::buildInparam(int sindex) {
     if (gm.contains(root + ":depth")) {
         useDepth = true;
         crd(2) = gm.get<double>(root + ":depth");
-        depthSolid = gm.getWithDefault(root + ":depth_below_solid_surface",
-                                       true);
+        depthSolid = gm.get<bool>(root + ":depth_below_solid_surface");
     } else if (gm.contains(root + ":radius")) {
         useDepth = false;
         crd(2) = gm.get<double>(root + ":radius");
@@ -86,7 +85,7 @@ std::shared_ptr<const Source> Source::buildInparam(int sindex) {
                                  "location:depth must exist. || "
                                  "Source name: " + sourceName);
     }
-    bool undulated = gm.getWithDefault(root + ":undulated_geometry", true);
+    bool undulated = gm.get<bool>(root + ":undulated_geometry");
     
     // construct and return
     return std::make_shared<const Source>(sourceName, axial,

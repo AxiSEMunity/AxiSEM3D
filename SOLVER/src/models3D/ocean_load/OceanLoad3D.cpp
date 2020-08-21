@@ -163,7 +163,7 @@ buildInparam(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
         ////////////// data //////////////
         const std::string &rootd = root + ":data_sum_rho_depth";
         const std::string &dataVarName = gm.get<std::string>(rootd + ":nc_var");
-        double factor = gm.getWithDefault(rootd + ":factor", 1.);
+        double factor = gm.get<double>(rootd + ":factor");
         bool superOnly = gm.get<bool>(root + ":store_grid_only_on_leaders");
         
         // construct

@@ -31,7 +31,7 @@ buildInparam(int sindex, const std::string &sourceName, double dt) {
         // use dt * 5. as the minimum (SPECFEM3D_GLOBE)
         hdur = std::max(hdur, dt * 5.);
         double decay = gm.getWithBounds(root + ":decay_factor", 0.);
-        double shift = gm.getWithDefault(root + ":time_shift", 0.);
+        double shift = gm.get<double>(root + ":time_shift");
         int order = gm.getWithLimits<int>(root + ":use_derivative_integral", {
             {"ERF", -1},
             {"GAUSSIAN", 0},
@@ -40,8 +40,7 @@ buildInparam(int sindex, const std::string &sourceName, double dt) {
         return std::make_unique<GaussianSTF>(hdur, decay, shift, order);
     } else if (className == "StreamSTF" || className == "NetCDF_STF") {
         // padding
-        const std::string &padding =
-        gm.getWithDefault<std::string>(root + ":padding", "NONE");
+        const std::string &padding = gm.get<std::string>(root + ":padding");
         StreamSTF::PaddingMode pm;
         double left = 0., right = 0.;
         if (padding == "NONE") {

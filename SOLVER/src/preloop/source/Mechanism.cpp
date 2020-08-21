@@ -36,7 +36,7 @@ buildInparam(int sindex, const std::string &sourceName) {
     // data
     const std::vector<double> &vec = gm.getVector<double>(root + ":data");
     eigen::DColX data = Eigen::Map<const eigen::DColX>(vec.data(), vec.size());
-    data *= gm.getWithDefault(root + ":unit", 1.);
+    data *= gm.get<double>(root + ":unit");
     return std::make_unique<Mechanism>(type, data);
 }
 

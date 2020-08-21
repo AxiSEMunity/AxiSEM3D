@@ -216,8 +216,7 @@ buildInparam(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
         double lengthUnit = 1., angleUnit = 1.;
         sg_tools::inparamUnits(gm, rootc, xy, lengthUnit, angleUnit);
         // other options
-        bool undulated =
-        gm.getWithDefault(rootc + ":undulated_geometry", false);
+        bool undulated = gm.get<bool>(rootc + ":undulated_geometry");
         bool center = gm.get<bool>(rootc + ":whole_element_inplane");
         
         ////////////// properties //////////////
@@ -235,7 +234,7 @@ buildInparam(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
             rootp + ":[" + bstring::toString(iprop) + "]:" + key;
             // var, factor, ref
             const std::string &vname = gm.get<std::string>(rootpi + ":nc_var");
-            double factor = gm.getWithDefault(rootpi + ":factor", 1.);
+            double factor = gm.get<double>(rootpi + ":factor");
             ReferenceKind ref = gm.getWithLimits<ReferenceKind>
             (rootpi + ":reference_kind", {
                 {"ABS", ReferenceKind::ABS},

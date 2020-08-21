@@ -118,8 +118,7 @@ buildInparam(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
         timer::gPreloopTimer.begin("Building 3D model: " + modelName);
         
         // activated or not
-        if (!inparam::gInparamModel.
-            getWithDefault(keyInparam + ":activated", true)) {
+        if (!inparam::gInparamModel.get<bool>(keyInparam + ":activated")) {
             timer::gPreloopTimer.message("Model is deactivated.");
             timer::gPreloopTimer.ended("Building 3D model: " + modelName);
             continue;

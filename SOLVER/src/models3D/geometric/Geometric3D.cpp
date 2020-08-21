@@ -159,7 +159,7 @@ buildInparam(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
         ////////////// data //////////////
         const std::string &rootu = root + ":undulation_data";
         const std::string &dataVarName = gm.get<std::string>(rootu + ":nc_var");
-        double factor = gm.getWithDefault(rootu + ":factor", 1.);
+        double factor = gm.get<double>(rootu + ":factor");
         bool superOnly = gm.get<bool>(root + ":store_grid_only_on_leaders");
         
         // construct
