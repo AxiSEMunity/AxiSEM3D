@@ -167,11 +167,29 @@ bool StructuredGridV3D::getProperties(const eigen::DMatX3 &spz,
     static const double err = std::numeric_limits<double>::lowest();
     const eigen::DRowX &valOut = eigen::DRowX::Constant(nProperties, err);
     for (int ipnt = 0; ipnt < nCardinals; ipnt++) {
-        const eigen::DRowX &val = mGrid->compute(crdGrid.row(ipnt), valOut);
+        int dimOutOfRange = 0;
+        const eigen::DRowX &val =
+        mGrid->compute(crdGrid.row(ipnt), valOut, dimOutOfRange);
         // check scope
         if (val(0) > err * .9) {
             inScopes.row(ipnt).fill(1);
             propValues.row(ipnt) = val;
+        } else {
+            // check out of range dimension
+            if (mElementCenter) {
+                if ((mSourceCentered && (!mXY) && dimOutOfRange == 0) ||
+                    dimOutOfRange == 2) {
+                    throw std::runtime_error
+                    ("StructuredGridV3D::getProperties || "
+                     "A GLL point of an element is out of inplane model range,"
+                     "|| but coordinates:whole_element_inplane is set to true."
+                     "|| Out-of_range coordinate = " +
+                     bstring::toString(crdGrid(ipnt, dimOutOfRange)) +
+                     "|| Out-of-range dimension = " +
+                     bstring::toString(dimOutOfRange) +
+                     "|| Model name = " + mModelName);
+                }
+            }
         }
     }
     

@@ -51,10 +51,16 @@
             # type: bool
             # note: compatible only with vertical = RADIUS
             undulated_geometry: false
-            # what: use element center for model scope check
+            # what: check inplane model range for the whole element
             # type: bool
-            # note: this feature allows for in-plane discontinuities
-            element_center_in_scope: true
+            # note: 1) if this parameter is set to true, the element center
+            #          will be used to determine whether an element is located
+            #          within the "inplane" model range
+            #       2) if its center is in range, all its GLL points must be
+            #          in range, or an exception will occur; users can extend
+            #          the model range slightly to allow for numerical errors
+            #       3) this parameter safely realizes inplane discontinuities
+            whole_element_inplane: true
         # parameters for properties
         properties:
             - VP:

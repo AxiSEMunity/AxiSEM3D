@@ -188,7 +188,7 @@ public:
     typedef Eigen::Matrix<T, 1, Eigen::Dynamic> TRowV;
     template <typename ArrayCS>
     TRowV compute(const ArrayCS &crdTarget,
-                  const TRowV &valOutOfRange) const {
+                  const TRowV &valOutOfRange, int &dimOutOfRange) const {
         // linear interp 0-1 points
         static std::array<std::array<int, D>, 2> index01;
         static std::array<std::array<double, D>, 2> factor01;
@@ -200,6 +200,7 @@ public:
                                    factor01[0][idim], factor01[1][idim]);
             } catch (...) {
                 // location out of range
+                dimOutOfRange = idim;
                 return valOutOfRange;
             }
         }
@@ -240,7 +241,18 @@ public:
         if (std::is_integral<T>::value) {
             data = data.array().round();
         }
+        
+        // return
+        dimOutOfRange = -1;
         return data.template cast<T>();
+    }
+    
+    // compute
+    template <typename ArrayCS>
+    TRowV compute(const ArrayCS &crdTarget,
+                  const TRowV &valOutOfRange) const {
+        static int dimOutOfRange = 0;
+        return compute(crdTarget, valOutOfRange, dimOutOfRange);
     }
     
     // compute single

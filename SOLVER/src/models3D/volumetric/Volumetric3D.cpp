@@ -217,9 +217,8 @@ buildInparam(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
         sg_tools::inparamUnits(gm, rootc, xy, lengthUnit, angleUnit);
         // other options
         bool undulated =
-        undulated = gm.getWithDefault(rootc + ":undulated_geometry", false);
-        bool center =
-        gm.getWithDefault(rootc + ":element_center_in_scope", false);
+        gm.getWithDefault(rootc + ":undulated_geometry", false);
+        bool center = gm.get<bool>(rootc + ":whole_element_inplane");
         
         ////////////// properties //////////////
         // size
