@@ -26,7 +26,7 @@ public:
     virtual ~ElementOp() = default;
     
     ///////////////////////// template functions /////////////////////////
-    // record: in-plane downsampling and making real
+    // record: inplane downsampling and making real
     template <int D,
     typename CMatXND =
     Eigen::Matrix<numerical::ComplexR, Eigen::Dynamic, spectral::nPEM * D>,
@@ -36,7 +36,7 @@ public:
     void recordToElem(CMatXND &cxnd, int nu_1, RMatXND_RM &rxnd,
                       const eigen::CMatXX &expIAlphaPhi,
                       eigen::RTensor4 &field, int bufferLine) const {
-        // in-plane downsampling
+        // inplane downsampling
         int npnts = (int)mIPnts.size();
         if (npnts != spectral::nPEM) {
             for (int dim = 0; dim < D; dim++) {

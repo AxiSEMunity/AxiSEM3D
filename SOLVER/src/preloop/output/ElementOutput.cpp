@@ -154,7 +154,7 @@ verbose(double dt, int numRecordSteps, int npnts,
     ss << boxEquals(4, width, "vertical range", range(mMinZ, mMaxZ));
     
     //////// inplane ////////
-    ss << boxSubTitle(2, "In-plane sampling");
+    ss << boxSubTitle(2, "Inplane sampling");
     if (mEdgeDim == 0) {
         ss << boxEquals(4, width, "edge dimension", "horizontal");
         ss << boxEquals(4, width, "edge position", mEdgeCoord);
@@ -304,7 +304,7 @@ void ElementOutput::release(const SE_Model &sem, Domain &domain, double dt,
         timer::gPreloopTimer.ended("Selecting elements in mesh");
         
         //////////// edge and npnts ////////////
-        timer::gPreloopTimer.begin("Handling in-plane sampling");
+        timer::gPreloopTimer.begin("Handling inplane sampling");
         std::vector<int> opQuadsUse;
         std::vector<std::vector<int>> ipntsElem;
         std::vector<int> ipntsElemUniform;
@@ -360,7 +360,7 @@ void ElementOutput::release(const SE_Model &sem, Domain &domain, double dt,
                 }
             }
         }
-        timer::gPreloopTimer.ended("Handling in-plane sampling");
+        timer::gPreloopTimer.ended("Handling inplane sampling");
         
         //////////// azimuth ////////////
         timer::gPreloopTimer.begin("Handling azimuthal sampling");

@@ -61,7 +61,7 @@ private:
     double mMinR, mMaxR;
     double mMinZ, mMaxZ;
     
-    // in-plane
+    // inplane
     const int mEdgeDim;
     const double mEdgeCoord;
     const std::vector<int> mIPols;

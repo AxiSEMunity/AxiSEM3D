@@ -185,7 +185,7 @@ list_of_3D_models:
             undulated_geometry: false
             # what: use element center for model scope check
             # type: bool
-            # note: this feature allows for in-plane discontinuities
+            # note: this feature allows for inplane discontinuities
             element_center_in_scope: true
         # parameters for properties
         properties:

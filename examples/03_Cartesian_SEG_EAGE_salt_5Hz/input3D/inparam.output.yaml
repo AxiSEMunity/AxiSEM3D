@@ -47,7 +47,7 @@ list_of_element_groups:
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
             vertical_range: [0, 1e10]
-        # in-plane sampling on each element
+        # inplane sampling on each element
         inplane:
             # what: edge dimension
             # type: string
@@ -69,7 +69,7 @@ list_of_element_groups:
             # only: FULL / a subset of [0, 1, 2, ..., npol], where npol is
             #       the polynomial order of spectral elements, given in
             #       CMakeLists.txt
-            # note: use this parameter for in-plane downsampling;
+            # note: use this parameter for inplane downsampling;
             #       for example, when npol = 4:
             #       - [2]:       only the element center
             #       - [0, 4]:    only the 4 vertices
@@ -182,7 +182,7 @@ list_of_element_groups:
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
             vertical_range: [0, 1e10]
-        # in-plane sampling on each element
+        # inplane sampling on each element
         inplane:
             # what: edge dimension
             # type: string
@@ -204,7 +204,7 @@ list_of_element_groups:
             # only: FULL / a subset of [0, 1, 2, ..., npol], where npol is
             #       the polynomial order of spectral elements, given in
             #       CMakeLists.txt
-            # note: use this parameter for in-plane downsampling;
+            # note: use this parameter for inplane downsampling;
             #       for example, when npol = 4:
             #       - [2]:       only the element center
             #       - [0, 4]:    only the 4 vertices

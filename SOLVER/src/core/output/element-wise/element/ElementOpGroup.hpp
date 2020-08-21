@@ -241,7 +241,7 @@ private:
     const typename
     ElementOpInference<ElementOpT>::ChannelOptions mChannelOptions;
     
-    // in-plane
+    // inplane
     const int mNPnts;
     
     // azimuth
