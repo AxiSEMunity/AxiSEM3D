@@ -27,9 +27,10 @@ void Undulation::finishing3D() const {
     int nr = (int)getElemental().rows();
     sFFT_N1.addNR(nr);
     sFFT_N3.addNR(nr);
-    if (sDeltaZ_Fourier.size() < nr) {
-        sDeltaZ_Fourier.resize(nr);
-        sDeltaZ_SPZ_Fourier.resize(nr);
+    int nc = nr / 2 + 1;
+    if (sDeltaZ_Fourier.size() < nc) {
+        sDeltaZ_Fourier.resize(nc);
+        sDeltaZ_SPZ_Fourier.resize(nc);
     }
 }
 
@@ -209,11 +210,12 @@ computeNormal3D(const eigen::DCol2 &n1D,
     const eigen::DColX &K3 = J0.cwiseProduct(J0);
     
     // rotate n1D to RTZ
-    const eigen::DCol2 &rt = geodesy::sz2rtheta(sz.col(ipnt).eval(), false);
-    double sint = sin(rt(1));
-    double cost = cos(rt(1));
+    double sint = 0., cost = 0.;
     eigen::DCol2 n1D_RZ = n1D;
     if (!geodesy::isCartesian()) {
+        const eigen::DCol2 &rt = geodesy::sz2rtheta(sz.col(ipnt).eval(), false);
+        sint = sin(rt(1));
+        cost = cos(rt(1));
         n1D_RZ(0) = n1D(0) * cost - n1D(1) * sint;
         n1D_RZ(1) = n1D(1) * cost + n1D(0) * sint;
     }
