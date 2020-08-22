@@ -67,10 +67,10 @@ namespace op1D_3D {
             R = A.cwiseProduct(B);
         } else if (A.rows() == 1) {
             // 1Dx3D
-            R = (B * A.asDiagonal()).eval();
+            R = (B * A.asDiagonal()).eval(); // older gcc needs eval()
         } else if (B.rows() == 1) {
             // 3Dx1D
-            R = (A * B.asDiagonal()).eval();
+            R = (A * B.asDiagonal()).eval(); // older gcc needs eval()
         } else {
             throw std::runtime_error("op1D_3D::times || "
                                      "Incompatible dimemsions.");
@@ -97,7 +97,7 @@ namespace op1D_3D {
             me += in;
         } else if (me.rows() == 1) {
             // add 3D to 1D
-            me = in.rowwise() + me.row(0);
+            me = (in.rowwise() + me.row(0)).eval(); // older gcc needs eval()
         } else if (in.rows() == 1) {
             // add 1D to 3D
             me.rowwise() += in.row(0);
