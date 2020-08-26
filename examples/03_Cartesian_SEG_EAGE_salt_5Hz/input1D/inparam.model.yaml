@@ -103,12 +103,12 @@ absorbing_boundary:
         #          pattern is automatically handled by the solver
         #       4) the default is an empirical expression from
         #          Haindl et al., 2020
-        gamma_expr_solid: 2.2 / T0 * (VS / VP)^2 * exp(-0.08 * SPAN / (VP * T0))
+        gamma_expr_solid: 1.1 / T0 * (VS / VP)^2 * exp(-0.04 * SPAN / (VP * T0))
         
         # what: expression of γ-factor in fluid domain
         # type: math expression
         # note: same as gamma_expr_solid but without VS dependency
-        gamma_expr_fluid: 1.76 / T0 * exp(-0.08 * SPAN / (VP * T0))
+        gamma_expr_fluid: 0.88 / T0 * exp(-0.04 * SPAN / (VP * T0))
 
 
 ######################## attenuation ########################
