@@ -99,11 +99,11 @@ ElementOutput::buildInparam(int gindex, double dt) {
     
     // fields
     const std::string &rootw = root + ":wavefields";
+    // ENZ and xyz make no sense
     channel::WavefieldCS wcs = gm.getWithLimits<channel::WavefieldCS>
     (rootw + ":coordinate_frame", {
         {"spz", channel::WavefieldCS::spz},
-        {"RTZ", channel::WavefieldCS::RTZ},
-        {"ENZ", channel::WavefieldCS::ENZ}});
+        {"RTZ", channel::WavefieldCS::RTZ}});
     bool fluid = gm.getWithLimits<bool>(rootw + ":medium", {
         {"SOLID", false}, {"FLUID", true}});
     const std::vector<std::string> userChannels =

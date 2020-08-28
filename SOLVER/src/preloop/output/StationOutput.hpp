@@ -23,14 +23,14 @@ class StationOutput {
 public:
     // constructor
     StationOutput(const std::string &groupName, const std::string &fileName,
-                  bool sourceCentered, bool ellipticity,
+                  bool sourceCentered, bool xy, bool ellipticity,
                   bool useDepth, bool depthSolid, bool undulatedGeometry,
                   channel::WavefieldCS wcs, bool fluid,
                   const std::vector<std::string> &userChannels,
                   double samplingPeriod,
                   Format format, int bufferSize, bool flush):
     mGroupName(groupName), mFileName(fileName),
-    mSourceCentered(sourceCentered), mEllipticity(ellipticity),
+    mSourceCentered(sourceCentered), mXY(xy), mEllipticity(ellipticity),
     mUseDepth(useDepth), mDepthSolid(depthSolid),
     mUndulatedGeometry(undulatedGeometry),
     mWCS(wcs), mFluid(fluid), mUserChannels(userChannels),
@@ -60,6 +60,7 @@ private:
     // locations
     const std::string mFileName;
     const bool mSourceCentered;
+    const bool mXY;
     const bool mEllipticity;
     const bool mUseDepth;
     const bool mDepthSolid;

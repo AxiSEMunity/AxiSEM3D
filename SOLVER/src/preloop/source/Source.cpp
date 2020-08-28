@@ -96,7 +96,7 @@ std::shared_ptr<const Source> Source::buildInparam(int sindex) {
 // compute spz
 eigen::DRow3 Source::
 computeSPZ(const SE_Model &sem, const eigen::DRow3 &crdIn,
-           bool sourceCentered, bool ellipticity,
+           bool sourceCentered, bool xy, bool ellipticity,
            bool useDepth, bool depthSolid, bool undulatedGeometry,
            const std::string &errInfo, bool enforceOnAxis) {
     // result
@@ -119,12 +119,20 @@ computeSPZ(const SE_Model &sem, const eigen::DRow3 &crdIn,
     } else {
         // horizontal
         if (sourceCentered) {
-            if (!geodesy::isCartesian()) {
-                // (theta, phi, r) -> spz
-                double r = crd(2);
-                double theta = crd(0);
-                crd(0) = r * sin(theta);
-                crd(2) = r * cos(theta);
+            if (xy) {
+                // xyz -> spz, for both spherical and Cartesian
+                double x = crd(0);
+                double y = crd(1);
+                crd(0) = sqrt(x * x + y * y);
+                crd(1) = (crd(0) < numerical::dEpsilon) ? 0. : atan2(y, x);
+            } else {
+                if (!geodesy::isCartesian()) {
+                    // (theta, phi, r) -> spz
+                    double r = crd(2);
+                    double theta = crd(0);
+                    crd(0) = r * sin(theta);
+                    crd(2) = r * cos(theta);
+                }
             }
         } else {
             // geographic to source-centered
@@ -311,7 +319,7 @@ void Source::release(const SE_Model &sem, Domain &domain, double dt,
         // compute spz
         const eigen::DRow3 &spz =
         computeSPZ(sem, source->mCrdIn,
-                   source->mSourceCentered, source->mEllipticity,
+                   source->mSourceCentered, false, source->mEllipticity,
                    source->mUseDepth, source->mDepthSolid,
                    source->mUndulatedGeometry,
                    "Source name: " + source->mName, source->mAxial);
@@ -367,7 +375,7 @@ void Source::release(const SE_Model &sem, Domain &domain, double dt,
         const std::shared_ptr<const Source> &source = sources[sindex];
         const eigen::DRow3 &spz =
         computeSPZ(sem, source->mCrdIn,
-                   source->mSourceCentered, source->mEllipticity,
+                   source->mSourceCentered, false, source->mEllipticity,
                    source->mUseDepth, source->mDepthSolid,
                    source->mUndulatedGeometry,
                    "Source name: " + source->mName, source->mAxial);

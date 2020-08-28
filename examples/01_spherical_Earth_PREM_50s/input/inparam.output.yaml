@@ -36,11 +36,12 @@ list_of_station_groups:
             station_file: GSN.txt
             # what: horizontal coordinates x1 and x2
             # type: string
-            # only: LATITUDE_LONGITUDE / DISTANCE_AZIMUTH
+            # only: LATITUDE_LONGITUDE / DISTANCE_AZIMUTH / XY_CARTESIAN
             # note: 1) the unit for LATITUDE_LONGITUDE is degree
             #       2) the unit for DISTANCE is either radian (for a
             #          spherical mesh) or meter (for a Cartesian mesh);
             #          the unit for AZIMUTH is radian
+            #       3) the unit for XY_CARTESIAN is meter
             horizontal_x1_x2: LATITUDE_LONGITUDE
             # what: vertical coordinate x3
             # type: string
@@ -64,10 +65,11 @@ list_of_station_groups:
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
-            # only: spz / RTZ / ENZ
+            # only: spz / RTZ / ENZ / xyz
             # note: 1) spz: (s, phi, z) or AxiSEM3D-intrinsic
             #       2) RTZ: (radial, transpose, vertical)
             #       3) ENZ: (east, north, vertical)
+            #       4) xyz: (x, y, z) in source-centered frame
             coordinate_frame: RTZ
             # what: type of medium
             # type: string
@@ -153,11 +155,12 @@ list_of_station_groups:
             station_file: US_TA.txt
             # what: horizontal coordinates x1 and x2
             # type: string
-            # only: LATITUDE_LONGITUDE / DISTANCE_AZIMUTH
+            # only: LATITUDE_LONGITUDE / DISTANCE_AZIMUTH / XY_CARTESIAN
             # note: 1) the unit for LATITUDE_LONGITUDE is degree
             #       2) the unit for DISTANCE is either radian (for a
             #          spherical mesh) or meter (for a Cartesian mesh);
             #          the unit for AZIMUTH is radian
+            #       3) the unit for XY_CARTESIAN is meter
             horizontal_x1_x2: LATITUDE_LONGITUDE
             # what: vertical coordinate x3
             # type: string
@@ -181,10 +184,11 @@ list_of_station_groups:
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
-            # only: spz / RTZ / ENZ
+            # only: spz / RTZ / ENZ / xyz
             # note: 1) spz: (s, phi, z) or AxiSEM3D-intrinsic
             #       2) RTZ: (radial, transpose, vertical)
             #       3) ENZ: (east, north, vertical)
+            #       4) xyz: (x, y, z) in source-centered frame
             coordinate_frame: RTZ
             # what: type of medium
             # type: string

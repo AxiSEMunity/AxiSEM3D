@@ -45,7 +45,7 @@ public:
     // compute spz
     static eigen::DRow3
     computeSPZ(const SE_Model &sem, const eigen::DRow3 &crdIn,
-               bool sourceCentered, bool ellipticity,
+               bool sourceCentered, bool xy, bool ellipticity,
                bool useDepth, bool depthSolid, bool undulatedGeometry,
                const std::string &errInfo, bool enforceOnAxis);
     

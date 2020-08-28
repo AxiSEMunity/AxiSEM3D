@@ -20,11 +20,13 @@ namespace channel {
     // spz: s, phi, z (solver intrinsic)
     // RTZ: radial, transverse, vertical
     // ENZ: east, north, vertical
-    enum class WavefieldCS {spz, RTZ, ENZ};
+    // xyz: x, y, z in source-centered
+    enum class WavefieldCS {spz, RTZ, ENZ, xyz};
     const std::map<WavefieldCS, std::string> WavefieldCS_Str = {
         {WavefieldCS::spz, "spz"},
         {WavefieldCS::RTZ, "RTZ"},
-        {WavefieldCS::ENZ, "ENZ"}};
+        {WavefieldCS::ENZ, "ENZ"},
+        {WavefieldCS::xyz, "xyz"}};
     
     // solid
     namespace solid {

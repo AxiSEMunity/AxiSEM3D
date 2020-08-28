@@ -82,6 +82,9 @@ protected:
             if (wcs == channel::WavefieldCS::ENZ) {
                 // RTZ (= SPZ) -> ENZ
                 rotate(field, bufferLine, 2, mBAzPlus90);
+            } else if (wcs == channel::WavefieldCS::xyz) {
+                // RTZ (= SPZ) -> XYZ
+                rotate(field, bufferLine, 2, -mPhi);
             }
         } else {
             if (fieldInRTZ) {
@@ -91,15 +94,24 @@ protected:
                 } else if (wcs == channel::WavefieldCS::ENZ) {
                     // RTZ -> ENZ
                     rotate(field, bufferLine, 2, mBAzPlus90);
+                } else if (wcs == channel::WavefieldCS::xyz) {
+                    // RTZ -> SPZ
+                    rotate(field, bufferLine, 1, -mTheta);
+                    // SPZ -> XYZ
+                    rotate(field, bufferLine, 2, -mPhi);
                 }
             } else {
-                if (wcs != channel::WavefieldCS::spz) {
+                if (wcs == channel::WavefieldCS::RTZ) {
                     // SPZ -> RTZ
                     rotate(field, bufferLine, 1, mTheta);
-                    if (wcs == channel::WavefieldCS::ENZ) {
-                        // RTZ -> ENZ
-                        rotate(field, bufferLine, 2, mBAzPlus90);
-                    }
+                } else if (wcs == channel::WavefieldCS::ENZ) {
+                    // SPZ -> RTZ
+                    rotate(field, bufferLine, 1, mTheta);
+                    // RTZ -> ENZ
+                    rotate(field, bufferLine, 2, mBAzPlus90);
+                } else if (wcs == channel::WavefieldCS::xyz) {
+                    // SPZ -> XYZ
+                    rotate(field, bufferLine, 2, -mPhi);
                 }
             }
         }

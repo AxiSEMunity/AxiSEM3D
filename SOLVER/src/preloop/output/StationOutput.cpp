@@ -41,7 +41,11 @@ StationOutput::buildInparam(int gindex, double dt) {
     const std::string &rootl = root + ":locations";
     const std::string &fileName = gm.get<std::string>(rootl + ":station_file");
     bool sourceCentered = gm.getWithLimits<bool>(rootl + ":horizontal_x1_x2", {
-        {"LATITUDE_LONGITUDE", false}, {"DISTANCE_AZIMUTH", true}});
+        {"LATITUDE_LONGITUDE", false}, {"DISTANCE_AZIMUTH", true},
+        {"XY_CARTESIAN", true}});
+    bool xy = gm.getWithLimits<bool>(rootl + ":horizontal_x1_x2", {
+        {"LATITUDE_LONGITUDE", false}, {"DISTANCE_AZIMUTH", false},
+        {"XY_CARTESIAN", true}});
     bool useDepth = gm.getWithLimits<bool>(rootl + ":vertical_x3", {
         {"RADIUS", false}, {"DEPTH", true}});
     bool ellipticity = false;
@@ -60,7 +64,8 @@ StationOutput::buildInparam(int gindex, double dt) {
     (rootw + ":coordinate_frame", {
         {"spz", channel::WavefieldCS::spz},
         {"RTZ", channel::WavefieldCS::RTZ},
-        {"ENZ", channel::WavefieldCS::ENZ}});
+        {"ENZ", channel::WavefieldCS::ENZ},
+        {"xyz", channel::WavefieldCS::xyz}});
     bool fluid = gm.getWithLimits<bool>(rootw + ":medium", {
         {"SOLID", false}, {"FLUID", true}});
     const std::vector<std::string> userChannels =
@@ -94,7 +99,7 @@ StationOutput::buildInparam(int gindex, double dt) {
     
     // construct and return
     return std::make_shared
-    <const StationOutput>(groupName, fileName, sourceCentered, ellipticity,
+    <const StationOutput>(groupName, fileName, sourceCentered, xy, ellipticity,
                           useDepth, depthSolid, undulated,
                           wcs, fluid, userChannels,
                           samplingPeriod, format, bufferSize, flush);
@@ -287,7 +292,7 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
             // compute spz
             const eigen::DRow3 &spz = Source::
             computeSPZ(sem, stCrds.row(ist),
-                       stgrp->mSourceCentered, stgrp->mEllipticity,
+                       stgrp->mSourceCentered, stgrp->mXY, stgrp->mEllipticity,
                        stgrp->mUseDepth, stgrp->mDepthSolid,
                        stgrp->mUndulatedGeometry,
                        "Station group name: " + stgrp->mGroupName, false);
@@ -308,7 +313,7 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
         mpi::aggregate(stationRank, MPI_ALL, MPI_MIN);
         
         // check if all stations are located
-        if (stationRank.size() != numStations && mpi::root()) {
+        if (stationRank.size() != numStations) {
             for (int ist = 0; ist < numStations; ist++) {
                 if (stationRank.find(ist) == stationRank.end()) {
                     throw std::runtime_error
@@ -382,7 +387,7 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
             // compute spz
             const eigen::DRow3 &spz = Source::
             computeSPZ(sem, stCrds.row(ist),
-                       stgrp->mSourceCentered, stgrp->mEllipticity,
+                       stgrp->mSourceCentered, stgrp->mXY, stgrp->mEllipticity,
                        stgrp->mUseDepth, stgrp->mDepthSolid,
                        stgrp->mUndulatedGeometry,
                        "Station group name: " + stgrp->mGroupName, false);
