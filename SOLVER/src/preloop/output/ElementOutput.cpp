@@ -26,7 +26,8 @@ using namespace bstring;
 
 // build from inparam
 std::shared_ptr<const ElementOutput>
-ElementOutput::buildInparam(int gindex, double dt) {
+ElementOutput::buildInparam(int gindex, double dt,
+                            double tmin_simu, double tmax_simu) {
     // group name and key in inparam
     const InparamYAML &gm = inparam::gInparamOutput;
     std::string root = "list_of_element_groups";
@@ -122,6 +123,13 @@ ElementOutput::buildInparam(int gindex, double dt) {
     } else {
         samplingPeriod = cast<double>(strSP, "StationOutput::buildInparam");
     }
+    // time window
+    double tmin = tmin_simu;
+    double tmax = tmax_simu;
+    if (gm.get<std::string>(roott + ":time_window") != "FULL") {
+        tmin = std::max(tmin_simu, gm.get<double>(roott + ":time_window:[0]"));
+        tmax = std::min(tmax_simu, gm.get<double>(roott + ":time_window:[1]"));
+    }
     
     // file options
     const std::string &rootf = root + ":file_options";
@@ -136,7 +144,8 @@ ElementOutput::buildInparam(int gindex, double dt) {
                           edgeDim, edgeCoord, ipols,
                           phis, lats, lons, naSpace,
                           wcs, fluid, userChannels,
-                          samplingPeriod, bufferSize, flush);
+                          samplingPeriod, tmin, tmax,
+                          bufferSize, flush);
 }
 
 // verbose
@@ -230,6 +239,7 @@ verbose(double dt, int numRecordSteps, int npnts,
         ss << boxEquals(6, width - 1, "rounded to Δt", sampleIntv * dt);
         ss << boxEquals(4, width, "# time steps per sample", sampleIntv);
     }
+    ss << boxEquals(4, width, "time window", range(mTmin, mTmax));
     
     //////// file options ////////
     ss << boxSubTitle(2, "File options");
@@ -257,6 +267,7 @@ verbose(double dt, int numRecordSteps, int npnts,
 
 // release ElementOp to domain
 void ElementOutput::release(const SE_Model &sem, Domain &domain, double dt,
+                            double tmin_simu, double tmax_simu,
                             int nTotalSteps, double distTol) {
     // group count
     int groupCount =
@@ -275,7 +286,8 @@ void ElementOutput::release(const SE_Model &sem, Domain &domain, double dt,
         
         //////////// inparam ////////////
         timer::gPreloopTimer.begin("Building element group from inparam");
-        std::shared_ptr<const ElementOutput> elgrp = buildInparam(gindex, dt);
+        std::shared_ptr<const ElementOutput> elgrp =
+        buildInparam(gindex, dt, tmin_simu, tmax_simu);
         timer::gPreloopTimer.message("group name = " + elgrp->mGroupName);
         if (groupNames.find(elgrp->mGroupName) != groupNames.end()) {
             throw std::runtime_error("ElementOutput::release || "
@@ -392,9 +404,22 @@ void ElementOutput::release(const SE_Model &sem, Domain &domain, double dt,
         }
         
         // total number of steps recorded
-        int nRecSteps = nTotalSteps / sampleIntv;
-        if (nTotalSteps % sampleIntv > 0) {
+        int nRecSteps = 0;
+        for (int tstep = 0; tstep < nTotalSteps; tstep++) {
+            if (tstep % sampleIntv > 0) {
+                continue;
+            }
+            double t = tmin_simu + tstep * dt;
+            if (t < elgrp->mTmin - dt / 2. || t > elgrp->mTmax + dt / 2.) {
+                continue;
+            }
             nRecSteps++;
+        }
+        if (nRecSteps == 0) {
+            throw std::runtime_error
+            ("ElementOutput::release || "
+             "No time step to record in the given time window. ||"
+             "Element group name: " + elgrp->mGroupName);
         }
         
         // io
@@ -416,12 +441,14 @@ void ElementOutput::release(const SE_Model &sem, Domain &domain, double dt,
                      (int)elgrp->mIPols.size());
         if (elgrp->mFluid) {
             EGF = std::make_unique<ElementOpGroup<ElementOpFluid>>
-            (elgrp->mGroupName, nRecSteps, sampleIntv, elgrp->mBufferSize,
+            (elgrp->mGroupName, nRecSteps, sampleIntv,
+             elgrp->mTmin - dt / 2., elgrp->mTmax + dt / 2., elgrp->mBufferSize,
              elgrp->mWCS, elgrp->mUserChannels,
              npnts, phisToUse, elgrp->mNaSpace, elementIO);
         } else {
             EGS = std::make_unique<ElementOpGroup<ElementOpSolid>>
-            (elgrp->mGroupName, nRecSteps, sampleIntv, elgrp->mBufferSize,
+            (elgrp->mGroupName, nRecSteps, sampleIntv,
+             elgrp->mTmin - dt / 2., elgrp->mTmax + dt / 2., elgrp->mBufferSize,
              elgrp->mWCS, elgrp->mUserChannels,
              npnts, phisToUse, elgrp->mNaSpace, elementIO);
         }

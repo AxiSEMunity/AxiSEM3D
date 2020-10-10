@@ -28,20 +28,22 @@ public:
                   const std::vector<double> &lons, int naSpace,
                   channel::WavefieldCS wcs, bool fluid,
                   const std::vector<std::string> &userChannels,
-                  double samplingPeriod, int bufferSize, bool flush):
+                  double samplingPeriod, double tmin, double tmax,
+                  int bufferSize, bool flush):
     mGroupName(groupName),
     mMinR(minR), mMaxR(maxR), mMinZ(minZ), mMaxZ(maxZ),
     mEdgeDim(edgeDim), mEdgeCoord(edgeCoord), mIPols(ipols),
     mPhis(phis), mLats(lats), mLons(lons), mNaSpace(naSpace),
     mWCS(wcs), mFluid(fluid), mUserChannels(userChannels),
-    mSamplingPeriod(samplingPeriod), mBufferSize(bufferSize), mFlush(flush) {
+    mSamplingPeriod(samplingPeriod), mTmin(tmin), mTmax(tmax),
+    mBufferSize(bufferSize), mFlush(flush) {
         // nothing
     }
     
 private:
     // build from inparam
     static std::shared_ptr<const ElementOutput>
-    buildInparam(int gindex, double dt);
+    buildInparam(int gindex, double dt, double tmin_simu, double tmax_simu);
     
     // verbose
     std::string verbose(double dt, int numRecordSteps, int npnts,
@@ -50,6 +52,7 @@ private:
 public:
     // release ElementOp to domain
     static void release(const SE_Model &sem, Domain &domain, double dt,
+                        double tmin_simu, double tmax_simu,
                         int nTotalSteps, double distTol);
     
 private:
@@ -79,6 +82,7 @@ private:
     
     // temporal
     const double mSamplingPeriod;
+    const double mTmin, mTmax;
     
     // file
     const int mBufferSize;

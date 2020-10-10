@@ -27,14 +27,14 @@ public:
                   bool useDepth, bool depthSolid, bool undulatedGeometry,
                   channel::WavefieldCS wcs, bool fluid,
                   const std::vector<std::string> &userChannels,
-                  double samplingPeriod,
+                  double samplingPeriod, double tmin, double tmax,
                   Format format, int bufferSize, bool flush):
     mGroupName(groupName), mFileName(fileName),
     mSourceCentered(sourceCentered), mXY(xy), mEllipticity(ellipticity),
     mUseDepth(useDepth), mDepthSolid(depthSolid),
     mUndulatedGeometry(undulatedGeometry),
     mWCS(wcs), mFluid(fluid), mUserChannels(userChannels),
-    mSamplingPeriod(samplingPeriod),
+    mSamplingPeriod(samplingPeriod), mTmin(tmin), mTmax(tmax),
     mFormat(format), mBufferSize(bufferSize), mFlush(flush) {
         // nothing
     }
@@ -42,7 +42,7 @@ public:
 private:
     // build from inparam
     static std::shared_ptr<const StationOutput>
-    buildInparam(int gindex, double dt);
+    buildInparam(int gindex, double dt, double tmin_simu, double tmax_simu);
     
     // verbose
     std::string verbose(double dt, int numRecordSteps, int numStations) const;
@@ -50,7 +50,7 @@ private:
 public:
     // release stations to domain
     static void release(const SE_Model &sem, Domain &domain, double dt,
-                        int nTotalSteps);
+                        double tmin_simu, double tmax_simu, int nTotalSteps);
     
 private:
     /////////////// raw data ///////////////
@@ -73,6 +73,7 @@ private:
     
     // temporal
     const double mSamplingPeriod;
+    const double mTmin, mTmax;
     
     // file
     const Format mFormat;

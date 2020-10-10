@@ -29,7 +29,8 @@ using namespace bstring;
 
 // build from inparam
 std::shared_ptr<const StationOutput>
-StationOutput::buildInparam(int gindex, double dt) {
+StationOutput::buildInparam(int gindex, double dt,
+                            double tmin_simu, double tmax_simu) {
     // group name and key in inparam
     const InparamYAML &gm = inparam::gInparamOutput;
     std::string root = "list_of_station_groups";
@@ -84,6 +85,13 @@ StationOutput::buildInparam(int gindex, double dt) {
     } else {
         samplingPeriod = cast<double>(strSP, "StationOutput::buildInparam");
     }
+    // time window
+    double tmin = tmin_simu;
+    double tmax = tmax_simu;
+    if (gm.get<std::string>(roott + ":time_window") != "FULL") {
+        tmin = std::max(tmin_simu, gm.get<double>(roott + ":time_window:[0]"));
+        tmax = std::min(tmax_simu, gm.get<double>(roott + ":time_window:[1]"));
+    }
     
     // file options
     const std::string &rootf = root + ":file_options";
@@ -99,10 +107,12 @@ StationOutput::buildInparam(int gindex, double dt) {
     
     // construct and return
     return std::make_shared
-    <const StationOutput>(groupName, fileName, sourceCentered, xy, ellipticity,
+    <const StationOutput>(groupName, fileName,
+                          sourceCentered, xy, ellipticity,
                           useDepth, depthSolid, undulated,
                           wcs, fluid, userChannels,
-                          samplingPeriod, format, bufferSize, flush);
+                          samplingPeriod, tmin, tmax,
+                          format, bufferSize, flush);
 }
 
 // verbose
@@ -169,6 +179,7 @@ verbose(double dt, int numRecordSteps, int numStations) const {
         ss << boxEquals(6, width - 1, "rounded to Δt", sampleIntv * dt);
         ss << boxEquals(4, width, "# time steps per sample", sampleIntv);
     }
+    ss << boxEquals(4, width, "time window", range(mTmin, mTmax));
     
     //////// file options ////////
     ss << boxSubTitle(2, "File options");
@@ -196,6 +207,7 @@ verbose(double dt, int numRecordSteps, int numStations) const {
 
 // release stations to domain
 void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
+                            double tmin_simu, double tmax_simu,
                             int nTotalSteps) {
     // group count
     int groupCount =
@@ -214,7 +226,8 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
         
         //////////// inparam ////////////
         timer::gPreloopTimer.begin("Building station group from inparam");
-        std::shared_ptr<const StationOutput> stgrp = buildInparam(gindex, dt);
+        std::shared_ptr<const StationOutput> stgrp =
+        buildInparam(gindex, dt, tmin_simu, tmax_simu);
         timer::gPreloopTimer.message("group name = " + stgrp->mGroupName);
         if (groupNames.find(stgrp->mGroupName) != groupNames.end()) {
             throw std::runtime_error("StationOutput::release || "
@@ -340,9 +353,22 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
         }
         
         // total number of steps recorded
-        int nRecSteps = nTotalSteps / sampleIntv;
-        if (nTotalSteps % sampleIntv > 0) {
+        int nRecSteps = 0;
+        for (int tstep = 0; tstep < nTotalSteps; tstep++) {
+            if (tstep % sampleIntv > 0) {
+                continue;
+            }
+            double t = tmin_simu + tstep * dt;
+            if (t < stgrp->mTmin - dt / 2. || t > stgrp->mTmax + dt / 2.) {
+                continue;
+            }
             nRecSteps++;
+        }
+        if (nRecSteps == 0) {
+            throw std::runtime_error
+            ("StationOutput::release || "
+             "No time step to record in the given time window. ||"
+             "Station group name: " + stgrp->mGroupName);
         }
         
         // io
@@ -367,11 +393,13 @@ void StationOutput::release(const SE_Model &sem, Domain &domain, double dt,
         // but only initialize one (stationIO can be used only once)
         if (stgrp->mFluid) {
             SGF = std::make_unique<StationGroup<StationFluid>>
-            (stgrp->mGroupName, nRecSteps, sampleIntv, stgrp->mBufferSize,
+            (stgrp->mGroupName, nRecSteps, sampleIntv,
+             stgrp->mTmin - dt / 2., stgrp->mTmax + dt / 2., stgrp->mBufferSize,
              stgrp->mWCS, stgrp->mUserChannels, stationIO);
         } else {
             SGS = std::make_unique<StationGroup<StationSolid>>
-            (stgrp->mGroupName, nRecSteps, sampleIntv, stgrp->mBufferSize,
+            (stgrp->mGroupName, nRecSteps, sampleIntv,
+             stgrp->mTmin - dt / 2., stgrp->mTmax + dt / 2., stgrp->mBufferSize,
              stgrp->mWCS, stgrp->mUserChannels, stationIO);
         }
         

@@ -112,6 +112,11 @@ list_of_station_groups:
             # note: DT stands for Δt of the simulation; DTx3 means
             #       sampling period = Δt * 3
             sampling_period: DT
+            # what: time window
+            # type: string / array of double
+            # only: FULL / [t0, t1]
+            # note: use FULL to record the whole simulation
+            time_window: FULL
         # file options
         file_options:
             # what: output file format
@@ -231,6 +236,11 @@ list_of_station_groups:
             # note: DT stands for Δt of the simulation; DTx3 means
             #       sampling period = Δt * 3
             sampling_period: 5.
+            # what: time window
+            # type: string / array of double
+            # only: FULL / [t0, t1]
+            # note: use FULL to record the whole simulation
+            time_window: FULL
         # file options
         file_options:
             # what: output file format

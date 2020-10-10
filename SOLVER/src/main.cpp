@@ -155,12 +155,14 @@ int main(int argc, char *argv[]) {
         // station output
         timer::gPreloopTimer.begin("Station groups", '*');
         StationOutput::release(*sem, *domain, dt,
+                               timeScheme->getT0(), timeScheme->getT1(),
                                timeScheme->getNumTimeSteps());
         timer::gPreloopTimer.ended("Station groups", '*');
         
         // element output
         timer::gPreloopTimer.begin("Element groups", '*');
         ElementOutput::release(*sem, *domain, dt,
+                               timeScheme->getT0(), timeScheme->getT1(),
                                timeScheme->getNumTimeSteps(), distTol);
         timer::gPreloopTimer.ended("Element groups", '*');
         

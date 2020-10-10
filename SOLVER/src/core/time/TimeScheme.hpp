@@ -45,6 +45,16 @@ public:
         return mNumTimeSteps;
     }
     
+    // get t0
+    double getT0() const {
+        return mT0;
+    }
+    
+    // get t1
+    double getT1() const {
+        return mT0 + mNumTimeSteps * mDt;
+    }
+    
     // set domain
     void setDomain(const std::shared_ptr<const Domain> &domain) {
         mDomain = domain;

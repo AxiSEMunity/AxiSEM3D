@@ -38,13 +38,14 @@ template <class StationT>
 class StationGroup {
 public:
     // constructor
-    StationGroup(const std::string &groupName,
-                 int numRecordSteps, int sampleIntv, int dumpIntv,
-                 channel::WavefieldCS wcs,
+    StationGroup(const std::string &groupName, int numRecordSteps,
+                 int sampleIntv, double tmin, double tmax,
+                 int dumpIntv, channel::WavefieldCS wcs,
                  const std::vector<std::string> &userChannels,
                  std::unique_ptr<StationIO> &io):
     mGroupName(groupName), mNumRecordSteps(numRecordSteps),
-    mSampleIntv(sampleIntv), mDumpIntv(std::min(dumpIntv, numRecordSteps)),
+    mSampleIntv(sampleIntv), mTmin(tmin), mTmax(tmax),
+    mDumpIntv(std::min(dumpIntv, numRecordSteps)),
     mChannelOptions(wcs, userChannels), mIO(io.release()) {
         // nothing
     }
@@ -99,8 +100,8 @@ public:
     
     // record at a time step
     void record(int timeStep, double time) {
-        // interval
-        if (timeStep % mSampleIntv != 0) {
+        // interval and time window
+        if (timeStep % mSampleIntv != 0 || time < mTmin || time > mTmax) {
             return;
         }
         
@@ -152,6 +153,7 @@ private:
     // steps
     const int mNumRecordSteps;
     const int mSampleIntv;
+    const double mTmin, mTmax;
     const int mDumpIntv;
     
     // channels

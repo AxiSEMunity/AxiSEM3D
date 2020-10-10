@@ -41,13 +41,15 @@ class ElementOpGroup {
 public:
     // constructor
     ElementOpGroup(const std::string &groupName,
-                   int numRecordSteps, int sampleIntv, int dumpIntv,
-                   channel::WavefieldCS wcs,
+                   int numRecordSteps,
+                   int sampleIntv, double tmin, double tmax,
+                   int dumpIntv, channel::WavefieldCS wcs,
                    const std::vector<std::string> &userChannels,
                    int npnts, const std::vector<double> &phis, int naSpace,
                    std::unique_ptr<ElementIO> &io):
     mGroupName(groupName), mNumRecordSteps(numRecordSteps),
-    mSampleIntv(sampleIntv), mDumpIntv(std::min(dumpIntv, numRecordSteps)),
+    mSampleIntv(sampleIntv), mTmin(tmin), mTmax(tmax),
+    mDumpIntv(std::min(dumpIntv, numRecordSteps)),
     mChannelOptions(wcs, userChannels), mNPnts(npnts), mPhis(phis),
     mNaSpace(naSpace), mIO(io.release()) {
         // nothing
@@ -179,8 +181,8 @@ public:
     
     // record at a time step
     void record(int timeStep, double time) {
-        // interval
-        if (timeStep % mSampleIntv != 0) {
+        // interval and time window
+        if (timeStep % mSampleIntv != 0 || time < mTmin || time > mTmax) {
             return;
         }
         
@@ -235,6 +237,7 @@ private:
     // steps
     const int mNumRecordSteps;
     const int mSampleIntv;
+    const double mTmin, mTmax;
     const int mDumpIntv;
     
     // channels
