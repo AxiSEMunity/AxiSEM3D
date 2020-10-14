@@ -145,27 +145,32 @@ void Material::addProperty3D(const std::string &propKey,
     if (refKind == Volumetric3D::ReferenceKind::ABS) {
         // absolute
         valNew = propValue;
-    } else {
-        eigen::arN_DColX val0;
-        if (refKind == Volumetric3D::ReferenceKind::REF1D) {
-            // 1D as reference
-            val0 = getProperty(propKey).getPointwiseNodal();
-        } else if (refKind == Volumetric3D::ReferenceKind::REF3D) {
-            // 3D as reference
-            val0 = getProperty(propKey).getPointwise();
-        } else {
-            // (3D - 1D) as reference
-            val0 = getProperty(propKey).getPointwise();
-            const eigen::arN_DColX &val1D =
-            getProperty(propKey).getPointwiseNodal();
-            for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
-                op1D_3D::addTo(-val1D[ipnt], val0[ipnt]);
-            }
-        }
-        // set 3D
+    } else if (refKind == Volumetric3D::ReferenceKind::REF1D) {
+        // 1D as reference
+        const eigen::arN_DColX &val1D =
+        getProperty(propKey).getPointwiseNodal();
         for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
             op1D_3D::times((propValue[ipnt].array() + 1.).matrix(),
-                           val0[ipnt], valNew[ipnt]);
+                           val1D[ipnt], valNew[ipnt]);
+        }
+    } else if (refKind == Volumetric3D::ReferenceKind::REF3D) {
+        // 3D as reference
+        const eigen::arN_DColX &val3D =
+        getProperty(propKey).getPointwise();
+        for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
+            op1D_3D::times((propValue[ipnt].array() + 1.).matrix(),
+                           val3D[ipnt], valNew[ipnt]);
+        }
+    } else {
+        // (3D - 1D) as reference
+        const eigen::arN_DColX &val1D =
+        getProperty(propKey).getPointwiseNodal();
+        eigen::arN_DColX valPurterb = getProperty(propKey).getPointwise();
+        for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
+            op1D_3D::addTo(-val1D[ipnt], valPurterb[ipnt]);
+            op1D_3D::times((propValue[ipnt].array() + 1.).matrix(),
+                           valPurterb[ipnt], valNew[ipnt]);
+            op1D_3D::addTo(val1D[ipnt], valNew[ipnt]);
         }
     }
     
