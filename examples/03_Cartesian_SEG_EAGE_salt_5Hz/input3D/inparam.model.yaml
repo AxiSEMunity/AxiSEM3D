@@ -202,6 +202,16 @@ list_of_3D_models:
                 factor: 1e3
                 # what: reference kind
                 # only: ABS / REF1D / REF3D / REF_PERTURB
+                # note: For any property X:
+                #       1) ABS: absolute value
+                #          X_3D = value_in_file
+                #       2) REF1D: perturbation w.r.t. the 1D reference model
+                #          X_3D = (1 + value_in_file) * X_1D
+                #       3) REF3D: perturbation w.r.t. the current 3D model
+                #          X_3D = (1 + value_in_file) * X_3D
+                #       4) REF_PERTURB => perturbation w.r.t. the current
+                #                         perturbation or (X_3D - X_1D)
+                #          X_3D = (1 + value_in_file) * (X_3D - X_1D) + X_1D
                 reference_kind: ABS
             - VS:
                 # what: NetCDF variable
@@ -210,6 +220,16 @@ list_of_3D_models:
                 factor: 1e3
                 # what: reference kind
                 # only: ABS / REF1D / REF3D / REF_PERTURB
+                # note: For any property X:
+                #       1) ABS: absolute value
+                #          X_3D = value_in_file
+                #       2) REF1D: perturbation w.r.t. the 1D reference model
+                #          X_3D = (1 + value_in_file) * X_1D
+                #       3) REF3D: perturbation w.r.t. the current 3D model
+                #          X_3D = (1 + value_in_file) * X_3D
+                #       4) REF_PERTURB => perturbation w.r.t. the current
+                #                         perturbation or (X_3D - X_1D)
+                #          X_3D = (1 + value_in_file) * (X_3D - X_1D) + X_1D
                 reference_kind: ABS
             - RHO:
                 # what: NetCDF variable
@@ -218,6 +238,16 @@ list_of_3D_models:
                 factor: 1e3
                 # what: reference kind
                 # only: ABS / REF1D / REF3D / REF_PERTURB
+                # note: For any property X:
+                #       1) ABS: absolute value
+                #          X_3D = value_in_file
+                #       2) REF1D: perturbation w.r.t. the 1D reference model
+                #          X_3D = (1 + value_in_file) * X_1D
+                #       3) REF3D: perturbation w.r.t. the current 3D model
+                #          X_3D = (1 + value_in_file) * X_3D
+                #       4) REF_PERTURB => perturbation w.r.t. the current
+                #                         perturbation or (X_3D - X_1D)
+                #          X_3D = (1 + value_in_file) * (X_3D - X_1D) + X_1D
                 reference_kind: ABS
         # what: store grid data only on the leader processors
         # type: bool
