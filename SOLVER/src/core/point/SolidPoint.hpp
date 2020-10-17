@@ -157,15 +157,15 @@ public:
     }
     
     // do scanning
-    void doScanning(numerical::Real relTolFourierH2,
-                    numerical::Real relTolH2, numerical::Real absTolH2) const {
+    void doScanning(numerical::Real relTolFourierH2, numerical::Real relTolH2,
+                    numerical::Real absTolH2, int maxNumPeaks) const {
         if (mScanningS) {
             mScanningS->doScanning(relTolFourierH2, relTolH2, absTolH2,
-                                   mFields.mDispl.col(0));
+                                   maxNumPeaks, mFields.mDispl.col(0));
             mScanningP->doScanning(relTolFourierH2, relTolH2, absTolH2,
-                                   mFields.mDispl.col(1));
+                                   maxNumPeaks, mFields.mDispl.col(1));
             mScanningZ->doScanning(relTolFourierH2, relTolH2, absTolH2,
-                                   mFields.mDispl.col(2));
+                                   maxNumPeaks, mFields.mDispl.col(2));
         }
     }
     

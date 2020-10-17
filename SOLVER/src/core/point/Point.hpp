@@ -107,18 +107,13 @@ class Scanning1D {
     // typedef
     typedef numerical::Real Real;
     // use H2 as the key for fast insertion and deletion
-    struct cmpReal {
-        bool operator()(Real a, Real b) const {
-            return (std::abs(a - b) > numerical::epsilon<Real>() && a < b);
-        }
-    };
-    typedef std::map<Real, int, cmpReal> ScanMap;
+    typedef std::map<Real, int> ScanMap;
     
 public:
     // do scanning
     template <class CColX>
-    void doScanning(Real relTolFourierH2, Real relTolH2,
-                    Real absTolH2, const CColX &fseries) {
+    void doScanning(Real relTolFourierH2, Real relTolH2, Real absTolH2,
+                    int maxNumPeaks, const CColX &fseries) {
         // l2 and h2 norm
         Real L2 = fseries.squaredNorm();
         Real H2 = L2 - .5 * fseries.row(0).squaredNorm();
@@ -157,18 +152,19 @@ public:
         } else {
             // remove tiny values due to new maximum
             if (maxH2 < H2) {
-                Real absMaxH2 = relTolH2 * H2;
-                for (auto it = mCandidates.cbegin();
-                     it != mCandidates.cend(); /* no increment */) {
-                    if (it->first < absMaxH2) {
-                        it = mCandidates.erase(it);
-                    } else {
-                        ++it;
-                    }
-                }
+                // find deletion point
+                auto deleteIter = mCandidates.lower_bound(relTolH2 * H2);
+                // delete from begin to deletion point
+                mCandidates.erase(mCandidates.cbegin(), deleteIter);
             }
             // insert
             mCandidates.insert({H2, newNu_1});
+        }
+        
+        // check number of peaks
+        if (mCandidates.size() > maxNumPeaks) {
+            // remove the first (smallest H2)
+            mCandidates.erase(mCandidates.cbegin());
         }
         
         // update H2 series

@@ -210,11 +210,11 @@ public:
     }
     
     // do scanning
-    void doScanning(numerical::Real relTolFourierH2,
-                    numerical::Real relTolH2, numerical::Real absTolH2) const {
+    void doScanning(numerical::Real relTolFourierH2, numerical::Real relTolH2,
+                    numerical::Real absTolH2, int maxNumPeaks) const {
         if (mScanningChi) {
             mScanningChi->doScanning(relTolFourierH2, relTolH2, absTolH2,
-                                     mFields.mDispl);
+                                     maxNumPeaks, mFields.mDispl);
         }
     }
     

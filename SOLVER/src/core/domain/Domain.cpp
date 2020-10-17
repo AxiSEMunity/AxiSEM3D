@@ -477,14 +477,16 @@ void Domain::doScanning(int tstep) const {
     for (const std::shared_ptr<SolidPoint> &point: mSolidPoints) {
         point->doScanning(mWavefieldScanning->mTolFourierH2,
                           mWavefieldScanning->mRelTolH2,
-                          mWavefieldScanning->mAbsTolH2);
+                          mWavefieldScanning->mAbsTolH2,
+                          mWavefieldScanning->mMaxNumPeaks);
     }
     
     // fluid
     for (const std::shared_ptr<FluidPoint> &point: mFluidPoints) {
         point->doScanning(mWavefieldScanning->mTolFourierH2,
                           mWavefieldScanning->mRelTolH2,
-                          mWavefieldScanning->mAbsTolH2);
+                          mWavefieldScanning->mAbsTolH2,
+                          mWavefieldScanning->mMaxNumPeaks);
     }
 }
 

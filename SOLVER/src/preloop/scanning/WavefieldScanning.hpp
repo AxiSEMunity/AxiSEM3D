@@ -28,6 +28,7 @@ private:
     numerical::Real mTolFourierH2 = 0.;
     numerical::Real mRelTolH2 = 0.;
     numerical::Real mAbsTolH2 = 0.;
+    int mMaxNumPeaks = 0;
     int mScanningInterval = 0;
 };
 

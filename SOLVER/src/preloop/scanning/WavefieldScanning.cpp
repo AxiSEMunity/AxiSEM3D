@@ -41,6 +41,7 @@ void WavefieldScanning::setup(double dt, double period, int numTotalSteps,
     ws->mTolFourierH2 = tolFourierH1 * tolFourierH1;
     ws->mRelTolH2 = relTolH1 * relTolH1;
     ws->mAbsTolH2 = absTolH1 * absTolH1;
+    ws->mMaxNumPeaks = gm.getWithBounds(rt + ":advanced:max_num_peaks", 1);
     // vertex
     bool vertexOnly = gm.get<bool>(rt + ":advanced:vertex_only");
     timer::gPreloopTimer.ended("Building from inparam");
@@ -68,6 +69,8 @@ void WavefieldScanning::setup(double dt, double period, int numTotalSteps,
                         relTolH1);
         ss << boxEquals(0, 40, "absolute amplitude skipped for scanning",
                         absTolH1);
+        ss << boxEquals(0, 40, "maximum number of energy peaks",
+                        ws->mMaxNumPeaks);
         ss << boxEquals(0, 40, "perform scanning only on vertex points",
                         vertexOnly);
         ss << boxEquals(0, 40, "# time steps scanned per mesh period",
