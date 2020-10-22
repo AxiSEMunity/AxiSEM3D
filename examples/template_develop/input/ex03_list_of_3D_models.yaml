@@ -28,6 +28,10 @@
             # type: string
             # only: RADIUS / DEPTH
             vertical: DEPTH
+            # what: correct for ellipticity when locating the model
+            # type: bool
+            # note: used only when horizontal = LATITUDE_LONGITUDE
+            ellipticity: false
             # what: use solid surface as depth origin
             # type: bool
             # note: used only when vertical = DEPTH
@@ -153,6 +157,10 @@
             # type: string
             # only: RADIUS / DEPTH
             vertical: DEPTH
+            # what: correct for ellipticity when locating the model
+            # type: bool
+            # note: used only when horizontal = LATITUDE_LONGITUDE
+            ellipticity: false
             # what: use solid surface as depth origin
             # type: bool
             # note: used only when vertical = DEPTH
