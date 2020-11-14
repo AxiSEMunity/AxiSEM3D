@@ -31,11 +31,6 @@ void NewmarkTimeScheme::solve() const {
     // start timer
     timers.at("TOTAL").resume();
     
-    // wavefield output: initialize
-    timers.at("WAVE_OUTPUT").resume();
-    mDomain->initializeOutput();
-    timers.at("WAVE_OUTPUT").pause();
-    
     // disable eigen malloc from now on
     Eigen::internal::set_is_malloc_allowed(false);
     

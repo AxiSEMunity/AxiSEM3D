@@ -182,6 +182,11 @@ int main(int argc, char *argv[]) {
         initalizeFFT("Time Loop");
         timer::gPreloopTimer.ended("Time loop FFT", '*');
         
+        // wavefield output: initialize
+        timer::gPreloopTimer.begin("Output files", '*');
+        domain->initializeOutput();
+        timer::gPreloopTimer.ended("Output files", '*');
+        
         // end preloop timer
         timer::gPreloopTimer.ended("Pre-timeloop processing", '*');
         
