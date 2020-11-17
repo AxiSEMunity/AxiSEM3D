@@ -89,13 +89,13 @@ item_source_mono = replace_in_string(item_source_VIR,
  'ellipticity: true', 'depth_below_solid_surface: true',
  'undulated_geometry: true',
  'data: [4.71e24, 3.81e22, -4.74e24, 3.99e23, -8.05e23, -1.23e24]',
- 'half_duraction: 50.', 'use_derivative_integral: ERF'],
+ 'half_duration: 50.', 'use_derivative_integral: ERF'],
 ['- the_only_source:',
  'latitude_longitude: [90., 0.]', 'depth: 1000.',
  'ellipticity: false', 'depth_below_solid_surface: false',
  'undulated_geometry: false',
  'data: [1e20, 0., 0., 0., 0., 0.]',
- 'half_duraction: 0.2', 'use_derivative_integral: GAUSSIAN'])
+ 'half_duration: 0.2', 'use_derivative_integral: GAUSSIAN'])
 replace_in_file(input1D_dir + '/inparam.source.yaml',
                 ['list_of_sources: []'],
                 ['list_of_sources:\n' + item_source_mono])

@@ -27,7 +27,7 @@ buildInparam(int sindex, const std::string &sourceName, double dt) {
     
     // init class
     if (className == "GaussianSTF") {
-        double hdur = gm.getWithBounds(root + ":half_duraction", 0.);
+        double hdur = gm.getWithBounds(root + ":half_duration", 0.);
         // use dt * 5. as the minimum (SPECFEM3D_GLOBE)
         hdur = std::max(hdur, dt * 5.);
         double decay = gm.getWithBounds(root + ":decay_factor", 0.);

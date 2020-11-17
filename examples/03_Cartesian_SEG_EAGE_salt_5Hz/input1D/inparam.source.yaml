@@ -117,10 +117,10 @@ list_of_sources:
             # -------------------------- #
             # parameters for GaussianSTF #
             # -------------------------- #
-            # what: half duraction
+            # what: half duration
             # type: double
             # note: use 0 for a Dirac-δ to compute the Green's functions
-            half_duraction: 0.2
+            half_duration: 0.2
             # what: decay factor
             # type: double
             # note: 1) this factor further controls the shape of the bell
