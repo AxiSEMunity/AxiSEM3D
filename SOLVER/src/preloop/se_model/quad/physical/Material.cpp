@@ -106,6 +106,24 @@ void Material::addProperty3D(const std::string &propKey,
                              const Volumetric3D::ReferenceKind &refKind,
                              const eigen::arN_IColX &inScope,
                              const eigen::arN_DColX &propValue) {
+    // backward compatibility
+    // TISO
+    if (currentRheology() == RheologyType::TISO &&
+        (propKey == "VP" || propKey == "VS")) {
+        // recursive call
+        addProperty3D(propKey + "V", refKind, inScope, propValue);
+        addProperty3D(propKey + "H", refKind, inScope, propValue);
+        return;
+    }
+    // ANISO
+    if (currentRheology() == RheologyType::ANISO &&
+        propKey.front() == 'V') {
+        // give a clearer instruction
+        throw std::runtime_error("Material::getProperty || "
+                                 "Setting velocity is prohibited "
+                                 "in full anisotropy.");
+    }
+    
     // evolve anisotropy
     // ISO -> TISO
     if (currentRheology() == RheologyType::ISO &&
@@ -121,23 +139,6 @@ void Material::addProperty3D(const std::string &propKey,
         if (currentRheology() == RheologyType::TISO) {
             evolveTISO_ANISO();
         }
-    }
-    
-    // backward compatibility
-    // TISO
-    if (currentRheology() == RheologyType::TISO &&
-        (propKey == "VP" || propKey == "VS")) {
-        // recursive call
-        addProperty3D(propKey + "V", refKind, inScope, propValue);
-        addProperty3D(propKey + "H", refKind, inScope, propValue);
-    }
-    // ANISO
-    if (currentRheology() == RheologyType::ANISO &&
-        propKey.front() == 'V') {
-        // give a clearer instruction
-        throw std::runtime_error("Material::getProperty || "
-                                 "Setting velocity is prohibited "
-                                 "in full anisotropy.");
     }
     
     // compute 3D value
