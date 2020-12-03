@@ -78,6 +78,16 @@ public:
         op1D_3D::tryReduceTo1D(std::get<3>(mClaytonABC.at(key).back()));
     }
     
+    void averageGamma(const eigen::DColX &Gamma) {
+        if (mGamma.norm() < numerical::dEpsilon) {
+            mGamma = Gamma;
+        } else {
+            op1D_3D::addTo(Gamma, mGamma);
+            mGamma.array() /= 2.;
+        }
+        op1D_3D::tryReduceTo1D(mGamma);
+    }
+    
     // add ocean load
     void addOceanLoad(const eigen::DMatX3 &nTop,
                       const eigen::DColX &sumRhoDepth) {
@@ -100,7 +110,7 @@ public:
     int getCommSize() const {
         // must use this full size because the compact size
         // of recv buffer is unknown
-        return 1 + 4 + mNr + mNr + mNr * 3 + mNr * 3;
+        return 1 + 5 + mNr + mNr + mNr * 3 + mNr * 3 + mNr;
     }
     
     // feed comm
@@ -113,7 +123,8 @@ public:
         buffer(row + 2, 0) = mMassSolid.size();
         buffer(row + 3, 0) = mNormalSFA.size();
         buffer(row + 4, 0) = mNormalTop.size();
-        row += 5;
+        buffer(row + 5, 0) = mGamma.size();
+        row += 6;
         // mass
         buffer.block(row, 0, mMassFluid.size(), 1) = mMassFluid;
         row += mMassFluid.size();
@@ -127,6 +138,10 @@ public:
         buffer.block(row, 0, mNormalTop.size(), 1) =
         Eigen::Map<const eigen::DColX>(mNormalTop.data(), mNormalTop.size(), 1);
         row += mNormalTop.size();
+        // sponge boundary (non-physical, effect has to be halved at shared points)
+        buffer.block(row, 0, mGamma.size(), 1) = mGamma;
+        if (mGamma.size() > 0) mCountGammasAdded++;
+        row += mGamma.size();
     }
     
     // extract comm
@@ -138,7 +153,8 @@ public:
         int sizeMassSolid = (int)round(buffer(row + 2, 0));
         int sizeNormalSFA = (int)round(buffer(row + 3, 0));
         int sizeNormalTop = (int)round(buffer(row + 4, 0));
-        row += 5;
+        int sizeGamma = (int)round(buffer(row + 5, 0));
+        row += 6;
         // mass
         op1D_3D::addTo(buffer.block(row, 0, sizeMassFluid, 1), mMassFluid);
         row += sizeMassFluid;
@@ -154,6 +170,10 @@ public:
                        (buffer.block(row, 0, sizeNormalTop, 1).data(),
                         sizeNormalTop / 3, 3), mNormalTop);
         row += sizeNormalTop;
+        // sponge boundary (non-physical, effect has to be halved at shared points)
+        op1D_3D::addTo(buffer.block(row, 0, sizeGamma, 1), mGamma);
+        if (sizeGamma > 0) mCountGammasAdded++;
+        row += sizeGamma;
     }
     
     // release to domain
@@ -206,6 +226,10 @@ private:
     // Clayton ABC {key, {fluid/solid, normal, rho * vp, rho * vs}}
     std::map<std::string, std::vector<
     std::tuple<bool, eigen::DMatX3, eigen::DColX, eigen::DColX>>> mClaytonABC;
+
+    // Kosloff_Kosloff sponge boundary
+    eigen::DColX mGamma = eigen::DColX::Zero(0);
+    mutable int mCountGammasAdded = 0;
     
     // ocean load
     eigen::DMatX3 mNormalTop = eigen::DMatX3::Zero(0, 3);

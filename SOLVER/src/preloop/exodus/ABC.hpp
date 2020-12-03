@@ -54,11 +54,11 @@ public:
         return mSpongeOuterSpan.at(key);
     }
     
-    // get gamma solid
-    double getGammaSolid(double r, double span) const;
+    // get U0 solid
+    eigen::DColX getU0Solid(double span, eigen::DColX vp, eigen::DColX vs, eigen::DColX rho) const;
     
-    // get gamma fluid
-    double getGammaFluid(double r, double span) const;
+    // get U0 fluid
+    eigen::DColX getU0Fluid(double span, eigen::DColX vp, eigen::DColX rho) const;
     
 private:
     /////// general data ///////

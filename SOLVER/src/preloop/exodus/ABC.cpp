@@ -105,9 +105,6 @@ std::unique_ptr<ABC> ABC::buildInparam(const ExodusMesh &exodusMesh) {
         return abc;
     }
     
-    // setup mesh pointer
-    abc->mExodusMesh = &exodusMesh;
-    
     // setup expressions
     // constant
     abc->mT0 = exodusMesh.getGlobalVariable("minimum_period");
@@ -183,154 +180,31 @@ std::string ABC::verbose() const {
     return ss.str();
 }
 
-// get gamma solid
-double ABC::getGammaSolid(double r, double span) const {
-    // get radial coords and variables from mesh
-    const auto &rcrd = mExodusMesh->getRadialCoords();
-    const auto &rval = mExodusMesh->getRadialVariables();
-    double distTol = mExodusMesh->getGlobalVariable("dist_tolerance");
+eigen::DColX ABC::getU0Solid(double span, eigen::DColX vp, eigen::DColX vs, eigen::DColX rho) const {
+    int nr = vp.cols();
+    eigen::DColX U0 = eigen::DColX::Zero(nr, 1);
     
-    // locate r
-    // first bound r by mesh min/max because vertices are searched for
-    r = std::max(r, rcrd.front());
-    r = std::min(r, rcrd.back());
-    int index0 = -1, index1 = -1;
-    double factor0 = 0., factor1 = 0.;
-    vector_tools::linearInterpSorted(rcrd, r, index0, index1,
-                                     factor0, factor1);
-    
-    // get end values
-    double rho0 = rval.at("RHO")(index0);
-    double rho1 = rval.at("RHO")(index1);
-    bool tiso = (rval.find("VPV") != rval.end());
-    double vp0 = 0., vp1 = 0., vs0 = 0., vs1 = 0.;
-    if (tiso) {
-        // approximate Voigt average (assuming eta = 1)
-        vp0 = sqrt((pow(rval.at("VPV")(index0), 2.) +
-                    pow(rval.at("VPH")(index0), 2.) * 4.) / 5.);
-        vp1 = sqrt((pow(rval.at("VPV")(index1), 2.) +
-                    pow(rval.at("VPH")(index1), 2.) * 4.) / 5.);
-        vs0 = sqrt((pow(rval.at("VSV")(index0), 2.)  * 2. +
-                    pow(rval.at("VSH")(index0), 2.)) / 3.);
-        vs1 = sqrt((pow(rval.at("VSV")(index1), 2.)  * 2. +
-                    pow(rval.at("VSH")(index1), 2.)) / 3.);
-    } else {
-        vp0 = rval.at("VP")(index0);
-        vp1 = rval.at("VP")(index1);
-        vs0 = rval.at("VS")(index0);
-        vs1 = rval.at("VS")(index1);
-    }
-    
-    // judge type of the gap
-    if (rcrd[index1] - rcrd[index0] > distTol * 4) {
-        // this gap spans an element
-        // do interpolation
-        sVP = vp0 * factor0 + vp1 * factor1;
-        sVS = vs0 * factor0 + vs1 * factor1;
-        sRHO = rho0 * factor0 + rho1 * factor1;
-    } else if (vs0 > numerical::dEpsilon && vs1 > numerical::dEpsilon) {
-        // this gap is either solid-solid or fake
-        // do average
-        sVP = (vp0 + vp1) * 0.5;
-        sVS = (vs0 + vs1) * 0.5;
-        sRHO = (rho0 + rho1) * 0.5;
-    } else if (vs0 > numerical::dEpsilon && vs1 < numerical::dEpsilon) {
-        // this gap is solid-fluid
-        // use solid
-        sVP = vp0;
-        sVS = vs0;
-        sRHO = rho0;
-    } else if (vs0 < numerical::dEpsilon && vs1 > numerical::dEpsilon) {
-        // this gap is solid-fluid
-        // use solid
-        sVP = vp1;
-        sVS = vs1;
-        sRHO = rho1;
-    } else {
-        // this gap is fluid-fluid, impossible
-        throw std::runtime_error("ABC::getGammaSolid || Impossible.");
-    }
-    
-    // evaluate
     sSPAN = span;
-    double gamma = mGammaExprSolid.value();
-    if (gamma < 0.) {
-        throw std::runtime_error("ABC::getGammaSolid || Nagative γ yeilded "
-                                 "from Kosloff_Kosloff:gamma_expr_solid.");
+    for (int alpha = 0; alpha < nr; alpha++) {
+        sVP = vp(alpha);
+        sVS = vp(alpha);
+        sRHO = vp(alpha);
+        U0(alpha) = mGammaExprSolid.value();
     }
-    return gamma;
+    
+    return U0;  
 }
 
-// get gamma fluid
-double ABC::getGammaFluid(double r, double span) const {
-    // get radial coords and variables from mesh
-    const auto &rcrd = mExodusMesh->getRadialCoords();
-    const auto &rval = mExodusMesh->getRadialVariables();
-    double distTol = mExodusMesh->getGlobalVariable("dist_tolerance");
+eigen::DColX ABC::getU0Fluid(double span, eigen::DColX vp, eigen::DColX rho) const {
+    int nr = vp.cols();
+    eigen::DColX U0 = eigen::DColX::Zero(nr, 1);
     
-    // locate r
-    // first bound r by mesh min/max because vertices are searched for
-    r = std::max(r, rcrd.front());
-    r = std::min(r, rcrd.back());
-    int index0 = -1, index1 = -1;
-    double factor0 = 0., factor1 = 0.;
-    vector_tools::linearInterpSorted(rcrd, r, index0, index1,
-                                     factor0, factor1);
-    
-    // get end values
-    double rho0 = rval.at("RHO")(index0);
-    double rho1 = rval.at("RHO")(index1);
-    bool tiso = (rval.find("VPV") != rval.end());
-    double vp0 = 0., vp1 = 0., vs0 = 0., vs1 = 0.;
-    if (tiso) {
-        // approximate Voigt average (assuming eta = 1)
-        vp0 = sqrt((pow(rval.at("VPV")(index0), 2.) +
-                    pow(rval.at("VPH")(index0), 2.) * 4.) / 5.);
-        vp1 = sqrt((pow(rval.at("VPV")(index1), 2.) +
-                    pow(rval.at("VPH")(index1), 2.) * 4.) / 5.);
-        vs0 = sqrt((pow(rval.at("VSV")(index0), 2.)  * 2. +
-                    pow(rval.at("VSH")(index0), 2.)) / 3.);
-        vs1 = sqrt((pow(rval.at("VSV")(index1), 2.)  * 2. +
-                    pow(rval.at("VSH")(index1), 2.)) / 3.);
-    } else {
-        vp0 = rval.at("VP")(index0);
-        vp1 = rval.at("VP")(index1);
-        vs0 = rval.at("VS")(index0);
-        vs1 = rval.at("VS")(index1);
-    }
-    
-    // judge type of the gap
-    if (rcrd[index1] - rcrd[index0] > distTol * 4) {
-        // this gap spans an element
-        // do interpolation
-        sVP = vp0 * factor0 + vp1 * factor1;
-        sRHO = rho0 * factor0 + rho1 * factor1;
-    } else if (vs0 < numerical::dEpsilon && vs1 < numerical::dEpsilon) {
-        // this gap is fake (fluid-fluid is non-physical)
-        // do average
-        sVP = (vp0 + vp1) * 0.5;
-        sRHO = (rho0 + rho1) * 0.5;
-    } else if (vs0 > numerical::dEpsilon && vs1 < numerical::dEpsilon) {
-        // this gap is solid-fluid
-        // use fluid
-        sVP = vp1;
-        sRHO = rho1;
-    } else if (vs0 < numerical::dEpsilon && vs1 > numerical::dEpsilon) {
-        // this gap is solid-fluid
-        // use fluid
-        sVP = vp0;
-        sRHO = rho0;
-    } else {
-        // this gap is solid-solid or fluid-fluid, impossible
-        throw std::runtime_error("ABC::getGammaFluid || Impossible.");
-    }
-    
-    // evaluate
     sSPAN = span;
-    double gamma = mGammaExprFluid.value();
-    if (gamma < 0.) {
-        throw std::runtime_error("ABC::getGammaFluid || Nagative γ yeilded "
-                                 "from Kosloff_Kosloff:gamma_expr_fluid.");
+    for (int alpha = 0; alpha < nr; alpha++) {
+        sVP = vp(alpha);
+        sRHO = vp(alpha);
+        U0(alpha) = mGammaExprFluid.value();
     }
-    return gamma;
+    
+    return U0;  
 }

@@ -150,6 +150,65 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
         }
     }
     
+    // sponge ABC
+    if (abc.sponge()) {
+        eigen::arN_DColX rho, vp, vs;
+        mMaterial->getPointwiseRhoVpVs(rho, vp, vs);
+        
+        for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
+            int igll = localMesh.mElementGLL(mLocalTag, ipnt);
+            
+            // compute maximum gamma among all boundaries
+            eigen::DColX gammaMax = eigen::DColX::Zero((*mPointNr)(ipnt), 1);
+            double distToOuter_min = 1.;
+            for (const std::string &key: abc.getBoundaryKeys()) {
+                /////////// pattern ///////////
+                // geometry
+                const auto &outerSpan = abc.getSpongeOuterSpan(key);
+                double outer = std::get<0>(outerSpan);
+                double span = std::get<1>(outerSpan);
+                // coord of me
+                double coord = 0.;
+                double r = 0.;
+                if (geodesy::isCartesian()) {
+                    coord = (key == "RIGHT" ? sz(0,ipnt) : sz(1,ipnt));
+                    r = sz(ipnt, 1);
+                } else {
+                    const eigen::DCol2 &rt = geodesy::sz2rtheta(sz.col(ipnt).eval(), false);
+                    coord = (key == "RIGHT" ? rt(1) : rt(0));
+                    r = rt(0);
+                }
+                // gamma
+                double distToOuter = 1. / span * (outer - coord);
+                if (distToOuter > distToOuter_min) {
+                    // point is inside the inner boundary, skip;
+                    // point is closer to other boundary, skip;
+                    // there is no need to check distToOuter < 0.
+                    continue;
+                }
+                distToOuter_min = distToOuter;
+                
+                static const double piHalf = numerical::dPi / 2.;
+                double pattern = pow(cos(piHalf * distToOuter), 2.);
+                
+                /////////// gamma ///////////
+                // for theta, change span to arc-length
+                if (!geodesy::isCartesian() && key == "RIGHT") {
+                    span *= r;
+                }
+                if (!mFluid) {
+                    gammaMax = pattern * abc.getU0Solid(std::abs(span), vp[ipnt], vs[ipnt], rho[ipnt]);
+                } else {
+                    gammaMax = pattern * abc.getU0Fluid(std::abs(span), vp[ipnt], rho[ipnt]);
+                }
+            }
+            // release
+            if (gammaMax.norm() > numerical::dEpsilon) {
+                GLLPoints[igll].averageGamma(gammaMax);
+            }
+        }
+    }
+    
     // ocean load
     // get data from OceanLoad
     if (mEdgesOnBoundary.at("TOP") != -1 && (*mOceanLoad)) {
