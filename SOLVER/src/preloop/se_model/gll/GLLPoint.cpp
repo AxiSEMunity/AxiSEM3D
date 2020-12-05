@@ -31,6 +31,7 @@
 #include "ClaytonSolid3D.hpp"
 #include "ClaytonFluid1D.hpp"
 #include "ClaytonFluid3D.hpp"
+#include "Sponge.hpp"
 #include "AxialBoundary.hpp"
 #include "FluidSurfaceBoundary.hpp"
 
@@ -45,6 +46,7 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
     op1D_3D::tryReduceTo1D(mNormalSFA);
     op1D_3D::tryReduceTo1D(mNormalTop);
     op1D_3D::tryReduceTo1D(mSumRhoDepth);
+    op1D_3D::tryReduceTo1D(mGamma);
     
     
     //////////////////////////// point ////////////////////////////
@@ -190,61 +192,28 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
     }
     
     // sponge ABC
-    if (abc.sponge()) {
-        // compute maximum gamma among all boundaries
-        double gammaMaxSolid = -1.;
-        double gammaMaxFluid = -1.;
-        for (const std::string &key: abc.getBoundaryKeys()) {
-            /////////// pattern ///////////
-            // geometry
-            const auto &outerSpan = abc.getSpongeOuterSpan(key);
-            double outer = std::get<0>(outerSpan);
-            double span = std::get<1>(outerSpan);
-            // coord of me
-            double coord = 0.;
-            double r = 0.;
-            if (geodesy::isCartesian()) {
-                coord = (key == "RIGHT" ? mCoords(0) : mCoords(1));
-                r = mCoords(1);
+    if (abc.sponge() && mCountGammasAdded > 0) {
+        if (mFluidPoint) {
+            std::unique_ptr<const Sponge<FluidPoint>> sponge_f = nullptr;
+            if (mGamma.rows() == 1) {
+                sponge_f = std::make_unique<const
+                Sponge<FluidPoint>>(mFluidPoint, mGamma(0) / mCountGammasAdded);
             } else {
-                const eigen::DCol2 &rt = geodesy::sz2rtheta(mCoords, false);
-                coord = (key == "RIGHT" ? rt(1) : rt(0));
-                r = rt(0);
+                sponge_f = std::make_unique<const
+                Sponge<FluidPoint>>(mFluidPoint, mGamma / mCountGammasAdded);
             }
-            // gamma
-            double distToOuter = 1. / span * (outer - coord);
-            if (distToOuter > 1.) {
-                // point is inside the inner boundary, skip;
-                // there is no need to check distToOuter < 0.
-                continue;
-            }
-            static const double piHalf = numerical::dPi / 2.;
-            double pattern = pow(cos(piHalf * distToOuter), 2.);
-            
-            /////////// gamma ///////////
-            // for theta, change span to arc-length
-            if (!geodesy::isCartesian() && key == "RIGHT") {
-                span *= r;
-            }
-            if (mSolidPoint) {
-                double gamma = pattern * abc.getGammaSolid(r, std::abs(span));
-                gammaMaxSolid = std::max(gamma, gammaMaxSolid);
-            }
-            if (mFluidPoint) {
-                double gamma = pattern * abc.getGammaFluid(r, std::abs(span));
-                gammaMaxFluid = std::max(gamma, gammaMaxFluid);
-            }
+            domain.getAbsorbingBoundary()->addSpongeFluid(sponge_f);
         }
-        // release
-        if (gammaMaxSolid > numerical::dEpsilon) {
-            std::unique_ptr<const SpongeSolid> sponge =
-            std::make_unique<const SpongeSolid>(mSolidPoint, gammaMaxSolid);
-            domain.getAbsorbingBoundary()->addSpongeSolid(sponge);
-        }
-        if (gammaMaxFluid > numerical::dEpsilon) {
-            std::unique_ptr<const SpongeFluid> sponge =
-            std::make_unique<const SpongeFluid>(mFluidPoint, gammaMaxFluid);
-            domain.getAbsorbingBoundary()->addSpongeFluid(sponge);
+        if (mSolidPoint) {
+            std::unique_ptr<const Sponge<SolidPoint>> sponge_s = nullptr;
+            if (mGamma.rows() == 1) {
+                sponge_s = std::make_unique<const
+                Sponge<SolidPoint>>(mSolidPoint, mGamma(0) / mCountGammasAdded);
+            } else {
+                sponge_s = std::make_unique<const
+                Sponge<SolidPoint>>(mSolidPoint, mGamma / mCountGammasAdded);
+            }
+            domain.getAbsorbingBoundary()->addSpongeSolid(sponge_s);
         }
     }
     
@@ -273,4 +242,5 @@ release(const ABC &abc, const TimeScheme &timeScheme, Domain &domain) {
     mClaytonABC.clear();
     mNormalTop.resize(0, 3);
     mSumRhoDepth.resize(0);
+    mGamma.resize(0);
 }

@@ -54,11 +54,16 @@ public:
         return mSpongeOuterSpan.at(key);
     }
     
-    // get gamma solid
-    double getGammaSolid(double r, double span) const;
+    // get U0 solid
+    eigen::DColX getU0Solid(double span,
+                            const eigen::DColX &vp,
+                            const eigen::DColX &vs,
+                            const eigen::DColX &rho) const;
     
-    // get gamma fluid
-    double getGammaFluid(double r, double span) const;
+    // get U0 fluid
+    eigen::DColX getU0Fluid(double span,
+                            const eigen::DColX &vp,
+                            const eigen::DColX &rho) const;
     
 private:
     /////// general data ///////
@@ -70,9 +75,6 @@ private:
     /////// data for sponge ///////
     // geometry
     std::map<std::string, std::tuple<double, double>> mSpongeOuterSpan;
-    
-    // mesh pointer
-    const ExodusMesh *mExodusMesh = nullptr;
     
     // gamma expressions
     // using static for variables to keep const modifier
