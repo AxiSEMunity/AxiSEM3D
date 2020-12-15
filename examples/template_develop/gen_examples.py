@@ -101,7 +101,7 @@ replace_in_file(input1D_dir + '/inparam.source.yaml',
                 ['list_of_sources:\n' + item_source_mono])
 replace_in_file(input1D_dir + '/inparam.source.yaml',
                 ['record_length: 1800.', 'Courant_number: 0.6'],
-                ['record_length: 10.', 'Courant_number: 0.6'])
+                ['record_length: 10.', 'Courant_number: 0.5'])
                 
 # output
 item_elements_inplane = replace_in_string(item_elements_mantle,

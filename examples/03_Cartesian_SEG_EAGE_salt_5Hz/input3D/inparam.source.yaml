@@ -32,7 +32,7 @@ time_axis:
     #       3) if Courant_number < 0.3 but instability still occurs,
     #          it is likely to be an issue caused by an input 3D model
     #          (e.g., mislocation near a model boundary)
-    Courant_number: 0.6
+    Courant_number: 0.5
 
     # what: time integrator
     # type: string

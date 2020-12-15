@@ -158,8 +158,11 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
         
         // loop over gll
         for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
-            int igll = localMesh.mElementGLL(mLocalTag, ipnt);
-            
+            // regularize 1D/3D
+            op1D_3D::regularize1D<eigen::DColX>({
+                std::ref(rho[ipnt]),
+                std::ref(vp[ipnt]),
+                std::ref(vs[ipnt])});
             // compute maximum gamma among all boundaries
             eigen::DColX gammaMax = eigen::DColX::Zero((*mPointNr)(ipnt), 1);
             double distToOuter_min = 1.;
@@ -210,6 +213,7 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
             }
             // release
             if (gammaMax.norm() > numerical::dEpsilon) {
+                int igll = localMesh.mElementGLL(mLocalTag, ipnt);
                 GLLPoints[igll].addGamma(gammaMax);
             }
         }

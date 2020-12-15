@@ -186,7 +186,7 @@ eigen::DColX ABC::getU0Solid(double span,
                              const eigen::DColX &vs,
                              const eigen::DColX &rho) const {
     // initialize
-    int nr = (int)vp.cols();
+    int nr = (int)vp.rows();
     eigen::DColX U0 = eigen::DColX::Zero(nr, 1);
     // compute by expr
     sSPAN = span;
@@ -204,7 +204,7 @@ eigen::DColX ABC::getU0Fluid(double span,
                              const eigen::DColX &vp,
                              const eigen::DColX &rho) const {
     // initialize
-    int nr = (int)vp.cols();
+    int nr = (int)vp.rows();
     eigen::DColX U0 = eigen::DColX::Zero(nr, 1);
     // compute by expr
     sSPAN = span;
