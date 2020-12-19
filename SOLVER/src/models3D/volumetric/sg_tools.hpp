@@ -63,7 +63,7 @@ namespace sg_tools {
         if (type == "DEPTH") {
             useDepth = true;
             depthSolid = gm.get<bool>(rootc + ":depth_below_solid_surface");
-        } else if (gm.contains(rootc + ":radius")) {
+        } else if (type == "RADIUS") {
             useDepth = false;
             depthSolid = false;
         } else {
