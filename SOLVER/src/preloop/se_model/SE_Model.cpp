@@ -45,7 +45,8 @@
 SE_Model::
 SE_Model(const ExodusMesh &exodusMesh,
          const ABC &abc, const LocalMesh &localMesh,
-         const std::vector<std::shared_ptr<const Model3D>> &models3D):
+         const std::vector<std::shared_ptr<const Model3D>> &models3D,
+         bool useLuckyNumbers):
 mDistToleranceMesh(exodusMesh.getGlobalVariable("dist_tolerance")) {
     ///////////////// generate empty GLL points /////////////////
     timer::gPreloopTimer.begin("Generating empty points");
@@ -61,7 +62,7 @@ mDistToleranceMesh(exodusMesh.getGlobalVariable("dist_tolerance")) {
     int nquad = (int)(localMesh.mL2G_Element.rows());
     mQuads.reserve(nquad);
     for (int iquad = 0; iquad < nquad; iquad++) {
-        mQuads.push_back(Quad(exodusMesh, localMesh, iquad));
+        mQuads.push_back(Quad(exodusMesh, localMesh, iquad, useLuckyNumbers));
     }
     timer::gPreloopTimer.ended("Generating Quads");
     

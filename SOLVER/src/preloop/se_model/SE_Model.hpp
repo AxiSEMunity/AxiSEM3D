@@ -41,7 +41,8 @@ public:
     // step 1: constructor
     SE_Model(const ExodusMesh &exodusMesh,
              const ABC &abc, const LocalMesh &localMesh,
-             const std::vector<std::shared_ptr<const Model3D>> &models3D);
+             const std::vector<std::shared_ptr<const Model3D>> &models3D,
+             bool useLuckyNumbers);
     
     // step 2: get dt for attenuation
     double computeDt(double courant, const ABC &abc, eigen::DCol2 &sz) const;

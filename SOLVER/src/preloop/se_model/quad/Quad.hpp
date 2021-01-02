@@ -41,7 +41,7 @@ class Quad {
 public:
     // constructor
     Quad(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
-         int localTag);
+         int localTag, bool useLuckyNumbers);
     
     // finishing 3D properties
     void finishing3D() {

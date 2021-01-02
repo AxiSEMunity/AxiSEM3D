@@ -412,8 +412,11 @@ buildSE_Model(const ExodusMesh &exodusMesh,
               const std::vector<std::shared_ptr<const Model3D>> &models3D,
               const std::string &stageKey) {
     // build model
+    bool useLuckyNumbers =
+    inparam::gInparamAdvanced.get<bool>("develop:fftw_lucky_numbers");
     std::unique_ptr<SE_Model> sem =
-    std::make_unique<SE_Model>(exodusMesh, abc, localMesh, models3D);
+    std::make_unique<SE_Model>(exodusMesh, abc, localMesh, models3D,
+                               useLuckyNumbers);
     // free dummy memory
     localMesh.freeMemorySE_ModelBuilt();
     

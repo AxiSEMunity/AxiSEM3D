@@ -15,6 +15,7 @@
 #include "ExodusMesh.hpp"
 #include "ABC.hpp"
 #include "LocalMesh.hpp"
+#include "NrField.hpp"
 
 // mapping
 #include "MappingLinear.hpp"
@@ -35,7 +36,7 @@
 
 // constructor
 Quad::Quad(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
-           int localTag):
+           int localTag, bool useLuckyNumbers):
 mLocalTag(localTag), mGlobalTag(localMesh.mL2G_Element[localTag]),
 mFluid(localMesh.mIsElementFluid(localTag)) {
     // model boundary
@@ -54,6 +55,12 @@ mFluid(localMesh.mIsElementFluid(localTag)) {
     }
     mPointNr = std::make_unique<eigen::IRowN>
     (spectrals::interpolateGLL(nodalNr, axial()).array().round().cast<int>());
+    // round to lucky numbers
+    if (useLuckyNumbers) {
+        (*mPointNr) = (*mPointNr).unaryExpr([](int nr) {
+            return NrField::nextLuckyNumber(nr);
+        });
+    }
     
     ////////////// components //////////////
     // 1) mapping
