@@ -20,7 +20,7 @@ void OceanLoad3D::applyTo(std::vector<Quad> &quads) const {
             // check surface
             int surfEdge = quad.getSurfaceEdge();
             if (surfEdge == -1) {
-                return;
+                continue;
             }
             // cardinal coordinates
             const eigen::DMatX3 &spz = computeEdgeSPZ(quad, surfEdge);
@@ -32,8 +32,7 @@ void OceanLoad3D::applyTo(std::vector<Quad> &quads) const {
                 setSumRhoDepthToQuad(sumRD, quad);
             }
         }
-    }
-    else {
+    } else {
         mpi::enterInfer();
         for (int irank = 0; irank < mpi::nproc(); irank++) {
             // step 1: gather coords on infer and send to super
@@ -41,8 +40,8 @@ void OceanLoad3D::applyTo(std::vector<Quad> &quads) const {
             std::vector<eigen::DMat24> szAll;
             if (irank == mpi::rank()) {
                 // gather coords
-                spzAll.reserve(quads.size());
-                szAll.reserve(quads.size());
+                // spzAll.reserve(quads.size());
+                // szAll.reserve(quads.size());
                 for (Quad &quad: quads) {
                     // check surface
                     int surfEdge = quad.getSurfaceEdge();
