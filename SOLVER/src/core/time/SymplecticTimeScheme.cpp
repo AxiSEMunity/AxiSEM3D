@@ -93,15 +93,15 @@ void SymplecticTimeScheme::solve() const {
             mDomain->applyBC_AfterAssemblingStiff();
             timers.at("BOUNDARIES").pause();
             
-            // boundary conditions after computing acceleration
-            timers.at("BOUNDARIES").resume();
-            mDomain->applyBC_AfterComputingAccel();
-            timers.at("BOUNDARIES").pause();
-            
             // stiff => accel
             timers.at("MASS_TERM").resume();
             mDomain->computeStiffToAccel();
             timers.at("MASS_TERM").pause();
+            
+            // boundary conditions after computing acceleration
+            timers.at("BOUNDARIES").resume();
+            mDomain->applyBC_AfterComputingAccel();
+            timers.at("BOUNDARIES").pause();
             
             // update fields
             timers.at("TIME_MARCH").resume();
