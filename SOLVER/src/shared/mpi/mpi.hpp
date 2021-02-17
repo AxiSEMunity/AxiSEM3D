@@ -80,12 +80,12 @@ namespace mpi {
         
         template <>
         inline MPI_Datatype typeMPI<std::complex<float>>() {
-            return MPI_CXX_FLOAT_COMPLEX;
+            return MPI_C_FLOAT_COMPLEX;
         }
         
         template <>
         inline MPI_Datatype typeMPI<std::complex<double>>() {
-            return MPI_CXX_DOUBLE_COMPLEX;
+            return MPI_C_DOUBLE_COMPLEX;
         }
         
         template <>
