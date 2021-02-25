@@ -56,13 +56,13 @@ void SolverFFTW<floatT, HOWMANY>::createPlans(double timeLimitForPlanning) {
             InterfaceFFTW<floatT>::planR2C(1, &NR, HOWMANY,
                                            rdata, NULL, 1, maxNR,
                                            cdata, NULL, 1, maxNC,
-                                           FFTW_PATIENT)});
+                                           FFTW_MEASURE)});
         // c2r plan
         mPlansC2R.insert({NR,
             InterfaceFFTW<floatT>::planC2R(1, &NR, HOWMANY,
                                            cdata, NULL, 1, maxNC,
                                            rdata, NULL, 1, maxNR,
-                                           FFTW_PATIENT)});
+                                           FFTW_MEASURE)});
     }
 }
 
