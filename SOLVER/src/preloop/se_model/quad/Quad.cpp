@@ -183,8 +183,8 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
                 double coord = 0.;
                 double r = 0.;
                 if (geodesy::isCartesian()) {
-                    coord = (key == "RIGHT" ? sz(0,ipnt) : sz(1,ipnt));
-                    r = sz(ipnt, 1);
+                    coord = (key == "RIGHT" ? sz(0, ipnt) : sz(1, ipnt));
+                    r = sz(1, ipnt);
                 } else {
                     const eigen::DCol2 &rt =
                     geodesy::sz2rtheta(sz.col(ipnt).eval(), false);
