@@ -55,8 +55,8 @@ void ClaytonSolid3D::apply() const {
     // a = rsa V
     sAR.topRows(nr) = mRSA.asDiagonal() * sVR.topRows(nr);
     
-    // a -= V.k k
-    sAR.topRows(nr) -= (sVR.topRows(nr).cwiseProduct(mK)
+    // a += V.k k
+    sAR.topRows(nr) += (sVR.topRows(nr).cwiseProduct(mK)
                         .rowwise().sum().asDiagonal() * mK);
     
     // FFT: cardinal => Fourier
