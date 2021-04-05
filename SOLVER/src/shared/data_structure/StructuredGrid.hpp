@@ -206,8 +206,9 @@ public:
         }
         
         // shapes
-        static Eigen::array<Eigen::DenseIndex, 1> shapeV = {numUniqueData()};
+        static Eigen::array<Eigen::DenseIndex, 1> shapeV;
         static Eigen::array<Eigen::DenseIndex, 1 + D> start, count;
+        shapeV[0] = numUniqueData();
         start.fill(0);
         count.fill(1);
         count[0] = numUniqueData();
