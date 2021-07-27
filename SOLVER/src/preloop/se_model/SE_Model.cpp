@@ -573,14 +573,7 @@ int SE_Model::locateInplane(const eigen::DCol2 &sz, bool inFluid) const {
     std::vector<double> dists;
     std::vector<Eigen::Matrix<int, 1, 1>> vals;
     // one point is shared by at most 6 elements
-    // However, it is possible that:
-    // (a) the element the target point falls in has a relatively large size
-    // (b) the target point is located near the edge of that host element
-    // In the case of (a) && (b), the centroid of the host element will be
-    // further away from the target point than the other non-hosting elements.
-    // Therefore, we have to use a larger candidate pool
-    // -- search the host element among 30 nearby candidates
-    const int nNear = 30;
+    const int nNear = 6;
     if (inFluid) {
         mRTreeFluid->query(sz, nNear, dists, vals);
     } else {
