@@ -21,6 +21,7 @@ namespace metis {
     
     // domain decomposition
     double decompose(const eigen::IMatX4_RM &connectivity,
+                     const eigen::IColX &solid_fluid,
                      const eigen::DColX &weights, int npart, int rseed,
                      eigen::IColX &elemRank);
 }

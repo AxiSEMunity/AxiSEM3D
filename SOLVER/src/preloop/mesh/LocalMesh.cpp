@@ -59,6 +59,7 @@ void LocalMesh::decomposeExodusMesh(const ExodusMesh &exodusMesh,
                                     eigen::IColX &elemRank) {
     // metis
     double obj = metis::decompose(exodusMesh.getConnectivity(),
+                                  exodusMesh.getIsElementFluid(),
                                   weights, mpi::nprocWorld(),
                                   mpi::rankWorld(), elemRank);
     // choose highest quality

@@ -61,6 +61,32 @@ namespace metis {
               "METIS_MeshToDual");
     }
     
+    // form solid_fluid weights
+    std::vector<idx_t> formSF_Weights(const eigen::IColX &solid_fluid,
+                                      idx_t *xadj, idx_t *adjncy) {
+        // allocate same length as adjncy
+        idx_t nelem = (idx_t)solid_fluid.rows();
+        std::vector<idx_t> adjwgt;
+        adjwgt.reserve(xadj[nelem]);
+        // element loop
+        for (idx_t ielem = 0; ielem < nelem; ielem++) {
+            idx_t start = xadj[ielem];
+            idx_t end = xadj[ielem + 1];
+            // adj loop
+            for (idx_t iadj = start; iadj < end; iadj++) {
+                idx_t ielem_other = adjncy[iadj];
+                if (solid_fluid[ielem] == solid_fluid[ielem_other]) {
+                    // solid-solid, fluid-fluid
+                    adjwgt.push_back(1);
+                } else {
+                    // solid-fluid
+                    adjwgt.push_back(10000000);
+                }
+            }
+        }
+        return adjwgt;
+    }
+    
     // free adjacency
     void freeAdjacency(idx_t *&xadj, idx_t *&adjncy) {
         // free CRS created by metis
@@ -95,6 +121,7 @@ namespace metis {
     
     // domain decomposition
     double decompose(const eigen::IMatX4_RM &connectivity,
+                     const eigen::IColX &solid_fluid,
                      const eigen::DColX &weights, int npart, int rseed,
                      eigen::IColX &elemRank) {
         // this cause error in Metis
@@ -111,6 +138,10 @@ namespace metis {
         // form graph
         idx_t *xadj, *adjncy;
         formAdjacency(connectivity.cast<idx_t>(), 2, xadj, adjncy);
+        
+        // form adjwgt
+        std::vector<idx_t> adjwgt = formSF_Weights(solid_fluid,
+                                                   xadj, adjncy);
         
         // weights
         idx_t *vwgt = NULL;
@@ -141,8 +172,8 @@ namespace metis {
         
         //////////// run ////////////
         error(METIS_PartGraphKway(&nelem, &ncon, xadj, adjncy, vwgt, NULL,
-                                  NULL, &npart_idx_t, NULL, &ubvec, metisOps,
-                                  &objval, erank.data()),
+                                  adjwgt.data(), &npart_idx_t, NULL, &ubvec,
+                                  metisOps, &objval, erank.data()),
               "METIS_PartGraphKway");
         
         // free graph
