@@ -127,7 +127,12 @@ verbose(double dt, int numRecordSteps, int numStations) const {
     ss << boxSubTitle(2, "Locations");
     ss << boxEquals(4, width, "station location file", mFileName);
     std::string crd = "(";
-    crd += (mSourceCentered ? "distance, azimuth, " : "latitude, longitude, ");
+    if (mXY) {
+        crd += "X, Y, ";
+    } else {
+        crd += (mSourceCentered ? "distance, azimuth, "
+                : "latitude, longitude, ");
+    }
     crd += (mUseDepth ? "depth)" : "radius)");
     ss << boxEquals(4, width, "coordinates in file", crd);
     if (!mSourceCentered) {
