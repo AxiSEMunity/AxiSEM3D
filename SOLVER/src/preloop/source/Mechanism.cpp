@@ -49,7 +49,7 @@ release(const eigen::DMat33 &Qzsp, bool sourceOnAxis,
     using spectral::nPEM;
     using spectral::nPED;
     static const numerical::ComplexD i(0., 1.);
-    const numerical::ComplexD i_phi(0., phi);
+    const numerical::ComplexD i_phi(0., -phi);
     
     // nu + 1
     int nu_1 = quad.getElement()->getNu_1();
