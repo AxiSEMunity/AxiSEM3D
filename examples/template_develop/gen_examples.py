@@ -42,11 +42,11 @@ item_elements_mantle = read('input/item_elements_mantle.yaml')[:-1]
 ################ 01_spherical_Earth_PREM_100s ################
 # copy
 ex_name = '01_spherical_Earth_PREM_50s'
-input_dir = '../%s/input' % ex_name
-os.system('cp input/inparam.*.yaml %s' % input_dir)
+input1D_dir = '../%s/input1D' % ex_name
+os.system('cp input/inparam.*.yaml %s' % input1D_dir)
 
 # source
-replace_in_file(input_dir + '/inparam.source.yaml',
+replace_in_file(input1D_dir + '/inparam.source.yaml',
                 ['list_of_sources: []',
                  'Courant_number: 0.6'],
                 ['list_of_sources:\n' + item_source_VIR,
@@ -58,10 +58,25 @@ item_stations_US = replace_in_string(item_stations_GSN,
  'format: ASCII_STATION', 'sampling_period: DT'],
 ['USArray_transportable', 'US_TA.txt', 'channels: [U3, E_I1, R3]',
  'format: ASCII_CHANNEL', 'sampling_period: 5.'])
-replace_in_file(input_dir + '/inparam.output.yaml',
+replace_in_file(input1D_dir + '/inparam.output.yaml',
                 ['list_of_station_groups: []'],
                 ['list_of_station_groups:\n' +
                  item_stations_GSN + '\n' + item_stations_US])
+
+# copy 3D
+input3D_dir = input1D_dir.replace('1D', '3D')
+os.system('cp %s/inparam.*.yaml %s' % (input1D_dir, input3D_dir))
+
+# model
+item_3D_model_list = read('input/ex01_list_of_3D_models.yaml')[:-1]
+replace_in_file(input3D_dir + '/inparam.model.yaml',
+                ['list_of_3D_models: []'],
+                ['list_of_3D_models:\n' + item_3D_model_list])
+
+# nr
+replace_in_file(input3D_dir + '/inparam.nr.yaml',
+                ['constant: 5'],
+                ['constant: 50'])
 
 
 ################ 03_Cartesian_SEG_EAGE_salt_5Hz ################

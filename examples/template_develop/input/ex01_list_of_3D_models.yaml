@@ -1,0 +1,111 @@
+    #==========================================================================#
+    # this key can be arbitrary
+    - EMC_S362ANI:
+        # what: activate this model
+        # type: bool
+        activated: true
+        # what: class name
+        # type: string
+        # note: current built-in classes include
+        #       - StructuredGridV3D: volumetric 3D model on a structured grid
+        #       - StructuredGridG3D: geometric 3D model on a structured grid
+        #       - StructuredGridO3D: ocean-load 3D model on a structured grid
+        #       - Ellipticity: deform the mesh with global ellipticity
+        class_name: StructuredGridV3D
+        # -------------------------------- #
+        # parameters for StructuredGridV3D #
+        # -------------------------------- #
+        # what: NetCDF data file
+        # type: filename
+        nc_data_file: S362ANI_percent.nc
+        # parameters for grid coordinates
+        coordinates:
+            # what: type of horizontal coordinates
+            # type: string
+            # only: DISTANCE_AZIMUTH / XY_CARTESIAN / LATITUDE_LONGITUDE
+            horizontal: LATITUDE_LONGITUDE
+            # what: type of vertical coordinate
+            # type: string
+            # only: RADIUS / DEPTH
+            vertical: DEPTH
+            # what: correct for ellipticity when locating the model
+            # type: bool
+            # note: used only when horizontal = LATITUDE_LONGITUDE
+            ellipticity: false
+            # what: use solid surface as depth origin
+            # type: bool
+            # note: used only when vertical = DEPTH
+            depth_below_solid_surface: false
+            # what: NetCDF variables for the coordinates
+            # type: array of string
+            nc_variables: [latitude, longitude, depth]
+            # what: rank of the coordinates in data
+            # type: array of int
+            data_rank: [1, 2, 0]
+            # what: length unit of the coordinates
+            # type: string / value
+            # only: km / m / number
+            length_unit: km
+            # what: angle unit of the coordinates
+            # type: string
+            # only: degree / radian
+            angle_unit: degree
+            # what: use undulated (otherwise reference) geometry to
+            #       determine the vertical location
+            # type: bool
+            # note: compatible only with vertical = RADIUS
+            undulated_geometry: false
+            # what: check inplane model range for the whole element
+            # type: bool
+            # note: 1) if this parameter is set to true, the element center
+            #          will be used to determine whether an element is located
+            #          within the "inplane" model range
+            #       2) if its center is in range, all its GLL points must be
+            #          in range, or an exception will occur; users can extend
+            #          the model range slightly to allow for numerical errors
+            #       3) this parameter safely realizes inplane discontinuities
+            whole_element_inplane: true
+        # parameters for properties
+        properties:
+            - VP:
+                # what: NetCDF variable
+                nc_var: dvs
+                # what: factor or unit
+                factor: 0.005
+                # what: reference kind
+                # only: ABS / REF1D / REF3D / REF_PERTURB
+                # note: For any property X:
+                #       1) ABS: absolute value
+                #          X_3D = value_in_file
+                #       2) REF1D: perturbation w.r.t. the 1D reference model
+                #          X_3D = (1 + value_in_file) * X_1D
+                #       3) REF3D: perturbation w.r.t. the current 3D model
+                #          X_3D = (1 + value_in_file) * X_3D
+                #       4) REF_PERTURB => perturbation w.r.t. the current
+                #                         perturbation or (X_3D - X_1D)
+                #          X_3D = (1 + value_in_file) * (X_3D - X_1D) + X_1D
+                reference_kind: REF1D
+            - VS:
+                # what: NetCDF variable
+                nc_var: dvs
+                # what: factor or unit
+                factor: 0.01
+                # what: reference kind
+                # only: ABS / REF1D / REF3D / REF_PERTURB
+                # note: For any property X:
+                #       1) ABS: absolute value
+                #          X_3D = value_in_file
+                #       2) REF1D: perturbation w.r.t. the 1D reference model
+                #          X_3D = (1 + value_in_file) * X_1D
+                #       3) REF3D: perturbation w.r.t. the current 3D model
+                #          X_3D = (1 + value_in_file) * X_3D
+                #       4) REF_PERTURB => perturbation w.r.t. the current
+                #                         perturbation or (X_3D - X_1D)
+                #          X_3D = (1 + value_in_file) * (X_3D - X_1D) + X_1D
+                reference_kind: REF1D
+        # what: store grid data only on the leader processors
+        # type: bool
+        # note: turn this on if the model is large; set mpi:nproc_per_group
+        #       in inparam.advanced.yaml to the number of processors per
+        #       node to minimize memory usage
+        store_grid_only_on_leaders: true
