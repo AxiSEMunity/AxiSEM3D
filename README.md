@@ -1,5 +1,5 @@
 # AxiSEM3D
 
-This is a brand new version of AxiSEM3D. It is ready for use but the documentation is under construction.
+This is a brand new version of AxiSEM3D. 
 
-The [installation page](https://github.com/kuangdai/AxiSEM-3D/wiki/Installation) is ready.
+Please see the [wiki page](https://github.com/kuangdai/AxiSEM-3D/wiki) for installation instructions and user documentation.
