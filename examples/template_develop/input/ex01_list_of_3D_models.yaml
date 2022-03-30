@@ -64,7 +64,7 @@
             #          in range, or an exception will occur; users can extend
             #          the model range slightly to allow for numerical errors
             #       3) this parameter safely realizes inplane discontinuities
-            whole_element_inplane: true
+            whole_element_inplane: false
         # parameters for properties
         properties:
             - VP:
