@@ -136,6 +136,13 @@ if(${USE_PARALLEL_NETCDF})
 add_definitions(-D_USE_PARALLEL_NETCDF)
 endif()
 
+# skip _MM_SET_FLUSH_ZERO_MODE in fenv.cpp
+set(SKIP_MM_SET ${skip_mm_set})
+setDefault(SKIP_MM_SET false)
+if(${SKIP_MM_SET})
+add_definitions(-D_SKIP_DISABLE_SSE_DENORMS)
+endif()
+
 
 ################# find packages #################
 # path of *.cmake files
