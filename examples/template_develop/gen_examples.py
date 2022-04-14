@@ -39,9 +39,9 @@ item_stations_GSN = read('input/item_stations_GSN.yaml')[:-1]
 item_elements_mantle = read('input/item_elements_mantle.yaml')[:-1]
 
 
-################ 01_spherical_Earth_PREM_100s ################
+################ 01_S362ANI_EMC_global ################
 # copy
-ex_name = '01_spherical_Earth_PREM_50s'
+ex_name = '01_S362ANI_EMC_global'
 input1D_dir = '../%s/input1D' % ex_name
 os.system('cp input/inparam.*.yaml %s' % input1D_dir)
 
@@ -79,9 +79,9 @@ replace_in_file(input3D_dir + '/inparam.nr.yaml',
                 ['constant: 50'])
 
 
-################ 03_Cartesian_SEG_EAGE_salt_5Hz ################
+################ 03_salt_body_SEG_local ################
 # copy
-ex_name = '03_Cartesian_SEG_EAGE_salt_5Hz'
+ex_name = '03_salt_body_SEG_local'
 input1D_dir = '../%s/input1D' % ex_name
 os.system('cp input/inparam.*.yaml %s' % input1D_dir)
 
