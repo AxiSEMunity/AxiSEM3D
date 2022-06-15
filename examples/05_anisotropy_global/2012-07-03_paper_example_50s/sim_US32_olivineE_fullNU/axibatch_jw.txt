@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#SBATCH --partition=mpi
+#SBATCH --requeue
+#SBATCH --job-name=AxiSEM3D
+#SBATCH --ntasks=768 --nodes=32
+#SBATCH --constraint="skylake|cascadelake"
+#SBATCH --mem-per-cpu=3000 
+#SBATCH --time=24:00:00
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=jonathan.wolf@yale.edu
+
+mpirun ./axisem3d | tee info.log

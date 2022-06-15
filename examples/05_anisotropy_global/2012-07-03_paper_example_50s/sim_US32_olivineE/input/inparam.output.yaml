@@ -1,0 +1,156 @@
+#
+#  inparam.output.yaml
+#  AxiSEM3D
+#
+#  Created by Kuangdai Leng on 6/20/20.
+#  Copyright © 2020 Kuangdai Leng. All rights reserved.
+#
+
+#  This is an AxiSEM3D input parameter file for
+#  station-wise and element-wise output
+
+
+############################# station-wise #############################
+# what: list of station groups
+# type: array of objects
+# note: 1) different options such as channels and sampling rates can
+#          be used for different station groups; for example, one may
+#          have one group of real-world seismic stations to record the
+#          displacement vector at a high sampling rate and another group
+#          of animation stations to record only the vertical displacement
+#          at a low sampling rate
+#       2) use [] if no station group presents
+list_of_station_groups:
+    #==========================================================================#
+    # this key can be arbitrary but must be unique in this list
+    - JW_stations:
+        # station locations
+        locations:
+            # what: station location file
+            # type: filename
+            # note: 1) must be an ascii file with five or six columns:
+            #          NAME NETWORK x1 x2 [useless] x3
+            #          [useless] is for compatibility with SPECFEM and AxiSEM
+            #       2) (x1, x2, x3) are specified by the next two options
+            #       3) empty lines and comment lines (led by #) are allowed
+            station_file: eq3.txt
+            # what: horizontal coordinates x1 and x2
+            # type: string
+            # only: LATITUDE_LONGITUDE / DISTANCE_AZIMUTH / XY_CARTESIAN
+            # note: 1) the unit for LATITUDE_LONGITUDE is degree
+            #       2) the unit for DISTANCE is either radian (for a
+            #          spherical mesh) or meter (for a Cartesian mesh);
+            #          the unit for AZIMUTH is radian
+            #       3) the unit for XY_CARTESIAN is meter
+            horizontal_x1_x2: LATITUDE_LONGITUDE
+            # what: vertical coordinate x3
+            # type: string
+            # only: RADIUS / DEPTH
+            # note: the unit is meter
+            vertical_x3: DEPTH
+            # what: correct for ellipticity when locating the stations
+            # type: bool
+            # note: used only when horizontal_x1_x2 = LATITUDE_LONGITUDE
+            ellipticity: true
+            # what: use solid surface as depth origin
+            # type: bool
+            # note: used only when vertical_x3 = DEPTH
+            depth_below_solid_surface: true
+            # what: use undulated (otherwise reference) geometry to
+            #       determine the vertical locations
+            # type: bool
+            # note: compatible with vertical_x3 = both RADIUS and DEPTH
+            undulated_geometry: true
+        # wavefields to be recorded
+        wavefields:
+            # what: coordinate frame of wavefields
+            # type: string
+            # only: spz / RTZ / ENZ / xyz
+            # note: 1) spz: (s, phi, z) or AxiSEM3D-intrinsic
+            #       2) RTZ: (radial, transpose, vertical)
+            #       3) ENZ: (east, north, vertical)
+            #       4) xyz: (x, y, z) in source-centered frame
+            coordinate_frame: RTZ
+            # what: type of medium
+            # type: string
+            # only: SOLID / FLUID
+            # note: all stations in a group must be located in either
+            #       the solid or the fluid domain
+            medium: SOLID
+            # what: list of channels
+            # type: array of string
+            # note: 1) allowed channels for medium = SOLID
+            #          * displacement:
+            #            U, U1, U2, U3, U_NORM (or |U|)
+            #          * gradient of displacement:
+            #            G, G11, G12, G13, G21, G22, G23, G31, G32, G33,
+            #            Gii (or G_I1)
+            #          * strain:
+            #            E, E11, E12, E13, E21, E22, E23, E31, E32, E33,
+            #            Eii (or E_I1), E_J2
+            #          * stress:
+            #            S, S11, S12, S13, S21, S22, S23, S31, S32, S33,
+            #            Sii (or S_I1), S_J2
+            #          * curl:
+            #            R, R1, R2, R3, R_NORM (or |R|)
+            #      2) allowed channels for medium = FLUID
+            #          * displacement:
+            #            U, U1, U2, U3, U_NORM (or |U|)
+            #          * scalar potential of displacement (U = ∇X):
+            #            X
+            #          * pressure:
+            #            P
+            #      3) (1, 2, 3) are determined by coordinate_frame
+            #      4) using U means [U1, U2, U3], and similarly for G, E, S
+            #         and R; duplicated channels are automatically removed
+            channels: [U]
+        # temporal sampling
+        temporal:
+            # what: sampling period
+            # type: string / double
+            # only: DT / DTx2 / DTx3 / ... / value
+            # note: DT stands for Δt of the simulation; DTx3 means
+            #       sampling period = Δt * 3
+            sampling_period: DT
+            # what: time window
+            # type: string / array of double
+            # only: FULL / [t0, t1]
+            # note: use FULL to record the whole simulation
+            time_window: [0, 2000]
+        # file options
+        file_options:
+            # what: output file format
+            # type: string
+            # only: ASCII_STATION / ASCII_CHANNEL / NETCDF
+            # note: 1) ASCII_STATION: one ascii file contains all channels at
+            #                         one station, available only for a small
+            #                         number of stations
+            #       2) ASCII_CHANNEL: one ascii file contains one channel at
+            #                         all stations, available for many stations
+            #       3) NETCDF: much more efficient than ascii, available for
+            #                  many stations; parallel NetCDF can be activated
+            #                  in CMakeLists.txt
+            format: ASCII_STATION
+            # what: number of sampled time steps to be buffered
+            # type: int
+            # note: 1) the solver buffers wave data during the time loop for
+            #          efficient writing; increase this buffer size to save
+            #          writing time and decrease it to save memroy (useful for
+            #          a large number of stations)
+            #       2) this parameter does not affect the final results
+            buffer_size: 1000
+            # what: flush file after writing a buffer to it
+            # type: bool
+            # note: 1) pro: minimizes data loss in case of abnormal termination
+            #          con: hits output performace if buffer_size is small
+            #       2) this parameter does not affect the final results
+            flush: true
+    #==========================================================================#
+    # this key can be arbitrary but must be unique in this list
+############################# element-wise #############################
+# what: list of element groups
+# type: array of objects
+# note: 1) different options such as channels and sampling rates can
+#          be used for different element groups
+#       2) use [] if no element group presents
+list_of_element_groups: []
