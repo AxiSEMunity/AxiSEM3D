@@ -1,0 +1,131 @@
+#  inparam.model.yaml
+#  AxiSEM3D
+#
+#  Created by Kuangdai Leng on 6/20/20.
+#  Copyright © 2019 Kuangdai Leng. All rights reserved.
+#
+
+#  This is an AxiSEM3D input parameter file for
+#  1D and 3D models
+
+
+############################# 1D model #############################
+# parameters for 1D model (the mesh)
+model1D:
+    # what: Exodus mesh file created by salvus mesher
+    # type: filename
+    exodus_mesh: AxiSEM_prem_ani_50.e
+
+
+############################# geodesy #############################
+# parameters for geodesy
+geodesy:
+    # what: geographic location of the north pole in the mesh
+    # type: array of double / SOURCE
+    # note: 1) this reference location enables the usage of geographic
+    #          coordinates for locating sources, receivers and 3D models,
+    #          compatible with Cartesian meshes
+    #       2) array of double: [latitude, longitude]
+    #       3) SOURCE: determined this location by the FIRST source
+    #                  presented in list_of_sources in inparam.source.yaml;
+    #                  always use SOURCE for a single-source simulation
+    lat_lon_north_pole_mesh: SOURCE
+
+    # what: flattening on the surface
+    # type: string / double
+    # only: SPHERE / WGS84 / GRS80 / SPECFEM3D_GLOBE / value
+    # note: 1) ellipticity is ignored for a Cartesian mesh
+    #       2) 0 for a perfect sphere; ~0.0033 for the Earth
+    #       3) ellipticity will be used in the transformation between
+    #          the geographic and the geocentric co-latitudes;
+    #          see eq. (14.32) in Dahlen & Tromp, 1998
+    #       4) to actually deform the entire mesh, add 3D model
+    #          "Ellipticity" to list_of_3D_models
+    flattening_on_surface: SPHERE
+
+
+######################## absorbing boundary ########################
+# parameters for absorbing boundary condition
+absorbing_boundary:
+    # what: model boundaries regarded as absorbing boundaries
+    # type: array of string
+    # only: a subset of [RIGHT, BOTTOM, TOP]
+    # note: 1) an AxiSEM3D mesh may contain four outer boundaries:
+    #          left (axial), right, bottom and top (surface); the right,
+    #          bottom and top ones can be absorbing boundaries (the left
+    #          or axial one is non-physical)
+    #       2) use [] to disable absorbing boundary condition
+    #          (so that all model boundaries will be stress-free)
+    #       3) the most common case in seismology is [RIGHT, BOTTOM]
+    boundaries: [RIGHT, BOTTOM]
+    
+    # what: enable the Clayton-Enquist approach
+    # type: bool
+    # note: the simplest linear approach by Clayton & Engquist (1977)
+    enable_Clayton_Enquist: false
+    
+    # the sponge approach by Kosloff & Kosloff (1986)
+    Kosloff_Kosloff:
+        # what: enable the Kosloff-Kosloff approach
+        # type: bool
+        # note: Clayton-Enquist and Kosloff-Kosloff can be used together,
+        #       but one of them has to be enabled at least
+        enable: true
+        
+        # what: relative spans of the sponge layers
+        # type: array of double
+        # note: 1) must be presented in the same order as absorbing_boundaries
+        #       2) to use Kosloff-Kosloff, the mesh should be a little larger
+        #          than the required computational domain; for example, given
+        #          a required domain spans from 0 to 100 km in depth, one can
+        #          generate a mesh from 0 to 110 km and set the relative span
+        #          to 0.05, so the thickness of the sponge layer at the mesh
+        #          bottom will be determined as 110 * 0.05 = 5.5 km, leaving
+        #          an unaffected depth range from 0 to 104.5 km for normal
+        #          wave propagation and analysis
+        #       3) allowed range: .01 ~ 0.25
+        relative_spans: [.05, .05]
+        
+        # what: expression of γ-factor in solid domain
+        # type: math expression
+        # note: 1) γ-factor represents the absorbing strength at a point
+        #       2) allowed arguments include (case sensitive):
+        #          - VP, VS: P- and S- wave velocities at the point
+        #          - RHO   : density at the point
+        #          - SPAN  : span of the sponge layer
+        #          - T0    : mesh period
+        #          * VP, VS and RHO are the 1D values in the Exodus mesh
+        #       3) this expression will be further multiplied by a pattern
+        #          function that equals to 1 on the outermost edge of the
+        #          sponge layer (i.e., on the mesh boundary) and gradually
+        #          decreases to 0 on the the innermost edge; such a decreasing
+        #          pattern is automatically handled by the solver
+        #       4) the default is an empirical expression from
+        #          Haindl et al., 2020
+        gamma_expr_solid: 1.1 / T0 * (VS / VP)^2 * exp(-0.04 * SPAN / (VP * T0))
+        
+        # what: expression of γ-factor in fluid domain
+        # type: math expression
+        # note: same as gamma_expr_solid but without VS dependency
+        gamma_expr_fluid: 0.88 / T0 * exp(-0.04 * SPAN / (VP * T0))
+
+
+######################## attenuation ########################
+# what: attenuation mode
+# type: string
+# only: NONE / FULL / CG4
+# note: 1) NONE: turn off attenuation
+#       2) FULL: compute attenuation on all GLL points
+#       3) CG4:  compute attenuation on 4 GLL points per element;
+#                CG4 is mostly as accurate as FULL but more efficient
+#                than FULL, see van Driel & Nissen-​Meyer, 2014;
+#                CG4 requires set(NPOL 4) in CMakeLists.txt;
+attenuation: FULL
+
+
+############################# 3D models #############################
+# what: list of 3D models
+# type: array of objects
+# note: 1) the order in this list can affect the final 3D model
+#       2) use [] if no 3D model presents
+list_of_3D_models: []
