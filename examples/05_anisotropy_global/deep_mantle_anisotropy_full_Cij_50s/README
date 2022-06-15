@@ -1,0 +1,3 @@
+"lowermost_mantle_ani":
+Simulation with an isotropic PREM mesh. Seismic anisotropy is added in the lowermost mantle.
+A script that shows how to do this is given in "processing/Cijkl_for_ani". 
