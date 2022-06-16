@@ -1,7 +1,7 @@
 "sim1_ani_prem_mesh ":
 Contains the input for a 50s simulation using an anisotropic PREM mesh (created with salvus).
 "sim2_iso_prem_mesh_plus_ani":
-Contains the input for a 5s simulation for an isotropic PREM mesh.
+Contains the input for a 50s simulation for an isotropic PREM mesh.
 Anisotropy is added later, reproducing ani PREM anisotropy.
 The anisotropic netcdf input is created in "processing/Cijkl_for_ani_PREM".
 The folder contains all the files necessary to repeat this exercise.
