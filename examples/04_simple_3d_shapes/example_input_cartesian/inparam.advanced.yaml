@@ -1,0 +1,96 @@
+#
+#  inparam.advanced.yaml
+#  AxiSEM3D
+#
+#  Created by Kuangdai Leng on 6/20/20.
+#  Copyright © 2019 Kuangdai Leng. All rights reserved.
+#
+
+#  This is an AxiSEM3D input parameter file for
+#  advanced settings
+
+
+##################### verbosity #####################
+# parameters for verbosity
+verbose:
+    # what: verbose to stdout or a file
+    # type: string
+    # only: STDOUT / filename
+    channel: STDOUT
+
+    # what: verbosity level
+    # type: string
+    # only: NONE / ESSENTIAL / DETAILED
+    level: ESSENTIAL
+
+    # what: show/hide runtime warnings
+    # type: bool
+    warnings: true
+
+    # what: time step interval to display time loop info
+    # type: int
+    loop_info_interval: 100
+
+    # what: time step interval for stability check
+    # type: int
+    # note: use 1 to precisely locate the origin of instability
+    stability_interval: 1
+
+
+##################### mpi #####################
+# parameters for mpi
+mpi:
+    # what: number of processors in a mpi group
+    # type: int
+    # note: 1) AxiSEM3D uses a two-level MPI structure where the
+    #          processors are divided into groups to avoid broadcasting
+    #          a large input dataset (e.g., the Exodus mesh or a large
+    #          3D model) on every processor; instead, a large dataset can
+    #          be stored only on a "leader" processor in each group, which
+    #          handles data requests from its members
+    #       2) increase this number (from 1 to the number of processors per
+    #          per node) to save memory
+    nproc_per_group: 24
+    
+    # what: weight for load balancing
+    # type: string
+    # only: ELEMENT / ELEMENT_POINT
+    # note: 1) ELEMENT:       use cost measurement on elements
+    #       2) ELEMENT_POINT: use cost measurement on both elements and points
+    weight_for_load_balancing: ELEMENT_POINT
+
+    # what: plot domain decomposition
+    # type: bool
+    # note: the output netcdf file contains three variables:
+    #       * coords,   double, (X, 2), (s,z) of the element centers
+    #       * mpi_rank, int,    (X, ),  mpi rank of the elements
+    #       * weights,  double, (X, ),  element weights for decomposition
+    #       where X is the number of elements
+    plot_domain_decomposition: false
+
+
+##################### developers #####################
+# parameters for developers
+develop:
+    # what: enable/disable preloop diagnosis
+    # type: bool
+    # note: 1) output/develop/preloop_diagnosis.log for runtime and memory
+    #       2) output/develop/cost_measurements.log for cost measurements
+    #          on elements and GLL points
+    diagnose_preloop: true
+
+    # what: maximum time steps for running
+    # type: int
+    # note: use 0 to free this limit
+    max_num_time_steps: 0
+
+    # what: wall-clock time limit (sec) for FFTW planning
+    # type: double
+    time_limit_for_fftw_planning: 60.
+
+    # what: enforce FFTW lucky numbers
+    # type: bool
+    # note: FFTW is good at handling logical sizes of the form:
+    #       n = (2^a)*(3^b)*(5^c)*(7^d)*(11^e)*(13^f), where e + f < 2,
+    #       as called the lucky numbers; users should use true.
+    fftw_lucky_numbers: true
