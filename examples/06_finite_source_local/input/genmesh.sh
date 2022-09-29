@@ -1,0 +1,2 @@
+#!/bin/bash
+python -m salvus_mesh_lite.interface AxiSEMCartesian  --basic.model "sfba_2018_m500.bm" --basic.period 2.0 --attenuation.frequencies 0.01 10.0 --cartesian2Daxisem.x 60.0 --cartesian2Daxisem.min_z 6326.1 --output_file AxiSEMCartesian_sfba_m500_2s.e

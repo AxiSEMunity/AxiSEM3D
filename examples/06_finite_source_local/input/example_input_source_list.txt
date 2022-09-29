@@ -1,0 +1,35 @@
+
+    - point1:
+        location:
+            latitude_longitude: [1, 1]
+            depth: 1
+            ellipticity: false
+            depth_below_solid_surface: true
+            undulated_geometry: true
+        mechanism:
+            type: MOMENT_TENSOR
+            data: [9.966e-01, 2.211e+00, 1.667e+00, -3.575e-01, 1.086e+00, -4.233e-01]
+            unit: 1.000e+00
+        source_time_function:
+            class_name: GaussianSTF
+            half_duration: 2.000e+00
+            decay_factor: 1.628
+            time_shift: -1.000e+00
+            use_derivative_integral: GAUSSIAN
+    - point2:
+        location:
+            latitude_longitude: [1, 1]
+            depth: 1
+            ellipticity: false
+            depth_below_solid_surface: true
+            undulated_geometry: true
+        mechanism:
+            type: MOMENT_TENSOR
+            data: [8.281e-04, 2.321e-01, 4.625e-01, 3.115e-01, -1.578e-01, -8.286e-01]
+            unit: 1.000e+00
+        source_time_function:
+            class_name: GaussianSTF
+            half_duration: 2.000e+00
+            decay_factor: 1.628
+            time_shift: -1.000e+00
+            use_derivative_integral: GAUSSIAN
