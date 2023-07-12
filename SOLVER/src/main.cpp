@@ -177,15 +177,15 @@ int main(int argc, char *argv[]) {
         sem.reset();
         timer::gPreloopTimer.ended("Freeing memory Stage-III", '*');
         
-        // FFT (must be initialized after adding sources and receivers)
-        timer::gPreloopTimer.begin("Time loop FFT", '*');
-        initalizeFFT("Time Loop");
-        timer::gPreloopTimer.ended("Time loop FFT", '*');
-        
         // wavefield output: initialize
         timer::gPreloopTimer.begin("Output files", '*');
         domain->initializeOutput();
         timer::gPreloopTimer.ended("Output files", '*');
+        
+        // FFT (must be initialized after adding sources and receivers)
+        timer::gPreloopTimer.begin("Time loop FFT", '*');
+        initalizeFFT("Time Loop");
+        timer::gPreloopTimer.ended("Time loop FFT", '*');
         
         // end preloop timer
         timer::gPreloopTimer.ended("Pre-timeloop processing", '*');
