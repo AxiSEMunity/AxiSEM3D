@@ -90,8 +90,9 @@ public:
             InterfaceSF<PointSF>::fftSF.computeC2R(stiff, sStiff, nr);
             InterfaceSF<PointSF>::fftSF.computeC2R(displ, sDispl, nr);
             InterfaceSF<PointSF>::fftSF.computeC2R(veloc, sVeloc, nr);
-            sStiff -= ((two * mGamma).asDiagonal() * sVeloc +
-                       mGamma.array().square().matrix().asDiagonal() * sDispl);
+            sStiff.topRows(nr) -=
+            (two * mGamma).asDiagonal() * sVeloc.topRows(nr) +
+            mGamma.array().square().matrix().asDiagonal() * sDispl.topRows(nr);
             InterfaceSF<PointSF>::fftSF.computeR2C(sStiff, stiff, nr);
         }
     }
