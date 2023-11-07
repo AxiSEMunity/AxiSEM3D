@@ -276,8 +276,10 @@ void FluidElement::getDisplField(eigen::CMatXN3 &displ, bool needRTZ) const {
                                     sStressUndulated_FR, mNr);
         }
         if (!needRTZ) {
-            mTransform->transformRTZ_SPZ3(sStressSpherical_FR, mNu_1);
+            mTransform->transformRTZ_SPZ3(sStressUndulated_FR, mNu_1);
         }
+        // convert to flattened
+        mapPPvsN::PP2N(sStressUndulated_FR, displ, mNu_1);
     } else {
         if (mInFourier) {
             mAcoustic->strainToStress_FR(sStrainSpherical_FR,
@@ -293,10 +295,9 @@ void FluidElement::getDisplField(eigen::CMatXN3 &displ, bool needRTZ) const {
         if (needRTZ) {
             mTransform->transformSPZ_RTZ3(sStressSpherical_FR, mNu_1);
         }
+        // convert to flattened
+        mapPPvsN::PP2N(sStressSpherical_FR, displ, mNu_1);
     }
-    
-    // convert to flattened
-    mapPPvsN::PP2N(sStressUndulated_FR, displ, mNu_1);
 }
 
 // pressure field

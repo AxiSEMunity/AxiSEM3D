@@ -425,7 +425,7 @@ void SolidElement::getNablaField(eigen::CMatXN9 &nabla, bool needRTZ) const {
             fft::gFFT_N9.computeC2R(sStrainSpherical_FR,
                                     sStrainSpherical_CD, mNr);
             mPRT->sphericalToUndulated9_CD(sStrainSpherical_CD,
-                                           sStrainUndulated9_CD, mNu_1);
+                                           sStrainUndulated9_CD, mNr);
             fft::gFFT_N9.computeR2C(sStrainUndulated9_CD,
                                     sStrainUndulated9_FR, mNr);
         }

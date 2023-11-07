@@ -121,7 +121,7 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
     ////////////////////////////////////
     
     // solid-fluid
-    if (mEdgesOnBoundary.at("SOLID_FLUID") != -1 && !mFluid) {
+    if (mEdgesOnBoundary.at("SOLID_FLUID") != -1) {
         // compute normals
         static std::vector<int> ipnts;
         static eigen::arP_DMatX3 nSF;
@@ -129,8 +129,13 @@ void Quad::setupGLL(const ABC &abc, const LocalMesh &localMesh,
         // add normals to points
         for (int ip = 0; ip < spectral::nPED; ip++) {
             int igll = localMesh.mElementGLL(mLocalTag, ipnts[ip]);
-            // normal must point from fluid to solid
-            GLLPoints[igll].addNormalSF(-nSF[ip]);
+            // divid by 2 because fluid and solid elements will add normal twice
+            if (mFluid) {
+                GLLPoints[igll].addNormalSF(nSF[ip] / 2.);
+            } else {
+                // negative because normal must point from fluid to solid
+                GLLPoints[igll].addNormalSF(-nSF[ip] / 2.);
+            }
         }
     }
     
