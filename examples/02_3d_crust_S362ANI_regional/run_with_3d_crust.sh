@@ -1,4 +1,4 @@
-# create simualtion dir
+# create simulation dir
 mkdir -p simu_with_3d_crust/input
 
 # copy input files
