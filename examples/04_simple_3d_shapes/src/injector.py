@@ -54,7 +54,7 @@ class Injector():
 
     def slice_obj(self, object):
         # Calculate the dimensions of sphere array:
-        # Get the index for the centre of sphere array - may need updating if slice elemets with lower indices than it
+        # Get the index for the centre of sphere array - may need updating if slice elements with lower indices than it
         object.sliced = copy(object.obj)
         sa_centre     = copy(object.sa_centre_original)
 
