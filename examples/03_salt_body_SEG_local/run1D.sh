@@ -1,4 +1,4 @@
-# create simualtion dir
+# create simulation dir
 mkdir -p simu1D/input
 
 # copy input files
