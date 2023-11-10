@@ -8,7 +8,7 @@ It is particularly important to remember that this is a linear, static-backgroun
 
 2. MODELS
 
-If you want to use an absorbing boundary (AB) at the top of the atmosphere, to prevent spurious reflections, you need to set the model up to do this. This may not be needed - for example if you are just interested in the intial coupling of the pressure-wave into the ground and don't care about what happens afterward - but in most cases it is important.
+If you want to use an absorbing boundary (AB) at the top of the atmosphere, to prevent spurious reflections, you need to set the model up to do this. This may not be needed - for example if you are just interested in the initial coupling of the pressure-wave into the ground and don't care about what happens afterward - but in most cases it is important.
 
 The way that you do this in AxiSEM3D requires editing the base model (tayak_atmosphere_30km.bm) if you want to change the thickness or effectivenes of the base model. You will need to do this too for any other models or planets or moons that you want to work with. Thankfully, it just consists of changing numbers rather than changing the code.
 
