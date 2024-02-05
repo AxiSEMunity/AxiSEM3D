@@ -61,7 +61,7 @@ end
 Cijkl(:,:,i:end)= [];
 depth(:,i:end) = [];
 
-% AxiSEM3D does not like it if you speficy the sam depth twice, which is
+% AxiSEM3D does not like it if you specify the same depth twice, which is
 % what PREM does at discontinuities. Avoid problems by separating layers.
 for i=2:length(depth)
     if depth(i-1) == depth(i)
