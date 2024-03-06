@@ -47,6 +47,3 @@ cmake -Dcxx=CC \
   ../AxiSEM3D/SOLVER/
 
 make -j
-~                                                                                                                                                                                                               
-~                                                                                                                                                                                                               
-~                            
