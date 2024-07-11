@@ -1,0 +1,53 @@
+# Example Polynomial Model Input File for AXISEM 2.0
+NAME                paper_example
+
+# is this model defined by multiple layers [layer] or polynomials [poly]
+MODEL_TYPE          poly
+
+# if anelastic, QMU an QKAPPA are defined, default: False
+ANELASTIC           T
+
+# reference frequency at which the velocities are defined in Hz, default: 1.
+REFERENCE_FREQUENCY 1.
+
+# if anisotropic, velocitities are defined as VPV, VPH, VSV, VSH and ETA is
+# provided. If false, only VP and VS are needed. default: False
+ANISOTROPIC         F
+
+# number of regions in which the model is described by polynomials
+NREGIONS            1
+
+# radii of discontinuties, for whole planets starts from the center (0.0) and includes
+# the free surface. This should hence be NREGIONS + 1 floats
+DISCONTINUITIES     15000.0  0.
+
+# maximum polynomial degree throughout the whole model, default: 3
+MAX_POLY_DEG        1
+
+# prefactor to scale the radius before evaluating the polynomial, default:
+# radius of the planet
+SCALE               15000.0
+
+# Are the units given in meters and meters per second?
+# Allowed values:
+#    m - lengths in m,  velocities in m/s,  density in kg/m^3
+#   km - lengths in km, velocities in km/s, density in g/cm^3
+UNITS               m
+
+# Indentations by at least two blanks are necessary.
+# Assuming to have same order as DISCONTINUITIES (from center to the surface or vice versa)
+RHO
+  2000.
+
+VP
+  1500
+
+# Fluid is detected by a single 0. value
+VS
+  1000
+
+QKAPPA
+  57827.0
+
+QMU
+  600.0

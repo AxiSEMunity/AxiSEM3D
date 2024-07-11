@@ -63,7 +63,6 @@ def cartesian_to_ellipsoidal(x,y,z, e2, iterations=20, z_def="depth"):
     return depth, latitude, longitude
 
 
-
 # SPHERE PARAMETERS:
 sph_depth          =  200000  # m
 sph_lat            =  90.0       # degrees

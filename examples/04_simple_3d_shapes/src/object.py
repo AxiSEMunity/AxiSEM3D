@@ -6,7 +6,7 @@ from gen_scripts import latlon_to_cartesian
 class Object(ABC):
     """Abstract base class that can not be instantiated."""
     @abstractmethod
-    def __init__(self, model, vp, vs, rho, dim, loc=None, angle_thresholds=[15, 75], random_mag=0):
+    def __init__(self, model, vp, vs, rho, dim, loc=None, angle_thresholds=[15, 75], random_mag=0, verb=1):
         """
         Constructor that acts as template. Can never be directly called.
 
@@ -26,7 +26,11 @@ class Object(ABC):
 
         # General:
         self.m   = model
-        self.dim = np.array(dim)
+
+        if(self.shape_name=='sphere'):
+            self.dim = dim
+        else:
+            self.dim = np.array(dim)
         self.obj = None
         self.sliced = None
 
@@ -53,7 +57,11 @@ class Object(ABC):
         # the radius is changed
         self.set_dimensions(self.dim)
 
-        print(f"Generated {self.shape_name}.")
+        # verbosity flag
+        self.verb = verb
+
+        if self.verb>0:
+            print(f"Generated {self.shape_name}.")
 
 
 
@@ -158,9 +166,12 @@ class Object(ABC):
     def _get_iter_no(self):
         metric = self._get_metric()
 
-        x_loop = int(self.radius[0] * self.expand_int  // (metric*self.m.dx))
-        y_loop = int(self.radius[1] * self.expand_int  // (metric*self.m.dy))
-        z_loop = int(self.radius[2] * self.expand_int  // self.m.dz)
+        # Get max radius:
+        rr = np.max(self.radius)
+
+        x_loop = int(rr * self.expand_int  // (metric*self.m.dx))
+        y_loop = int(rr * self.expand_int  // (metric*self.m.dy))
+        z_loop = int(rr * self.expand_int  // (self.m.dz))
 
         return x_loop, y_loop, z_loop
 
@@ -171,10 +182,10 @@ class Object(ABC):
             sph_coords = np.array([i*self.m.dx + self.loc[0], j*self.m.dy + self.loc[1], k*self.m.dz + self.loc[2]])
 
             # Convert spherical to cartesian:
-            x, y, z, n = latlon_to_cartesian(lat=sph_coords[0], long=sph_coords[1], depth=sph_coords[2], e2=0, a=self.m.a)
+            x, y, z = latlon_to_cartesian(lat=sph_coords[0], long=sph_coords[1], depth=sph_coords[2], e2=0, a=self.m.a)
 
             # Get coordinates of centre of object:
-            x_centre, y_centre, z_centre, n = latlon_to_cartesian(lat=self.loc[0], long=self.loc[1], depth=self.loc[2],
+            x_centre, y_centre, z_centre = latlon_to_cartesian(lat=self.loc[0], long=self.loc[1], depth=self.loc[2],
                                                                   e2=0, a=self.m.a)
 
             cart_coords = np.array([x-x_centre,y-y_centre, z-z_centre])

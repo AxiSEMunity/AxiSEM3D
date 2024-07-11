@@ -24,7 +24,7 @@ class Model(object):
         :param min_velocity:  Minimum velocity for mesh. Controls resolution of 3D models. See notes below.
         :type min_velocity: float
         :param oversaturation: Scaling for mesh resolution. E.g. a value of 2 doubles the array resolution relative to the 1D mesh. See notes below.
-        :type oversaturation: int
+        :type oversaturation: int/float or array of 3 ints for x/y/z lat/lon/depth
         :returns: Model object.
         """
 
@@ -76,7 +76,7 @@ class Model(object):
 
 
 
-    def writeNetCDF(self, filename, paraview=False):
+    def writeNetCDF(self, filename, paraview=False, add_longitude=0):
         """
         Writes 3D arrays for velocity and density to a .nc file for inclusion in AxiSEM-3D simulation.
 
@@ -146,7 +146,7 @@ class Model(object):
 
             # Assigning values to the variables:
             lats[:] = grid_lat
-            lons[:] = grid_lon
+            lons[:] = grid_lon + add_longitude
             if paraview == True:
                 print("PARAVIEW FLAG = TRUE: USE MODEL FOR VISUALS BUT NOT SIMULATION")
                 z[:] = self.a - grid_depth
@@ -205,11 +205,24 @@ class Model(object):
 
 
     def _set_numel(self, oversaturation):
+
+        # sort oversaturation - can be an integer or array of length three
+        if type(oversaturation) == int or type(oversaturation) == float:
+            oversat_x = oversaturation
+            oversat_y = oversaturation
+            oversat_z = oversaturation
+
+        elif np.size(np.array(oversaturation))==3:
+            oversat_x = oversaturation[0]
+            oversat_y = oversaturation[1]
+            oversat_z = oversaturation[2]
+
+
         if self.type.upper() =="SPHERICAL":
-            x,y,z,n = latlon_to_cartesian(lat=self.x_lim, long=self.y_lim, depth=self.z_lim, e2=0, a=self.a)
-            self.nx = np.abs(oversaturation * math.ceil((x[1] - x[0]) * self.epw / self.min_wavelength))
-            self.ny = np.abs(2*oversaturation * math.ceil((y[1] - y[0]) * self.epw / self.min_wavelength))
-            self.nz = np.abs(oversaturation * math.ceil((z[1] - z[0]) * self.epw / self.min_wavelength))
+            x,y,z = latlon_to_cartesian(lat=self.x_lim, long=self.y_lim, depth=self.z_lim, e2=0, a=self.a)
+            self.nz = int(np.abs(oversat_z * math.ceil((x[1] - x[0]) * self.epw / self.min_wavelength)))
+            self.ny = int(np.abs(oversat_y * math.ceil((y[1] - y[0]) * self.epw / self.min_wavelength)))
+            self.nx = int(np.abs(oversat_x * math.ceil((z[1] - z[0]) * self.epw / self.min_wavelength)))
 
             # Ensure that nx, ny, nz are odd
             if self.nx % 2 == 0:
@@ -241,7 +254,7 @@ class Model(object):
         print(f"            ellipticity: FILL THIS IN - true/false")
         print(f"            depth_below_solid_surface: FILL THIS IN - true/false")
         print(f"            nc_variables: [lat, lon, depth]")
-        print(f"            data_rank: [1, 2, 0]")
+        print(f"            data_rank: [0, 1, 2]")
         print(f"            length_unit: m")
         print(f"            angle_unit: degree")
         print(f"            undulated_geometry: false")
