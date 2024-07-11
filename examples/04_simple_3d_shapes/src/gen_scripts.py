@@ -2,11 +2,12 @@ import numpy as np
 
 def latlon_to_cartesian(lat, long, depth, e2, a):
     # Convert the ellipsoidal (geographic) coordinates to x,y,z:
-    lat = np.radians(lat)
-    lon = np.radians(long)
+    latr = np.radians(lat)
+    lonr = np.radians(long)
+    depth = np.array(depth)
 
-    N = a / np.sqrt(1 - e2 * (np.sin(lat) ** 2))
-    X = (N - depth) * np.cos(lat) * np.cos(lon)
-    Y = (N - depth) * np.cos(lat) * np.sin(lon)
-    Z = ((1 - e2) * N - depth) * np.sin(lat)
-    return X, Y, Z, N
+    N = a / np.sqrt(1 - e2 * (np.sin(latr) ** 2))
+    X =  np.cos(latr) * np.cos(lonr) * (N - depth)
+    Y =  np.cos(latr) * np.sin(lonr) *(N - depth)
+    Z =  np.sin(latr) * ((1 - e2) * N - depth)
+    return X, Y, Z#, N

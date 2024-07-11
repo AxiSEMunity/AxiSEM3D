@@ -2,7 +2,7 @@ import numpy as np
 from object import Object
 
 class Ellipsoid(Object):
-    def __init__(self, model, vp, vs, rho, dim, loc=None, random_mag=0):
+    def __init__(self, model, vp, vs, rho, dim, loc=None, random_mag=0, verb=0):
         """
         :param model: The instance of :class:`~model.Model` object shape is injected into.
         :type  model: :class:`~model.Model`
@@ -19,7 +19,8 @@ class Ellipsoid(Object):
         """
 
         self.shape_name = "ellipsoid"
-        super().__init__(model, vp, vs, rho, dim, loc, random_mag=random_mag)
+        super().__init__(model, vp, vs, rho, dim, loc, random_mag=random_mag, verb=verb)
+
 
 
     def _in_shape_condition(self, rot_coords):

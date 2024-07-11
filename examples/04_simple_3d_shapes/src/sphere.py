@@ -52,8 +52,11 @@ class Sphere(Object):
 
 
     def set_dimensions(self, radius):
+
+
         if type(radius) == float or type(radius) == int or len(radius) == 1:
             self.radius = radius
+
         else:
             raise ValueError("Dim/radius must have dimensions of 1 (sphere)")
 
