@@ -8,6 +8,7 @@ Author: Matheo Fouchet, JPL
 import os
 import pyvista as pv
 from pyvista import examples
+# import pyvistaqt 
 import vtk
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,15 +21,22 @@ import sys
 import open3d as o3d
 import warnings
 import gc
+from obspy import read
+from obspy.signal.filter import bandpass,lowpass
 
 warnings.filterwarnings("ignore", category=DeprecationWarning) 
 
 MOON_RADIUS_IN_KM = 1737.1
 
 # specify a run name
-run = '158_ISSI_atten_slice_10' # to adapt to the simulation
+run = '163_very_simple_moonShroedinger_hemsiphere_10' # to adapt to the simulation
+
 # run_title = 'M1 with ±50% heterogeneity (linear to 50 km), surface explosion'
-run_title = 'Very Simple Moon, surface explosion'
+# run_title = 'Very Simple Moon, surface explosion'
+# run_title = 'Very Simple Moon, deep explosion'
+# run_title = 'Lunar Model M1 - no heterogeneity '
+run_title = 'Test Model'
+
 # model for TauP
 model_taup='homogeneous_Moon_taup' # it has no boundaries
 
@@ -88,6 +96,9 @@ def find_coordinates(filename, target_line, lines_to_skip):
         latitude = float(value1.strip())
         longitude = float(value2.strip())
     return latitude,longitude
+
+def triangle_area(v0, v1, v2):
+    return 0.5 * np.linalg.norm(np.cross(v1 - v0, v2 - v0))
 
 def animate_pyvista_png(top_dir=None,run=None,element_name=None,station_group=None,station_file=None, run_title=None):
 
@@ -173,51 +184,81 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,station_group=No
             # setting up the data
             wave1 = ds.variables['data_wave'][:, wave_dim, :]
             
+            # Define the bandpass filter parameters
+            freqmin = 1/100  # Minimum frequency in Hz
+            freqmax = 1/2  # Maximum frequency in Hz
+            corners = 6  # Number of corners
+            zerophase = False  # Apply filter in both directions
+            dt = 0.0967807
+            fs = 1/dt
+            
+            # Apply the bandpass filter 
+            print('filtering...')
+            wave2 = bandpass(wave1, freqmin, freqmax, fs, corners=corners, zerophase=zerophase)
+            
+            # Initializing the plotter
+            plotter = pv.Plotter(off_screen=True)
             print('setup complete')
 
+            # Initializing the surface thresholds
+            S_mesh = 0
+            S_threshold = 13000000
+            
             # loop over time
-            for itime in range(562,ntime):
-                
-                # initializing the plotter          
-                plotter = pv.Plotter(off_screen=True)
+            for itime in range(0,ntime):          
+            # for itime in [2726]: 
+
+                # plotter = pyvistaqt.BackgroundPlotter()
 
                 # Analyzing the non zero data
                 points = element_coords[:,:]
+                wave3 = wave2[:,itime]
+
+                mesh = pv.PolyData(points)
+                mesh[ch] = wave3[:]
                 
-                if itime <= 40 :
-                    threshold = 0.5e-7
+                # if itime <= np.floor(ntime/3) :
+                if S_mesh <= S_threshold :
+                    threshold = 0.4e-7
                 else:
-                    threshold = 1e-7
-                nonzeroind = np.where(np.abs(wave1[:,itime]) > threshold)[0]
+                    threshold = 0
+                nonzeroind = np.where(np.abs(wave3[:]) >= threshold)[0]
                 points = points[nonzeroind]
                 
-                if len(points) != 0:
+                if len(points) >= 6:
                     mesh = pv.PolyData(points)   
-                    mesh[ch] = wave1[nonzeroind,itime] 
-        
+                    mesh[ch] = wave3[nonzeroind] 
+                    
                     # open3d mesh creation
                     point_cloud= points
                     pcd = o3d.geometry.PointCloud()
                     pcd.points = o3d.utility.Vector3dVector(point_cloud[:,:3])
+                    # print('points ok')
                     pcd.estimate_normals()
-                    pcd.orient_normals_consistent_tangent_plane(100)
+                    # print('normals ok')
+                    pcd.orient_normals_consistent_tangent_plane(5)
+                    # print('orientation ok')
                     distances = pcd.compute_nearest_neighbor_distance()
+                    # print('ok mesh open3d')
                     avg_dist = np.mean(distances)
                     radius = 3 * avg_dist
                     bpa_mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(pcd,o3d.utility.DoubleVector([radius, radius * 2]))
+                    vertices = np.asarray(bpa_mesh.vertices)
+                    triangles = np.asarray(bpa_mesh.triangles)
+                    S_mesh = sum(triangle_area(vertices[t[0]], vertices[t[1]], vertices[t[2]]) for t in triangles)
                     filename = "bpa_mesh.ply"
                     o3d.io.write_triangle_mesh(filename, bpa_mesh)
-                    
                     bpa_mesh2 = pv.read(filename)
                     interpolated = bpa_mesh2.interpolate(mesh, radius=10,sharpness=10)
-                    # interpolated.clean()
-                    plotter.add_mesh(interpolated,clim=clim['Z'],cmap=cmap,scalar_bar_args=sargs)
+                    plotter.add_mesh(interpolated,clim=clim['Z'],cmap=cmap,scalar_bar_args=sargs,opacity=0.6)
                 else :
                     mesh = 0
-                    
+
+                print('done meshing')
                 # Setting the back ground for the image
-                image_path = examples.planets.download_stars_sky_background(load=False)
-                plotter.add_background_image(image_path)
+                # image_path = examples.planets.download_stars_sky_background(load=True)
+                # plotter.add_background_image(image_path)
+                plotter.set_background('black')
 
                 # Setting the text for the image
                 plotter.add_text(run_title, position=(0.01,0.90), color='white',font_size=40, viewport=True,font='arial')
@@ -247,8 +288,8 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,station_group=No
                 fss__pos = [R*np.cos(fss_lat)*np.cos(fss_lon),R*np.cos(fss_lat)*np.sin(fss_lon),R*np.sin(fss_lat)]
                 sch = pv.PolyData(fss__pos)
                 sch["My Labels"] = ['Schrodinger Basin']
-                plotter.add_point_labels(sch, "My Labels", point_size=10,
-                italic=True,font_size=35,text_color='white',point_color='black',shape_opacity=0,render_points_as_spheres=True,always_visible=True)
+                plotter.add_point_labels(sch, "My Labels", point_size=25,
+                italic=True,font_size=65,text_color='white',point_color='black',shape_opacity=0,render_points_as_spheres=True,always_visible=True)
 
                 # Extracting the video
                 png = 'simulation_{}_{:04d}.png'.format(wave_channel,itime)
@@ -256,9 +297,11 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,station_group=No
                 plotter.window_size = [3000, 3000]
                 plotter.screenshot(png_file)
                 print(png_file)
-    
-                plotter.close()
-                gc.collect()
+                # plotter.deep_clean()
+                plotter.clear()
+                
+            plotter.close()
+            gc.collect()
 
         print('\nDone %s' % wave_channel)        
         print(png_file)
