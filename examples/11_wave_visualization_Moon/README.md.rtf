@@ -1,7 +1,10 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2761
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset0 Menlo-Regular;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\csgray\c0;}
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\fnil\fcharset0 Menlo-Regular;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue233;\red0\green0\blue0;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c93333;\csgray\c0;
+}
 \margl1440\margr1440\vieww17860\viewh10240\viewkind0
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
@@ -10,6 +13,10 @@
 ## Description\
 \
 This project aims to visualize the surface projection of seismic waves on  the Moon produced by meteoroid impacts. It is written in Python and uses the datas produced by AxiSEM3D simulations.\
+\
+There are two part in the code:\
+- The first part is called \'93stations_processing.py\'94 in order to create the PyVista meshes that will be visualized.\
+- The second part is called \'93png_creation_seismo.py\'94 in order to visualize the meshes and create the images.\
 \
 ## Requirements\
  \
@@ -21,27 +28,49 @@ In order to run the code, several Python packages are required :\
 - os\
 - netcdf4\
 - moviepy\
-\
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install them.\
+- opencv\
+- obspy\
+- future \
+- seaborn\
+- pandas\
+- irfpy from ```bash 
+\f1 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 pip install --find-links={\field{\*\fldinst{HYPERLINK "https://irfpy.irf.se/sdist/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://irfpy.irf.se/sdist/}} irfpy.util -U\
+\pard\pardeftab720\partightenfactor0
+\cf0 \'a0\'a0\'a0\'a0# Moon basemap\
+pip install --no-index --find-links={\field{\*\fldinst{HYPERLINK "https://irfpy.irf.se/sdist"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://irfpy.irf.se/sdist}} irfpy.planets -U\
+```
+\f0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 \
+The package \'91open3d\'92 only works with certain versions of Python, I used the 3.11 version of Python. To do so, it is convenient to use Miniconda in order to create a python environment. After the conda environment installation is complete, use the \'91conda forge\'92 library to install the previous packages :\
 \
 ```bash\
-pip install <PackageName>\
+conda create -n myenv python=3.11\
+conda activate myenv\
+conda install <PackageName>\
 ```\
 \
 ## Usage\
 \
-In order to create the images of the simulation for a video, one has to run the code labeled \'91stations_processing_png.py\'92\'92. To get the video, one has to run the notebook \'91combine_png_stations.ipynb\'92.\
+In order to create the images of the simulation for a video, one has to run the codes labeled \'93stations_processing.py\'94 and \'93png_creation_seismo.py\'94. To get the video, one has to run the block \'93Generate Video Stations\'94 in the notebook \'91combine_png.ipynb\'92 \
 \
 Before running the code, one has to adapt the name of the simulation in the Python code such as :\
 \
 ```python\
 run = 'name_of_the_simulation_folder'\
+run_title = \'91name of the model used for the simulation\'92\
+```\
+\
+And the top directory, where the AxiSEM3D simulation is supposed to be stored:\
+```python\
+top_dir = '/Users/mfouchet/Documents/Simulations/'\
 ```\
 \
 And then, the Python script can be called using :\
 \
 ```bash\
-python stations_processing_png.py\
+python stations_processing.py\
 ```\
 \
 NB: Using the caffeinate package, after installation, allows the code to run even when the computer is sleeping\
@@ -52,28 +81,34 @@ caffeinate python stations_processing_png.py\
 \
 ## Example \
 \
-Let\'92s visualize the simulation called \'91158_ISSI_atten_slice_10\'92. \
+Let\'92s visualize the simulation called \'91161_ISSI_atten_slice_10\'92. \
 \
 First, let\'92s change the name and the title of the simulation in the \'91stations_processing_png.py\'92 :\
 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0 ```python\
-run = '158_ISSI_atten_slice_10\'92\
-run_title = 'Very Simple Moon, surface explosion'\
+```python\
+run = '161pre_ISSI_linear50_full_2\'92\
+run_title = 'Lunar Model M1 with heterogeneity'\
 ```\
 \
-Then, let\'92s run the Python code in a condo environment with a 3.10 python version :\
+Then, let\'92s run the Python code in a conda environment with a 3.11 python version :\
 \
 ```bash\
-caffeinate python stations_processing_png.py\
+conda activate myenv\
+caffeinate python stations_processing.py\
+```\
+\
+And then, when the first script is done:\
+\
+```bash\
+caffeinate python png_creation_seismo,py\
 ```\
 \
 The created images will then appear one by one in the \'91
-\f1\fs22 \cf2 \CocoaLigature0 /158_ISSI_atten_slice_10/simu3D/output/stations/stations_array/images\'92 folder.\
+\f2\fs22 \cf4 \CocoaLigature0 /161pre_ISSI_linear50_full_2/simu3D/output/stations/stations_array/result\'92 folder.\
 \
 Finally, let\'92s use the notebook 
-\f0\fs24 \cf0 \CocoaLigature1 \'91combine_png_stations.ipynb\'92 by changing the name and title of the simulation in the first cell. The video is then created and uploaded in the \'91
-\f1\fs22 \cf2 \CocoaLigature0 /158_ISSI_atten_slice_10/simu3D/output/stations/stations_array/video\'92 folder.\
+\f0\fs24 \cf0 \CocoaLigature1 \'91combine_png.ipynb\'92 by changing the name and title of the simulation in the first cell. The video is then created and uploaded in the \'91
+\f2\fs22 \cf4 \CocoaLigature0 /161pre_ISSI_linear50_full_2/simu3D/output/stations/stations_array/video\'92 folder.\
 
 \f0\fs24 \cf0 \CocoaLigature1 \
 \
