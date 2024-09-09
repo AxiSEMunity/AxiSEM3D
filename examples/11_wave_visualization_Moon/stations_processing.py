@@ -30,15 +30,12 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 MOON_RADIUS_IN_KM = 1737.1
 
-# specify a run name
-# run = '157w_ISSI_atten_linear50_10' # to adapt to the simulation
-run = '161pre_ISSI_linear50_full_2'
+####### PARAMETERS #######
 
-# run_title = 'M1 with ±50% heterogeneity (linear to 50 km), surface explosion'
-# run_title = 'Very Simple Moon, surface explosion'
-# run_title = 'Very Simple Moon, deep explosion'
-run_title = 'Lunar Model M1 with heterogeneity '
-# run_title = 'Test Model'
+# specify a run name
+# run = '157_ISSI_atten_linear50_slice_10' # to adapt to the simulation
+# run = '161pre_ISSI_linear50_full_2'
+run = '158_ISSI_atten_slice_10'
 
 # model for TauP
 model_taup='homogeneous_Moon_taup' # it has no boundaries
@@ -47,6 +44,22 @@ model_taup='homogeneous_Moon_taup' # it has no boundaries
 top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
 # top_dir = '/scratch/planetseismology/mfouchet/'
 folder='simu3D'
+
+# channels to calculate
+include_channels = ['Z']
+
+# Filtering parameters
+freqmin = 1/100  # Minimum frequency in Hz
+freqmax = 1/10.4978 # Maximum frequency in Hz
+corners = 6  # Number of corners
+zerophase = False  # Apply filter in both directions
+dt = 1.23879 # sampling period found in the temporal section of the output.txt
+fs = 1/dt
+
+# Moon surface threshold
+S_threshold = 13000000 # in km2, less than half of the moon's hemisphere
+
+##########################
 
 # output.txt file 
 output_file = os.path.join(top_dir,run,'output.txt')
@@ -62,32 +75,17 @@ station_file = 'stations_array.txt'
 station_key = 'A.A0'
 
 # source name 
-source_name='explosion_south_east_quadrant' # this is an incorrect name, depth=0kms
 element_name='stations_array'
 clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [-1e-6, 1e-6]}
 model_type = 'MOON'
 
-# channels to calculate
-# include_channels = ['R', 'T', 'Z']
-# include_channels = ['R','Z']
-# include_channels = ['R']
-# include_channels = ['T']
-include_channels = ['Z']
-
-# Filtering parameters
-freqmin = 1/100  # Minimum frequency in Hz
-freqmax = 1/2  # Maximum frequency in Hz
-corners = 6  # Number of corners
-zerophase = False  # Apply filter in both directions
-dt = 0.0967807
-fs = 1/dt
 
 # Function for the calculation of the mesh surface
 def triangle_area(v0, v1, v2):
     return 0.5 * np.linalg.norm(np.cross(v1 - v0, v2 - v0))
 
 # Main processing function
-def processing(top_dir=None,run=None,element_name=None,station_group=None,station_file=None, run_title=None):
+def processing(top_dir=None,run=None,element_name=None,station_group=None,station_file=None):
     
     # map channel names to something human readable
     channel_dict = {'U1' : 'R', 'U2' : 'T', 'U3' : 'Z'}
@@ -161,10 +159,9 @@ def processing(top_dir=None,run=None,element_name=None,station_group=None,statio
 
             # Initializing the surface thresholds
             S_mesh = 0
-            S_threshold = 13000000
             
             # loop over time
-            for itime in range(1586,ntime):          
+            for itime in range(1,ntime):          
             # for itime in [2726]: 
 
                 # plotter = pyvistaqt.BackgroundPlotter()
@@ -176,10 +173,11 @@ def processing(top_dir=None,run=None,element_name=None,station_group=None,statio
                 mesh = pv.PolyData(points)
                 mesh[ch] = wave3[:]
                 
-                if S_mesh <= S_threshold :
-                    threshold = 0.4e-7
-                else:
-                    threshold = 0
+                # if S_mesh <= S_threshold :
+                #     threshold = 0.4e-7
+                # else:
+                #     threshold = 0
+                threshold = 0.3e-7
                 nonzeroind = np.where(np.abs(wave3[:]) >= threshold)[0]
                 points = points[nonzeroind]
                 
@@ -199,8 +197,10 @@ def processing(top_dir=None,run=None,element_name=None,station_group=None,statio
                     distances = pcd.compute_nearest_neighbor_distance()
                     # print('ok mesh open3d')
                     avg_dist = np.mean(distances)
-                    radius = 3 * avg_dist
-                    bpa_mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(pcd,o3d.utility.DoubleVector([radius, radius * 2]))
+                    # radius = 3 * avg_dist
+                    # bpa_mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(pcd,o3d.utility.DoubleVector([radius, radius * 2]))
+                    radii = [avg_dist/2,avg_dist,3*avg_dist,8*avg_dist,25*avg_dist]
+                    bpa_mesh = o3d.geometry.TriangleMesh.create_from_point_cloud_ball_pivoting(pcd,o3d.utility.DoubleVector(radii))
                     vertices = np.asarray(bpa_mesh.vertices)
                     triangles = np.asarray(bpa_mesh.triangles)
                     S_mesh = sum(triangle_area(vertices[t[0]], vertices[t[1]], vertices[t[2]]) for t in triangles)
@@ -227,4 +227,4 @@ def processing(top_dir=None,run=None,element_name=None,station_group=None,statio
 
 if __name__ == '__main__':
     mesh, sample_time = processing(top_dir=top_dir,
-            run=run,element_name=element_name,run_title=run_title)
+            run=run,element_name=element_name)

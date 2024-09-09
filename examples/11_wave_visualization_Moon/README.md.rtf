@@ -18,6 +18,8 @@ There are two part in the code:\
 - The first part is called \'93stations_processing.py\'94 in order to create the PyVista meshes that will be visualized.\
 - The second part is called \'93png_creation_seismo.py\'94 in order to visualize the meshes and create the images.\
 \
+The file \'93lroc_color_poles_16k.png\'94 is the image for the texture of the Moon, it needs to be in the same repository as the code. Don\'92t hesitate to change it if you need another level of resolution for the texture.\
+\
 ## Requirements\
  \
 In order to run the code, several Python packages are required :\
@@ -35,12 +37,11 @@ In order to run the code, several Python packages are required :\
 - pandas\
 - irfpy from ```bash 
 \f1 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 pip install --find-links={\field{\*\fldinst{HYPERLINK "https://irfpy.irf.se/sdist/"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://irfpy.irf.se/sdist/}} irfpy.util -U\
+pip install --find-links={\field{\*\fldinst{HYPERLINK "https://irfpy.irf.se/sdist/"}}{\fldrslt \cf3 \ul \ulc3 https://irfpy.irf.se/sdist/}} irfpy.util -U\
 \pard\pardeftab720\partightenfactor0
-\cf0 \'a0\'a0\'a0\'a0# Moon basemap\
-pip install --no-index --find-links={\field{\*\fldinst{HYPERLINK "https://irfpy.irf.se/sdist"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 https://irfpy.irf.se/sdist}} irfpy.planets -U\
+\cf0 pip install --no-index --find-links={\field{\*\fldinst{HYPERLINK "https://irfpy.irf.se/sdist"}}{\fldrslt \cf3 \ul \ulc3 https://irfpy.irf.se/sdist}} irfpy.planets -U\
 ```
-\f0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\f0 \kerning1\expnd0\expndtw0 \
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 \cf0 \
 The package \'91open3d\'92 only works with certain versions of Python, I used the 3.11 version of Python. To do so, it is convenient to use Miniconda in order to create a python environment. After the conda environment installation is complete, use the \'91conda forge\'92 library to install the previous packages :\

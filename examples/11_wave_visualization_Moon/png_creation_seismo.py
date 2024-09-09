@@ -64,14 +64,15 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 MOON_RADIUS_IN_KM = 1737.1
 
 # specify a run name
-# run = '157w_ISSI_atten_linear50_10' # to adapt to the simulation
+# run = '157_ISSI_atten_linear50_slice_10' # to adapt to the simulation
 run = '161pre_ISSI_linear50_full_2'
+# run = '158_ISSI_atten_slice_10'
 
-# run_title = 'M1 with ±50% heterogeneity (linear to 50 km), surface explosion'
+# run_title = 'Lunar Model M1 without heterogeneity, surface explosion'
 # run_title = 'Very Simple Moon, surface explosion'
 # run_title = 'Very Simple Moon, deep explosion'
-run_title = 'Lunar Model M1 with heterogeneity '
-# run_title = 'Test Model'
+# run_title = 'Lunar Model M1 with heterogeneity min period 10.49'
+run_title = 'Coda for Model M1 with heterogeneity'
 short_title = 'Model M1'
 
 # model for TauP
@@ -148,12 +149,9 @@ def sismometer_observation(top_dir,run,folder,short_title,new_station_group,stat
     data_dir = os.path.join(top_dir, run, folder, 'output', 'stations')
     seismo_dir = data_dir + '/seismograms_stations'
     os.makedirs(seismo_dir, exist_ok=True)
-    print(station_group)
     fn_file = os.path.join(top_dir, run, folder, 'output', 'stations', station_group, 'axisem3d_synthetics.nc.rank_all.nc')
     
     ds = nc4.Dataset(fn_file)
-    
-    print(len(ds.variables['list_station']))
     
     # Open the original NetCDF4 file
     dst_file = os.path.join(top_dir, run, folder, 'output', 'stations', new_station_group, 'axisem3d_synthetics.nc.rank_all.nc')
@@ -248,7 +246,7 @@ def sismometer_observation(top_dir,run,folder,short_title,new_station_group,stat
             epicentral_stream.append(tr)
             # epicentral_stream.trim(starttime=UTCDateTime(-200.0),pad=True,fill_value=0.0)
             epicentral_stream.taper(max_percentage=None,max_length=taper_len,side='right')
-            epicentral_stream.filter('bandpass', freqmin=freqmin, freqmax=freqmax,zerophase=False)
+            # epicentral_stream.filter('bandpass', freqmin=freqmin, freqmax=freqmax,zerophase=False)
 
     time = epicentral_stream[2].times()
     data = epicentral_stream[2].data
@@ -295,7 +293,6 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
     print(file)
     ds = nc4.Dataset(file)
     data_time = ds.variables['data_time'][:]
-    print('time values read')
     
     # Radius of the texture (km)
     R = MOON_RADIUS_IN_KM-2
@@ -312,6 +309,7 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
 
     # create images folder
     result_dir = data_dir + '/result'
+    # result_dir = data_dir + '/coda'
     os.makedirs(result_dir, exist_ok=True)
     
     # create sismo folder
@@ -320,6 +318,13 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
     
     # Initializing the plotter
     plotter = pv.Plotter(off_screen=True)
+    
+    # camera position
+    plotter.camera_position = [event_pos,(0, 0, 88), (0, 1, 0)]
+    plotter.camera.zoom(3.5)
+            
+    # Setting the back ground for the image
+    plotter.set_background('black')
     print('setup complete')
 
     # List all files in the directory
@@ -348,10 +353,6 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         #Adding the mesh to the plotter
         plotter.add_mesh(interpolated_mesh,clim=clim['Z'],cmap=cmap,scalar_bar_args=sargs,opacity=0.6)
 
-        
-        # Setting the back ground for the image
-        plotter.set_background('black')
-
         # Setting the text for the image
         plotter.add_text(run_title, position=(0.01,0.90), color='white',font_size=40, viewport=True,font='arial')
         plotter.add_text('Vertical', position='lower_right', color='white',font_size=40, font='arial')
@@ -364,10 +365,6 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         sphere.active_texture_coordinates[:, 1] = 0.5 + np.arcsin(sphere.points[:, 2]/R) / np.pi
         moon = pv.Texture('lroc_color_poles_16k.png')
         plotter.add_mesh(sphere, texture=moon, smooth_shading=False)
-         
-        # camera position
-        plotter.camera_position = [event_pos,(0, 0, 88), (0, 1, 0)]
-        plotter.camera.zoom(1)
 
         # Labeling the Schrodinger Bassin
         fss_lat = -71.379*np.pi/180
@@ -378,13 +375,13 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         plotter.add_point_labels(sch, "My Labels", point_size=25,
         italic=True,font_size=60,text_color='white',point_color='black',shape_opacity=0,render_points_as_spheres=True,always_visible=True)
 
-        # Plotting the sismograms
-        plt.figure()
-        plt.plot(time,data)
-        plt.plot(time[0:number],data[0:number],color='red')
-        plot_file = os.path.join(sismo_dir,"sismo_plot.png")
-        plt.savefig(plot_file,transparent=True)
-        plt.close()
+        # # Plotting the sismograms
+        # plt.figure()
+        # plt.plot(time,data)
+        # plt.plot(time[0:number],data[0:number],color='red')
+        # plot_file = os.path.join(sismo_dir,"sismo_plot.png")
+        # plt.savefig(plot_file,transparent=True)
+        # plt.close()
         
         # Extracting the image for the video
         png = 'simulation_{}_{:04d}.png'.format(include_channels[0],number)
@@ -394,34 +391,34 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         print(png_file)
         plotter.clear()
 
-        # Merging sismograms image and plotter
-        background = cv2.imread(png_file)
-        foreground = cv2.imread(plot_file, -1)  # Load with alpha channel
+        # # Merging sismograms image and plotter
+        # background = cv2.imread(png_file)
+        # foreground = cv2.imread(plot_file, -1)  # Load with alpha channel
 
-        if background is None:
-            print(f"Error: Cannot load the background image from {png_file}")
-        if foreground is None:
-            print(f"Error: Cannot load the foreground image from {plot_file}")
+        # if background is None:
+        #     print(f"Error: Cannot load the background image from {png_file}")
+        # if foreground is None:
+        #     print(f"Error: Cannot load the foreground image from {plot_file}")
         
-        if background is not None and foreground is not None:
-            # Resize the foreground image if needed (for example, 200x200 pixels)
-            foreground = cv2.resize(foreground, (1100, 500))
+        # if background is not None and foreground is not None:
+        #     # Resize the foreground image if needed (for example, 200x200 pixels)
+        #     foreground = cv2.resize(foreground, (1100, 500))
         
-            # Get dimensions of the foreground
-            h, w = foreground.shape[:2]
+        #     # Get dimensions of the foreground
+        #     h, w = foreground.shape[:2]
         
-            # Define the position for overlay (top-right corner)
-            y, x = 0, background.shape[1] - w
+        #     # Define the position for overlay (top-right corner)
+        #     y, x = 0, background.shape[1] - w
         
-            # Ensure the foreground image's alpha channel is used for blending
-            for c in range(0, 3):
-                background[y:y+h, x:x+w, c] = (foreground[:, :, c] * (foreground[:, :, 3] / 255.0) + 
-                                               background[y:y+h, x:x+w, c] * (1.0 - foreground[:, :, 3] / 255.0))
+        #     # Ensure the foreground image's alpha channel is used for blending
+        #     for c in range(0, 3):
+        #         background[y:y+h, x:x+w, c] = (foreground[:, :, c] * (foreground[:, :, 3] / 255.0) + 
+        #                                        background[y:y+h, x:x+w, c] * (1.0 - foreground[:, :, 3] / 255.0))
         
-            # Save the result image with the same size as the background
-            result_image = 'result_image_{}_{:04d}.png'.format(include_channels[0],number)
-            result_path = os.path.join(result_dir, result_image)
-            cv2.imwrite(result_path, background)
+        #     # Save the result image with the same size as the background
+        #     result_image = 'result_image_{}_{:04d}.png'.format(include_channels[0],number)
+        #     result_path = os.path.join(result_dir, result_image)
+        #     cv2.imwrite(result_path, background)
         
     plotter.close()
     gc.collect()
