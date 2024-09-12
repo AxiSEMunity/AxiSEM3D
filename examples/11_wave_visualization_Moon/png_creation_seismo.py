@@ -8,7 +8,6 @@ Author: Matheo Fouchet, JPL
 import os
 import pyvista as pv
 from pyvista import examples
-# import pyvistaqt 
 import vtk
 import numpy as np
 import matplotlib.pyplot as plt
@@ -27,6 +26,7 @@ import re
 from obspy.taup import TauPyModel
 import time
 import cv2
+import matplotlib.colors as mcolors
 
 calculated_VPREMOON = TauPyModel(model='VPREMOON_atten_taup')
 calculated_ISSI_M1 = TauPyModel(model='ISSI_MOON_M1_atten_taup')
@@ -37,24 +37,10 @@ calculated_taup_dict =	{
   "ISSI_MOON_M1_taup": calculated_ISSI_M1,
     'VPREMOON_atten_no_LVZ_taup':calculated_VPREMOON_atten_no_LVZ_taup
 }
-# Store the initial state of sys.path
-# initial_sys_path = sys.path.copy()
-
-# Add or modify sys.path as needed during your script
-
-# Reset sys.path to its initial state
-# sys.path = initial_sys_path
 
 from obspy.core import Stream, UTCDateTime
 from obspy import read_inventory
 
-
-# # Add the path to the scripts directory to the system path
-# scripts_path = os.path.abspath(os.path.join(os.getcwd(), '..', 'impact_simulations'))
-# if scripts_path not in sys.path:
-#     sys.path.append(scripts_path)
-
-# from postprocessing_util_observations import get_observations_local
 from postprocessing_util import get_all_streams_from_netcdf
 from postprocessing_util import plot_epicentral_distance_taup
 from postprocessing_util import plot_envelope_taup
@@ -63,25 +49,45 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 MOON_RADIUS_IN_KM = 1737.1
 
-# specify a run name
+################# PARAMETERS #################
+
+#### specify a run name ###
 # run = '157_ISSI_atten_linear50_slice_10' # to adapt to the simulation
 run = '161pre_ISSI_linear50_full_2'
 # run = '158_ISSI_atten_slice_10'
+# run = '160_ISSI_2'
 
+#### specify a run title ####
 # run_title = 'Lunar Model M1 without heterogeneity, surface explosion'
 # run_title = 'Very Simple Moon, surface explosion'
 # run_title = 'Very Simple Moon, deep explosion'
 # run_title = 'Lunar Model M1 with heterogeneity min period 10.49'
-run_title = 'Coda for Model M1 with heterogeneity'
-short_title = 'Model M1'
+run_title = '3D-1D Model M1 with heterogeneity'
 
-# model for TauP
+#### specify a short title and model TauP ####
+short_title = 'Model M1'
 model_taup='ISSI_MOON_M1_taup' # it has no boundaries
 
-# top level dir 
+#### specify top level dir and folder ####
 top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
 # top_dir = '/scratch/planetseismology/mfouchet/'
 folder='simu3D'
+
+#### specify camera parameter ####
+pos_cam = 'tilted' # position of the camera can be either straight or tilted
+
+#### specify channels to calculate ####
+# include_channels = ['R', 'T', 'Z']
+# include_channels = ['R','Z']
+# include_channels = ['R']
+# include_channels = ['T']
+include_channels = ['Z']
+
+#### specify borders for the colourscale ####
+# clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [-1e-6, 1e-6]}
+clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [0, 1e-6]}
+
+################# END PARAMETERS #################
 
 # output.txt file 
 output_name = 'output.txt'
@@ -93,7 +99,6 @@ lines_to_skip = 3 # lines to skip after the target line, do not change unless th
 if not os.path.isfile(output_file):
     raise FileNotFoundError(f"The file '{output_name}'do not exists in the directory '{os.path.join(top_dir,run)}'.")
 
-#######
 # specify station_group
 station_group = 'stations_array'
 new_station_group = 'seismograms_stations'
@@ -105,15 +110,7 @@ station_key = 'A.A0'
 # source name 
 source_name='explosion_south_east_quadrant' # this is an incorrect name, depth=0kms
 element_name='stations_array'
-clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [-1e-6, 1e-6]}
 model_type = 'MOON'
-
-# channels to calculate
-# include_channels = ['R', 'T', 'Z']
-# include_channels = ['R','Z']
-# include_channels = ['R']
-# include_channels = ['T']
-include_channels = ['Z']
 
 pv.global_theme.allow_empty_mesh = True
 
@@ -271,7 +268,40 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
     lightgray = '#D3D3D3'
     transparent = '#03D3D3D3'
     white = '#FFFFFF'
-    cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", [blue1,lightgray,pink1])
+    colors = ['#EF8683', '#D0EFFF', '#A9C7E9', '#021076', '#000000', 
+          '#FFD966', '#E50000', '#FFA500', '#D3D3D3', '#FFFFFF']
+    # Define the start and end colors
+    start_color = '#E50000'  # Red
+    end_color = '#021076'    # Blue
+
+    # # Generate 10 colors between red and blue
+    # colors = [mcolors.to_hex(c) for c in plt.cm.RdBu(np.linspace(0, 1, 15))]
+
+    # # Create a colormap from the list of colors
+    # cmap = mcolors.LinearSegmentedColormap.from_list('red_to_blue_cmap', colors, N=15)
+
+    # # Generate 15 colors between pale purple to bright purple using the 'Purples' colormap
+    # colors = [mcolors.to_hex(c) for c in plt.cm.Reds_r(np.linspace(0, 1, 15))]
+    
+    # # Create a sequential colormap from the list of colors
+    # cmap = mcolors.LinearSegmentedColormap.from_list('pale_to_bright_cmap', colors, N=15)
+    
+
+    # Define the start and end colors
+    start_color = '#cc0000'   # Larger, pale red
+    end_color = '#ffe6e6' #'#ff9999'   # Smaller, bright red
+    
+    # Generate a continuous gradient of colors between start_color and end_color
+    colors = [start_color, end_color]
+    cmap = mcolors.LinearSegmentedColormap.from_list('pale_to_bright_red', colors, N=256)
+
+
+    
+    # Create a colormap from the list of colors
+    
+    # cmap = mcolors.LinearSegmentedColormap.from_list('custom_cmap', colors, N=10)
+
+    # cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", [blue1,lightgray,pink1])
     # cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", [blue0,blue1,blue2,black,red1,orange1,yellow])
 
     # Sismograms data
@@ -318,13 +348,18 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
     
     # Initializing the plotter
     plotter = pv.Plotter(off_screen=True)
-    
-    # camera position
-    plotter.camera_position = [event_pos,(0, 0, 88), (0, 1, 0)]
-    plotter.camera.zoom(3.5)
-            
-    # Setting the back ground for the image
-    plotter.set_background('black')
+
+    #Adding background
+    image_path = examples.planets.download_stars_sky_background(load=False)
+    # plotter.add_background_image(image_path)
+
+    if pos_cam == 'straight':
+        plotter.camera.zoom(1)
+    elif pos_cam == 'tilted':
+        plotter.camera.zoom(2)
+    else:
+        print('ERROR: camera postion has to be straight or tilted')
+        sys.exit()
     print('setup complete')
 
     # List all files in the directory
@@ -339,6 +374,9 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
 
     # Load each mesh file
     for mesh_file in mesh_files:
+
+        plotter.clear()
+        
         file_path = os.path.join(mesh_dir, mesh_file)
 
         # number of the mesh
@@ -349,14 +387,16 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         
         # Loading the mesh
         interpolated_mesh = pv.read(file_path)
-
+        
         #Adding the mesh to the plotter
         plotter.add_mesh(interpolated_mesh,clim=clim['Z'],cmap=cmap,scalar_bar_args=sargs,opacity=0.6)
 
+        plotter.set_background('black')
+        
         # Setting the text for the image
         plotter.add_text(run_title, position=(0.01,0.90), color='white',font_size=40, viewport=True,font='arial')
         plotter.add_text('Vertical', position='lower_right', color='white',font_size=40, font='arial')
-        plotter.add_text('{:.02f} s'.format(data_time[number]), position='lower_left', color='white',font_size=40, font='arial')
+        text_actor = plotter.add_text('{:.02f} s'.format(data_time[number]), position='lower_left', color='white',font_size=40, font='arial')
 
         # Setting the Moon texture
         sphere = pv.Sphere(radius=R, theta_resolution=300, phi_resolution=300,start_theta=270.001, end_theta=270)
@@ -364,8 +404,18 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         sphere.active_texture_coordinates[:, 0] = 0.5 + np.arctan2(-sphere.points[:, 0], sphere.points[:, 1])/(2 * np.pi)
         sphere.active_texture_coordinates[:, 1] = 0.5 + np.arcsin(sphere.points[:, 2]/R) / np.pi
         moon = pv.Texture('lroc_color_poles_16k.png')
+        # moon = pv.Texture('Moon.png')
         plotter.add_mesh(sphere, texture=moon, smooth_shading=False)
 
+        # camera position
+        if pos_cam == 'straight':
+            plotter.camera_position = [event_pos,(0, 0, 88), (0, 1, 0)]
+        elif pos_cam == 'tilted':
+            plotter.camera_position = [[event_pos[0],event_pos[1]-7000,event_pos[2]-7000],(0, 0, 88), (0, 1, 0)]
+        
+        # Add a scene light (fixed in the scene)
+        light = plotter.add_light(pv.Light(light_type='scenelight', position=event_pos, color='white', intensity=1.0))
+        
         # Labeling the Schrodinger Bassin
         fss_lat = -71.379*np.pi/180
         fss_lon = 138.248*np.pi/180
@@ -375,13 +425,14 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         plotter.add_point_labels(sch, "My Labels", point_size=25,
         italic=True,font_size=60,text_color='white',point_color='black',shape_opacity=0,render_points_as_spheres=True,always_visible=True)
 
-        # # Plotting the sismograms
-        # plt.figure()
-        # plt.plot(time,data)
-        # plt.plot(time[0:number],data[0:number],color='red')
-        # plot_file = os.path.join(sismo_dir,"sismo_plot.png")
-        # plt.savefig(plot_file,transparent=True)
-        # plt.close()
+        # Plotting the sismograms
+        plt.figure()
+        plt.plot(time,data)
+        plt.plot(time[0:number],data[0:number],color='red')
+        plt.axis('off')
+        plot_file = os.path.join(sismo_dir,"sismo_plot.png")
+        plt.savefig(plot_file,transparent=True)
+        plt.close()
         
         # Extracting the image for the video
         png = 'simulation_{}_{:04d}.png'.format(include_channels[0],number)
@@ -389,38 +440,38 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         plotter.window_size = [3000, 3000]
         plotter.screenshot(png_file)
         print(png_file)
-        plotter.clear()
+        
 
-        # # Merging sismograms image and plotter
-        # background = cv2.imread(png_file)
-        # foreground = cv2.imread(plot_file, -1)  # Load with alpha channel
+        # Merging sismograms image and plotter
+        background = cv2.imread(png_file)
+        foreground = cv2.imread(plot_file, -1)  # Load with alpha channel
 
-        # if background is None:
-        #     print(f"Error: Cannot load the background image from {png_file}")
-        # if foreground is None:
-        #     print(f"Error: Cannot load the foreground image from {plot_file}")
+        if background is None:
+            print(f"Error: Cannot load the background image from {png_file}")
+        if foreground is None:
+            print(f"Error: Cannot load the foreground image from {plot_file}")
         
-        # if background is not None and foreground is not None:
-        #     # Resize the foreground image if needed (for example, 200x200 pixels)
-        #     foreground = cv2.resize(foreground, (1100, 500))
+        if background is not None and foreground is not None:
+            # Resize the foreground image if needed (for example, 200x200 pixels)
+            foreground = cv2.resize(foreground, (1100, 500))
         
-        #     # Get dimensions of the foreground
-        #     h, w = foreground.shape[:2]
+            # Get dimensions of the foreground
+            h, w = foreground.shape[:2]
         
-        #     # Define the position for overlay (top-right corner)
-        #     y, x = 0, background.shape[1] - w
+            # Define the position for overlay (top-right corner)
+            y, x = 0, background.shape[1] - w
         
-        #     # Ensure the foreground image's alpha channel is used for blending
-        #     for c in range(0, 3):
-        #         background[y:y+h, x:x+w, c] = (foreground[:, :, c] * (foreground[:, :, 3] / 255.0) + 
-        #                                        background[y:y+h, x:x+w, c] * (1.0 - foreground[:, :, 3] / 255.0))
+            # Ensure the foreground image's alpha channel is used for blending
+            for c in range(0, 3):
+                background[y:y+h, x:x+w, c] = (foreground[:, :, c] * (foreground[:, :, 3] / 255.0) + 
+                                               background[y:y+h, x:x+w, c] * (1.0 - foreground[:, :, 3] / 255.0))
         
-        #     # Save the result image with the same size as the background
-        #     result_image = 'result_image_{}_{:04d}.png'.format(include_channels[0],number)
-        #     result_path = os.path.join(result_dir, result_image)
-        #     cv2.imwrite(result_path, background)
+            # Save the result image with the same size as the background
+            result_image = 'result_image_{}_{:04d}.png'.format(include_channels[0],number)
+            result_path = os.path.join(result_dir, result_image)
+            cv2.imwrite(result_path, background)
         
-    plotter.close()
+    # plotter.close()
     gc.collect()
 
     print(number)
