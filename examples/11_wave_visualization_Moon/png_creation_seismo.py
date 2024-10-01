@@ -52,40 +52,58 @@ MOON_RADIUS_IN_KM = 1737.1
 ################# PARAMETERS #################
 
 #### specify a run name ###
-# run = '157_ISSI_atten_linear50_slice_10' # to adapt to the simulation
-run = '161pre_ISSI_linear50_full_2'
-# run = '158_ISSI_atten_slice_10'
-# run = '160_ISSI_2'
+run = '158_ISSI_atten_slice_10'
 
 #### specify a run title ####
-# run_title = 'Lunar Model M1 without heterogeneity, surface explosion'
-# run_title = 'Very Simple Moon, surface explosion'
-# run_title = 'Very Simple Moon, deep explosion'
-# run_title = 'Lunar Model M1 with heterogeneity min period 10.49'
-run_title = '3D-1D Model M1 with heterogeneity'
+run_title = 'Lunar Model M1 with heterogeneity'
 
 #### specify a short title and model TauP ####
 short_title = 'Model M1'
 model_taup='ISSI_MOON_M1_taup' # it has no boundaries
 
 #### specify top level dir and folder ####
-top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
-# top_dir = '/scratch/planetseismology/mfouchet/'
+top_dir = '/Users/mfouchet/Documents/AxiSEM3D/examples/11_wave_visualization_Moon' # to adapt with user's directory
 folder='simu3D'
 
 #### specify camera parameter ####
 pos_cam = 'tilted' # position of the camera can be either straight or tilted
+# pos_cam = 'straight'
 
 #### specify channels to calculate ####
-# include_channels = ['R', 'T', 'Z']
-# include_channels = ['R','Z']
-# include_channels = ['R']
-# include_channels = ['T']
 include_channels = ['Z']
 
+#### Create a colormap ###
+# CLASSICAL 
+pink1 = '#EF8683'
+lightgray = '#D3D3D3'
+blue1 = '#A9C7E9'
+cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", [blue1,lightgray,pink1])
+
+
+# GRADIENT 
+# Define the colors for the gradient: pale red, bright red, and pale red again
+start_color = '#ffe6e6'   # Pale red (start)
+mid_color = '#cc0000'     # Bright red (middle)
+end_color = '#ffe6e6'     # Pale red (end)
+colors = [start_color, mid_color, end_color]
+# cmap = mcolors.LinearSegmentedColormap.from_list('pale_bright_pale_red', colors, N=256)
+
+
+# LOGARITHMIC
+start_color = '#800080'  # Purple
+mid_color = '#cc0000'    # Red
+end_color = '#ffe6e6'    # Pale red
+color_positions = [0, 0.01, 0.1, 0.5, 1]  # Example positions
+colors = ['#0033cc', '#66b3ff', '#ffffff', '#ff9999', '#cc0000']
+# cmap = mcolors.LinearSegmentedColormap.from_list('custom_pale_to_bright_red', list(zip(color_positions, colors)))
+
+
 #### specify borders for the colourscale ####
-# clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [-1e-6, 1e-6]}
-clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [0, 1e-6]}
+clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [-1e-6, 1e-6]} #Classical
+# clim={'R': [-1e-15, 1e-15], 'T': [-1e-15, 1e-15], 'Z': [0, 7e-5]} # For 3D - 1D
+
+# Background image
+texture_name = 'Moon.png' # Can also be 'lroc_color_poles_16k.png' for the NASA image
 
 ################# END PARAMETERS #################
 
@@ -254,55 +272,7 @@ def sismometer_observation(top_dir,run,folder,short_title,new_station_group,stat
         
     return time, data
         
-def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None,station_group=None,station_file=None, run_title=None,new_station_group=None):
-
-    # make a colormap
-    pink1 = '#EF8683'
-    blue0 = '#D0EFFF'
-    blue1 = '#A9C7E9'
-    blue2 = '#021076'
-    black = '#000000'
-    yellow = '#FFD966'
-    red1 = '#E50000'
-    orange1 = '#FFA500'
-    lightgray = '#D3D3D3'
-    transparent = '#03D3D3D3'
-    white = '#FFFFFF'
-    colors = ['#EF8683', '#D0EFFF', '#A9C7E9', '#021076', '#000000', 
-          '#FFD966', '#E50000', '#FFA500', '#D3D3D3', '#FFFFFF']
-    # Define the start and end colors
-    start_color = '#E50000'  # Red
-    end_color = '#021076'    # Blue
-
-    # # Generate 10 colors between red and blue
-    # colors = [mcolors.to_hex(c) for c in plt.cm.RdBu(np.linspace(0, 1, 15))]
-
-    # # Create a colormap from the list of colors
-    # cmap = mcolors.LinearSegmentedColormap.from_list('red_to_blue_cmap', colors, N=15)
-
-    # # Generate 15 colors between pale purple to bright purple using the 'Purples' colormap
-    # colors = [mcolors.to_hex(c) for c in plt.cm.Reds_r(np.linspace(0, 1, 15))]
-    
-    # # Create a sequential colormap from the list of colors
-    # cmap = mcolors.LinearSegmentedColormap.from_list('pale_to_bright_cmap', colors, N=15)
-    
-
-    # Define the start and end colors
-    start_color = '#cc0000'   # Larger, pale red
-    end_color = '#ffe6e6' #'#ff9999'   # Smaller, bright red
-    
-    # Generate a continuous gradient of colors between start_color and end_color
-    colors = [start_color, end_color]
-    cmap = mcolors.LinearSegmentedColormap.from_list('pale_to_bright_red', colors, N=256)
-
-
-    
-    # Create a colormap from the list of colors
-    
-    # cmap = mcolors.LinearSegmentedColormap.from_list('custom_cmap', colors, N=10)
-
-    # cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", [blue1,lightgray,pink1])
-    # cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", [blue0,blue1,blue2,black,red1,orange1,yellow])
+def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None,station_group=None,station_file=None, run_title=None,new_station_group=None,cmap=None,texture_name=None):
 
     # Sismograms data
     time, data = sismometer_observation(top_dir,run,folder,short_title,new_station_group,station_group)
@@ -356,7 +326,7 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
     if pos_cam == 'straight':
         plotter.camera.zoom(1)
     elif pos_cam == 'tilted':
-        plotter.camera.zoom(2)
+        plotter.camera.zoom(1.5)
     else:
         print('ERROR: camera postion has to be straight or tilted')
         sys.exit()
@@ -403,15 +373,14 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         sphere.active_texture_coordinates = np.zeros((sphere.points.shape[0], 2))
         sphere.active_texture_coordinates[:, 0] = 0.5 + np.arctan2(-sphere.points[:, 0], sphere.points[:, 1])/(2 * np.pi)
         sphere.active_texture_coordinates[:, 1] = 0.5 + np.arcsin(sphere.points[:, 2]/R) / np.pi
-        moon = pv.Texture('lroc_color_poles_16k.png')
-        # moon = pv.Texture('Moon.png')
+        moon = pv.Texture(texture_name)
         plotter.add_mesh(sphere, texture=moon, smooth_shading=False)
 
         # camera position
         if pos_cam == 'straight':
             plotter.camera_position = [event_pos,(0, 0, 88), (0, 1, 0)]
         elif pos_cam == 'tilted':
-            plotter.camera_position = [[event_pos[0],event_pos[1]-7000,event_pos[2]-7000],(0, 0, 88), (0, 1, 0)]
+            plotter.camera_position = [[event_pos[0],event_pos[1]-4000,event_pos[2]-4000],(0, 0, 88), (0, 1, 0)]
         
         # Add a scene light (fixed in the scene)
         light = plotter.add_light(pv.Light(light_type='scenelight', position=event_pos, color='white', intensity=1.0))
@@ -424,6 +393,11 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
         sch['My Labels'] = ['Schrodinger Basin']
         plotter.add_point_labels(sch, "My Labels", point_size=25,
         italic=True,font_size=60,text_color='white',point_color='black',shape_opacity=0,render_points_as_spheres=True,always_visible=True)
+
+        # Add a flash at the momment of the impact
+        # if data_time[number]<0 and data_time[number]>-2:
+        #     impact = pv.PolyData(np.array([R*np.cos(event_lat)*np.cos(event_lon),R*np.cos(event_lat)*np.sin(event_lon),R*np.sin(event_lat)]))
+        #     plotter.add_mesh(impact, color='white', point_size=20,render_points_as_spheres=True)
 
         # Plotting the sismograms
         plt.figure()
@@ -474,9 +448,9 @@ def animate_pyvista_png(top_dir=None,run=None,element_name=None,short_title=None
     # plotter.close()
     gc.collect()
 
-    print(number)
+    # print(number)
     return number
 
 if __name__ == '__main__':
     number = animate_pyvista_png(top_dir=top_dir,
-run=run,element_name=element_name,short_title=short_title,station_group=station_group,run_title=run_title,new_station_group=new_station_group)
+run=run,element_name=element_name,short_title=short_title,station_group=station_group,run_title=run_title,new_station_group=new_station_group,cmap=cmap,texture_name=texture_name)

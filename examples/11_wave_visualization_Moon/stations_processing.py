@@ -33,31 +33,26 @@ MOON_RADIUS_IN_KM = 1737.1
 ####### PARAMETERS #######
 
 # specify a run name
-# run = '157_ISSI_atten_linear50_slice_10' # to adapt to the simulation
-# run = '161pre_ISSI_linear50_full_2'
-# run = '158_ISSI_atten_slice_10'
-run = '160_ISSI_2'
+run = '158_ISSI_atten_slice_10'
+
 # model for TauP
 model_taup='homogeneous_Moon_taup' # it has no boundaries
 
 # top level dir 
-top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
-# top_dir = '/scratch/planetseismology/mfouchet/'
-folder='simu3D'
+top_dir = '/Users/mfouchet/Documents/AxiSEM3D/examples/11_wave_visualization_Moon' # to adapt with user's directory
+folder='simu3D' # DO NOT CHANGE
 
 # channels to calculate
 include_channels = ['Z']
 
 # Filtering parameters
 freqmin = 1/100  # Minimum frequency in Hz
-freqmax = 1/2 # Maximum frequency in Hz
+freqmax = 1/10.4978 # Maximum frequency in Hz
 corners = 6  # Number of corners
 zerophase = False  # Apply filter in both directions
-dt = 0.24675 # sampling period found in the temporal section of the output.txt
+dt = 1.23879 # sampling period found in the temporal section of the output.txt
 fs = 1/dt
 
-# Moon surface threshold
-S_threshold = 13000000 # in km2, less than half of the moon's hemisphere
 
 ##########################
 
@@ -172,11 +167,7 @@ def processing(top_dir=None,run=None,element_name=None,station_group=None,statio
 
                 mesh = pv.PolyData(points)
                 mesh[ch] = wave3[:]
-                
-                # if S_mesh <= S_threshold :
-                #     threshold = 0.4e-7
-                # else:
-                #     threshold = 0
+
                 threshold = 0.3e-7
                 nonzeroind = np.where(np.abs(wave3[:]) >= threshold)[0]
                 points = points[nonzeroind]
