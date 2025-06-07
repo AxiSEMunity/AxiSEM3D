@@ -7,17 +7,17 @@ This project aims to visualize the surface projection of seismic waves on  the M
 It is written in Python and uses the datas produced by AxiSEM3D simulations.
 
 There are two part in the code:
-- The first part is called “stations_processing.py” in order to create the PyVista meshes that will be visualized.
-- The second part is called “png_creation_seismo.py” in order to visualize the meshes and create the images.
+- The first part is called 'stations_processing.py' in order to create the PyVista meshes that will be visualized.
+- The second part is called 'png_creation_seismo.py' in order to visualize the meshes and create the images.
 
 In order to have a background image for the Moon, it is necessary to download a background image in
-https://svs.gsfc.nasa.gov/4720/ for instance. I used the file “lroc_color_poles_16k.png” as the image of the Moon.
+https://svs.gsfc.nasa.gov/4720/ for instance. I used the file 'lroc_color_poles_16k.png' as the image of the Moon.
 It needs to be in the same repository as the code. Don't hesitate to change it if you need another level of
 resolution for the image.
 
 
 ## Requirements
- 
+
 In order to run the code, several Python packages are required:
 
 - numpy
@@ -27,7 +27,7 @@ In order to run the code, several Python packages are required:
 - moviepy
 - opencv
 - obspy
-- future 
+- future
 - seaborn
 - pandas
 - pyyaml
@@ -54,8 +54,8 @@ conda install <PackageName> -c conda-forge
 
 ## Usage
 
-In order to create the images of the simulation for a video, one has to run the codes labeled “stations_processing.py”
-and “png_creation_seismo.py”. To get the video, one has to run the block “Generate Video Stations” in the notebook 'combine_png.ipynb' 
+In order to create the images of the simulation for a video, one has to run the codes labeled 'stations_processing.py'
+and 'png_creation_seismo.py'. To get the video, one has to run the block 'Generate Video Stations' in the notebook 'combine_png.ipynb'
 
 Before running the code, one has to adapt the name of the simulation in the Python code such as:
 ```python
@@ -79,11 +79,11 @@ caffeinate python stations_processing_png.py
 ```
 
 
-## Example 
+## Example
 
 After initializing the condo environment and adding the required packages.
 
-Let's visualize a small simulation called '158_ISSI_atten_slice_10' available in the example. 
+Let's visualize a small simulation called '158_ISSI_atten_slice_10' available in the example.
 
 First, let's the parameters of the simulation in the 'stations_processing.py', make sure to put the top directory
 of your simulation in the 'top_dir' variable:
@@ -94,7 +94,7 @@ run = '158_ISSI_atten_slice_10'
 # model for TauP
 model_taup = 'homogeneous_Moon_taup' # it has no boundaries
 
-# top level dir 
+# top level dir
 top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
 folder = 'simu3D' # DO NOT CHANGE
 
@@ -117,7 +117,7 @@ cd /path/to/the/code/directory/
 caffeinate python stations_processing.py
 ```
 
-And then, when the first script is done, one can open the “png_creation_seismo.py” file and change the
+And then, when the first script is done, one can open the 'png_creation_seismo.py' file and change the
 parameters as follow (again one needs to adapt the ''top_dir  variable):
 ```python
 
@@ -130,11 +130,11 @@ run_title = 'Lunar Model M1 with heterogeneity min period 10.49'
 
 #### specify a short title and model TauP ####
 short_title = 'Model M1'
-model_taup='ISSI_MOON_M1_taup' # it has no boundaries
+model_taup = 'ISSI_MOON_M1_taup' # it has no boundaries
 
 #### specify top level dir and folder ####
 top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
-folder='simu3D'
+folder = 'simu3D'
 
 #### specify camera parameter ####
 pos_cam = 'tilted' # position of the camera can be either straight or tilted
