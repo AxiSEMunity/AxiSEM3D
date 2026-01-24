@@ -1,6 +1,7 @@
 # Building local docker images
 
 This directory contains Dockerfiles which can be used to build ubuntu containers containing AxiSEM3D.
+<<<<<<< HEAD
 These containers might be helpful if you are struggling to compile AxiSEM3D yourself.
 
 The docker_copy directory contains a Dockerfile which copies the contains of your local Axisem3D directory
@@ -20,11 +21,25 @@ docker build -f docker/docker_copy/Dockerfile -t axisem3d --platform linux/amd64
 When building an image from the docker_copy Dockerfile it is especially important to run the build
 command from the top level directory, because otherwise docker will not be able to copy all of your
 Axisem3D files into the container.
+=======
+
+
+To build a docker image of AxiSEM3D, run this command from the top level
+of your Axisem3D directory:
+docker build -f docker/Dockerfile -t axisem3d --platform linux/amd64 .
+>>>>>>> 6559dbf (Add dockerfiles)
 
 # Using the Axisem3D image hosted on Dockerhub
 
 The built docker image is also available on Dockerhub at geodynamics/axisem3d.
 To use this prebuilt docker image, run these commands:
 
+<<<<<<< HEAD
 docker pull geodynamics/axisem3d;
 docker run --rm -it geodynamics/axisem3d;
+=======
+```
+  docker pull geodynamics/axisem3d
+  docker run --rm -it geodynamics/axisem3d
+```
+>>>>>>> 6559dbf (Add dockerfiles)
