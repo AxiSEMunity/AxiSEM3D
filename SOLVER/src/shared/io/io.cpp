@@ -50,18 +50,66 @@ namespace io {
             ::mkdir(path.c_str(), ACCESSPERMS);
         }
     }
+
+    void parseIOArguments(int argc, char *argv[]) {
+        // defaults: relative to run directory
+        gInputDirectory = "input";
+        gOutputDirectory = "output";
+    
+        for (int i = 1; i < argc; i++) {
+            std::string arg(argv[i]);
+    
+            if (arg == "--input") {
+                if (i + 1 >= argc) {
+                    if (mpi::root()) {
+                        std::cerr << "Error: --input requires a directory path."
+                                  << std::endl;
+                    }
+                    std::exit(1);
+                }
+                gInputDirectory = argv[++i];
+            }
+            else if (arg == "--output") {
+                if (i + 1 >= argc) {
+                    if (mpi::root()) {
+                        std::cerr << "Error: --output requires a directory path."
+                                  << std::endl;
+                    }
+                    std::exit(1);
+                }
+                gOutputDirectory = argv[++i];
+            }
+            else if (arg == "--version") {
+                if (mpi::root()) {
+                    std::cout << "AxiSEM3D version "
+                              << _VERSION << std::endl;
+                }
+                std::exit(0);
+            }
+            else if (arg == "--help" || arg == "-h") {
+                if (mpi::root()) {
+                    std::cout
+                    << "Usage: axisem3d [options]\n"
+                    << "  --input   <dir>   Input directory (default: ./input)\n"
+                    << "  --output  <dir>   Output directory (default: ./output)\n"
+                    << "  --version         Print version information\n"
+                    << "  --help, -h        Print this help message\n";
+                }
+                std::exit(0);
+            }
+            else {
+                if (mpi::root()) {
+                    std::cerr << "Error: unknown option: " << arg << std::endl;
+                    std::cerr << "Use --help to see available options."
+                              << std::endl;
+                }
+                std::exit(1);
+            }
+        }
+    }
     
     // verify input/output dirs under executable dir
-    void verifyDirectories(int argc, char *argv[], std::string &warning) {
-        // find path of executable
-        std::string argv0(argv[0]);
-        std::size_t found = argv0.find_last_of("/\\");
-        const std::string &execDirectory =
-        (found == std::string::npos) ? "." : argv0.substr(0, found);
-        
-        // input and output
-        gInputDirectory = execDirectory + "/input";
-        gOutputDirectory = execDirectory + "/output";
+    void verifyDirectories(std::string &warning) {
         warning = "";
         if (mpi::root()) {
             // check input

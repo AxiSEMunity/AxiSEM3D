@@ -24,9 +24,12 @@ namespace io {
     
     // mkdir
     void mkdir(const std::string &path);
+
+    // parse arguments
+    void parseIOArguments(int argc, char *argv[]);
     
     // verify input/output dirs under executable dir
-    void verifyDirectories(int argc, char *argv[], std::string &warning);
+    void verifyDirectories(std::string &warning);
     
     // pop input dir before filename
     std::string popInputDir(const std::string &fname);

@@ -215,9 +215,12 @@ int main(int argc, char *argv[]) {
 //////////////////// top-level functions ////////////////////
 // setup environment
 void setupEnvironment(int argc, char *argv[]) {
+    // initialize IO dirs from CLI first
+    io::parseIOArguments(argc, argv);
+
     // initialize IO
     std::string warningIO;
-    io::verifyDirectories(argc, argv, warningIO);
+    io::verifyDirectories(warningIO);
     
     // inparam setup
     inparam::setup();
