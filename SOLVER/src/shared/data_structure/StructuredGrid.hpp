@@ -213,19 +213,18 @@ public:
         count[0] = numUniqueData();
         
         // loop over 2^D points
-        typedef Eigen::Matrix<double, 1, Eigen::Dynamic> DRowV;
+        typedef Eigen::Matrix<T, 1, Eigen::Dynamic> DRowV;
         DRowV uData = DRowV::Zero(numUniqueData());
         for (int deci = 0; deci < pow(2, D); deci++) {
             int left = deci;
-            double factorCombine = 1.;
+            T factorCombine = (T)1.;
             for (int idim = 0; idim < D; idim++) {
                 start[idim + 1] = index01[left % 2][idim];
                 factorCombine *= factor01[left % 2][idim];
                 left /= 2;
             }
-            const Eigen::Tensor<double, 1, Eigen::RowMajor> &row =
-            factorCombine * mGridData.slice(start, count).reshape(shapeV)
-            .template cast<double>();
+            const Eigen::Tensor<T, 1, Eigen::RowMajor> &row =
+            factorCombine * mGridData.slice(start, count).reshape(shapeV);
             uData += Eigen::Map<const DRowV>(row.data(), numUniqueData());
         }
         
@@ -233,7 +232,7 @@ public:
         DRowV data = DRowV::Zero(mDataRankFactor.size());
         for (int ivar = 0; ivar < numData(); ivar++) {
             int index = mDataRankFactor[ivar].first;
-            double factor = mDataRankFactor[ivar].second;
+            T factor = mDataRankFactor[ivar].second;
             data(ivar) = uData(index) * factor;
         }
         
