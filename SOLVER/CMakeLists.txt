@@ -13,18 +13,20 @@
 ########################################################################
 
 # NOTE: these parameters can be either hardcoded in this box or
-#       passed by -D (e.g., -Dcc=mpicc for CMAKE_C_COMPILER)
+#       passed by -D (e.g., -Dcxx=mpicxx for CMAKE_CXX_COMPILER)
 
 
 ################## compiler options ##################
 # compiler
-set(CMAKE_CXX_COMPILER          ${cxx})
+if(DEFINED cxx AND NOT cxx STREQUAL "")
+  set(CMAKE_CXX_COMPILER "${cxx}" CACHE FILEPATH "C++ compiler" FORCE)
+endif()
 
-# compiler flags
-set(CMAKE_CXX_FLAGS             ${flags})
+# additional compiler flags
+set(ADDITIONAL_CXX_FLAGS "${flags}")
 
 # additional link options
-set(LINK_OPTIONS                ${links})
+set(ADDITIONAL_LINK_OPTIONS "${links}")
 
 
 ################## dependencies ##################
@@ -34,7 +36,6 @@ set(BOOST_ROOT                  ${boost})
 set(FFTW_ROOT                   ${fftw})
 set(METIS_ROOT                  ${metis})
 set(NETCDF_ROOT                 ${netcdf})
-# omitting -Dhdf5 disables linking to HDF5
 set(HDF5_ROOT                   ${hdf5})
 
 # use parallel NetCDF
@@ -65,39 +66,33 @@ set(USE_DOUBLE                  ${double})
 ################# set default values #################
 # macro to set default
 macro(setDefault var val)
-if(NOT DEFINED ${var})
-set(${var} ${val})
-endif()
+  if(NOT DEFINED "${var}")
+    set("${var}" "${val}")
+  endif()
 endmacro()
 
 # set default values
-setDefault(CMAKE_CXX_COMPILER          g++)
-setDefault(CMAKE_CXX_FLAGS             "")
-setDefault(LINK_OPTIONS                "")
+setDefault(ADDITIONAL_CXX_FLAGS        "")
+setDefault(ADDITIONAL_LINK_OPTIONS     "")
 setDefault(EIGEN3_ROOT                 "<empty>")
 setDefault(BOOST_ROOT                  "<empty>")
 setDefault(FFTW_ROOT                   "<empty>")
 setDefault(METIS_ROOT                  "<empty>")
 setDefault(NETCDF_ROOT                 "<empty>")
 setDefault(HDF5_ROOT                   "<empty>")
-setDefault(USE_PARALLEL_NETCDF         false)
+setDefault(USE_PARALLEL_NETCDF         OFF)
 setDefault(NPOL_SEM                    4)
-setDefault(USE_DOUBLE                  false)
+setDefault(USE_DOUBLE                  OFF)
 
 
 ################# cmake setup #################
-# use "Release" as the default build type
-if(NOT DEFINED CMAKE_BUILD_TYPE)
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Choose the type of build." FORCE)
-endif()
-
 # project
-cmake_minimum_required(VERSION 3.12.0)
+cmake_minimum_required(VERSION 4.2)
 project(AxiSEM3D)
 
-# CMP0074 issue since CMake 3.12
-if(POLICY CMP0074)
-cmake_policy(SET CMP0074 NEW)
+# use "Release" as the default build type
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build." FORCE)
 endif()
 
 
@@ -112,89 +107,82 @@ add_definitions(-D_PROJ_DIR=\"${PROJECT_SOURCE_DIR}\")
 add_definitions(-D_NPOL=${NPOL_SEM})
 
 # double
-if(${USE_DOUBLE})
-add_definitions(-D_USE_DOUBLE)
+if(USE_DOUBLE)
+  add_definitions(-D_USE_DOUBLE)
 endif()
 
 # memory
-set(MEMORY_SAVING_MODE ${save_mem})
-setDefault(MEMORY_SAVING_MODE false)
-if(${MEMORY_SAVING_MODE})
-add_definitions(-D_SAVE_MEMORY)
+set(MEMORY_SAVING_MODE "${save_mem}")
+setDefault(MEMORY_SAVING_MODE OFF)
+if(MEMORY_SAVING_MODE)
+  add_definitions(-D_SAVE_MEMORY)
 endif()
 
 # serial build
-set(SERIAL_BUILD ${serial})
-setDefault(SERIAL_BUILD false)
-if(${SERIAL_BUILD})
-add_definitions(-D_SERIAL_BUILD)
-set(USE_PARALLEL_NETCDF false)
+set(SERIAL_BUILD "${serial}")
+setDefault(SERIAL_BUILD OFF)
+if(SERIAL_BUILD)
+  add_definitions(-D_SERIAL_BUILD)
+  set(USE_PARALLEL_NETCDF OFF)
 endif()
 
 # parallel NetCDF
-if(${USE_PARALLEL_NETCDF})
-add_definitions(-D_USE_PARALLEL_NETCDF)
+if(USE_PARALLEL_NETCDF)
+  add_definitions(-D_USE_PARALLEL_NETCDF)
 endif()
 
 # skip _MM_SET_FLUSH_ZERO_MODE in fenv.cpp
-set(SKIP_MM_SET ${skip_mm_set})
-setDefault(SKIP_MM_SET false)
-if(${SKIP_MM_SET})
-add_definitions(-D_SKIP_DISABLE_SSE_DENORMS)
+set(SKIP_MM_SET "${skip_mm_set}")
+setDefault(SKIP_MM_SET OFF)
+if(SKIP_MM_SET)
+  add_definitions(-D_SKIP_DISABLE_SSE_DENORMS)
 endif()
 
 
 ################# find packages #################
 # path of *.cmake files
-set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 # mpi
-if(NOT ${SERIAL_BUILD})
-find_package(MPI COMPONENTS C REQUIRED)
-include_directories(${MPI_C_INCLUDE_DIRS})
+if(NOT SERIAL_BUILD)
+  find_package(MPI COMPONENTS CXX REQUIRED)
+  include_directories(${MPI_CXX_INCLUDE_DIRS})
 endif()
 
 # eigen
-# FindEigen3.cmake only uses ENV in HINTS
-set(ENV{EIGEN3_ROOT} ${EIGEN3_ROOT})
-find_package(Eigen3 3.3.90 REQUIRED)
+find_package(Eigen3 3.4 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # boost
-set(ENV{BOOST_ROOT} ${BOOST_ROOT})
-find_package(Boost 1.73.0 REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
+set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include")
+set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
+find_package(Boost 1.85 REQUIRED)
 
 # fftw
-set(ENV{FFTW_ROOT} ${FFTW_ROOT})
 find_package(FFTW REQUIRED)
 include_directories(${FFTW_INCLUDES})
 
 # metis
 # FindMETIS.cmake uses METIS_DIR instead of METIS_ROOT in HINTS
-set(METIS_DIR ${METIS_ROOT})
-set(ENV{METIS_DIR} ${METIS_ROOT})
-set(ENV{METIS_ROOT} ${METIS_ROOT})
+set(METIS_DIR "${METIS_ROOT}")
 find_package(METIS REQUIRED)
 include_directories(${METIS_INCLUDE_DIRS})
 
 # NetCDF
-set(ENV{NETCDF_ROOT} ${NETCDF_ROOT})
 find_package(NetCDF REQUIRED)
 include_directories(${NETCDF_INCLUDES})
 # check parallel
-if(${USE_PARALLEL_NETCDF})
-if(NOT EXISTS "${NETCDF_INCLUDES}/netcdf_par.h")
-message(FATAL_ERROR "\nMissing header netcdf_par.h under ${NETCDF_INCLUDES}/.\
+if(USE_PARALLEL_NETCDF)
+  if(NOT EXISTS "${NETCDF_INCLUDES}/netcdf_par.h")
+    message(FATAL_ERROR "\nMissing header netcdf_par.h under ${NETCDF_INCLUDES}/.\
 \nUse a NetCDF build with parallel support or disable parallel NetCDF by \
 -Dpar_netcdf=false.")
-endif()
+  endif()
 endif()
 
 # hdf5
-if(DEFINED hdf5)
-set(ENV{HDF5_ROOT} ${HDF5_ROOT})
-find_package(HDF5 COMPONENTS C COMPONENTS HL REQUIRED)
+if(NOT HDF5_ROOT STREQUAL "")
+  find_package(HDF5 REQUIRED COMPONENTS C HL)
 endif()
 
 
@@ -221,16 +209,6 @@ external
 
 
 ################# source files #################
-# compiler flags
-# upper case of CMAKE_BUILD_TYPE for compiler flags
-string(TOUPPER ${CMAKE_BUILD_TYPE} BUILD)
-# overwrite CMAKE_CXX_FLAGS_${BUILD}
-if(NOT "${CMAKE_CXX_FLAGS}" STREQUAL "")
-set(CMAKE_CXX_FLAGS_${BUILD} ${CMAKE_CXX_FLAGS})
-endif()
-# supress #pragma warnings
-set(CMAKE_CXX_FLAGS_${BUILD} "${CMAKE_CXX_FLAGS_${BUILD}} -Wno-unknown-pragmas")
-
 # find *.cpp
 file(GLOB_RECURSE CPP_FILES src/*.cpp)
 
@@ -246,30 +224,42 @@ external/yaml/Yaml.cpp
 # standard C++17
 set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
 
+# compiler flags
+# user-provided extra flags (space-separated string supported)
+if(NOT "${ADDITIONAL_CXX_FLAGS}" STREQUAL "")
+  separate_arguments(_A3D_USER_CXX_FLAGS NATIVE_COMMAND "${ADDITIONAL_CXX_FLAGS}")
+  target_compile_options(axisem3d PRIVATE ${_A3D_USER_CXX_FLAGS})
+endif()
+
+# suppress #pragma warnings
+target_compile_options(axisem3d PRIVATE -Wno-unknown-pragmas)
+
 
 ################# linking #################
-if(DEFINED hdf5)
-target_link_libraries(
-axisem3d
-${MPI_C_LIBRARIES}
-${FFTW_LIBRARIES}
-${METIS_LIBRARIES}
-${NETCDF_LIBRARIES}
-${HDF5_HL_LIBRARIES}
-${HDF5_LIBRARIES}
-# cmake may not specify HDF5 lib path
--L${HDF5_ROOT}/lib
-${LINK_OPTIONS}
-)
+if(NOT HDF5_ROOT STREQUAL "")
+  target_link_libraries(
+    axisem3d
+    ${MPI_CXX_LIBRARIES}
+    ${FFTW_LIBRARIES}
+    ${METIS_LIBRARIES}
+    ${NETCDF_LIBRARIES}
+    ${HDF5_HL_LIBRARIES}
+    ${HDF5_LIBRARIES}
+  )
 else()
-target_link_libraries(
-axisem3d
-${MPI_C_LIBRARIES}
-${FFTW_LIBRARIES}
-${METIS_LIBRARIES}
-${NETCDF_LIBRARIES}
-${LINK_OPTIONS}
-)
+  target_link_libraries(
+    axisem3d
+    ${MPI_CXX_LIBRARIES}
+    ${FFTW_LIBRARIES}
+    ${METIS_LIBRARIES}
+    ${NETCDF_LIBRARIES}
+  )
+endif()
+
+# additional user link options (space-separated string supported)
+if(NOT "${ADDITIONAL_LINK_OPTIONS}" STREQUAL "")
+  separate_arguments(_A3D_USER_LINK_OPTIONS NATIVE_COMMAND "${ADDITIONAL_LINK_OPTIONS}")
+  target_link_options(axisem3d PRIVATE ${_A3D_USER_LINK_OPTIONS})
 endif()
 
 
@@ -304,11 +294,11 @@ message("     * MPI")
 if(${SERIAL_BUILD})
 message("       This is a serial build without MPI.")
 else()
-if("${MPI_C_INCLUDE_DIRS}" STREQUAL "")
+if("${MPI_CXX_INCLUDE_DIRS}" STREQUAL "")
 message("       Using MPI wrapper compilers, no explicit link required.")
 else()
-msglist("       found include paths: " "${MPI_C_INCLUDE_DIRS}")
-msglist("       linked to libraries: " "${MPI_C_LIBRARIES}")
+msglist("       found include paths: " "${MPI_CXX_INCLUDE_DIRS}")
+msglist("       linked to libraries: " "${MPI_CXX_LIBRARIES}")
 endif()
 endif()
 message("     * Eigen3")
@@ -316,7 +306,7 @@ msglist("       user-specified root: " "${EIGEN3_ROOT}")
 msglist("       found include paths: " "${EIGEN3_INCLUDE_DIR}")
 message("     * Boost")
 msglist("       user-specified root: " "${BOOST_ROOT}")
-msglist("       found include paths: " "${Boost_INCLUDE_DIR}")
+msglist("       found include paths: " "${Boost_INCLUDE_DIRS}")
 message("     * FFTW3")
 msglist("       user-specified root: " "${FFTW_ROOT}")
 msglist("       found include paths: " "${FFTW_INCLUDES}")
