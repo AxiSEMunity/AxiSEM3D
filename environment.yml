@@ -1,0 +1,25 @@
+channels:
+  - conda-forge
+dependencies:
+  # Python (only for environment management)
+  - python=3.11
+
+  # Build system
+  - cmake=4.2.3
+
+  # Compiler toolchain (required for mpicxx to work on macOS arm64)
+  - compilers
+
+  # MPI implementation
+  - mpich
+  - mpi=*=mpich
+
+  # Core solver dependencies
+  - eigen=3.4.0
+  - boost-cpp=1.85.0
+  - fftw=3.3.10
+  - metis=5.2.1
+
+  # I/O stack (serial, no parallel netcdf)
+  - hdf5=1.14.6
+  - libnetcdf=4.9.3
