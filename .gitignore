@@ -31,6 +31,7 @@
 *.out
 *.app
 .DS_Store
+.idea
 
 # examples
 axisem3d
