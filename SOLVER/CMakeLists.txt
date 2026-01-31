@@ -87,7 +87,7 @@ setDefault(USE_DOUBLE                  OFF)
 
 ################# cmake setup #################
 # project
-cmake_minimum_required(VERSION 4.2)
+cmake_minimum_required(VERSION 4.0)
 project(AxiSEM3D)
 
 # use "Release" as the default build type
