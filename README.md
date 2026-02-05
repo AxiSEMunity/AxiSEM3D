@@ -19,7 +19,7 @@ conda activate axisem3d
 Configure the build:
 
 ```bash
-rm -rf build && cmake -S ./SOLVER -B build \
+rm -rf build && cmake -B build \
   -Dcxx=mpicxx \
   -Dhdf5=$CONDA_PREFIX \
   -Dnetcdf=$CONDA_PREFIX \

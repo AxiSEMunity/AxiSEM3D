@@ -26,8 +26,7 @@ jobs:
       - name: Configure
         run: |
           source $CONDA/etc/profile.d/conda.sh && conda activate axisem3d
-          rm -rf build
-          cmake -S ./SOLVER -B build \
+          cmake -B build \
             -Dcxx=mpicxx \
             -Dhdf5=$CONDA_PREFIX \
             -Dnetcdf=$CONDA_PREFIX \
