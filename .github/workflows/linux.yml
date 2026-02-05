@@ -1,0 +1,45 @@
+name: Compile
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  linux-conda:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-update-conda: true
+          python-version: 3.11
+          environment-file: environment.yml
+          activate-environment: axisem3d
+          use-mamba: true
+      - name: Conda info
+        shell: bash -el {0}
+        run: conda info
+      - name: Configure
+        run: |
+          source $CONDA/etc/profile.d/conda.sh && conda activate axisem3d
+          rm -rf build
+          cmake -S ./SOLVER -B build \
+            -Dcxx=mpicxx \
+            -Dhdf5=$CONDA_PREFIX \
+            -Dnetcdf=$CONDA_PREFIX \
+            -Deigen=$CONDA_PREFIX \
+            -Dboost=$CONDA_PREFIX \
+            -Dfftw=$CONDA_PREFIX \
+            -Dmetis=$CONDA_PREFIX
+
+      - name: Build
+        run: |
+          source $CONDA/etc/profile.d/conda.sh && conda activate axisem3d
+          cmake --build build -j4
+
+      - name: Check executable
+        run: ./build/axisem3d --help
