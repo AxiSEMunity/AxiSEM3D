@@ -1,0 +1,8 @@
+#  Debugging 3D Models
+It is not uncommon to have a working set-up before loading the 3D models, and to have something go terribly wrong as soon as the models are activated. There are many things for users to figure out and it is easy to make a mistake somewhere in the model setup. Most of these mistakes will lead to a (hopefully) self-explanatory error message. But some just lead to an instability after the time-loop has started, leaving it up to the user to find the culprit. It is always a good idea to switch aspects of the 3D model off individually to check where the issue is coming from. Here are some concrete steps on how to proceed further:
+* Make sure the stability check interval is set to 1 (in *inparam.advanced.yaml*).
+* If the run blows up instantly (i.e. after the second time step), there is most likely a vp/vs ratio < 1 somewhere in the model. This can easily happen if perturbation type volumetric models are used.
+* If the run blows up further into the simulation, try lowering the Courant number (in *inparam.source.yaml*).
+* If the Courant number is 0.2 or smaller and the run still blows up the issue may be caused by sharp velocity contrasts cutting through the spectral elements. Options to deal with this are:
+  1. If possible for the given medium, add geometric models to ensure sharp velocity contrasts coincide with element boundaries.
+  2. Apply a bit of smoothing to the model to remove the sharp contrasts. If this is not possible because you need very accurate results, we recommend model homogenization.
