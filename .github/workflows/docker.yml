@@ -43,6 +43,7 @@ jobs:
         uses: docker/build-push-action@v6 
         with:
           context: ./docker/docker_git/
+          file: Dockerfile
           cache-from: type=registry,ref=ubuntu:22.04
           cache-to: type=inline
           platforms: linux/amd64,linux/arm64
