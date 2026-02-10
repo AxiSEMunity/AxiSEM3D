@@ -40,7 +40,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
   
       - name: Build and push Docker image
-        uses: docker/build-push-action@v6 with:
+        uses: docker/build-push-action@v6 
+        with:
           context: ./docker/docker_git/
           cache-from: type=registry,ref=ubuntu:22.04
           cache-to: type=inline
