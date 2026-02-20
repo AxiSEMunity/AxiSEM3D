@@ -1,0 +1,81 @@
+#
+# clang-format style for AxiSEM3D
+#
+
+Language: Cpp
+Standard: c++20
+
+# Indentation
+TabWidth: 2
+UseTab: Never
+IndentWidth: 2
+ContinuationIndentWidth: 4
+AccessModifierOffset: 0
+
+# Line length (0 = no limit; 100 keeps lines readable)
+ColumnLimit: 100
+
+# Braces: opening brace on same line (K&R / Attach)
+BreakBeforeBraces: Attach
+
+# Return type on its own line (function name and params on next line)
+AlwaysBreakAfterReturnType: All
+
+# Pointers and references: attach to type (e.g. "Type *p", "const Type &ref")
+PointerAlignment: Left
+
+# Range-based for: space before colon (e.g. "for (auto x : v)")
+SpaceBeforeRangeBasedForLoopColon: true
+
+# Short blocks and functions
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: false 
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+
+# Wrapping and packing
+BinPackParameters: OnePerLine
+BinPackArguments: false
+AllowAllParametersOfDeclarationOnNextLine: true
+
+# Constructor initializers: break after colon, align on next line
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerIndentWidth: 4
+
+# Namespace: indent contents
+NamespaceIndentation: All 
+
+# Includes: do not sort (preserve manual grouping and comments)
+SortIncludes: false
+
+# Spacing
+SpaceAfterCStyleCast: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInAngles: Never
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: true
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# Alignments (match codebase: no fancy alignment)
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: false
+AlignTrailingComments: false
+
+# Other
+CompactNamespaces: false
+Cpp11BracedListStyle: true
+DerivePointerAlignment: false
+DeriveLineEnding: true
+FixNamespaceComments: true
+IncludeBlocks: Preserve
+KeepEmptyLinesAtTheStartOfBlocks: false
+ReflowComments: false
+SortUsingDeclarations: false
+# Comments: do not reflow (keep section headers as-is)

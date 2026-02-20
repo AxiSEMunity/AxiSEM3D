@@ -23,3 +23,6 @@ dependencies:
   # I/O stack (serial, no parallel netcdf)
   - hdf5=1.14.6
   - libnetcdf=4.9.3
+
+  # code formatting using clang-format:
+  - clang-format=21.1
