@@ -15,32 +15,36 @@
 #include <memory>
 
 class STF {
-public:
-    // padding mode
-    enum class PaddingMode {None, FirstLast, Specified};
-    
-    // destructor
-    virtual ~STF() = default;
-    
-    // get start time
-    virtual double getStartTime() const = 0;
-    
-    // get value
-    virtual numerical::Real getValue(double time) = 0;
-    
-    // verbose
-    virtual std::string verbose() const = 0;
-    
-    // verbose key width
-    virtual int verboseKeyWidth() const {
-        return 18;
-    }
-    
-    ////////////////////////////// static //////////////////////////////
-public:
-    // build from inparam
-    static std::unique_ptr<STF>
-    buildInparam(int sindex, const std::string &sourceName, double dt);
+  public:
+  // padding mode
+  enum class PaddingMode { None, FirstLast, Specified };
+
+  // destructor
+  virtual ~STF() = default;
+
+  // get start time
+  virtual double
+  getStartTime() const = 0;
+
+  // get value
+  virtual numerical::Real
+  getValue(double time) = 0;
+
+  // verbose
+  virtual std::string
+  verbose() const = 0;
+
+  // verbose key width
+  virtual int
+  verboseKeyWidth() const {
+    return 18;
+  }
+
+  ////////////////////////////// static //////////////////////////////
+  public:
+  // build from inparam
+  static std::unique_ptr<STF>
+  buildInparam(int sindex, const std::string& sourceName, double dt);
 };
 
 #endif /* STF_hpp */

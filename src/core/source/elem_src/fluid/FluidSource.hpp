@@ -14,21 +14,20 @@
 #include "ElementSource.hpp"
 class FluidElement;
 
-class FluidSource: public ElementSource {
-public:
-    // constructor
-    FluidSource(std::unique_ptr<STF> &stf,
-                const std::shared_ptr<const FluidElement> &element):
-    ElementSource(stf), mElement(element) {
-        // nothing
-    }
-    
-    // destructor
-    virtual ~FluidSource() = default;
-    
-protected:
-    // element pointer
-    const std::shared_ptr<const FluidElement> mElement;
+class FluidSource : public ElementSource {
+  public:
+  // constructor
+  FluidSource(std::unique_ptr<STF>& stf, const std::shared_ptr<const FluidElement>& element) :
+      ElementSource(stf), mElement(element) {
+    // nothing
+  }
+
+  // destructor
+  virtual ~FluidSource() = default;
+
+  protected:
+  // element pointer
+  const std::shared_ptr<const FluidElement> mElement;
 };
 
 #endif /* FluidSource_hpp */

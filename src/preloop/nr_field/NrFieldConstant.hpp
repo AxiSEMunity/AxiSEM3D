@@ -13,22 +13,24 @@
 
 #include "NrField.hpp"
 
-class NrFieldConstant: public NrField {
-public:
-    // constructor
-    NrFieldConstant(int nr): mNr(nr) {
-        // nothing
-    }
-    
-    // get nr by (s, z)
-    eigen::IColX getNrAtPoints(const eigen::DMatX2_RM &sz) const;
-    
-    // verbose
-    std::string verbose() const;
-    
-private:
-    // the constant nr value
-    const int mNr;
+class NrFieldConstant : public NrField {
+  public:
+  // constructor
+  NrFieldConstant(int nr) : mNr(nr) {
+    // nothing
+  }
+
+  // get nr by (s, z)
+  eigen::IColX
+  getNrAtPoints(const eigen::DMatX2_RM& sz) const;
+
+  // verbose
+  std::string
+  verbose() const;
+
+  private:
+  // the constant nr value
+  const int mNr;
 };
 
 #endif /* NrFieldConstant_hpp */

@@ -15,32 +15,29 @@
 #include "FluidPoint.hpp"
 
 // constructor
-SolidFluidCoupling::
-SolidFluidCoupling(const std::shared_ptr<SolidPoint> &sp,
-                   const std::shared_ptr<FluidPoint> &fp):
-mSolidPoint(sp), mFluidPoint(fp) {
-    if (mSolidPoint->getMeshTag() != mFluidPoint->getMeshTag()) {
-        throw std::runtime_error("SolidFluidCoupling::SolidFluidCoupling || "
-                                 "The coupled solid and fluid points have "
-                                 "different mesh tags (positions).");
-    }
+SolidFluidCoupling::SolidFluidCoupling(const std::shared_ptr<SolidPoint>& sp,
+    const std::shared_ptr<FluidPoint>& fp) : mSolidPoint(sp), mFluidPoint(fp) {
+  if (mSolidPoint->getMeshTag() != mFluidPoint->getMeshTag()) {
+    throw std::runtime_error("SolidFluidCoupling::SolidFluidCoupling || "
+                             "The coupled solid and fluid points have "
+                             "different mesh tags (positions).");
+  }
 }
 
 // compute coupling
-void SolidFluidCoupling::apply() const {
-    // this order matters!
-    coupleSolidToFluid(mSolidPoint->getFields().mDispl,
-                       mFluidPoint->getFields().mStiff);
-    coupleFluidToSolid(mFluidPoint->getFields().mStiff,
-                       mSolidPoint->getFields().mStiff);
+void
+SolidFluidCoupling::apply() const {
+  // this order matters!
+  coupleSolidToFluid(mSolidPoint->getFields().mDispl, mFluidPoint->getFields().mStiff);
+  coupleFluidToSolid(mFluidPoint->getFields().mStiff, mSolidPoint->getFields().mStiff);
 }
-
 
 ////////////////////////////// virtual //////////////////////////////
 // check compatibility
-void SolidFluidCoupling::checkCompatibility(int nr) const {
-    if (mSolidPoint->getNr() != nr || mFluidPoint->getNr() != nr) {
-        throw std::runtime_error("SolidFluidCoupling::checkCompatibility || "
-                                 "Incompatible sizes.");
-    }
+void
+SolidFluidCoupling::checkCompatibility(int nr) const {
+  if (mSolidPoint->getNr() != nr || mFluidPoint->getNr() != nr) {
+    throw std::runtime_error("SolidFluidCoupling::checkCompatibility || "
+                             "Incompatible sizes.");
+  }
 }

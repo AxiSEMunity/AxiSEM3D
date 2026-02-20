@@ -14,21 +14,20 @@
 #include "ElementSource.hpp"
 class SolidElement;
 
-class SolidSource: public ElementSource {
-public:
-    // constructor
-    SolidSource(std::unique_ptr<STF> &stf,
-                const std::shared_ptr<const SolidElement> &element):
-    ElementSource(stf), mElement(element) {
-        // nothing
-    }
-    
-    // destructor
-    virtual ~SolidSource() = default;
-    
-protected:
-    // element pointer
-    const std::shared_ptr<const SolidElement> mElement;
+class SolidSource : public ElementSource {
+  public:
+  // constructor
+  SolidSource(std::unique_ptr<STF>& stf, const std::shared_ptr<const SolidElement>& element) :
+      ElementSource(stf), mElement(element) {
+    // nothing
+  }
+
+  // destructor
+  virtual ~SolidSource() = default;
+
+  protected:
+  // element pointer
+  const std::shared_ptr<const SolidElement> mElement;
 };
 
 #endif /* SolidSource_hpp */

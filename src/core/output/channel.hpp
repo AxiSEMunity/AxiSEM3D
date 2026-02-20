@@ -16,26 +16,24 @@
 #include <string>
 
 namespace channel {
-    // coordinate system for wavefield output
-    // spz: s, phi, z (solver intrinsic)
-    // RTZ: radial, transverse, vertical
-    // ENZ: east, north, vertical
-    // xyz: x, y, z in source-centered
-    enum class WavefieldCS {spz, RTZ, ENZ, xyz};
-    const std::map<WavefieldCS, std::string> WavefieldCS_Str = {
-        {WavefieldCS::spz, "spz"},
-        {WavefieldCS::RTZ, "RTZ"},
-        {WavefieldCS::ENZ, "ENZ"},
-        {WavefieldCS::xyz, "xyz"}};
-    
-    // solid
-    namespace solid {
-        // allowed field types
-        enum class FieldType {Displ, Nabla, Strain, Curl, Stress};
-        
-        // allowed channels
-        const std::map<int,
-        std::tuple<std::string, std::vector<std::string>, FieldType, int>>
+  // coordinate system for wavefield output
+  // spz: s, phi, z (solver intrinsic)
+  // RTZ: radial, transverse, vertical
+  // ENZ: east, north, vertical
+  // xyz: x, y, z in source-centered
+  enum class WavefieldCS { spz, RTZ, ENZ, xyz };
+  const std::map<WavefieldCS, std::string> WavefieldCS_Str = {{WavefieldCS::spz, "spz"},
+      {WavefieldCS::RTZ, "RTZ"},
+      {WavefieldCS::ENZ, "ENZ"},
+      {WavefieldCS::xyz, "xyz"}};
+
+  // solid
+  namespace solid {
+    // allowed field types
+    enum class FieldType { Displ, Nabla, Strain, Curl, Stress };
+
+    // allowed channels
+    const std::map<int, std::tuple<std::string, std::vector<std::string>, FieldType, int>>
         gChannelMap = {
             // displ
             {1, {"U1", {"U1", "U"}, FieldType::Displ, 0}},
@@ -76,37 +74,35 @@ namespace channel {
             {32, {"S12", {"S12", "S", "S21"}, FieldType::Stress, 5}},
             {33, {"S_I1", {"S_I1", "Sii"}, FieldType::Stress, -1}},
             {34, {"S_J2", {"S_J2"}, FieldType::Stress, -2}},
-        };
-        
-        // channel options
-        struct ChannelOptions {
-            // constructor
-            ChannelOptions(WavefieldCS wcs,
-                           const std::vector<std::string> &userChannels);
-            
-            // wavefield cs
-            const WavefieldCS mWCS;
-            
-            // verified channels
-            std::vector<int> mStdChannels;
-            
-            // buffer
-            bool mNeedBufferU = false;
-            bool mNeedBufferG = false;
-            bool mNeedBufferE = false;
-            bool mNeedBufferR = false;
-            bool mNeedBufferS = false;
-        };
-    }
-    
-    // fluid
-    namespace fluid {
-        // allowed field types
-        enum class FieldType {Chi, Displ, Pressure, Delta};
-        
-        // allowed channels
-        const std::map<int,
-        std::tuple<std::string, std::vector<std::string>, FieldType, int>>
+    };
+
+    // channel options
+    struct ChannelOptions {
+      // constructor
+      ChannelOptions(WavefieldCS wcs, const std::vector<std::string>& userChannels);
+
+      // wavefield cs
+      const WavefieldCS mWCS;
+
+      // verified channels
+      std::vector<int> mStdChannels;
+
+      // buffer
+      bool mNeedBufferU = false;
+      bool mNeedBufferG = false;
+      bool mNeedBufferE = false;
+      bool mNeedBufferR = false;
+      bool mNeedBufferS = false;
+    };
+  } // namespace solid
+
+  // fluid
+  namespace fluid {
+    // allowed field types
+    enum class FieldType { Chi, Displ, Pressure, Delta };
+
+    // allowed channels
+    const std::map<int, std::tuple<std::string, std::vector<std::string>, FieldType, int>>
         gChannelMap = {
             // chi
             {1, {"X", {"X"}, FieldType::Chi, 0}},
@@ -121,27 +117,26 @@ namespace channel {
             // Delta output is disabled below because the stiffness term
             // on a fluid point does NOT equal to Delta but Delta * Jacobian
             // {7, {"D", {"D"}, FieldType::Delta, 0}},
-        };
-        
-        // channel options
-        struct ChannelOptions {
-            // constructor
-            ChannelOptions(WavefieldCS wcs,
-                           const std::vector<std::string> &userChannels);
-            
-            // wavefield cs
-            const WavefieldCS mWCS;
-            
-            // verified channels
-            std::vector<int> mStdChannels;
-            
-            // buffer
-            bool mNeedBufferX = false;
-            bool mNeedBufferU = false;
-            bool mNeedBufferP = false;
-            bool mNeedBufferD = false;
-        };
-    }
-}
+    };
+
+    // channel options
+    struct ChannelOptions {
+      // constructor
+      ChannelOptions(WavefieldCS wcs, const std::vector<std::string>& userChannels);
+
+      // wavefield cs
+      const WavefieldCS mWCS;
+
+      // verified channels
+      std::vector<int> mStdChannels;
+
+      // buffer
+      bool mNeedBufferX = false;
+      bool mNeedBufferU = false;
+      bool mNeedBufferP = false;
+      bool mNeedBufferD = false;
+    };
+  } // namespace fluid
+} // namespace channel
 
 #endif /* channel_hpp */

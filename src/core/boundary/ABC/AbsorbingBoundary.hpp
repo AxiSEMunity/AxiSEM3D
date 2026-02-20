@@ -24,58 +24,65 @@ typedef Sponge<FluidPoint> SpongeFluid;
 class Messaging;
 
 class AbsorbingBoundary {
-public:
-    // add Clayton in solid
-    void addClaytonSolid(std::unique_ptr<const ClaytonSolid> &clayton) {
-        mClaytonSolids.push_back(std::move(clayton));
+  public:
+  // add Clayton in solid
+  void
+  addClaytonSolid(std::unique_ptr<const ClaytonSolid>& clayton) {
+    mClaytonSolids.push_back(std::move(clayton));
+  }
+
+  // add Clayton in fluid
+  void
+  addClaytonFluid(std::unique_ptr<const ClaytonFluid>& clayton) {
+    mClaytonFluids.push_back(std::move(clayton));
+  }
+
+  // add sponge in solid
+  void
+  addSpongeSolid(std::unique_ptr<const SpongeSolid>& sponge) {
+    mSpongeSolids.push_back(std::move(sponge));
+  }
+
+  // add sponge in fluid
+  void
+  addSpongeFluid(std::unique_ptr<const SpongeFluid>& sponge) {
+    mSpongeFluids.push_back(std::move(sponge));
+  }
+
+  // apply Clayton ABC
+  void
+  applyClayton() const {
+    for (const auto& clayton : mClaytonSolids) {
+      clayton->apply();
     }
-    
-    // add Clayton in fluid
-    void addClaytonFluid(std::unique_ptr<const ClaytonFluid> &clayton) {
-        mClaytonFluids.push_back(std::move(clayton));
+    for (const auto& clayton : mClaytonFluids) {
+      clayton->apply();
     }
-    
-    // add sponge in solid
-    void addSpongeSolid(std::unique_ptr<const SpongeSolid> &sponge) {
-        mSpongeSolids.push_back(std::move(sponge));
+  }
+
+  // apply sponge ABC
+  void
+  applySponge() const {
+    for (const auto& sponge : mSpongeSolids) {
+      sponge->apply();
     }
-    
-    // add sponge in fluid
-    void addSpongeFluid(std::unique_ptr<const SpongeFluid> &sponge) {
-        mSpongeFluids.push_back(std::move(sponge));
+    for (const auto& sponge : mSpongeFluids) {
+      sponge->apply();
     }
-    
-    // apply Clayton ABC
-    void applyClayton() const {
-        for (const auto &clayton: mClaytonSolids) {
-            clayton->apply();
-        }
-        for (const auto &clayton: mClaytonFluids) {
-            clayton->apply();
-        }
-    }
-    
-    // apply sponge ABC
-    void applySponge() const {
-        for (const auto &sponge: mSpongeSolids) {
-            sponge->apply();
-        }
-        for (const auto &sponge: mSpongeFluids) {
-            sponge->apply();
-        }
-    }
-    
-    // count info
-    std::map<std::string, int> countInfo(const Messaging &msg) const;
-    
-private:
-    // Claytons
-    std::vector<std::unique_ptr<const ClaytonSolid>> mClaytonSolids;
-    std::vector<std::unique_ptr<const ClaytonFluid>> mClaytonFluids;
-    
-    // sponges
-    std::vector<std::unique_ptr<const SpongeSolid>> mSpongeSolids;
-    std::vector<std::unique_ptr<const SpongeFluid>> mSpongeFluids;
+  }
+
+  // count info
+  std::map<std::string, int>
+  countInfo(const Messaging& msg) const;
+
+  private:
+  // Claytons
+  std::vector<std::unique_ptr<const ClaytonSolid>> mClaytonSolids;
+  std::vector<std::unique_ptr<const ClaytonFluid>> mClaytonFluids;
+
+  // sponges
+  std::vector<std::unique_ptr<const SpongeSolid>> mSpongeSolids;
+  std::vector<std::unique_ptr<const SpongeFluid>> mSpongeFluids;
 };
 
 #endif /* AbsorbingBoundary_hpp */

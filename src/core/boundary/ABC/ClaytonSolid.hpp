@@ -16,27 +16,28 @@
 class SolidPoint;
 
 class ClaytonSolid {
-public:
-    // constructor
-    ClaytonSolid(const std::shared_ptr<SolidPoint> &sp):
-    mSolidPoint(sp) {
-        // nothing
-    }
-    
-    // get point
-    const std::shared_ptr<SolidPoint> &getPoint() const {
-        return mSolidPoint;
-    }
-    
-    // destructor
-    virtual ~ClaytonSolid() = default;
-    
-    // apply ABC
-    virtual void apply() const = 0;
-    
-protected:
-    // point
-    const std::shared_ptr<SolidPoint> mSolidPoint;
+  public:
+  // constructor
+  ClaytonSolid(const std::shared_ptr<SolidPoint>& sp) : mSolidPoint(sp) {
+    // nothing
+  }
+
+  // get point
+  const std::shared_ptr<SolidPoint>&
+  getPoint() const {
+    return mSolidPoint;
+  }
+
+  // destructor
+  virtual ~ClaytonSolid() = default;
+
+  // apply ABC
+  virtual void
+  apply() const = 0;
+
+  protected:
+  // point
+  const std::shared_ptr<SolidPoint> mSolidPoint;
 };
 
 #endif /* ClaytonSolid_hpp */

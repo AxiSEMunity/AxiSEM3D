@@ -19,25 +19,28 @@
 class Messaging;
 
 class SolidFluidBoundary {
-public:
-    // add solid-fluid coupling
-    void addSolidFluidCoupling(std::unique_ptr<const SolidFluidCoupling> &sf) {
-        mSFCs.push_back(std::move(sf));
+  public:
+  // add solid-fluid coupling
+  void
+  addSolidFluidCoupling(std::unique_ptr<const SolidFluidCoupling>& sf) {
+    mSFCs.push_back(std::move(sf));
+  }
+
+  // apply solid-fluid coupling
+  void
+  apply() const {
+    for (const std::unique_ptr<const SolidFluidCoupling>& sfc : mSFCs) {
+      sfc->apply();
     }
-    
-    // apply solid-fluid coupling
-    void apply() const {
-        for (const std::unique_ptr<const SolidFluidCoupling> &sfc: mSFCs) {
-            sfc->apply();
-        }
-    }
-    
-    // count info
-    std::map<std::string, int> countInfo(const Messaging &msg) const;
-    
-private:
-    // solid-fluid coupling pairs
-    std::vector<std::unique_ptr<const SolidFluidCoupling>> mSFCs;
+  }
+
+  // count info
+  std::map<std::string, int>
+  countInfo(const Messaging& msg) const;
+
+  private:
+  // solid-fluid coupling pairs
+  std::vector<std::unique_ptr<const SolidFluidCoupling>> mSFCs;
 };
 
 #endif /* SolidFluidBoundary_hpp */

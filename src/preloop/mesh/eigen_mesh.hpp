@@ -15,18 +15,18 @@
 #include "spectral.hpp"
 
 namespace eigen {
-    using Eigen::Dynamic;
-    using Eigen::RowMajor;
-    
-    ///////// nodal-level /////////
-    // connectivity
-    typedef Eigen::Matrix<int, Dynamic, 4, RowMajor> IMatX4_RM;
-    // nodal coords
-    typedef Eigen::Matrix<double, Dynamic, 2, RowMajor> DMatX2_RM;
-    
-    ///////// GLL-level /////////
-    // GLL tag on elements
-    typedef Eigen::Matrix<int, Dynamic, spectral::nPEM, RowMajor> IMatXN_RM;
-}
+  using Eigen::Dynamic;
+  using Eigen::RowMajor;
+
+  ///////// nodal-level /////////
+  // connectivity
+  typedef Eigen::Matrix<int, Dynamic, 4, RowMajor> IMatX4_RM;
+  // nodal coords
+  typedef Eigen::Matrix<double, Dynamic, 2, RowMajor> DMatX2_RM;
+
+  ///////// GLL-level /////////
+  // GLL tag on elements
+  typedef Eigen::Matrix<int, Dynamic, spectral::nPEM, RowMajor> IMatXN_RM;
+} // namespace eigen
 
 #endif /* eigen_mesh_hpp */

@@ -21,47 +21,48 @@
 #include "ClaytonSolid.hpp"
 #include "eigen_point.hpp"
 
-class ClaytonSolid3D: public ClaytonSolid {
-public:
-    // constructor
-    ClaytonSolid3D(const std::shared_ptr<SolidPoint> &sp,
-                   const eigen::DColX &rhoVp, const eigen::DColX &rhoVs,
-                   const eigen::DColX &area,
-                   const eigen::DMatX3 &unitNormal):
-    ClaytonSolid(sp),
-    mRSA(rhoVs.cwiseProduct(area).cast<numerical::Real>()),
-    mK(((rhoVp - rhoVs).cwiseProduct(area).cwiseSqrt().asDiagonal()
-        * unitNormal).cast<numerical::Real>()) {
-        // check compatibility
-        checkCompatibility();
-    }
-    
-private:
+class ClaytonSolid3D : public ClaytonSolid {
+  public:
+  // constructor
+  ClaytonSolid3D(const std::shared_ptr<SolidPoint>& sp,
+      const eigen::DColX& rhoVp,
+      const eigen::DColX& rhoVs,
+      const eigen::DColX& area,
+      const eigen::DMatX3& unitNormal) :
+      ClaytonSolid(sp), mRSA(rhoVs.cwiseProduct(area).cast<numerical::Real>()),
+      mK(((rhoVp - rhoVs).cwiseProduct(area).cwiseSqrt().asDiagonal() * unitNormal)
+              .cast<numerical::Real>()) {
     // check compatibility
-    void checkCompatibility();
-    
-public:
-    // apply ABC
-    void apply() const;
-    
-private:
-    // rsa = rho * vs * area
-    const eigen::RColX mRSA;
-    // k = sqrt(rpa - rsa) n
-    const eigen::RMatX3 mK;
-    
-    
-    ////////////////////////////////////////
-    //////////////// static ////////////////
-    ////////////////////////////////////////
-    
-private:
-    // workspace
-    // V = FFT(velocity)
-    inline static eigen::RMatX3 sVR = eigen::RMatX3(0, 3);
-    // a = rsa V + V.k k
-    inline static eigen::RMatX3 sAR = eigen::RMatX3(0, 3);
-    inline static eigen::CMatX3 sAC = eigen::CMatX3(0, 3);
+    checkCompatibility();
+  }
+
+  private:
+  // check compatibility
+  void
+  checkCompatibility();
+
+  public:
+  // apply ABC
+  void
+  apply() const;
+
+  private:
+  // rsa = rho * vs * area
+  const eigen::RColX mRSA;
+  // k = sqrt(rpa - rsa) n
+  const eigen::RMatX3 mK;
+
+  ////////////////////////////////////////
+  //////////////// static ////////////////
+  ////////////////////////////////////////
+
+  private:
+  // workspace
+  // V = FFT(velocity)
+  inline static eigen::RMatX3 sVR = eigen::RMatX3(0, 3);
+  // a = rsa V + V.k k
+  inline static eigen::RMatX3 sAR = eigen::RMatX3(0, 3);
+  inline static eigen::CMatX3 sAC = eigen::CMatX3(0, 3);
 };
 
 #endif /* ClaytonSolid3D_hpp */

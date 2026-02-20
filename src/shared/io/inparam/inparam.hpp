@@ -14,18 +14,20 @@
 #include "InparamYAML.hpp"
 
 namespace inparam {
-    // global input parameters
-    extern InparamYAML gInparamModel;
-    extern InparamYAML gInparamNr;
-    extern InparamYAML gInparamSource;
-    extern InparamYAML gInparamOutput;
-    extern InparamYAML gInparamAdvanced;
-    
-    // setup
-    void setup();
-    
-    // verbose
-    std::string verbose();
-}
+  // global input parameters
+  extern InparamYAML gInparamModel;
+  extern InparamYAML gInparamNr;
+  extern InparamYAML gInparamSource;
+  extern InparamYAML gInparamOutput;
+  extern InparamYAML gInparamAdvanced;
+
+  // setup
+  void
+  setup();
+
+  // verbose
+  std::string
+  verbose();
+} // namespace inparam
 
 #endif /* inparam_hpp */

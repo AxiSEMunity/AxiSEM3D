@@ -23,57 +23,58 @@
 #include "fft.hpp"
 
 // constructor
-MassOceanLoad3D::MassOceanLoad3D(const eigen::DColX &mass,
-                                 const eigen::DColX &massOcean,
-                                 const eigen::DMatX3 &unitNormal):
-mIM(mass.cwiseInverse().cast<numerical::Real>()),
-mK((massOcean.cwiseQuotient(mass.cwiseProduct(mass + massOcean))
-    .cwiseSqrt().asDiagonal() * unitNormal).cast<numerical::Real>()) {
-    // nothing
-    // im = 1 / m
-    // k = sqrt(m0 / [m (m + m0)]) n
+MassOceanLoad3D::MassOceanLoad3D(
+    const eigen::DColX& mass, const eigen::DColX& massOcean, const eigen::DMatX3& unitNormal) :
+    mIM(mass.cwiseInverse().cast<numerical::Real>()),
+    mK((massOcean.cwiseQuotient(mass.cwiseProduct(mass + massOcean)).cwiseSqrt().asDiagonal() *
+        unitNormal)
+            .cast<numerical::Real>()) {
+  // nothing
+  // im = 1 / m
+  // k = sqrt(m0 / [m (m + m0)]) n
 }
 
 // check compatibility
-void MassOceanLoad3D::checkCompatibility(int nr, bool solid) const {
-    // must on solid
-    if (!solid) {
-        throw std::runtime_error("MassOceanLoad3D::checkCompatibility || "
-                                 "Incompatible types: "
-                                 "ocean load on fluid point.");
-    }
-    
-    // check size
-    if (mIM.rows() != nr) {
-        throw std::runtime_error("MassOceanLoad3D::checkCompatibility || "
-                                 "Incompatible sizes.");
-    }
-    
-    // expand workspace if needed
-    if (sF.rows() < nr) {
-        sF.resize(nr, 3);
-        sA.resize(nr, 3);
-    }
-    
-    // report request to FFT
-    fft::gFFT_3.addNR(nr);
+void
+MassOceanLoad3D::checkCompatibility(int nr, bool solid) const {
+  // must on solid
+  if (!solid) {
+    throw std::runtime_error("MassOceanLoad3D::checkCompatibility || "
+                             "Incompatible types: "
+                             "ocean load on fluid point.");
+  }
+
+  // check size
+  if (mIM.rows() != nr) {
+    throw std::runtime_error("MassOceanLoad3D::checkCompatibility || "
+                             "Incompatible sizes.");
+  }
+
+  // expand workspace if needed
+  if (sF.rows() < nr) {
+    sF.resize(nr, 3);
+    sA.resize(nr, 3);
+  }
+
+  // report request to FFT
+  fft::gFFT_3.addNR(nr);
 }
 
 // compute accel in-place for solid
-void MassOceanLoad3D::computeAccel(eigen::CMatX3 &stiff3) const {
-    // constants
-    int nr = (int)mIM.rows();
-    
-    // FFT: Fourier => cardinal
-    fft::gFFT_3.computeC2R(stiff3, sF, nr);
-    
-    // a = im F
-    sA.topRows(nr) = mIM.asDiagonal() * sF.topRows(nr);
-    
-    // a -= F.k k
-    sA.topRows(nr) -= (sF.topRows(nr).cwiseProduct(mK)
-                       .rowwise().sum().asDiagonal() * mK);
-    
-    // FFT: cardinal => Fourier
-    fft::gFFT_3.computeR2C(sA, stiff3, nr);
+void
+MassOceanLoad3D::computeAccel(eigen::CMatX3& stiff3) const {
+  // constants
+  int nr = (int)mIM.rows();
+
+  // FFT: Fourier => cardinal
+  fft::gFFT_3.computeC2R(stiff3, sF, nr);
+
+  // a = im F
+  sA.topRows(nr) = mIM.asDiagonal() * sF.topRows(nr);
+
+  // a -= F.k k
+  sA.topRows(nr) -= (sF.topRows(nr).cwiseProduct(mK).rowwise().sum().asDiagonal() * mK);
+
+  // FFT: cardinal => Fourier
+  fft::gFFT_3.computeR2C(sA, stiff3, nr);
 }

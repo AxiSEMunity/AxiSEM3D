@@ -13,27 +13,28 @@
 
 #include "Mass.hpp"
 
-class Mass1D: public Mass {
-public:
-    // constructor
-    Mass1D(double mass):
-    mInvMass((numerical::Real)(1. / mass)) {
-        // nothing
-    }
-    
-    // compute accel in-place for fluid
-    void computeAccel(eigen::CColX &stiff1) const {
-        stiff1 *= mInvMass;
-    }
-    
-    // compute accel in-place for solid
-    void computeAccel(eigen::CMatX3 &stiff3) const {
-        stiff3 *= mInvMass;
-    }
-    
-private:
-    // inverse of mass
-    const numerical::Real mInvMass;
+class Mass1D : public Mass {
+  public:
+  // constructor
+  Mass1D(double mass) : mInvMass((numerical::Real)(1. / mass)) {
+    // nothing
+  }
+
+  // compute accel in-place for fluid
+  void
+  computeAccel(eigen::CColX& stiff1) const {
+    stiff1 *= mInvMass;
+  }
+
+  // compute accel in-place for solid
+  void
+  computeAccel(eigen::CMatX3& stiff3) const {
+    stiff3 *= mInvMass;
+  }
+
+  private:
+  // inverse of mass
+  const numerical::Real mInvMass;
 };
 
 #endif /* Mass1D_hpp */

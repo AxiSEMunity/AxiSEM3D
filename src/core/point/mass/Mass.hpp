@@ -14,20 +14,23 @@
 #include "eigen_point.hpp"
 
 class Mass {
-public:
-    // destructor
-    virtual ~Mass() = default;
-    
-    // check compatibility
-    virtual void checkCompatibility(int nr, bool solid) const {
-        // nothing by default
-    }
-    
-    // compute accel in-place for fluid
-    virtual void computeAccel(eigen::CColX &stiff1) const = 0;
-    
-    // compute accel in-place for solid
-    virtual void computeAccel(eigen::CMatX3 &stiff3) const = 0;
+  public:
+  // destructor
+  virtual ~Mass() = default;
+
+  // check compatibility
+  virtual void
+  checkCompatibility(int nr, bool solid) const {
+    // nothing by default
+  }
+
+  // compute accel in-place for fluid
+  virtual void
+  computeAccel(eigen::CColX& stiff1) const = 0;
+
+  // compute accel in-place for solid
+  virtual void
+  computeAccel(eigen::CMatX3& stiff3) const = 0;
 };
 
 #endif /* Mass_hpp */

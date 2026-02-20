@@ -18,41 +18,42 @@ class SolidPoint;
 class FluidPoint;
 
 class SolidFluidCoupling {
-public:
-    // constructor
-    SolidFluidCoupling(const std::shared_ptr<SolidPoint> &sp,
-                       const std::shared_ptr<FluidPoint> &fp);
-    
-    // destructor
-    virtual ~SolidFluidCoupling() = default;
-    
-    // get solid point
-    const std::shared_ptr<SolidPoint> &getSolidPoint() const {
-        return mSolidPoint;
-    }
-    
-    // apply coupling
-    void apply() const;
-    
-    
-    ////////////////////////////// virtual //////////////////////////////
-protected:
-    // check compatibility
-    virtual void checkCompatibility(int nr) const;
-    
-public:
-    // solid => fluid
-    virtual void coupleSolidToFluid(const eigen::CMatX3 &solidDispl,
-                                    eigen::CColX &fluidStiff) const = 0;
-    
-    // fluid => solid
-    virtual void coupleFluidToSolid(const eigen::CColX &fluidStiff,
-                                    eigen::CMatX3 &solidStiff) const = 0;
-    
-protected:
-    // coupled solid-fluid pair
-    const std::shared_ptr<SolidPoint> mSolidPoint;
-    const std::shared_ptr<FluidPoint> mFluidPoint;
+  public:
+  // constructor
+  SolidFluidCoupling(const std::shared_ptr<SolidPoint>& sp, const std::shared_ptr<FluidPoint>& fp);
+
+  // destructor
+  virtual ~SolidFluidCoupling() = default;
+
+  // get solid point
+  const std::shared_ptr<SolidPoint>&
+  getSolidPoint() const {
+    return mSolidPoint;
+  }
+
+  // apply coupling
+  void
+  apply() const;
+
+  ////////////////////////////// virtual //////////////////////////////
+  protected:
+  // check compatibility
+  virtual void
+  checkCompatibility(int nr) const;
+
+  public:
+  // solid => fluid
+  virtual void
+  coupleSolidToFluid(const eigen::CMatX3& solidDispl, eigen::CColX& fluidStiff) const = 0;
+
+  // fluid => solid
+  virtual void
+  coupleFluidToSolid(const eigen::CColX& fluidStiff, eigen::CMatX3& solidStiff) const = 0;
+
+  protected:
+  // coupled solid-fluid pair
+  const std::shared_ptr<SolidPoint> mSolidPoint;
+  const std::shared_ptr<FluidPoint> mFluidPoint;
 };
 
 #endif /* SolidFluidCoupling_hpp */

@@ -14,21 +14,21 @@
 #include "ClaytonFluid.hpp"
 #include "numerical.hpp"
 
-class ClaytonFluid1D: public ClaytonFluid {
-public:
-    // constructor
-    ClaytonFluid1D(const std::shared_ptr<FluidPoint> &fp,
-                   double rhoVp, double area):
-    ClaytonFluid(fp), mAreaOverRhoVp(area / rhoVp) {
-        // nothing
-    }
-    
-    // apply ABC
-    void apply() const;
-    
-private:
-    // area / (rho * vp)
-    const numerical::Real mAreaOverRhoVp;
+class ClaytonFluid1D : public ClaytonFluid {
+  public:
+  // constructor
+  ClaytonFluid1D(const std::shared_ptr<FluidPoint>& fp, double rhoVp, double area) :
+      ClaytonFluid(fp), mAreaOverRhoVp(area / rhoVp) {
+    // nothing
+  }
+
+  // apply ABC
+  void
+  apply() const;
+
+  private:
+  // area / (rho * vp)
+  const numerical::Real mAreaOverRhoVp;
 };
 
 #endif /* ClaytonFluid1D_hpp */

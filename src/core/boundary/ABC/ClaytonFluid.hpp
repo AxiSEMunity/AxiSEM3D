@@ -16,27 +16,28 @@
 class FluidPoint;
 
 class ClaytonFluid {
-public:
-    // constructor
-    ClaytonFluid(const std::shared_ptr<FluidPoint> &fp):
-    mFluidPoint(fp) {
-        // nothing
-    }
-    
-    // get point
-    const std::shared_ptr<FluidPoint> &getPoint() const {
-        return mFluidPoint;
-    }
-    
-    // destructor
-    virtual ~ClaytonFluid() = default;
-    
-    // apply ABC
-    virtual void apply() const = 0;
-    
-protected:
-    // point
-    const std::shared_ptr<FluidPoint> mFluidPoint;
+  public:
+  // constructor
+  ClaytonFluid(const std::shared_ptr<FluidPoint>& fp) : mFluidPoint(fp) {
+    // nothing
+  }
+
+  // get point
+  const std::shared_ptr<FluidPoint>&
+  getPoint() const {
+    return mFluidPoint;
+  }
+
+  // destructor
+  virtual ~ClaytonFluid() = default;
+
+  // apply ABC
+  virtual void
+  apply() const = 0;
+
+  protected:
+  // point
+  const std::shared_ptr<FluidPoint> mFluidPoint;
 };
 
 #endif /* ClaytonFluid_hpp */

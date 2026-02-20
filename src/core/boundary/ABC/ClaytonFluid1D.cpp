@@ -12,11 +12,12 @@
 #include "FluidPoint.hpp"
 
 // apply ABC
-void ClaytonFluid1D::apply() const {
-    // get fields
-    const eigen::CColX &veloc = mFluidPoint->getFields().mVeloc;
-    eigen::CColX &stiff = mFluidPoint->getFields().mStiff;
-    
-    // apply
-    stiff -= veloc * mAreaOverRhoVp;
+void
+ClaytonFluid1D::apply() const {
+  // get fields
+  const eigen::CColX& veloc = mFluidPoint->getFields().mVeloc;
+  eigen::CColX& stiff = mFluidPoint->getFields().mStiff;
+
+  // apply
+  stiff -= veloc * mAreaOverRhoVp;
 }

@@ -17,13 +17,13 @@
 #include "vector_tools.hpp"
 
 // count info
-std::map<std::string, int> SolidFluidBoundary::
-countInfo(const Messaging &msg) const {
-    std::map<std::string, int> countMap;
-    for (const auto &sfc: mSFCs) {
-        if (!msg.pointInSmallerRank(sfc->getSolidPoint())) {
-            vector_tools::aggregate(countMap, bstring::typeName(*sfc), 1);
-        }
+std::map<std::string, int>
+SolidFluidBoundary::countInfo(const Messaging& msg) const {
+  std::map<std::string, int> countMap;
+  for (const auto& sfc : mSFCs) {
+    if (!msg.pointInSmallerRank(sfc->getSolidPoint())) {
+      vector_tools::aggregate(countMap, bstring::typeName(*sfc), 1);
     }
-    return countMap;
+  }
+  return countMap;
 }

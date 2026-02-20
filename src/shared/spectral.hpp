@@ -16,18 +16,18 @@
 #endif
 
 namespace spectral {
-    // npol
-    const int nPol = _NPOL;
-    
-    // number of points on an edge
-    const int nPntEdge = nPol + 1;
-    
-    // number of points in an element
-    const int nPntElem = nPntEdge * nPntEdge;
-    
-    // shortened alias
-    const int nPED = nPntEdge;
-    const int nPEM = nPntElem;
-}
+  // npol
+  const int nPol = _NPOL;
+
+  // number of points on an edge
+  const int nPntEdge = nPol + 1;
+
+  // number of points in an element
+  const int nPntElem = nPntEdge * nPntEdge;
+
+  // shortened alias
+  const int nPED = nPntEdge;
+  const int nPEM = nPntElem;
+} // namespace spectral
 
 #endif /* spectral_hpp */

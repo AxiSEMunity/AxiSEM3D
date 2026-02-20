@@ -20,21 +20,24 @@ class FluidPoint;
 class Messaging;
 
 class FluidSurfaceBoundary {
-public:
-    // add fluid point
-    void addPoint(const std::shared_ptr<FluidPoint> &fp) {
-        mFluidPoints.push_back(fp);
-    }
-    
-    // apply stress-free boundary condition on fluid
-    void apply() const;
-    
-    // count info
-    int countInfo(const Messaging &msg) const;
-    
-private:
-    // points on surface
-    std::vector<std::shared_ptr<FluidPoint>> mFluidPoints;
+  public:
+  // add fluid point
+  void
+  addPoint(const std::shared_ptr<FluidPoint>& fp) {
+    mFluidPoints.push_back(fp);
+  }
+
+  // apply stress-free boundary condition on fluid
+  void
+  apply() const;
+
+  // count info
+  int
+  countInfo(const Messaging& msg) const;
+
+  private:
+  // points on surface
+  std::vector<std::shared_ptr<FluidPoint>> mFluidPoints;
 };
 
 #endif /* FluidSurfaceBoundary_hpp */

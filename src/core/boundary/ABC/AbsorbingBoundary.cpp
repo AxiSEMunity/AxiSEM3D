@@ -18,32 +18,32 @@
 #include "vector_tools.hpp"
 
 // count info
-std::map<std::string, int> AbsorbingBoundary::
-countInfo(const Messaging &msg) const {
-    std::map<std::string, int> countMap;
-    // Clayton in solid
-    for (const auto &clayton: mClaytonSolids) {
-        if (!msg.pointInSmallerRank(clayton->getPoint())) {
-            vector_tools::aggregate(countMap, bstring::typeName(*clayton), 1);
-        }
+std::map<std::string, int>
+AbsorbingBoundary::countInfo(const Messaging& msg) const {
+  std::map<std::string, int> countMap;
+  // Clayton in solid
+  for (const auto& clayton : mClaytonSolids) {
+    if (!msg.pointInSmallerRank(clayton->getPoint())) {
+      vector_tools::aggregate(countMap, bstring::typeName(*clayton), 1);
     }
-    // Clayton in fluid
-    for (const auto &clayton: mClaytonFluids) {
-        if (!msg.pointInSmallerRank(clayton->getPoint())) {
-            vector_tools::aggregate(countMap, bstring::typeName(*clayton), 1);
-        }
+  }
+  // Clayton in fluid
+  for (const auto& clayton : mClaytonFluids) {
+    if (!msg.pointInSmallerRank(clayton->getPoint())) {
+      vector_tools::aggregate(countMap, bstring::typeName(*clayton), 1);
     }
-    // sponge in solid
-    for (const auto &sponge: mSpongeSolids) {
-        if (!msg.pointInSmallerRank(sponge->getPoint())) {
-            vector_tools::aggregate(countMap, "SpongeSolid", 1);
-        }
+  }
+  // sponge in solid
+  for (const auto& sponge : mSpongeSolids) {
+    if (!msg.pointInSmallerRank(sponge->getPoint())) {
+      vector_tools::aggregate(countMap, "SpongeSolid", 1);
     }
-    // sponge in fluid
-    for (const auto &sponge: mSpongeFluids) {
-        if (!msg.pointInSmallerRank(sponge->getPoint())) {
-            vector_tools::aggregate(countMap, "SpongeFluid", 1);
-        }
+  }
+  // sponge in fluid
+  for (const auto& sponge : mSpongeFluids) {
+    if (!msg.pointInSmallerRank(sponge->getPoint())) {
+      vector_tools::aggregate(countMap, "SpongeFluid", 1);
     }
-    return countMap;
+  }
+  return countMap;
 }

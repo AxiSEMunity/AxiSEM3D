@@ -47,67 +47,86 @@
 // wavefield scanning
 #include "WavefieldScanning.hpp"
 
-
 //////////////////// top-level functions ////////////////////
 // setup environment
-void setupEnvironment(int argc, char *argv[]);
+void
+setupEnvironment(int argc, char* argv[]);
 
 // build exodus mesh
-std::unique_ptr<ExodusMesh> buildExodusMesh();
+std::unique_ptr<ExodusMesh>
+buildExodusMesh();
 
 // ABC
-std::unique_ptr<const ABC> buildABC(const ExodusMesh &exodusMesh);
+std::unique_ptr<const ABC>
+buildABC(const ExodusMesh& exodusMesh);
 
 // compute nr field and weights
-eigen::DColX computeNrFieldAndWeights(ExodusMesh &exodusMesh);
+eigen::DColX
+computeNrFieldAndWeights(ExodusMesh& exodusMesh);
 
 // build nr-weighted local mesh
 std::unique_ptr<LocalMesh>
-buildLocalMesh(const ExodusMesh &exodusMesh, const eigen::DColX &weights,
-               const std::string &weightsKey, const std::string &stageKey);
+buildLocalMesh(const ExodusMesh& exodusMesh,
+    const eigen::DColX& weights,
+    const std::string& weightsKey,
+    const std::string& stageKey);
 
 // build 3D models
-void buildModels3D(const ExodusMesh &exodusMesh, const LocalMesh &localMesh,
-                   std::vector<std::shared_ptr<const Model3D>> &models3D,
-                   const std::string &stageKey, const ABC &abc);
+void
+buildModels3D(const ExodusMesh& exodusMesh,
+    const LocalMesh& localMesh,
+    std::vector<std::shared_ptr<const Model3D>>& models3D,
+    const std::string& stageKey,
+    const ABC& abc);
 
 // build SE model
 std::unique_ptr<SE_Model>
-buildSE_Model(const ExodusMesh &exodusMesh,
-              const ABC &abc, LocalMesh &localMesh,
-              const std::vector<std::shared_ptr<const Model3D>> &models3D,
-              const std::string &stageKey);
+buildSE_Model(const ExodusMesh& exodusMesh,
+    const ABC& abc,
+    LocalMesh& localMesh,
+    const std::vector<std::shared_ptr<const Model3D>>& models3D,
+    const std::string& stageKey);
 
 // compute dt
-double computeDt(const SE_Model &sem, const ABC &abc);
+double
+computeDt(const SE_Model& sem, const ABC& abc);
 
 // attenuation
 std::unique_ptr<const AttBuilder>
-buildAttenuation(const ExodusMesh &exodusMesh, double dt);
+buildAttenuation(const ExodusMesh& exodusMesh, double dt);
 
 // time scheme
-std::unique_ptr<TimeScheme> buildTimeScheme();
+std::unique_ptr<TimeScheme>
+buildTimeScheme();
 
 // release to domain
-void releaseToDomain(SE_Model &sem, const ABC &abc, LocalMesh &localMesh,
-                     const std::unique_ptr<const AttBuilder> &attBuilder,
-                     const TimeScheme &timeScheme, Domain &domain,
-                     const std::string &stageKey);
+void
+releaseToDomain(SE_Model& sem,
+    const ABC& abc,
+    LocalMesh& localMesh,
+    const std::unique_ptr<const AttBuilder>& attBuilder,
+    const TimeScheme& timeScheme,
+    Domain& domain,
+    const std::string& stageKey);
 
 // initalize FFT
-void initalizeFFT(const std::string &stageKey);
+void
+initalizeFFT(const std::string& stageKey);
 
 // measure cost
 eigen::DColX
-measureCost(const SE_Model &sem, const ExodusMesh &exodusMesh,
-            const LocalMesh &localMesh, const TimeScheme &timeScheme);
+measureCost(const SE_Model& sem,
+    const ExodusMesh& exodusMesh,
+    const LocalMesh& localMesh,
+    const TimeScheme& timeScheme);
 
 // release sources
-void releaseSources(SE_Model &sem, Domain &domain, double dt,
-                    TimeScheme &timeScheme);
+void
+releaseSources(SE_Model& sem, Domain& domain, double dt, TimeScheme& timeScheme);
 
 // setup wavefield scanning
-void setupWavefieldScanning(double dt, double period, int numTotalSteps,
-                            const SE_Model &sem, Domain &domain);
+void
+setupWavefieldScanning(
+    double dt, double period, int numTotalSteps, const SE_Model& sem, Domain& domain);
 
 #endif /* main_hpp */

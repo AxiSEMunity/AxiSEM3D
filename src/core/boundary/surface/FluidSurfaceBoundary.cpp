@@ -17,22 +17,23 @@
 #include "Messaging.hpp"
 
 // apply stress-free boundary condition on fluid
-void FluidSurfaceBoundary::apply() const {
-    // pressure ≡ 0 or accel ≡ 0
-    // so, veloc = disp = everything ≡ 0
-    for (const std::shared_ptr<FluidPoint> &fp: mFluidPoints) {
-        fp->getFields().mStiff.setZero();
-    }
+void
+FluidSurfaceBoundary::apply() const {
+  // pressure ≡ 0 or accel ≡ 0
+  // so, veloc = disp = everything ≡ 0
+  for (const std::shared_ptr<FluidPoint>& fp : mFluidPoints) {
+    fp->getFields().mStiff.setZero();
+  }
 }
 
 // count info
-int FluidSurfaceBoundary::
-countInfo(const Messaging &msg) const {
-    int count = 0;
-    for (const auto &point: mFluidPoints) {
-        if (!msg.pointInSmallerRank(point)) {
-            count++;
-        }
+int
+FluidSurfaceBoundary::countInfo(const Messaging& msg) const {
+  int count = 0;
+  for (const auto& point : mFluidPoints) {
+    if (!msg.pointInSmallerRank(point)) {
+      count++;
     }
-    return count;
+  }
+  return count;
 }

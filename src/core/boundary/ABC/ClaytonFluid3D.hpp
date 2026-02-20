@@ -14,37 +14,37 @@
 #include "ClaytonFluid.hpp"
 #include "eigen_point.hpp"
 
-class ClaytonFluid3D: public ClaytonFluid {
-public:
-    // constructor
-    ClaytonFluid3D(const std::shared_ptr<FluidPoint> &fp,
-                   const eigen::DColX &rhoVp, const eigen::DColX &area):
-    ClaytonFluid(fp),
-    mAreaOverRhoVp(area.cwiseQuotient(rhoVp).cast<numerical::Real>()) {
-        // check compatibility
-        checkCompatibility();
-    }
-    
-private:
+class ClaytonFluid3D : public ClaytonFluid {
+  public:
+  // constructor
+  ClaytonFluid3D(
+      const std::shared_ptr<FluidPoint>& fp, const eigen::DColX& rhoVp, const eigen::DColX& area) :
+      ClaytonFluid(fp), mAreaOverRhoVp(area.cwiseQuotient(rhoVp).cast<numerical::Real>()) {
     // check compatibility
-    void checkCompatibility();
-    
-public:
-    // apply ABC
-    void apply() const;
-    
-private:
-    // area / (rho * vp)
-    const eigen::RColX mAreaOverRhoVp;
-    
-    
-    ////////////////////////////////////////
-    //////////////// static ////////////////
-    ////////////////////////////////////////
-    
-    // workspace
-    inline static eigen::RColX sVecR = eigen::RColX(0);
-    inline static eigen::CColX sVecC = eigen::CColX(0);
+    checkCompatibility();
+  }
+
+  private:
+  // check compatibility
+  void
+  checkCompatibility();
+
+  public:
+  // apply ABC
+  void
+  apply() const;
+
+  private:
+  // area / (rho * vp)
+  const eigen::RColX mAreaOverRhoVp;
+
+  ////////////////////////////////////////
+  //////////////// static ////////////////
+  ////////////////////////////////////////
+
+  // workspace
+  inline static eigen::RColX sVecR = eigen::RColX(0);
+  inline static eigen::CColX sVecC = eigen::CColX(0);
 };
 
 #endif /* ClaytonFluid3D_hpp */
