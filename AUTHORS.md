@@ -6,8 +6,8 @@ AxiSEM3D is being developed by a large, collaborative, and inclusive community. 
 
 This community is led by a group of Principal Developers who are active in developing code, reviewing code, contributing to the documentation, helping users on the online forums and in person, and in many other visible and invisible ways. They are: 
 
-- Kuangdai Leng (EarthRover Program)
-- Benjamin Fernando (Los Alamos National Laboratory) - Project Manager
+- Kuangdai Leng (EarthRover Program) - Lead Developer
+- Benjamin Fernando (Johns Hopkins University) - Project Manager
 - Jonathan Wolf (University of California, Berkeley)
 - Timo Heister (Clemson University)
 - Lorraine Hwang (University of California, Davis)
@@ -20,10 +20,10 @@ The following individuals were heavily involved in the development of AxiSEM3D:
 
 - Tarje Nissen-Meyer (University of Exeter/University of Oxford/EarthRover Program)
 - Claudia Haindl (University of Oxford)
+- Jack Muir (University of Oxford)
 - Alexandre Szenicer (University of Oxford)
 - Andrew Walker (University of Oxford)
-- Jack Muir (University of Oxford)
 
 ## Thank yous
 
-We are also grateful to the following people: Ceri Nunn, Will Eaton, Timothy Craig, and Maureen Long
+We are also grateful to the following people: Jarrett Baker-Dunn, Timothy Craig, Will Eaton, Maureen Long, and Ceri Nunn 
