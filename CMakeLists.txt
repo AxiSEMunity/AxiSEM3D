@@ -263,6 +263,15 @@ if(NOT "${ADDITIONAL_LINK_OPTIONS}" STREQUAL "")
 endif()
 
 
+
+# target to run tools/indent.sh (clang-format) from project root
+add_custom_target(indent
+  COMMAND sh "${CMAKE_SOURCE_DIR}/tools/indent.sh"
+  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+  COMMENT "Indenting source with clang-format (tools/indent.sh)"
+)
+
+
 ################# summary #################
 # macro to message dependencies nicely
 macro(msglist myhead mylist)
