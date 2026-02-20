@@ -97,8 +97,9 @@ endif()
 
 
 ################# macros passed to AxiSEM3D #################
-# version
-add_definitions(-D_VERSION="1.0")
+# grab version from VERSION file:
+file(STRINGS "${CMAKE_SOURCE_DIR}/VERSION" AXISEM3D_VERSION LIMIT_COUNT 1)
+add_definitions(-D_VERSION="${AXISEM3D_VERSION}")
 
 # source dir
 add_definitions(-D_PROJ_DIR=\"${PROJECT_SOURCE_DIR}\")
@@ -293,6 +294,8 @@ message(STATUS "")
 message(STATUS "")
 message(STATUS "")
 message(STATUS "========================== Summary ===========================")
+message("   AxiSEM3D version________________________________________________")
+message("     Version           =  ${AXISEM3D_VERSION}")
 message("   Build settings________________________________________________")
 message("     C++ compiler      =  ${CMAKE_CXX_COMPILER}")
 message("     Compiler flags    =  ${CMAKE_CXX_FLAGS_${BUILD}}")
