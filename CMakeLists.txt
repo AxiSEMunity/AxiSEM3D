@@ -155,6 +155,11 @@ find_package(Eigen3 3.4 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # boost
+# Silence a warning by CMake, the new policy is fine for
+# us as boost is new enough to provide the necessary info.
+if(POLICY CMP0167)
+  cmake_policy(SET CMP0167 NEW)
+endif()
 set(BOOST_INCLUDEDIR "${BOOST_ROOT}/include")
 set(BOOST_LIBRARYDIR "${BOOST_ROOT}/lib")
 find_package(Boost 1.85 REQUIRED)
