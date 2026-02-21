@@ -19,5 +19,3 @@ and Piyush P. Khopkar
 * AxiSEM3D - an introduction to using the code and its applications 
 by Benjamin Fernando, Jonathan Wolf, Kuangdai Leng, Tarje Nissen-Meyer,
 Will Eaton, Andrew Walker, Tim Craig, Jack Muir, Ceri Nunn, and Maureen D. Long
-
-
