@@ -79,7 +79,9 @@ how computationally expensive considering it can be. This comes about
 because the perturbations to the Poisson equation, which describes the
 Newtonian gravitational potential *ϕ* in terms of the mass density *ρ*:
 
-∇<sup>2</sup>*ϕ* = 4*π**G**ρ*
+```{math}
+   \nabla^{2}\phi = 4\pi G\rho
+```
 
 are felt everywhere instantaneously. Furthermore, there exists a
 coupling such that feedback from wave propagation affects the local
@@ -97,9 +99,9 @@ Einstein Field Equations may be significantly faster to implement, as
 the solutions are wave-like and hence inherently local. The potential
 *ϕ* is here expressed as the sum of propagating and static terms:
 
-$$\begin{equation}
--\frac{1}{c_g^{2}}\frac{\partial^{2}{\phi}}{\partial{t^{2}}} + \nabla^{2}\phi = 4\pi G\rho
-\end{equation}$$
+```{math}
+    -\frac{1}{c_g^{2}}\frac{\partial^{2}{\phi}}{\partial{t^{2}}} + \nabla^{2}\phi = 4\pi G\rho
+```
 
 where *c*<sub>*g*</sub> is the propagation speed. Physically, this speed
 is the speed of light (*c*), as this is the velocity at which
