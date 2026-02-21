@@ -1,5 +1,6 @@
 
-<img src="docs/source/_static/cover-small-axisem.png" width="10%" /> &nbsp;&nbsp;&nbsp;&nbsp; 
+<img width="10%" alt="cover-small-axisem" src="https://github.com/AxiSEMunity/AxiSEM3D/blob/master/doc/sphinx/source/_static/cover-small-axisem.png" />
+
 # AxiSEM3D
 
 
