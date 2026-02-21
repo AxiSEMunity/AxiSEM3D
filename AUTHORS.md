@@ -12,7 +12,7 @@ This community is led by a group of Principal Developers who are active in devel
 - Timo Heister (Clemson University)
 - Lorraine Hwang (University of California, Davis)
 
-If you have questions about installing or using the code, please use the AxiSEM3D forum. If you have other questions about the code of a non-technical nature (i.e. about grant applications, etc.), please contact the Project Manager (Benjamin Fernando). 
+If you have questions about installing or using the code, please use the AxiSEM3D [forum](https://community.geodynamics.org/c/axisem/75). If you have other questions about the code of a non-technical nature (i.e., about grant applications, etc.), please contact the Project Manager (Benjamin Fernando). 
 
 ## Emeritus developers 
 
@@ -26,4 +26,4 @@ The following individuals were heavily involved in the development of AxiSEM3D:
 
 ## Thank yous
 
-We are also grateful to the following people: Jarrett Baker-Dunn, Timothy Craig, Will Eaton, Maureen Long, and Ceri Nunn 
+We are also grateful to the following people: Jarrett Baker-Dunn, Timothy Craig, Will Eaton, Maureen Long, and Ceri Nunn. 
