@@ -12,10 +12,10 @@
 This version merges 3 different manual sources:
 
 * Git Wiki by Kuandai Leng
-* II. AxiSEM3D - Installation Guide by 
+* II. AxiSEM3D - Installation Guide by
 Benjamin Fernando, Jonathan Wolf, Kuangdai Leng, Tarje Nissen-Meyer,
 Will Eaton, Andrew Walker, Tim Craig, Jack Muir, Ceri Nunn, Maureen D. Long,
 and Piyush P. Khopkar
-* AxiSEM3D - an introduction to using the code and its applications 
+* AxiSEM3D - an introduction to using the code and its applications
 by Benjamin Fernando, Jonathan Wolf, Kuangdai Leng, Tarje Nissen-Meyer,
 Will Eaton, Andrew Walker, Tim Craig, Jack Muir, Ceri Nunn, and Maureen D. Long
