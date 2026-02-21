@@ -9,7 +9,7 @@
 -->
 
 
-THis version merges 3 different manual sources:
+This version merges 3 different manual sources:
 
 * Git Wiki by Kuandai Leng
 * II. AxiSEM3D - Installation Guide by 
