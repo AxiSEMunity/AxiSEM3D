@@ -120,20 +120,9 @@ not sure what to do.
 
 ### Coding conventions
 
-Since AxiSEM3D is a fairly large project with lots of contributors, we
-use [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to keep the coding style consistent. A `.clang-format` files is included in the repository.
 
-
-
-
-#### Example clang-format usage
-
-To properly format your code:
-
-```{code-block} bash
-clang-format -i my/source/file.cpp
-```
-
+We use [clang-format](https://clang.llvm.org/docs/ClangFormat.html) to keep the coding style consistent. A `.clang-format` files is included in the repository and all source code can be
+automatically formatted by running
 
 ### Changelog entries
 If your new pull request creates a change that is noticeable to AxiSEM3D users,
