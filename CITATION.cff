@@ -1,0 +1,54 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: AxiSEM3D
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Kuangdai
+    family-names: Leng
+    affiliation: EarthRover Program
+    orcid: 'https://orcid.org/0000-0002-3007-1825'
+  - given-names: Benjamin
+    family-names: Fernando
+    affiliation: Johns Hopkins University
+    orcid: 'https://orcid.org/0000-0002-7321-8401'
+  - given-names: Jonathan
+    family-names: Wolf
+    affiliation: 'University of California, Berkeley'
+    orcid: 'https://orcid.org/0000-0002-5440-3791'
+  - given-names: Timo
+    family-names: Heister
+    affiliation: Clemson University
+    orcid: 'https://orcid.org/0000-0002-8137-3903'
+  - given-names: Lorraine
+    family-names: Hwang
+    affiliation: University of California, Davis
+    orcid: 'https://orcid.org/0000-0002-1021-3101'
+  - given-names: Tarje
+    family-names: Nissen-Meyer
+    affiliation: >-
+      University of Exeter/University of Oxford/EarthRover
+      Program
+    orcid: 'https://orcid.org/0000-0002-9051-1060'
+identifiers:
+  - type: doi
+    value: 10.1234/zenodo
+    description: 'This is a place holder for the first release,'
+repository-code: 'https://github.com/AxiSEMunity/AxiSEM3D'
+url: 'https://geodynamics.org/resources/axisem'
+repository: 'https://github.com/AxiSEMunity'
+abstract: >
+  AxiSEM3D is a spectral-element-based solver for
+  large-scale 3D seismic wave-propagation simulations.
+keywords:
+  - seismology
+  - wave propagation
+  - spectral element
+  - axisymmetric
+license: MIT
+version: '0.0'
+date-released: '2020-07-24'
