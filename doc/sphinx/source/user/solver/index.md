@@ -6,7 +6,7 @@ AxiSEM3D reads a set of input files from an input directory and writes output to
 * `-- input <dir>`  Input directory: default ./input
 * `-- output <dir>` Output directory: default ./output
 
-To see the options avaible run:
+To see the options available run:
 
 ```bash
 axisem3d --help

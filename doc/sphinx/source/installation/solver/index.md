@@ -4,7 +4,7 @@ The AxiSEM3D solver is built on top of several widely used numerical libraries.
 This section describes how to install dependencies and build the solver using CMake.
 
 
-<span style="color: red;"><b>*** TO DO: This section is a mashup of different documents. Instructions need to be verified and updated ot the latest install.</b> </span>
+<span style="color: red;"><b>*** TO DO: This section is a mashup of different documents. Instructions need to be verified and updated to the latest install.</b> </span>
 ---
 
 ## Dependencies

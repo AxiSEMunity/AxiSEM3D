@@ -11,7 +11,7 @@ The other options in the wavefield scanning section of *inparam.nr.yaml* allow t
 
 * *relative_amplitude_skipped* - this enables the user to limit learning to the larger events using a fraction of the biggest recorded amplitude in each respective point as a threshold 
 * *max_num_peaks* - this option has two practical applications:
-   1. it can be used in conjuntion with *relative_amplitude_skipped* to limit the memory usage of the learning algoritm
+   1. it can be used in conjunction with *relative_amplitude_skipped* to limit the memory usage of the learning algorithm
    2. it can be used as an alternative to *relative_amplitude_skipped*, limiting learning to the largest N events arriving in each respective point. This is more robust with respect to numerical errors than the *relative_amplitude_skipped* method. To use the option in this manner, set *relative_amplitude_skipped: 0.*
 * *absolute_amplitude_skipped* - this option allows the user to cut out events which are suspected to be numerical noise. This becomes crucial if *threshold_Fourier_convergence* is made very small.
 

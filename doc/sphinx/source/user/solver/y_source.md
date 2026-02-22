@@ -53,7 +53,7 @@ list_of_sources:
 
 The key that you use, e.g., `VIRGINIA_201108231751A` is arbitrary. We normally use the CMT Catalogue designator for the earthquake in question.
 
-We recommend sticking sticking to specfiying the locaiton using `latitude_longitude`, remembering that the north and east is positive and `depth` is in metres – this is important!
+We recommend sticking sticking to specifying the location using `latitude_longitude`, remembering that the north and east is positive and `depth` is in metres – this is important!
 
 The `ellipticity` correction is easy to change and makes little difference unless you need very exact arrival times.
 

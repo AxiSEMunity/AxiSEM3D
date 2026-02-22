@@ -71,4 +71,4 @@ You should bear in mind that just because a mesh is produced, it doesn't mean it
 
 ## Using your mesh 
 
-Once you've made your mesh and checked it, the next thing to do is to make sure that it's linked properly to the input files for AxiSEM3D. These are described later on, but just make sure youre consistent: file names need to match, if you have attenuation in your mesh, make sure it's also on in the solver input files, and so on. 
+Once you've made your mesh and checked it, the next thing to do is to make sure that it's linked properly to the input files for AxiSEM3D. These are described later on, but just make sure you're consistent: file names need to match, if you have attenuation in your mesh, make sure it's also on in the solver input files, and so on. 

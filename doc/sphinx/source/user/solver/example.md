@@ -1,6 +1,6 @@
 # Example
 
-For this example, we will use the files fron the AxiSEM3D repository [examples folder](https://github.com/AxiSEMunity/AxiSEM3D/tree/master/examples). 
+For this example, we will use the files from the AxiSEM3D repository [examples folder](https://github.com/AxiSEMunity/AxiSEM3D/tree/master/examples). 
 
 From the top level of your AxiSEM3D directory copy the files from `examples/01_S362ANI_EMC_global/input1D` to the folder input:
 
