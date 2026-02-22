@@ -139,7 +139,7 @@ clang-format -i my/source/file.cpp
 If your new pull request creates a change that is noticeable to AxiSEM3D users,
 please add an entry to our
 [changelog](https://github.com/AxiSEMunity/AxiSEM3D/blob/master/CHANGELOG.md). 
-Start your newline with an action verb such as added, imoplemened changed, fixed, removed, etc., explain the nature of your change,
+Start your newline with an action verb such as added, implemened, changed, fixed, removed, etc., explain the nature of your change,
 include your name and date in the file as shown (this ensures you will get credit for your work), and lastly, include the pull request number.
 
 ## Acknowledgment of contributions
