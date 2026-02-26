@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM ubuntu:questing
 
 RUN apt-get update && \
   DEBIAN_FRONTEND='noninteractive' \
@@ -16,7 +16,8 @@ RUN apt-get update && \
     libmetis-dev \
     netcdf-bin \
     libnetcdf-dev \
-    libfftw3-dev
+    libfftw3-dev \
+    libhdf5-dev
 
 
 RUN useradd \
@@ -25,19 +26,27 @@ RUN useradd \
 
 USER axisem
 
-WORKDIR /home/axisem
+WORKDIR /home/axisem/
 
-RUN mkdir AxiSEM3D; cd Axisem3D; git clone https://github.com/kuangdai/AxiSEM-3D.git AxiSEM3D;
+RUN git clone https://github.com/AxiSEMunity/AxiSEM3D.git AxiSEM3D;
 
-RUN cd axisem3D_root; mkdir build; cd build; cmake -Dcxx=mpicxx \
+RUN cd AxiSEM3D; mkdir build; cd build; cmake -B . \
     -Deigen=/usr/include/eigen3 \
     -Dboost=/usr/include/boost \
     -Dfftw=/usr/lib/x86_64-linux-gnu \
     -DFFTW_INCLUDES=/usr/include \
     -Dmetis=/usr/include \
     -Dnetcdf=/usr/include \
-    ../AxiSEM3D/SOLVER/
+    -Dhdf5=/usr \
+    ../
 
-RUN cd axisem3D_root; cd build; make;
+#/usr/lib/x86_64-linux-gnu/hdf5/serial/include
+#/usr/include/hdf5/serial/
+#/usr/lib/x86_64-linux-gnu/hdf5/serial
+#/usr/lib/x86_64-linux-gnu/
+#/usr/include/hdf5/serial/
 
-ENV PATH="/home/axisem3d_user/axisem3D_root/build:${PATH}"
+
+RUN cd AxiSEM3D; cmake --build build;
+
+ENV PATH="/home/axisem/AxiSEM3D/build:${PATH}"
