@@ -1,0 +1,124 @@
+---
+---
+
+$brand-color: #4a9eff;
+$text-color: #e0e0e0;
+$link-base-color: #6eb3ff;
+$background-color: #0a0a0a;
+
+@import "minima";
+
+body, .page-content {
+  background-color: #000;
+  color: #e0e0e0;
+}
+
+.site-header {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  background-color: #0a0a0a;
+}
+
+.site-title, .site-title:visited {
+  color: #e0e0e0;
+}
+
+.site-nav .page-link {
+  color: #b0b0b0;
+}
+
+.site-nav .page-link:hover {
+  color: #fff;
+}
+
+.site-footer {
+  border-top: 1px solid #222;
+  background-color: #0a0a0a;
+  color: #888;
+}
+
+.footer-heading,
+.footer-col-wrapper {
+  color: #b0b0b0;
+}
+
+.footer-col a {
+  color: #6eb3ff;
+}
+
+a {
+  color: #6eb3ff;
+}
+
+.hero {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: #0d0d0d;
+  border-bottom: 1px solid #222;
+}
+
+.hero-tagline {
+  font-size: 1.25rem;
+  color: #b0b0b0;
+}
+
+.hero-buttons {
+  margin-top: 2rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  margin: 0.5rem;
+  font-weight: 600;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #3b82f6;
+}
+
+.btn-outline {
+  border: 2px solid #4a9eff;
+  color: #4a9eff;
+}
+
+.btn-outline:hover {
+  background: #4a9eff;
+  color: #000;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem 0;
+}
+
+.feature-box {
+  padding: 1.5rem;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background: #0d0d0d;
+  color: #e0e0e0;
+}
+
+.site-title::before {
+  content: "";
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+  margin-right: 0.5em;
+  vertical-align: middle;
+  background-image: url("{{ '/assets/logo.png' | relative_url }}");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}

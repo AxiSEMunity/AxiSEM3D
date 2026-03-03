@@ -18,7 +18,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Axisem3D
+title:
 #email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
   Project website of AxiSEM3D - a large-scale 3D seismic wave propagation code
