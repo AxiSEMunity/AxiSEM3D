@@ -19,15 +19,13 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Axisem3D
-email: your-email@example.com
+#email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Write an awesome description for your new site here. You can edit this
-  line in _config.yml. It will appear in your document head meta (for
-  Google search results) and in your feed.xml site description.
+  Project website of AxiSEM3D - a large-scale 3D seismic wave propagation code
 baseurl: "/AxiSEM3D" # the subpath of your site, e.g. /blog
 url: "https://axisemunity.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: jekyllrb
-github_username:  jekyll
+twitter_username:
+github_username:  axisemunity
 
 # Build settings
 theme: minima
