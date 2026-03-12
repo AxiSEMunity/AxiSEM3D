@@ -23,6 +23,14 @@ Activate the environment:
 conda activate axisem3d
 ```
 
+### Mesher
+
+```bash
+pip install "numpy==1.26.4" "scipy==1.13.1" && pip install --no-deps "https://gitlab.com/Salvus/SalvusMeshLite/-/archive/master/SalvusMeshLite-master.zip"
+```
+
+### Solver
+
 Configure the build:
 
 ```bash
