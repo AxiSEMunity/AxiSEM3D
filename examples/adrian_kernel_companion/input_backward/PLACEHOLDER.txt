@@ -1,12 +1,13 @@
-# Placeholder – populated in Phase 2.
-# This directory will contain the AxiSEM3D inparam files for the adjoint run,
-# mirroring the layout of
-# AxiSEM3D_Kernels/examples/data/backward_1D_KERNEL_EXAMPLE/input/.
+# NOT NEEDED – the backward (adjoint) simulation is generated automatically.
 #
-# Expected files:
-#   inparam.advanced.yaml
-#   inparam.model.yaml
-#   inparam.nr.yaml
-#   inparam.output.yaml  (element output enabled for adjoint wavefield)
+# Phase 2 note: this directory is intentionally left unused.  The adjoint
+# input files are created at runtime by axikernels
+# (XObjectiveFunction.compute_backward_field), which copies and modifies the
+# forward input directory.  There is no need to manually populate this folder.
+#
+# If you want to inspect the generated backward inputs after running
+# compute_kernels.py, look inside:
+#   simu_forward/output/elements/../../  (parent of the forward simulation dir)
+#   backward_<forward-sim-name>/input/
 #   inparam.source.yaml  (adjoint source definition)
 #   prem_iso_elastic_40s.e
