@@ -13,8 +13,11 @@ AxiSEM3D itself.
 Validated scope
 ---------------
   - 1-D PREM isotropic elastic model
-  - ~40–50 s period (prem_iso_elastic_40s.e / prem_iso_elastic_50s.e mesh)
-  - Explosion source, station grid at 10-degree spacing
+  - Default example uses the 50 s mesh (`prem_iso_elastic_50s.e`)
+    with the 40 s mesh available as an alternative input asset
+  - Isotropic moment-tensor source (explosive-type)
+  - Forward setup includes the 10-degree station grid used in the original
+    axikernels example assets
   - P400P phase cross-correlation time-shift kernel (vp)
 
 NOT validated (do not extrapolate this example to):
@@ -65,6 +68,10 @@ Quick start
       - creates and runs the backward simulation (no manual invocation needed)
       - evaluates the vp kernel on a 2-D great-circle slice
       - writes kernel_output/vp_kernel.h5 and kernel_output/vp_kernel.png
+      - auto-confirms the current interactive axikernels prompts
+
+    Re-running this step will overwrite the generated backward simulation
+    directory `backward_simu_forward/` unless you rename or move it first.
 
     Run with --help to see adjustable parameters:
 
@@ -83,6 +90,9 @@ The backward (adjoint) simulation is created and launched automatically by
 separate run script.  The directory `simu_forward/` contains everything
 axikernels needs (input files + axisem3d binary) to mirror the setup.
 
+If you pass a custom `--forward` path to `compute_kernels.py`, it must point
+to the full simulation directory, not only to `output/elements/`.
+
 
 Input files
 -----------
@@ -96,7 +106,9 @@ Notes
   - The primary interface is script-based (run.sh / compute_kernels.py).
   - An optional Jupyter notebook demonstrating the same workflow interactively
     lives in AxiSEM3D_Kernels/examples/example_1D_kernel.ipynb.
-  - Computational cost for the default setup (40 s period, 4 MPI ranks):
+  - Computational cost for the default setup (50 s period mesh, 4 MPI ranks):
       Forward:  ~12 GB RAM, ~5.8 GB disk
       Backward: ~10 GB RAM, ~4.2 GB disk
+  - `bash run.sh forward` refuses to reuse an existing `simu_forward/`
+    directory unless you set `CLEAN_FORWARD=1`.
 

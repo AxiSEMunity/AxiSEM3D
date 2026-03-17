@@ -98,15 +98,39 @@ def parse_args():
 
 def main():
     args = parse_args()
+    forward_dir = os.path.normpath(args.forward)
 
-    # ── validate forward output path ──────────────────────────────────────────
-    fwd_elements = os.path.join(args.forward, "output", "elements")
+    # ── validate forward simulation path ──────────────────────────────────────
+    fwd_elements = os.path.join(forward_dir, "output", "elements")
+    fwd_input = os.path.join(forward_dir, "input")
+    fwd_binary = os.path.join(forward_dir, "axisem3d")
+
     if not os.path.isdir(fwd_elements):
         print(
             f"ERROR: forward element output directory not found:\n"
             f"  {fwd_elements}\n"
             f"Run the forward simulation first:\n"
             f"  bash run.sh forward",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    if not os.path.isdir(fwd_input):
+        print(
+            f"ERROR: forward simulation input directory not found:\n"
+            f"  {fwd_input}\n"
+            f"The --forward argument must point to the full simulation directory,\n"
+            f"not only to the element output directory.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    if not os.path.isfile(fwd_binary):
+        print(
+            f"ERROR: axisem3d binary not found in the forward simulation directory:\n"
+            f"  {fwd_binary}\n"
+            f"Run the forward simulation with bash run.sh forward so axikernels can\n"
+            f"reuse the copied solver binary for the backward run.",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -136,7 +160,17 @@ def main():
 
     # ── build receiver point [radius_m, lat_deg, lon_deg] ────────────────────
     receiver_lat, receiver_lon = args.receiver
-    receiver_point = [6_371_000.0, receiver_lat, receiver_lon]
+    receiver_point = [forward_sim.Domain_Radius, receiver_lat, receiver_lon]
+
+    backward_dir = os.path.join(
+        os.path.dirname(forward_dir),
+        f"backward_{os.path.basename(forward_dir)}",
+    )
+    if os.path.isdir(backward_dir):
+        print(
+            f"WARNING: {backward_dir} already exists and will be overwritten "
+            f"because compute_kernels.py auto-confirms the current axikernels prompts."
+        )
 
     # ── run backward simulation (auto-answers all prompts) ────────────────────
     print("Computing adjoint source and launching backward simulation...")
@@ -175,7 +209,7 @@ def main():
         forward_sim.source_lat,
         forward_sim.source_lon,
     ]
-    domains = [[4_000_000.0, 6_371_000.0, -np.pi, np.pi]]
+    domains = [[4_000_000.0, forward_sim.Domain_Radius, -np.pi, np.pi]]
     print(f"Building slice mesh (resolution={args.resolution})...")
     slc = mesher.SliceMesh(
         point1=source_location,

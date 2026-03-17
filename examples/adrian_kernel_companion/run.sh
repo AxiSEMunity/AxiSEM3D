@@ -10,7 +10,8 @@
 #   You do NOT need to run "bash run.sh backward" manually.
 #
 # Environment variables:
-#   NRANKS   – number of MPI ranks to use (default: 4)
+#   NRANKS         – number of MPI ranks to use (default: 4)
+#   CLEAN_FORWARD  – set to 1 to remove an existing simu_forward/ first
 #
 # Prerequisites:
 #   - axisem3d binary must be in this directory or on PATH
@@ -35,6 +36,17 @@ fi
 
 SIMU_DIR="simu_forward"
 INPUT_DIR="input_forward"
+
+if [[ -d "$SIMU_DIR/output" || -f "$SIMU_DIR/axisem3d" ]]; then
+    if [[ "${CLEAN_FORWARD:-0}" == "1" ]]; then
+        echo "Removing existing ${SIMU_DIR}/ because CLEAN_FORWARD=1"
+        rm -rf "$SIMU_DIR"
+    else
+        echo "ERROR: ${SIMU_DIR}/ already appears to contain a previous run."
+        echo "       Remove it manually, or rerun with: CLEAN_FORWARD=1 bash run.sh forward"
+        exit 1
+    fi
+fi
 
 # ── validate inputs ───────────────────────────────────────────────────────────
 if [[ ! -d "$INPUT_DIR" ]]; then
@@ -79,6 +91,17 @@ if command -v ldd &>/dev/null; then
             fi
         fi
     done < <(ldd "$AXISEM3D_BIN" 2>/dev/null)
+fi
+
+if [[ "$MPIRUN" == */* ]]; then
+    if [[ ! -x "$MPIRUN" ]]; then
+        echo "ERROR: detected MPI launcher is not executable: $MPIRUN"
+        exit 1
+    fi
+elif ! command -v "$MPIRUN" &>/dev/null; then
+    echo "ERROR: MPI launcher '$MPIRUN' was not found on PATH."
+    echo "       If your system uses a different launcher, adjust PATH or edit run.sh."
+    exit 1
 fi
 
 # ── set up simulation directory ───────────────────────────────────────────────
