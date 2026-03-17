@@ -1,0 +1,12 @@
+# Placeholder – populated in Phase 2.
+# This directory will contain the AxiSEM3D inparam files for the forward run,
+# mirroring the layout of AxiSEM3D_Kernels/examples/data/1D_KERNEL_EXAMPLE/input/.
+#
+# Expected files:
+#   inparam.advanced.yaml
+#   inparam.model.yaml
+#   inparam.nr.yaml
+#   inparam.output.yaml
+#   inparam.source.yaml
+#   prem_iso_elastic_40s.e   (or whichever mesh period is chosen)
+#   STA_10DEG_GRID.txt       (station list)

@@ -1,0 +1,12 @@
+# Placeholder – populated in Phase 2.
+# This directory will contain the AxiSEM3D inparam files for the adjoint run,
+# mirroring the layout of
+# AxiSEM3D_Kernels/examples/data/backward_1D_KERNEL_EXAMPLE/input/.
+#
+# Expected files:
+#   inparam.advanced.yaml
+#   inparam.model.yaml
+#   inparam.nr.yaml
+#   inparam.output.yaml  (element output enabled for adjoint wavefield)
+#   inparam.source.yaml  (adjoint source definition)
+#   prem_iso_elastic_40s.e
