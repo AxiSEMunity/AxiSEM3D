@@ -1,0 +1,15 @@
+# Generated simulation run directory — created by run.sh
+sim_run/
+
+# Any stale top-level output directory
+output/
+
+# Obspyfied output produced by the notebook
+obspyfied/
+obspyfied_output/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# User-provided binary (not to be committed)
+axisem3d
