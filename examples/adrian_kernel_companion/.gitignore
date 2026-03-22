@@ -1,0 +1,6 @@
+simu_forward/
+backward_simu_forward/
+kernel_output/
+*.log
+__pycache__/
+*.pyc

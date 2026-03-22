@@ -162,7 +162,7 @@ list_of_element_groups:
             # type: array of double
             # note: 1) θ-range for a spherical mesh
             #       2) s-range for a Cartesian mesh
-            horizontal_range: [0, 3.14159265358979323846]
+            horizontal_range: [0, 1.047]
             # what: vertical range
             # type: array of double
             # note: 1) r-range for a spherical mesh

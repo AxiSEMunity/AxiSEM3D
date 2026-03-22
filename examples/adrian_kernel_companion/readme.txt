@@ -28,15 +28,35 @@ NOT validated (do not extrapolate this example to):
 
 External dependency
 -------------------
+This companion example assumes that `AxiSEM3D_Kernels` has been cloned as a
+separate repository.  Clone both repos side by side so you end up with:
+
+  some_folder/
+  ├── AxiSEM3D/              ← this repository (cloned from AxiSEMunity)
+  │   └── examples/
+  │       └── adrian_kernel_companion/   ← you are here
+  └── AxiSEM3D_Kernels/      ← axikernels (cloned from Adrian-Mag)
+
+The external package used for the validated run came from:
+
+  https://github.com/Adrian-Mag/AxiSEM3D_Kernels.git
+
 Install `axikernels` before running.  A ready-made conda environment is
-provided in AxiSEM3D_Kernels/:
+provided in `AxiSEM3D_Kernels/`.
 
-    conda env create -f AxiSEM3D_Kernels/environment.yml  # creates axikernels_env
-    conda activate axikernels_env
+From this example directory the axikernels repo is then at:
 
-Or install into an existing environment:
+  ../../../AxiSEM3D_Kernels
 
-    pip install -e /path/to/AxiSEM3D_Kernels   # development install
+Installation (conda — recommended):
+
+  conda env create -f ../../../AxiSEM3D_Kernels/environment.yml
+  conda activate axikernels_env
+  pip install -e ../../../AxiSEM3D_Kernels
+
+Or with pip only (into any Python ≥ 3.9 environment):
+
+  pip install -e /path/to/AxiSEM3D_Kernels
 
 See the axikernels README for full environment requirements.
 
@@ -83,6 +103,55 @@ Quick start
         kernel_output/vp_kernel.png   – quick-look figure
 
 
+Validation status
+-----------------
+This workflow was re-run successfully against the current upstream AxiSEM3D
+build in this workspace in March 2026 using:
+
+  - `bash run.sh forward`
+  - `python compute_kernels.py`
+
+Validated revisions in that run:
+  - AxiSEM3D example checkout: `30d7ea4ff225db04979ddcb41ada9e6cf16b426b`
+  - axikernels checkout: `890084ebe547df8714213b25885810a8be417e9b`
+
+Validated default parameters in that run:
+  - forward MPI ranks: `NRANKS=8`
+  - backward MPI ranks: `--cores 8`
+  - mesh: `prem_iso_elastic_50s.e`
+  - receiver: `--receiver 0 40`
+  - phase window: `--window 425 475`
+  - time shift: `--tau 2`
+  - channel: `--channel UZ`
+  - slice resolution: `--resolution 200`
+
+The validated run:
+  - completed the forward simulation to 600.223 s
+  - generated and ran `backward_simu_forward/` automatically
+  - wrote `kernel_output/vp_kernel.h5`
+  - wrote `kernel_output/vp_kernel.png`
+
+The Python side was validated from the `axikernels_env` conda environment
+created from `AxiSEM3D_Kernels/environment.yml`.
+
+The solver binary used for validation was the locally built upstream binary
+copied from `AxiSEM3D-upstream/build/axisem3d`.  Build that binary using the
+normal AxiSEM3D build instructions before running this example.
+
+
+Figure reproduction
+-------------------
+The minimum reproducible figure shipped by this example is the quick-look
+kernel slice `kernel_output/vp_kernel.png`, generated directly by
+`compute_kernels.py`.
+
+This is intended to demonstrate the validated companion workflow end to end.
+It is not yet a full packaging of every publication-quality figure previously
+produced during the original axikernels work.  The interactive notebook in
+`AxiSEM3D_Kernels/examples/example_1D_kernel.ipynb` remains useful for more
+exploratory visualization and figure customization.
+
+
 No manual backward run required
 --------------------------------
 The backward (adjoint) simulation is created and launched automatically by
@@ -106,9 +175,30 @@ Notes
   - The primary interface is script-based (run.sh / compute_kernels.py).
   - An optional Jupyter notebook demonstrating the same workflow interactively
     lives in AxiSEM3D_Kernels/examples/example_1D_kernel.ipynb.
-  - Computational cost for the default setup (50 s period mesh, 4 MPI ranks):
+  - Computational cost for the default setup (50 s period mesh, 8 MPI ranks):
       Forward:  ~12 GB RAM, ~5.8 GB disk
       Backward: ~10 GB RAM, ~4.2 GB disk
+      Combined wavefield storage: plan for at least ~10 GB free disk
+      Runtime: wall-clock / CPU-hour estimates have not yet been benchmarked
+               for this packaged companion example and will vary with MPI
+               ranks, CPU generation, and filesystem speed.
   - `bash run.sh forward` refuses to reuse an existing `simu_forward/`
     directory unless you set `CLEAN_FORWARD=1`.
+
+
+Integration note
+----------------
+This example is deliberately packaged as a companion example, not as evidence
+that kernel computation is integrated into AxiSEM3D core.
+
+What is demonstrated here:
+  - AxiSEM3D can provide the forward and adjoint wavefields required for a
+    kernel workflow.
+  - An external package (`axikernels`) can turn those wavefields into a
+    concrete sensitivity-kernel example.
+
+What remains outside the scope of this example:
+  - General in-core kernel support in AxiSEM3D itself
+  - Broad coverage of kernel types, objectives, and model classes
+  - Full replacement of the exploratory notebook-based workflow
 

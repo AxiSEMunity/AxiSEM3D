@@ -41,34 +41,12 @@ Exit codes
 """
 
 import argparse
-import builtins
 import os
 import sys
 
 # ── set non-interactive matplotlib backend before any other import ────────────
 import matplotlib
 matplotlib.use("Agg")
-import matplotlib.pyplot as _plt  # noqa: E402
-
-
-def _patch_interactive():
-    """Suppress all interactive prompts and plt.show() calls."""
-    _real_input = builtins.input
-
-    def _auto_yes(prompt=""):
-        print(f"[compute_kernels] auto-answering 'y' to: {prompt!r}")
-        return "y"
-
-    builtins.input = _auto_yes
-
-    # Make plt.show() a no-op (axikernels calls it inside plot_on_mesh)
-    _plt.show = lambda *a, **kw: None
-
-    return _real_input
-
-
-def _restore_input(original):
-    builtins.input = original
 
 
 def parse_args():
@@ -89,8 +67,8 @@ def parse_args():
                    help="Phase window in seconds (default: 425 475)")
     p.add_argument("--channel", default="UZ",
                    help="Displacement channel (default: UZ)")
-    p.add_argument("--cores", type=int, default=4,
-                   help="MPI ranks for backward simulation (default: 4)")
+    p.add_argument("--cores", type=int, default=8,
+                   help="MPI ranks for backward simulation (default: 8)")
     p.add_argument("--resolution", type=int, default=200,
                    help="Kernel slice grid resolution (default: 200)")
     return p.parse_args()
@@ -167,12 +145,9 @@ def main():
         f"backward_{os.path.basename(forward_dir)}",
     )
     if os.path.isdir(backward_dir):
-        print(
-            f"WARNING: {backward_dir} already exists and will be overwritten "
-            f"because compute_kernels.py auto-confirms the current axikernels prompts."
-        )
+        print(f"WARNING: {backward_dir} already exists and will be overwritten.")
 
-    # ── run backward simulation (auto-answers all prompts) ────────────────────
+    # ── run backward simulation ──────────────────────────────────────────────────────────
     print("Computing adjoint source and launching backward simulation...")
     print(f"  tau         = {args.tau} s")
     print(f"  receiver    = lat={receiver_lat}, lon={receiver_lon}")
@@ -180,18 +155,14 @@ def main():
     print(f"  channel     = {args.channel}")
     print(f"  MPI ranks   = {args.cores}")
 
-    original_input = _patch_interactive()
-    try:
-        time_shift_obj = of.XObjectiveFunction(forward_sim)
-        time_shift_obj.compute_backward_field(
-            tau=args.tau,
-            receiver_point=receiver_point,
-            window=args.window,
-            channel=args.channel,
-            cores=args.cores,
-        )
-    finally:
-        _restore_input(original_input)
+    time_shift_obj = of.XObjectiveFunction(forward_sim, interactive=False)
+    time_shift_obj.compute_backward_field(
+        tau=args.tau,
+        receiver_point=receiver_point,
+        window=args.window,
+        channel=args.channel,
+        cores=args.cores,
+    )
 
     if time_shift_obj.backward_simulation is None:
         print("ERROR: backward simulation was not produced.", file=sys.stderr)

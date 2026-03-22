@@ -23,7 +23,7 @@
 set -euo pipefail
 
 # ── configuration ────────────────────────────────────────────────────────────
-NRANKS="${NRANKS:-4}"
+NRANKS="${NRANKS:-8}"
 MODE="${1:-forward}"
 
 if [[ "$MODE" != "forward" ]]; then
