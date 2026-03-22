@@ -33,27 +33,28 @@ The package lives at:
 
   https://github.com/Adrian-Mag/AxiSEM3D_Kernels.git
 
-A ready-made conda environment is provided in that repository.  If your
-checkout matches the typical layout:
+Clone the axikernels repository alongside the AxiSEM3D repository so that
+you end up with:
 
-  AxiSEM3D/
-  ├── AxiSEM3D_Kernels/
-  └── axisem3d_root/
-    └── AxiSEM3D-upstream/
+  some_folder/
+  ├── AxiSEM3D/              ← this repository (cloned from AxiSEMunity)
+  │   └── examples/
+  │       └── adrian_handlers_demo/   ← you are here
+  └── AxiSEM3D_Kernels/      ← axikernels (cloned from Adrian-Mag)
 
-then the environment file can be found at (from this directory):
+From this example directory the axikernels repo is then at:
 
-  ../../../../AxiSEM3D_Kernels/environment.yml
+  ../../../AxiSEM3D_Kernels
 
-Example installation:
+Installation (conda — recommended):
 
-  conda env create -f ../../../../AxiSEM3D_Kernels/environment.yml
+  conda env create -f ../../../AxiSEM3D_Kernels/environment.yml
   conda activate axikernels_env
-  pip install -e ../../../../AxiSEM3D_Kernels
+  pip install -e ../../../AxiSEM3D_Kernels
 
-Or into an existing environment:
+Or with pip only (into any Python ≥ 3.9 environment):
 
-  pip install -e /path/to/AxiSEM3D_Kernels   # development install
+  pip install -e /path/to/AxiSEM3D_Kernels
 
 See the axikernels README for full requirements.
 
@@ -134,6 +135,10 @@ Notes
   - bash clean.sh removes generated output (with confirmation).
   - Computational cost for the default setup (50 s mesh, 2 MPI ranks) is
     modest relative to production runs; expect a few minutes on a workstation.
+  - The axisem3d binary is linked against the MPI library from the build
+    environment.  Make sure the same conda environment (or at least its
+    mpirun) is active when running the simulation.  run.sh automatically
+    prefers $CONDA_PREFIX/bin/mpirun over the system-wide launcher.
 
 
 Integration note

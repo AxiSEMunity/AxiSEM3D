@@ -69,7 +69,7 @@ EOF
     esac
 done
 
-NRANKS="${NRANKS:-2}"
+NRANKS="${NRANKS:-12}"
 if ! [[ "${NRANKS}" =~ ^[1-9][0-9]*$ ]]; then
     echo "ERROR: NRANKS must be a positive integer (got: ${NRANKS})" >&2
     exit 1
@@ -186,7 +186,7 @@ echo "  MPI launcher     : ${MPI_RUNNER}"
 echo ""
 
 pushd "${RUN_DIR}" > /dev/null
-"${MPI_RUNNER}" -n "${NRANKS}" ./axisem3d input
+"${MPI_RUNNER}" -n "${NRANKS}" ./axisem3d --input input
 popd > /dev/null
 
 echo ""
