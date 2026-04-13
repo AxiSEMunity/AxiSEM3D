@@ -460,6 +460,7 @@ Domain::finalizeOutput() const {
   for (const std::unique_ptr<ElementOpGroupInFluid>& elgrp : mElementOpGroupInFluids) {
     elgrp->finalize();
   }
+
 }
 
 // do scanning
@@ -571,9 +572,15 @@ Domain::reportScanning() const {
 // check stability
 void
 Domain::checkStability(int tstep, double t, double dt) const {
+  std::shared_ptr<Point> nanPoint = nullptr;
   std::shared_ptr<Point> unstablePoint = nullptr;
+
   // solid
   for (const std::shared_ptr<SolidPoint>& point : mSolidPoints) {
+    if (point->hasNaN()) {
+      nanPoint = point;
+      break;
+    }
     if (!point->stable()) {
       unstablePoint = point;
       break;
@@ -581,8 +588,12 @@ Domain::checkStability(int tstep, double t, double dt) const {
   }
 
   // fluid
-  if (!unstablePoint) {
+  if (!nanPoint && !unstablePoint) {
     for (const std::shared_ptr<FluidPoint>& point : mFluidPoints) {
+      if (point->hasNaN()) {
+        nanPoint = point;
+        break;
+      }
       if (!point->stable()) {
         unstablePoint = point;
         break;
@@ -590,7 +601,26 @@ Domain::checkStability(int tstep, double t, double dt) const {
     }
   }
 
-  // abort if unstable
+  // abort on NaN
+  if (nanPoint) {
+    using namespace bstring;
+    std::stringstream ss;
+    ss << "NaN detected in displacement field, with ΔT = " << dt << " s. || ";
+    ss << "Where NaN occurred: || ";
+    const eigen::DRow2& sz = nanPoint->getCoords();
+    if (geodesy::isCartesian()) {
+      ss << "* (s, z)  =  " << range(sz(0), sz(1), '(', ')') << " || ";
+    } else {
+      const eigen::DRow2& rt = geodesy::sz2rtheta(sz, true);
+      ss << "* (r, θ)  =  " << range(rt(0), rt(1), '(', ')') << " || ";
+    }
+    ss << "When NaN occurred: || ";
+    ss << "* current time  =  " << t << " || ";
+    ss << "* current step  =  " << tstep;
+    throw std::runtime_error("Domain::checkStability || " + ss.str());
+  }
+
+  // abort on blow-up (Inf / overflow)
   if (unstablePoint) {
     using namespace bstring;
     std::stringstream ss;
