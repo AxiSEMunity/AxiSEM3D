@@ -14,7 +14,7 @@ To regenerate it:
 To run the simulation (~4 minutes on 4 cores):
    cp path/to/axisem3d .
    mpirun -np 4 ./axisem3d input/
-
+c
 Output will be written to output/ inside this folder.
 
 Use post_processing.ipynb to visualize seismograms and USArray animations.
