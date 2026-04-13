@@ -236,6 +236,7 @@ class Domain {
   void
   checkStability(int tstep, double t, double dt) const;
 
+
   private:
   ////////////////////// spectral elements //////////////////////
   // points
@@ -288,6 +289,7 @@ class Domain {
 
   ////////////////////// wavefield scanning //////////////////////
   std::unique_ptr<const WavefieldScanning> mWavefieldScanning;
+
 
   ////////////////////////////////////////
   //////////////// static ////////////////

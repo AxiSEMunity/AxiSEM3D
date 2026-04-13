@@ -81,6 +81,12 @@ class FluidPoint : public Point {
     return mFields.mDispl.allFinite();
   }
 
+  // check for NaN specifically (distinct from Inf blow-up)
+  bool
+  hasNaN() const {
+    return mFields.mDispl.hasNaN();
+  }
+
   // stiff to accel
   void
   computeStiffToAccel();
