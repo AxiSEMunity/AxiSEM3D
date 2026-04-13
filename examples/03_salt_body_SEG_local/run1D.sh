@@ -1,13 +1,50 @@
-# create simulation dir
-mkdir -p simu1D/input
+#!/usr/bin/env bash
 
-# copy input files
-cp -r input1D/* ./simu1D/input/
+if [[ "${BASH_SOURCE[0]}" != "$0" ]]; then
+	echo "Run this script instead of sourcing it." >&2
+	return 1
+fi
 
-# copy binary
-cp axisem3d ./simu1D/
+set -euo pipefail
 
-# run
-cd simu1D
-mpirun -np 4 axisem3d
-cd ..
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
+AXISEM3D_BIN="${AXISEM3D_BIN:-$REPO_DIR/build/axisem3d}"
+RUN_DIR="$SCRIPT_DIR/simu1D"
+INPUT_DIR="$RUN_DIR/input"
+OUTPUT_DIR="${OUTPUT_DIR:-$RUN_DIR/output}"
+NP="${NP:-4}"
+
+if [[ -f /etc/profile.d/lmod.sh ]]; then
+	set +u
+	source /etc/profile.d/lmod.sh
+	set -u
+fi
+
+if type module >/dev/null 2>&1; then
+	module load ohpc
+	module load gnu13/13.2.0
+	module load openmpi5/5.0.5
+	module load netcdf/4.9.2
+	module load fftw/3.3.10
+	module load metis/5.1.0
+fi
+
+if [[ ! -x "$AXISEM3D_BIN" ]]; then
+	echo "AxiSEM3D binary not found at $AXISEM3D_BIN" >&2
+	exit 1
+fi
+
+if ! command -v mpirun >/dev/null 2>&1; then
+	echo "mpirun is not available; load the MPI runtime first." >&2
+	exit 1
+fi
+
+mkdir -p "$RUN_DIR"
+rm -rf "$INPUT_DIR"
+mkdir -p "$INPUT_DIR"
+cp -r "$SCRIPT_DIR/input1D/." "$INPUT_DIR/"
+
+mpirun -np "$NP" "$AXISEM3D_BIN" \
+	--input "$INPUT_DIR" \
+	--output "$OUTPUT_DIR"
