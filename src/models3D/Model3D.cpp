@@ -14,14 +14,14 @@
 #include "vicinity.hpp"
 
 // compute spz on element
-eigen::DMatX3
+axisem3d::eigen::DMatX3
 Model3D::computeElemSPZ(const Quad& quad, bool undulated) {
   // quad nr
-  const eigen::IRowN& pointNr = quad.getPointNr();
+  const axisem3d::eigen::IRowN& pointNr = quad.getPointNr();
   // GLL coordinates
-  const eigen::DMat2N& pointSZ = quad.getPointSZ();
+  const axisem3d::eigen::DMat2N& pointSZ = quad.getPointSZ();
   // allocate
-  eigen::DMatX3 spz(pointNr.sum(), 3);
+  axisem3d::eigen::DMatX3 spz(pointNr.sum(), 3);
   // structured to flattened
   int row = 0;
   for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
@@ -30,7 +30,8 @@ Model3D::computeElemSPZ(const Quad& quad, bool undulated) {
     spz.block(row, 0, nr, 1).fill(pointSZ(0, ipnt));
     spz.block(row, 2, nr, 1).fill(pointSZ(1, ipnt));
     // linearly varying phi
-    spz.block(row, 1, nr, 1) = eigen::DColX::LinSpaced(nr, 0, 2. * numerical::dPi / nr * (nr - 1));
+    spz.block(row, 1, nr, 1) =
+        axisem3d::eigen::DColX::LinSpaced(nr, 0, 2. * numerical::dPi / nr * (nr - 1));
     row += nr;
   }
 
@@ -39,7 +40,7 @@ Model3D::computeElemSPZ(const Quad& quad, bool undulated) {
     return spz;
   }
   // get undulation from quad
-  eigen::arN_DColX und = quad.getUndulation();
+  axisem3d::eigen::arN_DColX und = quad.getUndulation();
   // structured to flattened
   row = 0;
   for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
@@ -67,16 +68,16 @@ Model3D::computeElemSPZ(const Quad& quad, bool undulated) {
 }
 
 // compute spz on edge
-eigen::DMatX3
+axisem3d::eigen::DMatX3
 Model3D::computeEdgeSPZ(const Quad& quad, int edge) {
   // edge points
   const std::vector<int>& ipnts = vicinity::constants::gEdgeIPnt[edge];
   // quad nr
-  const eigen::IRowN& pointNr = quad.getPointNr();
+  const axisem3d::eigen::IRowN& pointNr = quad.getPointNr();
   // GLL coordinates
-  const eigen::DMat2N& pointSZ = quad.getPointSZ();
+  const axisem3d::eigen::DMat2N& pointSZ = quad.getPointSZ();
   // allocate
-  eigen::DMatX3 spz(pointNr(ipnts).sum(), 3);
+  axisem3d::eigen::DMatX3 spz(pointNr(ipnts).sum(), 3);
   // structured to flattened
   int row = 0;
   for (int ipnt : ipnts) {
@@ -85,7 +86,8 @@ Model3D::computeEdgeSPZ(const Quad& quad, int edge) {
     spz.block(row, 0, nr, 1).fill(pointSZ(0, ipnt));
     spz.block(row, 2, nr, 1).fill(pointSZ(1, ipnt));
     // linearly varying phi
-    spz.block(row, 1, nr, 1) = eigen::DColX::LinSpaced(nr, 0, 2. * numerical::dPi / nr * (nr - 1));
+    spz.block(row, 1, nr, 1) =
+        axisem3d::eigen::DColX::LinSpaced(nr, 0, 2. * numerical::dPi / nr * (nr - 1));
     row += nr;
   }
   return spz;

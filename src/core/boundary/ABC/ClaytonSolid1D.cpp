@@ -17,8 +17,8 @@
 void
 ClaytonSolid1D::apply() const {
   // get fields
-  const eigen::CMatX3& veloc = mSolidPoint->getFields().mVeloc;
-  eigen::CMatX3& stiff = mSolidPoint->getFields().mStiff;
+  const axisem3d::eigen::CMatX3& veloc = mSolidPoint->getFields().mVeloc;
+  axisem3d::eigen::CMatX3& stiff = mSolidPoint->getFields().mStiff;
 
   // s, z
   stiff.col(0) -= (mRSA_CosT2_p_RPA_SinT2 * veloc.col(0) + mRPA_m_RSA_x_CosT_SinT * veloc.col(2));

@@ -15,7 +15,7 @@
 class MappingSemiSpherical : public Mapping {
   public:
   // constructor
-  MappingSemiSpherical(const eigen::DMat24& nodalSZ) : Mapping(nodalSZ) {
+  MappingSemiSpherical(const axisem3d::eigen::DMat24& nodalSZ) : Mapping(nodalSZ) {
     // find curved outer
     const auto& r = nodalSZ.colwise().norm();
     double distTol = mMinEdgeLength * 1e-3;
@@ -34,8 +34,8 @@ class MappingSemiSpherical : public Mapping {
   }
 
   // forward mapping: (ξ,η) -> (s,z)
-  eigen::DCol2
-  mapping(const eigen::DCol2& xieta) const {
+  axisem3d::eigen::DCol2
+  mapping(const axisem3d::eigen::DCol2& xieta) const {
     // compute coords rotated by Q2
     double s0, z0, s1, z1, r2, t2, t3, xi, eta;
     computeCoordsQ2(xieta, s0, z0, s1, z1, r2, t2, t3, xi, eta);
@@ -48,7 +48,7 @@ class MappingSemiSpherical : public Mapping {
     double r2p = (1. + eta) * r2 * .5;
 
     // compute in new system
-    eigen::DCol2 sz;
+    axisem3d::eigen::DCol2 sz;
     sz(0) = etam * s01 + r2p * sin(t32);
     sz(1) = etam * z01 + r2p * cos(t32);
 
@@ -57,8 +57,8 @@ class MappingSemiSpherical : public Mapping {
   }
 
   // Jacobian: ∂(s,z) / ∂(ξ,η)
-  eigen::DMat22
-  jacobian(const eigen::DCol2& xieta) const {
+  axisem3d::eigen::DMat22
+  jacobian(const axisem3d::eigen::DCol2& xieta) const {
     // compute coords rotated by Q2
     double s0, z0, s1, z1, r2, t2, t3, xi, eta;
     computeCoordsQ2(xieta, s0, z0, s1, z1, r2, t2, t3, xi, eta);
@@ -77,21 +77,21 @@ class MappingSemiSpherical : public Mapping {
     double r2p_eta = r2 * .5;
 
     // compute in new system
-    eigen::DMat22 J;
+    axisem3d::eigen::DMat22 J;
     J(0, 0) = etam * s01_xi + r2p * cos(t32) * t32_xi;
     J(1, 0) = etam * z01_xi - r2p * sin(t32) * t32_xi;
     J(0, 1) = etam_eta * s01 + r2p_eta * sin(t32);
     J(1, 1) = etam_eta * z01 + r2p_eta * cos(t32);
 
     // rotate back
-    const eigen::DMat22& Q2 = sOrthogQ2[mCurvedOuter];
+    const axisem3d::eigen::DMat22& Q2 = sOrthogQ2[mCurvedOuter];
     return Q2.transpose() * J * Q2;
   }
 
   private:
   // compute coords rotated by Q2
   void
-  computeCoordsQ2(const eigen::DCol2& xieta,
+  computeCoordsQ2(const axisem3d::eigen::DCol2& xieta,
       double& s0,
       double& z0,
       double& s1,
@@ -102,8 +102,8 @@ class MappingSemiSpherical : public Mapping {
       double& xi,
       double& eta) const {
     // rotate CS such that mCurvedOuter lies on edge 2
-    static eigen::DMat24 szQ2, rtQ2;
-    static eigen::DCol2 xietaQ2;
+    static axisem3d::eigen::DMat24 szQ2, rtQ2;
+    static axisem3d::eigen::DCol2 xietaQ2;
     rotateQ2(xieta, szQ2, rtQ2, xietaQ2);
 
     // the coords are not permutated, so edge 2 should be

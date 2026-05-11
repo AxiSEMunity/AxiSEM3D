@@ -45,8 +45,8 @@ ClaytonSolid3D::checkCompatibility() {
 void
 ClaytonSolid3D::apply() const {
   // get fields
-  const eigen::CMatX3& veloc = mSolidPoint->getFields().mVeloc;
-  eigen::CMatX3& stiff = mSolidPoint->getFields().mStiff;
+  const axisem3d::eigen::CMatX3& veloc = mSolidPoint->getFields().mVeloc;
+  axisem3d::eigen::CMatX3& stiff = mSolidPoint->getFields().mStiff;
 
   // constants
   int nr = (int)mRSA.rows();

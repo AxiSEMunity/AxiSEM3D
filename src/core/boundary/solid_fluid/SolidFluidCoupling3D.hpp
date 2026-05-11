@@ -19,9 +19,9 @@ class SolidFluidCoupling3D : public SolidFluidCoupling {
   // constructor
   SolidFluidCoupling3D(const std::shared_ptr<SolidPoint>& sp,
       const std::shared_ptr<FluidPoint>& fp,
-      const eigen::DMatX3& n_unassmb,
-      const eigen::DMatX3& n_assmb,
-      const eigen::DColX& massFluid);
+      const axisem3d::eigen::DMatX3& n_unassmb,
+      const axisem3d::eigen::DMatX3& n_assmb,
+      const axisem3d::eigen::DColX& massFluid);
 
   private:
   // check compatibility
@@ -31,28 +31,30 @@ class SolidFluidCoupling3D : public SolidFluidCoupling {
   public:
   // solid => fluid
   void
-  coupleSolidToFluid(const eigen::CMatX3& solidDispl, eigen::CColX& fluidStiff) const;
+  coupleSolidToFluid(
+      const axisem3d::eigen::CMatX3& solidDispl, axisem3d::eigen::CColX& fluidStiff) const;
 
   // fluid => solid
   void
-  coupleFluidToSolid(const eigen::CColX& fluidStiff, eigen::CMatX3& solidStiff) const;
+  coupleFluidToSolid(
+      const axisem3d::eigen::CColX& fluidStiff, axisem3d::eigen::CMatX3& solidStiff) const;
 
   private:
   // These two normal vectors enable isochronous MPI communication for solid
   // and fluid domains. Though it is bad practice to mix MPI and physics,
   // but this trick can lead to significant performance boost.
-  const eigen::RMatX3 mNormal_UnassembledMPI;
-  const eigen::RMatX3 mNormal_AssembledMPI_InvMassFluid;
+  const axisem3d::eigen::RMatX3 mNormal_UnassembledMPI;
+  const axisem3d::eigen::RMatX3 mNormal_AssembledMPI_InvMassFluid;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
   ////////////////////////////////////////
 
   // workspace
-  inline static eigen::RMatX3 sSolidR = eigen::RMatX3(0, 3);
-  inline static eigen::CMatX3 sSolidC = eigen::CMatX3(0, 3);
-  inline static eigen::RColX sFluidR = eigen::RColX(0);
-  inline static eigen::CColX sFluidC = eigen::CColX(0);
+  inline static axisem3d::eigen::RMatX3 sSolidR = axisem3d::eigen::RMatX3(0, 3);
+  inline static axisem3d::eigen::CMatX3 sSolidC = axisem3d::eigen::CMatX3(0, 3);
+  inline static axisem3d::eigen::RColX sFluidR = axisem3d::eigen::RColX(0);
+  inline static axisem3d::eigen::CColX sFluidC = axisem3d::eigen::CColX(0);
 };
 
 #endif /* SolidFluidCoupling3D_hpp */

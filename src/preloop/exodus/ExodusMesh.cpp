@@ -119,14 +119,14 @@ ExodusMesh::verbose() const {
   ss << boxSubTitle(0, "Mesh geometry");
   ss << boxEquals(2, 20, "# elements", getNumQuads());
   ss << boxEquals(2, 20, "# nodes", getNumNodes());
-  const eigen::DMatX2_RM& nodalCoords = mySuperOnly().mNodalCoords;
+  const axisem3d::eigen::DMatX2_RM& nodalCoords = mySuperOnly().mNodalCoords;
   if (isCartesian()) {
     const std::string& rangeS = range(nodalCoords.col(0).minCoeff(), nodalCoords.col(0).maxCoeff());
     const std::string& rangeZ = range(nodalCoords.col(1).minCoeff(), nodalCoords.col(1).maxCoeff());
     ss << boxEquals(2, 20, "range of s-axis", rangeS);
     ss << boxEquals(2, 20, "range of z-axis", rangeZ);
   } else {
-    const eigen::DMatX2_RM& rt = geodesy::sz2rtheta(nodalCoords, true);
+    const axisem3d::eigen::DMatX2_RM& rt = geodesy::sz2rtheta(nodalCoords, true);
     const std::string& rangeR = range(rt.col(0).minCoeff(), rt.col(0).maxCoeff());
     const std::string& rangeT = range(rt.col(1).minCoeff(), rt.col(1).maxCoeff());
     ss << boxEquals(2, 20, "range of r-axis", rangeR);
@@ -140,7 +140,7 @@ ExodusMesh::verbose() const {
 
   // element geometry
   ss << boxSubTitle(0, "Element geometry");
-  const eigen::IColX& geometryType = mySuperOnly().mGeometryType;
+  const axisem3d::eigen::IColX& geometryType = mySuperOnly().mGeometryType;
   std::map<std::string, int> geomTypeMap = {
       {"spherical", geometryType.cwiseEqual(0).cast<int>().sum()},
       {"linear", geometryType.cwiseEqual(1).cast<int>().sum()},
@@ -149,7 +149,7 @@ ExodusMesh::verbose() const {
 
   // solid-fluid
   ss << boxSubTitle(0, "Element medium");
-  const eigen::IColX& isElementFluid = mySuperOnly().mIsElementFluid;
+  const axisem3d::eigen::IColX& isElementFluid = mySuperOnly().mIsElementFluid;
   std::map<std::string, int> solidFluidMap = {
       {"solid", getNumQuads() - isElementFluid.sum()}, {"fluid", isElementFluid.sum()}};
   ss << boxEquals(2, 20, solidFluidMap, ":");
@@ -190,7 +190,7 @@ void
 ExodusMesh::readBcastGlobal(const NetCDF_Reader& reader, double& memSup, double& memAll) {
   // read
   std::vector<std::string> glbVarNames, glbRecords;
-  eigen::DRowX glbVarValues;
+  axisem3d::eigen::DRowX glbVarValues;
   if (mpi::root()) {
     reader.readString("name_glo_var", glbVarNames);
     reader.readString("info_records", glbRecords);
@@ -261,7 +261,7 @@ ExodusMesh::readBcastCoordinates(const NetCDF_Reader& reader, double& memSup, do
     // read
     if (mpi::root()) {
       // read
-      eigen::DColX x, y;
+      axisem3d::eigen::DColX x, y;
       reader.readMatrix("coordx", x);
       reader.readMatrix("coordy", y);
       // cast to matrix
@@ -292,7 +292,7 @@ ExodusMesh::readBcastSideSets(const NetCDF_Reader& reader, double& memSup, doubl
   // values
   for (int iss = 0; iss < ssNames.size(); iss++) {
     // read
-    eigen::IColX elems, sides;
+    axisem3d::eigen::IColX elems, sides;
     if (mpi::root()) {
       const std::string& istr = bstring::toString(iss + 1);
       // elem
@@ -361,7 +361,7 @@ ExodusMesh::readBcastElemental(const NetCDF_Reader& reader, double& memSup, doub
             << (int)(std::find(evNames.begin(), evNames.end(), "element_type") - evNames.begin() +
                    1)
             << "eb1";
-      eigen::DRowX dbuffer;
+      axisem3d::eigen::DRowX dbuffer;
       reader.readMatrix(exKey.str(), dbuffer);
       mySuperOnly().mGeometryType = dbuffer.array().round().cast<int>();
 
@@ -428,7 +428,7 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
   double distTol = mGlobalVariables.at("dist_tolerance");
 
   // values
-  eigen::DMatXX rvValues;
+  axisem3d::eigen::DMatXX rvValues;
   if (mpi::root()) {
     //////////////////////// depth profile ////////////////////////
     // coords of axial points
@@ -459,12 +459,12 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
     }
 
     //////////////////////// depth values ////////////////////////
-    rvValues = eigen::DMatXX::Zero(coords.size(), rvNames.size());
+    rvValues = axisem3d::eigen::DMatXX::Zero(coords.size(), rvNames.size());
     for (int iname = 0; iname < rvNames.size(); iname++) {
       const std::string& rvName = rvNames[iname];
       if (mElementNodesStorage) {
         // storage = element_nodes
-        std::array<eigen::DRowX, 4> buf;
+        std::array<axisem3d::eigen::DRowX, 4> buf;
         reader.readMatrix(evNameMap.at(rvName + "_0"), buf[0]);
         reader.readMatrix(evNameMap.at(rvName + "_1"), buf[1]);
         reader.readMatrix(evNameMap.at(rvName + "_2"), buf[2]);
@@ -474,7 +474,7 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
         }
       } else {
         // storage = elements
-        eigen::DColX buf;
+        axisem3d::eigen::DColX buf;
         reader.readMatrix(evNameMap.at(rvName), buf);
         for (int idep = 0; idep < coords.size(); idep++) {
           rvValues(idep, iname) = buf(quad_nodes[idep].first);
@@ -484,7 +484,7 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
 
     //////////////////////// discontinuities ////////////////////////
     // read
-    eigen::DColX allDiscs;
+    axisem3d::eigen::DColX allDiscs;
     reader.readMatrix("discontinuities", allDiscs);
 
     // remove those out of model range
@@ -495,7 +495,7 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
         myDiscs.push_back(allDiscs(idisc));
       }
     }
-    mDiscontinuities = Eigen::Map<eigen::DColX>(myDiscs.data(), myDiscs.size());
+    mDiscontinuities = Eigen::Map<axisem3d::eigen::DColX>(myDiscs.data(), myDiscs.size());
 
     // verify discontinuities
     int disc_found = 0;
@@ -538,10 +538,10 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
   // memory infor
   timer::gPreloopTimer.message(
       eigen_tools::memoryInfo(mDiscontinuities, "discontinuities", memAll));
-  timer::gPreloopTimer.message(
-      eigen_tools::memoryInfo(Eigen::Map<eigen::DColX>(mRadialCoords.data(), mRadialCoords.size()),
-          "anchoring radii",
-          memAll));
+  timer::gPreloopTimer.message(eigen_tools::memoryInfo(
+      Eigen::Map<axisem3d::eigen::DColX>(mRadialCoords.data(), mRadialCoords.size()),
+      "anchoring radii",
+      memAll));
 
   // cast to map
   for (int irv = 0; irv < rvNames.size(); irv++) {
@@ -560,7 +560,7 @@ ExodusMesh::readBcastRadial(const NetCDF_Reader& reader, double& memSup, double&
     mpi::enterSuper();
     if (mpi::super()) {
       // cannot use const reference here
-      eigen::IMatX4_RM connect = mySuperOnly().mConnectivity.row(iquad);
+      axisem3d::eigen::IMatX4_RM connect = mySuperOnly().mConnectivity.row(iquad);
       for (int ivt = 0; ivt < 4; ivt++) {
         mySuperOnly().mConnectivity(iquad, ivt) = connect(Mapping::cycle4(ivt + axialSide - 3));
       }
@@ -584,7 +584,7 @@ ExodusMesh::readEllipticity(const NetCDF_Reader& reader, double& memSup, double&
       reader.readMatrix("ellipticity", mEllipticityCurve);
     } else {
       // constant 1 between [0, 1]
-      mEllipticityCurve = eigen::DMatXX_RM::Ones(2, 2);
+      mEllipticityCurve = axisem3d::eigen::DMatXX_RM::Ones(2, 2);
       mEllipticityCurve(0, 0) = 0.;
     }
     // to absolute
@@ -604,13 +604,13 @@ ExodusMesh::formNrAtNodes(const NrField& nrField, bool boundByInplane, bool useL
   if (mpi::rank() == mpi::nproc() - 1) {
     nNodeOnMe += getNumNodes() % mpi::nproc();
   }
-  const eigen::IColX& idR = eigen::IColX::LinSpaced(
+  const axisem3d::eigen::IColX& idR = axisem3d::eigen::IColX::LinSpaced(
       nNodeOnMe, mpi::rank() * nNodePP, mpi::rank() * nNodePP + nNodeOnMe - 1);
 
   // compute Nr on ranks
   timer::gPreloopTimer.begin("Computing Nr on ranks");
-  const eigen::DMatX2_RM& crdMe = mySuperOnly().mNodalCoords(idR, Eigen::all);
-  eigen::IColX nrMe = nrField.getNrAtPoints(crdMe);
+  const axisem3d::eigen::DMatX2_RM& crdMe = mySuperOnly().mNodalCoords(idR, Eigen::all);
+  axisem3d::eigen::IColX nrMe = nrField.getNrAtPoints(crdMe);
   // check Nr >= 1
   Eigen::Index loc = -1;
   int minNr = nrMe.minCoeff(&loc);
@@ -644,13 +644,13 @@ ExodusMesh::formNrAtNodes(const NrField& nrField, bool boundByInplane, bool useL
       double aveGLLSpacing = 0.;
       int inodeG = inode + mpi::rank() * nNodePP;
       for (int iquad : refQuads[inodeG]) {
-        const eigen::DRow2& sz0 =
+        const axisem3d::eigen::DRow2& sz0 =
             mySuperOnly().mNodalCoords.row(mySuperOnly().mConnectivity(iquad, 0));
-        const eigen::DRow2& sz1 =
+        const axisem3d::eigen::DRow2& sz1 =
             mySuperOnly().mNodalCoords.row(mySuperOnly().mConnectivity(iquad, 1));
-        const eigen::DRow2& sz2 =
+        const axisem3d::eigen::DRow2& sz2 =
             mySuperOnly().mNodalCoords.row(mySuperOnly().mConnectivity(iquad, 2));
-        const eigen::DRow2& sz3 =
+        const axisem3d::eigen::DRow2& sz3 =
             mySuperOnly().mNodalCoords.row(mySuperOnly().mConnectivity(iquad, 3));
         aveGLLSpacing += (sz0 - sz1).norm();
         aveGLLSpacing += (sz1 - sz2).norm();
@@ -688,7 +688,7 @@ ExodusMesh::formNrAtNodes(const NrField& nrField, bool boundByInplane, bool useL
   // assemble Nr on ranks
   timer::gPreloopTimer.begin("Assembling Nr on ranks");
   // allocate
-  mySuperOnly().mNodalNr = eigen::IColX::Zero(getNumNodes());
+  mySuperOnly().mNodalNr = axisem3d::eigen::IColX::Zero(getNumNodes());
   // copy to whole
   mySuperOnly().mNodalNr(idR, Eigen::all) = nrMe;
   // assemble by summation
@@ -704,7 +704,7 @@ std::string
 ExodusMesh::verboseNr(bool boundByInplane, bool useLuckyNumbers) const {
   std::stringstream ss;
   if (mpi::root()) {
-    const eigen::IColX& nodalNr = mySuperOnly().mNodalNr;
+    const axisem3d::eigen::IColX& nodalNr = mySuperOnly().mNodalNr;
     ss << bstring::boxTitle("Computed Nr on Mesh");
     ss << bstring::boxEquals(0, 6, "min Nr", nodalNr.minCoeff());
     ss << bstring::boxEquals(0, 6, "max Nr", nodalNr.maxCoeff());
@@ -784,7 +784,7 @@ ExodusMesh::boundaryInfoABC(const std::string& boundaryKey, double& outer, doubl
       if (geodesy::isCartesian()) {
         outer = mySuperOnly().mNodalCoords.col(0).maxCoeff();
       } else {
-        const eigen::DMatX2_RM& rt = geodesy::sz2rtheta(mySuperOnly().mNodalCoords, true);
+        const axisem3d::eigen::DMatX2_RM& rt = geodesy::sz2rtheta(mySuperOnly().mNodalCoords, true);
         outer = rt.col(1).maxCoeff();
       }
     }

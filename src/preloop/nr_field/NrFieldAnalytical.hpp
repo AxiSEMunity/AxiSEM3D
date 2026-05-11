@@ -21,8 +21,8 @@ class NrFieldAnalytical : public NrField {
   NrFieldAnalytical();
 
   // get nr by (s, z)
-  eigen::IColX
-  getNrAtPoints(const eigen::DMatX2_RM& sz) const;
+  axisem3d::eigen::IColX
+  getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const;
 
   // verbose
   std::string

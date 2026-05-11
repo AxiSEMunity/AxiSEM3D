@@ -15,7 +15,7 @@
 #include "eigen.hpp"
 #include "numerical.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   using Eigen::Dynamic;
   using Eigen::RowMajor;
   using numerical::Real;
@@ -75,6 +75,6 @@ namespace eigen {
   typedef Eigen::Matrix<ComplexD, Dynamic, Dynamic, RowMajor> ZMatXX_RM;
   typedef Eigen::Matrix<ComplexD, Dynamic, 1> ZColX;
   typedef Eigen::Matrix<ComplexD, 1, Dynamic> ZRowX;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 #endif /* eigen_generic_hpp */

@@ -14,14 +14,15 @@
 
 // get undulation on points
 bool
-Ellipticity::getUndulation(const eigen::DMatX3& spz, eigen::DColX& undulation) const {
+Ellipticity::getUndulation(
+    const axisem3d::eigen::DMatX3& spz, axisem3d::eigen::DColX& undulation) const {
   if (geodesy::isCartesian() || geodesy::getOuterFlattening() < numerical::dEpsilon) {
     return false;
   }
   // theta, phi, r
-  const eigen::DMatX3& llr =
+  const axisem3d::eigen::DMatX3& llr =
       coordsFromMeshToModel(spz, false, false, false, false, false, false, mModelName);
-  const eigen::DMatX3& tpr = geodesy::llr2tpr(llr, false);
+  const axisem3d::eigen::DMatX3& tpr = geodesy::llr2tpr(llr, false);
   // flattening
   typedef Eigen::Array<double, Eigen::Dynamic, 1> DColX_Array;
   const DColX_Array& r = tpr.col(2);

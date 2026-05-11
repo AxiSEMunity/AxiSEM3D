@@ -34,12 +34,12 @@ template <class PointSF> class Sponge {
   public:
   // 1D constructor
   Sponge(const std::shared_ptr<PointSF>& point, double gamma) :
-      mPoint(point), mGamma((eigen::RColX(1) << gamma).finished()) {
+      mPoint(point), mGamma((axisem3d::eigen::RColX(1) << gamma).finished()) {
     // nothing
   }
 
   // 3D constructor
-  Sponge(const std::shared_ptr<PointSF>& point, const eigen::DColX& gamma) :
+  Sponge(const std::shared_ptr<PointSF>& point, const axisem3d::eigen::DColX& gamma) :
       mPoint(point), mGamma(gamma.cast<numerical::Real>()) {
     // check size
     int nr = (int)gamma.rows();
@@ -98,7 +98,7 @@ template <class PointSF> class Sponge {
   const std::shared_ptr<PointSF> mPoint;
 
   // gamma
-  const eigen::RColX mGamma;
+  const axisem3d::eigen::RColX mGamma;
 
   //////////////////// static ////////////////////
   // 3D workspace

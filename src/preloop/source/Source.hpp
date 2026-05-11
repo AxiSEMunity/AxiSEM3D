@@ -19,10 +19,10 @@ class Mechanism;
 #include <memory>
 
 #include "eigen.hpp"
-namespace eigen {
+namespace axisem3d::eigen {
   typedef Eigen::Matrix<double, 1, 3> DRow3;
   typedef Eigen::Matrix<double, 3, 3> DMat33;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 class Source {
   public:
@@ -34,7 +34,7 @@ class Source {
       bool useDepth,
       bool depthSolid,
       bool undulatedGeometry,
-      const eigen::DRow3& crdIn) :
+      const axisem3d::eigen::DRow3& crdIn) :
       mName(name), mAxial(axial), mSourceCentered(sourceCentered), mEllipticity(ellipticity),
       mUseDepth(useDepth), mDepthSolid(depthSolid), mUndulatedGeometry(undulatedGeometry),
       mCrdIn(crdIn) {
@@ -48,9 +48,9 @@ class Source {
 
   public:
   // compute spz
-  static eigen::DRow3
+  static axisem3d::eigen::DRow3
   computeSPZ(const SE_Model& sem,
-      const eigen::DRow3& crdIn,
+      const axisem3d::eigen::DRow3& crdIn,
       bool sourceCentered,
       bool xy,
       bool ellipticity,
@@ -62,8 +62,8 @@ class Source {
 
   private:
   // compute rotation matrix Q from input to (z, s, phi)
-  const eigen::DMat33&
-  computeQzsp(const eigen::DRow3& spz, bool ellipticity) const;
+  const axisem3d::eigen::DMat33&
+  computeQzsp(const axisem3d::eigen::DRow3& spz, bool ellipticity) const;
 
   // verbose
   std::string
@@ -83,7 +83,7 @@ class Source {
   const bool mUseDepth;
   const bool mDepthSolid;
   const bool mUndulatedGeometry;
-  const eigen::DRow3 mCrdIn;
+  const axisem3d::eigen::DRow3 mCrdIn;
 };
 
 #endif /* Source_hpp */

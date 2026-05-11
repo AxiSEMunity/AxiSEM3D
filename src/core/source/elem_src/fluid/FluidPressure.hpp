@@ -20,7 +20,7 @@ class FluidPressure : public FluidSource {
   // constructor
   FluidPressure(std::unique_ptr<STF>& stf,
       const std::shared_ptr<FluidElement>& element,
-      const eigen::CMatXN& pattern);
+      const axisem3d::eigen::CMatXN& pattern);
 
   // apply source at a time step
   void
@@ -28,14 +28,14 @@ class FluidPressure : public FluidSource {
 
   private:
   // source pattern
-  const eigen::CMatXN mPattern;
+  const axisem3d::eigen::CMatXN mPattern;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
   ////////////////////////////////////////
 
   // workspace
-  inline static eigen::CMatXN sPattern = eigen::CMatXN(0, spectral::nPEM);
+  inline static axisem3d::eigen::CMatXN sPattern = axisem3d::eigen::CMatXN(0, spectral::nPEM);
 };
 
 #endif /* FluidPressure_hpp */

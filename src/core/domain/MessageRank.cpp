@@ -33,8 +33,8 @@ MessageRank::allocateBuffer() {
       sizeComm += fp->sizeComm();
     }
   }
-  mBufferSend = eigen::CColX::Zero(sizeComm);
-  mBufferRecv = eigen::CColX::Zero(sizeComm);
+  mBufferSend = axisem3d::eigen::CColX::Zero(sizeComm);
+  mBufferRecv = axisem3d::eigen::CColX::Zero(sizeComm);
 }
 
 // gather from points

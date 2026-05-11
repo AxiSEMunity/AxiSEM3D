@@ -22,27 +22,27 @@ class CoordTransform {
 
   // (s,phi,z) -> (R,T,Z)
   virtual void
-  transformSPZ_RTZ3(eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const = 0;
+  transformSPZ_RTZ3(axisem3d::eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const = 0;
 
   // (R,T,Z) -> (s,phi,z)
   virtual void
-  transformRTZ_SPZ3(eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const = 0;
+  transformRTZ_SPZ3(axisem3d::eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const = 0;
 
   // (s,phi,z) -> (R,T,Z) for nabla
   virtual void
-  transformSPZ_RTZ9(eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const = 0;
+  transformSPZ_RTZ9(axisem3d::eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const = 0;
 
   // (R,T,Z) -> (s,phi,z) for nabla
   virtual void
-  transformRTZ_SPZ9(eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const = 0;
+  transformRTZ_SPZ9(axisem3d::eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const = 0;
 
   // (s,phi,z) -> (R,T,Z) for Voigt
   virtual void
-  transformSPZ_RTZ6(eigen::vec_ar6_CMatPP_RM& eij, int nu_1) const = 0;
+  transformSPZ_RTZ6(axisem3d::eigen::vec_ar6_CMatPP_RM& eij, int nu_1) const = 0;
 
   // (R,T,Z) -> (s,phi,z) for Voigt
   virtual void
-  transformRTZ_SPZ6(eigen::vec_ar6_CMatPP_RM& sij, int nu_1) const = 0;
+  transformRTZ_SPZ6(axisem3d::eigen::vec_ar6_CMatPP_RM& sij, int nu_1) const = 0;
 };
 
 #endif /* CoordTransform_hpp */

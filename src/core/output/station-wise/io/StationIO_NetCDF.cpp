@@ -98,8 +98,9 @@ StationIO_NetCDF::finalize() {
 
 // dump to file
 void
-StationIO_NetCDF::dumpToFile(
-    const eigen::DColX& bufferTime, const eigen::RTensor3& bufferFields, int bufferLine) {
+StationIO_NetCDF::dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+    const axisem3d::eigen::RTensor3& bufferFields,
+    int bufferLine) {
   // no station
   if (!mNcFile) {
     return;
@@ -120,10 +121,10 @@ StationIO_NetCDF::dumpToFile(
   } else {
     // must truncate by copy because time is the fastest varying
     // dimension; occuring only at the end of the simulation
-    eigen::IArray3 loc = {0, 0, 0};
-    eigen::IArray3 len = {nst, nch, bufferLine};
+    axisem3d::eigen::IArray3 loc = {0, 0, 0};
+    axisem3d::eigen::IArray3 len = {nst, nch, bufferLine};
     Eigen::internal::set_is_malloc_allowed(true);
-    eigen::RTensor3 timeTruncated = bufferFields.slice(loc, len);
+    axisem3d::eigen::RTensor3 timeTruncated = bufferFields.slice(loc, len);
     Eigen::internal::set_is_malloc_allowed(false);
     mNcFile->writeVariable(
         mVarID_Data, "data_wave", timeTruncated, {0, 0, mFileLineTime}, {nst, nch, bufferLine});

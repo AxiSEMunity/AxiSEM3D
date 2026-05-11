@@ -21,8 +21,8 @@ class NrFieldPointwise : public NrField {
   NrFieldPointwise(const std::string& fname, double factor, double distTolExact);
 
   // get nr by (s, z)
-  eigen::IColX
-  getNrAtPoints(const eigen::DMatX2_RM& sz) const;
+  axisem3d::eigen::IColX
+  getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const;
 
   // verbose
   std::string

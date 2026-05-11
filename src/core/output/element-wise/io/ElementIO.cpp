@@ -20,8 +20,8 @@ ElementIO::initialize(const std::string& groupName,
     const std::vector<std::string>& channels,
     int npnts,
     const std::vector<int>& naGrid,
-    const eigen::IMatX4_RM& elemNaInfo,
-    const eigen::DMatXX_RM& elemCoords) {
+    const axisem3d::eigen::IMatX4_RM& elemNaInfo,
+    const axisem3d::eigen::DMatXX_RM& elemCoords) {
   // mpi globals
   int nelem = (int)elemNaInfo.rows();
   std::vector<int> nelemg;

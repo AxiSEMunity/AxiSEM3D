@@ -25,13 +25,13 @@
 #include "eigen_generic.hpp"
 #include "eigen_point.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   typedef Eigen::Matrix<numerical::ComplexR, 1, spectral::nPEM> CRowN;
 }
 
 template <class Element, int ndim> class ElementInteriorWJ : public Element {
   // matrix
-  typedef std::vector<std::array<eigen::CMatPP_RM, ndim>> vec_arD_CMatPP_RM;
+  typedef std::vector<std::array<axisem3d::eigen::CMatPP_RM, ndim>> vec_arD_CMatPP_RM;
 
   // stf
   typedef SourceTimeFunctionNetCDF<numerical::Real, ndim> STF_NetCDF;
@@ -67,8 +67,9 @@ template <class Element, int ndim> class ElementInteriorWJ : public Element {
     // NOTE: this will only affect interior elements
     for (int alpha = 0; alpha < this->getNu_1(); alpha++) {
       for (int idim = 0; idim < ndim; idim++) {
-        Eigen::Map<eigen::CRowN>(displElem[alpha][idim].data())(mPointsOnWJB) +=
-            Eigen::Map<const eigen::CRowN>((*mInjectedDispl)[alpha][idim].data())(mPointsOnWJB);
+        Eigen::Map<axisem3d::eigen::CRowN>(displElem[alpha][idim].data())(mPointsOnWJB) +=
+            Eigen::Map<const axisem3d::eigen::CRowN>((*mInjectedDispl)[alpha][idim].data())(
+                mPointsOnWJB);
       }
     }
   }
@@ -83,8 +84,9 @@ template <class Element, int ndim> class ElementInteriorWJ : public Element {
     // NOTE: this will also affect exterior elements
     for (int alpha = 0; alpha < this->getNu_1(); alpha++) {
       for (int idim = 0; idim < ndim; idim++) {
-        Eigen::Map<eigen::CRowN>(stiffElem[alpha][idim].data())(mPointsOnWJB) -=
-            Eigen::Map<const eigen::CRowN>(sInteriorStiff[alpha][idim].data())(mPointsOnWJB);
+        Eigen::Map<axisem3d::eigen::CRowN>(stiffElem[alpha][idim].data())(mPointsOnWJB) -=
+            Eigen::Map<const axisem3d::eigen::CRowN>(sInteriorStiff[alpha][idim].data())(
+                mPointsOnWJB);
       }
     }
 
@@ -127,7 +129,7 @@ template <class Element, int ndim> class ElementInteriorWJ : public Element {
   /////////////////////////// as a receiver ///////////////////////////
   // receiver info
   int
-  receiverInfo(std::vector<std::string>& keys, eigen::DMatXX& coords_spz) const {
+  receiverInfo(std::vector<std::string>& keys, axisem3d::eigen::DMatXX& coords_spz) const {
     // number of receivers
     int nr = this->getNr();
     int nrec = spectral::nPEM * nr;
@@ -136,7 +138,7 @@ template <class Element, int ndim> class ElementInteriorWJ : public Element {
 
     // s, z
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
-      const eigen::DRow2& sz = this->getPoint(ipnt).getCoords();
+      const axisem3d::eigen::DRow2& sz = this->getPoint(ipnt).getCoords();
       auto seq = Eigen::seqN(ipnt * nr, nr);
       coords_spz(seq, 0).fill(sz(0));
       coords_spz(seq, 2).fill(sz(1));

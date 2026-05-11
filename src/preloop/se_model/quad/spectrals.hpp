@@ -749,27 +749,33 @@ namespace spectrals {
   ////////////////// global constants //////////////////
   // point positions
   // GLL
-  const eigen::DColP gPositionsGLL = Eigen::Map<const eigen::DColP>(internal::pGLL.data());
+  const axisem3d::eigen::DColP gPositionsGLL =
+      Eigen::Map<const axisem3d::eigen::DColP>(internal::pGLL.data());
   // GLJ
-  const eigen::DColP gPositionsGLJ = Eigen::Map<const eigen::DColP>(internal::pGLJ.data());
+  const axisem3d::eigen::DColP gPositionsGLJ =
+      Eigen::Map<const axisem3d::eigen::DColP>(internal::pGLJ.data());
 
   // weights
   // GLL
-  const eigen::DColP gWeightsGLL = Eigen::Map<const eigen::DColP>(internal::wGLL.data());
+  const axisem3d::eigen::DColP gWeightsGLL =
+      Eigen::Map<const axisem3d::eigen::DColP>(internal::wGLL.data());
   // GLJ
-  const eigen::DColP gWeightsGLJ = Eigen::Map<const eigen::DColP>(internal::wGLJ.data());
+  const axisem3d::eigen::DColP gWeightsGLJ =
+      Eigen::Map<const axisem3d::eigen::DColP>(internal::wGLJ.data());
 
   // G matrix
   // GLL
-  const eigen::DMatPP_RM gGMatrixGLL = Eigen::Map<const eigen::DMatPP_RM>(internal::gGLL.data());
+  const axisem3d::eigen::DMatPP_RM gGMatrixGLL =
+      Eigen::Map<const axisem3d::eigen::DMatPP_RM>(internal::gGLL.data());
   // GLJ
-  const eigen::DMatPP_RM gGMatrixGLJ = Eigen::Map<const eigen::DMatPP_RM>(internal::gGLJ.data());
+  const axisem3d::eigen::DMatPP_RM gGMatrixGLJ =
+      Eigen::Map<const axisem3d::eigen::DMatPP_RM>(internal::gGLJ.data());
 
   ///////////////////////////// methods /////////////////////////////
   // xieta on element
-  inline const eigen::DMat2N&
+  inline const axisem3d::eigen::DMat2N&
   getXiEtaElement(bool axial) {
-    static eigen::DMat2N xietaAX, xietaNA;
+    static axisem3d::eigen::DMat2N xietaAX, xietaNA;
     static bool formed = false;
     if (!formed) {
       for (int ipol = 0; ipol < spectral::nPED; ipol++) {
@@ -789,14 +795,14 @@ namespace spectrals {
   }
 
   // weights on element
-  inline eigen::DRowN
+  inline axisem3d::eigen::DRowN
   getWeightsElement(bool axial) {
     if (axial) {
-      eigen::DMatPP_RM wmat = (gWeightsGLJ * gWeightsGLL.transpose());
-      return Eigen::Map<eigen::DRowN>(wmat.data());
+      axisem3d::eigen::DMatPP_RM wmat = (gWeightsGLJ * gWeightsGLL.transpose());
+      return Eigen::Map<axisem3d::eigen::DRowN>(wmat.data());
     } else {
-      eigen::DMatPP_RM wmat = (gWeightsGLL * gWeightsGLL.transpose());
-      return Eigen::Map<eigen::DRowN>(wmat.data());
+      axisem3d::eigen::DMatPP_RM wmat = (gWeightsGLL * gWeightsGLL.transpose());
+      return Eigen::Map<axisem3d::eigen::DRowN>(wmat.data());
     }
   }
 
@@ -810,7 +816,7 @@ namespace spectrals {
     if (!formed) {
       {
         // axial
-        const eigen::DMat2N& xieta = getXiEtaElement(true);
+        const axisem3d::eigen::DMat2N& xieta = getXiEtaElement(true);
         const auto& xip = 1. + xieta.row(0).array();
         const auto& xim = 1. - xieta.row(0).array();
         const auto& etp = 1. + xieta.row(1).array();
@@ -823,7 +829,7 @@ namespace spectrals {
       }
       {
         // non-axial
-        const eigen::DMat2N& xieta = getXiEtaElement(false);
+        const axisem3d::eigen::DMat2N& xieta = getXiEtaElement(false);
         const auto& xip = 1. + xieta.row(0).array();
         const auto& xim = 1. - xieta.row(0).array();
         const auto& etp = 1. + xieta.row(1).array();

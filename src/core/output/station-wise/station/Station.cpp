@@ -13,7 +13,7 @@
 
 // set element: inplane weights and Fourier exp
 void
-Station::setElement(const eigen::DRowN& weights, int nu_1) {
+Station::setElement(const axisem3d::eigen::DRowN& weights, int nu_1) {
   // indices of non-zero weights
   mNonZeroIndices.clear();
   double rEpsilon = (double)numerical::epsilon<numerical::Real>();
@@ -42,7 +42,7 @@ Station::setElement(const eigen::DRowN& weights, int nu_1) {
 
 // rotate vector
 void
-Station::rotate(eigen::RMatX3_RM& V, int nrow, int k, double angle) {
+Station::rotate(axisem3d::eigen::RMatX3_RM& V, int nrow, int k, double angle) {
   // frame index
   int i = (k + 1 > 2) ? k - 2 : k + 1;
   int j = (k + 2 > 2) ? k - 1 : k + 2;
@@ -57,7 +57,7 @@ Station::rotate(eigen::RMatX3_RM& V, int nrow, int k, double angle) {
 
 // rotate tensor
 void
-Station::rotate(eigen::RMatX9_RM& T, int nrow, int k, double angle) {
+Station::rotate(axisem3d::eigen::RMatX9_RM& T, int nrow, int k, double angle) {
   // frame index
   int i = (k + 1 > 2) ? k - 2 : k + 1;
   int j = (k + 2 > 2) ? k - 1 : k + 2;
@@ -87,7 +87,7 @@ Station::rotate(eigen::RMatX9_RM& T, int nrow, int k, double angle) {
 // 3(5) 4(1) 5(3)
 // 6(4) 7(3) 8(2)
 void
-Station::rotate(eigen::RMatX6_RM& S, int nrow, int k, double angle) {
+Station::rotate(axisem3d::eigen::RMatX6_RM& S, int nrow, int k, double angle) {
   // voigt -> 3*3
   sTensor33.block(0, 0, nrow, 1) = S.block(0, 0, nrow, 1);
   sTensor33.block(0, 1, nrow, 1) = S.block(0, 5, nrow, 1);

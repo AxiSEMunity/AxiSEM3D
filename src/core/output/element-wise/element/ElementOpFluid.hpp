@@ -58,9 +58,9 @@ class ElementOpFluid : public ElementOp {
   }
 
   // get coords
-  eigen::DRowX
+  axisem3d::eigen::DRowX
   getCoords() const {
-    eigen::DRowX sz(mIPnts.size() * 2);
+    axisem3d::eigen::DRowX sz(mIPnts.size() * 2);
     for (int ip = 0; ip < mIPnts.size(); ip++) {
       sz.block(0, ip * 2, 1, 2) = mElement->getPoint(mIPnts[ip]).getCoords();
     }
@@ -73,17 +73,17 @@ class ElementOpFluid : public ElementOp {
   void
   record(int bufferLine,
       const channel::fluid::ChannelOptions& chops,
-      const eigen::CMatXX& expIAlphaPhi);
+      const axisem3d::eigen::CMatXX& expIAlphaPhi);
 
   private:
   // element
   std::shared_ptr<FluidElement> mElement = nullptr;
 
   // buffer
-  eigen::RTensor4 mBufferX;
-  eigen::RTensor4 mBufferU;
-  eigen::RTensor4 mBufferP;
-  eigen::RTensor4 mBufferD;
+  axisem3d::eigen::RTensor4 mBufferX;
+  axisem3d::eigen::RTensor4 mBufferU;
+  axisem3d::eigen::RTensor4 mBufferP;
+  axisem3d::eigen::RTensor4 mBufferD;
 
   /////////////////////////// process ///////////////////////////
   public:
@@ -93,7 +93,7 @@ class ElementOpFluid : public ElementOp {
       const channel::fluid::ChannelOptions& chops,
       int elemIndexNaGrid,
       int naGridIndex,
-      std::vector<eigen::RTensor5>& ioBuffers);
+      std::vector<axisem3d::eigen::RTensor5>& ioBuffers);
 
   ////////////////////////////////////////
   //////////////// static ////////////////
@@ -142,16 +142,20 @@ class ElementOpFluid : public ElementOp {
 
   // workspace for record
   // get response from elememt
-  inline static eigen::CMatXN sCXXN1 = eigen::CMatXN(0, spectral::nPEM * 1);
-  inline static eigen::CMatXN3 sCUXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::CMatXN sCPXN1 = eigen::CMatXN(0, spectral::nPEM * 1);
-  inline static eigen::CMatXN sCDXN1 = eigen::CMatXN(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::CMatXN sCXXN1 = axisem3d::eigen::CMatXN(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::CMatXN3 sCUXN3 = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN sCPXN1 = axisem3d::eigen::CMatXN(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::CMatXN sCDXN1 = axisem3d::eigen::CMatXN(0, spectral::nPEM * 1);
 
   // making real
-  inline static eigen::RMatXN_RM sRXXN1 = eigen::RMatXN_RM(0, spectral::nPEM * 1);
-  inline static eigen::RMatXN3_RM sRUXN3 = eigen::RMatXN3_RM(0, spectral::nPEM * 3);
-  inline static eigen::RMatXN_RM sRPXN1 = eigen::RMatXN_RM(0, spectral::nPEM * 1);
-  inline static eigen::RMatXN_RM sRDXN1 = eigen::RMatXN_RM(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::RMatXN_RM sRXXN1 =
+      axisem3d::eigen::RMatXN_RM(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::RMatXN3_RM sRUXN3 =
+      axisem3d::eigen::RMatXN3_RM(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN_RM sRPXN1 =
+      axisem3d::eigen::RMatXN_RM(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::RMatXN_RM sRDXN1 =
+      axisem3d::eigen::RMatXN_RM(0, spectral::nPEM * 1);
 };
 
 #endif /* ElementOpFluid_hpp */

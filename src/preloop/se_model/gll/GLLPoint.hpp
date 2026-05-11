@@ -29,7 +29,7 @@ class GLLPoint {
   public:
   // setup by Quad
   void
-  setup(int globalTag, int nr, const eigen::DCol2& coords, double distTol) {
+  setup(int globalTag, int nr, const axisem3d::eigen::DCol2& coords, double distTol) {
     if (mGlobalTag == -1) {
       // set by the first element
       mGlobalTag = globalTag;
@@ -48,14 +48,14 @@ class GLLPoint {
 
   // add mass
   void
-  addMass(const eigen::DColX& mass, bool fluid) {
-    eigen::DColX& myMass = fluid ? mMassFluid : mMassSolid;
+  addMass(const axisem3d::eigen::DColX& mass, bool fluid) {
+    axisem3d::eigen::DColX& myMass = fluid ? mMassFluid : mMassSolid;
     op1D_3D::addTo(mass, myMass);
   }
 
   // add solid-fluid
   void
-  addNormalSF(const eigen::DMatX3& nSF) {
+  addNormalSF(const axisem3d::eigen::DMatX3& nSF) {
     op1D_3D::addTo(nSF, mNormalSFU);
     mNormalSFA = mNormalSFU;
   }
@@ -67,16 +67,19 @@ class GLLPoint {
   void
   addClaytonABC(const std::string& key,
       bool fluid,
-      const eigen::DMatX3& nABC,
-      const eigen::DColX& rho,
-      const eigen::DColX& vp,
-      const eigen::DColX& vs) {
-    eigen::DColX rhoVp, rhoVs;
+      const axisem3d::eigen::DMatX3& nABC,
+      const axisem3d::eigen::DColX& rho,
+      const axisem3d::eigen::DColX& vp,
+      const axisem3d::eigen::DColX& vs) {
+    axisem3d::eigen::DColX rhoVp, rhoVs;
     op1D_3D::times(rho, vp, rhoVp);
     op1D_3D::times(rho, vs, rhoVs);
     // init (key, vector<tuple>)
-    mClaytonABC.insert(
-        {key, std::vector<std::tuple<bool, eigen::DMatX3, eigen::DColX, eigen::DColX>>()});
+    mClaytonABC.insert({key,
+        std::vector<std::tuple<bool,
+            axisem3d::eigen::DMatX3,
+            axisem3d::eigen::DColX,
+            axisem3d::eigen::DColX>>()});
     mClaytonABC.at(key).push_back({fluid, nABC, rhoVp, rhoVs});
     // try reduce to 1D
     op1D_3D::tryReduceTo1D(std::get<1>(mClaytonABC.at(key).back()));
@@ -86,14 +89,14 @@ class GLLPoint {
 
   // add gamma
   void
-  addGamma(const eigen::DColX& Gamma) {
+  addGamma(const axisem3d::eigen::DColX& Gamma) {
     op1D_3D::addTo(Gamma, mGamma);
     mCountGammasAdded++;
   }
 
   // add ocean load
   void
-  addOceanLoad(const eigen::DMatX3& nTop, const eigen::DColX& sumRhoDepth) {
+  addOceanLoad(const axisem3d::eigen::DMatX3& nTop, const axisem3d::eigen::DColX& sumRhoDepth) {
     op1D_3D::addTo(nTop, mNormalTop);
     // this is done repeatedly at shared points
     mSumRhoDepth = sumRhoDepth;
@@ -121,7 +124,7 @@ class GLLPoint {
 
   // feed comm
   void
-  feedComm(eigen::DColX& buffer, int& row) const {
+  feedComm(axisem3d::eigen::DColX& buffer, int& row) const {
     // reference element count
     buffer(row, 0) = mElementCount;
     // size info
@@ -140,11 +143,11 @@ class GLLPoint {
     row += mMassSolid.size();
     // solid-fluid
     buffer.block(row, 0, mNormalSFA.size(), 1) =
-        Eigen::Map<const eigen::DColX>(mNormalSFA.data(), mNormalSFA.size(), 1);
+        Eigen::Map<const axisem3d::eigen::DColX>(mNormalSFA.data(), mNormalSFA.size(), 1);
     row += mNormalSFA.size();
     // ocean load
     buffer.block(row, 0, mNormalTop.size(), 1) =
-        Eigen::Map<const eigen::DColX>(mNormalTop.data(), mNormalTop.size(), 1);
+        Eigen::Map<const axisem3d::eigen::DColX>(mNormalTop.data(), mNormalTop.size(), 1);
     row += mNormalTop.size();
     // sponge boundary
     buffer.block(row, 0, mGamma.size(), 1) = mGamma;
@@ -153,7 +156,7 @@ class GLLPoint {
 
   // extract comm
   void
-  extractComm(const eigen::DColX& buffer, int& row) {
+  extractComm(const axisem3d::eigen::DColX& buffer, int& row) {
     // reference element count
     mElementCount += (int)round(buffer(row, 0));
     // size info
@@ -170,12 +173,12 @@ class GLLPoint {
     op1D_3D::addTo(buffer.block(row, 0, sizeMassSolid, 1), mMassSolid);
     row += sizeMassSolid;
     // solid-fluid
-    op1D_3D::addTo(Eigen::Map<const eigen::DMatX3>(
+    op1D_3D::addTo(Eigen::Map<const axisem3d::eigen::DMatX3>(
                        buffer.block(row, 0, sizeNormalSFA, 1).data(), sizeNormalSFA / 3, 3),
         mNormalSFA);
     row += sizeNormalSFA;
     // ocean load
-    op1D_3D::addTo(Eigen::Map<const eigen::DMatX3>(
+    op1D_3D::addTo(Eigen::Map<const axisem3d::eigen::DMatX3>(
                        buffer.block(row, 0, sizeNormalTop, 1).data(), sizeNormalTop / 3, 3),
         mNormalTop);
     row += sizeNormalTop;
@@ -222,32 +225,34 @@ class GLLPoint {
   int mNr = -1;
 
   // coords
-  eigen::DCol2 mCoords = eigen::DCol2::Zero();
+  axisem3d::eigen::DCol2 mCoords = axisem3d::eigen::DCol2::Zero();
 
   // reference element count
   int mElementCount = 0;
 
   // mass
-  eigen::DColX mMassFluid = eigen::DColX::Zero(0);
-  eigen::DColX mMassSolid = eigen::DColX::Zero(0);
+  axisem3d::eigen::DColX mMassFluid = axisem3d::eigen::DColX::Zero(0);
+  axisem3d::eigen::DColX mMassSolid = axisem3d::eigen::DColX::Zero(0);
 
   // solid-fuild
   // unassembled
-  eigen::DMatX3 mNormalSFU = eigen::DMatX3::Zero(0, 3);
+  axisem3d::eigen::DMatX3 mNormalSFU = axisem3d::eigen::DMatX3::Zero(0, 3);
   // assembled
-  eigen::DMatX3 mNormalSFA = eigen::DMatX3::Zero(0, 3);
+  axisem3d::eigen::DMatX3 mNormalSFA = axisem3d::eigen::DMatX3::Zero(0, 3);
 
   // Clayton ABC {key, {fluid/solid, normal, rho * vp, rho * vs}}
-  std::map<std::string, std::vector<std::tuple<bool, eigen::DMatX3, eigen::DColX, eigen::DColX>>>
+  std::map<std::string,
+      std::vector<std::
+              tuple<bool, axisem3d::eigen::DMatX3, axisem3d::eigen::DColX, axisem3d::eigen::DColX>>>
       mClaytonABC;
 
   // Kosloff_Kosloff sponge boundary
-  eigen::DColX mGamma = eigen::DColX::Zero(0);
+  axisem3d::eigen::DColX mGamma = axisem3d::eigen::DColX::Zero(0);
   int mCountGammasAdded = 0;
 
   // ocean load
-  eigen::DMatX3 mNormalTop = eigen::DMatX3::Zero(0, 3);
-  eigen::DColX mSumRhoDepth = eigen::DColX::Zero(0);
+  axisem3d::eigen::DMatX3 mNormalTop = axisem3d::eigen::DMatX3::Zero(0, 3);
+  axisem3d::eigen::DColX mSumRhoDepth = axisem3d::eigen::DColX::Zero(0);
 
   // axial
   bool mAxial = false;

@@ -27,12 +27,12 @@ class Isotropic : public Elastic {
   public:
   // 1D constructor
   Isotropic(std::unique_ptr<Attenuation>& attenuation,
-      const eigen::DMatPP_RM& lambda,
-      const eigen::DMatPP_RM& mu) :
+      const axisem3d::eigen::DMatPP_RM& lambda,
+      const axisem3d::eigen::DMatPP_RM& mu) :
       Elastic(true, attenuation), mLambda(lambda), mMu(mu)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mMu2(eigen::DMatPP_RM(mu * 2.))
+      mMu2(axisem3d::eigen::DMatPP_RM(mu * 2.))
 #endif
   {
     // nothing
@@ -40,12 +40,12 @@ class Isotropic : public Elastic {
 
   // 3D constructor
   Isotropic(std::unique_ptr<Attenuation>& attenuation,
-      const eigen::DMatXN& lambda,
-      const eigen::DMatXN& mu) :
+      const axisem3d::eigen::DMatXN& lambda,
+      const axisem3d::eigen::DMatXN& mu) :
       Elastic(false, attenuation), mLambda(lambda), mMu(mu)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mMu2(eigen::DMatXN(mu * 2.))
+      mMu2(axisem3d::eigen::DMatXN(mu * 2.))
 #endif
   {
     // nothing
@@ -92,8 +92,9 @@ class Isotropic : public Elastic {
 
   // strain => stress in Fourier space
   void
-  strainToStress_FR(
-      const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) const {
+  strainToStress_FR(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) const {
     // elasticity
 #ifdef AXISEM3D_SAVE_MEMORY
     computeMu2();
@@ -108,7 +109,8 @@ class Isotropic : public Elastic {
 
   // strain => stress in cardinal space
   void
-  strainToStress_CD(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) const {
+  strainToStress_CD(
+      const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) const {
     // elasticity
 #ifdef AXISEM3D_SAVE_MEMORY
     computeMu2();

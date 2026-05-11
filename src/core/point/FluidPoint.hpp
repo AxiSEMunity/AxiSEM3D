@@ -20,7 +20,7 @@ class FluidPoint : public Point {
   public:
   // constructor
   FluidPoint(int nr,
-      const eigen::DRow2& crds,
+      const axisem3d::eigen::DRow2& crds,
       int meshTag,
       std::unique_ptr<const Mass>& mass,
       const TimeScheme& timeScheme);
@@ -62,14 +62,14 @@ class FluidPoint : public Point {
 
   // feed to mpi buffer
   void
-  feedComm(eigen::CColX& buffer, int& row) const {
+  feedComm(axisem3d::eigen::CColX& buffer, int& row) const {
     buffer.block(row, 0, mFields.mStiff.rows(), 1) = mFields.mStiff;
     row += mFields.mStiff.rows();
   }
 
   // extract from mpi buffer
   void
-  extractComm(const eigen::CColX& buffer, int& row) {
+  extractComm(const axisem3d::eigen::CColX& buffer, int& row) {
     mFields.mStiff += buffer.block(row, 0, mFields.mStiff.rows(), 1);
     row += mFields.mStiff.rows();
   }
@@ -89,7 +89,7 @@ class FluidPoint : public Point {
   // scatter displ to element
   void
   scatterDisplToElement(
-      eigen::vec_ar1_CMatPP_RM& displ, int nu_1_element, int ipol, int jpol) const {
+      axisem3d::eigen::vec_ar1_CMatPP_RM& displ, int nu_1_element, int ipol, int jpol) const {
     // copy lower orders
     for (int alpha = 0; alpha < mNu_1; alpha++) {
       displ[alpha][0](ipol, jpol) = mFields.mDispl(alpha);
@@ -104,7 +104,7 @@ class FluidPoint : public Point {
 
   // gather stiff from element
   void
-  gatherStiffFromElement(const eigen::vec_ar1_CMatPP_RM& stiff, int ipol, int jpol) {
+  gatherStiffFromElement(const axisem3d::eigen::vec_ar1_CMatPP_RM& stiff, int ipol, int jpol) {
     // add lower orders only
     for (int alpha = 0; alpha < mNu_1; alpha++) {
       mFields.mStiff(alpha) -= stiff[alpha][0](ipol, jpol);
@@ -115,12 +115,12 @@ class FluidPoint : public Point {
   // prepare pressure source
   void
   preparePressureSource() {
-    mFields.mPressureSource = eigen::CColX::Zero(mNu_1, 1);
+    mFields.mPressureSource = axisem3d::eigen::CColX::Zero(mNu_1, 1);
   }
 
   // add pressure source
   void
-  addPressureSource(const eigen::CMatXN& pressure, int nu_1_pressure, int ipnt) {
+  addPressureSource(const axisem3d::eigen::CMatXN& pressure, int nu_1_pressure, int ipnt) {
     // add minimum orders only
     int nu_1_min = std::min(mNu_1, nu_1_pressure);
     mFields.mPressureSource.topRows(nu_1_min) += pressure.block(0, ipnt, nu_1_min, 1);
@@ -132,7 +132,7 @@ class FluidPoint : public Point {
   preparePressureOutput() {
     // pressure is mAccel, which may not be allocated by the time scheme
     if (mFields.mPressureStore.rows() == 0) {
-      mFields.mPressureStore = eigen::CColX::Zero(mNu_1, 1);
+      mFields.mPressureStore = axisem3d::eigen::CColX::Zero(mNu_1, 1);
     }
   }
 
@@ -142,13 +142,13 @@ class FluidPoint : public Point {
     // delta is mStiff, but we need to store it because mStiff is set
     // to zero after dividing by mass
     if (mFields.mDeltaStore.rows() == 0) {
-      mFields.mDeltaStore = eigen::CColX::Zero(mNu_1, 1);
+      mFields.mDeltaStore = axisem3d::eigen::CColX::Zero(mNu_1, 1);
     }
   }
 
   // scatter pressure to element
   void
-  scatterPressureToElement(eigen::CMatXN& pressure, int nu_1_element, int ipnt) const {
+  scatterPressureToElement(axisem3d::eigen::CMatXN& pressure, int nu_1_element, int ipnt) const {
     // copy lower orders
     pressure.block(0, ipnt, mNu_1, 1) = mFields.mPressureStore;
 
@@ -158,7 +158,7 @@ class FluidPoint : public Point {
 
   // scatter delta to element
   void
-  scatterDeltaToElement(eigen::CMatXN& delta, int nu_1_element, int ipnt) const {
+  scatterDeltaToElement(axisem3d::eigen::CMatXN& delta, int nu_1_element, int ipnt) const {
     // copy lower orders
     delta.block(0, ipnt, mNu_1, 1) = mFields.mDeltaStore;
 
@@ -169,20 +169,20 @@ class FluidPoint : public Point {
   /////////////////////////// fields ///////////////////////////
   // fields on a fluid point
   struct Fields {
-    eigen::CColX mStiff = eigen::CColX(0, 1);
-    eigen::CColX mDispl = eigen::CColX(0, 1);
-    eigen::CColX mVeloc = eigen::CColX(0, 1);
-    eigen::CColX mAccel = eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mStiff = axisem3d::eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mDispl = axisem3d::eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mVeloc = axisem3d::eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mAccel = axisem3d::eigen::CColX(0, 1);
 
     // pressure source (to be added to accel)
-    eigen::CColX mPressureSource = eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mPressureSource = axisem3d::eigen::CColX(0, 1);
 
     // acceleration storage for pressure output
     // NOTE: duplicated in Newmark
-    eigen::CColX mPressureStore = eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mPressureStore = axisem3d::eigen::CColX(0, 1);
 
     // stiffness storage for delta output
-    eigen::CColX mDeltaStore = eigen::CColX(0, 1);
+    axisem3d::eigen::CColX mDeltaStore = axisem3d::eigen::CColX(0, 1);
   };
 
   // get

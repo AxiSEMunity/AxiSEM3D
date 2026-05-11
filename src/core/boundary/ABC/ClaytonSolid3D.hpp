@@ -26,10 +26,10 @@ class ClaytonSolid3D : public ClaytonSolid {
   public:
   // constructor
   ClaytonSolid3D(const std::shared_ptr<SolidPoint>& sp,
-      const eigen::DColX& rhoVp,
-      const eigen::DColX& rhoVs,
-      const eigen::DColX& area,
-      const eigen::DMatX3& unitNormal) :
+      const axisem3d::eigen::DColX& rhoVp,
+      const axisem3d::eigen::DColX& rhoVs,
+      const axisem3d::eigen::DColX& area,
+      const axisem3d::eigen::DMatX3& unitNormal) :
       ClaytonSolid(sp), mRSA(rhoVs.cwiseProduct(area).cast<numerical::Real>()),
       mK(((rhoVp - rhoVs).cwiseProduct(area).cwiseSqrt().asDiagonal() * unitNormal)
               .cast<numerical::Real>()) {
@@ -49,9 +49,9 @@ class ClaytonSolid3D : public ClaytonSolid {
 
   private:
   // rsa = rho * vs * area
-  const eigen::RColX mRSA;
+  const axisem3d::eigen::RColX mRSA;
   // k = sqrt(rpa - rsa) n
-  const eigen::RMatX3 mK;
+  const axisem3d::eigen::RMatX3 mK;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
@@ -60,10 +60,10 @@ class ClaytonSolid3D : public ClaytonSolid {
   private:
   // workspace
   // V = FFT(velocity)
-  inline static eigen::RMatX3 sVR = eigen::RMatX3(0, 3);
+  inline static axisem3d::eigen::RMatX3 sVR = axisem3d::eigen::RMatX3(0, 3);
   // a = rsa V + V.k k
-  inline static eigen::RMatX3 sAR = eigen::RMatX3(0, 3);
-  inline static eigen::CMatX3 sAC = eigen::CMatX3(0, 3);
+  inline static axisem3d::eigen::RMatX3 sAR = axisem3d::eigen::RMatX3(0, 3);
+  inline static axisem3d::eigen::CMatX3 sAC = axisem3d::eigen::CMatX3(0, 3);
 };
 
 #endif /* ClaytonSolid3D_hpp */

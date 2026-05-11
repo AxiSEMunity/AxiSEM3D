@@ -97,15 +97,15 @@ SE_Model::SE_Model(const ExodusMesh& exodusMesh,
   timer::gPreloopTimer.begin("Assembling mass and normal");
   // init mpi buffer
   timer::gPreloopTimer.begin("Creating MPI buffers");
-  std::vector<eigen::DColX> bufSend, bufRecv;
+  std::vector<axisem3d::eigen::DColX> bufSend, bufRecv;
   int nCommProc = (int)localMesh.mCommProc.size();
   for (int iproc = 0; iproc < nCommProc; iproc++) {
     int commSize = 0;
     for (int igll : localMesh.mCommMyGLL[iproc]) {
       commSize += mGLLPoints[igll].getCommSize();
     }
-    bufSend.push_back(eigen::DColX::Zero(commSize));
-    bufRecv.push_back(eigen::DColX::Zero(commSize));
+    bufSend.push_back(axisem3d::eigen::DColX::Zero(commSize));
+    bufRecv.push_back(axisem3d::eigen::DColX::Zero(commSize));
   }
   timer::gPreloopTimer.ended("Creating MPI buffers");
 
@@ -158,12 +158,12 @@ SE_Model::SE_Model(const ExodusMesh& exodusMesh,
 
   // range
   timer::gPreloopTimer.begin("Computing local mesh range");
-  const eigen::DMatX2_RM& sz = localMesh.mNodalCoords;
+  const axisem3d::eigen::DMatX2_RM& sz = localMesh.mNodalCoords;
   mRangeS(0) = sz.col(0).minCoeff() - mDistToleranceMesh;
   mRangeS(1) = sz.col(0).maxCoeff() + mDistToleranceMesh;
   mRangeZ(0) = sz.col(1).minCoeff() - mDistToleranceMesh;
   mRangeZ(1) = sz.col(1).maxCoeff() + mDistToleranceMesh;
-  const eigen::DMatX2_RM& rt = geodesy::sz2rtheta(sz, true);
+  const axisem3d::eigen::DMatX2_RM& rt = geodesy::sz2rtheta(sz, true);
   mRangeR(0) = rt.col(0).minCoeff() - mDistToleranceMesh;
   mRangeR(1) = rt.col(0).maxCoeff() + mDistToleranceMesh;
   mRangeT(0) = rt.col(1).minCoeff();
@@ -173,7 +173,7 @@ SE_Model::SE_Model(const ExodusMesh& exodusMesh,
 
 // step 2: get dt for attenuation
 double
-SE_Model::computeDt(double courant, const ABC& abc, eigen::DCol2& sz) const {
+SE_Model::computeDt(double courant, const ABC& abc, axisem3d::eigen::DCol2& sz) const {
   // minimum dt over quads
   double dtMin = std::numeric_limits<double>::max();
   for (const Quad& quad : mQuads) {
@@ -186,13 +186,13 @@ SE_Model::computeDt(double courant, const ABC& abc, eigen::DCol2& sz) const {
 
   // minimum dt over ranks
   std::vector<double> dtV;
-  std::vector<eigen::DCol2> szV;
+  std::vector<axisem3d::eigen::DCol2> szV;
   mpi::gather(dtMin, dtV, MPI_ALL);
   mpi::gatherEigen(sz, szV, MPI_ALL);
 
   // rank with minimum dt
   Eigen::Index rankDt = -1;
-  dtMin = Eigen::Map<eigen::DColX>(dtV.data(), dtV.size()).minCoeff(&rankDt);
+  dtMin = Eigen::Map<axisem3d::eigen::DColX>(dtV.data(), dtV.size()).minCoeff(&rankDt);
   sz = szV[rankDt];
 
   // round to 4 significant figures to avoid dumping error
@@ -242,7 +242,7 @@ SE_Model::release(const ABC& abc,
 }
 
 // step 4: measure
-eigen::DColX
+axisem3d::eigen::DColX
 SE_Model::measureCost(const ExodusMesh& exodusMesh,
     const LocalMesh& localMesh,
     const TimeScheme& timeScheme,
@@ -394,7 +394,7 @@ SE_Model::measureCost(const ExodusMesh& exodusMesh,
 
   // read libraries locally
   timer::gPreloopTimer.begin("Computing weights from libraries");
-  eigen::DColX weightsLocal(mQuads.size());
+  axisem3d::eigen::DColX weightsLocal(mQuads.size());
   for (int iquad = 0; iquad < mQuads.size(); iquad++) {
     // element
     weightsLocal(iquad) = elemCostLibrary.at(elemSign(iquad));
@@ -412,15 +412,15 @@ SE_Model::measureCost(const ExodusMesh& exodusMesh,
   // gather weights
   timer::gPreloopTimer.begin("Gathering and broadcasting weights");
   // gather
-  std::vector<eigen::DColX> weightsLocalVec;
-  std::vector<eigen::IColX> L2G_ElementVec;
+  std::vector<axisem3d::eigen::DColX> weightsLocalVec;
+  std::vector<axisem3d::eigen::IColX> L2G_ElementVec;
   mpi::gatherEigen(weightsLocal, weightsLocalVec, 0);
   mpi::gatherEigen(localMesh.mL2G_Element, L2G_ElementVec, 0);
   // map global on root
-  eigen::DColX weightsGlobal;
+  axisem3d::eigen::DColX weightsGlobal;
   if (mpi::root()) {
     // allocate and fill with a crazy number
-    weightsGlobal = eigen::DColX::Constant(exodusMesh.getNumQuads(), numerical::dErr);
+    weightsGlobal = axisem3d::eigen::DColX::Constant(exodusMesh.getNumQuads(), numerical::dErr);
     for (int iproc = 0; iproc < mpi::nproc(); iproc++) {
       for (int ielem = 0; ielem < L2G_ElementVec[iproc].size(); ielem++) {
         int iglob = L2G_ElementVec[iproc][ielem];
@@ -446,7 +446,7 @@ SE_Model::verbose(const std::string& titleSEM) const {
   mpi::gather(nGLL, nGLLV, MPI_ALL);
   // find rank with max
   Eigen::Index rankMax;
-  Eigen::Map<eigen::IColX>(nQuadV.data(), nQuadV.size()).maxCoeff(&rankMax);
+  Eigen::Map<axisem3d::eigen::IColX>(nQuadV.data(), nQuadV.size()).maxCoeff(&rankMax);
 
   // verbose
   using namespace bstring;
@@ -463,9 +463,9 @@ SE_Model::verbose(const std::string& titleSEM) const {
 ////////////////// source-receiver //////////////////
 // get total undulation
 double
-SE_Model::getTotalUndulation(const eigen::DRow3& spzRef) const {
+SE_Model::getTotalUndulation(const axisem3d::eigen::DRow3& spzRef) const {
   double totalUndulation = 0.;
-  static eigen::DColX undulation(1);
+  static axisem3d::eigen::DColX undulation(1);
   for (const std::shared_ptr<const Geometric3D>& m : mModelsG3D) {
     m->getUndulation(spzRef, undulation);
     totalUndulation += undulation(0);
@@ -474,8 +474,8 @@ SE_Model::getTotalUndulation(const eigen::DRow3& spzRef) const {
 }
 
 // undulated to reference
-eigen::DRow3
-SE_Model::undulatedToReference(const eigen::DRow3& spzUnd) const {
+axisem3d::eigen::DRow3
+SE_Model::undulatedToReference(const axisem3d::eigen::DRow3& spzUnd) const {
   // no geometric model
   if (mModelsG3D.size() == 0) {
     return spzUnd;
@@ -483,13 +483,15 @@ SE_Model::undulatedToReference(const eigen::DRow3& spzUnd) const {
 
   // lambda to compute R from spz
   static auto toR =
-      geodesy::isCartesian() ? [](const eigen::DRow3& spz) -> double { return spz(2); }
-  : [](const eigen::DRow3& spz) -> double { return sqrt(spz(0) * spz(0) + spz(2) * spz(2)); };
+      geodesy::isCartesian() ? [](const axisem3d::eigen::DRow3& spz) -> double { return spz(2); }
+                             : [](const axisem3d::eigen::DRow3& spz) -> double {
+      return sqrt(spz(0) * spz(0) + spz(2) * spz(2));
+    };
 
   // lambda to compute spz from R
   static auto toSPZ = geodesy::isCartesian()
-      ? [](double R, eigen::DRow3& spz, double sint, double cost) { spz(2) = R; }
-      : [](double R, eigen::DRow3& spz, double sint, double cost) {
+      ? [](double R, axisem3d::eigen::DRow3& spz, double sint, double cost) { spz(2) = R; }
+      : [](double R, axisem3d::eigen::DRow3& spz, double sint, double cost) {
           spz(0) = R * sint;
           spz(2) = R * cost;
         };
@@ -507,7 +509,7 @@ SE_Model::undulatedToReference(const eigen::DRow3& spzUnd) const {
   double undR = toR(spzUnd);
 
   // intitial guess
-  eigen::DRow3 spzRef = spzUnd;
+  axisem3d::eigen::DRow3 spzRef = spzUnd;
   if (undR < geodesy::getInnerRadius()) {
     toSPZ(geodesy::getInnerRadius(), spzRef, sint, cost);
   }
@@ -545,7 +547,7 @@ SE_Model::formInplaneRTree() {
   mRTreeFluid = std::make_unique<RTreeND<2, 1, int>>();
   mRTreeSolid = std::make_unique<RTreeND<2, 1, int>>();
   for (int iquad = 0; iquad < mQuads.size(); iquad++) {
-    const eigen::DCol2& sz = mQuads[iquad].getNodalSZ().rowwise().mean();
+    const axisem3d::eigen::DCol2& sz = mQuads[iquad].getNodalSZ().rowwise().mean();
     if (mQuads[iquad].fluid()) {
       mRTreeFluid->addLeaf(sz, iquad);
     } else {
@@ -556,12 +558,12 @@ SE_Model::formInplaneRTree() {
 
 // locate inplane
 int
-SE_Model::locateInplane(const eigen::DCol2& sz, bool inFluid) const {
+SE_Model::locateInplane(const axisem3d::eigen::DCol2& sz, bool inFluid) const {
   // mesh range
   if ((sz(0) < mRangeS(0) || sz(0) > mRangeS(1)) || (sz(1) < mRangeZ(0) || sz(1) > mRangeZ(1))) {
     return -1;
   }
-  const eigen::DCol2& rt = geodesy::sz2rtheta(sz, false);
+  const axisem3d::eigen::DCol2& rt = geodesy::sz2rtheta(sz, false);
   if ((rt(0) < mRangeR(0) || rt(0) > mRangeR(1)) ||
       (rt(1) * rt(0) < mRangeT(0) * rt(0) - mDistToleranceMesh ||
           rt(1) * rt(0) > mRangeT(1) * rt(0) + mDistToleranceMesh)) {
@@ -587,7 +589,7 @@ SE_Model::locateInplane(const eigen::DCol2& sz, bool inFluid) const {
   }
 
   // locate inplane
-  static eigen::DCol2 xieta;
+  static axisem3d::eigen::DCol2 xieta;
   for (int iq = 0; iq < vals.size(); iq++) {
     int iquad = vals[iq](0);
     if (mQuads[iquad].inverseMapping(sz, xieta)) {
@@ -599,15 +601,15 @@ SE_Model::locateInplane(const eigen::DCol2& sz, bool inFluid) const {
 }
 
 // compute inplane factor
-eigen::DRowN
-SE_Model::computeInplaneFactor(const eigen::DCol2& sz, int iquad) const {
-  static eigen::DCol2 xieta;
+axisem3d::eigen::DRowN
+SE_Model::computeInplaneFactor(const axisem3d::eigen::DCol2& sz, int iquad) const {
+  static axisem3d::eigen::DCol2 xieta;
   if (mQuads[iquad].inverseMapping(sz, xieta)) {
-    const eigen::DColP& weightsXi = interpLagrange(
+    const axisem3d::eigen::DColP& weightsXi = interpLagrange(
         xieta(0), mQuads[iquad].axial() ? spectrals::gPositionsGLJ : spectrals::gPositionsGLL);
-    const eigen::DColP& weightsEta = interpLagrange(xieta(1), spectrals::gPositionsGLL);
-    return Eigen::Map<const eigen::DRowN>(
-        eigen::DMatPP_RM(weightsXi * weightsEta.transpose()).data());
+    const axisem3d::eigen::DColP& weightsEta = interpLagrange(xieta(1), spectrals::gPositionsGLL);
+    return Eigen::Map<const axisem3d::eigen::DRowN>(
+        axisem3d::eigen::DMatPP_RM(weightsXi * weightsEta.transpose()).data());
   } else {
     throw std::runtime_error("SE_Model::computeInterpFactor || "
                              "Location is not in the given quad.");

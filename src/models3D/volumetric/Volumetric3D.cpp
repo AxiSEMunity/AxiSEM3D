@@ -26,10 +26,10 @@ Volumetric3D::applyTo(std::vector<Quad>& quads) const {
   if (!isSuperOnly()) {
     for (Quad& quad : quads) {
       // cardinal coordinates
-      const eigen::DMatX3& spz = computeElemSPZ(quad, usingUndulatedGeometry());
+      const axisem3d::eigen::DMatX3& spz = computeElemSPZ(quad, usingUndulatedGeometry());
       // compute values
-      eigen::IMatXX inScopes;
-      eigen::DMatXX propValues;
+      axisem3d::eigen::IMatXX inScopes;
+      axisem3d::eigen::DMatXX propValues;
       bool elemInScope = getProperties(spz, quad.getNodalSZ(), inScopes, propValues);
       // set values to quad
       if (elemInScope) {
@@ -40,8 +40,8 @@ Volumetric3D::applyTo(std::vector<Quad>& quads) const {
     mpi::enterInfer();
     for (int irank = 0; irank < mpi::nproc(); irank++) {
       // step 1: gather coords on infer and send to super
-      std::vector<eigen::DMatX3> spzAll;
-      std::vector<eigen::DMat24> szAll;
+      std::vector<axisem3d::eigen::DMatX3> spzAll;
+      std::vector<axisem3d::eigen::DMat24> szAll;
       if (irank == mpi::rank()) {
         // gather coords
         spzAll.reserve(quads.size());
@@ -56,9 +56,9 @@ Volumetric3D::applyTo(std::vector<Quad>& quads) const {
       }
 
       // step 2: compute values on super and send back to infer
-      std::vector<eigen::IMatXX> inScopesAll;
-      std::vector<eigen::DMatXX> propValuesAll;
-      std::vector<eigen::IColX> elemInScopeAll;
+      std::vector<axisem3d::eigen::IMatXX> inScopesAll;
+      std::vector<axisem3d::eigen::DMatXX> propValuesAll;
+      std::vector<axisem3d::eigen::IColX> elemInScopeAll;
       if (mpi::root()) {
         // recv coords from infer
         mpi::recvVecEigen(irank, spzAll, 0);
@@ -67,11 +67,11 @@ Volumetric3D::applyTo(std::vector<Quad>& quads) const {
         int nQuad = (int)spzAll.size();
         inScopesAll.reserve(nQuad);
         propValuesAll.reserve(nQuad);
-        elemInScopeAll.push_back(eigen::IColX::Zero(nQuad));
+        elemInScopeAll.push_back(axisem3d::eigen::IColX::Zero(nQuad));
         // compute values
         for (int iq = 0; iq < nQuad; iq++) {
-          eigen::IMatXX inScopes;
-          eigen::DMatXX propValues;
+          axisem3d::eigen::IMatXX inScopes;
+          axisem3d::eigen::DMatXX propValues;
           elemInScopeAll[0](iq) = getProperties(spzAll[iq], szAll[iq], inScopes, propValues);
           inScopesAll.push_back(inScopes);
           propValuesAll.push_back(propValues);
@@ -107,16 +107,16 @@ Volumetric3D::applyTo(std::vector<Quad>& quads) const {
 void
 Volumetric3D::setPropertiesToQuad(const std::vector<std::string>& propKeys,
     const std::vector<ReferenceKind>& refKinds,
-    const eigen::IMatXX& inScopes,
-    const eigen::DMatXX& propValues,
+    const axisem3d::eigen::IMatXX& inScopes,
+    const axisem3d::eigen::DMatXX& propValues,
     Quad& quad) const {
   // property loop
-  const eigen::IRowN& pointNr = quad.getPointNr();
+  const axisem3d::eigen::IRowN& pointNr = quad.getPointNr();
   int nprop = (int)propKeys.size();
   for (int iprop = 0; iprop < nprop; iprop++) {
     // flattened to structured
-    eigen::arN_IColX inScope;
-    eigen::arN_DColX propValue;
+    axisem3d::eigen::arN_IColX inScope;
+    axisem3d::eigen::arN_DColX propValue;
     int row = 0;
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       int nr = pointNr(ipnt);
@@ -131,20 +131,20 @@ Volumetric3D::setPropertiesToQuad(const std::vector<std::string>& propKeys,
 
 // Bond transformation for rotating Cijkl
 void
-Volumetric3D::bondTransformation(const eigen::DMat66& inCijkl,
+Volumetric3D::bondTransformation(const axisem3d::eigen::DMat66& inCijkl,
     double alpha,
     double beta,
     double gamma,
-    eigen::DMat66& outCijkl) {
+    axisem3d::eigen::DMat66& outCijkl) {
   // R
-  static eigen::DMat33 R1, R2, R3, R;
+  static axisem3d::eigen::DMat33 R1, R2, R3, R;
   R1 << 1., 0., 0., 0., cos(alpha), sin(alpha), 0., -sin(alpha), cos(alpha);
   R2 << cos(beta), 0., sin(beta), 0., 1., 0., -sin(beta), 0, cos(beta);
   R3 << cos(gamma), sin(gamma), 0., -sin(gamma), cos(gamma), 0., 0., 0., 1.;
   R = R1 * R2 * R3;
 
   // K
-  static eigen::DMat33 K1, K2, K3, K4;
+  static axisem3d::eigen::DMat33 K1, K2, K3, K4;
   K1.array() = R.array().pow(2.);
   K2 << R(0, 1) * R(0, 2), R(0, 2) * R(0, 0), R(0, 0) * R(0, 1), R(1, 1) * R(1, 2),
       R(1, 2) * R(1, 0), R(1, 0) * R(1, 1), R(2, 1) * R(2, 2), R(2, 2) * R(2, 0), R(2, 0) * R(2, 1);
@@ -155,7 +155,7 @@ Volumetric3D::bondTransformation(const eigen::DMat66& inCijkl,
       R(2, 2) * R(0, 0) + R(2, 0) * R(0, 2), R(2, 0) * R(0, 1) + R(2, 1) * R(0, 0),
       R(0, 1) * R(1, 2) + R(0, 2) * R(1, 1), R(0, 2) * R(1, 0) + R(0, 0) * R(1, 2),
       R(0, 0) * R(1, 1) + R(0, 1) * R(1, 0);
-  static eigen::DMat66 K;
+  static axisem3d::eigen::DMat66 K;
   K.block(0, 0, 3, 3) = K1;
   K.block(0, 3, 3, 3) = 2. * K2;
   K.block(3, 0, 3, 3) = K3;

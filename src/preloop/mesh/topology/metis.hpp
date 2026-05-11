@@ -18,17 +18,18 @@
 namespace axisem3d::metis {
   // form neighbourhood of connectivity
   void
-  formNeighbourhood(
-      const eigen::IMatX4_RM& connectivity, int ncommon, std::vector<eigen::IColX>& neighbours);
+  formNeighbourhood(const axisem3d::eigen::IMatX4_RM& connectivity,
+      int ncommon,
+      std::vector<axisem3d::eigen::IColX>& neighbours);
 
   // domain decomposition
   double
-  decompose(const eigen::IMatX4_RM& connectivity,
-      const eigen::IColX& solid_fluid,
-      const eigen::DColX& weights,
+  decompose(const axisem3d::eigen::IMatX4_RM& connectivity,
+      const axisem3d::eigen::IColX& solid_fluid,
+      const axisem3d::eigen::DColX& weights,
       int npart,
       int rseed,
-      eigen::IColX& elemRank);
+      axisem3d::eigen::IColX& elemRank);
 } // namespace axisem3d::metis
 
 #endif /* metis_hpp */

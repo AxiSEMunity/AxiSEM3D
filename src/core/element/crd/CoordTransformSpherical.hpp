@@ -36,12 +36,13 @@ class CoordTransformSpherical : public CoordTransform {
   public:
 #ifdef AXISEM3D_SAVE_MEMORY
   // constructor
-  CoordTransformSpherical(const eigen::DMatPP_RM& theta) : mTheta(theta.cast<numerical::Real>()) {
+  CoordTransformSpherical(const axisem3d::eigen::DMatPP_RM& theta) :
+      mTheta(theta.cast<numerical::Real>()) {
     // nothing
   }
 #else
   // constructor
-  CoordTransformSpherical(const eigen::DMatPP_RM& theta) :
+  CoordTransformSpherical(const axisem3d::eigen::DMatPP_RM& theta) :
       mSin1t(theta.array().sin().cast<numerical::Real>()),
       mCos1t(theta.array().cos().cast<numerical::Real>()),
       mSin2t((2. * theta).array().sin().cast<numerical::Real>()),
@@ -52,14 +53,14 @@ class CoordTransformSpherical : public CoordTransform {
 
   // (s,phi,z) -> (R,T,Z)
   void
-  transformSPZ_RTZ3(eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
+  transformSPZ_RTZ3(axisem3d::eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     // compute sin(theta)
     computeSinOneTheta();
 #endif
     for (int alpha = 0; alpha < nu_1; alpha++) {
       // copy u0
-      eigen::CMatPP_RM& ui_alpha__0_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& ui_alpha__0_ = sTemp0;
       ui_alpha__0_ = ui[alpha][0];
 
       // rtz0 = spz0 * cos(t) - spz2 * sin(t)
@@ -75,14 +76,14 @@ class CoordTransformSpherical : public CoordTransform {
 
   // (R,T,Z) -> (s,phi,z)
   void
-  transformRTZ_SPZ3(eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
+  transformRTZ_SPZ3(axisem3d::eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     // compute sin(theta)
     computeSinOneTheta();
 #endif
     for (int alpha = 0; alpha < nu_1; alpha++) {
       // copy u0
-      eigen::CMatPP_RM& ui_alpha__0_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& ui_alpha__0_ = sTemp0;
       ui_alpha__0_ = ui[alpha][0];
 
       // spz0 = rtz0 * cos(t) + rtz2 * sin(t)
@@ -98,17 +99,17 @@ class CoordTransformSpherical : public CoordTransform {
 
   // (s,phi,z) -> (R,T,Z) for nabla
   void
-  transformSPZ_RTZ9(eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
+  transformSPZ_RTZ9(axisem3d::eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     // compute sin(theta)
     computeSinOneTwoTheta();
 #endif
     for (int alpha = 0; alpha < nu_1; alpha++) {
       // 2 * theta terms
-      eigen::CMatPP_RM& s08 = sTemp0;
-      eigen::CMatPP_RM& d08 = sTemp1;
-      eigen::CMatPP_RM& s26 = sTemp2;
-      eigen::CMatPP_RM& d26 = sTemp3;
+      axisem3d::eigen::CMatPP_RM& s08 = sTemp0;
+      axisem3d::eigen::CMatPP_RM& d08 = sTemp1;
+      axisem3d::eigen::CMatPP_RM& s26 = sTemp2;
+      axisem3d::eigen::CMatPP_RM& d26 = sTemp3;
       s08 = nij[alpha][0] + nij[alpha][8];
       d08 = nij[alpha][0] - nij[alpha][8];
       s26 = nij[alpha][2] + nij[alpha][6];
@@ -119,11 +120,11 @@ class CoordTransformSpherical : public CoordTransform {
       nij[alpha][8] = s08 - nij[alpha][0];
 
       // 1 * theta terms
-      eigen::CMatPP_RM& nij_alpha__1_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& nij_alpha__1_ = sTemp0;
       nij_alpha__1_ = nij[alpha][1];
       nij[alpha][1] = (nij_alpha__1_.cwiseProduct(xCos1t) - nij[alpha][7].cwiseProduct(xSin1t));
       nij[alpha][7] = (nij[alpha][7].cwiseProduct(xCos1t) + nij_alpha__1_.cwiseProduct(xSin1t));
-      eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
       nij_alpha__3_ = nij[alpha][3];
       nij[alpha][3] = (nij_alpha__3_.cwiseProduct(xCos1t) - nij[alpha][5].cwiseProduct(xSin1t));
       nij[alpha][5] = (nij[alpha][5].cwiseProduct(xCos1t) + nij_alpha__3_.cwiseProduct(xSin1t));
@@ -135,17 +136,17 @@ class CoordTransformSpherical : public CoordTransform {
 
   // (R,T,Z) -> (s,phi,z) for nabla
   void
-  transformRTZ_SPZ9(eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
+  transformRTZ_SPZ9(axisem3d::eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     // compute sin(theta)
     computeSinOneTwoTheta();
 #endif
     for (int alpha = 0; alpha < nu_1; alpha++) {
       // 2 * theta terms
-      eigen::CMatPP_RM& s08 = sTemp0;
-      eigen::CMatPP_RM& d08 = sTemp1;
-      eigen::CMatPP_RM& s26 = sTemp2;
-      eigen::CMatPP_RM& d26 = sTemp3;
+      axisem3d::eigen::CMatPP_RM& s08 = sTemp0;
+      axisem3d::eigen::CMatPP_RM& d08 = sTemp1;
+      axisem3d::eigen::CMatPP_RM& s26 = sTemp2;
+      axisem3d::eigen::CMatPP_RM& d26 = sTemp3;
       s08 = nij[alpha][0] + nij[alpha][8];
       d08 = nij[alpha][0] - nij[alpha][8];
       s26 = nij[alpha][2] + nij[alpha][6];
@@ -156,11 +157,11 @@ class CoordTransformSpherical : public CoordTransform {
       nij[alpha][8] = s08 - nij[alpha][0];
 
       // 1 * theta terms
-      eigen::CMatPP_RM& nij_alpha__1_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& nij_alpha__1_ = sTemp0;
       nij_alpha__1_ = nij[alpha][1];
       nij[alpha][1] = (nij_alpha__1_.cwiseProduct(xCos1t) + nij[alpha][7].cwiseProduct(xSin1t));
       nij[alpha][7] = (nij[alpha][7].cwiseProduct(xCos1t) - nij_alpha__1_.cwiseProduct(xSin1t));
-      eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
       nij_alpha__3_ = nij[alpha][3];
       nij[alpha][3] = (nij_alpha__3_.cwiseProduct(xCos1t) + nij[alpha][5].cwiseProduct(xSin1t));
       nij[alpha][5] = (nij[alpha][5].cwiseProduct(xCos1t) - nij_alpha__3_.cwiseProduct(xSin1t));
@@ -172,15 +173,15 @@ class CoordTransformSpherical : public CoordTransform {
 
   // (s,phi,z) -> (R,T,Z) for Voigt
   void
-  transformSPZ_RTZ6(eigen::vec_ar6_CMatPP_RM& eij, int nu_1) const {
+  transformSPZ_RTZ6(axisem3d::eigen::vec_ar6_CMatPP_RM& eij, int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     // compute sin(theta)
     computeSinOneTwoTheta();
 #endif
     for (int alpha = 0; alpha < nu_1; alpha++) {
       // 2 * theta terms
-      eigen::CMatPP_RM& s02 = sTemp0;
-      eigen::CMatPP_RM& d02 = sTemp1;
+      axisem3d::eigen::CMatPP_RM& s02 = sTemp0;
+      axisem3d::eigen::CMatPP_RM& d02 = sTemp1;
       s02 = eij[alpha][0] + eij[alpha][2];
       d02 = eij[alpha][0] - eij[alpha][2];
       eij[alpha][0] = (s02 + d02.cwiseProduct(xCos2t) - eij[alpha][4].cwiseProduct(xSin2t)) * half;
@@ -188,7 +189,7 @@ class CoordTransformSpherical : public CoordTransform {
       eij[alpha][4] = (eij[alpha][4].cwiseProduct(xCos2t) + d02.cwiseProduct(xSin2t));
 
       // 1 * theta terms
-      eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
       nij_alpha__3_ = eij[alpha][3];
       eij[alpha][3] = (nij_alpha__3_.cwiseProduct(xCos1t) + eij[alpha][5].cwiseProduct(xSin1t));
       eij[alpha][5] = (eij[alpha][5].cwiseProduct(xCos1t) - nij_alpha__3_.cwiseProduct(xSin1t));
@@ -200,15 +201,15 @@ class CoordTransformSpherical : public CoordTransform {
 
   // (R,T,Z) -> (s,phi,z) for Voigt
   void
-  transformRTZ_SPZ6(eigen::vec_ar6_CMatPP_RM& sij, int nu_1) const {
+  transformRTZ_SPZ6(axisem3d::eigen::vec_ar6_CMatPP_RM& sij, int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     // compute sin(theta)
     computeSinOneTwoTheta();
 #endif
     for (int alpha = 0; alpha < nu_1; alpha++) {
       // 2 * theta terms
-      eigen::CMatPP_RM& s02 = sTemp0;
-      eigen::CMatPP_RM& d02 = sTemp1;
+      axisem3d::eigen::CMatPP_RM& s02 = sTemp0;
+      axisem3d::eigen::CMatPP_RM& d02 = sTemp1;
       s02 = sij[alpha][0] + sij[alpha][2];
       d02 = sij[alpha][0] - sij[alpha][2];
       sij[alpha][0] =
@@ -217,7 +218,7 @@ class CoordTransformSpherical : public CoordTransform {
       sij[alpha][4] = (sij[alpha][4].cwiseProduct(xCos2t) - d02.cwiseProduct(xSin2t) * half);
 
       // 1 * theta terms
-      eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
+      axisem3d::eigen::CMatPP_RM& nij_alpha__3_ = sTemp0;
       nij_alpha__3_ = sij[alpha][3];
       sij[alpha][3] = (nij_alpha__3_.cwiseProduct(xCos1t) - sij[alpha][5].cwiseProduct(xSin1t));
       sij[alpha][5] = (sij[alpha][5].cwiseProduct(xCos1t) + nij_alpha__3_.cwiseProduct(xSin1t));
@@ -230,10 +231,10 @@ class CoordTransformSpherical : public CoordTransform {
   private:
 #ifdef AXISEM3D_SAVE_MEMORY
   // theta
-  const eigen::RMatPP_RM mTheta;
+  const axisem3d::eigen::RMatPP_RM mTheta;
 
   // sin(theta)
-  inline static eigen::RMatPP_RM sSin1t, sCos1t, sSin2t, sCos2t;
+  inline static axisem3d::eigen::RMatPP_RM sSin1t, sCos1t, sSin2t, sCos2t;
 
   // compute sin(theta) on the fly
   void
@@ -251,7 +252,7 @@ class CoordTransformSpherical : public CoordTransform {
   }
 #else
   // sin(theta)
-  const eigen::RMatPP_RM mSin1t, mCos1t, mSin2t, mCos2t;
+  const axisem3d::eigen::RMatPP_RM mSin1t, mCos1t, mSin2t, mCos2t;
 #endif
 
   ////////////////////////////////////////
@@ -260,7 +261,7 @@ class CoordTransformSpherical : public CoordTransform {
 
   private:
   // workspace
-  inline static eigen::CMatPP_RM sTemp0, sTemp1, sTemp2, sTemp3;
+  inline static axisem3d::eigen::CMatPP_RM sTemp0, sTemp1, sTemp2, sTemp3;
 };
 
 #endif /* CoordTransformSpherical_hpp */

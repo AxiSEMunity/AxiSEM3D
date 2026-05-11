@@ -65,19 +65,19 @@ GLLPoint::release(const ABC& abc, const TimeScheme& timeScheme, Domain& domain) 
     } else {
       if (mMassSolid.rows() == 1 && mSumRhoDepth.rows() == 1 && mNormalTop.rows() == 1) {
         // 1D mass with ocean load
-        eigen::DCol2 nsz;
+        axisem3d::eigen::DCol2 nsz;
         nsz << mNormalTop(0, 0), mNormalTop(0, 2);
-        const eigen::DCol2& nrt = geodesy::sz2rtheta(nsz, false);
+        const axisem3d::eigen::DCol2& nrt = geodesy::sz2rtheta(nsz, false);
         mass = std::make_unique<const MassOceanLoad1D>(
             mMassSolid(0), mSumRhoDepth(0) * nrt(0), nrt(1));
       } else {
         // 3D mass with ocean load
         // mass of ocean
-        eigen::DColX massOcean;
-        const eigen::DColX& area = mNormalTop.rowwise().norm();
+        axisem3d::eigen::DColX massOcean;
+        const axisem3d::eigen::DColX& area = mNormalTop.rowwise().norm();
         op1D_3D::times(mSumRhoDepth, area, massOcean);
         // unit normal
-        const eigen::DMatX3& unitNormal = mNormalTop.array().colwise() / area.array();
+        const axisem3d::eigen::DMatX3& unitNormal = mNormalTop.array().colwise() / area.array();
         // mass
         mass = std::make_unique<const MassOceanLoad3D>(op1D_3D::to3D(mMassSolid, mNr),
             op1D_3D::to3D(massOcean, mNr),
@@ -149,9 +149,9 @@ GLLPoint::release(const ABC& abc, const TimeScheme& timeScheme, Domain& domain) 
   for (auto itm = mClaytonABC.begin(); itm != mClaytonABC.end(); itm++) {
     for (auto itv = itm->second.begin(); itv != itm->second.end(); itv++) {
       bool fluid = std::get<0>(*itv);
-      const eigen::DMatX3& nABC = std::get<1>(*itv);
-      const eigen::DColX& rhoVp = std::get<2>(*itv);
-      const eigen::DColX& rhoVs = std::get<3>(*itv);
+      const axisem3d::eigen::DMatX3& nABC = std::get<1>(*itv);
+      const axisem3d::eigen::DColX& rhoVp = std::get<2>(*itv);
+      const axisem3d::eigen::DColX& rhoVs = std::get<3>(*itv);
       // fluid
       if (fluid) {
         std::unique_ptr<const ClaytonFluid> clayton = nullptr;
@@ -169,15 +169,15 @@ GLLPoint::release(const ABC& abc, const TimeScheme& timeScheme, Domain& domain) 
         std::unique_ptr<const ClaytonSolid> clayton = nullptr;
         if (nABC.rows() == 1 && rhoVp.rows() == 1 && rhoVs.rows() == 1) {
           // 1D solid
-          eigen::DCol2 nsz;
+          axisem3d::eigen::DCol2 nsz;
           nsz << nABC(0, 0), nABC(0, 2);
-          const eigen::DCol2& nrt = geodesy::sz2rtheta(nsz, false);
+          const axisem3d::eigen::DCol2& nrt = geodesy::sz2rtheta(nsz, false);
           clayton = std::make_unique<const ClaytonSolid1D>(
               mSolidPoint, rhoVp(0), rhoVs(0), nrt(0), nrt(1));
         } else {
           // 3D solid
-          const eigen::DColX& area = nABC.rowwise().norm();
-          const eigen::DMatX3& unitNormal = nABC.array().colwise() / area.array();
+          const axisem3d::eigen::DColX& area = nABC.rowwise().norm();
+          const axisem3d::eigen::DMatX3& unitNormal = nABC.array().colwise() / area.array();
           clayton = std::make_unique<const ClaytonSolid3D>(mSolidPoint,
               op1D_3D::to3D(rhoVp, mNr),
               op1D_3D::to3D(rhoVs, mNr),

@@ -25,9 +25,9 @@ OceanLoad3D::applyTo(std::vector<Quad>& quads) const {
         continue;
       }
       // cardinal coordinates
-      const eigen::DMatX3& spz = computeEdgeSPZ(quad, surfEdge);
+      const axisem3d::eigen::DMatX3& spz = computeEdgeSPZ(quad, surfEdge);
       // compute values
-      eigen::DColX sumRD;
+      axisem3d::eigen::DColX sumRD;
       bool elemInScope = getSumRhoDepth(spz, quad.getNodalSZ(), sumRD);
       // set values to quad
       if (elemInScope) {
@@ -38,8 +38,8 @@ OceanLoad3D::applyTo(std::vector<Quad>& quads) const {
     mpi::enterInfer();
     for (int irank = 0; irank < mpi::nproc(); irank++) {
       // step 1: gather coords on infer and send to super
-      std::vector<eigen::DMatX3> spzAll;
-      std::vector<eigen::DMat24> szAll;
+      std::vector<axisem3d::eigen::DMatX3> spzAll;
+      std::vector<axisem3d::eigen::DMat24> szAll;
       if (irank == mpi::rank()) {
         // gather coords
         // spzAll.reserve(quads.size());
@@ -59,8 +59,8 @@ OceanLoad3D::applyTo(std::vector<Quad>& quads) const {
       }
 
       // step 2: compute values on super and send back to infer
-      std::vector<eigen::DColX> sumRD_All;
-      std::vector<eigen::IColX> elemInScopeAll;
+      std::vector<axisem3d::eigen::DColX> sumRD_All;
+      std::vector<axisem3d::eigen::IColX> elemInScopeAll;
       if (mpi::root()) {
         // recv coords from infer
         mpi::recvVecEigen(irank, spzAll, 0);
@@ -68,10 +68,10 @@ OceanLoad3D::applyTo(std::vector<Quad>& quads) const {
         // allocate values
         int nQuad = (int)spzAll.size();
         sumRD_All.reserve(nQuad);
-        elemInScopeAll.push_back(eigen::IColX::Zero(nQuad));
+        elemInScopeAll.push_back(axisem3d::eigen::IColX::Zero(nQuad));
         // compute values
         for (int iq = 0; iq < nQuad; iq++) {
-          eigen::DColX sumRD;
+          axisem3d::eigen::DColX sumRD;
           elemInScopeAll[0](iq) = getSumRhoDepth(spzAll[iq], szAll[iq], sumRD);
           sumRD_All.push_back(sumRD);
         }
@@ -108,13 +108,13 @@ OceanLoad3D::applyTo(std::vector<Quad>& quads) const {
 
 // set sum(rho * depth) to quad
 void
-OceanLoad3D::setSumRhoDepthToQuad(const eigen::DColX& sumRhoDepth, Quad& quad) const {
+OceanLoad3D::setSumRhoDepthToQuad(const axisem3d::eigen::DColX& sumRhoDepth, Quad& quad) const {
   // edge points
   int surfEdge = quad.getSurfaceEdge();
   const std::vector<int>& ipnts = vicinity::constants::gEdgeIPnt[surfEdge];
-  const eigen::IRowN& pointNr = quad.getPointNr();
+  const axisem3d::eigen::IRowN& pointNr = quad.getPointNr();
   // flattened to structured
-  eigen::arP_DColX sumRD;
+  axisem3d::eigen::arP_DColX sumRD;
   int row = 0;
   for (int ip = 0; ip < spectral::nPED; ip++) {
     int nr = pointNr(ipnts[ip]);

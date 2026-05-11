@@ -180,12 +180,14 @@ ABC::verbose() const {
 }
 
 // get U0 solid
-eigen::DColX
-ABC::getU0Solid(
-    double span, const eigen::DColX& vp, const eigen::DColX& vs, const eigen::DColX& rho) const {
+axisem3d::eigen::DColX
+ABC::getU0Solid(double span,
+    const axisem3d::eigen::DColX& vp,
+    const axisem3d::eigen::DColX& vs,
+    const axisem3d::eigen::DColX& rho) const {
   // initialize
   int nr = (int)vp.rows();
-  eigen::DColX U0 = eigen::DColX::Zero(nr, 1);
+  axisem3d::eigen::DColX U0 = axisem3d::eigen::DColX::Zero(nr, 1);
   // compute by expr
   sSPAN = span;
   for (int alpha = 0; alpha < nr; alpha++) {
@@ -198,11 +200,12 @@ ABC::getU0Solid(
 }
 
 // get U0 fluid
-eigen::DColX
-ABC::getU0Fluid(double span, const eigen::DColX& vp, const eigen::DColX& rho) const {
+axisem3d::eigen::DColX
+ABC::getU0Fluid(
+    double span, const axisem3d::eigen::DColX& vp, const axisem3d::eigen::DColX& rho) const {
   // initialize
   int nr = (int)vp.rows();
-  eigen::DColX U0 = eigen::DColX::Zero(nr, 1);
+  axisem3d::eigen::DColX U0 = axisem3d::eigen::DColX::Zero(nr, 1);
   // compute by expr
   sSPAN = span;
   for (int alpha = 0; alpha < nr; alpha++) {

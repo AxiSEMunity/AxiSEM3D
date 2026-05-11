@@ -58,9 +58,9 @@ class ElementOpSolid : public ElementOp {
   }
 
   // get coords
-  eigen::DRowX
+  axisem3d::eigen::DRowX
   getCoords() const {
-    eigen::DRowX sz(mIPnts.size() * 2);
+    axisem3d::eigen::DRowX sz(mIPnts.size() * 2);
     for (int ip = 0; ip < mIPnts.size(); ip++) {
       sz.block(0, ip * 2, 1, 2) = mElement->getPoint(mIPnts[ip]).getCoords();
     }
@@ -73,18 +73,18 @@ class ElementOpSolid : public ElementOp {
   void
   record(int bufferLine,
       const channel::solid::ChannelOptions& chops,
-      const eigen::CMatXX& expIAlphaPhi);
+      const axisem3d::eigen::CMatXX& expIAlphaPhi);
 
   private:
   // element
   std::shared_ptr<SolidElement> mElement = nullptr;
 
   // buffer
-  eigen::RTensor4 mBufferU;
-  eigen::RTensor4 mBufferG;
-  eigen::RTensor4 mBufferE;
-  eigen::RTensor4 mBufferR;
-  eigen::RTensor4 mBufferS;
+  axisem3d::eigen::RTensor4 mBufferU;
+  axisem3d::eigen::RTensor4 mBufferG;
+  axisem3d::eigen::RTensor4 mBufferE;
+  axisem3d::eigen::RTensor4 mBufferR;
+  axisem3d::eigen::RTensor4 mBufferS;
 
   /////////////////////////// process ///////////////////////////
   public:
@@ -94,7 +94,7 @@ class ElementOpSolid : public ElementOp {
       const channel::solid::ChannelOptions& chops,
       int elemIndexNaGrid,
       int naGridIndex,
-      std::vector<eigen::RTensor5>& ioBuffers);
+      std::vector<axisem3d::eigen::RTensor5>& ioBuffers);
 
   ////////////////////////////////////////
   //////////////// static ////////////////
@@ -151,18 +151,23 @@ class ElementOpSolid : public ElementOp {
 
   // workspace for record
   // get response from elememt
-  inline static eigen::CMatXN3 sCUXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::CMatXN9 sCGXN9 = eigen::CMatXN9(0, spectral::nPEM * 9);
-  inline static eigen::CMatXN6 sCEXN6 = eigen::CMatXN6(0, spectral::nPEM * 6);
-  inline static eigen::CMatXN3 sCRXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::CMatXN6 sCSXN6 = eigen::CMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::CMatXN3 sCUXN3 = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN9 sCGXN9 = axisem3d::eigen::CMatXN9(0, spectral::nPEM * 9);
+  inline static axisem3d::eigen::CMatXN6 sCEXN6 = axisem3d::eigen::CMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::CMatXN3 sCRXN3 = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN6 sCSXN6 = axisem3d::eigen::CMatXN6(0, spectral::nPEM * 6);
 
   // making real
-  inline static eigen::RMatXN3_RM sRUXN3 = eigen::RMatXN3_RM(0, spectral::nPEM * 3);
-  inline static eigen::RMatXN9_RM sRGXN9 = eigen::RMatXN9_RM(0, spectral::nPEM * 9);
-  inline static eigen::RMatXN6_RM sREXN6 = eigen::RMatXN6_RM(0, spectral::nPEM * 6);
-  inline static eigen::RMatXN3_RM sRRXN3 = eigen::RMatXN3_RM(0, spectral::nPEM * 3);
-  inline static eigen::RMatXN6_RM sRSXN6 = eigen::RMatXN6_RM(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::RMatXN3_RM sRUXN3 =
+      axisem3d::eigen::RMatXN3_RM(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN9_RM sRGXN9 =
+      axisem3d::eigen::RMatXN9_RM(0, spectral::nPEM * 9);
+  inline static axisem3d::eigen::RMatXN6_RM sREXN6 =
+      axisem3d::eigen::RMatXN6_RM(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::RMatXN3_RM sRRXN3 =
+      axisem3d::eigen::RMatXN3_RM(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN6_RM sRSXN6 =
+      axisem3d::eigen::RMatXN6_RM(0, spectral::nPEM * 6);
 };
 
 #endif /* ElementOpSolid_hpp */

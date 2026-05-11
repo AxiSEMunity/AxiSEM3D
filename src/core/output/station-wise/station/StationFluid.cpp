@@ -17,7 +17,7 @@
 // set element
 void
 StationFluid::setElement(
-    const std::shared_ptr<FluidElement>& element, const eigen::DRowN& weights) {
+    const std::shared_ptr<FluidElement>& element, const axisem3d::eigen::DRowN& weights) {
   // element
   mElement = element;
 
@@ -87,7 +87,7 @@ void
 StationFluid::processReport(int bufferLine,
     const channel::fluid::ChannelOptions& chops,
     int stationIndex,
-    eigen::RTensor3& bufferFields) {
+    axisem3d::eigen::RTensor3& bufferFields) {
   // rotate
   rotate(bufferLine, chops);
 

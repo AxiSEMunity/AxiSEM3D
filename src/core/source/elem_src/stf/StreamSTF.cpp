@@ -109,7 +109,8 @@ StreamSTF::verbose() const {
       4, 18, "1st (time, value)", range(mTimes.front(), (double)mData.front(), '(', ')'));
   ss << boxEquals(
       4, 18, "last (time, value)", range(mTimes.back(), (double)mData.back(), '(', ')'));
-  const eigen::RColX& d = Eigen::Map<const eigen::RColX>(mData.data(), mData.size());
+  const axisem3d::eigen::RColX& d =
+      Eigen::Map<const axisem3d::eigen::RColX>(mData.data(), mData.size());
   ss << boxEquals(4, 18, "[min, max] values", range(d.minCoeff(), d.maxCoeff()));
   // padding
   if (mPadding) {

@@ -58,7 +58,7 @@ class WavefieldInjection {
       std::vector<int>& quadNrs,
       std::vector<std::vector<int>>& quadBoundaryPoints,
       std::vector<std::vector<std::string>>& recKeys,
-      std::vector<eigen::DMatXX>& rec_spz) const;
+      std::vector<axisem3d::eigen::DMatXX>& rec_spz) const;
 
   // info in fluid
   void
@@ -66,7 +66,7 @@ class WavefieldInjection {
       std::vector<int>& quadNrs,
       std::vector<std::vector<int>>& quadBoundaryPnts,
       std::vector<std::vector<std::string>>& recKeys,
-      std::vector<eigen::DMatXX>& rec_spz) const;
+      std::vector<axisem3d::eigen::DMatXX>& rec_spz) const;
 
   private:
   // elements

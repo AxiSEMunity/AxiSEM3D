@@ -23,13 +23,13 @@ class Mass1D : public Mass {
 
   // compute accel in-place for fluid
   void
-  computeAccel(eigen::CColX& stiff1) const {
+  computeAccel(axisem3d::eigen::CColX& stiff1) const {
     stiff1 *= mInvMass;
   }
 
   // compute accel in-place for solid
   void
-  computeAccel(eigen::CMatX3& stiff3) const {
+  computeAccel(axisem3d::eigen::CMatX3& stiff3) const {
     stiff3 *= mInvMass;
   }
 

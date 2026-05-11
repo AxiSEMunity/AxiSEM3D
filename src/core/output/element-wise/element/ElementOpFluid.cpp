@@ -45,7 +45,7 @@ ElementOpFluid::setInGroup(int dumpIntv, const channel::fluid::ChannelOptions& c
 void
 ElementOpFluid::record(int bufferLine,
     const channel::fluid::ChannelOptions& chops,
-    const eigen::CMatXX& expIAlphaPhi) {
+    const axisem3d::eigen::CMatXX& expIAlphaPhi) {
   int nu_1 = mElement->getNu_1();
   bool needRTZ = (chops.mWCS == channel::WavefieldCS::RTZ);
 
@@ -74,7 +74,7 @@ ElementOpFluid::processReport(int bufferLine,
     const channel::fluid::ChannelOptions& chops,
     int elemIndexNaGrid,
     int naGridIndex,
-    std::vector<eigen::RTensor5>& ioBuffers) {
+    std::vector<axisem3d::eigen::RTensor5>& ioBuffers) {
   // loop over channels
   for (int ich = 0; ich < chops.mStdChannels.size(); ich++) {
     // find field and index of channel

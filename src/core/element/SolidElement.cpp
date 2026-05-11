@@ -99,7 +99,7 @@ SolidElement::getPoint(int ipnt) const {
 /////////////////////////// time loop ///////////////////////////
 // collect displacement from points
 void
-SolidElement::collectDisplFromPoints(eigen::vec_ar3_CMatPP_RM& displElem) const {
+SolidElement::collectDisplFromPoints(axisem3d::eigen::vec_ar3_CMatPP_RM& displElem) const {
   for (int ipol = 0; ipol < spectral::nPED; ipol++) {
     for (int jpol = 0; jpol < spectral::nPED; jpol++) {
       mPoints[ipol * spectral::nPED + jpol]->scatterDisplToElement(displElem, mNu_1, ipol, jpol);
@@ -109,8 +109,8 @@ SolidElement::collectDisplFromPoints(eigen::vec_ar3_CMatPP_RM& displElem) const 
 
 // displacement to stiffness
 void
-SolidElement::displToStiff(
-    const eigen::vec_ar3_CMatPP_RM& displElem, eigen::vec_ar3_CMatPP_RM& stiffElem) const {
+SolidElement::displToStiff(const axisem3d::eigen::vec_ar3_CMatPP_RM& displElem,
+    axisem3d::eigen::vec_ar3_CMatPP_RM& stiffElem) const {
   if (mPRT) {
     /////////////// with PRT, strain in 3 * 3 ///////////////
     // disp to strain
@@ -184,7 +184,7 @@ SolidElement::displToStiff(
 // add stiffness to points
 // allow a derived class to change stiffElem (no const)
 void
-SolidElement::addStiffToPoints(eigen::vec_ar3_CMatPP_RM& stiffElem) const {
+SolidElement::addStiffToPoints(axisem3d::eigen::vec_ar3_CMatPP_RM& stiffElem) const {
   for (int ipol = 0; ipol < spectral::nPED; ipol++) {
     for (int jpol = 0; jpol < spectral::nPED; jpol++) {
       mPoints[ipol * spectral::nPED + jpol]->gatherStiffFromElement(stiffElem, ipol, jpol);
@@ -238,7 +238,7 @@ SolidElement::prepareForceSource() const {
 
 // add force source (force given in SPZ)
 void
-SolidElement::addForceSource(const eigen::CMatXN3& force, int nu_1_force) const {
+SolidElement::addForceSource(const axisem3d::eigen::CMatXN3& force, int nu_1_force) const {
   for (int ipnt = 0; ipnt < nPEM; ipnt++) {
     mPoints[ipnt]->addForceSource(force, nu_1_force, ipnt);
   }
@@ -257,7 +257,7 @@ SolidElement::prepareMomentSource() const {
 
 // add moment source (moment tensor given in SPZ)
 void
-SolidElement::addMomentSource(const eigen::CMatXN6& moment, int nu_1_moment) const {
+SolidElement::addMomentSource(const axisem3d::eigen::CMatXN6& moment, int nu_1_moment) const {
   // pad source with zeros if source has lower order than element
   // truncate source if source has higher order than element
   int nu_1_coexist = std::min(mNu_1, nu_1_moment);
@@ -370,7 +370,7 @@ SolidElement::prepareWavefieldOutput(
 
 // displ field
 void
-SolidElement::getDisplField(eigen::CMatXN3& displ, bool needRTZ) const {
+SolidElement::getDisplField(axisem3d::eigen::CMatXN3& displ, bool needRTZ) const {
   // collect displacement from points
   collectDisplFromPoints(sDisplSpherical_FR);
 
@@ -385,13 +385,13 @@ SolidElement::getDisplField(eigen::CMatXN3& displ, bool needRTZ) const {
 
 // nabla field
 void
-SolidElement::getNablaField(eigen::CMatXN9& nabla, bool needRTZ) const {
+SolidElement::getNablaField(axisem3d::eigen::CMatXN9& nabla, bool needRTZ) const {
   // collect displacement from points
   collectDisplFromPoints(sDisplSpherical_FR);
 
   // displ to nabla, use sStressSpherical as temp storage
-  eigen::vec_ar9_CMatPP_RM& sStrainUndulated9_FR = sStressSpherical_FR;
-  eigen::RMatXN9& sStrainUndulated9_CD = sStressSpherical_CD;
+  axisem3d::eigen::vec_ar9_CMatPP_RM& sStrainUndulated9_FR = sStressSpherical_FR;
+  axisem3d::eigen::RMatXN9& sStrainUndulated9_CD = sStressSpherical_CD;
   if (mPRT) {
     mGradQuad->computeGrad9(sDisplSpherical_FR, sStrainSpherical_FR, mNu_1);
     mTransform->transformSPZ_RTZ9(sStrainSpherical_FR, mNu_1);
@@ -418,7 +418,7 @@ SolidElement::getNablaField(eigen::CMatXN9& nabla, bool needRTZ) const {
 
 // strain field
 void
-SolidElement::getStrainField(eigen::CMatXN6& strain, bool needRTZ) const {
+SolidElement::getStrainField(axisem3d::eigen::CMatXN6& strain, bool needRTZ) const {
   // collect displacement from points
   collectDisplFromPoints(sDisplSpherical_FR);
 
@@ -463,13 +463,13 @@ SolidElement::getStrainField(eigen::CMatXN6& strain, bool needRTZ) const {
 
 // curl field
 void
-SolidElement::getCurlField(eigen::CMatXN3& curl, bool needRTZ) const {
+SolidElement::getCurlField(axisem3d::eigen::CMatXN3& curl, bool needRTZ) const {
   // collect displacement from points
   collectDisplFromPoints(sDisplSpherical_FR);
 
   // displ to nabla, use sStressSpherical as temp storage
-  eigen::vec_ar9_CMatPP_RM& sStrainUndulated9_FR = sStressSpherical_FR;
-  eigen::RMatXN9& sStrainUndulated9_CD = sStressSpherical_CD;
+  axisem3d::eigen::vec_ar9_CMatPP_RM& sStrainUndulated9_FR = sStressSpherical_FR;
+  axisem3d::eigen::RMatXN9& sStrainUndulated9_CD = sStressSpherical_CD;
   if (mPRT) {
     mGradQuad->computeGrad9(sDisplSpherical_FR, sStrainSpherical_FR, mNu_1);
     mTransform->transformSPZ_RTZ9(sStrainSpherical_FR, mNu_1);
@@ -485,7 +485,7 @@ SolidElement::getCurlField(eigen::CMatXN3& curl, bool needRTZ) const {
   }
 
   // nabla to curl, use sStiffSpherical_FR as temp storage
-  eigen::vec_ar3_CMatPP_RM& sCurlUndulated_FR = sStiffSpherical_FR;
+  axisem3d::eigen::vec_ar3_CMatPP_RM& sCurlUndulated_FR = sStiffSpherical_FR;
   for (int alpha = 0; alpha < mNu_1; alpha++) {
     sCurlUndulated_FR[alpha][0] = (sStrainUndulated9_FR[alpha][7] - sStrainUndulated9_FR[alpha][5]);
     sCurlUndulated_FR[alpha][1] = (sStrainUndulated9_FR[alpha][2] - sStrainUndulated9_FR[alpha][6]);
@@ -505,7 +505,7 @@ SolidElement::getCurlField(eigen::CMatXN3& curl, bool needRTZ) const {
 
 // stress field
 void
-SolidElement::getStressField(eigen::CMatXN6& stress, bool needRTZ) const {
+SolidElement::getStressField(axisem3d::eigen::CMatXN6& stress, bool needRTZ) const {
   // coord
   if (needRTZ && !stressInRTZ()) {
     // change to Voigt convention for strain before rotation

@@ -60,17 +60,17 @@ class SolidElement : public Element {
   /////////////////////////// time loop ///////////////////////////
   // collect displacement from points
   virtual void
-  collectDisplFromPoints(eigen::vec_ar3_CMatPP_RM& displElem) const;
+  collectDisplFromPoints(axisem3d::eigen::vec_ar3_CMatPP_RM& displElem) const;
 
   // displacement to stiffness
   void
-  displToStiff(
-      const eigen::vec_ar3_CMatPP_RM& displElem, eigen::vec_ar3_CMatPP_RM& stiffElem) const;
+  displToStiff(const axisem3d::eigen::vec_ar3_CMatPP_RM& displElem,
+      axisem3d::eigen::vec_ar3_CMatPP_RM& stiffElem) const;
 
   // add stiffness to points
   // allow a derived class to change stiffElem (no const)
   virtual void
-  addStiffToPoints(eigen::vec_ar3_CMatPP_RM& stiffElem) const;
+  addStiffToPoints(axisem3d::eigen::vec_ar3_CMatPP_RM& stiffElem) const;
 
   // compute stiffness term
   void
@@ -87,7 +87,7 @@ class SolidElement : public Element {
 
   // add force source (force given in SPZ)
   void
-  addForceSource(const eigen::CMatXN3& force, int nu_1_force) const;
+  addForceSource(const axisem3d::eigen::CMatXN3& force, int nu_1_force) const;
 
   // prepare moment source (moment tensor given in SPZ)
   void
@@ -95,7 +95,7 @@ class SolidElement : public Element {
 
   // add moment source (moment tensor given in SPZ)
   void
-  addMomentSource(const eigen::CMatXN6& moment, int nu_1_moment) const;
+  addMomentSource(const axisem3d::eigen::CMatXN6& moment, int nu_1_moment) const;
 
   /////////////////////////// wavefield output ///////////////////////////
   // prepare wavefield output
@@ -104,53 +104,53 @@ class SolidElement : public Element {
 
   // displ field
   void
-  getDisplField(eigen::CMatXN3& displ) const {
+  getDisplField(axisem3d::eigen::CMatXN3& displ) const {
     getDisplField(displ, displInRTZ());
   }
 
   // displ field
   void
-  getDisplField(eigen::CMatXN3& displ, bool needRTZ) const;
+  getDisplField(axisem3d::eigen::CMatXN3& displ, bool needRTZ) const;
 
   // nabla field
   void
-  getNablaField(eigen::CMatXN9& nabla) const {
+  getNablaField(axisem3d::eigen::CMatXN9& nabla) const {
     getNablaField(nabla, nablaInRTZ());
   }
 
   // nabla field
   void
-  getNablaField(eigen::CMatXN9& nabla, bool needRTZ) const;
+  getNablaField(axisem3d::eigen::CMatXN9& nabla, bool needRTZ) const;
 
   // strain field
   void
-  getStrainField(eigen::CMatXN6& strain) const {
+  getStrainField(axisem3d::eigen::CMatXN6& strain) const {
     getStrainField(strain, strainInRTZ());
   }
 
   // strain field
   void
-  getStrainField(eigen::CMatXN6& strain, bool needRTZ) const;
+  getStrainField(axisem3d::eigen::CMatXN6& strain, bool needRTZ) const;
 
   // curl field
   void
-  getCurlField(eigen::CMatXN3& curl) const {
+  getCurlField(axisem3d::eigen::CMatXN3& curl) const {
     getCurlField(curl, curlInRTZ());
   }
 
   // curl field
   void
-  getCurlField(eigen::CMatXN3& curl, bool needRTZ) const;
+  getCurlField(axisem3d::eigen::CMatXN3& curl, bool needRTZ) const;
 
   // stress field
   void
-  getStressField(eigen::CMatXN6& stress) const {
+  getStressField(axisem3d::eigen::CMatXN6& stress) const {
     getStressField(stress, stressInRTZ());
   }
 
   // stress field
   void
-  getStressField(eigen::CMatXN6& stress, bool needRTZ) const;
+  getStressField(axisem3d::eigen::CMatXN6& stress, bool needRTZ) const;
 
   // displ crd
   inline bool
@@ -194,8 +194,8 @@ class SolidElement : public Element {
 
   // stress buffer
   // stress cannot be recomputed with attenuation
-  const std::unique_ptr<eigen::vec_ar6_CMatPP_RM> mStressBuffer =
-      std::make_unique<eigen::vec_ar6_CMatPP_RM>();
+  const std::unique_ptr<axisem3d::eigen::vec_ar6_CMatPP_RM> mStressBuffer =
+      std::make_unique<axisem3d::eigen::vec_ar6_CMatPP_RM>();
 
   ////////////////////////////////////////
   //////////////// static ////////////////
@@ -221,17 +221,21 @@ class SolidElement : public Element {
 
   // workspace
   // Fourier
-  inline static eigen::vec_ar3_CMatPP_RM sDisplSpherical_FR;
-  inline static eigen::vec_ar9_CMatPP_RM sStrainSpherical_FR;
-  inline static eigen::vec_ar6_CMatPP_RM sStrainUndulated_FR;
-  inline static eigen::vec_ar6_CMatPP_RM sStressUndulated_FR;
-  inline static eigen::vec_ar9_CMatPP_RM sStressSpherical_FR;
-  inline static eigen::vec_ar3_CMatPP_RM sStiffSpherical_FR;
+  inline static axisem3d::eigen::vec_ar3_CMatPP_RM sDisplSpherical_FR;
+  inline static axisem3d::eigen::vec_ar9_CMatPP_RM sStrainSpherical_FR;
+  inline static axisem3d::eigen::vec_ar6_CMatPP_RM sStrainUndulated_FR;
+  inline static axisem3d::eigen::vec_ar6_CMatPP_RM sStressUndulated_FR;
+  inline static axisem3d::eigen::vec_ar9_CMatPP_RM sStressSpherical_FR;
+  inline static axisem3d::eigen::vec_ar3_CMatPP_RM sStiffSpherical_FR;
   // cardinal
-  inline static eigen::RMatXN9 sStrainSpherical_CD = eigen::RMatXN9(0, spectral::nPEM * 9);
-  inline static eigen::RMatXN6 sStrainUndulated_CD = eigen::RMatXN6(0, spectral::nPEM * 6);
-  inline static eigen::RMatXN6 sStressUndulated_CD = eigen::RMatXN6(0, spectral::nPEM * 6);
-  inline static eigen::RMatXN9 sStressSpherical_CD = eigen::RMatXN9(0, spectral::nPEM * 9);
+  inline static axisem3d::eigen::RMatXN9 sStrainSpherical_CD =
+      axisem3d::eigen::RMatXN9(0, spectral::nPEM * 9);
+  inline static axisem3d::eigen::RMatXN6 sStrainUndulated_CD =
+      axisem3d::eigen::RMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::RMatXN6 sStressUndulated_CD =
+      axisem3d::eigen::RMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::RMatXN9 sStressSpherical_CD =
+      axisem3d::eigen::RMatXN9(0, spectral::nPEM * 9);
 };
 
 #endif /* SolidElement_hpp */

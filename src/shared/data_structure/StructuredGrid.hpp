@@ -288,10 +288,10 @@ template <int D, typename T> class StructuredGrid {
   }
 
   // get data range
-  eigen::DMatXX
+  axisem3d::eigen::DMatXX
   getDataRange() const {
     // min/max of unique data
-    eigen::DMatXX uniqueMinMax(numUniqueData(), 2);
+    axisem3d::eigen::DMatXX uniqueMinMax(numUniqueData(), 2);
     Eigen::array<Eigen::DenseIndex, 1 + D> start, count;
     start.fill(0);
     count = mGridData.dimensions();
@@ -304,7 +304,7 @@ template <int D, typename T> class StructuredGrid {
     }
 
     // min/max of data
-    eigen::DMatXX dataMinMax(numData(), 2);
+    axisem3d::eigen::DMatXX dataMinMax(numData(), 2);
     for (int ivar = 0; ivar < numData(); ivar++) {
       int index = mDataRankFactor[ivar].first;
       double factor = mDataRankFactor[ivar].second;

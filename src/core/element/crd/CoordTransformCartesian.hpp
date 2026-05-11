@@ -20,37 +20,37 @@ class CoordTransformCartesian : public CoordTransform {
   public:
   // (s,phi,z) -> (R,T,Z)
   void
-  transformSPZ_RTZ3(eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
+  transformSPZ_RTZ3(axisem3d::eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
     // nothing
   }
 
   // (R,T,Z) -> (s,phi,z)
   void
-  transformRTZ_SPZ3(eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
+  transformRTZ_SPZ3(axisem3d::eigen::vec_ar3_CMatPP_RM& ui, int nu_1) const {
     // nothing
   }
 
   // (s,phi,z) -> (R,T,Z) for nabla
   void
-  transformSPZ_RTZ9(eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
+  transformSPZ_RTZ9(axisem3d::eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
     // nothing
   }
 
   // (R,T,Z) -> (s,phi,z) for nabla
   void
-  transformRTZ_SPZ9(eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
+  transformRTZ_SPZ9(axisem3d::eigen::vec_ar9_CMatPP_RM& nij, int nu_1) const {
     // nothing
   }
 
   // (s,phi,z) -> (R,T,Z) for Voigt
   void
-  transformSPZ_RTZ6(eigen::vec_ar6_CMatPP_RM& eij, int nu_1) const {
+  transformSPZ_RTZ6(axisem3d::eigen::vec_ar6_CMatPP_RM& eij, int nu_1) const {
     // nothing
   }
 
   // (R,T,Z) -> (s,phi,z) for Voigt
   void
-  transformRTZ_SPZ6(eigen::vec_ar6_CMatPP_RM& sij, int nu_1) const {
+  transformRTZ_SPZ6(axisem3d::eigen::vec_ar6_CMatPP_RM& sij, int nu_1) const {
     // nothing
   }
 };

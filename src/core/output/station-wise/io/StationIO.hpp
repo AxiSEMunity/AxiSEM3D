@@ -32,8 +32,9 @@ class StationIO {
 
   // dump to file
   virtual void
-  dumpToFile(
-      const eigen::DColX& bufferTime, const eigen::RTensor3& bufferFields, int bufferLine) = 0;
+  dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+      const axisem3d::eigen::RTensor3& bufferFields,
+      int bufferLine) = 0;
 
   // set flush
   void

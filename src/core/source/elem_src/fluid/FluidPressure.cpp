@@ -15,7 +15,7 @@
 // constructor
 FluidPressure::FluidPressure(std::unique_ptr<STF>& stf,
     const std::shared_ptr<FluidElement>& element,
-    const eigen::CMatXN& pattern) : FluidSource(stf, element), mPattern(pattern) {
+    const axisem3d::eigen::CMatXN& pattern) : FluidSource(stf, element), mPattern(pattern) {
   // prepare
   element->preparePressureSource();
 

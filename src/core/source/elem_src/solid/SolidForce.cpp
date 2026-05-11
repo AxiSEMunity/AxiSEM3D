@@ -15,7 +15,7 @@
 // constructor
 SolidForce::SolidForce(std::unique_ptr<STF>& stf,
     const std::shared_ptr<SolidElement>& element,
-    const eigen::CMatXN3& pattern) : SolidSource(stf, element), mPattern(pattern) {
+    const axisem3d::eigen::CMatXN3& pattern) : SolidSource(stf, element), mPattern(pattern) {
   // prepare
   element->prepareForceSource();
 

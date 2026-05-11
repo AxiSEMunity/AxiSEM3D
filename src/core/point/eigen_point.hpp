@@ -15,7 +15,7 @@
 #include "eigen.hpp"
 #include "numerical.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   // coords
   typedef Eigen::Matrix<double, 1, 2> DRow2;
 
@@ -28,6 +28,6 @@ namespace eigen {
   typedef Eigen::Matrix<double, Eigen::Dynamic, 3> DMatX3;
   typedef Eigen::Matrix<numerical::Real, Eigen::Dynamic, 3> RMatX3;
   typedef Eigen::Matrix<numerical::ComplexR, Eigen::Dynamic, 3> CMatX3;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 #endif /* eigen_point_hpp */

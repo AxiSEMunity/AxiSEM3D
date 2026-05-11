@@ -24,7 +24,7 @@ class Ellipticity : public Geometric3D {
   private:
   // get undulation on points
   bool
-  getUndulation(const eigen::DMatX3& spz, eigen::DColX& undulation) const;
+  getUndulation(const axisem3d::eigen::DMatX3& spz, axisem3d::eigen::DColX& undulation) const;
 
   // verbose
   std::string

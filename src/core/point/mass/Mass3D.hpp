@@ -17,7 +17,8 @@
 class Mass3D : public Mass {
   public:
   // constructor
-  Mass3D(const eigen::DColX& mass) : mInvMass(mass.cwiseInverse().cast<numerical::Real>()) {
+  Mass3D(const axisem3d::eigen::DColX& mass) :
+      mInvMass(mass.cwiseInverse().cast<numerical::Real>()) {
     // nothing
   }
 
@@ -27,23 +28,23 @@ class Mass3D : public Mass {
 
   // compute accel in-place for fluid
   void
-  computeAccel(eigen::CColX& stiff1) const;
+  computeAccel(axisem3d::eigen::CColX& stiff1) const;
 
   // compute accel in-place for solid
   void
-  computeAccel(eigen::CMatX3& stiff3) const;
+  computeAccel(axisem3d::eigen::CMatX3& stiff3) const;
 
   private:
   // inverse of mass
-  const eigen::RColX mInvMass;
+  const axisem3d::eigen::RColX mInvMass;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
   ////////////////////////////////////////
 
   // workspace
-  inline static eigen::RColX sStiffR1 = eigen::RColX(0);
-  inline static eigen::RMatX3 sStiffR3 = eigen::RMatX3(0, 3);
+  inline static axisem3d::eigen::RColX sStiffR1 = axisem3d::eigen::RColX(0);
+  inline static axisem3d::eigen::RMatX3 sStiffR3 = axisem3d::eigen::RMatX3(0, 3);
 };
 
 #endif /* Mass3D_hpp */

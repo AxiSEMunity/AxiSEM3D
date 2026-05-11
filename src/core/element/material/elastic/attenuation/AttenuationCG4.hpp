@@ -14,7 +14,7 @@
 
 #include "Attenuation.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   // Fourier
   typedef Eigen::Matrix<double, 2, 2, Eigen::RowMajor> DMat22_RM;
   typedef Eigen::Matrix<numerical::Real, 2, 2, Eigen::RowMajor> RMat22_RM;
@@ -25,7 +25,7 @@ namespace eigen {
   typedef Eigen::Matrix<double, Eigen::Dynamic, 4> DMatX4;
   typedef Eigen::Matrix<numerical::Real, Eigen::Dynamic, 4> RMatX4;
   typedef Eigen::Matrix<numerical::Real, Eigen::Dynamic, 4 * 6> RMatX46;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 namespace fa4 {
   // property class
@@ -38,22 +38,22 @@ namespace fa4 {
 class AttenuationCG4 : public Attenuation {
   public:
   // 1D constructor
-  AttenuationCG4(const eigen::DMat22_RM& dLambda, const eigen::DMat22_RM& dMu) :
+  AttenuationCG4(const axisem3d::eigen::DMat22_RM& dLambda, const axisem3d::eigen::DMat22_RM& dMu) :
       Attenuation(true), mDLambda(dLambda), mDMu(dMu)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mDMu2(eigen::DMat22_RM(dMu * 2.))
+      mDMu2(axisem3d::eigen::DMat22_RM(dMu * 2.))
 #endif
   {
     // nothing
   }
 
   // 3D constructor
-  AttenuationCG4(const eigen::DMatX4& dLambda, const eigen::DMatX4& dMu) :
+  AttenuationCG4(const axisem3d::eigen::DMatX4& dLambda, const axisem3d::eigen::DMatX4& dMu) :
       Attenuation(false), mDLambda(dLambda), mDMu(dMu)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mDMu2(eigen::DMatX4(dMu * 2.))
+      mDMu2(axisem3d::eigen::DMatX4(dMu * 2.))
 #endif
   {
     // nothing
@@ -93,13 +93,13 @@ class AttenuationCG4 : public Attenuation {
     if (elemInFourier) {
       mDStress_FR.resize(nu_1);
       for (int alpha = 0; alpha < nu_1; alpha++) {
-        mDStress_FR[alpha].fill(eigen::CMat22_RM::Zero());
+        mDStress_FR[alpha].fill(axisem3d::eigen::CMat22_RM::Zero());
       }
       mDStress_CD.resize(0, 4 * 6);
     } else {
       mDStress_FR.clear();
       mDStress_FR.shrink_to_fit();
-      mDStress_CD = eigen::RMatX46::Zero(nr, 4 * 6);
+      mDStress_CD = axisem3d::eigen::RMatX46::Zero(nr, 4 * 6);
     }
     mMemVar_FR.assign(nsls(), mDStress_FR);
     mMemVar_CD.assign(nsls(), mDStress_CD);
@@ -138,7 +138,9 @@ class AttenuationCG4 : public Attenuation {
   //////////////////////// apply ////////////////////////
   // apply attenuation in Fourier space
   void
-  apply(const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) {
+  apply(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeDMu2();
 #endif
@@ -150,7 +152,7 @@ class AttenuationCG4 : public Attenuation {
 
   // apply attenuation in cardinal space
   void
-  apply(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) {
+  apply(const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeDMu2();
 #endif
@@ -184,16 +186,16 @@ class AttenuationCG4 : public Attenuation {
 #endif
 
   // memory variables in Fourier space
-  eigen::vec_ar6_CMat22_RM mDStress_FR;
-  std::vector<eigen::vec_ar6_CMat22_RM> mMemVar_FR;
+  axisem3d::eigen::vec_ar6_CMat22_RM mDStress_FR;
+  std::vector<axisem3d::eigen::vec_ar6_CMat22_RM> mMemVar_FR;
 
   // memory variables in cardinal space
-  eigen::RMatX46 mDStress_CD;
-  std::vector<eigen::RMatX46> mMemVar_CD;
+  axisem3d::eigen::RMatX46 mDStress_CD;
+  std::vector<axisem3d::eigen::RMatX46> mMemVar_CD;
 
   // workspace
-  inline static eigen::vec_ar6_CMat22_RM sStrain4_FR;
-  inline static eigen::RMatX46 sStrain4_CD;
+  inline static axisem3d::eigen::vec_ar6_CMat22_RM sStrain4_FR;
+  inline static axisem3d::eigen::RMatX46 sStrain4_CD;
 
   /////////////////////////////////////////////////////////////////////
   /////////////////// template-based implementation ///////////////////
@@ -204,7 +206,7 @@ class AttenuationCG4 : public Attenuation {
   static typename std::enable_if<CASE == CaseFA::_1D_FR, void>::type
   subtractMemFromStress(const std::vector<FCG6>& memVar, FMat6& stressN, int nx) {
     for (int isls = 0; isls < nsls(); isls++) {
-      const eigen::vec_ar6_CMat22_RM& memVar4 = memVar[isls];
+      const axisem3d::eigen::vec_ar6_CMat22_RM& memVar4 = memVar[isls];
       for (int idim = 0; idim < 6; idim++) {
         stressN[nx][idim](1, 1) -= memVar4[nx][idim](0, 0);
         stressN[nx][idim](1, 3) -= memVar4[nx][idim](0, 1);
@@ -235,7 +237,7 @@ class AttenuationCG4 : public Attenuation {
 
     // subtract
     for (int isls = 0; isls < nsls(); isls++) {
-      const eigen::RMatX46& memVar4 = memVar[isls];
+      const axisem3d::eigen::RMatX46& memVar4 = memVar[isls];
       stressN(seqRow, seqN0) -= memVar4(seqRow, seq40);
       stressN(seqRow, seqN1) -= memVar4(seqRow, seq41);
       stressN(seqRow, seqN2) -= memVar4(seqRow, seq42);
@@ -246,7 +248,9 @@ class AttenuationCG4 : public Attenuation {
   /////////////////// strain => strain4 ///////////////////
   // CASE == _1D_FR
   static void
-  formStrain4(const eigen::vec_ar6_CMatPP_RM& strainN, eigen::vec_ar6_CMat22_RM& strain4, int nx) {
+  formStrain4(const axisem3d::eigen::vec_ar6_CMatPP_RM& strainN,
+      axisem3d::eigen::vec_ar6_CMat22_RM& strain4,
+      int nx) {
     for (int idim = 0; idim < 6; idim++) {
       strain4[nx][idim](0, 0) = strainN[nx][idim](1, 1);
       strain4[nx][idim](0, 1) = strainN[nx][idim](1, 3);
@@ -256,7 +260,7 @@ class AttenuationCG4 : public Attenuation {
   }
   // CASE != _1D_FR
   static void
-  formStrain4(const eigen::RMatXN6& strainN, eigen::RMatX46& strain4, int nx) {
+  formStrain4(const axisem3d::eigen::RMatXN6& strainN, axisem3d::eigen::RMatX46& strain4, int nx) {
     using spectral::nPEM;
     using spectral::nPED;
 

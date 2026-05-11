@@ -60,17 +60,17 @@ class FluidElement : public Element {
   /////////////////////////// time loop ///////////////////////////
   // collect displacement from points
   virtual void
-  collectDisplFromPoints(eigen::vec_ar1_CMatPP_RM& displElem) const;
+  collectDisplFromPoints(axisem3d::eigen::vec_ar1_CMatPP_RM& displElem) const;
 
   // displacement to stiffness
   void
-  displToStiff(
-      const eigen::vec_ar1_CMatPP_RM& displElem, eigen::vec_ar1_CMatPP_RM& stiffElem) const;
+  displToStiff(const axisem3d::eigen::vec_ar1_CMatPP_RM& displElem,
+      axisem3d::eigen::vec_ar1_CMatPP_RM& stiffElem) const;
 
   // add stiffness to points
   // allow a derived class to change stiffElem (no const)
   virtual void
-  addStiffToPoints(eigen::vec_ar1_CMatPP_RM& stiffElem) const;
+  addStiffToPoints(axisem3d::eigen::vec_ar1_CMatPP_RM& stiffElem) const;
 
   // compute stiffness term
   void
@@ -87,7 +87,7 @@ class FluidElement : public Element {
 
   // add pressure source
   void
-  addPressureSource(const eigen::CMatXN& pressure, int nu_1_pressure) const;
+  addPressureSource(const axisem3d::eigen::CMatXN& pressure, int nu_1_pressure) const;
 
   /////////////////////////// wavefield output ///////////////////////////
   // prepare wavefield output
@@ -96,25 +96,25 @@ class FluidElement : public Element {
 
   // chi field
   void
-  getChiField(eigen::CMatXN& chi) const;
+  getChiField(axisem3d::eigen::CMatXN& chi) const;
 
   // displ field
   void
-  getDisplField(eigen::CMatXN3& displ) const {
+  getDisplField(axisem3d::eigen::CMatXN3& displ) const {
     getDisplField(displ, displInRTZ());
   }
 
   // displ field
   void
-  getDisplField(eigen::CMatXN3& displ, bool needRTZ) const;
+  getDisplField(axisem3d::eigen::CMatXN3& displ, bool needRTZ) const;
 
   // pressure field
   void
-  getPressureField(eigen::CMatXN& pressure) const;
+  getPressureField(axisem3d::eigen::CMatXN& pressure) const;
 
   // delta field
   void
-  getDeltaField(eigen::CMatXN& delta) const;
+  getDeltaField(axisem3d::eigen::CMatXN& delta) const;
 
   // displ crd
   inline bool
@@ -156,17 +156,21 @@ class FluidElement : public Element {
 
   // workspace
   // Fourier
-  inline static eigen::vec_ar1_CMatPP_RM sDisplSpherical_FR;
-  inline static eigen::vec_ar3_CMatPP_RM sStrainSpherical_FR;
-  inline static eigen::vec_ar3_CMatPP_RM sStrainUndulated_FR;
-  inline static eigen::vec_ar3_CMatPP_RM sStressUndulated_FR;
-  inline static eigen::vec_ar3_CMatPP_RM sStressSpherical_FR;
-  inline static eigen::vec_ar1_CMatPP_RM sStiffSpherical_FR;
+  inline static axisem3d::eigen::vec_ar1_CMatPP_RM sDisplSpherical_FR;
+  inline static axisem3d::eigen::vec_ar3_CMatPP_RM sStrainSpherical_FR;
+  inline static axisem3d::eigen::vec_ar3_CMatPP_RM sStrainUndulated_FR;
+  inline static axisem3d::eigen::vec_ar3_CMatPP_RM sStressUndulated_FR;
+  inline static axisem3d::eigen::vec_ar3_CMatPP_RM sStressSpherical_FR;
+  inline static axisem3d::eigen::vec_ar1_CMatPP_RM sStiffSpherical_FR;
   // cardinal
-  inline static eigen::RMatXN3 sStrainSpherical_CD = eigen::RMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::RMatXN3 sStrainUndulated_CD = eigen::RMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::RMatXN3 sStressUndulated_CD = eigen::RMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::RMatXN3 sStressSpherical_CD = eigen::RMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN3 sStrainSpherical_CD =
+      axisem3d::eigen::RMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN3 sStrainUndulated_CD =
+      axisem3d::eigen::RMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN3 sStressUndulated_CD =
+      axisem3d::eigen::RMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::RMatXN3 sStressSpherical_CD =
+      axisem3d::eigen::RMatXN3(0, spectral::nPEM * 3);
 };
 
 #endif /* FluidElement_hpp */

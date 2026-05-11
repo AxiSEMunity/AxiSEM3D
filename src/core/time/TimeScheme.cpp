@@ -78,7 +78,7 @@ void
 TimeScheme::reportLoopTimers(
     const std::vector<std::string>& timerNames, const std::map<std::string, SimpleTimer>& timers) {
   // collect local timers
-  eigen::DMatXX elapsed(mpi::nproc(), timerNames.size());
+  axisem3d::eigen::DMatXX elapsed(mpi::nproc(), timerNames.size());
   elapsed.setZero();
   for (int itimer = 0; itimer < timerNames.size(); itimer++) {
     elapsed(mpi::rank(), itimer) = timers.at(timerNames[itimer]).elapsedTotal();

@@ -31,20 +31,21 @@ class Geometric3D : public Model3D {
   protected:
   // get undulation on an element
   virtual bool
-  getUndulation(
-      const eigen::DMatX3& spz, const eigen::DMat24& nodalSZ, eigen::DColX& undulation) const {
+  getUndulation(const axisem3d::eigen::DMatX3& spz,
+      const axisem3d::eigen::DMat24& nodalSZ,
+      axisem3d::eigen::DColX& undulation) const {
     // no element check by virtual
     return getUndulation(spz, undulation);
   }
 
   // set undulation to quad
   virtual void
-  setUndulationToQuad(const eigen::DColX& undulation, Quad& quad) const;
+  setUndulationToQuad(const axisem3d::eigen::DColX& undulation, Quad& quad) const;
 
   public:
   // get undulation on points
   virtual bool
-  getUndulation(const eigen::DMatX3& spz, eigen::DColX& undulation) const = 0;
+  getUndulation(const axisem3d::eigen::DMatX3& spz, axisem3d::eigen::DColX& undulation) const = 0;
 
   ////////////////////////////// static //////////////////////////////
   public:

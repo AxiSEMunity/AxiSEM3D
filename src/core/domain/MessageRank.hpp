@@ -78,8 +78,8 @@ class MessageRank {
   std::vector<MeshPoint> mMeshPoints;
 
   // buffers
-  eigen::CColX mBufferSend = eigen::CColX(0);
-  eigen::CColX mBufferRecv = eigen::CColX(0);
+  axisem3d::eigen::CColX mBufferSend = axisem3d::eigen::CColX(0);
+  axisem3d::eigen::CColX mBufferRecv = axisem3d::eigen::CColX(0);
 };
 
 #endif /* MessageRank_hpp */

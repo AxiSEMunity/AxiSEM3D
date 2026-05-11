@@ -66,7 +66,7 @@ class Quad {
   computeDt(double courant, const ABC& abc) const;
 
   // get nodal sz
-  const eigen::DMat24&
+  const axisem3d::eigen::DMat24&
   getNodalSZ() const {
     return mMapping->getNodalSZ();
   }
@@ -81,8 +81,8 @@ class Quad {
   // inverse mapping: (s,z) -> (ξ,η)
   // return true if (s,z) is inside this element
   bool
-  inverseMapping(const eigen::DCol2& sz,
-      eigen::DCol2& xieta,
+  inverseMapping(const axisem3d::eigen::DCol2& sz,
+      axisem3d::eigen::DCol2& xieta,
       double maxIter = 10,
       double tolerance = 1e-9) const {
     return mMapping->inverseMapping(sz, xieta, maxIter, tolerance);
@@ -91,20 +91,21 @@ class Quad {
   private:
   //////////////////////// interal ////////////////////////
   // compute integral factor
-  eigen::DRowN
-  computeIntegralFactor(eigen::DMat2N& sz, std::array<eigen::DMat22, spectral::nPEM>& J) const;
+  axisem3d::eigen::DRowN
+  computeIntegralFactor(
+      axisem3d::eigen::DMat2N& sz, std::array<axisem3d::eigen::DMat22, spectral::nPEM>& J) const;
 
   // get normal
   void
   computeNormal(int edge,
-      const eigen::DMat2N& sz,
-      const std::array<eigen::DMat22, spectral::nPEM>& J,
+      const axisem3d::eigen::DMat2N& sz,
+      const std::array<axisem3d::eigen::DMat22, spectral::nPEM>& J,
       std::vector<int>& ipnts,
-      eigen::arP_DMatX3& normal) const;
+      axisem3d::eigen::arP_DMatX3& normal) const;
 
   // weights for CG4 attenuation
-  eigen::DRow4
-  computeWeightsCG4(const eigen::DMatPP_RM& ifPP) const;
+  axisem3d::eigen::DRow4
+  computeWeightsCG4(const axisem3d::eigen::DMatPP_RM& ifPP) const;
 
   public:
   //////////////////////// get ////////////////////////
@@ -115,16 +116,16 @@ class Quad {
   }
 
   // get point nr
-  inline const eigen::IRowN&
+  inline const axisem3d::eigen::IRowN&
   getPointNr() const {
     return *mPointNr;
   }
 
   // get point sz
-  eigen::DMat2N
+  axisem3d::eigen::DMat2N
   getPointSZ() const {
-    eigen::DMat2N pointSZ;
-    const eigen::DMat2N& xieta = spectrals::getXiEtaElement(axial());
+    axisem3d::eigen::DMat2N pointSZ;
+    const axisem3d::eigen::DMat2N& xieta = spectrals::getXiEtaElement(axial());
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       pointSZ.col(ipnt) = mMapping->mapping(xieta.col(ipnt));
     }
@@ -132,7 +133,7 @@ class Quad {
   }
 
   // get undulation
-  eigen::arN_DColX
+  axisem3d::eigen::arN_DColX
   getUndulation() const {
     return mUndulation->getPointwise();
   }
@@ -176,15 +177,15 @@ class Quad {
   // create gradient
   template <typename floatT>
   std::unique_ptr<const GradientQuadrature<floatT>>
-  createGradient(eigen::DMat2N& sz, eigen::DMatPP_RM& ifPP) const {
+  createGradient(axisem3d::eigen::DMat2N& sz, axisem3d::eigen::DMatPP_RM& ifPP) const {
     // integral factor
-    static std::array<eigen::DMat22, spectral::nPEM> J;
-    const eigen::DRowN& ifact = computeIntegralFactor(sz, J);
+    static std::array<axisem3d::eigen::DMat22, spectral::nPEM> J;
+    const axisem3d::eigen::DRowN& ifact = computeIntegralFactor(sz, J);
     // save integral factor for later use (CG4)
-    ifPP = Eigen::Map<const eigen::DMatPP_RM>(ifact.data());
+    ifPP = Eigen::Map<const axisem3d::eigen::DMatPP_RM>(ifact.data());
 
     // compute Jacobian and s^-1
-    static eigen::DMatPP_RM dsdxii, dsdeta, dzdxii, dzdeta, inv_s;
+    static axisem3d::eigen::DMatPP_RM dsdxii, dsdeta, dzdxii, dzdeta, inv_s;
     for (int ipol = 0; ipol < spectral::nPED; ipol++) {
       for (int jpol = 0; jpol < spectral::nPED; jpol++) {
         int ipnt = ipol * spectral::nPED + jpol;
@@ -232,7 +233,7 @@ class Quad {
   std::map<std::string, int> mEdgesOnBoundary;
 
   // nr field
-  std::unique_ptr<eigen::IRowN> mPointNr = nullptr;
+  std::unique_ptr<axisem3d::eigen::IRowN> mPointNr = nullptr;
 
   ////////////// components //////////////
   // mapping

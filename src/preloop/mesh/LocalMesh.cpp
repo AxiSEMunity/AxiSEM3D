@@ -27,9 +27,9 @@
 
 /////////////////////////// build //////////////////////////
 // constructor
-LocalMesh::LocalMesh(const ExodusMesh& exodusMesh, const eigen::DColX& weights) {
+LocalMesh::LocalMesh(const ExodusMesh& exodusMesh, const axisem3d::eigen::DColX& weights) {
   // domain decomposition
-  eigen::IColX elemRank;
+  axisem3d::eigen::IColX elemRank;
   mpi::enterSuper();
   if (mpi::super()) {
     timer::gPreloopTimer.begin("Mesh partitioning by Metis");
@@ -55,8 +55,9 @@ LocalMesh::LocalMesh(const ExodusMesh& exodusMesh, const eigen::DColX& weights) 
 
 // domain decomposition
 void
-LocalMesh::decomposeExodusMesh(
-    const ExodusMesh& exodusMesh, const eigen::DColX& weights, eigen::IColX& elemRank) {
+LocalMesh::decomposeExodusMesh(const ExodusMesh& exodusMesh,
+    const axisem3d::eigen::DColX& weights,
+    axisem3d::eigen::IColX& elemRank) {
   // metis
   double obj = axisem3d::metis::decompose(exodusMesh.getConnectivity(),
       exodusMesh.getIsElementFluid(),
@@ -74,7 +75,8 @@ LocalMesh::decomposeExodusMesh(
 
 // build local skeleton
 void
-LocalMesh::buildLocalSkeleton(const ExodusMesh& exodusMesh, const eigen::IColX& elemRank) {
+LocalMesh::buildLocalSkeleton(
+    const ExodusMesh& exodusMesh, const axisem3d::eigen::IColX& elemRank) {
   // gather world rank
   timer::gPreloopTimer.begin("Gathering world rank in mpi-groups");
   std::vector<int> vecWorldRank;
@@ -83,12 +85,12 @@ LocalMesh::buildLocalSkeleton(const ExodusMesh& exodusMesh, const eigen::IColX& 
 
   // compute local skeleton on root (leader of inferior group)
   timer::gPreloopTimer.begin("Building local skeleton on mpi-group leaders");
-  std::vector<eigen::IColX> vmL2GE;
-  std::vector<eigen::IMatX4_RM> vmConn;
-  std::vector<eigen::DMatX2_RM> vmCrds;
-  std::vector<eigen::IColX> vmGeom;
-  std::vector<eigen::IColX> vmIsFl;
-  std::vector<eigen::IColX> vmNdNr;
+  std::vector<axisem3d::eigen::IColX> vmL2GE;
+  std::vector<axisem3d::eigen::IMatX4_RM> vmConn;
+  std::vector<axisem3d::eigen::DMatX2_RM> vmCrds;
+  std::vector<axisem3d::eigen::IColX> vmGeom;
+  std::vector<axisem3d::eigen::IColX> vmIsFl;
+  std::vector<axisem3d::eigen::IColX> vmNdNr;
   if (mpi::root()) {
     // reserve
     vmL2GE.reserve(mpi::nproc());
@@ -116,14 +118,14 @@ LocalMesh::buildLocalSkeleton(const ExodusMesh& exodusMesh, const eigen::IColX& 
       }
 
       // global element tag
-      vmL2GE.push_back(Eigen::Map<eigen::IColX>(vL2GE.data(), vL2GE.size()));
+      vmL2GE.push_back(Eigen::Map<axisem3d::eigen::IColX>(vL2GE.data(), vL2GE.size()));
 
       // elemental fields simply sliced by vL2GE
       vmGeom.push_back(exodusMesh.getGeometryType()(vL2GE));
       vmIsFl.push_back(exodusMesh.getIsElementFluid()(vL2GE));
 
       // nodes: local to global
-      const eigen::IMatX4_RM& matConnG = exodusMesh.getConnectivity()(vL2GE, Eigen::all);
+      const axisem3d::eigen::IMatX4_RM& matConnG = exodusMesh.getConnectivity()(vL2GE, Eigen::all);
       std::vector<int> nL2G(matConnG.data(), matConnG.data() + matConnG.size());
       vector_tools::sortUnique(nL2G);
 
@@ -138,7 +140,7 @@ LocalMesh::buildLocalSkeleton(const ExodusMesh& exodusMesh, const eigen::IColX& 
         nG2L.insert({nL2G[inl], inl});
       }
       // node tag from global to local
-      eigen::IMatX4_RM mConn(vL2GE.size(), 4);
+      axisem3d::eigen::IMatX4_RM mConn(vL2GE.size(), 4);
       for (int iel = 0; iel < vL2GE.size(); iel++) {
         for (int ivt = 0; ivt < 4; ivt++) {
           mConn(iel, ivt) = nG2L.at(matConnG(iel, ivt));
@@ -162,18 +164,19 @@ LocalMesh::buildLocalSkeleton(const ExodusMesh& exodusMesh, const eigen::IColX& 
 
 // build element-GLL vicinity
 void
-LocalMesh::buildElementGLL_CommMPI(const ExodusMesh& exodusMesh, const eigen::IColX& elemRank) {
+LocalMesh::buildElementGLL_CommMPI(
+    const ExodusMesh& exodusMesh, const axisem3d::eigen::IColX& elemRank) {
   // local GLL
   timer::gPreloopTimer.begin("Constructing local element-GLL vicinity");
-  std::vector<eigen::IColX> localNeighbours; // useless
+  std::vector<axisem3d::eigen::IColX> localNeighbours; // useless
   int nLocalGLL = vicinity::connectivityToElementGLL(mConnectivity, mElementGLL, localNeighbours);
   timer::gPreloopTimer.ended("Constructing local element-GLL vicinity");
 
   // gather
   timer::gPreloopTimer.begin("Gathering input data in mpi-groups");
   std::vector<int> vecNLocalGLL;
-  std::vector<eigen::IMatXN_RM> vecElementGLL;
-  std::vector<eigen::IColX> vecL2G_Element;
+  std::vector<axisem3d::eigen::IMatXN_RM> vecElementGLL;
+  std::vector<axisem3d::eigen::IColX> vecL2G_Element;
   std::vector<int> vecWorldRank;
   mpi::gather(nLocalGLL, vecNLocalGLL, 0);
   mpi::gatherEigen(mElementGLL, vecElementGLL, 0);
@@ -184,21 +187,21 @@ LocalMesh::buildElementGLL_CommMPI(const ExodusMesh& exodusMesh, const eigen::IC
   // root
   timer::gPreloopTimer.begin("Building L2G-GLL and mpi communication "
                              "on mpi-group leaders");
-  std::vector<eigen::IColX> vecL2G_GLL;
+  std::vector<axisem3d::eigen::IColX> vecL2G_GLL;
   std::vector<std::vector<int>> vecVecCommProcGLL;
   if (mpi::root()) {
     // global element-GLL vicinity
     timer::gPreloopTimer.begin("Constructing global element-GLL vicinity");
-    eigen::IMatXN_RM globalElementGLL;
-    std::vector<eigen::IColX> globalNeighbours;
+    axisem3d::eigen::IMatXN_RM globalElementGLL;
+    std::vector<axisem3d::eigen::IColX> globalNeighbours;
     vicinity::connectivityToElementGLL(
         exodusMesh.getConnectivity(), globalElementGLL, globalNeighbours);
     // message large variables (here is a memory peak)
     timer::gPreloopTimer.message(
         eigen_tools::memoryInfo(globalElementGLL, "global element-GLL vicinity (super-only)"));
     int gNeighbSize = (int)vector_tools::totalSize(globalNeighbours);
-    timer::gPreloopTimer.message(
-        eigen_tools::memoryInfo(eigen::IColX(gNeighbSize), "global neighbourhood (super-only)"));
+    timer::gPreloopTimer.message(eigen_tools::memoryInfo(
+        axisem3d::eigen::IColX(gNeighbSize), "global neighbourhood (super-only)"));
     timer::gPreloopTimer.ended("Constructing global element-GLL vicinity");
 
     // L2G GLL matching by (element, nPol^2)
@@ -207,7 +210,7 @@ LocalMesh::buildElementGLL_CommMPI(const ExodusMesh& exodusMesh, const eigen::IC
     vecL2G_GLL.reserve(mpi::nproc());
     // loop over inferior ranks
     for (int rank = 0; rank < mpi::nproc(); rank++) {
-      const eigen::IColX& myL2G_GLL = vicinity::buildL2G_GLL(
+      const axisem3d::eigen::IColX& myL2G_GLL = vicinity::buildL2G_GLL(
           vecNLocalGLL[rank], vecL2G_Element[rank], vecElementGLL[rank], globalElementGLL);
       vecL2G_GLL.push_back(myL2G_GLL);
     }
@@ -258,7 +261,7 @@ LocalMesh::buildElementGLL_CommMPI(const ExodusMesh& exodusMesh, const eigen::IC
 std::string
 LocalMesh::verbose(const std::string& meshTitle,
     const std::string& weightsKey,
-    const eigen::DColX& weights) const {
+    const axisem3d::eigen::DColX& weights) const {
   // element distribution
   std::vector<int> evec;
   mpi::gather((int)mL2G_Element.rows(), evec, 0);
@@ -286,7 +289,7 @@ LocalMesh::verbose(const std::string& meshTitle,
     ss << boxEquals(0, 24, "# processors", mpi::nproc());
 
     // weights
-    eigen::DColX wcol = Eigen::Map<eigen::DColX>(wvec.data(), wvec.size());
+    axisem3d::eigen::DColX wcol = Eigen::Map<axisem3d::eigen::DColX>(wvec.data(), wvec.size());
     wcol /= wcol.sum();
     double mean = wcol.mean();
     double sd = sqrt((wcol.array() - mean).square().sum() / wcol.rows());
@@ -297,8 +300,8 @@ LocalMesh::verbose(const std::string& meshTitle,
     ss << boxEquals(2, 24, "unbalance factor (σ/μ)", sd / mean);
 
     // element
-    const eigen::DColX& ecol =
-        Eigen::Map<const eigen::IColX>(evec.data(), evec.size()).cast<double>();
+    const axisem3d::eigen::DColX& ecol =
+        Eigen::Map<const axisem3d::eigen::IColX>(evec.data(), evec.size()).cast<double>();
     mean = ecol.mean();
     sd = sqrt((ecol.array() - mean).square().sum() / ecol.rows());
     ss << boxSubTitle(0, "Element distribution");
@@ -308,8 +311,8 @@ LocalMesh::verbose(const std::string& meshTitle,
     ss << boxEquals(2, 24, "unbalance factor (σ/μ)", sd / mean);
 
     // GLL
-    const eigen::DColX& gcol =
-        Eigen::Map<const eigen::IColX>(gvec.data(), gvec.size()).cast<double>();
+    const axisem3d::eigen::DColX& gcol =
+        Eigen::Map<const axisem3d::eigen::IColX>(gvec.data(), gvec.size()).cast<double>();
     mean = gcol.mean();
     sd = sqrt((gcol.array() - mean).square().sum() / gcol.rows());
     ss << boxSubTitle(0, "GLL-point distribution");
@@ -320,8 +323,10 @@ LocalMesh::verbose(const std::string& meshTitle,
 
     // communication
     ss << boxSubTitle(0, "mpi communication");
-    const eigen::IColX& crcol = Eigen::Map<const eigen::IColX>(crvec.data(), crvec.size());
-    const eigen::IColX& cgcol = Eigen::Map<const eigen::IColX>(cgvec.data(), cgvec.size());
+    const axisem3d::eigen::IColX& crcol =
+        Eigen::Map<const axisem3d::eigen::IColX>(crvec.data(), crvec.size());
+    const axisem3d::eigen::IColX& cgcol =
+        Eigen::Map<const axisem3d::eigen::IColX>(cgvec.data(), cgvec.size());
     ss << boxEquals(2, 22, "# rank-to-rank pairs", crcol.sum() / 2);
     ss << boxEquals(2, 22, "# GLL-to-GLL paris", cgcol.sum() / 2);
     ss << boxBaseline() << "\n\n";
@@ -331,15 +336,15 @@ LocalMesh::verbose(const std::string& meshTitle,
 
 // plot domain decomposition
 void
-LocalMesh::plotDD(const std::string& fname, const eigen::DColX& weights) const {
+LocalMesh::plotDD(const std::string& fname, const axisem3d::eigen::DColX& weights) const {
   // compute coords at element center
   int nelem = (int)weights.rows();
-  eigen::DMatX2_RM center = eigen::DMatX2_RM::Zero(nelem, 2);
+  axisem3d::eigen::DMatX2_RM center = axisem3d::eigen::DMatX2_RM::Zero(nelem, 2);
   center(mL2G_Element, Eigen::all) = mpi::nodalToElemental(mConnectivity, mNodalCoords, false);
   mpi::sumEigen(center);
 
   // gather rank info
-  eigen::IColX elemRank = eigen::IColX::Zero(nelem);
+  axisem3d::eigen::IColX elemRank = axisem3d::eigen::IColX::Zero(nelem);
   elemRank(mL2G_Element).array() = mpi::rank();
   mpi::sumEigen(elemRank);
 

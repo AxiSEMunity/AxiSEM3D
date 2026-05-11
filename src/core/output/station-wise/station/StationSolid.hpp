@@ -26,7 +26,7 @@ class StationSolid : public Station {
   /////////////////////////// setup ///////////////////////////
   // set element
   void
-  setElement(const std::shared_ptr<SolidElement>& element, const eigen::DRowN& weights);
+  setElement(const std::shared_ptr<SolidElement>& element, const axisem3d::eigen::DRowN& weights);
 
   // set in group
   void
@@ -43,11 +43,11 @@ class StationSolid : public Station {
   std::shared_ptr<SolidElement> mElement = nullptr;
 
   // buffer
-  eigen::RMatX3_RM mBufferU = eigen::RMatX3_RM(0, 3);
-  eigen::RMatX9_RM mBufferG = eigen::RMatX9_RM(0, 9);
-  eigen::RMatX6_RM mBufferE = eigen::RMatX6_RM(0, 6);
-  eigen::RMatX3_RM mBufferR = eigen::RMatX3_RM(0, 3);
-  eigen::RMatX6_RM mBufferS = eigen::RMatX6_RM(0, 6);
+  axisem3d::eigen::RMatX3_RM mBufferU = axisem3d::eigen::RMatX3_RM(0, 3);
+  axisem3d::eigen::RMatX9_RM mBufferG = axisem3d::eigen::RMatX9_RM(0, 9);
+  axisem3d::eigen::RMatX6_RM mBufferE = axisem3d::eigen::RMatX6_RM(0, 6);
+  axisem3d::eigen::RMatX3_RM mBufferR = axisem3d::eigen::RMatX3_RM(0, 3);
+  axisem3d::eigen::RMatX6_RM mBufferS = axisem3d::eigen::RMatX6_RM(0, 6);
 
   /////////////////////////// process ///////////////////////////
   public:
@@ -56,7 +56,7 @@ class StationSolid : public Station {
   processReport(int bufferLine,
       const channel::solid::ChannelOptions& chops,
       int stationIndex,
-      eigen::RTensor3& bufferFields);
+      axisem3d::eigen::RTensor3& bufferFields);
 
   private:
   // process 1: rotate
@@ -99,21 +99,21 @@ class StationSolid : public Station {
   }
 
   // workspace for record
-  inline static eigen::RRow3 sU3;
-  inline static eigen::RRow9 sG9;
-  inline static eigen::RRow6 sE6;
-  inline static eigen::RRow3 sR3;
-  inline static eigen::RRow6 sS6;
-  inline static eigen::CMatX3 sUX3 = eigen::CMatX3(0, 3);
-  inline static eigen::CMatX9 sGX9 = eigen::CMatX9(0, 9);
-  inline static eigen::CMatX6 sEX6 = eigen::CMatX6(0, 6);
-  inline static eigen::CMatX3 sRX3 = eigen::CMatX3(0, 3);
-  inline static eigen::CMatX6 sSX6 = eigen::CMatX6(0, 6);
-  inline static eigen::CMatXN3 sUXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::CMatXN9 sGXN9 = eigen::CMatXN9(0, spectral::nPEM * 9);
-  inline static eigen::CMatXN6 sEXN6 = eigen::CMatXN6(0, spectral::nPEM * 6);
-  inline static eigen::CMatXN3 sRXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::CMatXN6 sSXN6 = eigen::CMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::RRow3 sU3;
+  inline static axisem3d::eigen::RRow9 sG9;
+  inline static axisem3d::eigen::RRow6 sE6;
+  inline static axisem3d::eigen::RRow3 sR3;
+  inline static axisem3d::eigen::RRow6 sS6;
+  inline static axisem3d::eigen::CMatX3 sUX3 = axisem3d::eigen::CMatX3(0, 3);
+  inline static axisem3d::eigen::CMatX9 sGX9 = axisem3d::eigen::CMatX9(0, 9);
+  inline static axisem3d::eigen::CMatX6 sEX6 = axisem3d::eigen::CMatX6(0, 6);
+  inline static axisem3d::eigen::CMatX3 sRX3 = axisem3d::eigen::CMatX3(0, 3);
+  inline static axisem3d::eigen::CMatX6 sSX6 = axisem3d::eigen::CMatX6(0, 6);
+  inline static axisem3d::eigen::CMatXN3 sUXN3 = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN9 sGXN9 = axisem3d::eigen::CMatXN9(0, spectral::nPEM * 9);
+  inline static axisem3d::eigen::CMatXN6 sEXN6 = axisem3d::eigen::CMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::CMatXN3 sRXN3 = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN6 sSXN6 = axisem3d::eigen::CMatXN6(0, spectral::nPEM * 6);
 };
 
 #endif /* StationSolid_hpp */

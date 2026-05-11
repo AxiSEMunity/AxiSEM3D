@@ -15,7 +15,7 @@
 #include "eigen_station.hpp"
 #include "eigen_generic.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   using Eigen::Dynamic;
   using numerical::Real;
   using spectral::nPEM;
@@ -35,6 +35,6 @@ namespace eigen {
   typedef Eigen::Matrix<Real, Dynamic, nPEM * 3, Eigen::RowMajor> RMatXN3_RM;
   typedef Eigen::Matrix<Real, Dynamic, nPEM * 6, Eigen::RowMajor> RMatXN6_RM;
   typedef Eigen::Matrix<Real, Dynamic, nPEM * 9, Eigen::RowMajor> RMatXN9_RM;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 #endif /* eigen_element_op_hpp */

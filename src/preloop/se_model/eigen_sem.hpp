@@ -15,7 +15,7 @@
 #include "eigen_generic.hpp"
 #include "spectral.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   using Eigen::Dynamic;
   using Eigen::RowMajor;
   using spectral::nPEM;
@@ -45,17 +45,17 @@ namespace eigen {
   // 3D scalar field on an element with max Nr
   typedef Eigen::Matrix<double, Dynamic, nPEM> DMatXN;
   // 3D scalar field on an element with different Nr's
-  typedef std::array<eigen::DColX, nPEM> arN_DColX;
-  typedef std::array<eigen::IColX, nPEM> arN_IColX;
+  typedef std::array<axisem3d::eigen::DColX, nPEM> arN_DColX;
+  typedef std::array<axisem3d::eigen::IColX, nPEM> arN_IColX;
   // 3D scalar field on an edge with different Nr's
-  typedef std::array<eigen::DColX, nPED> arP_DColX;
+  typedef std::array<axisem3d::eigen::DColX, nPED> arP_DColX;
   // 3D vector field on an edge with different Nr's
-  typedef std::array<eigen::DMatX3, nPED> arP_DMatX3;
+  typedef std::array<axisem3d::eigen::DMatX3, nPED> arP_DMatX3;
 
   ///////// GLL structured /////////
   typedef Eigen::Matrix<double, nPED, 1> DColP;
   typedef Eigen::Matrix<double, nPED, nPED, Eigen::RowMajor> DMatPP_RM;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 /////////////////////////// 1D/3D operations ///////////////////////////
 namespace op1D_3D {
@@ -178,9 +178,9 @@ namespace op1D_3D {
   }
 
   // 1D structured
-  inline eigen::DMatPP_RM
-  toPP(const eigen::DMatXN& mat) {
-    return Eigen::Map<const eigen::DMatPP_RM>(mat.data());
+  inline axisem3d::eigen::DMatPP_RM
+  toPP(const axisem3d::eigen::DMatXN& mat) {
+    return Eigen::Map<const axisem3d::eigen::DMatPP_RM>(mat.data());
   }
 } // namespace op1D_3D
 

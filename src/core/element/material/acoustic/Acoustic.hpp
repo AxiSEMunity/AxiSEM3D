@@ -18,12 +18,12 @@
 class Acoustic {
   public:
   // 1D constructor
-  Acoustic(const eigen::DMatPP_RM& K) : m1D(true), mK(K) {
+  Acoustic(const axisem3d::eigen::DMatPP_RM& K) : m1D(true), mK(K) {
     // nothing
   }
 
   // 3D constructor
-  Acoustic(const eigen::DMatXN& K) : m1D(false), mK(K) {
+  Acoustic(const axisem3d::eigen::DMatXN& K) : m1D(false), mK(K) {
     // nothing
   }
 
@@ -48,8 +48,9 @@ class Acoustic {
   ///////////////////////// strain to stress /////////////////////////
   // strain => stress in Fourier space
   void
-  strainToStress_FR(
-      const eigen::vec_ar3_CMatPP_RM& strain, eigen::vec_ar3_CMatPP_RM& stress, int nu_1) const {
+  strainToStress_FR(const axisem3d::eigen::vec_ar3_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar3_CMatPP_RM& stress,
+      int nu_1) const {
     for (int alpha = 0; alpha < nu_1; alpha++) {
       strainToStress<CaseFA::_1D_FR>(strain, stress, alpha, mK);
     }
@@ -57,7 +58,8 @@ class Acoustic {
 
   // strain => stress in cardinal space
   void
-  strainToStress_CD(const eigen::RMatXN3& strain, eigen::RMatXN3& stress, int nr) const {
+  strainToStress_CD(
+      const axisem3d::eigen::RMatXN3& strain, axisem3d::eigen::RMatXN3& stress, int nr) const {
     if (m1D) {
       strainToStress<CaseFA::_1D_CD>(strain, stress, nr, mK);
     } else {

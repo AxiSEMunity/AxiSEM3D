@@ -37,8 +37,8 @@ ClaytonFluid3D::checkCompatibility() {
 void
 ClaytonFluid3D::apply() const {
   // get fields
-  const eigen::CColX& veloc = mFluidPoint->getFields().mVeloc;
-  eigen::CColX& stiff = mFluidPoint->getFields().mStiff;
+  const axisem3d::eigen::CColX& veloc = mFluidPoint->getFields().mVeloc;
+  axisem3d::eigen::CColX& stiff = mFluidPoint->getFields().mStiff;
 
   // constants
   int nr = mFluidPoint->getNr();

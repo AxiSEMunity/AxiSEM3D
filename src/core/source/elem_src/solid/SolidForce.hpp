@@ -20,7 +20,7 @@ class SolidForce : public SolidSource {
   // constructor
   SolidForce(std::unique_ptr<STF>& stf,
       const std::shared_ptr<SolidElement>& element,
-      const eigen::CMatXN3& pattern);
+      const axisem3d::eigen::CMatXN3& pattern);
 
   // apply source at a time step
   void
@@ -28,14 +28,14 @@ class SolidForce : public SolidSource {
 
   private:
   // source pattern
-  const eigen::CMatXN3 mPattern;
+  const axisem3d::eigen::CMatXN3 mPattern;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
   ////////////////////////////////////////
 
   // workspace
-  inline static eigen::CMatXN3 sPattern = eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN3 sPattern = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
 };
 
 #endif /* SolidForce_hpp */

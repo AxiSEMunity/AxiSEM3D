@@ -65,19 +65,22 @@ class Elastic {
 
   // strain => stress in Fourier space
   virtual void
-  strainToStress_FR(
-      const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) const = 0;
+  strainToStress_FR(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) const = 0;
 
   // strain => stress in cardinal space
   virtual void
-  strainToStress_CD(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) const = 0;
+  strainToStress_CD(
+      const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) const = 0;
 
   ///////////////////////// attenuation /////////////////////////
   protected:
   // attenuation in Fourier space
   void
-  applyAttenuation(
-      const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) const {
+  applyAttenuation(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) const {
     if (mAttenuation) {
       mAttenuation->apply(strain, stress, nu_1);
     }
@@ -85,7 +88,8 @@ class Elastic {
 
   // attenuation in cardinal space
   void
-  applyAttenuation(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) const {
+  applyAttenuation(
+      const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) const {
     if (mAttenuation) {
       mAttenuation->apply(strain, stress, nr);
     }

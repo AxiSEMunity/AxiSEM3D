@@ -539,9 +539,9 @@ Domain::reportScanning() const {
   // write to file
   if (mpi::root()) {
     // flatten buffer
-    eigen::DMatXX_RM sz(nPoints, 2);
-    eigen::IColX nrOrig(nPoints);
-    eigen::IColX nrScan(nPoints);
+    axisem3d::eigen::DMatXX_RM sz(nPoints, 2);
+    axisem3d::eigen::IColX nrOrig(nPoints);
+    axisem3d::eigen::IColX nrScan(nPoints);
     nPoints = 0;
     for (int iproc = 0; iproc < mpi::nproc(); iproc++) {
       for (int ipnt = 0; ipnt < szBufferAll[iproc].size() / 2; ipnt++) {
@@ -596,11 +596,11 @@ Domain::checkStability(int tstep, double t, double dt) const {
     std::stringstream ss;
     ss << "Simulation has blown up, with ΔT = " << dt << " s. || ";
     ss << "Where the instability occurred: || ";
-    const eigen::DRow2& sz = unstablePoint->getCoords();
+    const axisem3d::eigen::DRow2& sz = unstablePoint->getCoords();
     if (geodesy::isCartesian()) {
       ss << "* (s, z)  =  " << range(sz(0), sz(1), '(', ')') << " || ";
     } else {
-      const eigen::DRow2& rt = geodesy::sz2rtheta(sz, true);
+      const axisem3d::eigen::DRow2& rt = geodesy::sz2rtheta(sz, true);
       ss << "* (r, θ)  =  " << range(rt(0), rt(1), '(', ')') << " || ";
     }
     ss << "When the instability occurred: || ";

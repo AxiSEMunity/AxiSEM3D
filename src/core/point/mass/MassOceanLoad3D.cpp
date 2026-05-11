@@ -24,8 +24,9 @@
 #include "fft.hpp"
 
 // constructor
-MassOceanLoad3D::MassOceanLoad3D(
-    const eigen::DColX& mass, const eigen::DColX& massOcean, const eigen::DMatX3& unitNormal) :
+MassOceanLoad3D::MassOceanLoad3D(const axisem3d::eigen::DColX& mass,
+    const axisem3d::eigen::DColX& massOcean,
+    const axisem3d::eigen::DMatX3& unitNormal) :
     mIM(mass.cwiseInverse().cast<numerical::Real>()),
     mK((massOcean.cwiseQuotient(mass.cwiseProduct(mass + massOcean)).cwiseSqrt().asDiagonal() *
         unitNormal)
@@ -63,7 +64,7 @@ MassOceanLoad3D::checkCompatibility(int nr, bool solid) const {
 
 // compute accel in-place for solid
 void
-MassOceanLoad3D::computeAccel(eigen::CMatX3& stiff3) const {
+MassOceanLoad3D::computeAccel(axisem3d::eigen::CMatX3& stiff3) const {
   // constants
   int nr = (int)mIM.rows();
 

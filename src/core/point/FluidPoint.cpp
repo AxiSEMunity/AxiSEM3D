@@ -14,7 +14,7 @@
 
 // constructor
 FluidPoint::FluidPoint(int nr,
-    const eigen::DRow2& crds,
+    const axisem3d::eigen::DRow2& crds,
     int meshTag,
     std::unique_ptr<const Mass>& mass,
     const TimeScheme& timeScheme) : Point(nr, crds, meshTag, mass) {

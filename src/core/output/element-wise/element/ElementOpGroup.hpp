@@ -82,9 +82,9 @@ template <class ElementOpT> class ElementOpGroup {
         maxNu_1 = std::max(maxNu_1, eop->getNu_1());
       }
       // allocate and compute
-      mExpIAlphaPhi = eigen::CMatXX::Zero(maxNu_1, nphis);
+      mExpIAlphaPhi = axisem3d::eigen::CMatXX::Zero(maxNu_1, nphis);
       for (int iphi = 0; iphi < nphis; iphi++) {
-        eigen::CColX temp(maxNu_1);
+        axisem3d::eigen::CColX temp(maxNu_1);
         eigen_tools::computeTwoExpIAlphaPhi(maxNu_1, mPhis[iphi], temp);
         mExpIAlphaPhi.col(iphi) = temp;
       }
@@ -133,8 +133,8 @@ template <class ElementOpT> class ElementOpGroup {
 
     //////////// element-na info and coords ////////////
     std::vector<int> numElemNaGrid = std::vector<int>(mNaGrid.size(), 0);
-    mElemNaInfo = eigen::IMatX4_RM(nelem, 4);
-    eigen::DMatXX_RM elemCoords(nelem, mNPnts * 2);
+    mElemNaInfo = axisem3d::eigen::IMatX4_RM(nelem, 4);
+    axisem3d::eigen::DMatXX_RM elemCoords(nelem, mNPnts * 2);
     for (int ielem = 0; ielem < nelem; ielem++) {
       mElemNaInfo(ielem, 0) = allTag[ielem];
       mElemNaInfo(ielem, 1) = allNa[ielem];
@@ -155,7 +155,8 @@ template <class ElementOpT> class ElementOpGroup {
       mBufferTime.resize(mDumpIntv);
     }
     for (int inag = 0; inag < mNaGrid.size(); inag++) {
-      eigen::RTensor5 bufferField(numElemNaGrid[inag], mNaGrid[inag], mNPnts, nch, mDumpIntv);
+      axisem3d::eigen::RTensor5 bufferField(
+          numElemNaGrid[inag], mNaGrid[inag], mNPnts, nch, mDumpIntv);
       mBufferFields.push_back(bufferField);
     }
     mBufferLine = 0;
@@ -258,16 +259,16 @@ template <class ElementOpT> class ElementOpGroup {
   std::vector<std::unique_ptr<ElementOpT>> mElementOps;
 
   // Fourier
-  eigen::CMatXX mExpIAlphaPhi = eigen::CMatXX(0, 0);
+  axisem3d::eigen::CMatXX mExpIAlphaPhi = axisem3d::eigen::CMatXX(0, 0);
 
   // na
   std::vector<int> mNaGrid;
   std::map<int, int> mNaGridIndexDict;
-  eigen::IMatX4_RM mElemNaInfo;
+  axisem3d::eigen::IMatX4_RM mElemNaInfo;
 
   // buffer
-  eigen::DColX mBufferTime = eigen::DColX(0);
-  std::vector<eigen::RTensor5> mBufferFields;
+  axisem3d::eigen::DColX mBufferTime = axisem3d::eigen::DColX(0);
+  std::vector<axisem3d::eigen::RTensor5> mBufferFields;
   int mBufferLine = 0;
 };
 

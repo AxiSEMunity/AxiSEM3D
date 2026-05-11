@@ -15,7 +15,7 @@
 // constructor
 SolidMoment::SolidMoment(std::unique_ptr<STF>& stf,
     const std::shared_ptr<SolidElement>& element,
-    const eigen::CMatXN6& pattern) : SolidSource(stf, element), mPattern(pattern) {
+    const axisem3d::eigen::CMatXN6& pattern) : SolidSource(stf, element), mPattern(pattern) {
   // prepare
   element->prepareMomentSource();
 

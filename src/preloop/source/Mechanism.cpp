@@ -35,16 +35,16 @@ Mechanism::buildInparam(int sindex, const std::string& sourceName) {
 
   // data
   const std::vector<double>& vec = gm.getVector<double>(root + ":data");
-  eigen::DColX data = Eigen::Map<const eigen::DColX>(vec.data(), vec.size());
+  axisem3d::eigen::DColX data = Eigen::Map<const axisem3d::eigen::DColX>(vec.data(), vec.size());
   data *= gm.get<double>(root + ":unit");
   return std::make_unique<Mechanism>(type, data);
 }
 
 // release element source
 void
-Mechanism::release(const eigen::DMat33& Qzsp,
+Mechanism::release(const axisem3d::eigen::DMat33& Qzsp,
     bool sourceOnAxis,
-    const eigen::DRowN& inplaneFactor,
+    const axisem3d::eigen::DRowN& inplaneFactor,
     double phi,
     const Quad& quad,
     std::unique_ptr<STF>& stf,
@@ -62,12 +62,12 @@ Mechanism::release(const eigen::DMat33& Qzsp,
   std::unique_ptr<const ElementSource> src = nullptr;
   if (mType == SM_Type::FluidPressure) {
     // interpolated data
-    const eigen::DRowN& p = mData(0) * inplaneFactor;
+    const axisem3d::eigen::DRowN& p = mData(0) * inplaneFactor;
     // allocate
     if (sourceOnAxis) {
       nu_1 = std::min(nu_1, 1);
     }
-    eigen::ZMatXN pattern(nu_1, nPEM);
+    axisem3d::eigen::ZMatXN pattern(nu_1, nPEM);
     // non-axial
     if (sourceOnAxis) {
       pattern.setZero();
@@ -90,16 +90,16 @@ Mechanism::release(const eigen::DMat33& Qzsp,
         stf, quad.getFluidElement(), pattern.cast<numerical::ComplexR>());
   } else if (mType == SM_Type::ForceVector) {
     // rotate data
-    const eigen::DColX& fzsp = Qzsp * mData;
+    const axisem3d::eigen::DColX& fzsp = Qzsp * mData;
     // interpolated data
-    const eigen::DRowN& fs = fzsp(1) * inplaneFactor;
-    const eigen::DRowN& fp = fzsp(2) * inplaneFactor;
-    const eigen::DRowN& fz = fzsp(0) * inplaneFactor;
+    const axisem3d::eigen::DRowN& fs = fzsp(1) * inplaneFactor;
+    const axisem3d::eigen::DRowN& fp = fzsp(2) * inplaneFactor;
+    const axisem3d::eigen::DRowN& fz = fzsp(0) * inplaneFactor;
     // allocate
     if (sourceOnAxis) {
       nu_1 = std::min(nu_1, 2);
     }
-    eigen::ZMatXN3 pattern(nu_1, nPEM * 3);
+    axisem3d::eigen::ZMatXN3 pattern(nu_1, nPEM * 3);
     // non-axial
     if (sourceOnAxis) {
       pattern.setZero();
@@ -133,7 +133,7 @@ Mechanism::release(const eigen::DMat33& Qzsp,
         stf, quad.getSolidElement(), pattern.cast<numerical::ComplexR>());
   } else {
     // rotate data
-    static eigen::DMat33 m;
+    static axisem3d::eigen::DMat33 m;
     m(0, 0) = mData(0);
     m(1, 1) = mData(1);
     m(2, 2) = mData(2);
@@ -153,17 +153,17 @@ Mechanism::release(const eigen::DMat33& Qzsp,
     // mzz msz mpz
     // msz mss msp
     // mpz msp mpp
-    const eigen::DRowN& mss = m(1, 1) * inplaneFactor;
-    const eigen::DRowN& mpp = m(2, 2) * inplaneFactor;
-    const eigen::DRowN& mzz = m(0, 0) * inplaneFactor;
-    const eigen::DRowN& mpz = m(0, 2) * inplaneFactor;
-    const eigen::DRowN& msz = m(0, 1) * inplaneFactor;
-    const eigen::DRowN& msp = m(1, 2) * inplaneFactor;
+    const axisem3d::eigen::DRowN& mss = m(1, 1) * inplaneFactor;
+    const axisem3d::eigen::DRowN& mpp = m(2, 2) * inplaneFactor;
+    const axisem3d::eigen::DRowN& mzz = m(0, 0) * inplaneFactor;
+    const axisem3d::eigen::DRowN& mpz = m(0, 2) * inplaneFactor;
+    const axisem3d::eigen::DRowN& msz = m(0, 1) * inplaneFactor;
+    const axisem3d::eigen::DRowN& msp = m(1, 2) * inplaneFactor;
     // allocate
     if (sourceOnAxis) {
       nu_1 = std::min(nu_1, 3);
     }
-    eigen::ZMatXN6 pattern(nu_1, nPEM * 6);
+    axisem3d::eigen::ZMatXN6 pattern(nu_1, nPEM * 6);
     // non-axial
     if (sourceOnAxis) {
       pattern.setZero();

@@ -27,14 +27,16 @@ class SolidFluidCoupling1D : public SolidFluidCoupling {
 
   // solid => fluid
   void
-  coupleSolidToFluid(const eigen::CMatX3& solidDispl, eigen::CColX& fluidStiff) const {
+  coupleSolidToFluid(
+      const axisem3d::eigen::CMatX3& solidDispl, axisem3d::eigen::CColX& fluidStiff) const {
     fluidStiff += mNormalS_UnassembledMPI * solidDispl.col(0);
     fluidStiff += mNormalZ_UnassembledMPI * solidDispl.col(2);
   }
 
   // fluid => solid
   void
-  coupleFluidToSolid(const eigen::CColX& fluidStiff, eigen::CMatX3& solidStiff) const {
+  coupleFluidToSolid(
+      const axisem3d::eigen::CColX& fluidStiff, axisem3d::eigen::CMatX3& solidStiff) const {
     solidStiff.col(0) -= mNormalS_AssembledMPI_InvMassFluid * fluidStiff;
     solidStiff.col(2) -= mNormalZ_AssembledMPI_InvMassFluid * fluidStiff;
   }

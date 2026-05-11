@@ -20,10 +20,10 @@
 
 class ExodusMesh;
 
-namespace eigen {
+namespace axisem3d::eigen {
   typedef Eigen::Matrix<double, 1, 3> DRow3;
   typedef Eigen::Matrix<double, 3, 3> DMat33;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 namespace geodesy {
   // internal data
@@ -43,9 +43,9 @@ namespace geodesy {
 
     // geographic
     // (lat, lon, r) on positive z-axis
-    extern eigen::DRow3 iLatLonRadiusAxisZ;
+    extern axisem3d::eigen::DRow3 iLatLonRadiusAxisZ;
     // Q matrix from source-centered to geographic
-    extern eigen::DMat33 iSrc2GeoQ;
+    extern axisem3d::eigen::DMat33 iSrc2GeoQ;
   } // namespace internal
 
   // get
@@ -108,7 +108,7 @@ namespace geodesy {
 
   // verbose
   std::string
-  verbose(const eigen::DColX& discontinuities);
+  verbose(const axisem3d::eigen::DColX& discontinuities);
 
   /////////////////////////////// coords ///////////////////////////////
   // (s, z) -> (r, theta)
@@ -304,7 +304,7 @@ namespace geodesy {
   Col
   backAzimuth(const Mat& llr, bool ellipticity) {
     // event
-    const eigen::DRow3& srctpr = llr2tpr(internal::iLatLonRadiusAxisZ, ellipticity);
+    const axisem3d::eigen::DRow3& srctpr = llr2tpr(internal::iLatLonRadiusAxisZ, ellipticity);
     double d = sin(srctpr(1));
     double e = -cos(srctpr(1));
     double f = -sin(srctpr(0));

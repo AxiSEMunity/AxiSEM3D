@@ -61,13 +61,16 @@ class ABC {
   }
 
   // get U0 solid
-  eigen::DColX
-  getU0Solid(
-      double span, const eigen::DColX& vp, const eigen::DColX& vs, const eigen::DColX& rho) const;
+  axisem3d::eigen::DColX
+  getU0Solid(double span,
+      const axisem3d::eigen::DColX& vp,
+      const axisem3d::eigen::DColX& vs,
+      const axisem3d::eigen::DColX& rho) const;
 
   // get U0 fluid
-  eigen::DColX
-  getU0Fluid(double span, const eigen::DColX& vp, const eigen::DColX& rho) const;
+  axisem3d::eigen::DColX
+  getU0Fluid(
+      double span, const axisem3d::eigen::DColX& vp, const axisem3d::eigen::DColX& rho) const;
 
   private:
   /////// general data ///////

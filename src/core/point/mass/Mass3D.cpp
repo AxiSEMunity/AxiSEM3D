@@ -41,7 +41,7 @@ Mass3D::checkCompatibility(int nr, bool solid) const {
 
 // compute accel in-place for fluid
 void
-Mass3D::computeAccel(eigen::CColX& stiff1) const {
+Mass3D::computeAccel(axisem3d::eigen::CColX& stiff1) const {
   // constants
   int nr = (int)mInvMass.rows();
 
@@ -57,7 +57,7 @@ Mass3D::computeAccel(eigen::CColX& stiff1) const {
 
 // compute accel in-place for solid
 void
-Mass3D::computeAccel(eigen::CMatX3& stiff3) const {
+Mass3D::computeAccel(axisem3d::eigen::CMatX3& stiff3) const {
   // constants
   int nr = (int)mInvMass.rows();
 

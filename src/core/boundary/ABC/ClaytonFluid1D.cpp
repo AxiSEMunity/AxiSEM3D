@@ -16,8 +16,8 @@
 void
 ClaytonFluid1D::apply() const {
   // get fields
-  const eigen::CColX& veloc = mFluidPoint->getFields().mVeloc;
-  eigen::CColX& stiff = mFluidPoint->getFields().mStiff;
+  const axisem3d::eigen::CColX& veloc = mFluidPoint->getFields().mVeloc;
+  axisem3d::eigen::CColX& stiff = mFluidPoint->getFields().mStiff;
 
   // apply
   stiff -= veloc * mAreaOverRhoVp;

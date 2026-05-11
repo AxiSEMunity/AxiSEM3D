@@ -18,22 +18,23 @@
 class AttenuationFull : public Attenuation {
   public:
   // 1D constructor
-  AttenuationFull(const eigen::DMatPP_RM& dLambda, const eigen::DMatPP_RM& dMu) :
+  AttenuationFull(
+      const axisem3d::eigen::DMatPP_RM& dLambda, const axisem3d::eigen::DMatPP_RM& dMu) :
       Attenuation(true), mDLambda(dLambda), mDMu(dMu)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mDMu2(eigen::DMatPP_RM(dMu * 2.))
+      mDMu2(axisem3d::eigen::DMatPP_RM(dMu * 2.))
 #endif
   {
     // nothing
   }
 
   // 3D constructor
-  AttenuationFull(const eigen::DMatXN& dLambda, const eigen::DMatXN& dMu) :
+  AttenuationFull(const axisem3d::eigen::DMatXN& dLambda, const axisem3d::eigen::DMatXN& dMu) :
       Attenuation(false), mDLambda(dLambda), mDMu(dMu)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mDMu2(eigen::DMatXN(dMu * 2.))
+      mDMu2(axisem3d::eigen::DMatXN(dMu * 2.))
 #endif
   {
     // nothing
@@ -67,13 +68,13 @@ class AttenuationFull : public Attenuation {
       int nu_1 = nr / 2 + 1;
       mDStress_FR.resize(nu_1);
       for (int alpha = 0; alpha < nu_1; alpha++) {
-        mDStress_FR[alpha].fill(eigen::CMatPP_RM::Zero());
+        mDStress_FR[alpha].fill(axisem3d::eigen::CMatPP_RM::Zero());
       }
       mDStress_CD.resize(0, spectral::nPEM * 6);
     } else {
       mDStress_FR.clear();
       mDStress_FR.shrink_to_fit();
-      mDStress_CD = eigen::RMatXN6::Zero(nr, spectral::nPEM * 6);
+      mDStress_CD = axisem3d::eigen::RMatXN6::Zero(nr, spectral::nPEM * 6);
     }
     mMemVar_FR.assign(nsls(), mDStress_FR);
     mMemVar_CD.assign(nsls(), mDStress_CD);
@@ -103,7 +104,9 @@ class AttenuationFull : public Attenuation {
   //////////////////////// apply ////////////////////////
   // apply attenuation in Fourier space
   void
-  apply(const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) {
+  apply(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeDMu2();
 #endif
@@ -114,7 +117,7 @@ class AttenuationFull : public Attenuation {
 
   // apply attenuation in cardinal space
   void
-  apply(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) {
+  apply(const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeDMu2();
 #endif
@@ -146,12 +149,12 @@ class AttenuationFull : public Attenuation {
 #endif
 
   // memory variables in Fourier space
-  eigen::vec_ar6_CMatPP_RM mDStress_FR;
-  std::vector<eigen::vec_ar6_CMatPP_RM> mMemVar_FR;
+  axisem3d::eigen::vec_ar6_CMatPP_RM mDStress_FR;
+  std::vector<axisem3d::eigen::vec_ar6_CMatPP_RM> mMemVar_FR;
 
   // memory variables in cardinal space
-  eigen::RMatXN6 mDStress_CD;
-  std::vector<eigen::RMatXN6> mMemVar_CD;
+  axisem3d::eigen::RMatXN6 mDStress_CD;
+  std::vector<axisem3d::eigen::RMatXN6> mMemVar_CD;
 
   /////////////////////////////////////////////////////////////////////
   /////////////////// template-based implementation ///////////////////

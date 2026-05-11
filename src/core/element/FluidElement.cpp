@@ -88,7 +88,7 @@ FluidElement::getPoint(int ipnt) const {
 /////////////////////////// time loop ///////////////////////////
 // collect displacement from points
 void
-FluidElement::collectDisplFromPoints(eigen::vec_ar1_CMatPP_RM& displElem) const {
+FluidElement::collectDisplFromPoints(axisem3d::eigen::vec_ar1_CMatPP_RM& displElem) const {
   for (int ipol = 0; ipol < spectral::nPED; ipol++) {
     for (int jpol = 0; jpol < spectral::nPED; jpol++) {
       mPoints[ipol * spectral::nPED + jpol]->scatterDisplToElement(displElem, mNu_1, ipol, jpol);
@@ -98,8 +98,8 @@ FluidElement::collectDisplFromPoints(eigen::vec_ar1_CMatPP_RM& displElem) const 
 
 // displacement to stiffness
 void
-FluidElement::displToStiff(
-    const eigen::vec_ar1_CMatPP_RM& displElem, eigen::vec_ar1_CMatPP_RM& stiffElem) const {
+FluidElement::displToStiff(const axisem3d::eigen::vec_ar1_CMatPP_RM& displElem,
+    axisem3d::eigen::vec_ar1_CMatPP_RM& stiffElem) const {
   // displ => strain
   mGradQuad->computeGrad3(displElem, sStrainSpherical_FR, mNu_1);
 
@@ -135,7 +135,7 @@ FluidElement::displToStiff(
 // add stiffness to points
 // allow a derived class to change stiffElem (no const)
 void
-FluidElement::addStiffToPoints(eigen::vec_ar1_CMatPP_RM& stiffElem) const {
+FluidElement::addStiffToPoints(axisem3d::eigen::vec_ar1_CMatPP_RM& stiffElem) const {
   for (int ipol = 0; ipol < spectral::nPED; ipol++) {
     for (int jpol = 0; jpol < spectral::nPED; jpol++) {
       mPoints[ipol * spectral::nPED + jpol]->gatherStiffFromElement(stiffElem, ipol, jpol);
@@ -189,7 +189,7 @@ FluidElement::preparePressureSource() const {
 
 // add pressure source
 void
-FluidElement::addPressureSource(const eigen::CMatXN& pressure, int nu_1_pressure) const {
+FluidElement::addPressureSource(const axisem3d::eigen::CMatXN& pressure, int nu_1_pressure) const {
   for (int ipnt = 0; ipnt < nPEM; ipnt++) {
     mPoints[ipnt]->addPressureSource(pressure, nu_1_pressure, ipnt);
   }
@@ -225,7 +225,7 @@ FluidElement::prepareWavefieldOutput(
 
 // chi field
 void
-FluidElement::getChiField(eigen::CMatXN& chi) const {
+FluidElement::getChiField(axisem3d::eigen::CMatXN& chi) const {
   // collect displacement from points
   collectDisplFromPoints(sDisplSpherical_FR);
 
@@ -235,7 +235,7 @@ FluidElement::getChiField(eigen::CMatXN& chi) const {
 
 // displ field
 void
-FluidElement::getDisplField(eigen::CMatXN3& displ, bool needRTZ) const {
+FluidElement::getDisplField(axisem3d::eigen::CMatXN3& displ, bool needRTZ) const {
   // collect displacement from points
   collectDisplFromPoints(sDisplSpherical_FR);
 
@@ -278,7 +278,7 @@ FluidElement::getDisplField(eigen::CMatXN3& displ, bool needRTZ) const {
 
 // pressure field
 void
-FluidElement::getPressureField(eigen::CMatXN& pressure) const {
+FluidElement::getPressureField(axisem3d::eigen::CMatXN& pressure) const {
   for (int ipnt = 0; ipnt < nPEM; ipnt++) {
     mPoints[ipnt]->scatterPressureToElement(pressure, mNu_1, ipnt);
   }
@@ -286,7 +286,7 @@ FluidElement::getPressureField(eigen::CMatXN& pressure) const {
 
 // delta field
 void
-FluidElement::getDeltaField(eigen::CMatXN& delta) const {
+FluidElement::getDeltaField(axisem3d::eigen::CMatXN& delta) const {
   for (int ipnt = 0; ipnt < nPEM; ipnt++) {
     mPoints[ipnt]->scatterDeltaToElement(delta, mNu_1, ipnt);
   }

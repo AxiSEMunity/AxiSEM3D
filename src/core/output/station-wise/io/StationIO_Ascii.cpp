@@ -103,8 +103,9 @@ StationIO_Ascii::finalize() {
 
 // dump to file
 void
-StationIO_Ascii::dumpToFile(
-    const eigen::DColX& bufferTime, const eigen::RTensor3& bufferFields, int bufferLine) {
+StationIO_Ascii::dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+    const axisem3d::eigen::RTensor3& bufferFields,
+    int bufferLine) {
   // no station
   int nst = (int)bufferFields.dimensions()[0];
   if (nst == 0) {
@@ -125,12 +126,12 @@ StationIO_Ascii::dumpToFile(
 
   // wavefields
   int nch = (int)bufferFields.dimensions()[1];
-  static const eigen::IArray2 shuffle = {1, 0};
+  static const axisem3d::eigen::IArray2 shuffle = {1, 0};
   Eigen::internal::set_is_malloc_allowed(true);
   if (mStationCentric) {
-    eigen::IArray3 loc = {0, 0, 0};
-    eigen::IArray3 len = {1, nch, bufferLine};
-    eigen::IArray2 shape = {nch, bufferLine};
+    axisem3d::eigen::IArray3 loc = {0, 0, 0};
+    axisem3d::eigen::IArray3 len = {1, nch, bufferLine};
+    axisem3d::eigen::IArray2 shape = {nch, bufferLine};
     for (int ist = 0; ist < nst; ist++) {
       loc[0] = ist;
       (*mFileStreams[ist + tfile])
@@ -140,9 +141,9 @@ StationIO_Ascii::dumpToFile(
       }
     }
   } else {
-    eigen::IArray3 loc = {0, 0, 0};
-    eigen::IArray3 len = {nst, 1, bufferLine};
-    eigen::IArray2 shape = {nst, bufferLine};
+    axisem3d::eigen::IArray3 loc = {0, 0, 0};
+    axisem3d::eigen::IArray3 len = {nst, 1, bufferLine};
+    axisem3d::eigen::IArray2 shape = {nst, bufferLine};
     for (int ich = 0; ich < nch; ich++) {
       loc[1] = ich;
       (*mFileStreams[ich + tfile])

@@ -62,11 +62,11 @@ class Model3D {
 
   ////////////////////////////// static //////////////////////////////
   // compute spz on element
-  static eigen::DMatX3
+  static axisem3d::eigen::DMatX3
   computeElemSPZ(const Quad& quad, bool undulated = false);
 
   // compute spz on edge
-  static eigen::DMatX3
+  static axisem3d::eigen::DMatX3
   computeEdgeSPZ(const Quad& quad, int edge);
 
   // check inplane scope
@@ -117,8 +117,8 @@ class Model3D {
   }
 
   // compute coords in model CS
-  static eigen::DMatX3
-  coordsFromMeshToModel(const eigen::DMatX3& spzMesh,
+  static axisem3d::eigen::DMatX3
+  coordsFromMeshToModel(const axisem3d::eigen::DMatX3& spzMesh,
       bool sourceCentered,
       bool xy,
       bool ellipticity,
@@ -126,7 +126,7 @@ class Model3D {
       bool useDepth,
       bool depthSolid,
       const std::string& modelName) {
-    eigen::DMatX3 crdModel;
+    axisem3d::eigen::DMatX3 crdModel;
     if (sourceCentered) {
       if (geodesy::isCartesian()) {
         crdModel = spzMesh;
@@ -155,7 +155,7 @@ class Model3D {
                                    "Model name = " +
               modelName);
         }
-        eigen::DMatX3 spzBend(spzMesh.rows(), spzMesh.cols());
+        axisem3d::eigen::DMatX3 spzBend(spzMesh.rows(), spzMesh.cols());
         const auto& t = spzMesh.col(0).cwiseQuotient(spzMesh.col(2));
         spzBend.col(0) = spzMesh.col(2).array() * t.array().sin();
         spzBend.col(2) = spzMesh.col(2).array() * t.array().cos();

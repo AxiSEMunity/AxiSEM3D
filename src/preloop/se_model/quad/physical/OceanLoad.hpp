@@ -18,12 +18,12 @@ class OceanLoad {
   public:
   // add sum(rho * depth)
   void
-  addSumRhoDepth(const eigen::arP_DColX& sumRD) {
+  addSumRhoDepth(const axisem3d::eigen::arP_DColX& sumRD) {
     mSumRhoDepth.addGLL(sumRD);
   }
 
   // get pointwise
-  eigen::arP_DColX
+  axisem3d::eigen::arP_DColX
   getPointwise() const {
     return mSumRhoDepth.getPointwise();
   }

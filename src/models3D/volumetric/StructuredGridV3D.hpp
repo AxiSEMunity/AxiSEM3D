@@ -47,10 +47,10 @@ class StructuredGridV3D : public Volumetric3D {
 
   // get properties
   bool
-  getProperties(const eigen::DMatX3& spz,
-      const eigen::DMat24& nodalSZ,
-      eigen::IMatXX& inScopes,
-      eigen::DMatXX& propValues) const;
+  getProperties(const axisem3d::eigen::DMatX3& spz,
+      const axisem3d::eigen::DMat24& nodalSZ,
+      axisem3d::eigen::IMatXX& inScopes,
+      axisem3d::eigen::DMatXX& propValues) const;
 
   // verbose
   std::string
@@ -87,7 +87,7 @@ class StructuredGridV3D : public Volumetric3D {
   std::vector<std::string> mPropertyVarNames;
   std::vector<double> mPropertyFactors;
   std::vector<ReferenceKind> mPropertyReferenceKinds;
-  std::unique_ptr<eigen::IMat66> mIndexCIJ;
+  std::unique_ptr<axisem3d::eigen::IMat66> mIndexCIJ;
 
   // grid
   std::unique_ptr<StructuredGrid<3, double>> mGrid = nullptr;

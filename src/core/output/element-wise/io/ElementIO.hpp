@@ -26,8 +26,8 @@ class ElementIO {
       const std::vector<std::string>& channels,
       int npnts,
       const std::vector<int>& naGrid,
-      const eigen::IMatX4_RM& elemNaInfo,
-      const eigen::DMatXX_RM& elemCoords);
+      const axisem3d::eigen::IMatX4_RM& elemNaInfo,
+      const axisem3d::eigen::DMatXX_RM& elemCoords);
 
   // finalize
   virtual void
@@ -35,8 +35,8 @@ class ElementIO {
 
   // dump to file
   virtual void
-  dumpToFile(const eigen::DColX& bufferTime,
-      const std::vector<eigen::RTensor5>& bufferFields,
+  dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+      const std::vector<axisem3d::eigen::RTensor5>& bufferFields,
       int bufferLine) = 0;
 
   // set flush

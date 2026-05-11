@@ -62,8 +62,9 @@ StructuredGridO3D::StructuredGridO3D(const std::string& modelName,
 
 // get sum(rho * depth)
 bool
-StructuredGridO3D::getSumRhoDepth(
-    const eigen::DMatX3& spz, const eigen::DMat24& nodalSZ, eigen::DColX& sumRhoDepth) const {
+StructuredGridO3D::getSumRhoDepth(const axisem3d::eigen::DMatX3& spz,
+    const axisem3d::eigen::DMat24& nodalSZ,
+    axisem3d::eigen::DColX& sumRhoDepth) const {
   //////////////////////// coords ////////////////////////
   // check min/max
   const auto& gridCrds = mGrid->getGridCoords();
@@ -80,19 +81,19 @@ StructuredGridO3D::getSumRhoDepth(
   }
 
   // compute grid coords
-  const eigen::DMatX3& crdGrid = coordsFromMeshToModel(
+  const axisem3d::eigen::DMatX3& crdGrid = coordsFromMeshToModel(
       spz, mSourceCentered, mXY, mEllipticity, mLon360, false, false, mModelName);
 
   //////////////////////// values ////////////////////////
   // allocate and fill with zero
   int nCardinals = (int)spz.rows();
-  sumRhoDepth = eigen::DColX::Zero(nCardinals);
+  sumRhoDepth = axisem3d::eigen::DColX::Zero(nCardinals);
 
   // point loop
   static const double err = std::numeric_limits<double>::lowest();
   bool oneInScope = false;
   for (int ipnt = 0; ipnt < nCardinals; ipnt++) {
-    const eigen::DRow2& horizontal = crdGrid.block(ipnt, 0, 1, 2);
+    const axisem3d::eigen::DRow2& horizontal = crdGrid.block(ipnt, 0, 1, 2);
     double val = mGrid->compute(horizontal, err);
     // check scope
     // ignore negative sum(rho * depth)

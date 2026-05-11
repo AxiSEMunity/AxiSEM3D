@@ -18,10 +18,10 @@
 // need distance tolerance for NrFieldPointwise
 class ExodusMesh;
 
-namespace eigen {
+namespace axisem3d::eigen {
   // coords
   typedef Eigen::Matrix<double, Eigen::Dynamic, 2, Eigen::RowMajor> DMatX2_RM;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 class NrField {
   public:
@@ -29,8 +29,8 @@ class NrField {
   virtual ~NrField() = default;
 
   // get nr by (s, z)
-  virtual eigen::IColX
-  getNrAtPoints(const eigen::DMatX2_RM& sz) const = 0;
+  virtual axisem3d::eigen::IColX
+  getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const = 0;
 
   // verbose
   virtual std::string

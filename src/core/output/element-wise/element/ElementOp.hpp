@@ -36,8 +36,8 @@ class ElementOp {
   recordToElem(CMatXND& cxnd,
       int nu_1,
       RMatXND_RM& rxnd,
-      const eigen::CMatXX& expIAlphaPhi,
-      eigen::RTensor4& field,
+      const axisem3d::eigen::CMatXX& expIAlphaPhi,
+      axisem3d::eigen::RTensor4& field,
       int bufferLine) const {
     // inplane downsampling
     int npnts = (int)mIPnts.size();
@@ -68,43 +68,46 @@ class ElementOp {
     }
 
     // write to buffer (Nyquist truncated here)
-    static const eigen::IArray3 shuffle = {0, 2, 1};
-    static const eigen::IArray3 zero = {0, 0, 0};
+    static const axisem3d::eigen::IArray3 shuffle = {0, 2, 1};
+    static const axisem3d::eigen::IArray3 zero = {0, 0, 0};
     int na = (int)field.dimension(0);
-    field.slice(eigen::IArray4({0, 0, 0, bufferLine}), eigen::IArray4({na, npnts, D, 1}))
-        .reshape(eigen::IArray3{na, npnts, D}) = // the longest C++ statement I have written
-        Eigen::TensorMap<eigen::RTensor3>(
-            rxnd.data(), eigen::IArray3({rxnd.rows(), rxnd.cols(), 1}))
-            .slice(zero, eigen::IArray3({na, npntsD, 1}))
-            .reshape(eigen::IArray3{na, D, npnts})
+    field
+        .slice(axisem3d::eigen::IArray4({0, 0, 0, bufferLine}),
+            axisem3d::eigen::IArray4({na, npnts, D, 1}))
+        .reshape(
+            axisem3d::eigen::IArray3{na, npnts, D}) = // the longest C++ statement I have written
+        Eigen::TensorMap<axisem3d::eigen::RTensor3>(
+            rxnd.data(), axisem3d::eigen::IArray3({rxnd.rows(), rxnd.cols(), 1}))
+            .slice(zero, axisem3d::eigen::IArray3({na, npntsD, 1}))
+            .reshape(axisem3d::eigen::IArray3{na, D, npnts})
             .shuffle(shuffle);
   }
 
   // dump: compute channel and feed IO buffer
   template <int D>
   static void
-  dumpToIO(const eigen::RTensor4& field,
+  dumpToIO(const axisem3d::eigen::RTensor4& field,
       int fieldIndex,
       int bufferLine,
       int channelIndex,
       int elemIndexNaGrid,
       int naGridIndex,
-      std::vector<eigen::RTensor5>& ioBuffers) {
+      std::vector<axisem3d::eigen::RTensor5>& ioBuffers) {
     // result reference
     int na = (int)field.dimension(0);
     int npnts = (int)field.dimension(1);
-    eigen::IArray5 loc5 = {elemIndexNaGrid, 0, 0, channelIndex, 0};
-    eigen::IArray5 len5 = {1, na, npnts, 1, bufferLine};
-    eigen::IArray3 copy = {na, npnts, bufferLine};
+    axisem3d::eigen::IArray5 loc5 = {elemIndexNaGrid, 0, 0, channelIndex, 0};
+    axisem3d::eigen::IArray5 len5 = {1, na, npnts, 1, bufferLine};
+    axisem3d::eigen::IArray3 copy = {na, npnts, bufferLine};
     auto res = ioBuffers[naGridIndex].slice(loc5, len5).reshape(copy);
 
     // indexing of input elemBuffer
-    eigen::IArray4 loc4 = {0, 0, 0, 0};
-    eigen::IArray4 len4 = {na, npnts, 1, bufferLine};
+    axisem3d::eigen::IArray4 loc4 = {0, 0, 0, 0};
+    axisem3d::eigen::IArray4 len4 = {na, npnts, 1, bufferLine};
 
     // channel index
     static const int chrank = 2;
-    static const eigen::IArray1 chDim = {2};
+    static const axisem3d::eigen::IArray1 chDim = {2};
 
     // channel
     if (fieldIndex >= 0) {
@@ -139,7 +142,7 @@ class ElementOp {
           res = (field.slice(loc4, len4).sum(chDim).square() * numerical::Real(1. / 3));
           // I2: permutation 0, 1, 2
           len4[chrank] = 1;
-          eigen::IArray4 lox4 = loc4;
+          axisem3d::eigen::IArray4 lox4 = loc4;
           for (int dim = 0; dim < 3; dim++) {
             loc4[chrank] = dim;
             lox4[chrank] = (dim == 2) ? 0 : (dim + 1);

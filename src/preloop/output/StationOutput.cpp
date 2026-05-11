@@ -248,11 +248,11 @@ StationOutput::release(const SE_Model& sem,
     //////////// read ////////////
     timer::gPreloopTimer.begin("Reading and broadcasting station file");
     std::vector<std::string> stKeys;
-    eigen::DMatX3 stCrds;
+    axisem3d::eigen::DMatX3 stCrds;
     // open and read
     if (mpi::root()) {
       // use map to check key uniqueness while recording order in map
-      std::map<std::string, std::pair<int, eigen::DRow3>> keyCrds;
+      std::map<std::string, std::pair<int, axisem3d::eigen::DRow3>> keyCrds;
       const std::vector<std::string>& lines =
           readLines(io::popInputDir(stgrp->mFileName), "StationOutput::release");
       int numStations = 0;
@@ -280,7 +280,7 @@ StationOutput::release(const SE_Model& sem,
               stgrp->mGroupName);
         }
         // coords
-        static eigen::DRow3 crd;
+        static axisem3d::eigen::DRow3 crd;
         crd(0) = cast<double>(words[2], "StationOutput::release");
         crd(1) = cast<double>(words[3], "StationOutput::release");
         crd(2) = cast<double>(words.back(), "StationOutput::release");
@@ -309,7 +309,7 @@ StationOutput::release(const SE_Model& sem,
     int numStations = (int)stKeys.size();
     for (int ist = 0; ist < numStations; ist++) {
       // compute spz
-      const eigen::DRow3& spz = Source::computeSPZ(sem,
+      const axisem3d::eigen::DRow3& spz = Source::computeSPZ(sem,
           stCrds.row(ist),
           stgrp->mSourceCentered,
           stgrp->mXY,
@@ -430,7 +430,7 @@ StationOutput::release(const SE_Model& sem,
       }
 
       // compute spz
-      const eigen::DRow3& spz = Source::computeSPZ(sem,
+      const axisem3d::eigen::DRow3& spz = Source::computeSPZ(sem,
           stCrds.row(ist),
           stgrp->mSourceCentered,
           stgrp->mXY,
@@ -443,12 +443,12 @@ StationOutput::release(const SE_Model& sem,
 
       // theta and baz
       double theta = geodesy::sz2rtheta(spz, true, 0, 2, 2, 0)(0);
-      const eigen::DRow3& llr = geodesy::spz2llr(spz, true, false);
+      const axisem3d::eigen::DRow3& llr = geodesy::spz2llr(spz, true, false);
       double baz = geodesy::backAzimuth(llr, true)(0);
 
       // inplane interpolation
       int quadTag = stationQuad.at(ist);
-      const eigen::DRowN& inplaneFactor =
+      const axisem3d::eigen::DRowN& inplaneFactor =
           sem.computeInplaneFactor(spz({0, 2}).transpose(), quadTag);
 
       // station

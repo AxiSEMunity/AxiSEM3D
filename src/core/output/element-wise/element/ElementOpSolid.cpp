@@ -48,7 +48,7 @@ ElementOpSolid::setInGroup(int dumpIntv, const channel::solid::ChannelOptions& c
 void
 ElementOpSolid::record(int bufferLine,
     const channel::solid::ChannelOptions& chops,
-    const eigen::CMatXX& expIAlphaPhi) {
+    const axisem3d::eigen::CMatXX& expIAlphaPhi) {
   int nu_1 = mElement->getNu_1();
   bool needRTZ = (chops.mWCS == channel::WavefieldCS::RTZ);
 
@@ -81,7 +81,7 @@ ElementOpSolid::processReport(int bufferLine,
     const channel::solid::ChannelOptions& chops,
     int elemIndexNaGrid,
     int naGridIndex,
-    std::vector<eigen::RTensor5>& ioBuffers) {
+    std::vector<axisem3d::eigen::RTensor5>& ioBuffers) {
   // loop over channels
   for (int ich = 0; ich < chops.mStdChannels.size(); ich++) {
     // find field and index of channel

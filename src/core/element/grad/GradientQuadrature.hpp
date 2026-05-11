@@ -95,13 +95,13 @@ template <typename floatT> class GradientQuadrature {
   public:
 #ifdef AXISEM3D_SAVE_MEMORY
   // constructor
-  GradientQuadrature(const eigen::DMatPP_RM& dsdxii,
-      const eigen::DMatPP_RM& dsdeta,
-      const eigen::DMatPP_RM& dzdxii,
-      const eigen::DMatPP_RM& dzdeta,
-      const eigen::DMatPP_RM& _1ovrS,
+  GradientQuadrature(const axisem3d::eigen::DMatPP_RM& dsdxii,
+      const axisem3d::eigen::DMatPP_RM& dsdeta,
+      const axisem3d::eigen::DMatPP_RM& dzdxii,
+      const axisem3d::eigen::DMatPP_RM& dzdeta,
+      const axisem3d::eigen::DMatPP_RM& _1ovrS,
       bool axial,
-      const eigen::DMatPP_RM& integralFactor) :
+      const axisem3d::eigen::DMatPP_RM& integralFactor) :
       mDsDxii(dsdxii.cast<floatT>()), mDsDeta(dsdeta.cast<floatT>()),
       mDzDxii(dzdxii.cast<floatT>()), mDzDeta(dzdeta.cast<floatT>()),
       m1overS(_1ovrS.cast<floatT>()), mAxial(axial),
@@ -118,13 +118,13 @@ template <typename floatT> class GradientQuadrature {
   }
 #else
   // constructor
-  GradientQuadrature(const eigen::DMatPP_RM& dsdxii,
-      const eigen::DMatPP_RM& dsdeta,
-      const eigen::DMatPP_RM& dzdxii,
-      const eigen::DMatPP_RM& dzdeta,
-      const eigen::DMatPP_RM& _1ovrS,
+  GradientQuadrature(const axisem3d::eigen::DMatPP_RM& dsdxii,
+      const axisem3d::eigen::DMatPP_RM& dsdeta,
+      const axisem3d::eigen::DMatPP_RM& dzdxii,
+      const axisem3d::eigen::DMatPP_RM& dzdeta,
+      const axisem3d::eigen::DMatPP_RM& _1ovrS,
       bool axial,
-      const eigen::DMatPP_RM& integralFactor) :
+      const axisem3d::eigen::DMatPP_RM& integralFactor) :
       mDsDxii(dsdxii.cast<floatT>()), mDsDeta(dsdeta.cast<floatT>()),
       mDzDxii(dzdxii.cast<floatT>()), mDzDeta(dzdeta.cast<floatT>()),
       m1overS(_1ovrS.cast<floatT>()), mAxial(axial),
@@ -483,7 +483,7 @@ template <typename floatT> class GradientQuadrature {
   public:
   // set G Mat
   static void
-  setGMat(const eigen::DMatPP_RM& G_GLL, const eigen::DMatPP_RM& G_GLJ) {
+  setGMat(const axisem3d::eigen::DMatPP_RM& G_GLL, const axisem3d::eigen::DMatPP_RM& G_GLJ) {
     sG_GLL = G_GLL.cast<floatT>();
     sG_GLJ = G_GLJ.cast<floatT>();
     sGT_GLL = G_GLL.transpose().cast<floatT>();

@@ -165,8 +165,8 @@ template <class StationT> class StationGroup {
 
   //////////////// non-const ////////////////
   // buffer
-  eigen::DColX mBufferTime = eigen::DColX(0);
-  eigen::RTensor3 mBufferFields = eigen::RTensor3(0, 0, 0);
+  axisem3d::eigen::DColX mBufferTime = axisem3d::eigen::DColX(0);
+  axisem3d::eigen::RTensor3 mBufferFields = axisem3d::eigen::RTensor3(0, 0, 0);
   int mBufferLine = 0;
 
   // stations

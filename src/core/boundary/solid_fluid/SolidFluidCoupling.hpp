@@ -45,11 +45,13 @@ class SolidFluidCoupling {
   public:
   // solid => fluid
   virtual void
-  coupleSolidToFluid(const eigen::CMatX3& solidDispl, eigen::CColX& fluidStiff) const = 0;
+  coupleSolidToFluid(
+      const axisem3d::eigen::CMatX3& solidDispl, axisem3d::eigen::CColX& fluidStiff) const = 0;
 
   // fluid => solid
   virtual void
-  coupleFluidToSolid(const eigen::CColX& fluidStiff, eigen::CMatX3& solidStiff) const = 0;
+  coupleFluidToSolid(
+      const axisem3d::eigen::CColX& fluidStiff, axisem3d::eigen::CMatX3& solidStiff) const = 0;
 
   protected:
   // coupled solid-fluid pair

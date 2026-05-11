@@ -47,7 +47,7 @@ class SE_Model {
 
   // step 2: get dt for attenuation
   double
-  computeDt(double courant, const ABC& abc, eigen::DCol2& sz) const;
+  computeDt(double courant, const ABC& abc, axisem3d::eigen::DCol2& sz) const;
 
   // step 3: release to domain
   void
@@ -58,7 +58,7 @@ class SE_Model {
       Domain& domain);
 
   // step 4: measure
-  eigen::DColX
+  axisem3d::eigen::DColX
   measureCost(const ExodusMesh& exodusMesh,
       const LocalMesh& localMesh,
       const TimeScheme& timeScheme,
@@ -71,11 +71,11 @@ class SE_Model {
   ////////////////// source-receiver //////////////////
   // get total undulation
   double
-  getTotalUndulation(const eigen::DRow3& spzRef) const;
+  getTotalUndulation(const axisem3d::eigen::DRow3& spzRef) const;
 
   // undulated to reference
-  eigen::DRow3
-  undulatedToReference(const eigen::DRow3& spzUnd) const;
+  axisem3d::eigen::DRow3
+  undulatedToReference(const axisem3d::eigen::DRow3& spzUnd) const;
 
   // form inplane RTree
   void
@@ -83,11 +83,11 @@ class SE_Model {
 
   // locate inplane
   int
-  locateInplane(const eigen::DCol2& sz, bool inFluid) const;
+  locateInplane(const axisem3d::eigen::DCol2& sz, bool inFluid) const;
 
   // compute inplane factor
-  eigen::DRowN
-  computeInplaneFactor(const eigen::DCol2& sz, int iquad) const;
+  axisem3d::eigen::DRowN
+  computeInplaneFactor(const axisem3d::eigen::DCol2& sz, int iquad) const;
 
   // get quads
   const std::vector<Quad>&
@@ -132,10 +132,10 @@ class SE_Model {
   std::vector<std::shared_ptr<const Geometric3D>> mModelsG3D;
 
   // local mesh range
-  eigen::DCol2 mRangeS = eigen::DCol2::Zero();
-  eigen::DCol2 mRangeZ = eigen::DCol2::Zero();
-  eigen::DCol2 mRangeR = eigen::DCol2::Zero();
-  eigen::DCol2 mRangeT = eigen::DCol2::Zero();
+  axisem3d::eigen::DCol2 mRangeS = axisem3d::eigen::DCol2::Zero();
+  axisem3d::eigen::DCol2 mRangeZ = axisem3d::eigen::DCol2::Zero();
+  axisem3d::eigen::DCol2 mRangeR = axisem3d::eigen::DCol2::Zero();
+  axisem3d::eigen::DCol2 mRangeT = axisem3d::eigen::DCol2::Zero();
 
   // inplane
   std::unique_ptr<RTreeND<2, 1, int>> mRTreeFluid = nullptr;

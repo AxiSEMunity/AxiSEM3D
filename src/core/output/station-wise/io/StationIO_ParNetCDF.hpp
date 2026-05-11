@@ -30,7 +30,9 @@ class StationIO_ParNetCDF : public StationIO {
 
   // dump to file
   void
-  dumpToFile(const eigen::DColX& bufferTime, const eigen::RTensor3& bufferFields, int bufferLine);
+  dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+      const axisem3d::eigen::RTensor3& bufferFields,
+      int bufferLine);
 
   private:
   //////////////////// const ////////////////////

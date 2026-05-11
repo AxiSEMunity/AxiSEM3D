@@ -18,8 +18,9 @@
 class ClaytonFluid3D : public ClaytonFluid {
   public:
   // constructor
-  ClaytonFluid3D(
-      const std::shared_ptr<FluidPoint>& fp, const eigen::DColX& rhoVp, const eigen::DColX& area) :
+  ClaytonFluid3D(const std::shared_ptr<FluidPoint>& fp,
+      const axisem3d::eigen::DColX& rhoVp,
+      const axisem3d::eigen::DColX& area) :
       ClaytonFluid(fp), mAreaOverRhoVp(area.cwiseQuotient(rhoVp).cast<numerical::Real>()) {
     // check compatibility
     checkCompatibility();
@@ -37,15 +38,15 @@ class ClaytonFluid3D : public ClaytonFluid {
 
   private:
   // area / (rho * vp)
-  const eigen::RColX mAreaOverRhoVp;
+  const axisem3d::eigen::RColX mAreaOverRhoVp;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
   ////////////////////////////////////////
 
   // workspace
-  inline static eigen::RColX sVecR = eigen::RColX(0);
-  inline static eigen::CColX sVecC = eigen::CColX(0);
+  inline static axisem3d::eigen::RColX sVecR = axisem3d::eigen::RColX(0);
+  inline static axisem3d::eigen::CColX sVecC = axisem3d::eigen::CColX(0);
 };
 
 #endif /* ClaytonFluid3D_hpp */

@@ -17,7 +17,7 @@
 // set element
 void
 StationSolid::setElement(
-    const std::shared_ptr<SolidElement>& element, const eigen::DRowN& weights) {
+    const std::shared_ptr<SolidElement>& element, const axisem3d::eigen::DRowN& weights) {
   // element
   mElement = element;
 
@@ -96,7 +96,7 @@ void
 StationSolid::processReport(int bufferLine,
     const channel::solid::ChannelOptions& chops,
     int stationIndex,
-    eigen::RTensor3& bufferFields) {
+    axisem3d::eigen::RTensor3& bufferFields) {
   // rotate
   rotate(bufferLine, chops);
 

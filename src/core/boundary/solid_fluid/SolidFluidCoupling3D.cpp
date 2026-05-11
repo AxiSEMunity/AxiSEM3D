@@ -16,9 +16,9 @@
 // constructor
 SolidFluidCoupling3D::SolidFluidCoupling3D(const std::shared_ptr<SolidPoint>& sp,
     const std::shared_ptr<FluidPoint>& fp,
-    const eigen::DMatX3& n_unassmb,
-    const eigen::DMatX3& n_assmb,
-    const eigen::DColX& massFluid) :
+    const axisem3d::eigen::DMatX3& n_unassmb,
+    const axisem3d::eigen::DMatX3& n_assmb,
+    const axisem3d::eigen::DColX& massFluid) :
     SolidFluidCoupling(sp, fp), mNormal_UnassembledMPI(n_unassmb.cast<numerical::Real>()),
     mNormal_AssembledMPI_InvMassFluid(
         (massFluid.cwiseInverse().asDiagonal() * n_assmb).cast<numerical::Real>()) {
@@ -54,7 +54,7 @@ SolidFluidCoupling3D::checkCompatibility(int nr) const {
 // solid => fluid
 void
 SolidFluidCoupling3D::coupleSolidToFluid(
-    const eigen::CMatX3& solidDispl, eigen::CColX& fluidStiff) const {
+    const axisem3d::eigen::CMatX3& solidDispl, axisem3d::eigen::CColX& fluidStiff) const {
   // constants
   int nr = (int)mNormal_UnassembledMPI.rows();
   int nu_1 = nr / 2 + 1;
@@ -75,7 +75,7 @@ SolidFluidCoupling3D::coupleSolidToFluid(
 // fluid => solid
 void
 SolidFluidCoupling3D::coupleFluidToSolid(
-    const eigen::CColX& fluidStiff, eigen::CMatX3& solidStiff) const {
+    const axisem3d::eigen::CColX& fluidStiff, axisem3d::eigen::CMatX3& solidStiff) const {
   // constants
   int nr = (int)mNormal_UnassembledMPI.rows();
   int nu_1 = nr / 2 + 1;

@@ -21,8 +21,8 @@ ElementIO_NetCDF::initialize(const std::string& groupName,
     const std::vector<std::string>& channels,
     int npnts,
     const std::vector<int>& naGrid,
-    const eigen::IMatX4_RM& elemNaInfo,
-    const eigen::DMatXX_RM& elemCoords) {
+    const axisem3d::eigen::IMatX4_RM& elemNaInfo,
+    const axisem3d::eigen::DMatXX_RM& elemCoords) {
   // finalize
   finalize();
 
@@ -32,7 +32,7 @@ ElementIO_NetCDF::initialize(const std::string& groupName,
   ///////////////////////////////////////////////////////////////////////
   // the fifth column: element index in data after concat
   // gather elements
-  std::vector<eigen::IMatX4_RM> elemNaInfoRanks;
+  std::vector<axisem3d::eigen::IMatX4_RM> elemNaInfoRanks;
   mpi::gatherEigen(elemNaInfo, elemNaInfoRanks, MPI_ALL);
 
   // form dict of naGrid for fast search
@@ -62,7 +62,7 @@ ElementIO_NetCDF::initialize(const std::string& groupName,
 
   // the fifth column
   int nelem = (int)elemNaInfo.rows();
-  eigen::IMatX5_RM elemNaInfo5(nelem, 5);
+  axisem3d::eigen::IMatX5_RM elemNaInfo5(nelem, 5);
   elemNaInfo5.leftCols(4) = elemNaInfo;
   for (int ielem = 0; ielem < nelem; ielem++) {
     int nag = elemNaInfo5(ielem, 2);
@@ -183,8 +183,8 @@ ElementIO_NetCDF::finalize() {
 
 // dump to file
 void
-ElementIO_NetCDF::dumpToFile(const eigen::DColX& bufferTime,
-    const std::vector<eigen::RTensor5>& bufferFields,
+ElementIO_NetCDF::dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+    const std::vector<axisem3d::eigen::RTensor5>& bufferFields,
     int bufferLine) {
   // no element
   if (!mNcFile) {
@@ -217,10 +217,10 @@ ElementIO_NetCDF::dumpToFile(const eigen::DColX& bufferTime,
     } else {
       // must truncate by copy because time is the fastest varying
       // dimension; occuring only at the end of the simulation
-      eigen::IArray5 loc = {0, 0, 0, 0, 0};
-      eigen::IArray5 len = {nelem, nag, npnts, nch, bufferLine};
+      axisem3d::eigen::IArray5 loc = {0, 0, 0, 0, 0};
+      axisem3d::eigen::IArray5 len = {nelem, nag, npnts, nch, bufferLine};
       Eigen::internal::set_is_malloc_allowed(true);
-      eigen::RTensor5 timeTruncated = bufferFields[inag].slice(loc, len);
+      axisem3d::eigen::RTensor5 timeTruncated = bufferFields[inag].slice(loc, len);
       Eigen::internal::set_is_malloc_allowed(false);
       mNcFile->writeVariable(mVarID_Data[inag],
           "data_wave__NaG=" + strNag,

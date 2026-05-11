@@ -25,13 +25,14 @@
 
 ////////////////////////// input //////////////////////////
 // constructor
-Material::Material(const ExodusMesh& exodusMesh, const eigen::DMat24& nodalSZ, bool axial) {
+Material::Material(
+    const ExodusMesh& exodusMesh, const axisem3d::eigen::DMat24& nodalSZ, bool axial) {
   // get radial coords and variables from mesh
   const auto& radialCoords = exodusMesh.getRadialCoords();
   const auto& radialVariables = exodusMesh.getRadialVariables();
 
   // radial coords of me
-  const eigen::DRow4& r =
+  const axisem3d::eigen::DRow4& r =
       geodesy::isCartesian() ? nodalSZ.row(1).eval() : nodalSZ.colwise().norm().eval();
 
   // locate center in radial profile
@@ -46,11 +47,11 @@ Material::Material(const ExodusMesh& exodusMesh, const eigen::DMat24& nodalSZ, b
   bool fluid = false;
   for (auto it = radialVariables.begin(); it != radialVariables.end(); ++it) {
     // end points
-    const eigen::DColX& rvals = it->second;
+    const axisem3d::eigen::DColX& rvals = it->second;
     double v0 = rvals(index0);
     double v1 = rvals(index1);
     // interpolation
-    const eigen::DRow4& nvals = (v1 - v0) / (r1 - r0) * (r.array() - r0) + v0;
+    const axisem3d::eigen::DRow4& nvals = (v1 - v0) / (r1 - r0) * (r.array() - r0) + v0;
     // add to map
     mProperties.insert({it->first, NodalPhysicalProperty(nvals, axial)});
     // check fluid
@@ -64,10 +65,10 @@ Material::Material(const ExodusMesh& exodusMesh, const eigen::DMat24& nodalSZ, b
   // reduce to fluid
   if (fluid) {
     // get vp and rho
-    const eigen::DRow4& vp =
+    const axisem3d::eigen::DRow4& vp =
         (mProperties.find("VPV") != mProperties.end() ? mProperties.at("VPV").getNodalData()
                                                       : mProperties.at("VP").getNodalData());
-    const eigen::DRow4& rho = mProperties.at("RHO").getNodalData();
+    const axisem3d::eigen::DRow4& rho = mProperties.at("RHO").getNodalData();
     // clear all properties
     mProperties.clear();
     // only save vp and rho
@@ -77,15 +78,15 @@ Material::Material(const ExodusMesh& exodusMesh, const eigen::DMat24& nodalSZ, b
 
   // reduce TISO to ISO if possible
   if (currentRheology() == RheologyType::TISO) {
-    const eigen::DRow4& vpv = mProperties.at("VPV").getNodalData();
-    const eigen::DRow4& vph = mProperties.at("VPH").getNodalData();
-    const eigen::DRow4& vsv = mProperties.at("VSV").getNodalData();
-    const eigen::DRow4& vsh = mProperties.at("VSH").getNodalData();
-    const eigen::DRow4& eta = mProperties.at("ETA").getNodalData();
+    const axisem3d::eigen::DRow4& vpv = mProperties.at("VPV").getNodalData();
+    const axisem3d::eigen::DRow4& vph = mProperties.at("VPH").getNodalData();
+    const axisem3d::eigen::DRow4& vsv = mProperties.at("VSV").getNodalData();
+    const axisem3d::eigen::DRow4& vsh = mProperties.at("VSH").getNodalData();
+    const axisem3d::eigen::DRow4& eta = mProperties.at("ETA").getNodalData();
     // TISO to ISO
     if ((vpv - vph).norm() < vpv.norm() * numerical::dEpsilon &&
         (vsv - vsh).norm() < vsv.norm() * numerical::dEpsilon &&
-        (eta - eigen::DRow4::Ones()).norm() < 2. * numerical::dEpsilon) {
+        (eta - axisem3d::eigen::DRow4::Ones()).norm() < 2. * numerical::dEpsilon) {
       // add ISO
       mProperties.insert({"VP", NodalPhysicalProperty(vpv, axial)});
       mProperties.insert({"VS", NodalPhysicalProperty(vsv, axial)});
@@ -103,8 +104,8 @@ Material::Material(const ExodusMesh& exodusMesh, const eigen::DMat24& nodalSZ, b
 void
 Material::addProperty3D(const std::string& propKey,
     const Volumetric3D::ReferenceKind& refKind,
-    const eigen::arN_IColX& inScope,
-    const eigen::arN_DColX& propValue) {
+    const axisem3d::eigen::arN_IColX& inScope,
+    const axisem3d::eigen::arN_DColX& propValue) {
   // backward compatibility
   // TISO
   if (currentRheology() == RheologyType::TISO && (propKey == "VP" || propKey == "VS")) {
@@ -139,26 +140,26 @@ Material::addProperty3D(const std::string& propKey,
   }
 
   // compute 3D value
-  eigen::arN_DColX valNew;
+  axisem3d::eigen::arN_DColX valNew;
   if (refKind == Volumetric3D::ReferenceKind::ABS) {
     // absolute
     valNew = propValue;
   } else if (refKind == Volumetric3D::ReferenceKind::REF1D) {
     // 1D as reference
-    const eigen::arN_DColX& val1D = getProperty(propKey).getPointwiseNodal();
+    const axisem3d::eigen::arN_DColX& val1D = getProperty(propKey).getPointwiseNodal();
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       op1D_3D::times((propValue[ipnt].array() + 1.).matrix(), val1D[ipnt], valNew[ipnt]);
     }
   } else if (refKind == Volumetric3D::ReferenceKind::REF3D) {
     // 3D as reference
-    const eigen::arN_DColX& val3D = getProperty(propKey).getPointwise();
+    const axisem3d::eigen::arN_DColX& val3D = getProperty(propKey).getPointwise();
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       op1D_3D::times((propValue[ipnt].array() + 1.).matrix(), val3D[ipnt], valNew[ipnt]);
     }
   } else {
     // (3D - 1D) as reference
-    const eigen::arN_DColX& val1D = getProperty(propKey).getPointwiseNodal();
-    eigen::arN_DColX valPurterb = getProperty(propKey).getPointwise();
+    const axisem3d::eigen::arN_DColX& val1D = getProperty(propKey).getPointwiseNodal();
+    axisem3d::eigen::arN_DColX valPurterb = getProperty(propKey).getPointwise();
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       op1D_3D::addTo(-val1D[ipnt], valPurterb[ipnt]);
       op1D_3D::times((propValue[ipnt].array() + 1.).matrix(), valPurterb[ipnt], valNew[ipnt]);
@@ -167,7 +168,7 @@ Material::addProperty3D(const std::string& propKey,
   }
 
   // out-of-scope mask
-  const eigen::arN_DColX& oriVal = getProperty(propKey).getPointwise();
+  const axisem3d::eigen::arN_DColX& oriVal = getProperty(propKey).getPointwise();
   for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
     if (oriVal[ipnt].rows() == 1) {
       valNew[ipnt] = inScope[ipnt].select(valNew[ipnt], oriVal[ipnt](0));
@@ -185,13 +186,13 @@ void
 Material::finished3D() {
   // try to degenerate TISO to ISO
   if (currentRheology() == RheologyType::TISO) {
-    eigen::DMatXN vpv = getElemental("VPV");
-    eigen::DMatXN vph = getElemental("VPH");
-    eigen::DMatXN vsv = getElemental("VSV");
-    eigen::DMatXN vsh = getElemental("VSH");
-    eigen::DMatXN eta = getElemental("ETA");
-    op1D_3D::regularize1D<eigen::DMatXN>({std::ref(vpv), std::ref(vph)});
-    op1D_3D::regularize1D<eigen::DMatXN>({std::ref(vsv), std::ref(vsh)});
+    axisem3d::eigen::DMatXN vpv = getElemental("VPV");
+    axisem3d::eigen::DMatXN vph = getElemental("VPH");
+    axisem3d::eigen::DMatXN vsv = getElemental("VSV");
+    axisem3d::eigen::DMatXN vsh = getElemental("VSH");
+    axisem3d::eigen::DMatXN eta = getElemental("ETA");
+    op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({std::ref(vpv), std::ref(vph)});
+    op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({std::ref(vsv), std::ref(vsh)});
     // TISO to ISO
     if ((vpv - vph).norm() < vpv.norm() * numerical::dEpsilon &&
         (vsv - vsh).norm() < vsv.norm() * numerical::dEpsilon &&
@@ -211,25 +212,25 @@ Material::finished3D() {
 
 ////////////////////////// output //////////////////////////
 // get maximum velocity for dt
-eigen::DMatXN
+axisem3d::eigen::DMatXN
 Material::getMaxVelocity() const {
   // three types of anisotropy
   if (currentRheology() == RheologyType::ANISO) {
     // get density and Cijkl
-    eigen::DMatXN rho = getElemental("RHO");
-    eigen::DMatXN C11 = getElemental("C11");
-    eigen::DMatXN C22 = getElemental("C22");
-    eigen::DMatXN C33 = getElemental("C33");
-    op1D_3D::regularize1D<eigen::DMatXN>(
+    axisem3d::eigen::DMatXN rho = getElemental("RHO");
+    axisem3d::eigen::DMatXN C11 = getElemental("C11");
+    axisem3d::eigen::DMatXN C22 = getElemental("C22");
+    axisem3d::eigen::DMatXN C33 = getElemental("C33");
+    op1D_3D::regularize1D<axisem3d::eigen::DMatXN>(
         {std::ref(rho), std::ref(C11), std::ref(C22), std::ref(C33)});
     // max of C11, C22, C33
-    const eigen::DMatXN& Cmax = C11.cwiseMax(C22).cwiseMax(C33);
+    const axisem3d::eigen::DMatXN& Cmax = C11.cwiseMax(C22).cwiseMax(C33);
     // vp = sqrt(Cmax / rho)
     return Cmax.cwiseQuotient(rho).cwiseSqrt();
   } else if (currentRheology() == RheologyType::TISO) {
-    eigen::DMatXN vpv = getElemental("VPV");
-    eigen::DMatXN vph = getElemental("VPH");
-    op1D_3D::regularize1D<eigen::DMatXN>({std::ref(vpv), std::ref(vph)});
+    axisem3d::eigen::DMatXN vpv = getElemental("VPV");
+    axisem3d::eigen::DMatXN vph = getElemental("VPH");
+    op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({std::ref(vpv), std::ref(vph)});
     return vpv.cwiseMax(vph);
   } else {
     // ISO or fluid
@@ -239,8 +240,9 @@ Material::getMaxVelocity() const {
 
 // get rho, vp, vs for Clayton
 void
-Material::getPointwiseRhoVpVs(
-    eigen::arN_DColX& rho, eigen::arN_DColX& vp, eigen::arN_DColX& vs) const {
+Material::getPointwiseRhoVpVs(axisem3d::eigen::arN_DColX& rho,
+    axisem3d::eigen::arN_DColX& vp,
+    axisem3d::eigen::arN_DColX& vs) const {
   // density
   rho = getProperty("RHO").getPointwise();
 
@@ -257,7 +259,8 @@ Material::getPointwiseRhoVpVs(
   if (currentRheology() == RheologyType::FLUID) {
     vp = getProperty("VP").getPointwise();
     // vs = 0
-    vs = NodalPhysicalProperty(eigen::DRow4::Zero(), getProperty("RHO").axial()).getPointwise();
+    vs = NodalPhysicalProperty(axisem3d::eigen::DRow4::Zero(), getProperty("RHO").axial())
+             .getPointwise();
   } else if (currentRheology() == RheologyType::ANISO) {
     // get density and Cijkl
     const NodalPhysicalProperty& rh = mProperties.at("RHO");
@@ -303,9 +306,10 @@ Material::getPointwiseRhoVpVs(
 }
 
 // get mass for GLL-point setup
-eigen::arN_DColX
-Material::getMass(
-    const eigen::DRowN& integralFactor, const eigen::arN_DColX& jacobianPRT, bool fluid) const {
+axisem3d::eigen::arN_DColX
+Material::getMass(const axisem3d::eigen::DRowN& integralFactor,
+    const axisem3d::eigen::arN_DColX& jacobianPRT,
+    bool fluid) const {
   // check fluid
   if (fluid != (currentRheology() == RheologyType::FLUID)) {
     throw std::runtime_error("Material::getMass || "
@@ -313,11 +317,11 @@ Material::getMass(
   }
 
   // form density
-  eigen::arN_DColX mass;
+  axisem3d::eigen::arN_DColX mass;
   if (fluid) {
     // get rho and vp
-    const eigen::arN_DColX& rho = getPointwise("RHO");
-    const eigen::arN_DColX& vp = getPointwise("VP");
+    const axisem3d::eigen::arN_DColX& rho = getPointwise("RHO");
+    const axisem3d::eigen::arN_DColX& vp = getPointwise("VP");
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       // kappa = rho * vp ** 2
       op1D_3D::times(rho[ipnt], vp[ipnt].array().square().matrix(), mass[ipnt]);
@@ -351,7 +355,7 @@ Material::createAcoustic() const {
                              "Incompatible solid/fluid flags.");
   }
   // K = 1 / rho
-  const eigen::DMatXN& K = getElemental("RHO").cwiseInverse();
+  const axisem3d::eigen::DMatXN& K = getElemental("RHO").cwiseInverse();
   // 1D or 3D
   if (K.rows() == 1) {
     return std::make_unique<Acoustic>(op1D_3D::toPP(K));
@@ -362,8 +366,8 @@ Material::createAcoustic() const {
 
 // create Elastic
 std::unique_ptr<Elastic>
-Material::createElastic(
-    const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const {
+Material::createElastic(const std::unique_ptr<const AttBuilder>& attBuilder,
+    const axisem3d::eigen::DRow4& weightsCG4) const {
   // check fluid
   if (currentRheology() == RheologyType::FLUID) {
     throw std::runtime_error("Material::createElastic || "
@@ -381,48 +385,48 @@ Material::createElastic(
 
 // anisotropic
 std::unique_ptr<Elastic>
-Material::createAnisotropic(
-    const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const {
+Material::createAnisotropic(const std::unique_ptr<const AttBuilder>& attBuilder,
+    const axisem3d::eigen::DRow4& weightsCG4) const {
   using op1D_3D::toPP;
   using std::ref;
 
   // Cijkl
   // C11
-  eigen::DMatXN C11 = getElemental("C11");
-  eigen::DMatXN C12 = getElemental("C12");
-  eigen::DMatXN C13 = getElemental("C13");
-  eigen::DMatXN C14 = getElemental("C14");
-  eigen::DMatXN C15 = getElemental("C15");
-  eigen::DMatXN C16 = getElemental("C16");
+  axisem3d::eigen::DMatXN C11 = getElemental("C11");
+  axisem3d::eigen::DMatXN C12 = getElemental("C12");
+  axisem3d::eigen::DMatXN C13 = getElemental("C13");
+  axisem3d::eigen::DMatXN C14 = getElemental("C14");
+  axisem3d::eigen::DMatXN C15 = getElemental("C15");
+  axisem3d::eigen::DMatXN C16 = getElemental("C16");
   // C22
-  eigen::DMatXN C22 = getElemental("C22");
-  eigen::DMatXN C23 = getElemental("C23");
-  eigen::DMatXN C24 = getElemental("C24");
-  eigen::DMatXN C25 = getElemental("C25");
-  eigen::DMatXN C26 = getElemental("C26");
+  axisem3d::eigen::DMatXN C22 = getElemental("C22");
+  axisem3d::eigen::DMatXN C23 = getElemental("C23");
+  axisem3d::eigen::DMatXN C24 = getElemental("C24");
+  axisem3d::eigen::DMatXN C25 = getElemental("C25");
+  axisem3d::eigen::DMatXN C26 = getElemental("C26");
   // C33
-  eigen::DMatXN C33 = getElemental("C33");
-  eigen::DMatXN C34 = getElemental("C34");
-  eigen::DMatXN C35 = getElemental("C35");
-  eigen::DMatXN C36 = getElemental("C36");
+  axisem3d::eigen::DMatXN C33 = getElemental("C33");
+  axisem3d::eigen::DMatXN C34 = getElemental("C34");
+  axisem3d::eigen::DMatXN C35 = getElemental("C35");
+  axisem3d::eigen::DMatXN C36 = getElemental("C36");
   // C44
-  eigen::DMatXN C44 = getElemental("C44");
-  eigen::DMatXN C45 = getElemental("C45");
-  eigen::DMatXN C46 = getElemental("C46");
+  axisem3d::eigen::DMatXN C44 = getElemental("C44");
+  axisem3d::eigen::DMatXN C45 = getElemental("C45");
+  axisem3d::eigen::DMatXN C46 = getElemental("C46");
   // C55
-  eigen::DMatXN C55 = getElemental("C55");
-  eigen::DMatXN C56 = getElemental("C56");
+  axisem3d::eigen::DMatXN C55 = getElemental("C55");
+  axisem3d::eigen::DMatXN C56 = getElemental("C56");
   // C66
-  eigen::DMatXN C66 = getElemental("C66");
+  axisem3d::eigen::DMatXN C66 = getElemental("C66");
 
   // attenuation
   std::unique_ptr<Attenuation> attenuation = nullptr;
   bool elastic1D = false;
   if (attBuilder) {
     // 1D or 3D
-    eigen::DMatXN QKp = getElemental("QKAPPA");
-    eigen::DMatXN QMu = getElemental("QMU");
-    elastic1D = op1D_3D::regularize1D<eigen::DMatXN>({ref(C11),
+    axisem3d::eigen::DMatXN QKp = getElemental("QKAPPA");
+    axisem3d::eigen::DMatXN QMu = getElemental("QMU");
+    elastic1D = op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({ref(C11),
         ref(C12),
         ref(C13),
         ref(C14),
@@ -447,8 +451,9 @@ Material::createAnisotropic(
         ref(QMu)});
 
     // build attenuation
-    eigen::DMatXN kp = (C11 + C22 + C33 + (C12 + C23 + C13) * 2.) / 9.;
-    eigen::DMatXN mu = (C11 + C22 + C33 - (C12 + C23 + C13) + (C44 + C55 + C66) * 3.) / 15.;
+    axisem3d::eigen::DMatXN kp = (C11 + C22 + C33 + (C12 + C23 + C13) * 2.) / 9.;
+    axisem3d::eigen::DMatXN mu =
+        (C11 + C22 + C33 - (C12 + C23 + C13) + (C44 + C55 + C66) * 3.) / 15.;
     C11 -= (kp + 4. / 3. * mu);
     C22 -= (kp + 4. / 3. * mu);
     C33 -= (kp + 4. / 3. * mu);
@@ -470,7 +475,7 @@ Material::createAnisotropic(
     C66 += mu;
   } else {
     // 1D or 3D
-    elastic1D = op1D_3D::regularize1D<eigen::DMatXN>({ref(C11),
+    elastic1D = op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({ref(C11),
         ref(C12),
         ref(C13),
         ref(C14),
@@ -545,42 +550,42 @@ Material::createAnisotropic(
 
 // transversely isotropic
 std::unique_ptr<Elastic>
-Material::createTISO(
-    const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const {
+Material::createTISO(const std::unique_ptr<const AttBuilder>& attBuilder,
+    const axisem3d::eigen::DRow4& weightsCG4) const {
   using op1D_3D::toPP;
   using std::ref;
 
   // density and velocity
-  const eigen::DMatXN& rho = getElemental("RHO");
-  const eigen::DMatXN& vpv = getElemental("VPV");
-  const eigen::DMatXN& vph = getElemental("VPH");
-  const eigen::DMatXN& vsv = getElemental("VSV");
-  const eigen::DMatXN& vsh = getElemental("VSH");
+  const axisem3d::eigen::DMatXN& rho = getElemental("RHO");
+  const axisem3d::eigen::DMatXN& vpv = getElemental("VPV");
+  const axisem3d::eigen::DMatXN& vph = getElemental("VPH");
+  const axisem3d::eigen::DMatXN& vsv = getElemental("VSV");
+  const axisem3d::eigen::DMatXN& vsh = getElemental("VSH");
 
   // A, C, F, L, N
-  eigen::DMatXN A, C, L, N;
+  axisem3d::eigen::DMatXN A, C, L, N;
   op1D_3D::times(rho, vph.array().square().matrix(), A);
   op1D_3D::times(rho, vpv.array().square().matrix(), C);
   op1D_3D::times(rho, vsv.array().square().matrix(), L);
   op1D_3D::times(rho, vsh.array().square().matrix(), N);
   // F = eta * (A - 2 L)
-  eigen::DMatXN eta = getElemental("ETA");
-  op1D_3D::regularize1D<eigen::DMatXN>({ref(A), ref(L), ref(eta)});
-  eigen::DMatXN F = eta.cwiseProduct(A - 2. * L);
+  axisem3d::eigen::DMatXN eta = getElemental("ETA");
+  op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({ref(A), ref(L), ref(eta)});
+  axisem3d::eigen::DMatXN F = eta.cwiseProduct(A - 2. * L);
 
   // attenuation
   std::unique_ptr<Attenuation> attenuation = nullptr;
   bool elastic1D = false;
   if (attBuilder) {
     // 1D or 3D
-    eigen::DMatXN QKp = getElemental("QKAPPA");
-    eigen::DMatXN QMu = getElemental("QMU");
-    elastic1D = op1D_3D::regularize1D<eigen::DMatXN>(
+    axisem3d::eigen::DMatXN QKp = getElemental("QKAPPA");
+    axisem3d::eigen::DMatXN QMu = getElemental("QMU");
+    elastic1D = op1D_3D::regularize1D<axisem3d::eigen::DMatXN>(
         {ref(A), ref(C), ref(F), ref(L), ref(N), ref(QKp), ref(QMu)});
 
     // build attenuation
-    eigen::DMatXN kp = (A * 4. + C + F * 4. - N * 4.) / 9.;
-    eigen::DMatXN mu = (A + C - F * 2. + L * 6. + N * 5.) / 15.;
+    axisem3d::eigen::DMatXN kp = (A * 4. + C + F * 4. - N * 4.) / 9.;
+    axisem3d::eigen::DMatXN mu = (A + C - F * 2. + L * 6. + N * 5.) / 15.;
     A -= (kp + 4. / 3. * mu);
     C -= (kp + 4. / 3. * mu);
     F -= (kp - 2. / 3. * mu);
@@ -594,7 +599,8 @@ Material::createTISO(
     N += mu;
   } else {
     // 1D or 3D
-    elastic1D = op1D_3D::regularize1D<eigen::DMatXN>({ref(A), ref(C), ref(F), ref(L), ref(N)});
+    elastic1D =
+        op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({ref(A), ref(C), ref(F), ref(L), ref(N)});
   }
 
   // elastic
@@ -608,18 +614,18 @@ Material::createTISO(
 
 // isotropic
 std::unique_ptr<Elastic>
-Material::createIsotropic(
-    const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const {
+Material::createIsotropic(const std::unique_ptr<const AttBuilder>& attBuilder,
+    const axisem3d::eigen::DRow4& weightsCG4) const {
   using op1D_3D::toPP;
   using std::ref;
 
   // rho, vp, vs
-  const eigen::DMatXN& rho = getElemental("RHO");
-  const eigen::DMatXN& vp = getElemental("VP");
-  const eigen::DMatXN& vs = getElemental("VS");
+  const axisem3d::eigen::DMatXN& rho = getElemental("RHO");
+  const axisem3d::eigen::DMatXN& vp = getElemental("VP");
+  const axisem3d::eigen::DMatXN& vs = getElemental("VS");
 
   // lambda, mu
-  eigen::DMatXN lambda, mu;
+  axisem3d::eigen::DMatXN lambda, mu;
   op1D_3D::times(rho, vp.array().square().matrix(), lambda);
   op1D_3D::times(rho, vs.array().square().matrix(), mu);
   op1D_3D::addTo(-2. * mu, lambda);
@@ -629,17 +635,18 @@ Material::createIsotropic(
   bool elastic1D = false;
   if (attBuilder) {
     // 1D or 3D
-    eigen::DMatXN QKp = getElemental("QKAPPA");
-    eigen::DMatXN QMu = getElemental("QMU");
-    elastic1D = op1D_3D::regularize1D<eigen::DMatXN>({ref(lambda), ref(mu), ref(QKp), ref(QMu)});
+    axisem3d::eigen::DMatXN QKp = getElemental("QKAPPA");
+    axisem3d::eigen::DMatXN QMu = getElemental("QMU");
+    elastic1D =
+        op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({ref(lambda), ref(mu), ref(QKp), ref(QMu)});
 
     // build attenuation
-    eigen::DMatXN kp = lambda + (2. / 3.) * mu;
+    axisem3d::eigen::DMatXN kp = lambda + (2. / 3.) * mu;
     attenuation = attBuilder->createAttenuation(QKp, QMu, kp, mu, weightsCG4, elastic1D);
     lambda = kp - (2. / 3.) * mu;
   } else {
     // 1D or 3D
-    elastic1D = op1D_3D::regularize1D<eigen::DMatXN>({ref(lambda), ref(mu)});
+    elastic1D = op1D_3D::regularize1D<axisem3d::eigen::DMatXN>({ref(lambda), ref(mu)});
   }
 
   // elastic

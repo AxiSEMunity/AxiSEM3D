@@ -27,7 +27,7 @@ AxialBoundary::apply() const {
 
   // solid
   for (const std::shared_ptr<SolidPoint>& sp : mSolidPoints) {
-    eigen::CMatX3& stiff = sp->getFields().mStiff;
+    axisem3d::eigen::CMatX3& stiff = sp->getFields().mStiff;
     int nu = sp->getNu_1() - 1;
 
     // alpha = 0

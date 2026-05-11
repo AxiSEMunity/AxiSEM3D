@@ -63,22 +63,23 @@ NrFieldAnalytical::NrFieldAnalytical() {
 }
 
 // get nr by (s, z)
-eigen::IColX
-NrFieldAnalytical::getNrAtPoints(const eigen::DMatX2_RM& sz) const {
+axisem3d::eigen::IColX
+NrFieldAnalytical::getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const {
   // input: coordinates (s, z, r, theta, depth) and mUserParameters
   [[maybe_unused]]
-  const eigen::DColX& s = sz.col(0);
-  const eigen::DColX& z = sz.col(1);
-  const eigen::DMatX2_RM& rtheta = geodesy::sz2rtheta(sz, true);
-  const eigen::DColX& r = rtheta.col(0);
+  const axisem3d::eigen::DColX& s = sz.col(0);
+  const axisem3d::eigen::DColX& z = sz.col(1);
+  const axisem3d::eigen::DMatX2_RM& rtheta = geodesy::sz2rtheta(sz, true);
+  const axisem3d::eigen::DColX& r = rtheta.col(0);
   [[maybe_unused]]
-  const eigen::DColX& theta = rtheta.col(1);
+  const axisem3d::eigen::DColX& theta = rtheta.col(1);
   [[maybe_unused]]
-  const eigen::DColX& depth = geodesy::isCartesian() ? geodesy::getOuterRadius() - z.array()
-                                                     : geodesy::getOuterRadius() - r.array();
+  const axisem3d::eigen::DColX& depth =
+      geodesy::isCartesian() ? geodesy::getOuterRadius() - z.array()
+                             : geodesy::getOuterRadius() - r.array();
 
   // output: azimuthal dimension Nr
-  eigen::IColX nr = eigen::IColX::Zero(sz.rows());
+  axisem3d::eigen::IColX nr = axisem3d::eigen::IColX::Zero(sz.rows());
 
   ///////////////////////////////////////////////////////////////////
   ///////////////////// Only edit the box below /////////////////////

@@ -39,7 +39,7 @@ class Station {
   protected:
   // set element: inplane weights and nu
   void
-  setElement(const eigen::DRowN& weights, int nu_1);
+  setElement(const axisem3d::eigen::DRowN& weights, int nu_1);
 
   ///////////////////////// template functions /////////////////////////
   // record: inplane and Fourier interpolation
@@ -128,7 +128,7 @@ class Station {
       int bufferLine,
       int channelIndex,
       int stationIndex,
-      eigen::RTensor3& bufferFields) const {
+      axisem3d::eigen::RTensor3& bufferFields) const {
     if (fieldIndex >= 0) {
       sColBuffer.topRows(bufferLine) = field.bblk(fieldIndex);
     } else {
@@ -171,10 +171,10 @@ class Station {
     }
 
     // feed to tensor
-    eigen::IArray3 loc = {stationIndex, channelIndex, 0};
-    eigen::IArray3 len = {1, 1, bufferLine};
-    bufferFields.slice(loc, len).reshape(eigen::IArray1{bufferLine}) =
-        Eigen::TensorMap<eigen::RTensor1>(sColBuffer.data(), bufferLine);
+    axisem3d::eigen::IArray3 loc = {stationIndex, channelIndex, 0};
+    axisem3d::eigen::IArray3 len = {1, 1, bufferLine};
+    bufferFields.slice(loc, len).reshape(axisem3d::eigen::IArray1{bufferLine}) =
+        Eigen::TensorMap<axisem3d::eigen::RTensor1>(sColBuffer.data(), bufferLine);
   }
 
   ///////////////////////// data /////////////////////////
@@ -187,7 +187,7 @@ class Station {
   // inplane interpolation weights
   // NOTE: stations are likely to be located on an element edge such as
   //       the surface, so we only store non-zero inplane weights
-  eigen::RRowX mNonZeroWeights = eigen::RRowX(0);
+  axisem3d::eigen::RRowX mNonZeroWeights = axisem3d::eigen::RRowX(0);
   std::vector<int> mNonZeroIndices;
 
   // azimuth for Fourier interpolation
@@ -196,10 +196,10 @@ class Station {
   // 2 * exp(i * alpha * phi) for Fourier interpolation
 #ifndef AXISEM3D_SAVE_MEMORY
   // precompute
-  eigen::CColX m2ExpIAlphaPhi = eigen::CColX(0);
+  axisem3d::eigen::CColX m2ExpIAlphaPhi = axisem3d::eigen::CColX(0);
 #else
   // on-the-fly
-  inline static eigen::CColX s2ExpIAlphaPhi = eigen::CColX(0);
+  inline static axisem3d::eigen::CColX s2ExpIAlphaPhi = axisem3d::eigen::CColX(0);
 #endif
 
   /////////// for process ///////////
@@ -215,15 +215,15 @@ class Station {
   private:
   // rotate vector
   static void
-  rotate(eigen::RMatX3_RM& V, int nrow, int k, double angle);
+  rotate(axisem3d::eigen::RMatX3_RM& V, int nrow, int k, double angle);
 
   // rotate tensor
   static void
-  rotate(eigen::RMatX9_RM& T, int nrow, int k, double angle);
+  rotate(axisem3d::eigen::RMatX9_RM& T, int nrow, int k, double angle);
 
   // rotate tensor in Voigt
   static void
-  rotate(eigen::RMatX6_RM& S, int nrow, int k, double angle);
+  rotate(axisem3d::eigen::RMatX6_RM& S, int nrow, int k, double angle);
 
   ///////////////////////// workspace /////////////////////////
   protected:
@@ -240,8 +240,8 @@ class Station {
 
   private:
   // workspace for process
-  inline static eigen::RColX sColBuffer = eigen::RColX(0);
-  inline static eigen::RMatX9_RM sTensor33 = eigen::RMatX9_RM(0, 9);
+  inline static axisem3d::eigen::RColX sColBuffer = axisem3d::eigen::RColX(0);
+  inline static axisem3d::eigen::RMatX9_RM sTensor33 = axisem3d::eigen::RMatX9_RM(0, 9);
 };
 
 #endif /* Station_hpp */

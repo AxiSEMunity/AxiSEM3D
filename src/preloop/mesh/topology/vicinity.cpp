@@ -19,7 +19,7 @@
 namespace vicinity {
   /////////////////////// internal functions ///////////////////////
   void
-  sharedDOF(const eigen::IMatX4_RM& connectivity,
+  sharedDOF(const axisem3d::eigen::IMatX4_RM& connectivity,
       int elemA,
       int elemB,
       int& nodeOrEdgeA,
@@ -66,9 +66,9 @@ namespace vicinity {
   /////////////////////// external functions ///////////////////////
   // connectivity to element-GLL vicinity
   int
-  connectivityToElementGLL(const eigen::IMatX4_RM& connectivity,
-      eigen::IMatXN_RM& elementGLL,
-      std::vector<eigen::IColX>& neighbours) {
+  connectivityToElementGLL(const axisem3d::eigen::IMatX4_RM& connectivity,
+      axisem3d::eigen::IMatXN_RM& elementGLL,
+      std::vector<axisem3d::eigen::IColX>& neighbours) {
     using namespace constants;
 
     // get neighbours from metis
@@ -76,7 +76,7 @@ namespace vicinity {
 
     // init element-GLL vicinity
     int nelem = (int)connectivity.rows();
-    elementGLL = eigen::IMatXN_RM::Constant(nelem, spectral::nPEM, -1);
+    elementGLL = axisem3d::eigen::IMatXN_RM::Constant(nelem, spectral::nPEM, -1);
 
     // GLL tag start from 0
     int nGLL = 0;
@@ -125,13 +125,13 @@ namespace vicinity {
   }
 
   // build local to global GLL
-  eigen::IColX
+  axisem3d::eigen::IColX
   buildL2G_GLL(int nLocalGLL,
-      const eigen::IColX& myL2G_Element,
-      const eigen::IMatXN_RM& myElementGLL,
-      const eigen::IMatXN_RM& globalElementGLL) {
+      const axisem3d::eigen::IColX& myL2G_Element,
+      const axisem3d::eigen::IMatXN_RM& myElementGLL,
+      const axisem3d::eigen::IMatXN_RM& globalElementGLL) {
     // allocate and fill with -1
-    eigen::IColX myL2G_GLL = eigen::IColX::Constant(nLocalGLL, -1);
+    axisem3d::eigen::IColX myL2G_GLL = axisem3d::eigen::IColX::Constant(nLocalGLL, -1);
 
     // match local and global GLL tags by (element, ipnt)
     for (int letag = 0; letag < myL2G_Element.size(); letag++) {
@@ -150,13 +150,13 @@ namespace vicinity {
   // std::vector as the output to use mpi::scatter
   // rank0 gll0_0 gll0_1 ... -1 rank1 gll1_0 gll1_1 ... -1 rank2 ...
   std::vector<int>
-  buildCommMPI(const eigen::IColX& myL2G_Element,
-      const std::vector<eigen::IColX>& globalNeighbours,
-      const eigen::IColX& elemRank,
+  buildCommMPI(const axisem3d::eigen::IColX& myL2G_Element,
+      const std::vector<axisem3d::eigen::IColX>& globalNeighbours,
+      const axisem3d::eigen::IColX& elemRank,
       int myRank,
-      const eigen::IMatX4_RM& globalConnectivity,
-      const eigen::IMatXN_RM& myElementGLL,
-      const eigen::IColX& myL2G_GLL) {
+      const axisem3d::eigen::IMatX4_RM& globalConnectivity,
+      const axisem3d::eigen::IMatXN_RM& myElementGLL,
+      const axisem3d::eigen::IColX& myL2G_GLL) {
     using namespace constants;
     // structured output: std::map<otherRank, std::map<globalGLL, localGLL>>
     // A: Why each element is a map with key = globalGLL,

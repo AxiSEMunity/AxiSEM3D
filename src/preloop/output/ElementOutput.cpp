@@ -306,8 +306,8 @@ ElementOutput::release(const SE_Model& sem,
     const std::vector<Quad>& quads = sem.getQuads();
     for (int iquad = 0; iquad < quads.size(); iquad++) {
       // check coordinate ranges
-      const eigen::DCol2& sz = quads[iquad].getNodalSZ().rowwise().mean();
-      const eigen::DCol2& RZ =
+      const axisem3d::eigen::DCol2& sz = quads[iquad].getNodalSZ().rowwise().mean();
+      const axisem3d::eigen::DCol2& RZ =
           geodesy::isCartesian() ? sz : geodesy::sz2rtheta(sz, false, 0, 1, 1, 0);
       if (elgrp->mMinR < RZ(0) && RZ(0) < elgrp->mMaxR && elgrp->mMinZ < RZ(1) &&
           RZ(1) < elgrp->mMaxZ && quads[iquad].fluid() == elgrp->mFluid) {
@@ -335,11 +335,11 @@ ElementOutput::release(const SE_Model& sem,
       for (int qTag : opQuads) {
         int edge = -1;
         // compute coordinates
-        const eigen::DMat24& sz = quads[qTag].getNodalSZ();
-        const eigen::DMat24& RZ =
+        const axisem3d::eigen::DMat24& sz = quads[qTag].getNodalSZ();
+        const axisem3d::eigen::DMat24& RZ =
             geodesy::isCartesian() ? sz : geodesy::sz2rtheta(sz, false, 0, 1, 1, 0);
         // coordinate to check
-        eigen::DRow4 x;
+        axisem3d::eigen::DRow4 x;
         double xmin = 0, xmax = 0;
         if (elgrp->mEdgeDim == 0 && !geodesy::isCartesian()) {
           // theta to arc length
@@ -380,11 +380,11 @@ ElementOutput::release(const SE_Model& sem,
     std::vector<double> phisToUse = elgrp->mPhis;
     // given lat, lon
     int nll = (int)elgrp->mLats.size();
-    eigen::DMatXX llr(nll, 3);
-    llr.col(0) = Eigen::Map<const eigen::DColX>(elgrp->mLats.data(), nll);
-    llr.col(1) = Eigen::Map<const eigen::DColX>(elgrp->mLons.data(), nll);
+    axisem3d::eigen::DMatXX llr(nll, 3);
+    llr.col(0) = Eigen::Map<const axisem3d::eigen::DColX>(elgrp->mLats.data(), nll);
+    llr.col(1) = Eigen::Map<const axisem3d::eigen::DColX>(elgrp->mLons.data(), nll);
     llr.col(2).fill(geodesy::getOuterRadius());
-    const eigen::DMatXX& spz = geodesy::llr2spz(llr, true);
+    const axisem3d::eigen::DMatXX& spz = geodesy::llr2spz(llr, true);
     for (int iphi = 0; iphi < nll; iphi++) {
       phisToUse.push_back(spz(iphi, 1));
     }

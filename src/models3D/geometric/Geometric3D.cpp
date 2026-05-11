@@ -19,9 +19,9 @@ Geometric3D::applyTo(std::vector<Quad>& quads) const {
   if (!isSuperOnly()) {
     for (Quad& quad : quads) {
       // cardinal coordinates
-      const eigen::DMatX3& spz = computeElemSPZ(quad);
+      const axisem3d::eigen::DMatX3& spz = computeElemSPZ(quad);
       // compute values
-      eigen::DColX und;
+      axisem3d::eigen::DColX und;
       bool elemInScope = getUndulation(spz, quad.getNodalSZ(), und);
       // set values to quad
       if (elemInScope) {
@@ -32,8 +32,8 @@ Geometric3D::applyTo(std::vector<Quad>& quads) const {
     mpi::enterInfer();
     for (int irank = 0; irank < mpi::nproc(); irank++) {
       // step 1: gather coords on infer and send to super
-      std::vector<eigen::DMatX3> spzAll;
-      std::vector<eigen::DMat24> szAll;
+      std::vector<axisem3d::eigen::DMatX3> spzAll;
+      std::vector<axisem3d::eigen::DMat24> szAll;
       if (irank == mpi::rank()) {
         // gather coords
         spzAll.reserve(quads.size());
@@ -48,8 +48,8 @@ Geometric3D::applyTo(std::vector<Quad>& quads) const {
       }
 
       // step 2: compute values on super and send back to infer
-      std::vector<eigen::DColX> undAll;
-      std::vector<eigen::IColX> elemInScopeAll;
+      std::vector<axisem3d::eigen::DColX> undAll;
+      std::vector<axisem3d::eigen::IColX> elemInScopeAll;
       if (mpi::root()) {
         // recv coords from infer
         mpi::recvVecEigen(irank, spzAll, 0);
@@ -57,10 +57,10 @@ Geometric3D::applyTo(std::vector<Quad>& quads) const {
         // allocate values
         int nQuad = (int)spzAll.size();
         undAll.reserve(nQuad);
-        elemInScopeAll.push_back(eigen::IColX::Zero(nQuad));
+        elemInScopeAll.push_back(axisem3d::eigen::IColX::Zero(nQuad));
         // compute values
         for (int iq = 0; iq < nQuad; iq++) {
-          eigen::DColX und;
+          axisem3d::eigen::DColX und;
           elemInScopeAll[0](iq) = getUndulation(spzAll[iq], szAll[iq], und);
           undAll.push_back(und);
         }
@@ -90,10 +90,10 @@ Geometric3D::applyTo(std::vector<Quad>& quads) const {
 
 // set undulation to quad
 void
-Geometric3D::setUndulationToQuad(const eigen::DColX& undulation, Quad& quad) const {
+Geometric3D::setUndulationToQuad(const axisem3d::eigen::DColX& undulation, Quad& quad) const {
   // flattened to structured
-  const eigen::IRowN& pointNr = quad.getPointNr();
-  eigen::arN_DColX undArr;
+  const axisem3d::eigen::IRowN& pointNr = quad.getPointNr();
+  axisem3d::eigen::arN_DColX undArr;
   int row = 0;
   for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
     int nr = pointNr(ipnt);

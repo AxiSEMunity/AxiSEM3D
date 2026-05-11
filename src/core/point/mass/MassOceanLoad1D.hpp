@@ -47,7 +47,7 @@ class MassOceanLoad1D : public Mass {
 
   // compute accel in-place for fluid
   void
-  computeAccel(eigen::CColX& stiff1) const {
+  computeAccel(axisem3d::eigen::CColX& stiff1) const {
     throw std::runtime_error("MassOceanLoad1D::computeAccel || "
                              "Incompatible types: "
                              "ocean load on fluid point.");
@@ -55,7 +55,7 @@ class MassOceanLoad1D : public Mass {
 
   // compute accel in-place for solid
   void
-  computeAccel(eigen::CMatX3& stiff3) const {
+  computeAccel(axisem3d::eigen::CMatX3& stiff3) const {
     // copy s
     int nu_1 = (int)stiff3.rows();
     sStiff3_col0.topRows(nu_1) = stiff3.col(0);
@@ -88,7 +88,7 @@ class MassOceanLoad1D : public Mass {
 
   private:
   // workspace
-  inline static eigen::CColX sStiff3_col0 = eigen::CColX(0);
+  inline static axisem3d::eigen::CColX sStiff3_col0 = axisem3d::eigen::CColX(0);
 };
 
 #endif /* MassOceanLoad1D_hpp */

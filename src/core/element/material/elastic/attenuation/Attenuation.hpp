@@ -24,11 +24,11 @@
 #include "eigen_element.hpp"
 #include "FieldArithmetic.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   // alpha, beta, gamma
   typedef Eigen::Matrix<double, Eigen::Dynamic, 1> DColX;
   typedef Eigen::Matrix<numerical::Real, Eigen::Dynamic, 1> RColX;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 class Attenuation {
   public:
@@ -66,11 +66,13 @@ class Attenuation {
   //////////////////////// apply ////////////////////////
   // apply attenuation in Fourier space
   virtual void
-  apply(const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) = 0;
+  apply(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) = 0;
 
   // apply attenuation in cardinal space
   virtual void
-  apply(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) = 0;
+  apply(const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) = 0;
 
   //////////////////////// data ////////////////////////
   protected:
@@ -136,8 +138,9 @@ class Attenuation {
   public:
   // set alpha, beta, gamma
   static void
-  setAlphaBetaGamma(
-      const eigen::DColX& alpha, const eigen::DColX& betta, const eigen::DColX& gamma) {
+  setAlphaBetaGamma(const axisem3d::eigen::DColX& alpha,
+      const axisem3d::eigen::DColX& betta,
+      const axisem3d::eigen::DColX& gamma) {
     sAlpha = alpha.cast<numerical::Real>();
     sBetta = betta.cast<numerical::Real>();
     sGamma = gamma.cast<numerical::Real>();
@@ -145,9 +148,9 @@ class Attenuation {
 
   private:
   // coeffs
-  inline static eigen::RColX sAlpha;
-  inline static eigen::RColX sBetta;
-  inline static eigen::RColX sGamma;
+  inline static axisem3d::eigen::RColX sAlpha;
+  inline static axisem3d::eigen::RColX sBetta;
+  inline static axisem3d::eigen::RColX sGamma;
 };
 
 #endif /* Attenuation_hpp */

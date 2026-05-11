@@ -16,12 +16,12 @@
 #include "Model3D.hpp"
 #include <map>
 
-namespace eigen {
+namespace axisem3d::eigen {
   // anisotropy
   typedef Eigen::Matrix<int, 6, 6> IMat66;
   typedef Eigen::Matrix<double, 6, 6> DMat66;
   typedef Eigen::Matrix<double, 3, 3> DMat33;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 class Volumetric3D : public Model3D {
   public:
@@ -57,27 +57,27 @@ class Volumetric3D : public Model3D {
 
   // get properties
   virtual bool
-  getProperties(const eigen::DMatX3& spz,
-      const eigen::DMat24& nodalSZ,
-      eigen::IMatXX& inScopes,
-      eigen::DMatXX& propValues) const = 0;
+  getProperties(const axisem3d::eigen::DMatX3& spz,
+      const axisem3d::eigen::DMat24& nodalSZ,
+      axisem3d::eigen::IMatXX& inScopes,
+      axisem3d::eigen::DMatXX& propValues) const = 0;
 
   // set properties to quad
   virtual void
   setPropertiesToQuad(const std::vector<std::string>& propKeys,
       const std::vector<ReferenceKind>& refKinds,
-      const eigen::IMatXX& inScopes,
-      const eigen::DMatXX& propValues,
+      const axisem3d::eigen::IMatXX& inScopes,
+      const axisem3d::eigen::DMatXX& propValues,
       Quad& quad) const;
 
   ////////////////////////////// static //////////////////////////////
   // Bond transformation for rotating Cijkl
   static void
-  bondTransformation(const eigen::DMat66& inCijkl,
+  bondTransformation(const axisem3d::eigen::DMat66& inCijkl,
       double alpha,
       double beta,
       double gamma,
-      eigen::DMat66& outCijkl);
+      axisem3d::eigen::DMat66& outCijkl);
 
   public:
   // build from inparam

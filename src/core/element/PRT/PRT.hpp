@@ -34,20 +34,21 @@ class PRT {
   public:
 #ifdef AXISEM3D_SAVE_MEMORY
   // 1D constructor
-  PRT(const eigen::DMatPP_RM& X0,
-      const eigen::DMatPP_RM& X1,
-      const eigen::DMatPP_RM& X2,
-      const eigen::DMatPP_RM& X3,
-      const eigen::DMatPP_RM& XJ) : m1D(true), mX0(X0), mX1(X1), mX2(X2), mX3(X3), mXJ(XJ) {
+  PRT(const axisem3d::eigen::DMatPP_RM& X0,
+      const axisem3d::eigen::DMatPP_RM& X1,
+      const axisem3d::eigen::DMatPP_RM& X2,
+      const axisem3d::eigen::DMatPP_RM& X3,
+      const axisem3d::eigen::DMatPP_RM& XJ) :
+      m1D(true), mX0(X0), mX1(X1), mX2(X2), mX3(X3), mXJ(XJ) {
     // noting
   }
 
   // 3D constructor
-  PRT(const eigen::DMatXN& X0,
-      const eigen::DMatXN& X1,
-      const eigen::DMatXN& X2,
-      const eigen::DMatXN& X3,
-      const eigen::DMatXN& XJ) : m1D(false), mX0(X0), mX1(X1), mX2(X2), mX3(X3), mXJ(XJ) {
+  PRT(const axisem3d::eigen::DMatXN& X0,
+      const axisem3d::eigen::DMatXN& X1,
+      const axisem3d::eigen::DMatXN& X2,
+      const axisem3d::eigen::DMatXN& X3,
+      const axisem3d::eigen::DMatXN& XJ) : m1D(false), mX0(X0), mX1(X1), mX2(X2), mX3(X3), mXJ(XJ) {
     // noting
   }
 
@@ -59,26 +60,30 @@ class PRT {
   }
 #else
   // 1D constructor
-  PRT(const eigen::DMatPP_RM& X0,
-      const eigen::DMatPP_RM& X1,
-      const eigen::DMatPP_RM& X2,
-      const eigen::DMatPP_RM& X3,
-      const eigen::DMatPP_RM& XJ) :
-      m1D(true), mX0(X0), mX1(X1), mX2(X2), mX3(X3), mX0_J(eigen::DMatPP_RM(X0.cwiseProduct(XJ))),
-      mX1_J(eigen::DMatPP_RM(X1.cwiseProduct(XJ))), mX2_J(eigen::DMatPP_RM(X2.cwiseProduct(XJ))),
-      mX3_J(eigen::DMatPP_RM(X3.cwiseProduct(XJ))) {
+  PRT(const axisem3d::eigen::DMatPP_RM& X0,
+      const axisem3d::eigen::DMatPP_RM& X1,
+      const axisem3d::eigen::DMatPP_RM& X2,
+      const axisem3d::eigen::DMatPP_RM& X3,
+      const axisem3d::eigen::DMatPP_RM& XJ) :
+      m1D(true), mX0(X0), mX1(X1), mX2(X2), mX3(X3),
+      mX0_J(axisem3d::eigen::DMatPP_RM(X0.cwiseProduct(XJ))),
+      mX1_J(axisem3d::eigen::DMatPP_RM(X1.cwiseProduct(XJ))),
+      mX2_J(axisem3d::eigen::DMatPP_RM(X2.cwiseProduct(XJ))),
+      mX3_J(axisem3d::eigen::DMatPP_RM(X3.cwiseProduct(XJ))) {
     // noting
   }
 
   // 3D constructor
-  PRT(const eigen::DMatXN& X0,
-      const eigen::DMatXN& X1,
-      const eigen::DMatXN& X2,
-      const eigen::DMatXN& X3,
-      const eigen::DMatXN& XJ) :
-      m1D(false), mX0(X0), mX1(X1), mX2(X2), mX3(X3), mX0_J(eigen::DMatXN(X0.cwiseProduct(XJ))),
-      mX1_J(eigen::DMatXN(X1.cwiseProduct(XJ))), mX2_J(eigen::DMatXN(X2.cwiseProduct(XJ))),
-      mX3_J(eigen::DMatXN(X3.cwiseProduct(XJ))) {
+  PRT(const axisem3d::eigen::DMatXN& X0,
+      const axisem3d::eigen::DMatXN& X1,
+      const axisem3d::eigen::DMatXN& X2,
+      const axisem3d::eigen::DMatXN& X3,
+      const axisem3d::eigen::DMatXN& XJ) :
+      m1D(false), mX0(X0), mX1(X1), mX2(X2), mX3(X3),
+      mX0_J(axisem3d::eigen::DMatXN(X0.cwiseProduct(XJ))),
+      mX1_J(axisem3d::eigen::DMatXN(X1.cwiseProduct(XJ))),
+      mX2_J(axisem3d::eigen::DMatXN(X2.cwiseProduct(XJ))),
+      mX3_J(axisem3d::eigen::DMatXN(X3.cwiseProduct(XJ))) {
     // noting
   }
 
@@ -114,8 +119,9 @@ class PRT {
   //////////////////////// Fourier space ////////////////////////
   // fluid, sph -> und
   void
-  sphericalToUndulated3_FR(
-      const eigen::vec_ar3_CMatPP_RM& sph3, eigen::vec_ar3_CMatPP_RM& und3, int nu_1) const {
+  sphericalToUndulated3_FR(const axisem3d::eigen::vec_ar3_CMatPP_RM& sph3,
+      axisem3d::eigen::vec_ar3_CMatPP_RM& und3,
+      int nu_1) const {
     for (int alpha = 0; alpha < nu_1; alpha++) {
       sphericalToUndulated3<CaseFA::_1D_FR>(sph3, und3, alpha, mX0, mX1, mX2, mX3);
     }
@@ -123,8 +129,9 @@ class PRT {
 
   // solid, sph -> und
   void
-  sphericalToUndulated6_FR(
-      const eigen::vec_ar9_CMatPP_RM& sph9, eigen::vec_ar6_CMatPP_RM& und6, int nu_1) const {
+  sphericalToUndulated6_FR(const axisem3d::eigen::vec_ar9_CMatPP_RM& sph9,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& und6,
+      int nu_1) const {
     for (int alpha = 0; alpha < nu_1; alpha++) {
       sphericalToUndulated6<CaseFA::_1D_FR>(sph9, und6, alpha, mX0, mX1, mX2, mX3);
     }
@@ -132,8 +139,9 @@ class PRT {
 
   // solid, sph -> und, for curl computation (9->9)
   void
-  sphericalToUndulated9_FR(
-      const eigen::vec_ar9_CMatPP_RM& sph9, eigen::vec_ar9_CMatPP_RM& und9, int nu_1) const {
+  sphericalToUndulated9_FR(const axisem3d::eigen::vec_ar9_CMatPP_RM& sph9,
+      axisem3d::eigen::vec_ar9_CMatPP_RM& und9,
+      int nu_1) const {
     for (int alpha = 0; alpha < nu_1; alpha++) {
       sphericalToUndulated9<CaseFA::_1D_FR>(sph9, und9, alpha, mX0, mX1, mX2, mX3);
     }
@@ -141,8 +149,9 @@ class PRT {
 
   // fluid, und -> sph
   void
-  undulatedToSpherical3_FR(
-      const eigen::vec_ar3_CMatPP_RM& und3, eigen::vec_ar3_CMatPP_RM& sph3, int nu_1) const {
+  undulatedToSpherical3_FR(const axisem3d::eigen::vec_ar3_CMatPP_RM& und3,
+      axisem3d::eigen::vec_ar3_CMatPP_RM& sph3,
+      int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeScaledX();
 #endif
@@ -153,8 +162,9 @@ class PRT {
 
   // solid, und -> sph
   void
-  undulatedToSpherical6_FR(
-      const eigen::vec_ar6_CMatPP_RM& und6, eigen::vec_ar9_CMatPP_RM& sph9, int nu_1) const {
+  undulatedToSpherical6_FR(const axisem3d::eigen::vec_ar6_CMatPP_RM& und6,
+      axisem3d::eigen::vec_ar9_CMatPP_RM& sph9,
+      int nu_1) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeScaledX();
 #endif
@@ -165,8 +175,9 @@ class PRT {
 
   // solid, und -> sph, no integration, for moment tensor
   void
-  undulatedToSpherical6_NoIntegration_FR(
-      const eigen::vec_ar6_CMatPP_RM& und6, eigen::vec_ar9_CMatPP_RM& sph9, int nu_1) const {
+  undulatedToSpherical6_NoIntegration_FR(const axisem3d::eigen::vec_ar6_CMatPP_RM& und6,
+      axisem3d::eigen::vec_ar9_CMatPP_RM& sph9,
+      int nu_1) const {
     for (int alpha = 0; alpha < nu_1; alpha++) {
       undulatedToSpherical6<CaseFA::_1D_FR>(und6, sph9, alpha, mX0, mX1, mX2, mX3);
     }
@@ -175,7 +186,8 @@ class PRT {
   //////////////////////// cardinal space ////////////////////////
   // fluid, sph -> und
   void
-  sphericalToUndulated3_CD(const eigen::RMatXN3& sph3, eigen::RMatXN3& und3, int nr) const {
+  sphericalToUndulated3_CD(
+      const axisem3d::eigen::RMatXN3& sph3, axisem3d::eigen::RMatXN3& und3, int nr) const {
     if (m1D) {
       sphericalToUndulated3<CaseFA::_1D_CD>(sph3, und3, nr, mX0, mX1, mX2, mX3);
     } else {
@@ -185,7 +197,8 @@ class PRT {
 
   // solid, sph -> und
   void
-  sphericalToUndulated6_CD(const eigen::RMatXN9& sph9, eigen::RMatXN6& und6, int nr) const {
+  sphericalToUndulated6_CD(
+      const axisem3d::eigen::RMatXN9& sph9, axisem3d::eigen::RMatXN6& und6, int nr) const {
     if (m1D) {
       sphericalToUndulated6<CaseFA::_1D_CD>(sph9, und6, nr, mX0, mX1, mX2, mX3);
     } else {
@@ -195,7 +208,8 @@ class PRT {
 
   // solid, sph -> und, for curl computation (9->9)
   void
-  sphericalToUndulated9_CD(const eigen::RMatXN9& sph9, eigen::RMatXN9& und9, int nr) const {
+  sphericalToUndulated9_CD(
+      const axisem3d::eigen::RMatXN9& sph9, axisem3d::eigen::RMatXN9& und9, int nr) const {
     if (m1D) {
       sphericalToUndulated9<CaseFA::_1D_CD>(sph9, und9, nr, mX0, mX1, mX2, mX3);
     } else {
@@ -205,7 +219,8 @@ class PRT {
 
   // fluid, und -> sph
   void
-  undulatedToSpherical3_CD(const eigen::RMatXN3& und3, eigen::RMatXN3& sph3, int nr) const {
+  undulatedToSpherical3_CD(
+      const axisem3d::eigen::RMatXN3& und3, axisem3d::eigen::RMatXN3& sph3, int nr) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeScaledX();
 #endif
@@ -218,7 +233,8 @@ class PRT {
 
   // solid, und -> sph
   void
-  undulatedToSpherical6_CD(const eigen::RMatXN6& und6, eigen::RMatXN9& sph9, int nr) const {
+  undulatedToSpherical6_CD(
+      const axisem3d::eigen::RMatXN6& und6, axisem3d::eigen::RMatXN9& sph9, int nr) const {
 #ifdef AXISEM3D_SAVE_MEMORY
     computeScaledX();
 #endif
@@ -232,7 +248,7 @@ class PRT {
   // solid, und -> sph, no integration, for moment tensor
   void
   undulatedToSpherical6_NoIntegration_CD(
-      const eigen::RMatXN6& und6, eigen::RMatXN9& sph9, int nr) const {
+      const axisem3d::eigen::RMatXN6& und6, axisem3d::eigen::RMatXN9& sph9, int nr) const {
     if (m1D) {
       undulatedToSpherical6<CaseFA::_1D_CD>(und6, sph9, nr, mX0, mX1, mX2, mX3);
     } else {

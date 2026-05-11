@@ -14,11 +14,11 @@
 #include "vector_tools.hpp"
 #include <metis.h>
 
-namespace eigen {
+namespace axisem3d::eigen {
   // idx_t
   typedef Eigen::Matrix<idx_t, Eigen::Dynamic, 4, Eigen::RowMajor> IIMatX4_RM;
   typedef Eigen::Matrix<idx_t, Eigen::Dynamic, 1> IIColX;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 namespace axisem3d::metis {
   /////////////////////// internal functions ///////////////////////
@@ -32,8 +32,10 @@ namespace axisem3d::metis {
 
   // form adjacency
   void
-  formAdjacency(
-      const eigen::IIMatX4_RM& connectivity, idx_t ncommon, idx_t*& xadj, idx_t*& adjncy) {
+  formAdjacency(const axisem3d::eigen::IIMatX4_RM& connectivity,
+      idx_t ncommon,
+      idx_t*& xadj,
+      idx_t*& adjncy) {
     // get unique node list
     idx_t nelem = (idx_t)connectivity.rows();
     std::vector<idx_t> nodes(connectivity.data(), connectivity.data() + nelem * 4);
@@ -46,8 +48,8 @@ namespace axisem3d::metis {
     }
 
     // convert connectivity to CSR format
-    eigen::IIColX eptr = eigen::IIColX::LinSpaced(nelem + 1, 0, nelem * 4);
-    eigen::IIColX eind = eigen::IIColX(nelem * 4);
+    axisem3d::eigen::IIColX eptr = axisem3d::eigen::IIColX::LinSpaced(nelem + 1, 0, nelem * 4);
+    axisem3d::eigen::IIColX eind = axisem3d::eigen::IIColX(nelem * 4);
     for (idx_t ie = 0; ie < nelem; ie++) {
       for (idx_t ivt = 0; ivt < 4; ivt++) {
         eind(ie * 4 + ivt) = nG2L.at(connectivity(ie, ivt));
@@ -63,7 +65,7 @@ namespace axisem3d::metis {
 
   // form solid_fluid weights
   std::vector<idx_t>
-  formSF_Weights(const eigen::IColX& solid_fluid, idx_t* xadj, idx_t* adjncy) {
+  formSF_Weights(const axisem3d::eigen::IColX& solid_fluid, idx_t* xadj, idx_t* adjncy) {
     // allocate same length as adjncy
     idx_t nelem = (idx_t)solid_fluid.rows();
     std::vector<idx_t> adjwgt;
@@ -98,8 +100,9 @@ namespace axisem3d::metis {
   /////////////////////// external functions ///////////////////////
   // form neighbourhood of connectivity
   void
-  formNeighbourhood(
-      const eigen::IMatX4_RM& connectivity, int ncommon, std::vector<eigen::IColX>& neighbours) {
+  formNeighbourhood(const axisem3d::eigen::IMatX4_RM& connectivity,
+      int ncommon,
+      std::vector<axisem3d::eigen::IColX>& neighbours) {
     // form graph
     idx_t *xadj, *adjncy;
     formAdjacency(connectivity.cast<idx_t>(), (idx_t)ncommon, xadj, adjncy);
@@ -109,7 +112,7 @@ namespace axisem3d::metis {
     neighbours.reserve(connectivity.rows());
     for (int ie = 0; ie < connectivity.rows(); ie++) {
       int nNeighb = (int)(xadj[ie + 1] - xadj[ie]);
-      eigen::IColX neighb(nNeighb);
+      axisem3d::eigen::IColX neighb(nNeighb);
       for (int in = 0; in < nNeighb; in++) {
         neighb(in) = (int)adjncy[xadj[ie] + in];
       }
@@ -122,15 +125,15 @@ namespace axisem3d::metis {
 
   // domain decomposition
   double
-  decompose(const eigen::IMatX4_RM& connectivity,
-      const eigen::IColX& solid_fluid,
-      const eigen::DColX& weights,
+  decompose(const axisem3d::eigen::IMatX4_RM& connectivity,
+      const axisem3d::eigen::IColX& solid_fluid,
+      const axisem3d::eigen::DColX& weights,
       int npart,
       int rseed,
-      eigen::IColX& elemRank) {
+      axisem3d::eigen::IColX& elemRank) {
     // this cause error in Metis
     if (npart == 1) {
-      elemRank = eigen::IColX::Zero(connectivity.rows());
+      elemRank = axisem3d::eigen::IColX::Zero(connectivity.rows());
       return 0.;
     }
 
@@ -148,7 +151,7 @@ namespace axisem3d::metis {
 
     // weights
     idx_t* vwgt = NULL;
-    eigen::IIColX iweights; // must be defined outside if
+    axisem3d::eigen::IIColX iweights; // must be defined outside if
     if (weights.rows() == nelem) {
       // first normalize then magnify to avoid over/underflow
       double imax = std::numeric_limits<idx_t>::max() * .9;
@@ -170,7 +173,7 @@ namespace axisem3d::metis {
 
     //////////// output ////////////
     idx_t objval = 0;
-    eigen::IIColX erank(nelem);
+    axisem3d::eigen::IIColX erank(nelem);
 
     //////////// run ////////////
     error(METIS_PartGraphKway(&nelem,

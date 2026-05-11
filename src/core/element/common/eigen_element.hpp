@@ -16,7 +16,7 @@
 #include "numerical.hpp"
 #include "spectral.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   using numerical::ComplexR;
   using numerical::Real;
   using spectral::nPEM;
@@ -49,6 +49,6 @@ namespace eigen {
 
   // properties
   typedef Eigen::Matrix<double, Eigen::Dynamic, nPEM> DMatXN;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 #endif /* eigen_element_hpp */

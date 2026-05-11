@@ -75,10 +75,10 @@ Element::findBoundaryPointsByCrds(const std::vector<double>& boundaryCrdsRorZ,
   const std::vector<int>& allSidePoints = vicinity::constants::gEdgeIPntAll;
 
   // collect coords
-  eigen::DColX crdRorZ(nPEM);
-  eigen::DColX crdTorS(nPEM);
+  axisem3d::eigen::DColX crdRorZ(nPEM);
+  axisem3d::eigen::DColX crdTorS(nPEM);
   for (int ipnt = 0; ipnt < nPEM; ipnt++) {
-    const eigen::DRow2& sz = getPoint(ipnt).getCoords();
+    const axisem3d::eigen::DRow2& sz = getPoint(ipnt).getCoords();
     if (geodesy::isCartesian()) {
       crdRorZ(ipnt) = sz(1);
       crdTorS(ipnt) = sz(0);
@@ -138,12 +138,12 @@ Element::createCoordTransform() {
       mTransform = std::make_unique<const CoordTransformCartesian>();
     } else {
       // compute theta
-      eigen::DMatPP_RM theta;
+      axisem3d::eigen::DMatPP_RM theta;
       for (int ipol = 0; ipol < spectral::nPED; ipol++) {
         for (int jpol = 0; jpol < spectral::nPED; jpol++) {
           int ipnt = ipol * spectral::nPED + jpol;
-          const eigen::DRow2& sz = getPoint(ipnt).getCoords();
-          const eigen::DRow2& rt = geodesy::sz2rtheta(sz, true);
+          const axisem3d::eigen::DRow2& sz = getPoint(ipnt).getCoords();
+          const axisem3d::eigen::DRow2& rt = geodesy::sz2rtheta(sz, true);
           theta(ipol, jpol) = rt(1);
         }
       }

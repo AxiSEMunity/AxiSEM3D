@@ -35,9 +35,9 @@ namespace geodesy {
 
     // geographic
     // (lat, lon, r) on positive z-axis
-    eigen::DRow3 iLatLonRadiusAxisZ = eigen::DRow3::Zero();
+    axisem3d::eigen::DRow3 iLatLonRadiusAxisZ = axisem3d::eigen::DRow3::Zero();
     // Q matrix from source-centered to geographic
-    eigen::DMat33 iSrc2GeoQ = eigen::DMat33::Zero();
+    axisem3d::eigen::DMat33 iSrc2GeoQ = axisem3d::eigen::DMat33::Zero();
   } // namespace internal
 
   // setup
@@ -67,7 +67,7 @@ namespace geodesy {
 
     // ellipticity curve (only on root in ExodusMesh)
     if (mpi::root()) {
-      const eigen::DMatXX_RM& ellip = exMesh.getEllipticityCurve();
+      const axisem3d::eigen::DMatXX_RM& ellip = exMesh.getEllipticityCurve();
       internal::iEllipR.resize(ellip.cols());
       internal::iEllipF.resize(ellip.cols());
       for (int col = 0; col < ellip.cols(); col++) {
@@ -122,7 +122,7 @@ namespace geodesy {
     }
 
     // Q matrix from source-centered to geographic
-    eigen::DRow3 srctpr = llr2tpr(internal::iLatLonRadiusAxisZ, true);
+    axisem3d::eigen::DRow3 srctpr = llr2tpr(internal::iLatLonRadiusAxisZ, true);
     double theta = srctpr(0);
     double phi = srctpr(1);
     internal::iSrc2GeoQ(0, 0) = cos(theta) * cos(phi);
@@ -139,7 +139,7 @@ namespace geodesy {
 
   // verbose
   std::string
-  verbose(const eigen::DColX& discontinuities) {
+  verbose(const axisem3d::eigen::DColX& discontinuities) {
     std::stringstream ss;
     ss << bstring::boxTitle("Geodesy");
     // Cartesain
@@ -165,7 +165,7 @@ namespace geodesy {
         ///////// f at discontinuities /////////
         ss << bstring::boxSubTitle(0, "flattening at discontinuities");
         // compute f
-        const eigen::DColX& fDisc = computeFlattening(discontinuities);
+        const axisem3d::eigen::DColX& fDisc = computeFlattening(discontinuities);
         // width
         int width = (int)bstring::toString(internal::iOuterFlattening * numerical::dPi / 3.).size();
         // verbose f from surface to center

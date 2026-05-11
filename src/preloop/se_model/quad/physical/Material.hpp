@@ -31,14 +31,14 @@ class Material {
   public:
   ////////////////////////// input //////////////////////////
   // constructor
-  Material(const ExodusMesh& exodusMesh, const eigen::DMat24& nodalSZ, bool axial);
+  Material(const ExodusMesh& exodusMesh, const axisem3d::eigen::DMat24& nodalSZ, bool axial);
 
   // add a 3D property
   void
   addProperty3D(const std::string& propKey,
       const Volumetric3D::ReferenceKind& refKind,
-      const eigen::arN_IColX& inScope,
-      const eigen::arN_DColX& propValue);
+      const axisem3d::eigen::arN_IColX& inScope,
+      const axisem3d::eigen::arN_DColX& propValue);
 
   // finished 3D properties
   void
@@ -46,17 +46,20 @@ class Material {
 
   ////////////////////////// output //////////////////////////
   // get maximum velocity for dt
-  eigen::DMatXN
+  axisem3d::eigen::DMatXN
   getMaxVelocity() const;
 
   // get rho, vp, vs for Clayton
   void
-  getPointwiseRhoVpVs(eigen::arN_DColX& rho, eigen::arN_DColX& vp, eigen::arN_DColX& vs) const;
+  getPointwiseRhoVpVs(axisem3d::eigen::arN_DColX& rho,
+      axisem3d::eigen::arN_DColX& vp,
+      axisem3d::eigen::arN_DColX& vs) const;
 
   // get mass for GLL-point setup
-  eigen::arN_DColX
-  getMass(
-      const eigen::DRowN& integralFactor, const eigen::arN_DColX& jacobianPRT, bool fluid) const;
+  axisem3d::eigen::arN_DColX
+  getMass(const axisem3d::eigen::DRowN& integralFactor,
+      const axisem3d::eigen::arN_DColX& jacobianPRT,
+      bool fluid) const;
 
   // create Acoustic
   std::unique_ptr<Acoustic>
@@ -64,35 +67,35 @@ class Material {
 
   // create Elastic
   std::unique_ptr<Elastic>
-  createElastic(
-      const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const;
+  createElastic(const std::unique_ptr<const AttBuilder>& attBuilder,
+      const axisem3d::eigen::DRow4& weightsCG4) const;
 
   private:
   // anisotropic
   std::unique_ptr<Elastic>
-  createAnisotropic(
-      const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const;
+  createAnisotropic(const std::unique_ptr<const AttBuilder>& attBuilder,
+      const axisem3d::eigen::DRow4& weightsCG4) const;
 
   // transversely isotropic
   std::unique_ptr<Elastic>
-  createTISO(
-      const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const;
+  createTISO(const std::unique_ptr<const AttBuilder>& attBuilder,
+      const axisem3d::eigen::DRow4& weightsCG4) const;
 
   // isotropic
   std::unique_ptr<Elastic>
-  createIsotropic(
-      const std::unique_ptr<const AttBuilder>& attBuilder, const eigen::DRow4& weightsCG4) const;
+  createIsotropic(const std::unique_ptr<const AttBuilder>& attBuilder,
+      const axisem3d::eigen::DRow4& weightsCG4) const;
 
   ////////////////////// property //////////////////////
   private:
   // get property pointwise
-  eigen::arN_DColX
+  axisem3d::eigen::arN_DColX
   getPointwise(const std::string& key) const {
     return getProperty(key).getPointwise();
   }
 
   // get property elemental
-  eigen::DMatXN
+  axisem3d::eigen::DMatXN
   getElemental(const std::string& key) const {
     return getProperty(key).getElemental();
   }
@@ -159,8 +162,8 @@ class Material {
     mProperties.insert({"VSV", mProperties.at("VS")});
     mProperties.insert({"VSH", mProperties.at("VS")});
     // eta
-    mProperties.insert(
-        {"ETA", NodalPhysicalProperty(eigen::DRow4::Ones(), mProperties.at("RHO").axial())});
+    mProperties.insert({"ETA",
+        NodalPhysicalProperty(axisem3d::eigen::DRow4::Ones(), mProperties.at("RHO").axial())});
     // erase vp, vs
     mProperties.erase("VP");
     mProperties.erase("VS");
@@ -183,7 +186,7 @@ class Material {
     const NodalPhysicalProperty& N = rho * vsh.pow(2.);
     const NodalPhysicalProperty& F = eta * (A - L * 2.);
     const NodalPhysicalProperty& zero =
-        NodalPhysicalProperty(eigen::DRow4::Zero(), mProperties.at("RHO").axial());
+        NodalPhysicalProperty(axisem3d::eigen::DRow4::Zero(), mProperties.at("RHO").axial());
     // Cijkl
     // non-zero
     mProperties.insert({"C11", A});

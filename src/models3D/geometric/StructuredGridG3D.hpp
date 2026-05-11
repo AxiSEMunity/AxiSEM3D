@@ -39,12 +39,13 @@ class StructuredGridG3D : public Geometric3D {
   private:
   // get undulation on an element
   bool
-  getUndulation(
-      const eigen::DMatX3& spz, const eigen::DMat24& nodalSZ, eigen::DColX& undulation) const;
+  getUndulation(const axisem3d::eigen::DMatX3& spz,
+      const axisem3d::eigen::DMat24& nodalSZ,
+      axisem3d::eigen::DColX& undulation) const;
 
   // get undulation on points
   bool
-  getUndulation(const eigen::DMatX3& spz, eigen::DColX& undulation) const;
+  getUndulation(const axisem3d::eigen::DMatX3& spz, axisem3d::eigen::DColX& undulation) const;
 
   // verbose
   std::string

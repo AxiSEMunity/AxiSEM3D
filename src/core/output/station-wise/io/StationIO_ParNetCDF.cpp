@@ -125,8 +125,9 @@ StationIO_ParNetCDF::finalize() {
 
 // dump to file
 void
-StationIO_ParNetCDF::dumpToFile(
-    const eigen::DColX& bufferTime, const eigen::RTensor3& bufferFields, int bufferLine) {
+StationIO_ParNetCDF::dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+    const axisem3d::eigen::RTensor3& bufferFields,
+    int bufferLine) {
   // write time
   if (mpi::rank() == mRankWithMaxNumStations) {
     mNcFile->writeVariable(mVarID_Time, "data_time", bufferTime, {mFileLineTime}, {bufferLine});
@@ -148,10 +149,10 @@ StationIO_ParNetCDF::dumpToFile(
     } else {
       // must truncate by copy because time is the fastest varying
       // dimension; occuring only at the end of the simulation
-      eigen::IArray3 loc = {0, 0, 0};
-      eigen::IArray3 len = {nst, nch, bufferLine};
+      axisem3d::eigen::IArray3 loc = {0, 0, 0};
+      axisem3d::eigen::IArray3 len = {nst, nch, bufferLine};
       Eigen::internal::set_is_malloc_allowed(true);
-      eigen::RTensor3 timeTruncated = bufferFields.slice(loc, len);
+      axisem3d::eigen::RTensor3 timeTruncated = bufferFields.slice(loc, len);
       Eigen::internal::set_is_malloc_allowed(false);
       mNcFile->writeVariable(mVarID_Data,
           "data_wave",

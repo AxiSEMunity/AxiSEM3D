@@ -15,7 +15,7 @@
 #include "eigen_generic.hpp"
 #include "spectral.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   using Eigen::Dynamic;
   using Eigen::RowMajor;
 
@@ -28,6 +28,6 @@ namespace eigen {
   ///////// GLL-level /////////
   // GLL tag on elements
   typedef Eigen::Matrix<int, Dynamic, spectral::nPEM, RowMajor> IMatXN_RM;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 #endif /* eigen_mesh_hpp */

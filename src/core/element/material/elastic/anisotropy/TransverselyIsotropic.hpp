@@ -27,15 +27,15 @@ class TransverselyIsotropic : public Elastic {
   public:
   // 1D constructor
   TransverselyIsotropic(std::unique_ptr<Attenuation>& attenuation,
-      const eigen::DMatPP_RM& A,
-      const eigen::DMatPP_RM& C,
-      const eigen::DMatPP_RM& F,
-      const eigen::DMatPP_RM& L,
-      const eigen::DMatPP_RM& N) :
+      const axisem3d::eigen::DMatPP_RM& A,
+      const axisem3d::eigen::DMatPP_RM& C,
+      const axisem3d::eigen::DMatPP_RM& F,
+      const axisem3d::eigen::DMatPP_RM& L,
+      const axisem3d::eigen::DMatPP_RM& N) :
       Elastic(true, attenuation), mA(A), mC(C), mF(F), mL(L), mN(N)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mMinusN2(eigen::DMatPP_RM(N * (-2.)))
+      mMinusN2(axisem3d::eigen::DMatPP_RM(N * (-2.)))
 #endif
   {
     // nothing
@@ -43,15 +43,15 @@ class TransverselyIsotropic : public Elastic {
 
   // 3D constructor
   TransverselyIsotropic(std::unique_ptr<Attenuation>& attenuation,
-      const eigen::DMatXN& A,
-      const eigen::DMatXN& C,
-      const eigen::DMatXN& F,
-      const eigen::DMatXN& L,
-      const eigen::DMatXN& N) :
+      const axisem3d::eigen::DMatXN& A,
+      const axisem3d::eigen::DMatXN& C,
+      const axisem3d::eigen::DMatXN& F,
+      const axisem3d::eigen::DMatXN& L,
+      const axisem3d::eigen::DMatXN& N) :
       Elastic(false, attenuation), mA(A), mC(C), mF(F), mL(L), mN(N)
 #ifndef AXISEM3D_SAVE_MEMORY
       ,
-      mMinusN2(eigen::DMatXN(N * (-2.)))
+      mMinusN2(axisem3d::eigen::DMatXN(N * (-2.)))
 #endif
   {
     // nothing
@@ -98,8 +98,9 @@ class TransverselyIsotropic : public Elastic {
 
   // strain => stress in Fourier space
   void
-  strainToStress_FR(
-      const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) const {
+  strainToStress_FR(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) const {
     // elasticity
 #ifdef AXISEM3D_SAVE_MEMORY
     computeMinusN2();
@@ -114,7 +115,8 @@ class TransverselyIsotropic : public Elastic {
 
   // strain => stress in cardinal space
   void
-  strainToStress_CD(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) const {
+  strainToStress_CD(
+      const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) const {
     // elasticity
 #ifdef AXISEM3D_SAVE_MEMORY
     computeMinusN2();

@@ -23,7 +23,7 @@ NrFieldPointwise::NrFieldPointwise(const std::string& fname, double factor, doub
   NetCDF_Reader reader;
   reader.open(io::popInputDir(fname));
   try {
-    eigen::IColX nrStart;
+    axisem3d::eigen::IColX nrStart;
     reader.readMatrix("starting_Nr_for_scanning", nrStart);
     mSumNrStart = nrStart.sum();
   } catch (...) {
@@ -33,9 +33,9 @@ NrFieldPointwise::NrFieldPointwise(const std::string& fname, double factor, doub
 }
 
 // get nr by (s, z)
-eigen::IColX
-NrFieldPointwise::getNrAtPoints(const eigen::DMatX2_RM& sz) const {
-  eigen::IColX result(sz.rows());
+axisem3d::eigen::IColX
+NrFieldPointwise::getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const {
+  axisem3d::eigen::IColX result(sz.rows());
   for (int ip = 0; ip < sz.rows(); ip++) {
     // get from r-tree without distance limit
     double max = std::numeric_limits<double>::max();
@@ -51,7 +51,7 @@ std::string
 NrFieldPointwise::verbose() const {
   std::stringstream ss;
   // statistics for verbose
-  const eigen::IColX& controlNr = mRTree->getAllValues();
+  const axisem3d::eigen::IColX& controlNr = mRTree->getAllValues();
   long sumNr = controlNr.cast<long>().sum();
   int aveNr = (int)round(1. * sumNr / controlNr.size());
 

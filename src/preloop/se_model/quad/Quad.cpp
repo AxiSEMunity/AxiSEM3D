@@ -48,12 +48,12 @@ Quad::Quad(
   mEdgesOnBoundary.insert({"SOLID_FLUID", exodusMesh.getSide("solid_fluid_boundary", mGlobalTag)});
 
   // Nr field
-  static eigen::DRow4 nodalNr;
+  static axisem3d::eigen::DRow4 nodalNr;
   for (int ivt = 0; ivt < 4; ivt++) {
     int inode = localMesh.mConnectivity(mLocalTag, ivt);
     nodalNr(ivt) = localMesh.mNodalNr(inode);
   }
-  mPointNr = std::make_unique<eigen::IRowN>(
+  mPointNr = std::make_unique<axisem3d::eigen::IRowN>(
       spectrals::interpolateGLL(nodalNr, axial()).array().round().cast<int>());
   // round to lucky numbers
   if (useLuckyNumbers) {
@@ -63,7 +63,7 @@ Quad::Quad(
   ////////////// components //////////////
   // 1) mapping
   // form nodal (s,z)
-  static eigen::DMat24 nodalSZ;
+  static axisem3d::eigen::DMat24 nodalSZ;
   for (int ivt = 0; ivt < 4; ivt++) {
     int inode = localMesh.mConnectivity(mLocalTag, ivt);
     nodalSZ.col(ivt) = localMesh.mNodalCoords.row(inode).transpose();
@@ -95,11 +95,11 @@ Quad::Quad(
 void
 Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>& GLLPoints) const {
   // compute mass
-  static eigen::DMat2N sz;
-  static std::array<eigen::DMat22, spectral::nPEM> J;
-  const eigen::DRowN& ifact = computeIntegralFactor(sz, J);
-  const eigen::arN_DColX& J_PRT = mUndulation->getMassJacobian(sz);
-  const eigen::arN_DColX& mass = mMaterial->getMass(ifact, J_PRT, mFluid);
+  static axisem3d::eigen::DMat2N sz;
+  static std::array<axisem3d::eigen::DMat22, spectral::nPEM> J;
+  const axisem3d::eigen::DRowN& ifact = computeIntegralFactor(sz, J);
+  const axisem3d::eigen::arN_DColX& J_PRT = mUndulation->getMassJacobian(sz);
+  const axisem3d::eigen::arN_DColX& mass = mMaterial->getMass(ifact, J_PRT, mFluid);
 
   // setup tags, nr, coords and mass
   for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
@@ -122,7 +122,7 @@ Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>
   if (mEdgesOnBoundary.at("SOLID_FLUID") != -1) {
     // compute normals
     static std::vector<int> ipnts;
-    static eigen::arP_DMatX3 nSF;
+    static axisem3d::eigen::arP_DMatX3 nSF;
     computeNormal(mEdgesOnBoundary.at("SOLID_FLUID"), sz, J, ipnts, nSF);
     // add normals to points
     for (int ip = 0; ip < spectral::nPED; ip++) {
@@ -145,10 +145,10 @@ Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>
       }
       // compute normals
       static std::vector<int> ipnts;
-      static eigen::arP_DMatX3 nABC;
+      static axisem3d::eigen::arP_DMatX3 nABC;
       computeNormal(mEdgesOnBoundary.at(key), sz, J, ipnts, nABC);
       // get properties from material
-      eigen::arN_DColX rho, vp, vs;
+      axisem3d::eigen::arN_DColX rho, vp, vs;
       mMaterial->getPointwiseRhoVpVs(rho, vp, vs);
       // add ABCs to points
       for (int ip = 0; ip < spectral::nPED; ip++) {
@@ -162,16 +162,16 @@ Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>
   // sponge ABC
   if (abc.sponge()) {
     // get material
-    eigen::arN_DColX rho, vp, vs;
+    axisem3d::eigen::arN_DColX rho, vp, vs;
     mMaterial->getPointwiseRhoVpVs(rho, vp, vs);
 
     // loop over gll
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
       // regularize 1D/3D
-      op1D_3D::regularize1D<eigen::DColX>(
+      op1D_3D::regularize1D<axisem3d::eigen::DColX>(
           {std::ref(rho[ipnt]), std::ref(vp[ipnt]), std::ref(vs[ipnt])});
       // compute maximum gamma among all boundaries
-      eigen::DColX gammaMax = eigen::DColX::Zero((*mPointNr)(ipnt), 1);
+      axisem3d::eigen::DColX gammaMax = axisem3d::eigen::DColX::Zero((*mPointNr)(ipnt), 1);
       double distToOuter_min = 1.;
       for (const std::string& key : abc.getBoundaryKeys()) {
         /////////// pattern ///////////
@@ -186,7 +186,7 @@ Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>
           coord = (key == "RIGHT" ? sz(0, ipnt) : sz(1, ipnt));
           r = sz(1, ipnt);
         } else {
-          const eigen::DCol2& rt = geodesy::sz2rtheta(sz.col(ipnt).eval(), false);
+          const axisem3d::eigen::DCol2& rt = geodesy::sz2rtheta(sz.col(ipnt).eval(), false);
           coord = (key == "RIGHT" ? rt(1) : rt(0));
           r = rt(0);
         }
@@ -228,10 +228,10 @@ Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>
   if (mEdgesOnBoundary.at("TOP") != -1 && (*mOceanLoad)) {
     // compute normals
     static std::vector<int> ipnts;
-    static eigen::arP_DMatX3 nTop;
+    static axisem3d::eigen::arP_DMatX3 nTop;
     computeNormal(mEdgesOnBoundary.at("TOP"), sz, J, ipnts, nTop);
     // add ocean loads to points
-    const eigen::arP_DColX& sumRhoDepth = mOceanLoad->getPointwise();
+    const axisem3d::eigen::arP_DColX& sumRhoDepth = mOceanLoad->getPointwise();
     for (int ip = 0; ip < spectral::nPED; ip++) {
       int igll = localMesh.mElementGLL(mLocalTag, ipnts[ip]);
       GLLPoints[igll].addOceanLoad(nTop[ip], sumRhoDepth[ip]);
@@ -261,27 +261,27 @@ Quad::setupGLL(const ABC& abc, const LocalMesh& localMesh, std::vector<GLLPoint>
 double
 Quad::computeDt(double courant, const ABC& abc) const {
   // get vp
-  const eigen::DColX& vmaxNr = mMaterial->getMaxVelocity().rowwise().maxCoeff();
+  const axisem3d::eigen::DColX& vmaxNr = mMaterial->getMaxVelocity().rowwise().maxCoeff();
 
   // 1D coords in reference configuration
-  const eigen::DMat2N& szRef = getPointSZ();
+  const axisem3d::eigen::DMat2N& szRef = getPointSZ();
 
   // compute coords on slices
-  std::vector<eigen::DMat2N> szNr;
-  const eigen::DMatXN& dZ = mUndulation->getElemental();
+  std::vector<axisem3d::eigen::DMat2N> szNr;
+  const axisem3d::eigen::DMatXN& dZ = mUndulation->getElemental();
   // both 1D and 3D undulation
   if (geodesy::isCartesian()) {
     for (int nr = 0; nr < dZ.rows(); nr++) {
-      eigen::DMat2N sz = szRef;
+      axisem3d::eigen::DMat2N sz = szRef;
       sz.row(1) += dZ.row(nr);
       szNr.push_back(sz);
     }
   } else {
-    const eigen::DMat2N& rt = geodesy::sz2rtheta(szRef, false);
-    const eigen::DRowN& sint = rt.row(1).array().sin();
-    const eigen::DRowN& cost = rt.row(1).array().cos();
+    const axisem3d::eigen::DMat2N& rt = geodesy::sz2rtheta(szRef, false);
+    const axisem3d::eigen::DRowN& sint = rt.row(1).array().sin();
+    const axisem3d::eigen::DRowN& cost = rt.row(1).array().cos();
     for (int nr = 0; nr < dZ.rows(); nr++) {
-      eigen::DMat2N sz = szRef;
+      axisem3d::eigen::DMat2N sz = szRef;
       sz.row(0) += dZ.row(nr).cwiseProduct(sint);
       sz.row(1) += dZ.row(nr).cwiseProduct(cost);
       szNr.push_back(sz);
@@ -296,7 +296,7 @@ Quad::computeDt(double courant, const ABC& abc) const {
     double vmax = (vmaxNr.rows() == 1) ? vmaxNr(0) : vmaxNr(nr);
 
     // hmin
-    const eigen::DMat2N& sz = (szNr.size() == 1) ? szNr[0] : szNr[nr];
+    const axisem3d::eigen::DMat2N& sz = (szNr.size() == 1) ? szNr[0] : szNr[nr];
     double hmin = std::numeric_limits<double>::max();
     for (int ipnt0 = 0; ipnt0 < spectral::nPEM - 1; ipnt0++) {
       int ipol0 = ipnt0 / spectral::nPED;
@@ -343,8 +343,8 @@ Quad::release(const LocalMesh& localMesh,
     const std::unique_ptr<const AttBuilder>& attBuilder,
     Domain& domain) {
   // gradient-quadrature operator
-  static eigen::DMat2N sz;
-  static eigen::DMatPP_RM ifPP;
+  static axisem3d::eigen::DMat2N sz;
+  static axisem3d::eigen::DMatPP_RM ifPP;
   std::unique_ptr<const GradientQuadrature<numerical::Real>> grad =
       createGradient<numerical::Real>(sz, ifPP);
   // particle relabelling transformation
@@ -386,14 +386,15 @@ Quad::release(const LocalMesh& localMesh,
 
 //////////////////////// interal ////////////////////////
 // compute integral factor
-eigen::DRowN
-Quad::computeIntegralFactor(eigen::DMat2N& sz, std::array<eigen::DMat22, spectral::nPEM>& J) const {
+axisem3d::eigen::DRowN
+Quad::computeIntegralFactor(
+    axisem3d::eigen::DMat2N& sz, std::array<axisem3d::eigen::DMat22, spectral::nPEM>& J) const {
   // xieta and weights
-  const eigen::DMat2N& xieta = spectrals::getXiEtaElement(axial());
-  const eigen::DRowN& weights = spectrals::getWeightsElement(axial());
+  const axisem3d::eigen::DMat2N& xieta = spectrals::getXiEtaElement(axial());
+  const axisem3d::eigen::DRowN& weights = spectrals::getWeightsElement(axial());
 
   // compute integral factor
-  eigen::DRowN ifact;
+  axisem3d::eigen::DRowN ifact;
   for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
     // element Jacobian
     J[ipnt] = mMapping->jacobian(xieta.col(ipnt));
@@ -422,12 +423,12 @@ Quad::computeIntegralFactor(eigen::DMat2N& sz, std::array<eigen::DMat22, spectra
 // get normal
 void
 Quad::computeNormal(int edge,
-    const eigen::DMat2N& sz,
-    const std::array<eigen::DMat22, spectral::nPEM>& J,
+    const axisem3d::eigen::DMat2N& sz,
+    const std::array<axisem3d::eigen::DMat22, spectral::nPEM>& J,
     std::vector<int>& ipnts,
-    eigen::arP_DMatX3& normal) const {
+    axisem3d::eigen::arP_DMatX3& normal) const {
   // xieta
-  const eigen::DMat2N& xieta = spectrals::getXiEtaElement(axial());
+  const axisem3d::eigen::DMat2N& xieta = spectrals::getXiEtaElement(axial());
 
   // points on edge
   ipnts = vicinity::constants::gEdgeIPnt[edge];
@@ -436,7 +437,7 @@ Quad::computeNormal(int edge,
   for (int ip = 0; ip < spectral::nPED; ip++) {
     int ipnt = ipnts[ip];
     // 1D normal
-    eigen::DCol2 n1D = mMapping->normal(edge, J[ipnt]);
+    axisem3d::eigen::DCol2 n1D = mMapping->normal(edge, J[ipnt]);
     // integral weights
     int ipol = ipnt / spectral::nPED;
     int jpol = ipnt % spectral::nPED;
@@ -471,10 +472,10 @@ Quad::computeNormal(int edge,
 }
 
 // weights for CG4 attenuation
-eigen::DRow4
-Quad::computeWeightsCG4(const eigen::DMatPP_RM& ifPP) const {
+axisem3d::eigen::DRow4
+Quad::computeWeightsCG4(const axisem3d::eigen::DMatPP_RM& ifPP) const {
   if (spectral::nPol != 4) {
-    return eigen::DRow4::Zero();
+    return axisem3d::eigen::DRow4::Zero();
   }
   // weights on CG4 points (marked O)
   // x x x x x
@@ -482,7 +483,7 @@ Quad::computeWeightsCG4(const eigen::DMatPP_RM& ifPP) const {
   // x x x x x
   // x O x O x
   // x x x x x
-  eigen::DRow4 wcg4;
+  axisem3d::eigen::DRow4 wcg4;
   wcg4(0) = (ifPP(0, 0) + ifPP(0, 1) + ifPP(1, 0) + ifPP(1, 1) +
                 0.50 * (ifPP(0, 2) + ifPP(1, 2) + ifPP(2, 0) + ifPP(2, 1)) + 0.25 * ifPP(2, 2)) /
       ifPP(1, 1);

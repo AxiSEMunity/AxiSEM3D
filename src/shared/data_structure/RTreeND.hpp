@@ -87,7 +87,7 @@ template <int D, int V, typename T> class RTreeND {
       ctrlVals.resize(ctrlCrds.rows(), V);
       for (int ivar = 0; ivar < V; ivar++) {
         // read to double
-        eigen::DColX ctrlVal;
+        axisem3d::eigen::DColX ctrlVal;
         reader.readMatrixDouble(varInfo[ivar].first, ctrlVal);
         ctrlVal *= varInfo[ivar].second;
         // round

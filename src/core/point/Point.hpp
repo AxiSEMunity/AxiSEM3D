@@ -19,7 +19,8 @@
 class Point {
   public:
   // constructor
-  Point(int nr, const eigen::DRow2& crds, int meshTag, std::unique_ptr<const Mass>& mass) :
+  Point(
+      int nr, const axisem3d::eigen::DRow2& crds, int meshTag, std::unique_ptr<const Mass>& mass) :
       mNr(nr), mNu_1(mNr / 2 + 1), mCoords(crds), mMeshTag(meshTag), mMass(mass.release()) {
     // nothing
   }
@@ -55,7 +56,7 @@ class Point {
   }
 
   // location
-  const eigen::DRow2&
+  const axisem3d::eigen::DRow2&
   getCoords() const {
     return mCoords;
   }
@@ -91,7 +92,7 @@ class Point {
   const int mNu_1;
 
   // location (s, z)
-  const eigen::DRow2 mCoords;
+  const axisem3d::eigen::DRow2 mCoords;
 
   // tag in spectral-element mesh
   // * determined by location, mpi-independent

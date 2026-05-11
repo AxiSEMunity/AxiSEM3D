@@ -20,7 +20,7 @@ class SolidPoint : public Point {
   public:
   // constructor
   SolidPoint(int nr,
-      const eigen::DRow2& crds,
+      const axisem3d::eigen::DRow2& crds,
       int meshTag,
       std::unique_ptr<const Mass>& mass,
       const TimeScheme& timeScheme);
@@ -59,16 +59,17 @@ class SolidPoint : public Point {
 
   // feed to mpi buffer
   void
-  feedComm(eigen::CColX& buffer, int& row) const {
+  feedComm(axisem3d::eigen::CColX& buffer, int& row) const {
     buffer.block(row, 0, mFields.mStiff.size(), 1) =
-        Eigen::Map<const eigen::CColX>(mFields.mStiff.data(), mFields.mStiff.size());
+        Eigen::Map<const axisem3d::eigen::CColX>(mFields.mStiff.data(), mFields.mStiff.size());
     row += mFields.mStiff.size();
   }
 
   // extract from mpi buffer
   void
-  extractComm(const eigen::CColX& buffer, int& row) {
-    mFields.mStiff += Eigen::Map<const eigen::CMatX3>(&buffer(row), mFields.mStiff.rows(), 3);
+  extractComm(const axisem3d::eigen::CColX& buffer, int& row) {
+    mFields.mStiff +=
+        Eigen::Map<const axisem3d::eigen::CMatX3>(&buffer(row), mFields.mStiff.rows(), 3);
     row += mFields.mStiff.size();
   }
 
@@ -87,7 +88,7 @@ class SolidPoint : public Point {
   // scatter displ to element
   void
   scatterDisplToElement(
-      eigen::vec_ar3_CMatPP_RM& displ, int nu_1_element, int ipol, int jpol) const {
+      axisem3d::eigen::vec_ar3_CMatPP_RM& displ, int nu_1_element, int ipol, int jpol) const {
     // copy lower orders
     for (int alpha = 0; alpha < mNu_1; alpha++) {
       displ[alpha][0](ipol, jpol) = mFields.mDispl(alpha, 0);
@@ -106,7 +107,7 @@ class SolidPoint : public Point {
 
   // gather stiff from element
   void
-  gatherStiffFromElement(const eigen::vec_ar3_CMatPP_RM& stiff, int ipol, int jpol) {
+  gatherStiffFromElement(const axisem3d::eigen::vec_ar3_CMatPP_RM& stiff, int ipol, int jpol) {
     // add lower orders only
     for (int alpha = 0; alpha < mNu_1; alpha++) {
       mFields.mStiff(alpha, 0) -= stiff[alpha][0](ipol, jpol);
@@ -118,7 +119,7 @@ class SolidPoint : public Point {
   /////////////////////////// source ///////////////////////////
   // add force source (external)
   void
-  addForceSource(const eigen::CMatXN3& force, int nu_1_force, int ipnt) {
+  addForceSource(const axisem3d::eigen::CMatXN3& force, int nu_1_force, int ipnt) {
     // add minimum orders only
     int nu_1_min = std::min(mNu_1, nu_1_force);
     mFields.mStiff.topRows(nu_1_min) += force(Eigen::seqN(Eigen::fix<0>, nu_1_min),
@@ -128,10 +129,10 @@ class SolidPoint : public Point {
   /////////////////////////// fields ///////////////////////////
   // fields on a solid point
   struct Fields {
-    eigen::CMatX3 mStiff = eigen::CMatX3(0, 3);
-    eigen::CMatX3 mDispl = eigen::CMatX3(0, 3);
-    eigen::CMatX3 mVeloc = eigen::CMatX3(0, 3);
-    eigen::CMatX3 mAccel = eigen::CMatX3(0, 3);
+    axisem3d::eigen::CMatX3 mStiff = axisem3d::eigen::CMatX3(0, 3);
+    axisem3d::eigen::CMatX3 mDispl = axisem3d::eigen::CMatX3(0, 3);
+    axisem3d::eigen::CMatX3 mVeloc = axisem3d::eigen::CMatX3(0, 3);
+    axisem3d::eigen::CMatX3 mAccel = axisem3d::eigen::CMatX3(0, 3);
   };
 
   // get

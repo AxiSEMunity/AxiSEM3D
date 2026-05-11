@@ -19,7 +19,7 @@
 // gradient
 #include "SolverFFTW.hpp"
 class Quad;
-namespace eigen {
+namespace axisem3d::eigen {
   using numerical::ComplexD;
   using spectral::nPED;
   using spectral::nPEM;
@@ -27,7 +27,7 @@ namespace eigen {
   typedef std::vector<std::array<ZMatPP_RM, 1>> vec_ar1_ZMatPP_RM;
   typedef std::vector<std::array<ZMatPP_RM, 3>> vec_ar3_ZMatPP_RM;
   typedef Eigen::Matrix<double, Eigen::Dynamic, nPEM * 3> DMatXN3;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 // release
 #include "PRT.hpp"
@@ -36,18 +36,18 @@ class Undulation {
   public:
   // add undulation
   void
-  addUndulation(const eigen::arN_DColX& und) {
+  addUndulation(const axisem3d::eigen::arN_DColX& und) {
     mDeltaZ.addGLL(und);
   }
 
   // get elemental
-  eigen::DMatXN
+  axisem3d::eigen::DMatXN
   getElemental() const {
     return mDeltaZ.getElemental();
   }
 
   // get pointwise
-  eigen::arN_DColX
+  axisem3d::eigen::arN_DColX
   getPointwise() const {
     return mDeltaZ.getPointwise();
   }
@@ -61,16 +61,17 @@ class Undulation {
   finished3D(const Quad& myQuad);
 
   // get Jacobian for mass
-  eigen::arN_DColX
-  getMassJacobian(const eigen::DMat2N& sz) const;
+  axisem3d::eigen::arN_DColX
+  getMassJacobian(const axisem3d::eigen::DMat2N& sz) const;
 
   // create PRT
   std::unique_ptr<const PRT>
-  createPRT(const eigen::DMat2N& sz) const;
+  createPRT(const axisem3d::eigen::DMat2N& sz) const;
 
   // compute 3D normal at a point
-  eigen::DMatX3
-  computeNormal3D(const eigen::DCol2& n1D, const eigen::DMat2N& sz, int ipnt) const;
+  axisem3d::eigen::DMatX3
+  computeNormal3D(
+      const axisem3d::eigen::DCol2& n1D, const axisem3d::eigen::DMat2N& sz, int ipnt) const;
 
   ///////////////////////// data /////////////////////////
   private:
@@ -78,7 +79,7 @@ class Undulation {
   PhysicalProperty<spectral::nPEM> mDeltaZ;
 
   // gradient of delta Z
-  eigen::DMatXN3 mDeltaZ_RTZ;
+  axisem3d::eigen::DMatXN3 mDeltaZ_RTZ;
 
   ///////////////////////// static /////////////////////////
   public:
@@ -90,8 +91,8 @@ class Undulation {
   // static fft variables
   inline static SolverFFTW<double, spectral::nPEM> sFFT_N1;
   inline static SolverFFTW<double, spectral::nPEM * 3> sFFT_N3;
-  inline static eigen::vec_ar1_ZMatPP_RM sDeltaZ_Fourier;
-  inline static eigen::vec_ar3_ZMatPP_RM sDeltaZ_SPZ_Fourier;
+  inline static axisem3d::eigen::vec_ar1_ZMatPP_RM sDeltaZ_Fourier;
+  inline static axisem3d::eigen::vec_ar3_ZMatPP_RM sDeltaZ_SPZ_Fourier;
 };
 
 #endif /* Undulation_hpp */

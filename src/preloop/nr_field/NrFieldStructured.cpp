@@ -29,9 +29,9 @@ NrFieldStructured::NrFieldStructured(const std::string& fname, int valOutOfRange
 }
 
 // get nr by (s, z)
-eigen::IColX
-NrFieldStructured::getNrAtPoints(const eigen::DMatX2_RM& sz) const {
-  eigen::IColX nr(sz.rows());
+axisem3d::eigen::IColX
+NrFieldStructured::getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const {
+  axisem3d::eigen::IColX nr(sz.rows());
   if (geodesy::isCartesian()) {
     // Cartesian
     for (int ip = 0; ip < sz.rows(); ip++) {

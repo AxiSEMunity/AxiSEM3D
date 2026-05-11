@@ -19,32 +19,32 @@ class Anisotropic : public Elastic {
   // 1D constructor
   Anisotropic(std::unique_ptr<Attenuation>& attenuation,
       // C1
-      const eigen::DMatPP_RM& C11,
-      const eigen::DMatPP_RM& C12,
-      const eigen::DMatPP_RM& C13,
-      const eigen::DMatPP_RM& C14,
-      const eigen::DMatPP_RM& C15,
-      const eigen::DMatPP_RM& C16,
+      const axisem3d::eigen::DMatPP_RM& C11,
+      const axisem3d::eigen::DMatPP_RM& C12,
+      const axisem3d::eigen::DMatPP_RM& C13,
+      const axisem3d::eigen::DMatPP_RM& C14,
+      const axisem3d::eigen::DMatPP_RM& C15,
+      const axisem3d::eigen::DMatPP_RM& C16,
       // C2
-      const eigen::DMatPP_RM& C22,
-      const eigen::DMatPP_RM& C23,
-      const eigen::DMatPP_RM& C24,
-      const eigen::DMatPP_RM& C25,
-      const eigen::DMatPP_RM& C26,
+      const axisem3d::eigen::DMatPP_RM& C22,
+      const axisem3d::eigen::DMatPP_RM& C23,
+      const axisem3d::eigen::DMatPP_RM& C24,
+      const axisem3d::eigen::DMatPP_RM& C25,
+      const axisem3d::eigen::DMatPP_RM& C26,
       // C3
-      const eigen::DMatPP_RM& C33,
-      const eigen::DMatPP_RM& C34,
-      const eigen::DMatPP_RM& C35,
-      const eigen::DMatPP_RM& C36,
+      const axisem3d::eigen::DMatPP_RM& C33,
+      const axisem3d::eigen::DMatPP_RM& C34,
+      const axisem3d::eigen::DMatPP_RM& C35,
+      const axisem3d::eigen::DMatPP_RM& C36,
       // C4
-      const eigen::DMatPP_RM& C44,
-      const eigen::DMatPP_RM& C45,
-      const eigen::DMatPP_RM& C46,
+      const axisem3d::eigen::DMatPP_RM& C44,
+      const axisem3d::eigen::DMatPP_RM& C45,
+      const axisem3d::eigen::DMatPP_RM& C46,
       // C5
-      const eigen::DMatPP_RM& C55,
-      const eigen::DMatPP_RM& C56,
+      const axisem3d::eigen::DMatPP_RM& C55,
+      const axisem3d::eigen::DMatPP_RM& C56,
       // C6
-      const eigen::DMatPP_RM& C66) :
+      const axisem3d::eigen::DMatPP_RM& C66) :
       Elastic(true, attenuation), mC11(C11), mC12(C12), mC13(C13), mC14(C14), mC15(C15), mC16(C16),
       mC22(C22), mC23(C23), mC24(C24), mC25(C25), mC26(C26), mC33(C33), mC34(C34), mC35(C35),
       mC36(C36), mC44(C44), mC45(C45), mC46(C46), mC55(C55), mC56(C56), mC66(C66) {
@@ -54,32 +54,32 @@ class Anisotropic : public Elastic {
   // 3D constructor
   Anisotropic(std::unique_ptr<Attenuation>& attenuation,
       // C1
-      const eigen::DMatXN& C11,
-      const eigen::DMatXN& C12,
-      const eigen::DMatXN& C13,
-      const eigen::DMatXN& C14,
-      const eigen::DMatXN& C15,
-      const eigen::DMatXN& C16,
+      const axisem3d::eigen::DMatXN& C11,
+      const axisem3d::eigen::DMatXN& C12,
+      const axisem3d::eigen::DMatXN& C13,
+      const axisem3d::eigen::DMatXN& C14,
+      const axisem3d::eigen::DMatXN& C15,
+      const axisem3d::eigen::DMatXN& C16,
       // C2
-      const eigen::DMatXN& C22,
-      const eigen::DMatXN& C23,
-      const eigen::DMatXN& C24,
-      const eigen::DMatXN& C25,
-      const eigen::DMatXN& C26,
+      const axisem3d::eigen::DMatXN& C22,
+      const axisem3d::eigen::DMatXN& C23,
+      const axisem3d::eigen::DMatXN& C24,
+      const axisem3d::eigen::DMatXN& C25,
+      const axisem3d::eigen::DMatXN& C26,
       // C3
-      const eigen::DMatXN& C33,
-      const eigen::DMatXN& C34,
-      const eigen::DMatXN& C35,
-      const eigen::DMatXN& C36,
+      const axisem3d::eigen::DMatXN& C33,
+      const axisem3d::eigen::DMatXN& C34,
+      const axisem3d::eigen::DMatXN& C35,
+      const axisem3d::eigen::DMatXN& C36,
       // C4
-      const eigen::DMatXN& C44,
-      const eigen::DMatXN& C45,
-      const eigen::DMatXN& C46,
+      const axisem3d::eigen::DMatXN& C44,
+      const axisem3d::eigen::DMatXN& C45,
+      const axisem3d::eigen::DMatXN& C46,
       // C5
-      const eigen::DMatXN& C55,
-      const eigen::DMatXN& C56,
+      const axisem3d::eigen::DMatXN& C55,
+      const axisem3d::eigen::DMatXN& C56,
       // C6
-      const eigen::DMatXN& C66) :
+      const axisem3d::eigen::DMatXN& C66) :
       Elastic(false, attenuation), mC11(C11), mC12(C12), mC13(C13), mC14(C14), mC15(C15), mC16(C16),
       mC22(C22), mC23(C23), mC24(C24), mC25(C25), mC26(C26), mC33(C33), mC34(C34), mC35(C35),
       mC36(C36), mC44(C44), mC45(C45), mC46(C46), mC55(C55), mC56(C56), mC66(C66) {
@@ -130,8 +130,9 @@ class Anisotropic : public Elastic {
 
   // strain => stress in Fourier space
   void
-  strainToStress_FR(
-      const eigen::vec_ar6_CMatPP_RM& strain, eigen::vec_ar6_CMatPP_RM& stress, int nu_1) const {
+  strainToStress_FR(const axisem3d::eigen::vec_ar6_CMatPP_RM& strain,
+      axisem3d::eigen::vec_ar6_CMatPP_RM& stress,
+      int nu_1) const {
     // elasticity
     for (int alpha = 0; alpha < nu_1; alpha++) {
       strainToStress<CaseFA::_1D_FR>(strain,
@@ -166,7 +167,8 @@ class Anisotropic : public Elastic {
 
   // strain => stress in cardinal space
   void
-  strainToStress_CD(const eigen::RMatXN6& strain, eigen::RMatXN6& stress, int nr) const {
+  strainToStress_CD(
+      const axisem3d::eigen::RMatXN6& strain, axisem3d::eigen::RMatXN6& stress, int nr) const {
     // elasticity
     if (m1D) {
       strainToStress<CaseFA::_1D_CD>(strain,

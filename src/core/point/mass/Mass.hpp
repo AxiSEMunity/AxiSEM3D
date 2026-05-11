@@ -27,11 +27,11 @@ class Mass {
 
   // compute accel in-place for fluid
   virtual void
-  computeAccel(eigen::CColX& stiff1) const = 0;
+  computeAccel(axisem3d::eigen::CColX& stiff1) const = 0;
 
   // compute accel in-place for solid
   virtual void
-  computeAccel(eigen::CMatX3& stiff3) const = 0;
+  computeAccel(axisem3d::eigen::CMatX3& stiff3) const = 0;
 };
 
 #endif /* Mass_hpp */

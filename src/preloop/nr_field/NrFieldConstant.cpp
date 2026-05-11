@@ -13,9 +13,9 @@
 #include "bstring.hpp"
 
 // get nr by (s, z)
-eigen::IColX
-NrFieldConstant::getNrAtPoints(const eigen::DMatX2_RM& sz) const {
-  return eigen::IColX::Constant(sz.rows(), mNr);
+axisem3d::eigen::IColX
+NrFieldConstant::getNrAtPoints(const axisem3d::eigen::DMatX2_RM& sz) const {
+  return axisem3d::eigen::IColX::Constant(sz.rows(), mNr);
 }
 
 // verbose

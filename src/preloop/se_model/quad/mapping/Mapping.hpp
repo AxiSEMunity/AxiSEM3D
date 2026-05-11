@@ -18,9 +18,9 @@
 class Mapping {
   public:
   // constructor
-  Mapping(const eigen::DMat24& nodalSZ) : mNodalSZ(nodalSZ) {
+  Mapping(const axisem3d::eigen::DMat24& nodalSZ) : mNodalSZ(nodalSZ) {
     // minimum edge length
-    eigen::DRow4 edgeLength;
+    axisem3d::eigen::DRow4 edgeLength;
     edgeLength(0) = (nodalSZ.col(0) - nodalSZ.col(1)).norm();
     edgeLength(1) = (nodalSZ.col(1) - nodalSZ.col(2)).norm();
     edgeLength(2) = (nodalSZ.col(2) - nodalSZ.col(3)).norm();
@@ -32,18 +32,18 @@ class Mapping {
   virtual ~Mapping() = default;
 
   // forward mapping: (ξ,η) -> (s,z)
-  virtual eigen::DCol2
-  mapping(const eigen::DCol2& xieta) const = 0;
+  virtual axisem3d::eigen::DCol2
+  mapping(const axisem3d::eigen::DCol2& xieta) const = 0;
 
   // Jacobian: ∂(s,z) / ∂(ξ,η)
-  virtual eigen::DMat22
-  jacobian(const eigen::DCol2& xieta) const = 0;
+  virtual axisem3d::eigen::DMat22
+  jacobian(const axisem3d::eigen::DCol2& xieta) const = 0;
 
   // inverse mapping: (s,z) -> (ξ,η)
   // return true if (s,z) is inside this element
   bool
-  inverseMapping(const eigen::DCol2& sz,
-      eigen::DCol2& xieta,
+  inverseMapping(const axisem3d::eigen::DCol2& sz,
+      axisem3d::eigen::DCol2& xieta,
       double maxIter = 10,
       double tolerance = 1e-9) const {
     // Newton
@@ -51,7 +51,7 @@ class Mapping {
     double absSZ = tolerance * mMinEdgeLength;
     int iter = 0;
     for (; iter < maxIter; iter++) {
-      const eigen::DCol2& dsz = sz - mapping(xieta);
+      const axisem3d::eigen::DCol2& dsz = sz - mapping(xieta);
       if (dsz.norm() < absSZ) {
         break;
       }
@@ -69,9 +69,9 @@ class Mapping {
   }
 
   // normal
-  eigen::DCol2
-  normal(int edge, const eigen::DMat22& J) const {
-    eigen::DCol2 normal;
+  axisem3d::eigen::DCol2
+  normal(int edge, const axisem3d::eigen::DMat22& J) const {
+    axisem3d::eigen::DCol2 normal;
     if (edge == 0) {
       // xi increases from -1 to 1, eta = -1
       // n = (0, 1, 0) x (ds/dxi, 0, dz/dxi)
@@ -97,7 +97,7 @@ class Mapping {
   }
 
   // get nodal coordinates
-  const eigen::DMat24&
+  const axisem3d::eigen::DMat24&
   getNodalSZ() const {
     return mNodalSZ;
   }
@@ -111,10 +111,10 @@ class Mapping {
   protected:
   // rotate CS such that mCurvedOuter lies on edge 2
   void
-  rotateQ2(const eigen::DCol2& xieta,
-      eigen::DMat24& szQ2,
-      eigen::DMat24& rtQ2,
-      eigen::DCol2& xietaQ2) const {
+  rotateQ2(const axisem3d::eigen::DCol2& xieta,
+      axisem3d::eigen::DMat24& szQ2,
+      axisem3d::eigen::DMat24& rtQ2,
+      axisem3d::eigen::DCol2& xietaQ2) const {
     // direct multiplication for sz and xieta
     szQ2 = sOrthogQ2[mCurvedOuter] * mNodalSZ;
     xietaQ2 = sOrthogQ2[mCurvedOuter] * xieta;
@@ -132,7 +132,7 @@ class Mapping {
   ////////////////////////////// data //////////////////////////////
   protected:
   // nodal coordinates
-  const eigen::DMat24 mNodalSZ;
+  const axisem3d::eigen::DMat24 mNodalSZ;
 
   // minimum edge length
   double mMinEdgeLength = 0.;
@@ -169,11 +169,11 @@ class Mapping {
   }
 
   // coordinate rotation matrix Q2
-  inline static std::array<eigen::DMat22, 4> sOrthogQ2 = {
-      (eigen::DMat22(2, 2) << -1., 0., 0., -1.).finished(),
-      (eigen::DMat22(2, 2) << 0., -1., 1., 0.).finished(),
-      (eigen::DMat22(2, 2) << 1., 0., 0., 1.).finished(),
-      (eigen::DMat22(2, 2) << 0., 1., -1., 0.).finished()};
+  inline static std::array<axisem3d::eigen::DMat22, 4> sOrthogQ2 = {
+      (axisem3d::eigen::DMat22(2, 2) << -1., 0., 0., -1.).finished(),
+      (axisem3d::eigen::DMat22(2, 2) << 0., -1., 1., 0.).finished(),
+      (axisem3d::eigen::DMat22(2, 2) << 1., 0., 0., 1.).finished(),
+      (axisem3d::eigen::DMat22(2, 2) << 0., 1., -1., 0.).finished()};
 };
 
 #endif /* Mapping_hpp */

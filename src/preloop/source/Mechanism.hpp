@@ -19,7 +19,7 @@ class Quad;
 class STF;
 class Domain;
 
-namespace eigen {
+namespace axisem3d::eigen {
   using numerical::ComplexD;
   // coords
   typedef Eigen::Matrix<double, 1, 3> DRow3;
@@ -28,7 +28,7 @@ namespace eigen {
   typedef Eigen::Matrix<ComplexD, Eigen::Dynamic, nPEM> ZMatXN;
   typedef Eigen::Matrix<ComplexD, Eigen::Dynamic, nPEM * 3> ZMatXN3;
   typedef Eigen::Matrix<ComplexD, Eigen::Dynamic, nPEM * 6> ZMatXN6;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 class Mechanism {
   public:
@@ -42,7 +42,7 @@ class Mechanism {
       {SM_Type::MomentTensor, 6}, {SM_Type::ForceVector, 3}, {SM_Type::FluidPressure, 1}};
 
   // constructor
-  Mechanism(const SM_Type& type, const eigen::DColX& data) : mType(type), mData(data) {
+  Mechanism(const SM_Type& type, const axisem3d::eigen::DColX& data) : mType(type), mData(data) {
     // verify
     if (sSM_TypeDim.at(mType) != mData.size()) {
       throw std::runtime_error("Mechanism::Mechanism || "
@@ -65,9 +65,9 @@ class Mechanism {
 
   // release element source
   void
-  release(const eigen::DMat33& Qzsp,
+  release(const axisem3d::eigen::DMat33& Qzsp,
       bool sourceOnAxis,
-      const eigen::DRowN& inplaneFactor,
+      const axisem3d::eigen::DRowN& inplaneFactor,
       double phi,
       const Quad& quad,
       std::unique_ptr<STF>& stf,
@@ -89,7 +89,7 @@ class Mechanism {
   // type
   const SM_Type mType;
   // data
-  const eigen::DColX mData;
+  const axisem3d::eigen::DColX mData;
 
   ////////////////////////////// static //////////////////////////////
   public:

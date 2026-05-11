@@ -21,8 +21,8 @@ ElementIO_ParNetCDF::initialize(const std::string& groupName,
     const std::vector<std::string>& channels,
     int npnts,
     const std::vector<int>& naGrid,
-    const eigen::IMatX4_RM& elemNaInfoL,
-    const eigen::DMatXX_RM& elemCoordsL) {
+    const axisem3d::eigen::IMatX4_RM& elemNaInfoL,
+    const axisem3d::eigen::DMatXX_RM& elemCoordsL) {
   // finalize
   finalize();
 
@@ -40,8 +40,8 @@ ElementIO_ParNetCDF::initialize(const std::string& groupName,
   const std::string& fname = gdir + "/axisem3d_synthetics.nc";
 
   // gather elements
-  std::vector<eigen::IMatX4_RM> elemNaInfoRanks;
-  std::vector<eigen::DMatXX_RM> elemCoordsRanks;
+  std::vector<axisem3d::eigen::IMatX4_RM> elemNaInfoRanks;
+  std::vector<axisem3d::eigen::DMatXX_RM> elemCoordsRanks;
   mpi::gatherEigen(elemNaInfoL, elemNaInfoRanks, mRankWithMaxNumElements);
   mpi::gatherEigen(elemCoordsL, elemCoordsRanks, mRankWithMaxNumElements);
 
@@ -55,8 +55,8 @@ ElementIO_ParNetCDF::initialize(const std::string& groupName,
   if (mpi::rank() == mRankWithMaxNumElements) {
     // flatten
     int ncrd = npnts * 2;
-    eigen::IMatX5_RM elemNaInfoAll(mNumElementsGlobal, 5);
-    eigen::DMatXX_RM elemCoordsAll(mNumElementsGlobal, ncrd);
+    axisem3d::eigen::IMatX5_RM elemNaInfoAll(mNumElementsGlobal, 5);
+    axisem3d::eigen::DMatXX_RM elemCoordsAll(mNumElementsGlobal, ncrd);
     int row = 0;
     for (int irank = 0; irank < mpi::nproc(); irank++) {
       int nelocal = (int)elemNaInfoRanks[irank].rows();
@@ -224,8 +224,8 @@ ElementIO_ParNetCDF::finalize() {
 
 // dump to file
 void
-ElementIO_ParNetCDF::dumpToFile(const eigen::DColX& bufferTime,
-    const std::vector<eigen::RTensor5>& bufferFields,
+ElementIO_ParNetCDF::dumpToFile(const axisem3d::eigen::DColX& bufferTime,
+    const std::vector<axisem3d::eigen::RTensor5>& bufferFields,
     int bufferLine) {
   // write time
   if (mpi::rank() == mRankWithMaxNumElements) {
@@ -255,10 +255,10 @@ ElementIO_ParNetCDF::dumpToFile(const eigen::DColX& bufferTime,
     } else {
       // must truncate by copy because time is the fastest varying
       // dimension; occuring only at the end of the simulation
-      eigen::IArray5 loc = {0, 0, 0, 0, 0};
-      eigen::IArray5 len = {nelem, nag, npnts, nch, bufferLine};
+      axisem3d::eigen::IArray5 loc = {0, 0, 0, 0, 0};
+      axisem3d::eigen::IArray5 len = {nelem, nag, npnts, nch, bufferLine};
       Eigen::internal::set_is_malloc_allowed(true);
-      eigen::RTensor5 timeTruncated = bufferFields[inag].slice(loc, len);
+      axisem3d::eigen::RTensor5 timeTruncated = bufferFields[inag].slice(loc, len);
       Eigen::internal::set_is_malloc_allowed(false);
       mNcFile->writeVariable(mVarID_Data[inag],
           "data_wave__NaG=" + strNag,

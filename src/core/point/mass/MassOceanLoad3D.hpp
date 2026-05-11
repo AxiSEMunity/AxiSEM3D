@@ -28,8 +28,9 @@
 class MassOceanLoad3D : public Mass {
   public:
   // constructor
-  MassOceanLoad3D(
-      const eigen::DColX& mass, const eigen::DColX& massOcean, const eigen::DMatX3& unitNormal);
+  MassOceanLoad3D(const axisem3d::eigen::DColX& mass,
+      const axisem3d::eigen::DColX& massOcean,
+      const axisem3d::eigen::DMatX3& unitNormal);
 
   // check compatibility
   void
@@ -37,7 +38,7 @@ class MassOceanLoad3D : public Mass {
 
   // compute accel in-place for fluid
   void
-  computeAccel(eigen::CColX& stiff1) const {
+  computeAccel(axisem3d::eigen::CColX& stiff1) const {
     throw std::runtime_error("MassOceanLoad3D::computeAccel || "
                              "Incompatible types: "
                              "ocean load on fluid point.");
@@ -45,13 +46,13 @@ class MassOceanLoad3D : public Mass {
 
   // compute accel in-place for solid
   void
-  computeAccel(eigen::CMatX3& stiff3) const;
+  computeAccel(axisem3d::eigen::CMatX3& stiff3) const;
 
   private:
   // im = 1 / m
-  const eigen::RColX mIM;
+  const axisem3d::eigen::RColX mIM;
   // k = sqrt(m0 / [m (m + m0)]) n
-  const eigen::RMatX3 mK;
+  const axisem3d::eigen::RMatX3 mK;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
@@ -59,9 +60,9 @@ class MassOceanLoad3D : public Mass {
 
   // workspace
   // F = FFT(stiff)
-  inline static eigen::RMatX3 sF = eigen::RMatX3(0, 3);
+  inline static axisem3d::eigen::RMatX3 sF = axisem3d::eigen::RMatX3(0, 3);
   // a = im F - F.k k
-  inline static eigen::RMatX3 sA = eigen::RMatX3(0, 3);
+  inline static axisem3d::eigen::RMatX3 sA = axisem3d::eigen::RMatX3(0, 3);
 };
 
 #endif /* MassOceanLoad3D_hpp */

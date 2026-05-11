@@ -73,7 +73,8 @@ NetCDF_STF::NetCDF_STF(const std::string& fileName,
   mTmax = timesAll.back();
   mVTmin = dataAll.front();
   mVTmax = dataAll.back();
-  const eigen::RColX& vals = Eigen::Map<const eigen::RColX>(dataAll.data(), dataAll.size());
+  const axisem3d::eigen::RColX& vals =
+      Eigen::Map<const axisem3d::eigen::RColX>(dataAll.data(), dataAll.size());
   mVmin = vals.minCoeff();
   mVmax = vals.maxCoeff();
 

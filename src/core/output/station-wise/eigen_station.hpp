@@ -15,7 +15,7 @@
 #include "eigen_tensor.hpp"
 #include "eigen_element.hpp"
 
-namespace eigen {
+namespace axisem3d::eigen {
   // tensor
   typedef Eigen::Tensor<numerical::Real, 3, Eigen::RowMajor> RTensor3;
   typedef Eigen::Tensor<numerical::Real, 1, Eigen::RowMajor> RTensor1;
@@ -48,6 +48,6 @@ namespace eigen {
   typedef Eigen::Matrix<Real, Eigen::Dynamic, 3, Eigen::RowMajor> RMatX3_RM;
   typedef Eigen::Matrix<Real, Eigen::Dynamic, 6, Eigen::RowMajor> RMatX6_RM;
   typedef Eigen::Matrix<Real, Eigen::Dynamic, 9, Eigen::RowMajor> RMatX9_RM;
-} // namespace eigen
+} // namespace axisem3d::eigen
 
 #endif /* eigen_station_hpp */

@@ -42,7 +42,7 @@ main(int argc, char* argv[]) {
 
     // compute nr field
     timer::gPreloopTimer.begin("Nr(s,z) and weights", '*');
-    eigen::DColX nrWeights = computeNrFieldAndWeights(*exodusMesh);
+    axisem3d::eigen::DColX nrWeights = computeNrFieldAndWeights(*exodusMesh);
     timer::gPreloopTimer.ended("Nr(s,z) and weights", '*');
 
     const std::string loadBalanceWeight =
@@ -100,7 +100,7 @@ main(int argc, char* argv[]) {
     /////////////////////////////////////
     // Stage-II: cost-weighted domain
 
-    eigen::DColX stage2PartitionWeights;
+    axisem3d::eigen::DColX stage2PartitionWeights;
     timer::gPreloopTimer.begin("Cost measurement", '*');
     if (loadBalanceWeight == "NR") {
       timer::gPreloopTimer.message(
@@ -304,7 +304,7 @@ buildABC(const ExodusMesh& exodusMesh) {
 }
 
 // compute nr field
-eigen::DColX
+axisem3d::eigen::DColX
 computeNrFieldAndWeights(ExodusMesh& exodusMesh) {
   mpi::enterSuper();
   if (mpi::super()) {
@@ -329,7 +329,7 @@ computeNrFieldAndWeights(ExodusMesh& exodusMesh) {
   mpi::enterWorld();
 
   timer::gPreloopTimer.begin("Computing Nr-weights");
-  eigen::DColX weights;
+  axisem3d::eigen::DColX weights;
   mpi::enterSuper();
   if (mpi::super()) {
     weights = mpi::nodalToElemental(
@@ -346,7 +346,7 @@ computeNrFieldAndWeights(ExodusMesh& exodusMesh) {
 // build nr-weighted local mesh
 std::unique_ptr<LocalMesh>
 buildLocalMesh(const ExodusMesh& exodusMesh,
-    const eigen::DColX& weights,
+    const axisem3d::eigen::DColX& weights,
     const std::string& weightsKey,
     const std::string& stageKey) {
   // build
@@ -448,7 +448,7 @@ computeDt(const SE_Model& sem, const ABC& abc) {
   // get courant
   double courant = inparam::gInparamSource.getWithBounds("time_axis:Courant_number", 0.0);
   // automatically determined by mesh
-  eigen::DCol2 sz;
+  axisem3d::eigen::DCol2 sz;
   double dtMesh = sem.computeDt(courant, abc, sz);
   // enforced
   double dtEnforce =
@@ -574,7 +574,7 @@ initalizeFFT(const std::string& stageKey) {
 }
 
 // measure cost
-eigen::DColX
+axisem3d::eigen::DColX
 measureCost(const SE_Model& sem,
     const ExodusMesh& exodusMesh,
     const LocalMesh& localMesh,

@@ -90,29 +90,29 @@ class ExodusMesh {
   // NOTE: these are elemental variables depending ONLY on radius (depth)
   //       all material properties in Exodus are assumed to be radial
   std::vector<double> mRadialCoords;
-  std::map<std::string, eigen::DColX> mRadialVariables;
+  std::map<std::string, axisem3d::eigen::DColX> mRadialVariables;
 
   // discontinuities
-  eigen::DColX mDiscontinuities = eigen::DColX(0);
+  axisem3d::eigen::DColX mDiscontinuities = axisem3d::eigen::DColX(0);
 
   // ellipticity (root-only)
-  eigen::DMatXX_RM mEllipticityCurve = eigen::DMatXX_RM(0, 0);
+  axisem3d::eigen::DMatXX_RM mEllipticityCurve = axisem3d::eigen::DMatXX_RM(0, 0);
 
   // super-only
   // wrap over super-only variables for thread safety
   struct ExodusSuperOnly {
     // connectivity
-    eigen::IMatX4_RM mConnectivity = eigen::IMatX4_RM(0, 4);
+    axisem3d::eigen::IMatX4_RM mConnectivity = axisem3d::eigen::IMatX4_RM(0, 4);
 
     // coords
-    eigen::DMatX2_RM mNodalCoords = eigen::DMatX2_RM(0, 2);
+    axisem3d::eigen::DMatX2_RM mNodalCoords = axisem3d::eigen::DMatX2_RM(0, 2);
 
     // element-wise variables
-    eigen::IColX mGeometryType = eigen::IColX(0);
-    eigen::IColX mIsElementFluid = eigen::IColX(0);
+    axisem3d::eigen::IColX mGeometryType = axisem3d::eigen::IColX(0);
+    axisem3d::eigen::IColX mIsElementFluid = axisem3d::eigen::IColX(0);
 
     // Nr at nodes
-    eigen::IColX mNodalNr = eigen::IColX(0);
+    axisem3d::eigen::IColX mNodalNr = axisem3d::eigen::IColX(0);
   } mSuperOnly__AccessOnlyBy__mySuperOnly;
 
   // set access to super-only
@@ -142,31 +142,31 @@ class ExodusMesh {
   }
 
   // coords
-  const eigen::DMatX2_RM&
+  const axisem3d::eigen::DMatX2_RM&
   getNodalCoords() const {
     return mySuperOnly().mNodalCoords;
   }
 
   // connectivity
-  const eigen::IMatX4_RM&
+  const axisem3d::eigen::IMatX4_RM&
   getConnectivity() const {
     return mySuperOnly().mConnectivity;
   }
 
   // geometry
-  const eigen::IColX&
+  const axisem3d::eigen::IColX&
   getGeometryType() const {
     return mySuperOnly().mGeometryType;
   }
 
   // fluid
-  const eigen::IColX&
+  const axisem3d::eigen::IColX&
   getIsElementFluid() const {
     return mySuperOnly().mIsElementFluid;
   }
 
   // Nr at nodes
-  const eigen::IColX&
+  const axisem3d::eigen::IColX&
   getNrAtNodes() const {
     return mySuperOnly().mNodalNr;
   }
@@ -197,13 +197,13 @@ class ExodusMesh {
   }
 
   // discontinuities
-  const eigen::DColX&
+  const axisem3d::eigen::DColX&
   getDiscontinuities() const {
     return mDiscontinuities;
   }
 
   // ellipticity
-  const eigen::DMatXX_RM&
+  const axisem3d::eigen::DMatXX_RM&
   getEllipticityCurve() const {
     return mEllipticityCurve;
   }
@@ -215,7 +215,7 @@ class ExodusMesh {
   }
 
   // radial variables
-  const std::map<std::string, eigen::DColX>&
+  const std::map<std::string, axisem3d::eigen::DColX>&
   getRadialVariables() const {
     return mRadialVariables;
   }

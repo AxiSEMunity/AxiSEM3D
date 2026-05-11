@@ -33,7 +33,7 @@ Source::buildInparam(int sindex) {
   // horizontal
   root += ":location";
   bool axial = false, sourceCentered = false, ellipticity = true;
-  eigen::DRow3 crd = eigen::DRow3::Zero();
+  axisem3d::eigen::DRow3 crd = axisem3d::eigen::DRow3::Zero();
   if (gm.contains(root + ":latitude_longitude")) {
     const std::string& rooth = root + ":latitude_longitude";
     if (gm.get<std::string>(rooth) == "ON_AXIS") {
@@ -97,9 +97,9 @@ Source::buildInparam(int sindex) {
 }
 
 // compute spz
-eigen::DRow3
+axisem3d::eigen::DRow3
 Source::computeSPZ(const SE_Model& sem,
-    const eigen::DRow3& crdIn,
+    const axisem3d::eigen::DRow3& crdIn,
     bool sourceCentered,
     bool xy,
     bool ellipticity,
@@ -109,7 +109,7 @@ Source::computeSPZ(const SE_Model& sem,
     const std::string& errInfo,
     bool enforceOnAxis) {
   // result
-  static eigen::DRow3 crd;
+  static axisem3d::eigen::DRow3 crd;
   crd = crdIn;
 
   // vertical
@@ -152,7 +152,7 @@ Source::computeSPZ(const SE_Model& sem,
       //       Without such "bending", sqrt(s*s+z*z) on the surface
       //       will exceed the outer radius.
       if (geodesy::isCartesian()) {
-        static eigen::DRow3 spzUnbend;
+        static axisem3d::eigen::DRow3 spzUnbend;
         spzUnbend = geodesy::sz2rtheta(crd, true, 0, 2, 2, 0);
         spzUnbend(0) *= spzUnbend(2);
         spzUnbend(1) = crd(1);
@@ -198,9 +198,9 @@ Source::computeSPZ(const SE_Model& sem,
 }
 
 // compute rotation matrix Q from input to (z, s, phi)
-const eigen::DMat33&
-Source::computeQzsp(const eigen::DRow3& spz, bool ellipticity) const {
-  static eigen::DMat33 Qzsp;
+const axisem3d::eigen::DMat33&
+Source::computeQzsp(const axisem3d::eigen::DRow3& spz, bool ellipticity) const {
+  static axisem3d::eigen::DMat33 Qzsp;
   Qzsp.setIdentity();
 
   // axial source needs no rotation
@@ -211,7 +211,7 @@ Source::computeQzsp(const eigen::DRow3& spz, bool ellipticity) const {
   // first rotation: around vertical axis by back azimuth
   if (!mSourceCentered) {
     // compute back azimuth
-    eigen::DRow3 llr = mCrdIn;
+    axisem3d::eigen::DRow3 llr = mCrdIn;
     if (mUseDepth) {
       double R = (mDepthSolid ? geodesy::getOuterSolidRadius() : geodesy::getOuterRadius());
       llr(2) = R - llr(2);
@@ -231,7 +231,7 @@ Source::computeQzsp(const eigen::DRow3& spz, bool ellipticity) const {
     // cos(theta) -sin(theta) 0
     // sin(theta) cos(theta)  0
     // 0          0           1
-    static eigen::DMat33 Qtheta;
+    static axisem3d::eigen::DMat33 Qtheta;
     Qtheta.setIdentity();
     double theta = geodesy::sz2rtheta(spz, true, 0, 2, 2, 0)(0);
     Qtheta(0, 0) = cos(theta);
@@ -318,7 +318,7 @@ Source::release(const SE_Model& sem, Domain& domain, double dt, double& minT0) {
     sources.push_back(source);
 
     // compute spz
-    const eigen::DRow3& spz = computeSPZ(sem,
+    const axisem3d::eigen::DRow3& spz = computeSPZ(sem,
         source->mCrdIn,
         source->mSourceCentered,
         false,
@@ -379,7 +379,7 @@ Source::release(const SE_Model& sem, Domain& domain, double dt, double& minT0) {
 
     // compute spz
     const std::shared_ptr<const Source>& source = sources[sindex];
-    const eigen::DRow3& spz = computeSPZ(sem,
+    const axisem3d::eigen::DRow3& spz = computeSPZ(sem,
         source->mCrdIn,
         source->mSourceCentered,
         false,
@@ -392,7 +392,8 @@ Source::release(const SE_Model& sem, Domain& domain, double dt, double& minT0) {
 
     // inplane interpolation
     int quadTag = sourceIndexQuad.at(sindex);
-    const eigen::DRowN& inplaneFactor = sem.computeInplaneFactor(spz({0, 2}).transpose(), quadTag);
+    const axisem3d::eigen::DRowN& inplaneFactor =
+        sem.computeInplaneFactor(spz({0, 2}).transpose(), quadTag);
 
     // STF
     std::unique_ptr<STF> stf = STF::buildInparam(sindex, source->mName, dt);

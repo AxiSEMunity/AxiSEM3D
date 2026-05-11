@@ -28,11 +28,11 @@ class AttBuilder {
 
   // create attenuation
   std::unique_ptr<Attenuation>
-  createAttenuation(const eigen::DMatXN& QKp,
-      const eigen::DMatXN& QMu,
-      eigen::DMatXN& kp,
-      eigen::DMatXN& mu,
-      const eigen::DRow4& weightsCG4,
+  createAttenuation(const axisem3d::eigen::DMatXN& QKp,
+      const axisem3d::eigen::DMatXN& QMu,
+      axisem3d::eigen::DMatXN& kp,
+      axisem3d::eigen::DMatXN& mu,
+      const axisem3d::eigen::DRow4& weightsCG4,
       bool elastic1D) const;
 
   private:
@@ -46,7 +46,7 @@ class AttBuilder {
   // from Exodus
   const double mFmin, mFmax, mFref;
   const int mNSLS;
-  eigen::DColX mW, mY;
+  axisem3d::eigen::DColX mW, mY;
 
   // from inparam
   const bool mUseCG4;

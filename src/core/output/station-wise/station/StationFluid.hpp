@@ -26,7 +26,7 @@ class StationFluid : public Station {
   /////////////////////////// setup ///////////////////////////
   // set element
   void
-  setElement(const std::shared_ptr<FluidElement>& element, const eigen::DRowN& weights);
+  setElement(const std::shared_ptr<FluidElement>& element, const axisem3d::eigen::DRowN& weights);
 
   // set in group
   void
@@ -43,10 +43,10 @@ class StationFluid : public Station {
   std::shared_ptr<FluidElement> mElement = nullptr;
 
   // buffer
-  eigen::RMatX1_RM mBufferX = eigen::RMatX1_RM(0, 1);
-  eigen::RMatX3_RM mBufferU = eigen::RMatX3_RM(0, 3);
-  eigen::RMatX1_RM mBufferP = eigen::RMatX1_RM(0, 1);
-  eigen::RMatX1_RM mBufferD = eigen::RMatX1_RM(0, 1);
+  axisem3d::eigen::RMatX1_RM mBufferX = axisem3d::eigen::RMatX1_RM(0, 1);
+  axisem3d::eigen::RMatX3_RM mBufferU = axisem3d::eigen::RMatX3_RM(0, 3);
+  axisem3d::eigen::RMatX1_RM mBufferP = axisem3d::eigen::RMatX1_RM(0, 1);
+  axisem3d::eigen::RMatX1_RM mBufferD = axisem3d::eigen::RMatX1_RM(0, 1);
 
   /////////////////////////// process ///////////////////////////
   public:
@@ -55,7 +55,7 @@ class StationFluid : public Station {
   processReport(int bufferLine,
       const channel::fluid::ChannelOptions& chops,
       int stationIndex,
-      eigen::RTensor3& bufferFields);
+      axisem3d::eigen::RTensor3& bufferFields);
 
   private:
   // process 1: rotate
@@ -93,18 +93,18 @@ class StationFluid : public Station {
   }
 
   // workspace for record
-  inline static eigen::RRow1 sX1;
-  inline static eigen::RRow3 sU3;
-  inline static eigen::RRow1 sP1;
-  inline static eigen::RRow1 sD1;
-  inline static eigen::CMatX1 sXX1 = eigen::CMatX1(0, 1);
-  inline static eigen::CMatX3 sUX3 = eigen::CMatX3(0, 3);
-  inline static eigen::CMatX1 sPX1 = eigen::CMatX1(0, 1);
-  inline static eigen::CMatX1 sDX1 = eigen::CMatX1(0, 1);
-  inline static eigen::CMatXN sXXN1 = eigen::CMatXN(0, spectral::nPEM * 1);
-  inline static eigen::CMatXN3 sUXN3 = eigen::CMatXN3(0, spectral::nPEM * 3);
-  inline static eigen::CMatXN sPXN1 = eigen::CMatXN(0, spectral::nPEM * 1);
-  inline static eigen::CMatXN sDXN1 = eigen::CMatXN(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::RRow1 sX1;
+  inline static axisem3d::eigen::RRow3 sU3;
+  inline static axisem3d::eigen::RRow1 sP1;
+  inline static axisem3d::eigen::RRow1 sD1;
+  inline static axisem3d::eigen::CMatX1 sXX1 = axisem3d::eigen::CMatX1(0, 1);
+  inline static axisem3d::eigen::CMatX3 sUX3 = axisem3d::eigen::CMatX3(0, 3);
+  inline static axisem3d::eigen::CMatX1 sPX1 = axisem3d::eigen::CMatX1(0, 1);
+  inline static axisem3d::eigen::CMatX1 sDX1 = axisem3d::eigen::CMatX1(0, 1);
+  inline static axisem3d::eigen::CMatXN sXXN1 = axisem3d::eigen::CMatXN(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::CMatXN3 sUXN3 = axisem3d::eigen::CMatXN3(0, spectral::nPEM * 3);
+  inline static axisem3d::eigen::CMatXN sPXN1 = axisem3d::eigen::CMatXN(0, spectral::nPEM * 1);
+  inline static axisem3d::eigen::CMatXN sDXN1 = axisem3d::eigen::CMatXN(0, spectral::nPEM * 1);
 };
 
 #endif /* StationFluid_hpp */

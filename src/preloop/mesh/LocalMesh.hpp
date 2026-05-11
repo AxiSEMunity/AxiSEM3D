@@ -25,7 +25,7 @@ class LocalMesh {
   public:
   /////////////////////////// build //////////////////////////
   // constructor
-  LocalMesh(const ExodusMesh& exodusMesh, const eigen::DColX& weights);
+  LocalMesh(const ExodusMesh& exodusMesh, const axisem3d::eigen::DColX& weights);
 
   // free memory after building SE_Model
   void
@@ -48,16 +48,17 @@ class LocalMesh {
   private:
   // domain decomposition
   static void
-  decomposeExodusMesh(
-      const ExodusMesh& exodusMesh, const eigen::DColX& weights, eigen::IColX& elemRank);
+  decomposeExodusMesh(const ExodusMesh& exodusMesh,
+      const axisem3d::eigen::DColX& weights,
+      axisem3d::eigen::IColX& elemRank);
 
   // build local skeleton
   void
-  buildLocalSkeleton(const ExodusMesh& exodusMesh, const eigen::IColX& elemRank);
+  buildLocalSkeleton(const ExodusMesh& exodusMesh, const axisem3d::eigen::IColX& elemRank);
 
   // build element-GLL vicinity and MPI communication
   void
-  buildElementGLL_CommMPI(const ExodusMesh& exodusMesh, const eigen::IColX& elemRank);
+  buildElementGLL_CommMPI(const ExodusMesh& exodusMesh, const axisem3d::eigen::IColX& elemRank);
 
   /////////////////////////// info //////////////////////////
   public:
@@ -65,25 +66,25 @@ class LocalMesh {
   std::string
   verbose(const std::string& meshTitle,
       const std::string& weightsKey,
-      const eigen::DColX& weights) const;
+      const axisem3d::eigen::DColX& weights) const;
 
   // plot domain decomposition
   void
-  plotDD(const std::string& fname, const eigen::DColX& weights) const;
+  plotDD(const std::string& fname, const axisem3d::eigen::DColX& weights) const;
 
   /////////////////////////// data //////////////////////////
   private:
   // local skeleton (super-only in ExodusMesh)
-  eigen::IColX mL2G_Element;
-  eigen::IMatX4_RM mConnectivity;
-  eigen::DMatX2_RM mNodalCoords;
-  eigen::IColX mGeometryType;
-  eigen::IColX mIsElementFluid;
-  eigen::IColX mNodalNr;
+  axisem3d::eigen::IColX mL2G_Element;
+  axisem3d::eigen::IMatX4_RM mConnectivity;
+  axisem3d::eigen::DMatX2_RM mNodalCoords;
+  axisem3d::eigen::IColX mGeometryType;
+  axisem3d::eigen::IColX mIsElementFluid;
+  axisem3d::eigen::IColX mNodalNr;
 
   // element-GLL vicinity
-  eigen::IColX mL2G_GLL;
-  eigen::IMatXN_RM mElementGLL;
+  axisem3d::eigen::IColX mL2G_GLL;
+  axisem3d::eigen::IMatXN_RM mElementGLL;
 
   // mpi communication
   std::vector<int> mCommProc;

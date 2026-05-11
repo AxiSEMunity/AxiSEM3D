@@ -248,7 +248,7 @@ WavefieldInjection::infoSolid(std::vector<std::string>& quadKeys,
     std::vector<int>& quadNrs,
     std::vector<std::vector<int>>& quadBoundaryPnts,
     std::vector<std::vector<std::string>>& recKeys,
-    std::vector<eigen::DMatXX>& rec_spz) const {
+    std::vector<axisem3d::eigen::DMatXX>& rec_spz) const {
   // size
   quadKeys.resize(mInteriorSolidElements.size());
   quadNrs.resize(mInteriorSolidElements.size());
@@ -270,7 +270,7 @@ WavefieldInjection::infoFluid(std::vector<std::string>& quadKeys,
     std::vector<int>& quadNrs,
     std::vector<std::vector<int>>& quadBoundaryPnts,
     std::vector<std::vector<std::string>>& recKeys,
-    std::vector<eigen::DMatXX>& rec_spz) const {
+    std::vector<axisem3d::eigen::DMatXX>& rec_spz) const {
   // size
   quadKeys.resize(mInteriorFluidElements.size());
   quadNrs.resize(mInteriorFluidElements.size());

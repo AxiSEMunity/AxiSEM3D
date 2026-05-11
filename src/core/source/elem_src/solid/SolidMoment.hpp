@@ -20,7 +20,7 @@ class SolidMoment : public SolidSource {
   // constructor
   SolidMoment(std::unique_ptr<STF>& stf,
       const std::shared_ptr<SolidElement>& element,
-      const eigen::CMatXN6& pattern);
+      const axisem3d::eigen::CMatXN6& pattern);
 
   // apply source at a time step
   void
@@ -28,14 +28,14 @@ class SolidMoment : public SolidSource {
 
   private:
   // source pattern
-  const eigen::CMatXN6 mPattern;
+  const axisem3d::eigen::CMatXN6 mPattern;
 
   ////////////////////////////////////////
   //////////////// static ////////////////
   ////////////////////////////////////////
 
   // workspace
-  inline static eigen::CMatXN6 sPattern = eigen::CMatXN6(0, spectral::nPEM * 6);
+  inline static axisem3d::eigen::CMatXN6 sPattern = axisem3d::eigen::CMatXN6(0, spectral::nPEM * 6);
 };
 
 #endif /* SolidMoment_hpp */

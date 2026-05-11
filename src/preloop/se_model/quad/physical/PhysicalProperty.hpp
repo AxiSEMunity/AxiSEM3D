@@ -8,9 +8,9 @@
 // -----------------------------------------------------------------------------
 
 //  physical property on element
-//  NOTE: 1) data are stored pointwise by std::array<eigen::DColX, nPEM>
+//  NOTE: 1) data are stored pointwise by std::array<axisem3d::eigen::DColX, nPEM>
 //        2) data can only be empty (rows=0), 1D (rows=1) or 3D (rows=nr)
-//        3) computed elemental data are stored in eigen::DMatXN,
+//        3) computed elemental data are stored in axisem3d::eigen::DMatXN,
 //           either 1D (row=1) or 3D (row=nr_max)
 //        4) getPointwise() and getElemental() return 1D zero if data is empty
 
@@ -22,13 +22,13 @@
 // property without nodal
 template <int M> class PhysicalProperty {
   protected:
-  typedef std::array<eigen::DColX, M> arM_DColX;
+  typedef std::array<axisem3d::eigen::DColX, M> arM_DColX;
   typedef Eigen::Matrix<double, Eigen::Dynamic, M> DMatXM;
 
   public:
   // constructor
   PhysicalProperty() : mGLL() {
-    mGLL.fill(eigen::DColX(0));
+    mGLL.fill(axisem3d::eigen::DColX(0));
   }
 
   // constructor
@@ -55,7 +55,7 @@ template <int M> class PhysicalProperty {
     } else {
       // return zero array with 1D size
       arM_DColX zero;
-      zero.fill(eigen::DColX::Zero(1));
+      zero.fill(axisem3d::eigen::DColX::Zero(1));
       return zero;
     }
   }
@@ -152,7 +152,7 @@ template <int M> class PhysicalProperty {
 class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
   public:
   // constructor with nodal
-  NodalPhysicalProperty(const eigen::DRow4& nodal, bool axial) :
+  NodalPhysicalProperty(const axisem3d::eigen::DRow4& nodal, bool axial) :
       PhysicalProperty<spectral::nPEM>(), mNodal(nodal), mAxial(axial) {
     // nothing
   }
@@ -166,16 +166,16 @@ class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
   // get pointwise from nodal
   arM_DColX
   getPointwiseNodal() const {
-    const eigen::DRowN& mat = spectrals::interpolateGLL(mNodal, mAxial);
-    eigen::arN_DColX ar;
+    const axisem3d::eigen::DRowN& mat = spectrals::interpolateGLL(mNodal, mAxial);
+    axisem3d::eigen::arN_DColX ar;
     for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
-      ar[ipnt] = (eigen::DColX(1) << mat(ipnt)).finished();
+      ar[ipnt] = (axisem3d::eigen::DColX(1) << mat(ipnt)).finished();
     }
     return ar;
   }
 
   // get elemental from nodal
-  eigen::DMatXN
+  axisem3d::eigen::DMatXN
   getElementalNodal() const {
     return spectrals::interpolateGLL(mNodal, mAxial);
   }
@@ -193,7 +193,7 @@ class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
   }
 
   // get elemental
-  eigen::DMatXN
+  axisem3d::eigen::DMatXN
   getElemental() const {
     if (*this) {
       // preferentially use GLL
@@ -205,7 +205,7 @@ class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
   }
 
   // get nodal
-  const eigen::DRow4
+  const axisem3d::eigen::DRow4
   getNodalData() const {
     return mNodal;
   }
@@ -264,8 +264,8 @@ class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
     result.mNodal += other.mNodal;
     // GLL: no need to compute GLL if both are nodal only
     if (*this || other) {
-      const eigen::arN_DColX& gllThis = this->getPointwise();
-      const eigen::arN_DColX& gllOther = other.getPointwise();
+      const axisem3d::eigen::arN_DColX& gllThis = this->getPointwise();
+      const axisem3d::eigen::arN_DColX& gllOther = other.getPointwise();
       for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
         result.mGLL[ipnt] = gllThis[ipnt];
         op1D_3D::addTo(gllOther[ipnt], result.mGLL[ipnt]);
@@ -289,8 +289,8 @@ class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
     result.mNodal.array() *= other.mNodal.array();
     // GLL: no need to compute GLL if both are nodal only
     if (*this || other) {
-      const eigen::arN_DColX& gllThis = this->getPointwise();
-      const eigen::arN_DColX& gllOther = other.getPointwise();
+      const axisem3d::eigen::arN_DColX& gllThis = this->getPointwise();
+      const axisem3d::eigen::arN_DColX& gllOther = other.getPointwise();
       for (int ipnt = 0; ipnt < spectral::nPEM; ipnt++) {
         op1D_3D::times(gllThis[ipnt], gllOther[ipnt], result.mGLL[ipnt]);
       }
@@ -309,7 +309,7 @@ class NodalPhysicalProperty : public PhysicalProperty<spectral::nPEM> {
   bool mAxial;
 
   // nodal
-  eigen::DRow4 mNodal;
+  axisem3d::eigen::DRow4 mNodal;
 };
 
 #endif /* PhysicalProperty_hpp */

@@ -62,13 +62,13 @@ std::unique_ptr<const ABC>
 buildABC(const ExodusMesh& exodusMesh);
 
 // compute nr field and weights
-eigen::DColX
+axisem3d::eigen::DColX
 computeNrFieldAndWeights(ExodusMesh& exodusMesh);
 
 // build nr-weighted local mesh
 std::unique_ptr<LocalMesh>
 buildLocalMesh(const ExodusMesh& exodusMesh,
-    const eigen::DColX& weights,
+    const axisem3d::eigen::DColX& weights,
     const std::string& weightsKey,
     const std::string& stageKey);
 
@@ -115,7 +115,7 @@ void
 initalizeFFT(const std::string& stageKey);
 
 // measure cost
-eigen::DColX
+axisem3d::eigen::DColX
 measureCost(const SE_Model& sem,
     const ExodusMesh& exodusMesh,
     const LocalMesh& localMesh,

@@ -17,16 +17,16 @@
 class MappingLinear : public Mapping {
   public:
   // constructor
-  MappingLinear(const eigen::DMat24& nodalSZ) : Mapping(nodalSZ) {
+  MappingLinear(const axisem3d::eigen::DMat24& nodalSZ) : Mapping(nodalSZ) {
     // undefined curved outer
     mCurvedOuter = -1;
   }
 
   // forward mapping: (ξ,η) -> (s,z)
-  eigen::DCol2
-  mapping(const eigen::DCol2& xieta) const {
+  axisem3d::eigen::DCol2
+  mapping(const axisem3d::eigen::DCol2& xieta) const {
     // shape function
-    eigen::DRow4 shp;
+    axisem3d::eigen::DRow4 shp;
     double xip = 1. + xieta(0);
     double xim = 1. - xieta(0);
     double etp = 1. + xieta(1);
@@ -39,10 +39,10 @@ class MappingLinear : public Mapping {
   }
 
   // Jacobian: ∂(s,z) / ∂(ξ,η)
-  eigen::DMat22
-  jacobian(const eigen::DCol2& xieta) const {
+  axisem3d::eigen::DMat22
+  jacobian(const axisem3d::eigen::DCol2& xieta) const {
     // derivative of shape function
-    eigen::DMat24 dshp;
+    axisem3d::eigen::DMat24 dshp;
     double xip = 1. + xieta(0);
     double xim = 1. - xieta(0);
     double etp = 1. + xieta(1);

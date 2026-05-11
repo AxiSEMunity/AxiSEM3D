@@ -83,7 +83,7 @@ StructuredGridV3D::StructuredGridV3D(const std::string& modelName,
           "C55",
           "C56",
           "C66"};
-      mIndexCIJ = std::make_unique<eigen::IMat66>();
+      mIndexCIJ = std::make_unique<axisem3d::eigen::IMat66>();
       for (const std::string& CIJ : allCIJ) {
         auto it = std::find(mPropertyKeys.begin(), mPropertyKeys.end(), CIJ);
         if (it == mPropertyKeys.end()) {
@@ -149,15 +149,15 @@ StructuredGridV3D::getPropertyInfo(
 
 // get properties
 bool
-StructuredGridV3D::getProperties(const eigen::DMatX3& spz,
-    const eigen::DMat24& nodalSZ,
-    eigen::IMatXX& inScopes,
-    eigen::DMatXX& propValues) const {
+StructuredGridV3D::getProperties(const axisem3d::eigen::DMatX3& spz,
+    const axisem3d::eigen::DMat24& nodalSZ,
+    axisem3d::eigen::IMatXX& inScopes,
+    axisem3d::eigen::DMatXX& propValues) const {
   //////////////////////// coords ////////////////////////
   // check center
   const auto& gridCrds = mGrid->getGridCoords();
   if (mElementCenter) {
-    if (!inplaneScope<eigen::DCol2>(nodalSZ.rowwise().mean(),
+    if (!inplaneScope<axisem3d::eigen::DCol2>(nodalSZ.rowwise().mean(),
             mSourceCentered && (!mXY),
             gridCrds[0].front(),
             gridCrds[0].back(),
@@ -184,22 +184,22 @@ StructuredGridV3D::getProperties(const eigen::DMatX3& spz,
   }
 
   // compute grid coords
-  eigen::DMatX3 crdGrid = coordsFromMeshToModel(
+  axisem3d::eigen::DMatX3 crdGrid = coordsFromMeshToModel(
       spz, mSourceCentered, mXY, mEllipticity, mLon360, mUseDepth, mDepthSolid, mModelName);
 
   //////////////////////// values ////////////////////////
   // allocate
   int nProperties = (int)mPropertyKeys.size();
   int nCardinals = (int)spz.rows();
-  inScopes = eigen::IMatXX::Zero(nCardinals, nProperties);
-  propValues = eigen::DMatXX::Zero(nCardinals, nProperties);
+  inScopes = axisem3d::eigen::IMatXX::Zero(nCardinals, nProperties);
+  propValues = axisem3d::eigen::DMatXX::Zero(nCardinals, nProperties);
 
   // point loop
   static const double err = std::numeric_limits<double>::lowest();
-  const eigen::DRowX& valOut = eigen::DRowX::Constant(nProperties, err);
+  const axisem3d::eigen::DRowX& valOut = axisem3d::eigen::DRowX::Constant(nProperties, err);
   for (int ipnt = 0; ipnt < nCardinals; ipnt++) {
     int dimOutOfRange = 0;
-    const eigen::DRowX& val = mGrid->compute(crdGrid.row(ipnt), valOut, dimOutOfRange);
+    const axisem3d::eigen::DRowX& val = mGrid->compute(crdGrid.row(ipnt), valOut, dimOutOfRange);
     // check scope
     if (val(0) > err * .9) {
       inScopes.row(ipnt).fill(1);
@@ -221,7 +221,7 @@ StructuredGridV3D::getProperties(const eigen::DMatX3& spz,
 
   // rotate Cijkl
   if (mIndexCIJ && ((!mSourceCentered) || mXY)) {
-    eigen::DColX angle;
+    axisem3d::eigen::DColX angle;
     if (!mSourceCentered) {
       // geographic: rotate around vertical by -baz
       // depth back to radius
@@ -238,7 +238,7 @@ StructuredGridV3D::getProperties(const eigen::DMatX3& spz,
 
     // point loop
     for (int ipnt = 0; ipnt < nCardinals; ipnt++) {
-      static eigen::DMat66 inCijkl, outCijkl;
+      static axisem3d::eigen::DMat66 inCijkl, outCijkl;
       // copy input
       for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6; j++) {
