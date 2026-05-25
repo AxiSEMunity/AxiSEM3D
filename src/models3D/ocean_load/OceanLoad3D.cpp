@@ -127,6 +127,7 @@ OceanLoad3D::setSumRhoDepthToQuad(const eigen::DColX& sumRhoDepth, Quad& quad) c
 
 #include "StructuredGridO3D.hpp"
 #include "sg_tools.hpp"
+#include "Crust1O3D.hpp"
 
 // build from inparam
 std::shared_ptr<const OceanLoad3D>
@@ -178,6 +179,18 @@ OceanLoad3D::buildInparam(const ExodusMesh& exodusMesh,
         dataVarName,
         factor,
         superOnly);
+  } else if (className == "Crust1O3D") {
+    double waterDensity = gm.get<double>(root + ":water_density");
+    bool includeIceAsWater = gm.get<bool>(root + ":include_ice_as_water");
+    bool ellipticity = gm.get<bool>(root + ":ellipticity");
+    int gaussianOrder = gm.contains(root + ":gaussian_order")
+                            ? gm.get<int>(root + ":gaussian_order")
+                            : 2;
+    double gaussianDev = gm.contains(root + ":gaussian_deviation")
+                             ? gm.get<double>(root + ":gaussian_deviation")
+                             : 0.5;
+    return std::make_shared<const Crust1O3D>(
+        modelName, waterDensity, includeIceAsWater, ellipticity, gaussianOrder, gaussianDev);
   } else {
     // other models
   }
