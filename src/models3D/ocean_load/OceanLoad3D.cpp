@@ -183,12 +183,11 @@ OceanLoad3D::buildInparam(const ExodusMesh& exodusMesh,
     double waterDensity = gm.get<double>(root + ":water_density");
     bool includeIceAsWater = gm.get<bool>(root + ":include_ice_as_water");
     bool ellipticity = gm.get<bool>(root + ":ellipticity");
-    int gaussianOrder = gm.contains(root + ":gaussian_order")
-                            ? gm.get<int>(root + ":gaussian_order")
-                            : 2;
+    int gaussianOrder =
+        gm.contains(root + ":gaussian_order") ? gm.get<int>(root + ":gaussian_order") : 2;
     double gaussianDev = gm.contains(root + ":gaussian_deviation")
-                             ? gm.get<double>(root + ":gaussian_deviation")
-                             : 0.5;
+        ? gm.get<double>(root + ":gaussian_deviation")
+        : 0.5;
     return std::make_shared<const Crust1O3D>(
         modelName, waterDensity, includeIceAsWater, ellipticity, gaussianOrder, gaussianDev);
   } else {
