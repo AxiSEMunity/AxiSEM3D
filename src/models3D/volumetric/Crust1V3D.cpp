@@ -326,10 +326,7 @@ Crust1V3D::getPropertiesPoint(double r, double lat, double lon) const {
   }
 
   // element inside but point slightly outside
-  if (r >= mRSurf * 0.999999)
-    r = mRSurf * 0.999999;
-  if (r <= mRMoho * 1.000001)
-    r = mRMoho * 1.000001;
+  r = std::max(std::min(r, mRSurf * 0.999999), mRMoho * 1.000001);
   double v_p = 0.;
   double v_s = 0.;
   double rho = 0.;
