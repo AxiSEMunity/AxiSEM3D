@@ -1,10 +1,11 @@
+// -----------------------------------------------------------------------------
 //
-//  c1_tools.hpp
-//  AxiSEM3D
+// SPDX-License-Identifier: MIT
+// Copyright (C) 2019 - 2026 by the AxiSEM3D authors
 //
-//  Created by Kuangdai Leng on 16/10/2024.
-//  Copyright © 2024 Kuangdai Leng. All rights reserved.
+// This file is part of the AxiSEM3D library. See the LICENSE file for details.
 //
+// -----------------------------------------------------------------------------
 
 #ifndef c1_tools_h
 #define c1_tools_h
