@@ -194,4 +194,4 @@ See also [CONTRIBUTING.md](../../../CONTRIBUTING.md).
 ### Development
 AxiSEM3D is being developed as a community code project. As such, we rely on the community to help maintain and contiribute new features to the code.
 
-Development priorities arise from community consensus. The developoment priorites are maaintained as separate [GitHub issues](https://github.com/AxiSEMunity/AxiSEM3D/issues?q=is%3Aissue%20state%3Aopen%20label%3ADEV%3Ahigh%2CDEV%3Alow%2CDEV%3Amedium) and maybe assigned high, medium, or low priority according to community ranking.
+Development priorities arise from community consensus. The development priorites are maintained as separate [GitHub issues](https://github.com/AxiSEMunity/AxiSEM3D/issues?q=is%3Aissue%20state%3Aopen%20label%3ADEV%3Ahigh%2CDEV%3Alow%2CDEV%3Amedium) and maybe assigned high, medium, or low priority according to community ranking.
