@@ -25,9 +25,8 @@ mpl.rcParams['pdf.use14corefonts'] = True    # reference core Helvetica (Illustr
 mpl.rcParams['font.family'] = 'Helvetica'
 mpl.rcParams['axes.unicode_minus'] = False
 
-MOON_IMG = os.path.join(HERE, 'assets', 'moon_8k.jpg')
-if not os.path.exists(MOON_IMG):
-    MOON_IMG = os.path.join(HERE, 'assets', 'moon_2k.jpg')
+MOON_IMG = glob.glob(os.path.join(HERE, '..', '..',
+                     '09_wave_visualization_Moon', 'assets', 'moon_8k.jpg'))[0]
 d = np.load(os.path.join(HERE, 'data', 'moon_surface.npz'))
 dist, time, uz = d['dist'], d['time'], d['uz']
 
@@ -72,6 +71,7 @@ shots = [(int(np.argmin(np.abs(time - ts))),) for ts in snap_t]
 imgs = [render(fr) for (fr,) in shots]
 
 # ---- composite into a 2x4 figure ----
+mpl.rcParams['figure.constrained_layout.use'] = False
 fig, axes = plt.subplots(2, 4, figsize=(16, 8.6))
 for ax, img, (fr,) in zip(axes.ravel(), imgs, shots):
     ax.imshow(img); ax.axis('off')
@@ -82,8 +82,8 @@ cb = fig.colorbar(cm.ScalarMappable(norm=Normalize(-1, 1), cmap='RdBu_r'),
                   cax=cax, orientation='horizontal')
 cb.set_label('Uz / max|Uz|  (each snapshot normalised)', fontsize=14)
 cb.set_ticks([-1, 0, 1]); cb.ax.tick_params(labelsize=10)
-fig.suptitle('Moon impact — wavefield on the 3-D lunar surface', fontsize=22)
-fig.subplots_adjust(left=0.01, right=0.99, top=0.93, bottom=0.11, wspace=0.02, hspace=0.10)
+fig.suptitle('Moon impact — wavefield on the 3-D lunar surface', fontsize=22, y=0.995)
+fig.subplots_adjust(left=0.01, right=0.99, top=0.85, bottom=0.11, wspace=0.02, hspace=0.25)
 fig.savefig(os.path.join(HERE, 'moon_3d_snapshots.pdf'), dpi=200)
 fig.savefig(os.path.join(HERE, 'moon_3d_snapshots.png'), dpi=160)
 print('Saved moon_3d_snapshots.pdf / .png')
