@@ -16,6 +16,9 @@ time_axis:
     # what: record length (the end time in seismograms)
     # type: double
     # note: the start time depends on the source-time functions
+    # 30 s (was 40): the figure's snapshot is at 60% of the record and the
+    # near-field SFBA shaking/PGV for this Mw~4.4 source peaks within ~20 s, so
+    # 30 s is ample and trims ~25% off the (mesh-Δt-bound) ~26 h runtime.
     record_length: 30.
 
     # what: user-specified Δt
@@ -26,13 +29,10 @@ time_axis:
 
     # what: the Courant number for determining Δt by mesh
     # type: double
-    # note: 1) Δt increases with the Courant number; decrease it when
-    #          numerical instability occurs
-    #       2) [safe] 0.5 <===> 1.0 [aggressive]; 0.6~0.7 normally works
-    #       3) if Courant_number < 0.3 but instability still occurs,
-    #          it is likely to be an issue caused by an input 3D model
-    #          (e.g., mislocation near a model boundary)
-    Courant_number: 0.6
+    # note: Δt increases with this number
+    #       0.6 was marginally unstable on the fine 0.5 s mesh (late-onset
+    #       exponential blow-up ~t=8-25 s); 0.5 gives a safe stability margin.
+    Courant_number: 0.5
 
     # what: time integrator
     # type: string
@@ -59,10 +59,16 @@ list_of_sources:
         mechanism:
             type: MOMENT_TENSOR
             data: [-3.959e+22, 3.827e+22, 1.320e+21, -2.123e+22, -1.053e+22, 2.859e+21]
-            unit: 1
+            # the 6 values are the GCMT tensor in dyne.cm (scalar M0 -> Mw 4.4);
+            # unit 1e-7 converts dyne.cm -> N.m. (unit:1 read them as N.m, giving
+            # Mw 9.0 -- a source ~1e7x too strong.)
+            unit: 1.0e-7
         source_time_function:
-            # half_duration band-limits the source to the mesh's resolved band;
-            # 2 s matches the 2 s mesh period and keeps the simulation stable.
+            # half_duration 0 made this a DELTA source: the full ~4e22 moment
+            # dumped broadband into one node on the fine SFBA/attenuating mesh ->
+            # unstable from t~2 s (peak |U| hit 34 m, then exponential blow-up).
+            # 2 s band-limits the source to the mesh's resolved band (the proven-
+            # stable finite-fault original used half_duration 2).
             class_name: GaussianSTF
             half_duration: 2.
             decay_factor: 1.628

@@ -8,10 +8,16 @@
         mechanism:
             type: MOMENT_TENSOR
             data: [-3.959e+22, 3.827e+22, 1.320e+21, -2.123e+22, -1.053e+22, 2.859e+21]
-            unit: 1
+            # the 6 values are the GCMT tensor in dyne.cm (scalar M0 -> Mw 4.4);
+            # unit 1e-7 converts dyne.cm -> N.m. (unit:1 read them as N.m, giving
+            # Mw 9.0 -- a source ~1e7x too strong.)
+            unit: 1.0e-7
         source_time_function:
-            # half_duration band-limits the source to the mesh's resolved band;
-            # 2 s matches the 2 s mesh period and keeps the simulation stable.
+            # half_duration 0 made this a DELTA source: the full ~4e22 moment
+            # dumped broadband into one node on the fine SFBA/attenuating mesh ->
+            # unstable from t~2 s (peak |U| hit 34 m, then exponential blow-up).
+            # 2 s band-limits the source to the mesh's resolved band (the proven-
+            # stable finite-fault original used half_duration 2).
             class_name: GaussianSTF
             half_duration: 2.
             decay_factor: 1.628
