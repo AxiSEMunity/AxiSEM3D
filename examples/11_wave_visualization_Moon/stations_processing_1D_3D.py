@@ -39,9 +39,8 @@ run2 = '160_ISSI_2'
 # model for TauP
 model_taup='homogeneous_Moon_taup' # it has no boundaries
 
-# top level dir 
-# top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
-top_dir = '/scratch/planetseismology/mfouchet/'
+# top level dir
+top_dir = os.getcwd() # to adapt with user's directory
 folder='simu3D'
 
 # channels to calculate

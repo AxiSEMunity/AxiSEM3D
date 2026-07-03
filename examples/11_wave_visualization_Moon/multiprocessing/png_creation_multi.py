@@ -45,9 +45,8 @@ run_title = 'Lunar Model M1 with heterogeneity '
 # model for TauP
 model_taup='homogeneous_Moon_taup' # it has no boundaries
 
-# top level dir 
-# top_dir = '/Users/mfouchet/Documents/Simulations/' # to adapt with user's directory
-top_dir = '/scratch/planetseismology/mfouchet/'
+# top level dir
+top_dir = os.getcwd() # to adapt with user's directory
 folder='simu3D'
 
 # output.txt file 
