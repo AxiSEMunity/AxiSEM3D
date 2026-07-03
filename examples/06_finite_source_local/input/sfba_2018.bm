@@ -1,5 +1,5 @@
 # Example Polynomial Model Input File for AXISEM 2.0
-NAME                sfba_2018_m500
+NAME                sfba_2018
 
 # is this model defined by multiple layers [layer] or polynomials [poly]
 MODEL_TYPE          poly
@@ -15,11 +15,11 @@ REFERENCE_FREQUENCY 1.
 ANISOTROPIC         F
 
 # number of regions in which the model is described by polynomials
-NREGIONS            6
+NREGIONS            7
 
 # radii of discontinuties, for whole planets starts from the center (0.0) and includes
 # the free surface. This should hence be NREGIONS + 1 floats
-DISCONTINUITIES     6371.1 6370.9 6370.35 6366.8 6350.8 6347.0 0
+DISCONTINUITIES     6371.1 6371.075 6370.9 6370.35 6366.8 6350.8 6347.0 0
 #DISCONTINUITIES     6371.1 0
 
 # maximum polynomial degree throughout the whole model, default: 3
@@ -38,6 +38,7 @@ UNITS               km
 # Indentations by at least two blanks are necessary.
 # Assuming to have same order as DISCONTINUITIES (from center to the surface or vice versa)
 RHO
+  1.59
   2.07
   2.22
   2.56
@@ -46,6 +47,7 @@ RHO
   3.30
 
 VP
+  0.7 
   1.98
   2.63
   4.68
@@ -55,6 +57,7 @@ VP
 
 # Fluid is detected by a single 0. value
 VS
+  0.08
   0.59
   1.10
   2.67
@@ -63,6 +66,7 @@ VS
   4.41
   
 QMU
+   13. 
    39.
    79.
   239.
@@ -71,6 +75,7 @@ QMU
   661.
   
 QKAPPA
+   48.1 
   140.6
   824.3
  4546.3

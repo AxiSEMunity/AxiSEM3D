@@ -600,14 +600,32 @@ copy_templates(d)
 # they come from input_setup.ipynb.  We insert the pre-extracted snippet.
 item_src_06 = snippet('ex06_list_of_sources.yaml')
 replace_in_file(jp(d, 'inparam.source.yaml'),
-                ['list_of_sources: []', 'record_length: 1800.'],
-                ['list_of_sources:\n' + item_src_06, 'record_length: 40.'])
+                ['list_of_sources: []',
+                 '# note: the start time depends on the source-time functions\n'
+                 '    record_length: 1800.',
+                 '# note: 1) Δt increases with the Courant number; decrease it when\n'
+                 '    #          numerical instability occurs\n'
+                 '    #       2) [safe] 0.5 <===> 1.0 [aggressive]; 0.6~0.7 normally works\n'
+                 '    #       3) if Courant_number < 0.3 but instability still occurs,\n'
+                 '    #          it is likely to be an issue caused by an input 3D model\n'
+                 '    #          (e.g., mislocation near a model boundary)\n'
+                 '    Courant_number: 0.6'],
+                ['list_of_sources:\n' + item_src_06,
+                 '# note: the start time depends on the source-time functions\n'
+                 '    # 30 s (was 40): the figure\'s snapshot is at 60% of the record and the\n'
+                 '    # near-field SFBA shaking/PGV for this Mw~4.4 source peaks within ~20 s, so\n'
+                 '    # 30 s is ample and trims ~25% off the (mesh-Δt-bound) ~26 h runtime.\n'
+                 '    record_length: 30.',
+                 '# note: Δt increases with this number\n'
+                 '    #       0.6 was marginally unstable on the fine 0.5 s mesh (late-onset\n'
+                 '    #       exponential blow-up ~t=8-25 s); 0.5 gives a safe stability margin.\n'
+                 '    Courant_number: 0.5'])
 
 replace_in_file(jp(d, 'inparam.model.yaml'),
                 ['exodus_mesh: global_mesh__prem_ani__50s.e',
                  'lat_lon_north_pole_mesh: SOURCE',
                  'list_of_3D_models: []'],
-                ['exodus_mesh: AxiSEMCartesian_sfba_m500_2s.e',
+                ['exodus_mesh: AxiSEMCartesian_sfba_2018_2s.e',
                  'lat_lon_north_pole_mesh: [37.7, -122.1]',
                  'list_of_3D_models:\n' + snippet('ex06_list_of_3D_models.yaml')])
 replace_in_file(jp(d, 'inparam.model.yaml'),
@@ -632,7 +650,7 @@ replace_in_file(jp(d, 'inparam.nr.yaml'),
                 ['type_Nr: CONSTANT', 'constant: 5',
                  'nc_data_file: pointwise.nc'],
                 ['type_Nr: POINTWISE', 'constant: 3000',
-                 'nc_data_file: SFBA_finite_rupture_Nr0.nc'])
+                 'nc_data_file: point_source_approx.nc'])
 replace_in_file(jp(d, 'inparam.nr.yaml'),
                 ['enable_scanning: false',
                  'output_file: scanning_output_Nr.nc',
