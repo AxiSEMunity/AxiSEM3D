@@ -681,7 +681,7 @@ replace_in_file(jp(d, 'inparam.model.yaml'),
                 ['exodus_mesh: global_mesh__prem_ani__50s.e',
                  'boundaries: [RIGHT, BOTTOM]',
                  'relative_spans: [.05, .05]'],
-                ['exodus_mesh: tayak_60km_10s.e',
+                ['exodus_mesh: tayak_60km_20s.e',
                  'boundaries: [TOP]',
                  'relative_spans: [.01]'])
 

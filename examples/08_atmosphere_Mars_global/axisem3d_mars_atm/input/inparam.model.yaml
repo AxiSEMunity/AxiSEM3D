@@ -15,7 +15,7 @@
 model1D:
     # what: Exodus mesh file created by salvus mesher
     # type: filename
-    exodus_mesh: tayak_60km_10s.e
+    exodus_mesh: tayak_60km_20s.e
 
 
 ############################# geodesy #############################
