@@ -1,0 +1,7 @@
+simu_forward/
+backward_simu_forward/
+kernel_output/
+axisem3d
+*.log
+__pycache__/
+*.pyc

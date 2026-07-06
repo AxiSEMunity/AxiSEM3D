@@ -1,0 +1,16 @@
+# NOT NEEDED – the backward (adjoint) simulation is generated automatically.
+#
+# Phase 2 note: this directory is intentionally left unused.  The adjoint
+# input files are created at runtime by axikernels
+# (XObjectiveFunction.compute_backward_field), which copies and modifies the
+# forward input directory.  There is no need to manually populate this folder.
+#
+# If you want to inspect the generated backward inputs after running
+# compute_kernels.py, look inside:
+#   backward_<forward-sim-name>/input/
+#   inparam.source.yaml  (adjoint source definition)
+#   the same mesh file used by the forward run (for example
+#   prem_iso_elastic_50s.e in the default setup)
+#
+# In the default workflow the directory is named backward_simu_forward/ and is
+# created as a sibling of simu_forward/.
