@@ -7,7 +7,7 @@
    .''''|.   .x.   ||      '||||      | 'M' ||    \\  ||    ||  
   .|.  .||..|  ||..||.|'...|S.||....|.|. | .||.    3' D|...|'   
   .............................................   //            
-                                                 /' v 1.1.0-pre   
+                                                 /' v 2.2.0-pre   
                                                                 
   Copyright (c) 2026 AxiSEM3D developers, MIT License           
   Source, docs, and issues: github.com/AxiSEMunity/AxiSEM3D     
@@ -175,7 +175,7 @@ anijonathan ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 =========================== Time Step ==========================
 Δt determined by mesh  =  0.09425
    Courant number      =  0.6
-   location (r,θ)      =  [6.35118e+06, 2.58322]
+   location (r,θ)      =  [6.35118e+06, 2.57095]
 Δt enforced by user    =  NONE
 Δt to be used          =  0.09425
 ================================================================
@@ -211,8 +211,8 @@ Solid-fluid boundary____________________________________________
   SolidFluidCoupling1D           =  514
   Σ                              =  514
 Domain decomposition____________________________________________
-  # sub-domains (nproc)          =  1
-  # rank-to-rank communications  =  0
+  # sub-domains (nproc)          =  3
+  # rank-to-rank communications  =  3
 ================================================================
 
 
@@ -310,7 +310,5 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 TTTTTTTTTTTTTTTTTT NEWMARK TIME LOOP FINISHES TTTTTTTTTTTTTTTTTT
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
-wave propagation time / sec  =  5.18375
 total # time steps finished  =  68
-elapsed wall-clock time / h  =  0.0721157
 
