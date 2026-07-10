@@ -1,0 +1,34 @@
+#  inparam.source.yaml  — Moon meteoroid-impact simulation
+#  On-axis isotropic explosion (excavation component of an impact) =>
+#  axisymmetric wavefield (m = 0), so Nr can be small.
+#  STF values below are those of the authored gallery runs (see README);
+#  lengthen half_duration to resolve the shipped 15 s coarse mesh, or refine
+#  the mesh with the salvus command in the README.
+
+time_axis:
+    record_length: 3000.
+    enforced_dt: NONE
+    Courant_number: 0.5
+    integrator: NEWMARK
+
+list_of_sources:
+    - METEOROID_IMPACT:
+        location:
+            latitude_longitude: [0., 0.]
+            depth: 1e3
+            ellipticity: false
+            depth_below_solid_surface: true
+            undulated_geometry: true
+        mechanism:
+            # Isotropic explosion = the volumetric (excavation) part of an impact.
+            # Robust and axisymmetric (m = 0), avoids the near-axis instability a
+            # single vertical force triggered in this lunar mesh.
+            type: MOMENT_TENSOR
+            data: [1e15, 1e15, 1e15, 0., 0., 0.]
+            unit: 1.
+        source_time_function:
+            class_name: GaussianSTF
+            half_duration: 5.
+            decay_factor: 1.628
+            time_shift: 10.
+            use_derivative_integral: ERF

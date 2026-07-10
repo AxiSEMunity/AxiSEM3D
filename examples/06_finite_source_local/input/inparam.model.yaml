@@ -15,7 +15,7 @@
 model1D:
     # what: Exodus mesh file created by salvus mesher
     # type: filename
-    exodus_mesh: AxiSEMCartesian_sfba_m500_2s.e
+    exodus_mesh: AxiSEMCartesian_sfba_2018_2s.e
 
 
 ############################# geodesy #############################

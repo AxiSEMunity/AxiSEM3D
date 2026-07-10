@@ -103,7 +103,7 @@ list_of_sources:
             #          order as in the CMTSOLUTION format (globalcmt.org)
             #       3) if horizontal location is given by "distance_azimuth",
             #          the RT-axes are determined w.r.t. the source (mesh axis)
-            data: [0, 0, 0, 0, 0, 1e25]
+            data: [2e25, -1e25, -1e25, 0, 0, 0]
             # what: unit of data
             # type: double
             # note: use 1e-7 to convert dyn*cm (in CMTSOLUTION) to N*m

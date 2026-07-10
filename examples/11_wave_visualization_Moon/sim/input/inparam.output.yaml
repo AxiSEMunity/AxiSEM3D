@@ -1,0 +1,30 @@
+#  inparam.output.yaml — Moon impact simulation
+#  A dense meridian line of surface receivers. Because a vertical on-axis
+#  impact force radiates an axisymmetric wavefield, U(distance, t) along this
+#  one line fully determines the surface field everywhere on the Moon: the
+#  full sphere is reconstructed by rotating the line about the impact point.
+
+list_of_station_groups:
+    - surface_line:
+        locations:
+            station_file: moon_line.txt
+            horizontal_x1_x2: LATITUDE_LONGITUDE
+            vertical_x3: DEPTH
+            ellipticity: false
+            depth_below_solid_surface: true
+            undulated_geometry: true
+        wavefields:
+            coordinate_frame: RTZ
+            medium: SOLID
+            channels: [U]
+        temporal:
+            # DTx5 resolves the surface waves (even at the 1 s mesh: 5*dt < 1 s)
+            # while keeping the file small enough for snapshots and movies.
+            sampling_period: DTx5
+            time_window: FULL
+        file_options:
+            format: NETCDF
+            buffer_size: 5000
+            flush: true
+
+list_of_element_groups: []
