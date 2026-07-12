@@ -1,0 +1,3 @@
+       MPI_RANK          TOTAL         SOURCE      STIFFNESS      MASS_TERM     BOUNDARIES     TIME_MARCH       MPI_COMM    WAVE_OUTPUT       SCANNING
+              0        259.616     0.00227583        237.401        5.33706      0.0265337        5.09631     0.00223841       0.416342      0.0314417
+
