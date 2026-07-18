@@ -1,0 +1,388 @@
+<BEGIN>  Pre-timeloop processing
+****<BEGIN>  Exodus mesh
+........<BEGIN>  Building Exodus mesh
+............<BEGIN>  Opening Exodus mesh file
+................<MESSG>  input/AxiSEM_prem_iso_50.e
+............<ENDED>  Opening Exodus mesh file [ELAPSED = 0.00868575 sec]
+............<BEGIN>  Reading and broadcasting mesh
+................<BEGIN>  Global variables
+................<ENDED>  Global variables [ELAPSED = 0.000543667 sec]
+................<BEGIN>  Connectivity
+....................<MESSG>  connectivity (super-only): dimensions = 6400 x 4; scalar type = int (4 bytes); memory = 0.0001024 GB
+................<ENDED>  Connectivity [ELAPSED = 0.000716583 sec]
+................<BEGIN>  Coordinates
+....................<MESSG>  coordinates (super-only): dimensions = 6589 x 2; scalar type = double (8 bytes); memory = 0.000105424 GB
+................<ENDED>  Coordinates [ELAPSED = 0.000595291 sec]
+................<BEGIN>  Side sets
+....................<MESSG>  r1: matrix count = 2; dimensions = 256 x 1; scalar type = int (4 bytes); memory = 2.048e-06 GB
+....................<MESSG>  solid_fluid_boundary: matrix count = 2; dimensions = 256 x 1; scalar type = int (4 bytes); memory = 2.048e-06 GB
+....................<MESSG>  t0: matrix count = 2; dimensions = 120 x 1; scalar type = int (4 bytes); memory = 9.6e-07 GB
+................<ENDED>  Side sets [ELAPSED = 0.0220294 sec]
+................<BEGIN>  Element variables
+....................<MESSG>  element_type (super-only): dimensions = 6400 x 1; scalar type = int (4 bytes); memory = 2.56e-05 GB
+....................<MESSG>  fluid (super-only): dimensions = 6400 x 1; scalar type = int (4 bytes); memory = 2.56e-05 GB
+................<ENDED>  Element variables [ELAPSED = 0.00105575 sec]
+................<BEGIN>  Radial variables
+....................<MESSG>  discontinuities: dimensions = 13 x 1; scalar type = double (8 bytes); memory = 1.04e-07 GB
+....................<MESSG>  anchoring radii: dimensions = 120 x 1; scalar type = double (8 bytes); memory = 9.6e-07 GB
+....................<MESSG>  RHO: dimensions = 120 x 1; scalar type = double (8 bytes); memory = 9.6e-07 GB
+....................<MESSG>  VP: dimensions = 120 x 1; scalar type = double (8 bytes); memory = 9.6e-07 GB
+....................<MESSG>  VS: dimensions = 120 x 1; scalar type = double (8 bytes); memory = 9.6e-07 GB
+....................<MESSG>  QMU: dimensions = 120 x 1; scalar type = double (8 bytes); memory = 9.6e-07 GB
+....................<MESSG>  QKAPPA: dimensions = 120 x 1; scalar type = double (8 bytes); memory = 9.6e-07 GB
+................<ENDED>  Radial variables [ELAPSED = 0.0309049 sec]
+................<BEGIN>  Ellipticity
+....................<MESSG>  ellipticity: dimensions = 2 x 2398; scalar type = double (8 bytes); memory = 3.8368e-05 GB
+................<ENDED>  Ellipticity [ELAPSED = 0.000243416 sec]
+................<MESSG>  *** Non-scalable memory allocation on super processors: 0.000259024 GB ***
+................<MESSG>  *** Non-scalable memory allocation on all processors: 4.9288e-05 GB ***
+............<ENDED>  Reading and broadcasting mesh [ELAPSED = 0.0562035 sec]
+........<ENDED>  Building Exodus mesh [ELAPSED = 0.0658787 sec]
+........<BEGIN>  Setting up geodesy
+........<ENDED>  Setting up geodesy [ELAPSED = 7.8958e-05 sec]
+****<ENDED>  Exodus mesh [ELAPSED = 0.0659768 sec]
+****<BEGIN>  ABC parameters
+****<ENDED>  ABC parameters [ELAPSED = 0.00155196 sec]
+****<BEGIN>  Nr(s,z) and weights
+........<BEGIN>  Building Nr(s,z) of type POINTWISE
+............<BEGIN>  Reading control-point data
+................<MESSG>  data file: input/scanning_output_Nr.nc
+............<ENDED>  Reading control-point data [ELAPSED = 0.0107785 sec]
+............<BEGIN>  Broadcasting control-point data
+................<MESSG>  coordinates at control points: dimensions = 745414 x 2; scalar type = double (8 bytes); memory = 0.0119266 GB
+................<MESSG>  values at control points: dimensions = 745414 x 1; scalar type = int (4 bytes); memory = 0.00298166 GB
+............<ENDED>  Broadcasting control-point data [ELAPSED = 2.2292e-05 sec]
+............<BEGIN>  Building R-tree
+............<ENDED>  Building R-tree [ELAPSED = 0.186359 sec]
+........<ENDED>  Building Nr(s,z) of type POINTWISE [ELAPSED = 0.199591 sec]
+........<BEGIN>  Computing Nr at mesh nodes
+............<BEGIN>  Computing Nr on ranks
+............<ENDED>  Computing Nr on ranks [ELAPSED = 0.0182081 sec]
+............<BEGIN>  Bounding Nr by inplane resolution
+................<BEGIN>  Generating node-quad reference list
+................<ENDED>  Generating node-quad reference list [ELAPSED = 0.000503375 sec]
+................<BEGIN>  Computing average GLL spacing
+................<ENDED>  Computing average GLL spacing [ELAPSED = 0.000376667 sec]
+............<ENDED>  Bounding Nr by inplane resolution [ELAPSED = 0.000898125 sec]
+............<BEGIN>  Rounding Nr up to FFTW lucky numbers
+............<ENDED>  Rounding Nr up to FFTW lucky numbers [ELAPSED = 0.000127875 sec]
+............<BEGIN>  Assembling Nr on ranks
+................<MESSG>  nodal Nr (super-only): dimensions = 6589 x 1; scalar type = int (4 bytes); memory = 2.6356e-05 GB
+............<ENDED>  Assembling Nr on ranks [ELAPSED = 4.0167e-05 sec]
+........<ENDED>  Computing Nr at mesh nodes [ELAPSED = 0.0194461 sec]
+........<BEGIN>  Computing Nr-weights
+........<ENDED>  Computing Nr-weights [ELAPSED = 9.7125e-05 sec]
+****<ENDED>  Nr(s,z) and weights [ELAPSED = 0.240209 sec]
+****<BEGIN>  Nr-weighted local mesh
+........<BEGIN>  Building local mesh
+............<BEGIN>  Mesh partitioning by Metis
+................<MESSG>  element mpi-rank (super-only): dimensions = 6400 x 1; scalar type = int (4 bytes); memory = 2.56e-05 GB
+............<ENDED>  Mesh partitioning by Metis [ELAPSED = 1.7291e-05 sec]
+............<BEGIN>  Building local skeleton
+................<BEGIN>  Gathering world rank in mpi-groups
+................<ENDED>  Gathering world rank in mpi-groups [ELAPSED = 8.417e-06 sec]
+................<BEGIN>  Building local skeleton on mpi-group leaders
+................<ENDED>  Building local skeleton on mpi-group leaders [ELAPSED = 0.00225054 sec]
+................<BEGIN>  Scattering local skeleton in mpi-groups
+................<ENDED>  Scattering local skeleton in mpi-groups [ELAPSED = 0.000116541 sec]
+............<ENDED>  Building local skeleton [ELAPSED = 0.002412 sec]
+............<BEGIN>  Building element-GLL vicinity and mpi communication
+................<BEGIN>  Constructing local element-GLL vicinity
+................<ENDED>  Constructing local element-GLL vicinity [ELAPSED = 0.00312446 sec]
+................<BEGIN>  Gathering input data in mpi-groups
+................<ENDED>  Gathering input data in mpi-groups [ELAPSED = 0.000292667 sec]
+................<BEGIN>  Building L2G-GLL and mpi communication on mpi-group leaders
+....................<BEGIN>  Constructing global element-GLL vicinity
+........................<MESSG>  global element-GLL vicinity (super-only): dimensions = 6400 x 25; scalar type = int (4 bytes); memory = 0.00064 GB
+........................<MESSG>  global neighbourhood (super-only): dimensions = 50644 x 1; scalar type = int (4 bytes); memory = 0.000202576 GB
+....................<ENDED>  Constructing global element-GLL vicinity [ELAPSED = 0.00301088 sec]
+....................<BEGIN>  Matching L2G-GLL by (element, nPol^2)
+....................<ENDED>  Matching L2G-GLL by (element, nPol^2) [ELAPSED = 7.0292e-05 sec]
+....................<BEGIN>  Building mpi communication
+....................<ENDED>  Building mpi communication [ELAPSED = 7.4792e-05 sec]
+................<ENDED>  Building L2G-GLL and mpi communication on mpi-group leaders [ELAPSED = 0.00325262 sec]
+................<BEGIN>  Scattering output data in mpi-groups
+................<ENDED>  Scattering output data in mpi-groups [ELAPSED = 5.0708e-05 sec]
+............<ENDED>  Building element-GLL vicinity and mpi communication [ELAPSED = 0.00682962 sec]
+........<ENDED>  Building local mesh [ELAPSED = 0.00928696 sec]
+****<ENDED>  Nr-weighted local mesh [ELAPSED = 0.00929983 sec]
+****<BEGIN>  3D models
+........<BEGIN>  Building 3D models
+............<BEGIN>  Building 3D model: anijonathan
+................<BEGIN>  Reading grid data
+....................<MESSG>  data file: input/jons_azi_410_3.nc
+................<ENDED>  Reading grid data [ELAPSED = 0.057225 sec]
+................<BEGIN>  Broadcasting grid data
+....................<MESSG>  unique grid data: dimensions = 21 x 61 x 91 x 41; scalar type = double (8 bytes); memory = 0.0382353 GB
+................<ENDED>  Broadcasting grid data [ELAPSED = 1.8167e-05 sec]
+............<ENDED>  Building 3D model: anijonathan [ELAPSED = 0.057522 sec]
+........<ENDED>  Building 3D models [ELAPSED = 0.057543 sec]
+........<BEGIN>  Verbosing 3D models
+........<ENDED>  Verbosing 3D models [ELAPSED = 0.0363815 sec]
+****<ENDED>  3D models [ELAPSED = 0.0939411 sec]
+****<BEGIN>  Spectral element model (ROOT)
+........<BEGIN>  Generating empty points
+........<ENDED>  Generating empty points [ELAPSED = 0.004634 sec]
+........<BEGIN>  Generating Quads
+........<ENDED>  Generating Quads [ELAPSED = 0.120824 sec]
+........<BEGIN>  Applying 3D models to Quads
+............<BEGIN>  Applying 3D model:anijonathan
+............<ENDED>  Applying 3D model:anijonathan [ELAPSED = 39.2048 sec]
+........<ENDED>  Applying 3D models to Quads [ELAPSED = 39.2057 sec]
+........<BEGIN>  Finishing applying 3D models to Quads
+........<ENDED>  Finishing applying 3D models to Quads [ELAPSED = 0.0119587 sec]
+........<BEGIN>  Setting up GLL points
+........<ENDED>  Setting up GLL points [ELAPSED = 0.616887 sec]
+........<BEGIN>  Assembling mass and normal
+............<BEGIN>  Creating MPI buffers
+............<ENDED>  Creating MPI buffers [ELAPSED = 8.3e-08 sec]
+............<BEGIN>  Feeding MPI buffers
+............<ENDED>  Feeding MPI buffers [ELAPSED = 1.25e-07 sec]
+............<BEGIN>  Exchanging MPI buffers
+............<ENDED>  Exchanging MPI buffers [ELAPSED = 8.084e-06 sec]
+............<BEGIN>  Extracting MPI buffers
+............<ENDED>  Extracting MPI buffers [ELAPSED = 1.25e-07 sec]
+........<ENDED>  Assembling mass and normal [ELAPSED = 4.3917e-05 sec]
+........<BEGIN>  Casting geometric models
+........<ENDED>  Casting geometric models [ELAPSED = 1.416e-06 sec]
+........<BEGIN>  Computing local mesh range
+........<ENDED>  Computing local mesh range [ELAPSED = 0.000157291 sec]
+****<ENDED>  Spectral element model (ROOT) [ELAPSED = 39.9605 sec]
+****<BEGIN>  Time step
+........<MESSG>  mesh Δt = 0.09425
+........<MESSG>  user Δt = -1
+........<MESSG>  used Δt = 0.09425
+****<ENDED>  Time step [ELAPSED = 0.132101 sec]
+****<BEGIN>  Attenuation builder
+........<BEGIN>  Creating attenuation builder
+........<ENDED>  Creating attenuation builder [ELAPSED = 1.0792e-05 sec]
+........<BEGIN>  Computing alpha, beta and gamma
+........<ENDED>  Computing alpha, beta and gamma [ELAPSED = 5e-06 sec]
+****<ENDED>  Attenuation builder [ELAPSED = 5.6291e-05 sec]
+****<BEGIN>  Time Scheme
+****<ENDED>  Time Scheme [ELAPSED = 1.3875e-05 sec]
+****<BEGIN>  Nr-weighted domain
+........<BEGIN>  Releasing GLL points
+........<ENDED>  Releasing GLL points [ELAPSED = 0.205937 sec]
+........<BEGIN>  Releasing elements
+........<ENDED>  Releasing elements [ELAPSED = 1.75738 sec]
+........<BEGIN>  Releasing messaging
+........<ENDED>  Releasing messaging [ELAPSED = 3.33e-07 sec]
+****<ENDED>  Nr-weighted domain [ELAPSED = 1.96355 sec]
+****<BEGIN>  Preloop FFT
+........<BEGIN>  FFT with HOWMANY = 1
+............<MESSG>  HOWMANY = 1
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = 1 [ELAPSED = 4.6792e-05 sec]
+........<BEGIN>  FFT with HOWMANY = 3
+............<MESSG>  HOWMANY = 3
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = 3 [ELAPSED = 1.6875e-05 sec]
+........<BEGIN>  FFT with HOWMANY = # GLL per Element * 3
+............<MESSG>  HOWMANY = 75
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = # GLL per Element * 3 [ELAPSED = 1.35e-05 sec]
+........<BEGIN>  FFT with HOWMANY = # GLL per Element * 6
+............<MESSG>  HOWMANY = 150
+............<MESSG>  # NR's (max over MPI ranks) = 1
+............<MESSG>  max NR (max over MPI ranks) = 300
+............<MESSG>  sum NR (max over MPI ranks) = 300
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0.00036 GB ***
+........<ENDED>  FFT with HOWMANY = # GLL per Element * 6 [ELAPSED = 0.259445 sec]
+........<BEGIN>  FFT with HOWMANY = # GLL per Element * 9
+............<MESSG>  HOWMANY = 225
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = # GLL per Element * 9 [ELAPSED = 1.4083e-05 sec]
+****<ENDED>  Preloop FFT [ELAPSED = 0.259619 sec]
+****<BEGIN>  Cost measurement
+........<BEGIN>  Measuring element cost library
+........<ENDED>  Measuring element cost library [ELAPSED = 1.20473 sec]
+........<BEGIN>  Measuring point cost library
+........<ENDED>  Measuring point cost library [ELAPSED = 3.93957 sec]
+........<BEGIN>  Gathering cost libraries
+............<MESSG>  Cost libraries written to output/develop/measured_element_costs.log
+........<ENDED>  Gathering cost libraries [ELAPSED = 0.00118238 sec]
+........<BEGIN>  Computing weights from libraries
+........<ENDED>  Computing weights from libraries [ELAPSED = 0.058544 sec]
+........<BEGIN>  Gathering and broadcasting weights
+........<ENDED>  Gathering and broadcasting weights [ELAPSED = 0.000110208 sec]
+****<ENDED>  Cost measurement [ELAPSED = 5.20536 sec]
+****<BEGIN>  Freeing memory Stage-I
+****<ENDED>  Freeing memory Stage-I [ELAPSED = 0.609871 sec]
+****<BEGIN>  Cost-weighted local mesh
+........<BEGIN>  Building local mesh
+............<BEGIN>  Mesh partitioning by Metis
+................<MESSG>  element mpi-rank (super-only): dimensions = 6400 x 1; scalar type = int (4 bytes); memory = 2.56e-05 GB
+............<ENDED>  Mesh partitioning by Metis [ELAPSED = 4.4e-05 sec]
+............<BEGIN>  Building local skeleton
+................<BEGIN>  Gathering world rank in mpi-groups
+................<ENDED>  Gathering world rank in mpi-groups [ELAPSED = 2.583e-06 sec]
+................<BEGIN>  Building local skeleton on mpi-group leaders
+................<ENDED>  Building local skeleton on mpi-group leaders [ELAPSED = 0.00239908 sec]
+................<BEGIN>  Scattering local skeleton in mpi-groups
+................<ENDED>  Scattering local skeleton in mpi-groups [ELAPSED = 0.000103834 sec]
+............<ENDED>  Building local skeleton [ELAPSED = 0.00253421 sec]
+............<BEGIN>  Building element-GLL vicinity and mpi communication
+................<BEGIN>  Constructing local element-GLL vicinity
+................<ENDED>  Constructing local element-GLL vicinity [ELAPSED = 0.00321237 sec]
+................<BEGIN>  Gathering input data in mpi-groups
+................<ENDED>  Gathering input data in mpi-groups [ELAPSED = 0.000382459 sec]
+................<BEGIN>  Building L2G-GLL and mpi communication on mpi-group leaders
+....................<BEGIN>  Constructing global element-GLL vicinity
+........................<MESSG>  global element-GLL vicinity (super-only): dimensions = 6400 x 25; scalar type = int (4 bytes); memory = 0.00064 GB
+........................<MESSG>  global neighbourhood (super-only): dimensions = 50644 x 1; scalar type = int (4 bytes); memory = 0.000202576 GB
+....................<ENDED>  Constructing global element-GLL vicinity [ELAPSED = 0.00309087 sec]
+....................<BEGIN>  Matching L2G-GLL by (element, nPol^2)
+....................<ENDED>  Matching L2G-GLL by (element, nPol^2) [ELAPSED = 9.425e-05 sec]
+....................<BEGIN>  Building mpi communication
+....................<ENDED>  Building mpi communication [ELAPSED = 7.4042e-05 sec]
+................<ENDED>  Building L2G-GLL and mpi communication on mpi-group leaders [ELAPSED = 0.00337642 sec]
+................<BEGIN>  Scattering output data in mpi-groups
+................<ENDED>  Scattering output data in mpi-groups [ELAPSED = 4.9958e-05 sec]
+............<ENDED>  Building element-GLL vicinity and mpi communication [ELAPSED = 0.00714654 sec]
+........<ENDED>  Building local mesh [ELAPSED = 0.00974996 sec]
+****<ENDED>  Cost-weighted local mesh [ELAPSED = 0.00976354 sec]
+****<BEGIN>  3D models (rebuild)
+........<BEGIN>  Building 3D models
+............<BEGIN>  Building 3D model: anijonathan
+................<MESSG>  Model is MPI-independent, no need to rebuild.
+............<ENDED>  Building 3D model: anijonathan [ELAPSED = 6.167e-06 sec]
+........<ENDED>  Building 3D models [ELAPSED = 2.0959e-05 sec]
+****<ENDED>  3D models (rebuild) [ELAPSED = 2.6542e-05 sec]
+****<BEGIN>  Spectral element model (ROOT)
+........<BEGIN>  Generating empty points
+........<ENDED>  Generating empty points [ELAPSED = 0.00507313 sec]
+........<BEGIN>  Generating Quads
+........<ENDED>  Generating Quads [ELAPSED = 0.12084 sec]
+........<BEGIN>  Applying 3D models to Quads
+............<BEGIN>  Applying 3D model:anijonathan
+............<ENDED>  Applying 3D model:anijonathan [ELAPSED = 39.4713 sec]
+........<ENDED>  Applying 3D models to Quads [ELAPSED = 39.4721 sec]
+........<BEGIN>  Finishing applying 3D models to Quads
+........<ENDED>  Finishing applying 3D models to Quads [ELAPSED = 0.00658458 sec]
+........<BEGIN>  Setting up GLL points
+........<ENDED>  Setting up GLL points [ELAPSED = 0.610637 sec]
+........<BEGIN>  Assembling mass and normal
+............<BEGIN>  Creating MPI buffers
+............<ENDED>  Creating MPI buffers [ELAPSED = 8.3e-08 sec]
+............<BEGIN>  Feeding MPI buffers
+............<ENDED>  Feeding MPI buffers [ELAPSED = 1.25e-07 sec]
+............<BEGIN>  Exchanging MPI buffers
+............<ENDED>  Exchanging MPI buffers [ELAPSED = 9.583e-06 sec]
+............<BEGIN>  Extracting MPI buffers
+............<ENDED>  Extracting MPI buffers [ELAPSED = 1.25e-07 sec]
+........<ENDED>  Assembling mass and normal [ELAPSED = 4.0292e-05 sec]
+........<BEGIN>  Casting geometric models
+........<ENDED>  Casting geometric models [ELAPSED = 4.834e-06 sec]
+........<BEGIN>  Computing local mesh range
+........<ENDED>  Computing local mesh range [ELAPSED = 0.000152875 sec]
+****<ENDED>  Spectral element model (ROOT) [ELAPSED = 40.2156 sec]
+****<BEGIN>  Cost-weighted domain
+........<BEGIN>  Releasing GLL points
+........<ENDED>  Releasing GLL points [ELAPSED = 0.267632 sec]
+........<BEGIN>  Releasing elements
+........<ENDED>  Releasing elements [ELAPSED = 1.96091 sec]
+........<BEGIN>  Releasing messaging
+........<ENDED>  Releasing messaging [ELAPSED = 4.16e-07 sec]
+****<ENDED>  Cost-weighted domain [ELAPSED = 2.25695 sec]
+****<BEGIN>  Freeing memory Stage-II
+****<ENDED>  Freeing memory Stage-II [ELAPSED = 0.000110792 sec]
+****<BEGIN>  Source
+........<BEGIN>  Forming R-tree on mesh
+........<ENDED>  Forming R-tree on mesh [ELAPSED = 0.00157979 sec]
+........<BEGIN>  Releasing sources
+............<BEGIN>  Locating sources in mesh
+............<ENDED>  Locating sources in mesh [ELAPSED = 9.0541e-05 sec]
+............<BEGIN>  Assembling and verifying source locations
+............<ENDED>  Assembling and verifying source locations [ELAPSED = 1.6583e-05 sec]
+............<BEGIN>  Computing source patterns and releasing
+............<ENDED>  Computing source patterns and releasing [ELAPSED = 8.2584e-05 sec]
+............<BEGIN>  Verbosing sources
+............<ENDED>  Verbosing sources [ELAPSED = 2.4167e-05 sec]
+........<ENDED>  Releasing sources [ELAPSED = 0.000275958 sec]
+........<BEGIN>  Setting simulation time
+............<MESSG>  Δt = 0.09425
+............<MESSG>  t0 = -1.22525
+............<MESSG>  t1 = 5.0895
+............<MESSG>  nstep = 68
+........<ENDED>  Setting simulation time [ELAPSED = 2.75e-05 sec]
+****<ENDED>  Source [ELAPSED = 0.00191271 sec]
+****<BEGIN>  Station groups
+........<BEGIN>  Station group 0
+............<BEGIN>  Building station group from inparam
+................<MESSG>  group name = JW_stations
+............<ENDED>  Building station group from inparam [ELAPSED = 6.5e-05 sec]
+............<BEGIN>  Reading and broadcasting station file
+............<ENDED>  Reading and broadcasting station file [ELAPSED = 0.000766625 sec]
+............<BEGIN>  Locating stations in mesh
+............<ENDED>  Locating stations in mesh [ELAPSED = 0.00302263 sec]
+............<BEGIN>  Assembling and verifying locations
+............<ENDED>  Assembling and verifying locations [ELAPSED = 6.5959e-05 sec]
+............<BEGIN>  Releasing station group
+............<ENDED>  Releasing station group [ELAPSED = 0.000529125 sec]
+............<BEGIN>  Verbosing station group
+............<ENDED>  Verbosing station group [ELAPSED = 2.9583e-05 sec]
+........<ENDED>  Station group 0 [ELAPSED = 0.0045315 sec]
+****<ENDED>  Station groups [ELAPSED = 0.00456479 sec]
+****<BEGIN>  Element groups
+****<ENDED>  Element groups [ELAPSED = 1.9209e-05 sec]
+****<BEGIN>  Wavefield scanning
+........<BEGIN>  Building from inparam
+........<ENDED>  Building from inparam [ELAPSED = 1.1e-05 sec]
+........<BEGIN>  Initializing scanning on GLL points
+........<ENDED>  Initializing scanning on GLL points [ELAPSED = 0.00313488 sec]
+****<ENDED>  Wavefield scanning [ELAPSED = 0.00323283 sec]
+****<BEGIN>  Freeing memory Stage-III
+****<ENDED>  Freeing memory Stage-III [ELAPSED = 0.00377683 sec]
+****<BEGIN>  Output files
+****<ENDED>  Output files [ELAPSED = 0.00784925 sec]
+****<BEGIN>  Time loop FFT
+........<BEGIN>  FFT with HOWMANY = 1
+............<MESSG>  HOWMANY = 1
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = 1 [ELAPSED = 2.2583e-05 sec]
+........<BEGIN>  FFT with HOWMANY = 3
+............<MESSG>  HOWMANY = 3
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = 3 [ELAPSED = 1.3166e-05 sec]
+........<BEGIN>  FFT with HOWMANY = # GLL per Element * 3
+............<MESSG>  HOWMANY = 75
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = # GLL per Element * 3 [ELAPSED = 1.2792e-05 sec]
+........<BEGIN>  FFT with HOWMANY = # GLL per Element * 6
+............<MESSG>  HOWMANY = 150
+............<MESSG>  # NR's (max over MPI ranks) = 1
+............<MESSG>  max NR (max over MPI ranks) = 300
+............<MESSG>  sum NR (max over MPI ranks) = 300
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0.00036 GB ***
+........<ENDED>  FFT with HOWMANY = # GLL per Element * 6 [ELAPSED = 0.000131167 sec]
+........<BEGIN>  FFT with HOWMANY = # GLL per Element * 9
+............<MESSG>  HOWMANY = 225
+............<MESSG>  # NR's (max over MPI ranks) = 0
+............<MESSG>  max NR (max over MPI ranks) = 0
+............<MESSG>  sum NR (max over MPI ranks) = 0
+............<MESSG>  *** non-scalable memory allocation (max over MPI ranks) = 0 GB ***
+........<ENDED>  FFT with HOWMANY = # GLL per Element * 9 [ELAPSED = 1.3042e-05 sec]
+****<ENDED>  Time loop FFT [ELAPSED = 0.000227583 sec]
+<ENDED>  Pre-timeloop processing [ELAPSED = 91.0463 sec]

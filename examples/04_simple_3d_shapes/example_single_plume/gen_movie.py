@@ -74,8 +74,9 @@ def read_element_output(data_dir, load_wave_data=True):
 
 
 
-# data dir
-data_dir = '../../../build/output/elements/orthogonal_azimuthal_slices'
+# data dir: element wavefield output produced by running this case
+# (mpirun -np <N> axisem3d --input . --output output)
+data_dir = 'output/elements/orthogonal_azimuthal_slices'
 
 # read
 na_grid, data_time, list_element_na, list_element_coords, \

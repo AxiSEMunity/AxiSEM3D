@@ -47,3 +47,7 @@ examples/*/output__backup_at_*/
 
 # Documentation
 .venv
+
+# Website Files
+_site/
+Gemfile.lock

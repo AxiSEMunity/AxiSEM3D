@@ -9,6 +9,7 @@ AxiSEM3D is a spectral-element based solver for large-scale 3D seismic wave prop
 
 See the [documentation](https://axisem3d.readthedocs.io/en/latest/) for details.
 
+Our website is under development and can be found [here](https://axisemunity.github.io/AxiSEM3D/).            
 
 ## Quick start
 

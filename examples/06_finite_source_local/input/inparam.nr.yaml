@@ -90,7 +90,7 @@ pointwise:
     #       3) interpolation is based on inverse distance weighting
     #       4) another variable starting_Nr_for_scanning will exist if
     #          this file has been created by wavefield scanning
-    nc_data_file: SFBA_finite_rupture_Nr0.nc
+    nc_data_file: point_source_approx.nc
 
     # what: factor multiplied to Nr(s,z)
     # type: double

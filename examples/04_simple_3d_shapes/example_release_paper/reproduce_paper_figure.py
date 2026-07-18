@@ -1,6 +1,7 @@
-# Plots figure used in release paper. Make sure to have copied dir
-#   AxiSEM3D/build/output/stations 
-# to this directory, or modify the relative path 
+# Plots figure used in release paper. Run from this case directory after the
+# simulation has written its station output. By default it reads the station
+# group at ./stations/station_1; if your run wrote to ./output/stations/station_1,
+# either copy that folder here or edit the `ddir` path below.
 import numpy as np
 import obspy
 from obspy.core.trace import Trace
@@ -43,7 +44,7 @@ arr_time = ((np.arange(1,16)*2000)**2 + 7500**2)**0.5 / 1500
 try: 
     time = np.loadtxt(f"{ddir}/data_time.ascii")
 except: 
-    raise ValueError(f"Couldnt load {ddir}/data_time.ascii. Have you copied/moved AxiSEM3D/build/output/stations to this directory? ")
+    raise ValueError(f"Couldnt load {ddir}/data_time.ascii. Have you run the simulation and pointed ddir at the station output (e.g. output/stations/station_1)? ")
 # Timestep
 dt = np.mean(time[1:] - time[:-1])
 

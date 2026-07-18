@@ -187,7 +187,7 @@ rho = interp_rho.reshape(len(grid_lat), len(grid_lon), len(grid_depth))
 
 print("exporting to NetCDF4")
 
-out_dir  = f"../../AxiSEM3D_2020/build/input/"
+out_dir  = f"."  # write the NetCDF model into the current directory
 #filename = f"sphere_{sph_depth}d_{sph_lat}lat_{sph_long}lon_{sph_radius}rad.nc"
 filename = f"polar.nc"
 fullname = f"{out_dir}/{filename}"
