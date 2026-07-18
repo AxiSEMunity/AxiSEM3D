@@ -167,6 +167,7 @@ Volumetric3D::bondTransformation(const eigen::DMat66& inCijkl,
 
 #include "StructuredGridV3D.hpp"
 #include "sg_tools.hpp"
+#include "Crust1V3D.hpp"
 
 // build from inparam
 std::shared_ptr<const Volumetric3D>
@@ -245,6 +246,14 @@ Volumetric3D::buildInparam(const ExodusMesh& exodusMesh,
         center,
         propertyInfo,
         superOnly);
+  } else if (className == "Crust1V3D") {
+    double rSurf = gm.get<double>(root + ":surface_radius");
+    double rMoho = gm.get<double>(root + ":moho_radius");
+    bool includeSediment = gm.get<bool>(root + ":include_sediment");
+    bool includeIce = gm.get<bool>(root + ":include_ice");
+    bool ellipticity = gm.get<bool>(root + ":ellipticity");
+    return std::make_shared<const Crust1V3D>(
+        modelName, rSurf, rMoho, includeSediment, includeIce, ellipticity, exodusMesh);
   } else {
     // other models
   }
