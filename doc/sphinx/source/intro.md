@@ -189,7 +189,7 @@ Please consider using the following text in your Acknowledgments section:
 
 For questions about AxiSEM3D on all levels, please use the [AxiSEM3D forum](https://community.geodynamics.org/c/axisem).
 
-See also [CONTRIBUTING.md](../../../CONTRIBUTING.md).
+See also [CONTRIBUTING.md](../../../CONTRIBUTING).
 
 ### Development
 AxiSEM3D is being developed as a community code project. As such, we rely on the community to help maintain and contiribute new features to the code.
