@@ -56,6 +56,7 @@ jobs:
         with: 
           name: changes
           path: ./build/changes.diff
+          archive: false
       
       - name: Check if tests failed
         run: | 
