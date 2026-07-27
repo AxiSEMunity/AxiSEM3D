@@ -248,18 +248,35 @@ ${CPP_FILES}
 external/yaml/Yaml.cpp
 )
 
+# add all source files to the debug executable
+add_executable(
+axisem3d-debug
+# src
+${CPP_FILES}
+# non-header-only local externals
+external/yaml/Yaml.cpp
+)
+
 # standard C++17
 set_property(TARGET axisem3d PROPERTY CXX_STANDARD 17)
+set_property(TARGET axisem3d-debug PROPERTY CXX_STANDARD 17)
+
 
 # compiler flags
 # user-provided extra flags (space-separated string supported)
 if(NOT "${ADDITIONAL_CXX_FLAGS}" STREQUAL "")
   separate_arguments(_A3D_USER_CXX_FLAGS NATIVE_COMMAND "${ADDITIONAL_CXX_FLAGS}")
   target_compile_options(axisem3d PRIVATE ${_A3D_USER_CXX_FLAGS})
+  target_compile_options(axisem3d-debug PRIVATE ${_A3D_USER_CXX_FLAGS})
 endif()
+
+# Make sure to compile the debug target with debug symbols
+# and no optimizations
+target_compile_options(axisem3d-debug PRIVATE -g -O0)
 
 # suppress #pragma warnings
 target_compile_options(axisem3d PRIVATE -Wno-unknown-pragmas)
+target_compile_options(axisem3d-debug PRIVATE -Wno-unknown-pragmas)
 
 
 ################# linking #################
@@ -271,14 +288,24 @@ target_link_libraries(
     ${NETCDF_LIBRARIES}
   )
 
+target_link_libraries(
+    axisem3d-debug
+    ${MPI_CXX_LIBRARIES}
+    ${FFTW3_LIBRARIES}
+    ${METIS_LIBRARIES}
+    ${NETCDF_LIBRARIES}
+  )
+
 if(WITH_HDF5)
   target_link_libraries(axisem3d ${HDF5_HL_LIBRARIES} ${HDF5_LIBRARIES})
+  target_link_libraries(axisem3d-debug ${HDF5_HL_LIBRARIES} ${HDF5_LIBRARIES})
 endif()
 
 # additional user link options (space-separated string supported)
 if(NOT "${ADDITIONAL_LINK_OPTIONS}" STREQUAL "")
   separate_arguments(_A3D_USER_LINK_OPTIONS NATIVE_COMMAND "${ADDITIONAL_LINK_OPTIONS}")
   target_link_options(axisem3d PRIVATE ${_A3D_USER_LINK_OPTIONS})
+  target_link_options(axisem3d-debug PRIVATE ${_A3D_USER_LINK_OPTIONS})
 endif()
 
 # target to run tools/indent.sh (clang-format) from project root
