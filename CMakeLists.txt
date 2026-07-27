@@ -9,6 +9,10 @@ if(DEFINED cxx AND NOT cxx STREQUAL "")
   set(CMAKE_CXX_COMPILER "${cxx}" CACHE FILEPATH "C++ compiler" FORCE)
 endif()
 
+if(NOT DEFINED COMPILE_DEBUG_EXECUTABLE)
+    set(COMPILE_DEBUG_EXECUTABLE ON CACHE BOOL "If OFF, only compile the optimized axisem3d executable.")
+endif()
+
 # additional compiler flags
 set(ADDITIONAL_CXX_FLAGS "${flags}")
 
@@ -260,8 +264,11 @@ external/yaml/Yaml.cpp
 # Create a list with both executables, so that we can loop through them
 # when setting properties shared by both.
 list(APPEND TARGET_EXECUTABLES axisem3d)
-list(APPEND TARGET_EXECUTABLES axisem3d-debug)
-
+# Do not compile axisem3d-debug if the user doesn't want it
+# compiled
+if(COMPILE_DEBUG_EXECUTABLE)
+  list(APPEND TARGET_EXECUTABLES axisem3d-debug)
+endif()
 # standard C++17
 foreach(_T ${TARGET_EXECUTABLES})
   set_property(TARGET ${_T} PROPERTY CXX_STANDARD 17)
