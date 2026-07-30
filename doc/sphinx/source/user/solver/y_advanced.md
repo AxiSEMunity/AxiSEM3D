@@ -4,6 +4,18 @@ It is unlikely that you will need to change anything in this file, as
 the options are quite technical and likely of limited interest to the
 casual user. 
 
+**geometric deformation**
+```yaml
+minimum_jacobian: 0.1
+```
+
+`minimum_jacobian` is the dimensionless lower limit accepted for the
+final particle-relabeling Jacobian after all geometric models have been
+applied. The undeformed value is 1 and 0 is singular. If the limit is
+violated, the run stops during preloop and reports both the observed and
+configured values. Lowering the limit accepts stronger distortion; it
+does not smooth or otherwise repair the geometry.
+
 **verbosity**
 ```
 verbose:

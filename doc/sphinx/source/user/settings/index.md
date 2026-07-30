@@ -1,6 +1,20 @@
 # Advanced settings
 
-The input file `inparam.advanced.yaml` contains several advanced settings. Most of these parameters facilitate code development and are usually not of users' interest except `nproc_per_group` under `mpi`, which is important for large-scale computations.
+The input file `inparam.advanced.yaml` contains several advanced settings.
+Most facilitate code development, but `minimum_jacobian` is important for
+geometric models and `nproc_per_group` under `mpi` is important for
+large-scale computations.
+
+**`minimum_jacobian`**
+
+This dimensionless value is the global acceptance threshold for the final
+particle-relabeling transformation after all geometric models have been
+combined. The default is `0.1`; an undeformed mapping has a value of 1 and
+a singular mapping has a value of 0. AxiSEM3D aborts during preloop if a
+sampled Jacobian is smaller than the threshold. Lowering this value allows
+more distorted elements but does not repair them. See
+[More on undulation](../../methods/undulations.md) and
+[Clamping and smoothing undulations](../models/geometric.md#clamping-and-smoothing-undulations).
 
 
 **`verbose`**
@@ -24,4 +38,3 @@ Any number in between is reasonable. If the program is terminated by a memory er
 
 **`develop`**
 The parameters under `develop` are mostly for developers. `max_num_time_steps` can be a useful one for users, which allows you to run only one time step to validate the input files. 
-

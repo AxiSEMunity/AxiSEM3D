@@ -47,6 +47,9 @@ SE_Model::SE_Model(const ExodusMesh& exodusMesh,
     const LocalMesh& localMesh,
     const std::vector<std::shared_ptr<const Model3D>>& models3D,
     bool useLuckyNumbers) : mDistToleranceMesh(exodusMesh.getGlobalVariable("dist_tolerance")) {
+  // global acceptance threshold for geometric deformation
+  Undulation::setupMinimumJacobian();
+
   ///////////////// generate empty GLL points /////////////////
   timer::gPreloopTimer.begin("Generating empty points");
   int ngll = (int)(localMesh.mL2G_GLL.rows());

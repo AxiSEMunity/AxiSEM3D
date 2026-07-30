@@ -51,3 +51,19 @@ transformation’s Jacobian. Things get unstable when the Jacobian becomes
 negative or otherwise badly behaved; physically this corresponds to
 elements doing things that they should not be doing (becoming overly
 stretched, crossing into other elements, etc).
+
+A value of 1 represents an undeformed mapping and a value approaching 0
+represents a mapping approaching singularity. AxiSEM3D checks the final,
+combined geometric deformation during preloop. The global threshold is
+configured in `inparam.advanced.yaml`:
+
+```yaml
+minimum_jacobian: 0.1
+```
+
+The value is dimensionless and must be non-negative. If a sampled
+Jacobian is below the threshold, AxiSEM3D reports both values and aborts
+before the time loop. Lowering the threshold accepts more severe
+distortion; it does not improve or repair the geometry. Prefer first to
+check the model units and undulation ranges, then adjust the deformation
+range or use the [clamping and smoothing options](../user/models/geometric.md#clamping-and-smoothing-undulations).

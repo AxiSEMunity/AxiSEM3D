@@ -14,8 +14,24 @@
 #include "SolverFFTW.cpp"
 #include "Quad.hpp"
 #include "geodesy.hpp"
+#include "inparam.hpp"
+#include <cmath>
 
 using spectral::nPEM;
+
+// setup minimum acceptable Jacobian from inparam.advanced.yaml
+void
+Undulation::setupMinimumJacobian() {
+  const std::string key = "minimum_jacobian";
+  sMinimumJacobian = .1;
+  if (inparam::gInparamAdvanced.contains(key)) {
+    sMinimumJacobian = inparam::gInparamAdvanced.get<double>(key);
+  }
+  if (!(sMinimumJacobian >= 0.) || !std::isfinite(sMinimumJacobian)) {
+    throw std::runtime_error("Undulation::setupMinimumJacobian || "
+                             "minimum_jacobian must be non-negative and finite.");
+  }
+}
 
 // finishing 3D properties
 void
@@ -111,9 +127,13 @@ Undulation::getMassJacobian(const eigen::DMat2N& sz) const {
       J0 = (Z > numerical::dEpsilon) ? (1. + dZ[ipnt].array() / Z) : J3;
     }
     J[ipnt] = J0.array().square() * J3.array();
-    if (J[ipnt].minCoeff() < numerical::dEpsilon) {
+    const double jacobianMin = J[ipnt].minCoeff();
+    const double threshold = std::max(sMinimumJacobian, numerical::dEpsilon);
+    if (jacobianMin < threshold) {
       throw std::runtime_error("Undulation::getMassJacobian || "
-                               "Negative Jacobian or distorted element occurred.");
+                               "Jacobian is below minimum_jacobian. || "
+                               "Jacobian: " +
+          std::to_string(jacobianMin) + " || Minimum: " + std::to_string(sMinimumJacobian));
     }
   }
   return J;
@@ -149,9 +169,13 @@ Undulation::createPRT(const eigen::DMat2N& sz) const {
   const eigen::DMatXN& X2 = -J2.cwiseQuotient((J0.cwiseProduct(J3)));
   const eigen::DMatXN& X3 = J3.cwiseInverse();
   const eigen::DMatXN& XJ = J0.array().square() * J3.array();
-  if (XJ.minCoeff() < numerical::dEpsilon) {
+  const double jacobianMin = XJ.minCoeff();
+  const double threshold = std::max(sMinimumJacobian, numerical::dEpsilon);
+  if (jacobianMin < threshold) {
     throw std::runtime_error("Undulation::createPRT || "
-                             "Negative Jacobian or distorted element occurred.");
+                             "Jacobian is below minimum_jacobian. || "
+                             "Jacobian: " +
+        std::to_string(jacobianMin) + " || Minimum: " + std::to_string(sMinimumJacobian));
   }
 
   // create PRT

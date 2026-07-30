@@ -1,5 +1,24 @@
 # inparam.advanced.yaml
 
+## geometric deformation
+
+### `minimum_jacobian`
+
+**What:** minimum acceptable Jacobian after applying geometric models
+
+**Type:** double
+
+**Default:** `0.1`
+
+**Note:**
+
+1) dimensionless; the undeformed value is 1, while 0 is singular
+2) checked after all geometric models have been combined; the solver
+aborts during preloop if any sampled value is below this threshold
+3) must be non-negative; decreasing it permits stronger distortion but
+does not repair the input geometry
+
+
 ## verbosity
 
 Parameters for verbosity.
