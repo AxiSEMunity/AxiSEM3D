@@ -34,7 +34,8 @@ class StructuredGridG3D : public Geometric3D {
       double angleUnit,
       const std::string& dataVarName,
       double factor,
-      bool superOnly);
+      bool superOnly,
+      const ClampSmoothConfig& clampSmooth);
 
   private:
   // get undulation on an element

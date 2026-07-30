@@ -12,6 +12,136 @@
 #include "Geometric3D.hpp"
 #include "Quad.hpp"
 #include "mpi.hpp"
+#include "bstring.hpp"
+#include "inparam.hpp"
+#include <cmath>
+
+namespace {
+  // skimage/scipy default; intentionally not exposed in YAML
+  constexpr double sGaussianTruncate = 4.;
+
+  ClampSmoothConfig
+  readClampSmooth(const InparamYAML& gm,
+      const std::string& root,
+      const std::string& modelName,
+      const std::string& className) {
+    ClampSmoothConfig config;
+    // Crust1 keeps smoothing on by default; other geometric models opt in
+    config.enabled = className == "Crust1G3D";
+
+    const std::string roots = root + ":clamp_smooth";
+    if (gm.contains(roots)) {
+      if (gm.contains(roots + ":enabled")) {
+        config.enabled = gm.get<bool>(roots + ":enabled");
+      }
+      if (gm.contains(roots + ":clamp_range")) {
+        const std::vector<double>& range = gm.getVector<double>(roots + ":clamp_range");
+        if (range.size() != 2) {
+          throw std::runtime_error("Geometric3D::buildInparam || "
+                                   "clamp_smooth:clamp_range must contain two values. || "
+                                   "Model name: " +
+              modelName + " || Class name: " + className);
+        }
+        config.clampMin = range[0];
+        config.clampMax = range[1];
+      }
+      if (gm.contains(roots + ":sigma_degree_or_meter")) {
+        config.sigmaDegreeOrMeter = gm.get<double>(roots + ":sigma_degree_or_meter");
+      }
+    }
+
+    if (config.clampMin > config.clampMax) {
+      throw std::runtime_error("Geometric3D::buildInparam || "
+                               "clamp_smooth:clamp_range must be ascending. || "
+                               "Model name: " +
+          modelName + " || Class name: " + className);
+    }
+    if (config.enabled &&
+        (!(config.sigmaDegreeOrMeter > 0.) || !std::isfinite(config.sigmaDegreeOrMeter))) {
+      throw std::runtime_error("Geometric3D::buildInparam || "
+                               "clamp_smooth:sigma_degree_or_meter must be positive and finite. || "
+                               "Model name: " +
+          modelName + " || Class name: " + className);
+    }
+    return config;
+  }
+} // namespace
+
+// clamp in metres, then smooth on the model's native horizontal grid
+void
+Geometric3D::applyClampSmooth(eigen::DMatXX& data,
+    const std::array<double, 2>& gridSpacing,
+    SmoothGridUnit gridUnit,
+    const std::array<bool, 2>& periodicAxes) const {
+  if (!mClampSmooth.enabled || data.size() == 0) {
+    return;
+  }
+
+  // clamp always acts on the final physical undulation in metres
+  data = data.array().max(mClampSmooth.clampMin).min(mClampSmooth.clampMax);
+
+  // user sigma is in degrees on spherical grids and metres on Cartesian grids;
+  // source-centred spherical coordinates are stored internally in radians
+  double sigmaGridUnit = mClampSmooth.sigmaDegreeOrMeter;
+  if (gridUnit == SmoothGridUnit::RADIAN) {
+    sigmaGridUnit *= numerical::dDegree;
+  }
+
+  // separable Gaussian with model-specific boundary topology
+  for (int axis = 0; axis < 2; axis++) {
+    if (!(gridSpacing[axis] > 0.) || !std::isfinite(gridSpacing[axis])) {
+      throw std::runtime_error("Geometric3D::applyClampSmooth || "
+                               "Invalid spacing on the native model grid. || Model name: " +
+          mModelName);
+    }
+    const double sigmaIndex = sigmaGridUnit / gridSpacing[axis];
+    const int radius = (int)std::round(sGaussianTruncate * sigmaIndex);
+    if (radius == 0) {
+      continue;
+    }
+
+    eigen::DColX kernel(radius * 2 + 1);
+    for (int iker = -radius; iker <= radius; iker++) {
+      kernel(iker + radius) = std::exp(-.5 * iker * iker / (sigmaIndex * sigmaIndex));
+    }
+    kernel /= kernel.sum();
+
+    const int nAxis = axis == 0 ? (int)data.rows() : (int)data.cols();
+    eigen::DMatXX result = eigen::DMatXX::Zero(data.rows(), data.cols());
+    for (int irow = 0; irow < data.rows(); irow++) {
+      for (int icol = 0; icol < data.cols(); icol++) {
+        for (int iker = -radius; iker <= radius; iker++) {
+          int index = (axis == 0 ? irow : icol) + iker;
+          if (periodicAxes[axis]) {
+            index %= nAxis;
+            if (index < 0) {
+              index += nAxis;
+            }
+          } else {
+            index = std::max(0, std::min(index, nAxis - 1));
+          }
+          const int jrow = axis == 0 ? index : irow;
+          const int jcol = axis == 1 ? index : icol;
+          result(irow, icol) += kernel(iker + radius) * data(jrow, jcol);
+        }
+      }
+    }
+    data = result;
+  }
+}
+
+// verbose for clamp and smooth
+std::string
+Geometric3D::verboseClampSmooth(int indent, int width) const {
+  using namespace bstring;
+  std::stringstream ss;
+  ss << boxSubTitle(indent, "Clamp and Gaussian smoothing");
+  ss << boxEquals(indent + 2, width, "enabled", mClampSmooth.enabled);
+  ss << boxEquals(
+      indent + 2, width, "clamp range (m)", range(mClampSmooth.clampMin, mClampSmooth.clampMax));
+  ss << boxEquals(indent + 2, width, "sigma (degree or m)", mClampSmooth.sigmaDegreeOrMeter);
+  return ss.str();
+}
 
 // apply to Quad
 void
@@ -122,6 +252,9 @@ Geometric3D::buildInparam(const ExodusMesh& exodusMesh,
   // class name
   const std::string& className = gm.get<std::string>(root + ":class_name");
 
+  // clamp and Gaussian smoothing shared by geometric models
+  const ClampSmoothConfig& clampSmooth = readClampSmooth(gm, root, modelName, className);
+
   // init class
   if (className == "StructuredGridG3D") {
     // file name
@@ -178,8 +311,15 @@ Geometric3D::buildInparam(const ExodusMesh& exodusMesh,
         angleUnit,
         dataVarName,
         factor,
-        superOnly);
+        superOnly,
+        clampSmooth);
   } else if (className == "Ellipticity") {
+    if (clampSmooth.enabled) {
+      throw std::runtime_error("Geometric3D::buildInparam || "
+                               "clamp_smooth is not supported for the analytical Ellipticity "
+                               "model. || Model name: " +
+          modelName);
+    }
     // ellipticity can be added only once
     static bool ellipticityAdded = false;
     if (ellipticityAdded) {
@@ -207,8 +347,6 @@ Geometric3D::buildInparam(const ExodusMesh& exodusMesh,
     bool ellipticity = gm.get<bool>(root + ":ellipticity");
     double surfaceFactor = gm.get<double>(root + ":surface_factor");
     double mohoFactor = gm.get<double>(root + ":moho_factor");
-    int gaussianOrder = gm.get<int>(root + ":gaussian_order");
-    double gaussianDev = gm.get<double>(root + ":gaussian_deviation");
     return std::make_shared<const Crust1G3D>(modelName,
         rSurf,
         rMoho,
@@ -218,8 +356,7 @@ Geometric3D::buildInparam(const ExodusMesh& exodusMesh,
         ellipticity,
         surfaceFactor,
         mohoFactor,
-        gaussianOrder,
-        gaussianDev);
+        clampSmooth);
   }
 
   // unknown class

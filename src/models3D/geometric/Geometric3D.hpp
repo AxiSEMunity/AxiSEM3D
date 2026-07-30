@@ -14,10 +14,20 @@
 
 #include "Model3D.hpp"
 
+// configuration for clamping and Gaussian smoothing of geometric models
+struct ClampSmoothConfig {
+  bool enabled = false;
+  double clampMin = -1e10;
+  double clampMax = 1e10;
+  double sigmaDegreeOrMeter = 1.;
+};
+
 class Geometric3D : public Model3D {
   public:
   // constructor
-  Geometric3D(const std::string& modelName) : Model3D(modelName) {
+  Geometric3D(
+      const std::string& modelName, const ClampSmoothConfig& clampSmooth = ClampSmoothConfig()) :
+      Model3D(modelName), mClampSmooth(clampSmooth) {
     // nothing
   }
 
@@ -29,6 +39,20 @@ class Geometric3D : public Model3D {
   applyTo(std::vector<Quad>& quads) const;
 
   protected:
+  // units of the two axes on the model's native horizontal grid
+  enum class SmoothGridUnit { METER, RADIAN, DEGREE };
+
+  // clamp in metres, then smooth on the model's native horizontal grid
+  void
+  applyClampSmooth(eigen::DMatXX& data,
+      const std::array<double, 2>& gridSpacing,
+      SmoothGridUnit gridUnit,
+      const std::array<bool, 2>& periodicAxes = {false, false}) const;
+
+  // verbose for clamp and smooth
+  std::string
+  verboseClampSmooth(int indent, int width) const;
+
   // get undulation on an element
   virtual bool
   getUndulation(
@@ -54,6 +78,10 @@ class Geometric3D : public Model3D {
       const LocalMesh& localMesh,
       const std::string& modelName,
       const std::string& keyInparam);
+
+  protected:
+  // common clamp-and-smooth configuration
+  const ClampSmoothConfig mClampSmooth;
 };
 
 #endif /* Geometric3D_hpp */

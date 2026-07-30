@@ -132,8 +132,12 @@
         ellipticity: true
         surface_factor: 1
         moho_factor: 1
-        gaussian_order: 2
-        gaussian_deviation: 0.5
+        # clamp in metres, then Gaussian-smooth the native Crust1 grid
+        # sigma_degree_or_meter is in degrees for this spherical grid
+        clamp_smooth:
+            enabled: true
+            clamp_range: [-1e10, 1e10]
+            sigma_degree_or_meter: 1
     #==========================================================================#
     # this key can be arbitrary
     - CRUST1_O3D:

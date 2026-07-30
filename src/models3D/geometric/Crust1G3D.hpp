@@ -26,8 +26,7 @@ class Crust1G3D : public Geometric3D {
       bool ellipticity,
       double surfaceFactor,
       double mohoFactor,
-      int gaussianOrder,
-      double gaussianDev);
+      const ClampSmoothConfig& clampSmooth);
 
   private:
   // get undulation on an element
@@ -69,10 +68,6 @@ class Crust1G3D : public Geometric3D {
   // strengthening factor
   const double mSurfFactor;
   const double mMohoFactor;
-
-  // smoothening
-  const int mGaussianOrder;
-  const double mGaussianDev;
 
   // deltaR at surface and moho
   eigen::DMatXX mDeltaRSurf;
