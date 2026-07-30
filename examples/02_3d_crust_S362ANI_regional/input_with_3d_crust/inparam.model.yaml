@@ -264,6 +264,8 @@ list_of_3D_models:
         ellipticity: true
         surface_factor: 1
         moho_factor: 1
+        # clamp in metres, then Gaussian-smooth the native Crust1 grid
+        # sigma_degree_or_meter is in degrees for this spherical grid
         clamp_smooth:
             enabled: true
             clamp_range: [-1e10, 1e10]

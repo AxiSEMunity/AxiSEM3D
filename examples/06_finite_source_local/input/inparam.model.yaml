@@ -607,6 +607,8 @@ list_of_3D_models:
             nc_var: dz
             # what: factor or unit
             factor: 1.
+        # clamp in metres, then Gaussian-smooth the native horizontal grid
+        # sigma_degree_or_meter is in metres for a Cartesian XY grid
         clamp_smooth:
             enabled: false
             clamp_range: [-1e10, 1e10]
@@ -676,6 +678,8 @@ list_of_3D_models:
             nc_var: dz
             # what: factor or unit
             factor: 1.
+        # clamp in metres, then Gaussian-smooth the native horizontal grid
+        # sigma_degree_or_meter is in metres for a Cartesian XY grid
         clamp_smooth:
             enabled: false
             clamp_range: [-1e10, 1e10]
