@@ -42,7 +42,7 @@ easiest way. If necessary, the following CMake options can be specified (using t
 | USE_PARALLEL_NETCDF | OFF | If set to ON, AxiSEM3D will write netCDF output with parallel routines. |
 | WITH_HDF5 | ON | If set to OFF or HDF5 is not found, disable HDF5 support |
 | HDF5_DIR | | Optional hint to the HDF5 directory |
-| COMPILE_DEBUG_EXECUTABLE | ON | Set to OFF to stop cmake from compilining axisem3d-debug executable alongside the optimized axisem3d executable |
+| COMPILE_DEBUG_EXECUTABLE | ON | Set to OFF to stop cmake from compiling axisem3d-debug executable alongside the optimized axisem3d executable |
 ---
 
 ```{toctree}
