@@ -51,6 +51,63 @@ latitude and longitude each at a spacing of 1°, that gives you 180 ×
 elevation or depth. You can choose the spacing that you want: 1° is
 probably fine for most things.
 
+(clamping-and-smoothing-undulations)=
+## Clamping and smoothing undulations
+
+`StructuredGridG3D` and `Crust1G3D` can clamp and Gaussian-smooth their
+undulation data during model initialisation. This operates on the
+undulation, such as `dz`, rather than on an absolute interface radius or
+depth. The NetCDF file itself is not modified.
+
+For a structured-grid geometric model, add the following block alongside
+`undulation_data`:
+
+```yaml
+undulation_data:
+    nc_var: elevation
+    factor: 1.0
+clamp_smooth:
+    enabled: true
+    clamp_range: [-10000.0, 10000.0]
+    sigma_degree_or_meter: 1.0
+```
+
+The operations are applied in this order:
+
+1. Multiply the input undulation by `undulation_data:factor` (or by the
+   corresponding surface/Moho factor in `Crust1G3D`).
+2. Clamp the scaled undulation to `clamp_range`.
+3. Apply a two-dimensional Gaussian filter to the clamped field.
+
+The parameters are:
+
+- `enabled`: enables both clamping and smoothing. It defaults to `true`
+  for `Crust1G3D` and to `false` for other geometric models. An explicit
+  value always overrides the model default.
+- `clamp_range`: the inclusive minimum and maximum undulation in metres.
+  It must contain two ascending values. The default
+  `[-1e10, 1e10]` effectively disables clamping for normal models.
+- `sigma_degree_or_meter`: the Gaussian standard deviation. It must be
+  positive and defaults to `1`. Its unit is degrees for spherical models
+  and metres for Cartesian models. The Gaussian is internally truncated
+  at four standard deviations.
+
+Smoothing requires a uniformly spaced horizontal grid. In Cartesian
+geometry it is supported on `XY_CARTESIAN` grids, where both axes and
+`sigma_degree_or_meter` are in metres. In spherical geometry the sigma is
+always specified in degrees, including for source-centred
+`DISTANCE_AZIMUTH` grids.
+
+For `StructuredGridG3D`, the filter uses nearest-value padding at every
+grid edge and does not wrap longitude or azimuth periodically. A global
+or periodic user model must therefore provide suitable and mutually
+consistent values at its grid boundaries. The built-in `Crust1G3D`
+model has known global topology, so it always wraps longitude while
+keeping nearest-value padding in latitude. Filtering can reduce steep
+gradients and often prevent distorted elements, but it is not an
+automatic geometry repair: users should inspect the scientific loss
+caused by the selected clamp and sigma.
+
 ## Creating new geometric models
 
 The base structure for global scale, 3D geometric models is included in

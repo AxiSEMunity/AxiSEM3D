@@ -82,6 +82,10 @@ class Undulation {
 
   ///////////////////////// static /////////////////////////
   public:
+  // setup minimum acceptable Jacobian from inparam.advanced.yaml
+  static void
+  setupMinimumJacobian();
+
   // finished 3D properties
   static void
   finished3D();
@@ -92,6 +96,7 @@ class Undulation {
   inline static SolverFFTW<double, spectral::nPEM * 3> sFFT_N3;
   inline static eigen::vec_ar1_ZMatPP_RM sDeltaZ_Fourier;
   inline static eigen::vec_ar3_ZMatPP_RM sDeltaZ_SPZ_Fourier;
+  inline static double sMinimumJacobian = .1;
 };
 
 #endif /* Undulation_hpp */

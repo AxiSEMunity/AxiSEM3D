@@ -342,6 +342,10 @@ list_of_3D_models:
             nc_var: iob
             # what: factor or unit
             factor: 1
+        clamp_smooth:
+            enabled: false
+            clamp_range: [-1e10, 1e10]
+            sigma_degree_or_meter: 1
         # what: store grid data only on the leader processors
         # type: bool
         # note: turn this on if the model is large; set mpi:nproc_per_group
@@ -349,4 +353,3 @@ list_of_3D_models:
         #       node to minimize memory usage
         store_grid_only_on_leaders: true
     #==========================================================================#
-

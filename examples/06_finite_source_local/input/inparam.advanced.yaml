@@ -10,6 +10,17 @@
 #  advanced settings
 
 
+##################### geometric deformation #####################
+# what: minimum acceptable Jacobian after applying geometric models
+# type: double
+# note: 1) dimensionless; the undeformed value is 1, while 0 is singular
+#       2) checked after all geometric models have been combined; the solver
+#          aborts during preloop if any sampled value is below this threshold
+#       3) must be non-negative; decreasing it permits stronger distortion but
+#          does not repair the input geometry
+minimum_jacobian: 0.1
+
+
 ##################### verbosity #####################
 # parameters for verbosity
 verbose:

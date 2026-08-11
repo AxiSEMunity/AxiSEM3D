@@ -287,6 +287,12 @@ template <int D, typename T> class StructuredGrid {
     return mGridData;
   }
 
+  // get mutable grid data during model initialization
+  Eigen::Tensor<T, 1 + D, Eigen::RowMajor>&
+  getGridData() {
+    return mGridData;
+  }
+
   // get data range
   eigen::DMatXX
   getDataRange() const {

@@ -26,12 +26,10 @@ Crust1G3D::Crust1G3D(const std::string& modelName,
     bool ellipticity,
     double surfaceFactor,
     double mohoFactor,
-    int gaussianOrder,
-    double gaussianDev) :
-    Geometric3D(modelName), mRSurf(rSurf), mRMoho(rMoho), mRBase(rBase),
+    const ClampSmoothConfig& clampSmooth) :
+    Geometric3D(modelName, clampSmooth), mRSurf(rSurf), mRMoho(rMoho), mRBase(rBase),
     mIncludeSediment(includeSediment), mIncludeIce(includeIce), mEllipticity(ellipticity),
-    mSurfFactor(surfaceFactor), mMohoFactor(mohoFactor), mGaussianOrder(gaussianOrder),
-    mGaussianDev(gaussianDev) {
+    mSurfFactor(surfaceFactor), mMohoFactor(mohoFactor) {
   // read raw data
   int nrow = sNLat * sNLon;
   eigen::DMatXX elevation = eigen::DMatXX::Zero(nrow, sNLayer);
@@ -80,20 +78,16 @@ Crust1G3D::Crust1G3D(const std::string& modelName,
   // fs.close();
   //////////// plot raw data ////////////
 
-  // Gaussian smoothing
-  eigen::IColX orderRow = eigen::IColX::Constant(sNLat, mGaussianOrder);
-  eigen::IColX orderCol = eigen::IColX::Constant(sNLon, mGaussianOrder);
-  eigen::DColX devRow = eigen::DColX::Constant(sNLat, mGaussianDev);
-  eigen::DColX devCol = eigen::DColX::Constant(sNLon, mGaussianDev);
-  // smooth poles more
-  // int npolar = mGaussianOrder + 1;
-  // int opolar = sNLon;
-  // for (int i = 0; i < npolar; i++) {
-  //     double order = (double)(opolar - mGaussianOrder) / npolar * (npolar - i) + mGaussianOrder;
-  //     orderRow(i) = orderRow(sNLat - 1 - i) = round(order);
-  // }
-  c1_tools::gaussianSmoothing(deltaRSurf, orderRow, devRow, true, orderCol, devCol, false);
-  c1_tools::gaussianSmoothing(deltaRMoho, orderRow, devRow, true, orderCol, devCol, false);
+  // factors are applied before the nonlinear clamp
+  deltaRSurf *= mSurfFactor;
+  deltaRMoho *= mMohoFactor;
+
+  // clamp and Gaussian smoothing on the native 1-degree grid
+  const std::array<double, 2> spacing = {1., 1.};
+  // CRUST1.0 is global: latitude is bounded and longitude is periodic.
+  const std::array<bool, 2> periodicAxes = {false, true};
+  applyClampSmooth(deltaRSurf, spacing, SmoothGridUnit::DEGREE, periodicAxes);
+  applyClampSmooth(deltaRMoho, spacing, SmoothGridUnit::DEGREE, periodicAxes);
 
   // cast to integer theta with unique polar values
   mDeltaRSurf = eigen::DMatXX::Zero(sNLat + 1, sNLon);
@@ -111,10 +105,6 @@ Crust1G3D::Crust1G3D(const std::string& modelName,
   // reverse south to north
   mDeltaRSurf = mDeltaRSurf.colwise().reverse().eval();
   mDeltaRMoho = mDeltaRMoho.colwise().reverse().eval();
-
-  // apply factor
-  mDeltaRSurf *= mSurfFactor;
-  mDeltaRMoho *= mMohoFactor;
 
   // grid lat and lon
   mGridLat = eigen::DColX(sNLat + 1);
@@ -187,8 +177,7 @@ Crust1G3D::verbose() const {
   ss << boxEquals(2, 22, "ellipticity correction", mEllipticity);
   ss << boxEquals(2, 22, "surface factor", mSurfFactor);
   ss << boxEquals(2, 22, "moho factor", mMohoFactor);
-  ss << boxEquals(2, 22, "Gaussian order", mGaussianOrder);
-  ss << boxEquals(2, 22, "Gaussian factor", mGaussianDev);
+  ss << verboseClampSmooth(2, 22);
   return ss.str();
 }
 

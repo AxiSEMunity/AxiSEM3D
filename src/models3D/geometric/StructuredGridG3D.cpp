@@ -10,6 +10,26 @@
 //  3D geometric models based on structured grid
 
 #include "StructuredGridG3D.hpp"
+#include <cmath>
+
+namespace {
+  double
+  uniformSpacing(
+      const std::vector<double>& coords, const std::string& axis, const std::string& modelName) {
+    const double spacing = (coords.back() - coords.front()) / (coords.size() - 1);
+    const double tolerance = std::max(1., std::abs(spacing)) * 1e-8;
+    for (int index = 1; index < coords.size(); index++) {
+      if (std::abs(coords[index] - coords[index - 1] - spacing) > tolerance) {
+        throw std::runtime_error("StructuredGridG3D::StructuredGridG3D || "
+                                 "Clamp and Gaussian smoothing requires a uniformly spaced "
+                                 "horizontal grid. || Axis: " +
+            axis + " || Model name: " + modelName);
+      }
+    }
+    return spacing;
+  }
+
+} // namespace
 
 // constructor
 StructuredGridG3D::StructuredGridG3D(const std::string& modelName,
@@ -28,15 +48,17 @@ StructuredGridG3D::StructuredGridG3D(const std::string& modelName,
     double angleUnit,
     const std::string& dataVarName,
     double factor,
-    bool superOnly) :
-    Geometric3D(modelName), mFileName(fname), mCrdVarNames(crdVarNames),
+    bool superOnly,
+    const ClampSmoothConfig& clampSmooth) :
+    Geometric3D(modelName, clampSmooth), mFileName(fname), mCrdVarNames(crdVarNames),
     mSourceCentered(sourceCentered), mXY(xy), mEllipticity(ellipticity), mUseDepth(useDepth),
     mDepthSolid(depthSolid), mInterface(interface * lengthUnit), mMin(min * lengthUnit),
     mMax(max * lengthUnit), mDataVarName(dataVarName), mFactor(factor), mSuperOnly(superOnly) {
   ////////////// init grid //////////////
   // info
   std::vector<std::pair<std::string, double>> dataInfo;
-  dataInfo.push_back({mDataVarName, mFactor});
+  // With clamp enabled, materialise the factor before the nonlinear operation.
+  dataInfo.push_back({mDataVarName, mClampSmooth.enabled ? 1. : mFactor});
 
   // lambda
   auto initGrid = [this, &dataInfo, &shuffleData, &lengthUnit, &angleUnit]() {
@@ -48,6 +70,48 @@ StructuredGridG3D::StructuredGridG3D(const std::string& modelName,
     // longitude range
     if (!mSourceCentered) {
       mLon360 = sg_tools::constructLon360(*mGrid, mModelName);
+    }
+
+    // clamp and smooth each unique data field on the native horizontal grid
+    if (mClampSmooth.enabled) {
+      const auto& coords = mGrid->getGridCoords();
+      const std::array<double, 2> spacing = {uniformSpacing(coords[0], mCrdVarNames[0], mModelName),
+          uniformSpacing(coords[1], mCrdVarNames[1], mModelName)};
+
+      SmoothGridUnit gridUnit;
+      if (geodesy::isCartesian()) {
+        if (!mSourceCentered || !mXY) {
+          throw std::runtime_error("StructuredGridG3D::StructuredGridG3D || "
+                                   "Clamp and Gaussian smoothing in Cartesian geometry requires "
+                                   "an XY grid in metres. || Model name: " +
+              mModelName);
+        }
+        gridUnit = SmoothGridUnit::METER;
+      } else if (!mSourceCentered) {
+        // latitude and longitude are stored internally in degrees
+        gridUnit = SmoothGridUnit::DEGREE;
+      } else {
+        // spherical distance and azimuth are stored internally in radians
+        gridUnit = SmoothGridUnit::RADIAN;
+      }
+
+      auto& gridData = mGrid->getGridData();
+      const int n0 = (int)gridData.dimension(1);
+      const int n1 = (int)gridData.dimension(2);
+      for (int idata = 0; idata < mGrid->numUniqueData(); idata++) {
+        eigen::DMatXX physical(n0, n1);
+        for (int i0 = 0; i0 < n0; i0++) {
+          for (int i1 = 0; i1 < n1; i1++) {
+            physical(i0, i1) = gridData(idata, i0, i1) * mFactor;
+          }
+        }
+        applyClampSmooth(physical, spacing, gridUnit);
+        for (int i0 = 0; i0 < n0; i0++) {
+          for (int i1 = 0; i1 < n1; i1++) {
+            gridData(idata, i0, i1) = physical(i0, i1);
+          }
+        }
+      }
     }
   };
 
@@ -180,5 +244,6 @@ StructuredGridG3D::verbose() const {
   const auto& minMax = mGrid->getDataRange();
   ss << boxEquals(4, 19, "data range", range(minMax(0, 0), minMax(0, 1)));
   ss << boxEquals(4, 19, "leader-only storage", mSuperOnly);
+  ss << verboseClampSmooth(2, 19);
   return ss.str();
 }
