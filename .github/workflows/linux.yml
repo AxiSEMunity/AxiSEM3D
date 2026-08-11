@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main, master]
 
+env:
+  # disable other MPI protocols to avoid intermittent test failures:
+  UCX_TLS: self,sm,tcp
+
 jobs:
   linux-conda:
     runs-on: ubuntu-latest
