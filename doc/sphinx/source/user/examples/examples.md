@@ -25,8 +25,10 @@ examples/03_salt_body_SEG_local/README.md
 examples/04_simple_3d_shapes/README.md
 examples/05_anisotropy_global/README.md
 examples/06_finite_source_local/README.md
-examples/07_atmosphere_Mars_global/README.md
-examples/08_icesheet_regional/README.md
-examples/09_wave_visualization_Moon/README.md
+examples/07_kernels/README.md
+examples/08_atmosphere_Mars_global/README.md
+examples/09_icesheet_regional/README.md
+examples/10_helioseismology_sun/README.md
+examples/11_wave_visualization_Moon/README.md
 ```
 

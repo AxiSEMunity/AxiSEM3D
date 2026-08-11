@@ -48,9 +48,10 @@ at `latitude_longitude: [0, 0]`, with a `GaussianSTF` source-time function and
 `Courant_number: 0.5` (a single vertical force triggered a near-axis instability in
 this lunar mesh; the isotropic explosion is stable and axisymmetric).
 
+(mesh-overview)=
 ## Mesh
 
-The shipped mesh `sim/input/moon_issi_m1_15s.e` is a **coarse 15 s** AxiSEM mesh
+The shipped mesh ``sim/input/moon_issi_m1_15s.e`` is a **coarse 15 s** AxiSEM mesh
 (18,400 elements, 0.8 MB) built from the `.bm` model with `salvus_mesh_lite`. To
 regenerate it, run from `sim/` with a Python that has `salvus_mesh_lite`:
 
@@ -66,6 +67,7 @@ function `half_duration` in `inparam.source.yaml` to resolve the new minimum
 period). The high-resolution 4 s / 2 s / 1 s meshes used for the headline figures
 exceed the repository size cap and are listed under **Large data** below.
 
+(large-data-overview)=
 ## Large data
 
 The high-resolution Moon meshes are not shipped here (they exceed the 4 MB
@@ -86,15 +88,15 @@ belongs on Zenodo, not in the repository.
 
 ### 1. Mesh
 
-The shipped run uses the coarse 15 s mesh `sim/input/moon_issi_m1_15s.e`
+The shipped run uses the coarse 15 s mesh ``sim/input/moon_issi_m1_15s.e``
 (18,400 elements, 0.8 MB), which is already in the repository. Regenerate or
-refine it with the `salvus_mesh_lite` command in the [Mesh](#mesh) section above.
+refine it with the `salvus_mesh_lite` command in the [Mesh](#mesh-overview) section above.
 
 ### 2. Large data
 
 Only needed for the high-resolution headline figures. The refined
 4 s / 2 s / 1 s meshes and the multi-GB raw station output of those runs are
-**not** shipped (see [Large data](#large-data)). Regenerate the meshes with
+**not** shipped (see [Large data](#large-data-overview)). Regenerate the meshes with
 `salvus_mesh_lite`, or obtain the pre-built `.e` files and reduced outputs from
 the AxiSEM3D gallery / Zenodo. The shipped coarse run needs none of this.
 
@@ -166,3 +168,10 @@ above.
 ## Notes
 
 Prepared/updated by Jonathan Wolf.
+
+```{toctree}
+---
+maxdepth: 1
+---
+FIGURES.md
+README_gallery_pyvista_viz.md

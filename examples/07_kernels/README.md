@@ -15,3 +15,10 @@ reproduce the figures:
   (S362ANI mantle + Gaussian Moho topography).
 
 *Prepared/updated by Jonathan Wolf.*
+
+```{toctree}
+---
+maxdepth: 1
+---
+kernel_1D/README.md
+kernel_3D/README.md
