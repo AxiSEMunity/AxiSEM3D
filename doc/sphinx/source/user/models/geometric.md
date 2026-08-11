@@ -51,7 +51,6 @@ latitude and longitude each at a spacing of 1°, that gives you 180 ×
 elevation or depth. You can choose the spacing that you want: 1° is
 probably fine for most things.
 
-(clamping-and-smoothing-undulations)=
 ## Clamping and smoothing undulations
 
 `StructuredGridG3D` and `Crust1G3D` can clamp and Gaussian-smooth their

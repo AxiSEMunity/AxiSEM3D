@@ -10,7 +10,7 @@ The vp kernel sliced on the source–receiver great circle shows the classic
 banana-doughnut pattern (zero sensitivity on the geometric ray, peak in the first
 Fresnel zone); the Moho interface kernel reuses the same wavefields, so it costs no
 extra simulation. The 3-D counterpart on a heterogeneous Earth model is in
-[`../kernel_3D/`](../kernel_3D/).
+[`kernel_3D`](https://github.com/AxiSEMunity/AxiSEM3D/blob/main/examples/07_kernels/kernel_3D/README.md).
 
 ## Contents
 
