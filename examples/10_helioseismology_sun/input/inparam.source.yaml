@@ -193,7 +193,7 @@ list_of_sources:
             # type: NONE / int
             # note: 1) NetCDF_STF loads data by chunks during the time loop;
             #          increase this chunk size to save reading time and
-            #          decrease it to save memroy (useful for a large number
+            #          decrease it to save memory (useful for a large number
             #          of sources); must be greater than 2.
             #       2) use NONE to disable buffering (chunk size = file size)
             chunk_size: NONE
