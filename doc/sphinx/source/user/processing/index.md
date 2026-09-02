@@ -1,4 +1,5 @@
 # Pre- and Post-processing
+
 Perhaps the most important part of the entire simulation process is
 actually plotting and processing the data that you have generated!
 
@@ -10,7 +11,7 @@ by hand if you want! Our strong recommendation would be to use Python,
 however – even if you think you are more comfortable with MATLAB, the
 open-source seismogram processing functionality exists only in Python.
 
-Within Python, you can probably get by with ObsPy, NumPy, and SciPy. we
+Within Python, you can probably get by with ObsPy, NumPy, and SciPy. We
 presume that you already have NumPy and SciPy installed, you can find
 all the documentation needed to work with ObsPy 
 [here](https://docs.obspy.org) which includes tutorials, documentation, and
