@@ -22,7 +22,7 @@ is given in the notebook `Example_4_README.ipynb`.
   simulation output under each case's `output/` directory.
 - `make_blob_plume_figure.py` — publication composite (blob + plume wavefield
   time-lapses with their input velocity models); reads reduced cross-section
-  archives (see [Figures](#figures)).
+  archives (see the Figures section below).
 - `example_input_cartesian/` — single Cartesian blob:
   - `homogenous_cart.bm`, `gen_mesh.sh` — background model + mesh command.
   - `homogenous_cartesian.e` — shipped coarse Exodus mesh (period 0.2 s).

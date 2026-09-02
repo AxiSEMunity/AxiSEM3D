@@ -4,7 +4,7 @@ P-wave traveltime (banana-doughnut) and Moho interface sensitivity kernels compu
 from an AxiSEM3D **3-D** forward simulation — S362ANI volumetric heterogeneity plus a
 Gaussian Moho-topography perturbation — using the external
 [`axikernels`](https://github.com/Adrian-Mag/AxiSEM3D_Kernels) package. It is the 3-D
-counterpart of [`../kernel_1D/`](../kernel_1D/): the same vp and Moho (P400P) measurements,
+counterpart of [`kernel_1D`](https://github.com/AxiSEMunity/AxiSEM3D/blob/main/examples/07_kernels/kernel_1D/README.md): the same vp and Moho (P400P) measurements,
 but on a laterally heterogeneous Earth instead of plain PREM. The forward run dumps the
 full elastic wavefield over a pole-to-pole element region; `axikernels` then builds the
 adjoint source, runs the backward simulation, and evaluates the kernels. The Moho interface
@@ -177,6 +177,6 @@ start fresh, delete the generated `simu_forward/`, `backward_simu_forward/`, and
 - **axikernels** — <https://github.com/Adrian-Mag/AxiSEM3D_Kernels> (Adrian Mag).
 - **S362ANI** — Kustowski, Ekström & Dziewoński (2008), *J. Geophys. Res.* (via IRIS EMC).
 - **PREM** — Dziewoński & Anderson (1981), *Phys. Earth Planet. Inter.* 25, 297–356.
-- Companion 1-D example: [`../kernel_1D/`](../kernel_1D/).
+- Companion 1-D example: [`kernel_1D`](https://github.com/AxiSEMunity/AxiSEM3D/blob/main/examples/07_kernels/kernel_1D/README.md).
 
 Prepared/updated by Jonathan Wolf.
