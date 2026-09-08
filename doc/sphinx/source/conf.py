@@ -69,7 +69,7 @@ html_theme_options = {
     "navigation_depth": 3,
     "show_toc_level": 3,
       "logo": {
-        "text": "AxiSEM3D",
+        "text": "",
         
     },
     "home_page_in_toc": True,
