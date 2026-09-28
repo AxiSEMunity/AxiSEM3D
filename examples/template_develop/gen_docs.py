@@ -225,7 +225,8 @@ def document_inparam_yaml(path):
 
 def writeExampleCustomName(path,name):
         base = os.path.basename(name)
-        stem = os.path.splitext(base)[0]
+        base_cleaned = base.replace(" ", "_")
+        stem = os.path.splitext(base_cleaned)[0]
         out_path = os.path.join(OUTPUT_DIR, stem + ".md")
         body = document_inparam_yaml(path)
         with open(out_path, "w", encoding="utf-8") as f:

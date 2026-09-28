@@ -15,8 +15,8 @@ nr.md
 source.md
 output.md
 advanced.md
-List of Sources.md
-List of Element Groups.md
-List of 3D Models.md
-List of Stations.md
+List_of_Sources.md
+List_of_Element_Groups.md
+List_of_3D_Models.md
+List_of_Stations.md
 ```
