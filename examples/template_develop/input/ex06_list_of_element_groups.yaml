@@ -1,9 +1,8 @@
     #==========================================================================#
     # this key can be arbitrary but must be unique in this list
     - orthogonal_azimuthal_slices:
-        # elements to be recorded
-        # note: an element will be included if its center falls within
-        #       both horizontal_range and vertical_range
+        ############################# elements to be recorded #############################
+        # note: an element will be included if its center falls within both horizontal_range and vertical_range
         elements:
             # what: horizontal range
             # type: array of double
@@ -15,7 +14,8 @@
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
             vertical_range: [0, 1e10]
-        # in-plane sampling on each element
+        ############################# in-plane sampling on each element #############################
+        # parameters for in-plane sampling on each element
         inplane:
             # what: edge dimension
             # type: string
@@ -44,10 +44,8 @@
             #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
             #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
             GLL_points_one_edge: [0,4]
-        # azimuthal sampling on each element
-        # note: if both phi_list and lat_lon_list are empty, no azimuthal
-        #       interpolation will be performed; instead, all the Fourier
-        #       series coefficients at each GLL point will be recorded
+        ############################# azimuthal sampling on each element #############################
+        # note: if both phi_list and lat_lon_list are empty, no azimuthal interpolation will be performed; instead, all the Fourier series coefficients at each GLL point will be recorded
         azimuthal:
             # what: azimuths (ɸ) of the recorded slices
             # type: array of double
@@ -68,7 +66,8 @@
             #       2) must be greater than or equal to 1
             #       3) recommended: maximum Nr in the target region / 200
             na_space: 1
-        # wavefields to be recorded
+        ############################# wavefields to be recorded #############################
+        # parameters for the wavefields to be recorded
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -110,7 +109,8 @@
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # temporal sampling
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
         temporal:
             # what: sampling period
             # type: string / double
@@ -123,7 +123,8 @@
             # only: FULL / [t0, t1]
             # note: use FULL to record the whole simulation
             time_window: FULL
-        # file options
+        ############################# file options ############################
+        # parameters for file options
         file_options:
             # what: number of sampled time steps to be buffered
             # type: int
@@ -142,9 +143,8 @@
                 #==========================================================================#
     # this key can be arbitrary but must be unique in this list
     - Fourier_coefficients_surface:
-        # elements to be recorded
-        # note: an element will be included if its center falls within
-        #       both horizontal_range and vertical_range
+        ############################# elements to be recorded #############################
+        # note: an element will be included if its center falls within both horizontal_range and vertical_range
         elements:
             # what: horizontal range
             # type: array of double
@@ -156,7 +156,8 @@
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
             vertical_range: [0, 1e10]
-        # inplane sampling on each element
+        ############################# inplane sampling on each element #############################
+        # parameters for inplane sampling
         inplane:
             # what: edge dimension
             # type: string
@@ -185,10 +186,8 @@
             #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
             #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
             GLL_points_one_edge: [0, 2, 4]
-        # azimuthal sampling on each element
-        # note: if both phi_list and lat_lon_list are empty, no azimuthal
-        #       interpolation will be performed; instead, all the Fourier
-        #       series coefficients at each GLL point will be recorded
+        ############################# azimuthal sampling on each element #############################
+        # note: if both phi_list and lat_lon_list are empty, no azimuthal interpolation will be performed; instead, all the Fourier series coefficients at each GLL point will be recorded
         azimuthal:
             # what: azimuths (ɸ) of the recorded slices
             # type: array of double
@@ -208,7 +207,8 @@
             #       2) must be greater than or equal to 1
             #       3) recommended: maximum Nr in the target region / 200
             na_space: 1
-        # wavefields to be recorded
+        ############################# wavefields to be recorded #############################
+        # parameters for wavefields to be recorded
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -250,7 +250,8 @@
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # temporal sampling
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
         temporal:
             # what: sampling period
             # type: string / double
@@ -263,7 +264,8 @@
             # only: FULL / [t0, t1]
             # note: use FULL to record the whole simulation
             time_window: FULL
-        # file options
+        ############################# file options #############################
+        # parameters for file options
         file_options:
             # what: number of sampled time steps to be buffered
             # type: int

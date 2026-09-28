@@ -13,7 +13,10 @@ maxdepth: 1
 model.md
 nr.md
 source.md
-array.md
 output.md
 advanced.md
+List_of_Sources.md
+List_of_Element_Groups.md
+List_of_3D_Models.md
+List_of_Stations.md
 ```

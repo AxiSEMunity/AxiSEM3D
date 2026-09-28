@@ -1,4 +1,5 @@
-
+    ############################# modelname #############################
+    # parameters for the model
     - aniPREM:
         # what: activate this model
         # type: bool
@@ -64,7 +65,8 @@
             #          the model range slightly to allow for numerical errors
             #       3) this parameter safely realizes inplane discontinuities
             whole_element_inplane: false
-        # parameters for properties
+        ############################# parameters for properties #############################
+        # parameters for model properties
         properties:
             - C11:
                 # what: NetCDF variable
@@ -447,7 +449,7 @@
                 
                                 
                 
-            
+         
         # what: store grid data only on the leader processors
         # type: bool
         # note: turn this on if the model is large; set mpi:nproc_per_group

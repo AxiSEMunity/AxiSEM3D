@@ -1,5 +1,8 @@
     - sfba_local:
-        # station locations
+
+
+        ############################# station location #############################
+        # parameters for station location
         locations:
             # what: station location file
             # type: filename
@@ -36,7 +39,10 @@
             # type: bool
             # note: compatible with vertical_x3 = both RADIUS and DEPTH
             undulated_geometry: true
-        # wavefields to be recorded
+
+
+        ############################# wavefields to be recorded #############################
+        # parameters for wavefields
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -79,7 +85,10 @@
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # temporal sampling
+
+
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
         temporal:
             # what: sampling period
             # type: string / double
@@ -92,7 +101,10 @@
             # only: FULL / [t0, t1]
             # note: use FULL to record the whole simulation
             time_window: FULL
-        # file options
+
+
+        ############################# file options #############################
+        # parameters for file options
         file_options:
             # what: output file format
             # type: string
@@ -120,9 +132,13 @@
             #          con: hits output performance if buffer_size is small
             #       2) this parameter does not affect the final results
             flush: true
+
+
 ############################# element-wise #############################
+
 # what: list of element groups
 # type: array of objects
 # note: 1) different options such as channels and sampling rates can
 #          be used for different element groups
 #       2) use [] if no element group presents
+list_of_element_groups: []
