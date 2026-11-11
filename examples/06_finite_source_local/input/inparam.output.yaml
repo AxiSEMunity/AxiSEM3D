@@ -22,7 +22,10 @@
 #       2) use [] if no station group presents
 list_of_station_groups:
     - sfba_local:
-        # station locations
+
+
+        ############################# station location #############################
+        # parameters for station location
         locations:
             # what: station location file
             # type: filename
@@ -59,7 +62,10 @@ list_of_station_groups:
             # type: bool
             # note: compatible with vertical_x3 = both RADIUS and DEPTH
             undulated_geometry: true
-        # wavefields to be recorded
+
+
+        ############################# wavefields to be recorded #############################
+        # parameters for wavefields
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -102,7 +108,10 @@ list_of_station_groups:
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # temporal sampling
+
+
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
         temporal:
             # what: sampling period
             # type: string / double
@@ -115,7 +124,10 @@ list_of_station_groups:
             # only: FULL / [t0, t1]
             # note: use FULL to record the whole simulation
             time_window: FULL
-        # file options
+
+
+        ############################# file options #############################
+        # parameters for file options
         file_options:
             # what: output file format
             # type: string
@@ -143,15 +155,10 @@ list_of_station_groups:
             #          con: hits output performance if buffer_size is small
             #       2) this parameter does not affect the final results
             flush: true
-############################# element-wise #############################
-# what: list of element groups
-# type: array of objects
-# note: 1) different options such as channels and sampling rates can
-#          be used for different element groups
-#       2) use [] if no element group presents
 
 
 ############################# element-wise #############################
+
 # what: list of element groups
 # type: array of objects
 # note: 1) different options such as channels and sampling rates can
@@ -161,9 +168,8 @@ list_of_element_groups:
     #==========================================================================#
     # this key can be arbitrary but must be unique in this list
     - orthogonal_azimuthal_slices:
-        # elements to be recorded
-        # note: an element will be included if its center falls within
-        #       both horizontal_range and vertical_range
+        ############################# elements to be recorded #############################
+        # note: an element will be included if its center falls within both horizontal_range and vertical_range
         elements:
             # what: horizontal range
             # type: array of double
@@ -175,7 +181,8 @@ list_of_element_groups:
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
             vertical_range: [0, 1e10]
-        # in-plane sampling on each element
+        ############################# in-plane sampling on each element #############################
+        # parameters for in-plane sampling on each element
         inplane:
             # what: edge dimension
             # type: string
@@ -204,10 +211,8 @@ list_of_element_groups:
             #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
             #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
             GLL_points_one_edge: [0,4]
-        # azimuthal sampling on each element
-        # note: if both phi_list and lat_lon_list are empty, no azimuthal
-        #       interpolation will be performed; instead, all the Fourier
-        #       series coefficients at each GLL point will be recorded
+        ############################# azimuthal sampling on each element #############################
+        # note: if both phi_list and lat_lon_list are empty, no azimuthal interpolation will be performed; instead, all the Fourier series coefficients at each GLL point will be recorded
         azimuthal:
             # what: azimuths (ɸ) of the recorded slices
             # type: array of double
@@ -228,7 +233,8 @@ list_of_element_groups:
             #       2) must be greater than or equal to 1
             #       3) recommended: maximum Nr in the target region / 200
             na_space: 1
-        # wavefields to be recorded
+        ############################# wavefields to be recorded #############################
+        # parameters for the wavefields to be recorded
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -270,7 +276,8 @@ list_of_element_groups:
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # temporal sampling
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
         temporal:
             # what: sampling period
             # type: string / double
@@ -283,7 +290,8 @@ list_of_element_groups:
             # only: FULL / [t0, t1]
             # note: use FULL to record the whole simulation
             time_window: FULL
-        # file options
+        ############################# file options ############################
+        # parameters for file options
         file_options:
             # what: number of sampled time steps to be buffered
             # type: int
@@ -302,9 +310,8 @@ list_of_element_groups:
                 #==========================================================================#
     # this key can be arbitrary but must be unique in this list
     - Fourier_coefficients_surface:
-        # elements to be recorded
-        # note: an element will be included if its center falls within
-        #       both horizontal_range and vertical_range
+        ############################# elements to be recorded #############################
+        # note: an element will be included if its center falls within both horizontal_range and vertical_range
         elements:
             # what: horizontal range
             # type: array of double
@@ -316,7 +323,8 @@ list_of_element_groups:
             # note: 1) r-range for a spherical mesh
             #       2) z-range for a Cartesian mesh
             vertical_range: [0, 1e10]
-        # inplane sampling on each element
+        ############################# inplane sampling on each element #############################
+        # parameters for inplane sampling
         inplane:
             # what: edge dimension
             # type: string
@@ -345,10 +353,8 @@ list_of_element_groups:
             #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
             #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
             GLL_points_one_edge: [0, 2, 4]
-        # azimuthal sampling on each element
-        # note: if both phi_list and lat_lon_list are empty, no azimuthal
-        #       interpolation will be performed; instead, all the Fourier
-        #       series coefficients at each GLL point will be recorded
+        ############################# azimuthal sampling on each element #############################
+        # note: if both phi_list and lat_lon_list are empty, no azimuthal interpolation will be performed; instead, all the Fourier series coefficients at each GLL point will be recorded
         azimuthal:
             # what: azimuths (ɸ) of the recorded slices
             # type: array of double
@@ -368,7 +374,8 @@ list_of_element_groups:
             #       2) must be greater than or equal to 1
             #       3) recommended: maximum Nr in the target region / 200
             na_space: 1
-        # wavefields to be recorded
+        ############################# wavefields to be recorded #############################
+        # parameters for wavefields to be recorded
         wavefields:
             # what: coordinate frame of wavefields
             # type: string
@@ -410,7 +417,8 @@ list_of_element_groups:
             #      4) using U means [U1, U2, U3], and similarly for G, E, S
             #         and R; duplicated channels are automatically removed
             channels: [U]
-        # temporal sampling
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
         temporal:
             # what: sampling period
             # type: string / double
@@ -423,7 +431,300 @@ list_of_element_groups:
             # only: FULL / [t0, t1]
             # note: use FULL to record the whole simulation
             time_window: FULL
-        # file options
+        ############################# file options #############################
+        # parameters for file options
+        file_options:
+            # what: number of sampled time steps to be buffered
+            # type: int
+            # note: 1) the solver buffers wave data during the time loop for
+            #          efficient writing; increase this buffer size to save
+            #          writing time and decrease it to save memory (useful for
+            #          a large number of stations)
+            #       2) this parameter does not affect the final results
+            buffer_size: 100
+            # what: flush file after writing a buffer to it
+            # type: bool
+            # note: 1) pro: minimizes data loss in case of abnormal termination
+            #          con: hits output performance if buffer_size is small
+            #       2) this parameter does not affect the final results
+            flush: true
+
+
+############################# element-wise #############################
+# what: list of element groups
+# type: array of objects
+# note: 1) different options such as channels and sampling rates can
+#          be used for different element groups
+#       2) use [] if no element group presents
+list_of_element_groups:
+    #==========================================================================#
+    # this key can be arbitrary but must be unique in this list
+    - orthogonal_azimuthal_slices:
+        ############################# elements to be recorded #############################
+        # note: an element will be included if its center falls within both horizontal_range and vertical_range
+        elements:
+            # what: horizontal range
+            # type: array of double
+            # note: 1) θ-range for a spherical mesh
+            #       2) s-range for a Cartesian mesh
+            horizontal_range: [0, 1e10]
+            # what: vertical range
+            # type: array of double
+            # note: 1) r-range for a spherical mesh
+            #       2) z-range for a Cartesian mesh
+            vertical_range: [0, 1e10]
+        ############################# in-plane sampling on each element #############################
+        # parameters for in-plane sampling on each element
+        inplane:
+            # what: edge dimension
+            # type: string
+            # only: HORIZONTAL / VERTICAL / BOTH
+            # note: 1) use HORIZONTAL or VERTICAL to record only an outer edge
+            #          of each element, with the edge position specified below
+            #       2) use BOTH to record the entire element
+            edge_dimension: BOTH
+            # what: edge position
+            # type: double
+            # note: 1) as we only search among the four outer edges of each
+            #          element, this edge position must lie on a mesh
+            #          boundary (either internal or external), such as one
+            #          of the vertical discontinuities
+            #       2) not used if edge_dimension = BOTH
+            edge_position: 6371e3
+            # what: GLL points on one edge
+            # type: string / array of int
+            # only: FULL / a subset of [0, 1, 2, ..., npol], where npol is
+            #       the polynomial order of spectral elements, given in
+            #       CMakeLists.txt
+            # note: use this parameter for in-plane downsampling;
+            #       for example, when npol = 4:
+            #       - [2]:       only the element center
+            #       - [0, 4]:    only the 4 vertices
+            #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
+            #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
+            GLL_points_one_edge: [0,4]
+        ############################# azimuthal sampling on each element #############################
+        # note: if both phi_list and lat_lon_list are empty, no azimuthal interpolation will be performed; instead, all the Fourier series coefficients at each GLL point will be recorded
+        azimuthal:
+            # what: azimuths (ɸ) of the recorded slices
+            # type: array of double
+            # note: the unit is radian
+            # phi_list: [0, 0.838, 1.57079632679, 2.409, 3.14159265359, 3.979, 4.71238898038, 5.55]
+            phi_list: [0, 0.838]
+            # what: latitudes and longitudes of the recorded slices
+            # type: array of array of double
+            # note: ɸ computed from (lat, lon) will be append to phi_list
+            lat_lon_list: []
+            # what: grid space for azimuthal storage
+            # type: int
+            # note: 1) when the Fourier series coefficients are recorded
+            #          (phi_list = [] and lat_lon_list = []), this parameter
+            #          affects how the wavefield data with different azimuthal
+            #          dimensions are stored in the output NetCDF file(s);
+            #          see the online manual for details
+            #       2) must be greater than or equal to 1
+            #       3) recommended: maximum Nr in the target region / 200
+            na_space: 1
+        ############################# wavefields to be recorded #############################
+        # parameters for the wavefields to be recorded
+        wavefields:
+            # what: coordinate frame of wavefields
+            # type: string
+            # only: spz / RTZ / ENZ
+            # note: 1) spz: (s, phi, z) or AxiSEM3D-intrinsic
+            #       2) RTZ: (radial, transpose, vertical)
+            #       3) ENZ: (east, north, vertical)
+            coordinate_frame: RTZ
+            # what: type of medium
+            # type: string
+            # only: SOLID / FLUID
+            # note: all elements in a group must be located in either
+            #       the solid or the fluid domain
+            medium: SOLID
+            # what: list of channels
+            # type: array of string
+            # note: 1) allowed channels for medium = SOLID
+            #          * displacement:
+            #            U, U1, U2, U3, U_NORM (or |U|)
+            #          * gradient of displacement:
+            #            G, G11, G12, G13, G21, G22, G23, G31, G32, G33,
+            #            Gii (or G_I1)
+            #          * strain:
+            #            E, E11, E12, E13, E21, E22, E23, E31, E32, E33,
+            #            Eii (or E_I1), E_J2
+            #          * stress:
+            #            S, S11, S12, S13, S21, S22, S23, S31, S32, S33,
+            #            Sii (or S_I1), S_J2
+            #          * curl:
+            #            R, R1, R2, R3, R_NORM (or |R|)
+            #      2) allowed channels for medium = FLUID
+            #          * displacement:
+            #            U, U1, U2, U3, U_NORM (or |U|)
+            #          * scalar potential of displacement (U = ∇X):
+            #            X
+            #          * pressure:
+            #            P
+            #      3) (1, 2, 3) are determined by coordinate_frame
+            #      4) using U means [U1, U2, U3], and similarly for G, E, S
+            #         and R; duplicated channels are automatically removed
+            channels: [U]
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
+        temporal:
+            # what: sampling period
+            # type: string / double
+            # only: DT / DTx2 / DTx3 / ... / value
+            # note: DT stands for Δt of the simulation; DTx3 means
+            #       sampling period = Δt * 3
+            sampling_period: 0.1
+            # what: time window
+            # type: string / array of double
+            # only: FULL / [t0, t1]
+            # note: use FULL to record the whole simulation
+            time_window: FULL
+        ############################# file options ############################
+        # parameters for file options
+        file_options:
+            # what: number of sampled time steps to be buffered
+            # type: int
+            # note: 1) the solver buffers wave data during the time loop for
+            #          efficient writing; increase this buffer size to save
+            #          writing time and decrease it to save memory (useful for
+            #          a large number of stations)
+            #       2) this parameter does not affect the final results
+            buffer_size: 100
+            # what: flush file after writing a buffer to it
+            # type: bool
+            # note: 1) pro: minimizes data loss in case of abnormal termination
+            #          con: hits output performance if buffer_size is small
+            #       2) this parameter does not affect the final results
+            flush: true
+                #==========================================================================#
+    # this key can be arbitrary but must be unique in this list
+    - Fourier_coefficients_surface:
+        ############################# elements to be recorded #############################
+        # note: an element will be included if its center falls within both horizontal_range and vertical_range
+        elements:
+            # what: horizontal range
+            # type: array of double
+            # note: 1) θ-range for a spherical mesh
+            #       2) s-range for a Cartesian mesh
+            horizontal_range: [0, 1e10]
+            # what: vertical range
+            # type: array of double
+            # note: 1) r-range for a spherical mesh
+            #       2) z-range for a Cartesian mesh
+            vertical_range: [0, 1e10]
+        ############################# inplane sampling on each element #############################
+        # parameters for inplane sampling
+        inplane:
+            # what: edge dimension
+            # type: string
+            # only: HORIZONTAL / VERTICAL / BOTH
+            # note: 1) use HORIZONTAL or VERTICAL to record only an outer edge
+            #          of each element, with the edge position specified below
+            #       2) use BOTH to record the entire element
+            edge_dimension: VERTICAL
+            # what: edge position
+            # type: double
+            # note: 1) as we only search among the four outer edges of each
+            #          element, this edge position must lie on a mesh
+            #          boundary (either internal or external), such as one
+            #          of the vertical discontinuities
+            #       2) not used if edge_dimension = BOTH
+            edge_position: 6371.1e3
+            # what: GLL points on one edge
+            # type: string / array of int
+            # only: FULL / a subset of [0, 1, 2, ..., npol], where npol is
+            #       the polynomial order of spectral elements, given in
+            #       CMakeLists.txt
+            # note: use this parameter for inplane downsampling;
+            #       for example, when npol = 4:
+            #       - [2]:       only the element center
+            #       - [0, 4]:    only the 4 vertices
+            #       - [0, 2, 4]: 4 vertices + 4 edge centers + 1 element center
+            #       - FULL:      all GLL points, the same as [0, 1, 2, 3, 4]
+            GLL_points_one_edge: [0, 2, 4]
+        ############################# azimuthal sampling on each element #############################
+        # note: if both phi_list and lat_lon_list are empty, no azimuthal interpolation will be performed; instead, all the Fourier series coefficients at each GLL point will be recorded
+        azimuthal:
+            # what: azimuths (ɸ) of the recorded slices
+            # type: array of double
+            # note: the unit is radian
+            phi_list: []
+            # what: latitudes and longitudes of the recorded slices
+            # type: array of array of double
+            # note: ɸ computed from (lat, lon) will be append to phi_list
+            lat_lon_list: []
+            # what: grid space for azimuthal storage
+            # type: int
+            # note: 1) when the Fourier series coefficients are recorded
+            #          (phi_list = [] and lat_lon_list = []), this parameter
+            #          affects how the wavefield data with different azimuthal
+            #          dimensions are stored in the output NetCDF file(s);
+            #          see the online manual for details
+            #       2) must be greater than or equal to 1
+            #       3) recommended: maximum Nr in the target region / 200
+            na_space: 1
+        ############################# wavefields to be recorded #############################
+        # parameters for wavefields to be recorded
+        wavefields:
+            # what: coordinate frame of wavefields
+            # type: string
+            # only: spz / RTZ / ENZ
+            # note: 1) spz: (s, phi, z) or AxiSEM3D-intrinsic
+            #       2) RTZ: (radial, transpose, vertical)
+            #       3) ENZ: (east, north, vertical)
+            coordinate_frame: RTZ
+            # what: type of medium
+            # type: string
+            # only: SOLID / FLUID
+            # note: all elements in a group must be located in either
+            #       the solid or the fluid domain
+            medium: SOLID
+            # what: list of channels
+            # type: array of string
+            # note: 1) allowed channels for medium = SOLID
+            #          * displacement:
+            #            U, U1, U2, U3, U_NORM (or |U|)
+            #          * gradient of displacement:
+            #            G, G11, G12, G13, G21, G22, G23, G31, G32, G33,
+            #            Gii (or G_I1)
+            #          * strain:
+            #            E, E11, E12, E13, E21, E22, E23, E31, E32, E33,
+            #            Eii (or E_I1), E_J2
+            #          * stress:
+            #            S, S11, S12, S13, S21, S22, S23, S31, S32, S33,
+            #            Sii (or S_I1), S_J2
+            #          * curl:
+            #            R, R1, R2, R3, R_NORM (or |R|)
+            #      2) allowed channels for medium = FLUID
+            #          * displacement:
+            #            U, U1, U2, U3, U_NORM (or |U|)
+            #          * scalar potential of displacement (U = ∇X):
+            #            X
+            #          * pressure:
+            #            P
+            #      3) (1, 2, 3) are determined by coordinate_frame
+            #      4) using U means [U1, U2, U3], and similarly for G, E, S
+            #         and R; duplicated channels are automatically removed
+            channels: [U]
+        ############################# temporal sampling #############################
+        # parameters for temporal sampling
+        temporal:
+            # what: sampling period
+            # type: string / double
+            # only: DT / DTx2 / DTx3 / ... / value
+            # note: DT stands for Δt of the simulation; DTx3 means
+            #       sampling period = Δt * 3
+            sampling_period: 0.1
+            # what: time window
+            # type: string / array of double
+            # only: FULL / [t0, t1]
+            # note: use FULL to record the whole simulation
+            time_window: FULL
+        ############################# file options #############################
+        # parameters for file options
         file_options:
             # what: number of sampled time steps to be buffered
             # type: int

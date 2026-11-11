@@ -223,6 +223,16 @@ def document_inparam_yaml(path):
 
     return "".join(out)
 
+def writeExampleCustomName(path,name):
+        base = os.path.basename(name)
+        base_cleaned = base.replace(" ", "_")
+        stem = os.path.splitext(base_cleaned)[0]
+        out_path = os.path.join(OUTPUT_DIR, stem + ".md")
+        body = document_inparam_yaml(path)
+        with open(out_path, "w", encoding="utf-8") as f:
+            f.write(f"# {base}\n\n")
+            f.write(body)
+        print(f"Wrote {out_path}")
 
 def main():
     os.chdir(SCRIPT_DIR)
@@ -242,6 +252,12 @@ def main():
             f.write(body)
         print(f"Wrote {out_path}")
 
+    # Stations, sources, models examples should not necessarily 
+    # be named after their example files.
+    writeExampleCustomName(os.path.join(SCRIPT_DIR, "input", "ex06_list_of_station_groups.yaml"),"List of Stations")
+    writeExampleCustomName(os.path.join(SCRIPT_DIR, "input", "ex05c_list_of_sources.yaml"),"List of Sources")
+    writeExampleCustomName(os.path.join(SCRIPT_DIR, "input", "ex06_list_of_element_groups.yaml"),"List of Element Groups")
+    writeExampleCustomName(os.path.join(SCRIPT_DIR, "input", "ex05c_list_of_3D_models.yaml"),"List of 3D Models")
 
 if __name__ == "__main__":
     main()

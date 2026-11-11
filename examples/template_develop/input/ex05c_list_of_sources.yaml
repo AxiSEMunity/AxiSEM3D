@@ -1,7 +1,8 @@
     #==========================================================================#
     # this key can be arbitrary
     - 1970-01-01:
-        # source location
+        ############################# source location #############################
+        # parameters for source location
         location:
             # what: horizontal location
             # type: string / array of double
@@ -34,7 +35,8 @@
             # type: bool
             # note: compatible with both "depth" and "radius"
             undulated_geometry: true
-        # source mechanism
+        ############################# source mechanism #############################
+        # parameters for source mechanism
         mechanism:
             # what: type of source mechanism
             # type: string
@@ -57,7 +59,8 @@
             # type: double
             # note: use 1e-7 to convert dyn*cm (in CMTSOLUTION) to N*m
             unit: 1
-        # source time function
+        ############################# source time function #############################
+        #parameters for source time function
         source_time_function:
             # what: class name
             # type: string
